@@ -1,0 +1,309 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Asistencias_Empresas" pageWidth="864" pageHeight="612" orientation="Landscape" columnWidth="850" leftMargin="7" rightMargin="7" topMargin="20" bottomMargin="10" scriptletClass="Paquete.ScriptletsAsistencias" uuid="7db4d154-afa9-4d97-87b8-8ea7cd5a7e19">
+	<property name="ireport.zoom" value="1.6105100000000008"/>
+	<property name="ireport.x" value="67"/>
+	<property name="ireport.y" value="0"/>
+	<import value="Paquete.ScriptletsAsistencias"/>
+	<style name="Crosstab Data Text" hAlign="Center"/>
+	<style name="style1" style="Crosstab Data Text">
+		<conditionalStyle>
+			<style/>
+		</conditionalStyle>
+	</style>
+	<parameter name="F_INICIO" class="java.util.Date">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="F_FINAL" class="java.util.Date">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="ID_EMPRESA" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="Host" class="java.lang.String"/>
+	<parameter name="DB" class="java.lang.String"/>
+	<parameter name="Usu" class="java.lang.String"/>
+	<parameter name="Cont" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT *
+FROM 	(SELECT t_asistencias.ID_EMPLEADO, t_asistencias.ID_EMPRESA, t_asistencias.F_INGRESO, t_asistencias.F_RETIRO, t_asistencias.ID_TIPO, t_asistencias.F_ASISTENCIA, t_empresas.NOMBRE_EMPRESA, t_empleados.NOMBRE_1_EMP, t_empleados.NOMBRE_2_EMP,t_empleados.APELLIDO_1_EMP, t_empleados.APELLIDO_2_EMP
+	FROM
+	t_asistencias
+	INNER JOIN t_novedades 
+	ON (t_asistencias.ID_EMPLEADO = t_novedades.ID_EMPLEADO) AND (t_asistencias.ID_EMPRESA = t_novedades.ID_EMPRESA) AND (t_asistencias.F_INGRESO = t_novedades.FECHA_INGRESO) AND (t_asistencias.ID_TIPO = t_novedades.ID_TIPO) AND (t_asistencias.F_RETIRO = t_novedades.FECHA_RETIRO)
+	INNER JOIN t_obra 
+	ON (t_novedades.ID_OBRA = t_obra.ID_OBRA)
+	INNER JOIN t_empresas 
+       	ON (t_novedades.ID_EMPRESA = t_empresas.ID_EMPRESA)
+	INNER JOIN t_empleados 
+       	ON (t_novedades.ID_EMPLEADO = t_empleados.ID_EMP)
+ WHERE t_asistencias.ID_EMPRESA = $P{ID_EMPRESA} GROUP BY t_asistencias.ID_EMPLEADO, t_asistencias.ID_EMPRESA) Y,
+	(SELECT DATE_ADD($P{F_INICIO}, INTERVAL `n`.`id` - 1 DAY) AS ts
+	FROM `numbers` `n`
+	WHERE DATE_ADD($P{F_INICIO}, INTERVAL `n`.`id` -1 DAY) <= $P{F_FINAL} ) X
+
+ORDER BY Y.ID_EMPLEADO ASC,Y.F_ASISTENCIA ASC, X.TS ASC]]>
+	</queryString>
+	<field name="ID_EMPLEADO" class="java.lang.Long">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="ID_EMPRESA" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="F_INGRESO" class="java.sql.Date">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="F_RETIRO" class="java.sql.Date">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="ID_TIPO" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="F_ASISTENCIA" class="java.sql.Date">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="NOMBRE_EMPRESA" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="NOMBRE_1_EMP" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="NOMBRE_2_EMP" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="APELLIDO_1_EMP" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="APELLIDO_2_EMP" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="ts" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="60" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="850" height="20" uuid="bc78090a-1e02-4882-9045-3f31a9cf9931"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true" isItalic="true" isStrikeThrough="false"/>
+				</textElement>
+				<text><![CDATA[LISTADO DE ASISTENCIAS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="25" y="20" width="80" height="13" uuid="2d40859d-9838-4c51-b9e5-b545ee9fb292"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Fecha de validez:]]></text>
+			</staticText>
+			<textField pattern="EEEEE dd &apos;de&apos; MMMMM &apos;de&apos; yyyy">
+				<reportElement x="105" y="20" width="278" height="13" isPrintInFirstWholeBand="true" isPrintWhenDetailOverflows="true" uuid="3714ba9e-1be3-4712-a245-367b7218ad39"/>
+				<textElement>
+					<font size="8" isUnderline="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new SimpleDateFormat("dd-MM-yyyy").format($P{F_INICIO}) + " A " + new SimpleDateFormat("dd-MM-yyyy").format($P{F_FINAL})]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="25" y="33" width="80" height="13" uuid="e9c542e4-65c5-41a7-91e5-31ede3561a17"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Contratista:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="105" y="33" width="278" height="13" uuid="2ca83e34-a740-4bb2-8d25-e599a5cc72b0"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{NOMBRE_EMPRESA}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<summary>
+		<band height="20">
+			<crosstab>
+				<reportElement x="25" y="0" width="825" height="20" uuid="2ae025da-bc05-41f3-b2f9-1933c8e66e97"/>
+				<box>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<crosstabHeaderCell>
+					<cellContents>
+						<staticText>
+							<reportElement style="Crosstab Data Text" mode="Opaque" x="0" y="23" width="48" height="12" forecolor="#000000" backcolor="#999999" uuid="f61a9e4d-0829-487f-8259-2652d525d70b"/>
+							<box>
+								<topPen lineWidth="0.5"/>
+								<leftPen lineWidth="0.5"/>
+								<bottomPen lineWidth="0.5"/>
+								<rightPen lineWidth="0.5"/>
+							</box>
+							<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+								<font fontName="Arial" size="5" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+								<paragraph lineSpacing="Single"/>
+							</textElement>
+							<text><![CDATA[ID EMPLEADO]]></text>
+						</staticText>
+						<textField>
+							<reportElement style="Crosstab Data Text" mode="Opaque" x="48" y="23" width="120" height="12" forecolor="#000000" backcolor="#999999" uuid="c062bbc1-279d-43b0-af6b-e8c13fb93bb9"/>
+							<box>
+								<topPen lineWidth="0.5"/>
+								<leftPen lineWidth="0.5"/>
+								<bottomPen lineWidth="0.5"/>
+								<rightPen lineWidth="0.5"/>
+							</box>
+							<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+								<font fontName="Arial" size="5" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+								<paragraph lineSpacing="Single"/>
+							</textElement>
+							<textFieldExpression><![CDATA["NOMBRE EMPLEADO"]]></textFieldExpression>
+						</textField>
+					</cellContents>
+				</crosstabHeaderCell>
+				<rowGroup name="ID_EMPLEADO" width="168" totalPosition="End">
+					<bucket class="java.lang.Long">
+						<bucketExpression><![CDATA[$F{ID_EMPLEADO}]]></bucketExpression>
+					</bucket>
+					<crosstabRowHeader>
+						<cellContents mode="Opaque">
+							<box>
+								<pen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+							</box>
+							<textField>
+								<reportElement style="Crosstab Data Text" x="0" y="0" width="48" height="10" uuid="e9cff71a-7014-4c60-9f84-b48029be13db"/>
+								<box>
+									<topPen lineWidth="0.5"/>
+									<leftPen lineWidth="0.5"/>
+									<bottomPen lineWidth="0.5"/>
+									<rightPen lineWidth="0.5"/>
+								</box>
+								<textElement verticalAlignment="Middle">
+									<font size="5"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$V{ID_EMPLEADO}]]></textFieldExpression>
+							</textField>
+							<textField>
+								<reportElement style="Crosstab Data Text" x="48" y="0" width="120" height="10" uuid="b302c4ee-6405-44ec-b50d-5376145f2a1e"/>
+								<box>
+									<topPen lineWidth="0.5"/>
+									<leftPen lineWidth="0.5"/>
+									<bottomPen lineWidth="0.5"/>
+									<rightPen lineWidth="0.5"/>
+								</box>
+								<textElement verticalAlignment="Middle">
+									<font size="5"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$V{NOMBRE_EMPLEADO}]]></textFieldExpression>
+							</textField>
+						</cellContents>
+					</crosstabRowHeader>
+					<crosstabTotalRowHeader>
+						<cellContents backcolor="#005FB3" mode="Opaque">
+							<box>
+								<pen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+							</box>
+						</cellContents>
+					</crosstabTotalRowHeader>
+				</rowGroup>
+				<columnGroup name="F_ASISTENCIA" height="35" totalPosition="End">
+					<bucket class="java.util.Date">
+						<bucketExpression><![CDATA[new SimpleDateFormat("yyyy-MM-dd").parse($F{ts})]]></bucketExpression>
+					</bucket>
+					<crosstabColumnHeader>
+						<cellContents backcolor="#999999" mode="Opaque">
+							<box>
+								<pen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+							</box>
+							<textField pattern="dd MMMMM yyyy">
+								<reportElement style="Crosstab Data Text" x="0" y="0" width="20" height="35" backcolor="#999999" uuid="93a07e15-1340-4e4a-8f85-e92c1c7b8f6d"/>
+								<textElement verticalAlignment="Middle" rotation="Left">
+									<font size="5"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$V{F_ASISTENCIA}]]></textFieldExpression>
+							</textField>
+						</cellContents>
+					</crosstabColumnHeader>
+					<crosstabTotalColumnHeader>
+						<cellContents backcolor="#999999" mode="Opaque">
+							<box>
+								<pen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+							</box>
+							<staticText>
+								<reportElement x="0" y="23" width="30" height="12" uuid="a7d74ea4-c484-4357-b8e9-ad463b58030c"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="5"/>
+								</textElement>
+								<text><![CDATA[TOTAL]]></text>
+							</staticText>
+						</cellContents>
+					</crosstabTotalColumnHeader>
+				</columnGroup>
+				<measure name="ASISTENCIA" class="java.lang.String">
+					<measureExpression><![CDATA[$P{REPORT_SCRIPTLET}.get_asist( $F{ID_EMPLEADO}, $F{ID_EMPRESA}, new SimpleDateFormat("yyyy-MM-dd").parse($F{ts}), $P{Host}, $P{DB}, $P{Usu}, $P{Cont} )]]></measureExpression>
+				</measure>
+				<measure name="COUNT_ASIST" class="java.lang.Integer">
+					<measureExpression><![CDATA[$P{REPORT_SCRIPTLET}.get_count_asist( $F{ID_EMPLEADO}, $F{ID_EMPRESA}, $P{F_INICIO},$P{F_FINAL}, $P{Host}, $P{DB}, $P{Usu}, $P{Cont} )]]></measureExpression>
+				</measure>
+				<measure name="NOMBRE_EMPLEADO" class="java.lang.String">
+					<measureExpression><![CDATA[$F{APELLIDO_1_EMP}+" "+$F{APELLIDO_2_EMP}+" "+$F{NOMBRE_1_EMP}+" "+$F{NOMBRE_2_EMP}]]></measureExpression>
+				</measure>
+				<crosstabCell width="20" height="10">
+					<cellContents>
+						<box>
+							<pen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+						</box>
+						<textField>
+							<reportElement style="style1" x="0" y="0" width="20" height="10" uuid="c12f82d0-b8ca-4f3a-a090-4328ad4525d1"/>
+							<box>
+								<topPen lineWidth="0.5"/>
+								<leftPen lineWidth="0.5"/>
+								<bottomPen lineWidth="0.5"/>
+								<rightPen lineWidth="0.5"/>
+							</box>
+							<textElement verticalAlignment="Middle">
+								<font size="5"/>
+							</textElement>
+							<textFieldExpression><![CDATA[$V{ASISTENCIA}]]></textFieldExpression>
+						</textField>
+					</cellContents>
+				</crosstabCell>
+				<crosstabCell width="20" height="0" rowTotalGroup="ID_EMPLEADO">
+					<cellContents backcolor="#005FB3" mode="Opaque">
+						<box>
+							<pen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+						</box>
+					</cellContents>
+				</crosstabCell>
+				<crosstabCell width="30" height="10" columnTotalGroup="F_ASISTENCIA">
+					<cellContents mode="Opaque">
+						<box>
+							<pen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+						</box>
+						<textField pattern="" isBlankWhenNull="false">
+							<reportElement style="Crosstab Data Text" mode="Transparent" x="0" y="0" width="30" height="10" forecolor="#000000" backcolor="#FFFFFF" uuid="2fe492a2-8cc8-45e7-a339-80ad2b0e9887"/>
+							<box>
+								<topPen lineWidth="0.5"/>
+								<leftPen lineWidth="0.5"/>
+								<bottomPen lineWidth="0.5"/>
+								<rightPen lineWidth="0.5"/>
+							</box>
+							<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+								<font fontName="SansSerif" size="5" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+								<paragraph lineSpacing="Single"/>
+							</textElement>
+							<textFieldExpression><![CDATA[$V{COUNT_ASIST}]]></textFieldExpression>
+						</textField>
+					</cellContents>
+				</crosstabCell>
+				<crosstabCell width="30" height="0" rowTotalGroup="ID_EMPLEADO" columnTotalGroup="F_ASISTENCIA">
+					<cellContents backcolor="#005FB3" mode="Opaque">
+						<box>
+							<pen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+						</box>
+					</cellContents>
+				</crosstabCell>
+			</crosstab>
+		</band>
+	</summary>
+</jasperReport>

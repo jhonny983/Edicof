@@ -1,0 +1,1213 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+/*
+ * Opciones.java
+ *
+ * Created on 10-feb-2015, 16:25:57
+ */
+package com.jm.outhelp.GUI;
+
+import com.jm.outhelp.GUI.*;
+import com.jm.outhelp.Clases.Conexion;
+import com.jm.outhelp.Encriptar.Encriptar;
+import java.awt.Color;
+import java.awt.Cursor;
+import java.awt.HeadlessException;
+import java.awt.Toolkit;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.io.PrintWriter;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
+import javax.swing.filechooser.FileFilter;
+import javax.swing.filechooser.FileNameExtensionFilter;
+
+/**
+ *
+ * @author Johnnatan
+ */
+public class Opciones extends javax.swing.JDialog {
+
+//static FileReader fr = null;
+//static BufferedReader br = null;
+String aux="";
+String aux1="";
+String aux2="";
+String temp="";
+String [] param;
+String [] host;
+//int i=0;
+//private StringTokenizer st;
+//private StringTokenizer st1;
+    /** Creates new form Opciones */
+    public Opciones(java.awt.Frame parent, boolean modal) {
+        super(parent, modal);
+        //setIconImage(parent.getIconImage());
+        initComponents();
+        //jTabbedPane1.setEnabledAt(0, false);
+        this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/group_gear.png")));
+        this.setLocationRelativeTo(null);
+        String[] t = load_task(Main.ruta_program);
+        ArrayList con = load_file_conection(Main.ruta_file_option);
+        for(int j = 0;j<con.size();j++){
+            if(j==Main.num_conection){
+                String[] p = (String[])con.get(j);
+                String[] p1 = p[0].split("\\.");
+                host1.setText(p1[0]);
+                host2.setText(p1[1]);
+                host3.setText(p1[2]);
+                host4.setText(p1[3]);
+                bd.setText(p[1]);
+                usu.setText(p[2]);
+                cont.setText(p[3]);
+            }
+        }
+        if(t[0].equals("1")){
+            enable_prog.setSelected(true);
+            hh_prog.setEnabled(true);
+            mm_prog.setEnabled(true);
+        }else{
+            enable_prog.setSelected(false);
+            hh_prog.setEnabled(false);
+            mm_prog.setEnabled(false);
+        }
+        hh_prog.setSelectedItem(t[1]);
+        mm_prog.setSelectedItem(t[2]);
+        sql_dump.setText(t[3]);
+        sql_file.setText(t[4]);
+        sql_restore.setText(sql_file.getText());
+        en_task.setSelected(t[5].equals("1"));
+        tipo_estacion.setSelectedItem(t[6]);
+        
+        
+//        File archivo=new File(Main.ruta_file_option);
+//        if(archivo.exists()){
+//            try{
+//                fr = new FileReader (archivo);
+//                br = new BufferedReader(fr);
+//                while((aux=br.readLine())!=null){
+//                    temp = Encriptar.Desencriptar(aux);
+//                    param=temp.split("\\*");
+//                    host = param[0].split("\\.");
+//                    host1.setText(host[0]);
+//                    host2.setText(host[1]);
+//                    host3.setText(host[2]);
+//                    host4.setText(host[3]);
+//                    bd.setText(param[1]);
+//                    usu.setText(param[2]);
+//                    cont.setText(param[3]);
+//                    if(param[4].equals("1")){
+//                        enable_prog.setSelected(true);
+//                        hh_prog.setEnabled(true);
+//                        mm_prog.setEnabled(true);
+//                    }else{
+//                        enable_prog.setSelected(false);
+//                        hh_prog.setEnabled(false);
+//                        mm_prog.setEnabled(false);
+//                    }
+//                    hh_prog.setSelectedItem(param[5]);
+//                    mm_prog.setSelectedItem(param[6]);
+//                    sql_dump.setText(param[7]);
+//                    sql_file.setText(param[8]);
+//                    sql_restore.setText(sql_file.getText());
+//                    en_task.setSelected(param[9].equals("1"));
+//                    tipo_estacion.setSelectedItem(param[10]);
+//                    enable_panel();
+//                }
+//                br.close();
+//                fr.close();
+//            }catch(Exception e){
+//                e.printStackTrace();
+//                JOptionPane.showMessageDialog(this,e, "Error",JOptionPane.ERROR_MESSAGE);
+//            }
+//        }
+    }
+
+    /** This method is called from within the constructor to
+     * initialize the form.
+     * WARNING: Do NOT modify this code. The content of this method is
+     * always regenerated by the Form Editor.
+     */
+    @SuppressWarnings("unchecked")
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    private void initComponents() {
+        bindingGroup = new org.jdesktop.beansbinding.BindingGroup();
+
+        jPanel1 = new javax.swing.JPanel();
+        jTabbedPane1 = new javax.swing.JTabbedPane();
+        jp_general = new javax.swing.JPanel();
+        jPanel9 = new javax.swing.JPanel();
+        jLabel11 = new javax.swing.JLabel();
+        en_task = new javax.swing.JCheckBox();
+        jp_base_datos = new javax.swing.JPanel();
+        jLabel6 = new javax.swing.JLabel();
+        host1 = new javax.swing.JTextField();
+        jLabel7 = new javax.swing.JLabel();
+        bd = new javax.swing.JTextField();
+        host2 = new javax.swing.JTextField();
+        host3 = new javax.swing.JTextField();
+        host4 = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        usu = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        cont = new javax.swing.JPasswordField();
+        jButton4 = new javax.swing.JButton();
+        jp_backup = new javax.swing.JPanel();
+        jPanel4 = new javax.swing.JPanel();
+        jLabel4 = new javax.swing.JLabel();
+        enable_prog = new javax.swing.JCheckBox();
+        jPanel5 = new javax.swing.JPanel();
+        hh_prog = new javax.swing.JComboBox<>();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        mm_prog = new javax.swing.JComboBox<>();
+        jPanel11 = new javax.swing.JPanel();
+        brow4 = new javax.swing.JButton();
+        jp_restore = new javax.swing.JPanel();
+        jLabel10 = new javax.swing.JLabel();
+        sql_restore = new javax.swing.JTextField();
+        brow3 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
+        jp_rutas = new javax.swing.JPanel();
+        sql_dump = new javax.swing.JTextField();
+        brow1 = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        sql_file = new javax.swing.JTextField();
+        brow2 = new javax.swing.JButton();
+        jp_advance = new javax.swing.JPanel();
+        jLabel12 = new javax.swing.JLabel();
+        jButton5 = new javax.swing.JButton();
+        jLabel13 = new javax.swing.JLabel();
+        tipo_estacion = new javax.swing.JComboBox<>();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Opciones");
+        setResizable(false);
+
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Ajustes de conexiones"));
+
+        jPanel9.setBorder(javax.swing.BorderFactory.createTitledBorder("Ejecutar en segundo plano"));
+
+        jLabel11.setText("Habilitar");
+
+        org.jdesktop.beansbinding.Binding binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, jp_general, org.jdesktop.beansbinding.ELProperty.create("${enabled}"), en_task, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
+        bindingGroup.addBinding(binding);
+
+        javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
+        jPanel9.setLayout(jPanel9Layout);
+        jPanel9Layout.setHorizontalGroup(
+            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel9Layout.createSequentialGroup()
+                .addGap(51, 51, 51)
+                .addComponent(jLabel11)
+                .addGap(41, 41, 41)
+                .addComponent(en_task, javax.swing.GroupLayout.DEFAULT_SIZE, 32, Short.MAX_VALUE)
+                .addGap(50, 50, 50))
+        );
+        jPanel9Layout.setVerticalGroup(
+            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel9Layout.createSequentialGroup()
+                .addGap(37, 37, 37)
+                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                    .addComponent(jLabel11)
+                    .addComponent(en_task))
+                .addContainerGap(45, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout jp_generalLayout = new javax.swing.GroupLayout(jp_general);
+        jp_general.setLayout(jp_generalLayout);
+        jp_generalLayout.setHorizontalGroup(
+            jp_generalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jp_generalLayout.createSequentialGroup()
+                .addGap(57, 57, 57)
+                .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(57, Short.MAX_VALUE))
+        );
+        jp_generalLayout.setVerticalGroup(
+            jp_generalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jp_generalLayout.createSequentialGroup()
+                .addGap(39, 39, 39)
+                .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(46, Short.MAX_VALUE))
+        );
+
+        jTabbedPane1.addTab("General", jp_general);
+
+        jLabel6.setText("IP Host");
+
+        host1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        host1.setText("0");
+
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, jp_base_datos, org.jdesktop.beansbinding.ELProperty.create("${enabled}"), host1, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
+        bindingGroup.addBinding(binding);
+
+        jLabel7.setText("Base de datos");
+
+        bd.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, jp_base_datos, org.jdesktop.beansbinding.ELProperty.create("${enabled}"), bd, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
+        bindingGroup.addBinding(binding);
+
+        host2.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        host2.setText("0");
+
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, jp_base_datos, org.jdesktop.beansbinding.ELProperty.create("${enabled}"), host2, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
+        bindingGroup.addBinding(binding);
+
+        host3.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        host3.setText("0");
+
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, jp_base_datos, org.jdesktop.beansbinding.ELProperty.create("${enabled}"), host3, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
+        bindingGroup.addBinding(binding);
+
+        host4.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        host4.setText("0");
+
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, jp_base_datos, org.jdesktop.beansbinding.ELProperty.create("${enabled}"), host4, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
+        bindingGroup.addBinding(binding);
+
+        jLabel2.setText("Usuario");
+
+        usu.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, jp_base_datos, org.jdesktop.beansbinding.ELProperty.create("${enabled}"), usu, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
+        bindingGroup.addBinding(binding);
+
+        jLabel3.setText("Contraseña");
+
+        cont.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, jp_base_datos, org.jdesktop.beansbinding.ELProperty.create("${enabled}"), cont, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
+        bindingGroup.addBinding(binding);
+
+        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/database_connect.png"))); // NOI18N
+        jButton4.setText("Test");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jp_base_datosLayout = new javax.swing.GroupLayout(jp_base_datos);
+        jp_base_datos.setLayout(jp_base_datosLayout);
+        jp_base_datosLayout.setHorizontalGroup(
+            jp_base_datosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jp_base_datosLayout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addGroup(jp_base_datosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel7)
+                    .addComponent(jLabel6)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel3))
+                .addGap(38, 38, 38)
+                .addGroup(jp_base_datosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton4)
+                    .addGroup(jp_base_datosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(usu, javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(bd, javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jp_base_datosLayout.createSequentialGroup()
+                            .addComponent(host1, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(host2, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(host3, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(host4, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(cont, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(27, Short.MAX_VALUE))
+        );
+        jp_base_datosLayout.setVerticalGroup(
+            jp_base_datosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jp_base_datosLayout.createSequentialGroup()
+                .addGap(32, 32, 32)
+                .addGroup(jp_base_datosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(host1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(host2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(host3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(host4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jp_base_datosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel7)
+                    .addComponent(bd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jp_base_datosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(usu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jp_base_datosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(cont, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButton4)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jTabbedPane1.addTab("Base de Datos", jp_base_datos);
+
+        jp_backup.setPreferredSize(new java.awt.Dimension(339, 215));
+
+        jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder("Control Backup"));
+
+        jLabel4.setText("Habilitar");
+
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, jp_backup, org.jdesktop.beansbinding.ELProperty.create("${enabled}"), enable_prog, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
+        bindingGroup.addBinding(binding);
+
+        enable_prog.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                enable_progItemStateChanged(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGap(18, 18, 18)
+                .addComponent(jLabel4)
+                .addGap(18, 18, 18)
+                .addComponent(enable_prog)
+                .addContainerGap(20, Short.MAX_VALUE))
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGap(19, 19, 19)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                    .addComponent(jLabel4)
+                    .addComponent(enable_prog))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder("Programacion Backup"));
+
+        hh_prog.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23" }));
+
+        jLabel5.setText("Hora");
+
+        jLabel8.setText("Minuto");
+
+        mm_prog.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59" }));
+
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+                .addContainerGap(34, Short.MAX_VALUE)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel5)
+                    .addComponent(hh_prog, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(30, 30, 30)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(mm_prog, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel8))
+                .addGap(29, 29, 29))
+        );
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(jLabel8))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(hh_prog, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(mm_prog, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jPanel11.setBorder(javax.swing.BorderFactory.createTitledBorder("Copia de seguridad manual"));
+
+        brow4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/database_go.png"))); // NOI18N
+        brow4.setText("Copia de seguridad");
+
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, jp_backup, org.jdesktop.beansbinding.ELProperty.create("${enabled}"), brow4, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
+        bindingGroup.addBinding(binding);
+
+        brow4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                brow4ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel11Layout = new javax.swing.GroupLayout(jPanel11);
+        jPanel11.setLayout(jPanel11Layout);
+        jPanel11Layout.setHorizontalGroup(
+            jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel11Layout.createSequentialGroup()
+                .addGap(78, 78, 78)
+                .addComponent(brow4)
+                .addContainerGap(84, Short.MAX_VALUE))
+        );
+        jPanel11Layout.setVerticalGroup(
+            jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel11Layout.createSequentialGroup()
+                .addGap(19, 19, 19)
+                .addComponent(brow4)
+                .addContainerGap(29, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout jp_backupLayout = new javax.swing.GroupLayout(jp_backup);
+        jp_backup.setLayout(jp_backupLayout);
+        jp_backupLayout.setHorizontalGroup(
+            jp_backupLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jp_backupLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jp_backupLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(jPanel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jp_backupLayout.createSequentialGroup()
+                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jp_backupLayout.setVerticalGroup(
+            jp_backupLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jp_backupLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jp_backupLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(28, 28, 28))
+        );
+
+        jTabbedPane1.addTab("Copia de seguridad", jp_backup);
+
+        jLabel10.setText("Archivo Backup SQL");
+
+        sql_restore.setEditable(false);
+
+        brow3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/folder_database.png"))); // NOI18N
+
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, jp_restore, org.jdesktop.beansbinding.ELProperty.create("${enabled}"), brow3, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
+        bindingGroup.addBinding(binding);
+
+        brow3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                brow3ActionPerformed(evt);
+            }
+        });
+
+        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/database_refresh.png"))); // NOI18N
+        jButton3.setText("Restaurar");
+
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, jp_restore, org.jdesktop.beansbinding.ELProperty.create("${enabled}"), jButton3, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
+        bindingGroup.addBinding(binding);
+
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jp_restoreLayout = new javax.swing.GroupLayout(jp_restore);
+        jp_restore.setLayout(jp_restoreLayout);
+        jp_restoreLayout.setHorizontalGroup(
+            jp_restoreLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jp_restoreLayout.createSequentialGroup()
+                .addGap(34, 34, 34)
+                .addGroup(jp_restoreLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel10)
+                    .addGroup(jp_restoreLayout.createSequentialGroup()
+                        .addComponent(sql_restore, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(brow3, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(40, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jp_restoreLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton3)
+                .addGap(114, 114, 114))
+        );
+        jp_restoreLayout.setVerticalGroup(
+            jp_restoreLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jp_restoreLayout.createSequentialGroup()
+                .addGap(39, 39, 39)
+                .addComponent(jLabel10)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jp_restoreLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                    .addComponent(sql_restore, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(brow3))
+                .addGap(31, 31, 31)
+                .addComponent(jButton3)
+                .addContainerGap(71, Short.MAX_VALUE))
+        );
+
+        jTabbedPane1.addTab("Restaurar", jp_restore);
+
+        sql_dump.setEditable(false);
+
+        brow1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/folder_database.png"))); // NOI18N
+
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, jp_rutas, org.jdesktop.beansbinding.ELProperty.create("${enabled}"), brow1, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
+        bindingGroup.addBinding(binding);
+
+        brow1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                brow1ActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setText("MySql Bin");
+
+        jLabel9.setText("Archivo Backup SQL");
+
+        sql_file.setEditable(false);
+
+        brow2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/folder_database.png"))); // NOI18N
+
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, jp_rutas, org.jdesktop.beansbinding.ELProperty.create("${enabled}"), brow2, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
+        bindingGroup.addBinding(binding);
+
+        brow2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                brow2ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jp_rutasLayout = new javax.swing.GroupLayout(jp_rutas);
+        jp_rutas.setLayout(jp_rutasLayout);
+        jp_rutasLayout.setHorizontalGroup(
+            jp_rutasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jp_rutasLayout.createSequentialGroup()
+                .addGap(36, 36, 36)
+                .addGroup(jp_rutasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jp_rutasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jLabel9)
+                        .addGroup(jp_rutasLayout.createSequentialGroup()
+                            .addComponent(sql_file, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(18, 18, 18)
+                            .addComponent(brow2, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jp_rutasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jLabel1)
+                        .addGroup(jp_rutasLayout.createSequentialGroup()
+                            .addComponent(sql_dump, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(18, 18, 18)
+                            .addComponent(brow1, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(38, Short.MAX_VALUE))
+        );
+        jp_rutasLayout.setVerticalGroup(
+            jp_rutasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jp_rutasLayout.createSequentialGroup()
+                .addGap(16, 16, 16)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jp_rutasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                    .addComponent(sql_dump, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(brow1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel9)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jp_rutasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                    .addComponent(sql_file, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(brow2))
+                .addContainerGap(94, Short.MAX_VALUE))
+        );
+
+        jTabbedPane1.addTab("Rutas", jp_rutas);
+
+        jLabel12.setText("Crear base de datos");
+
+        jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/database_add.png"))); // NOI18N
+        jButton5.setText("Instalar");
+
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, jp_advance, org.jdesktop.beansbinding.ELProperty.create("${enabled}"), jButton5, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
+        bindingGroup.addBinding(binding);
+
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
+
+        jLabel13.setText("Tipo de estación");
+
+        tipo_estacion.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "CLIENTE", "SERVIDOR" }));
+
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, jp_advance, org.jdesktop.beansbinding.ELProperty.create("${enabled}"), tipo_estacion, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
+        bindingGroup.addBinding(binding);
+
+        javax.swing.GroupLayout jp_advanceLayout = new javax.swing.GroupLayout(jp_advance);
+        jp_advance.setLayout(jp_advanceLayout);
+        jp_advanceLayout.setHorizontalGroup(
+            jp_advanceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jp_advanceLayout.createSequentialGroup()
+                .addGap(45, 45, 45)
+                .addGroup(jp_advanceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel12)
+                    .addComponent(jLabel13))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
+                .addGroup(jp_advanceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(tipo_estacion, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(56, 56, 56))
+        );
+        jp_advanceLayout.setVerticalGroup(
+            jp_advanceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jp_advanceLayout.createSequentialGroup()
+                .addGap(23, 23, 23)
+                .addGroup(jp_advanceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel13)
+                    .addComponent(tipo_estacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jp_advanceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel12)
+                    .addComponent(jButton5))
+                .addContainerGap(125, Short.MAX_VALUE))
+        );
+
+        jTabbedPane1.addTab("Avanzado", jp_advance);
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jTabbedPane1)
+                .addContainerGap())
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 255, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        jButton1.setBackground(Color.WHITE);
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/accept_1.png"))); // NOI18N
+        jButton1.setText("Aceptar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        jButton2.setBackground(Color.WHITE);
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cancel_1.png"))); // NOI18N
+        jButton2.setText("Cancelar");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton2)
+                .addGap(99, 99, 99))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton1)
+                    .addComponent(jButton2))
+                .addContainerGap(13, Short.MAX_VALUE))
+        );
+
+        bindingGroup.bind();
+
+        pack();
+    }// </editor-fold>//GEN-END:initComponents
+
+private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        String [] con = new String[4];
+        if(!(host1.getText().equals("") || host2.getText().equals("") || host3.getText().equals("") || host4.getText().equals("") || bd.getText().equals(""))){
+            if(JOptionPane.showConfirmDialog(null,"Esta seguro que desea continuar?","Confirmar",JOptionPane.OK_CANCEL_OPTION)==0){
+                if (tipo_estacion.getSelectedItem().toString().equals("CLIENTE")) {
+                    enable_prog.setSelected(false);
+                    en_task.setSelected(false);
+                }
+                con[0]=host1.getText()+"."+host2.getText()+"."+host3.getText()+"."+host4.getText();
+                con[1]=bd.getText();
+                con[2]= usu.getText();
+                con[3]= new String(cont.getPassword());
+                Main.host=host1.getText()+"."+host2.getText()+"."+host3.getText()+"."+host4.getText();
+                Main.bd=bd.getText();
+                Main.usu= usu.getText();
+                Main.cont= new String(cont.getPassword());
+                Main.enable_prog=enable_prog.isSelected();
+                Main.hh_pro=Integer.valueOf(hh_prog.getSelectedItem().toString());
+                Main.mm_pro=Integer.valueOf(mm_prog.getSelectedItem().toString());
+                Main.ruta_sql_bin=sql_dump.getText();
+                Main.ruta_backup=sql_file.getText();
+                Main.enable_task=en_task.isSelected();
+                Main.tipo_estacion=tipo_estacion.getSelectedItem().toString();
+                ////////////////////////////////****************************************************
+                ArrayList lista = load_file_conection(Main.ruta_file_option);
+                File archivo=new File(Main.ruta_file_option);
+                if(archivo.exists()){
+                    archivo.setWritable(true);
+                    try {
+                        FileWriter fw = new FileWriter(archivo);
+                        PrintWriter pw = new PrintWriter(fw);
+                        for (int i = 0; i < lista.size(); i++) {
+                            if (i==Main.num_conection) {
+                                pw.println( Encriptar.Encriptar(con[0]+"*"+con[1]+"*"+con[2]+"*"+con[3]));
+                            }else{
+                                String [] c= (String[])lista.get(i);
+                                pw.println(Encriptar.Encriptar(c[0]+"*"+c[1]+"*"+c[2]+"*"+c[3]));
+                            }
+                        }
+                        archivo.setReadable(true);
+                        fw.close();
+                        pw.close();
+                        JOptionPane.showMessageDialog(this,"Configuracion guardada", "Confirmacion",JOptionPane.INFORMATION_MESSAGE);
+                        this.dispose();
+                    } catch (IOException | HeadlessException ex) {
+                        ex.printStackTrace();
+                        JOptionPane.showMessageDialog(this,ex, "Error",JOptionPane.ERROR_MESSAGE);
+                    }
+                }else{
+                    JOptionPane.showMessageDialog(this,"Archivo de configuracion no encontrado en la ruta: "+Main.ruta_file_option, "Confirmacion",JOptionPane.INFORMATION_MESSAGE);
+                }
+                ///////////////***********************ALMACENA ARCHIVO DE CONEXIONES************************///////////////
+//                File archivo=new File(Main.ruta_file_option);
+//                if(archivo.exists()){
+//                    archivo.setWritable(true);
+//                    try {
+//                        FileWriter fw = new FileWriter(archivo);
+//                        PrintWriter pw = new PrintWriter(fw);
+//                        pw.println( Encriptar.Encriptar(host1.getText()+"."+host2.getText()+"."+host3.getText()+"."+host4.getText()+"*"+bd.getText()+"*"+usu.getText()+"*"+new String(cont.getPassword())));
+//                        archivo.setReadable(true);
+//                        fw.close();
+//                        pw.close();
+//                        
+//                    } catch (IOException | HeadlessException ex) {
+//                        ex.printStackTrace();
+//                        JOptionPane.showMessageDialog(this,ex, "Error",JOptionPane.ERROR_MESSAGE);
+//                    }
+//                }else{
+//                    JOptionPane.showMessageDialog(this,"Archivo de configuracion no existe en la ruta: "+Main.ruta_file_option, "Confirmacion",JOptionPane.ERROR_MESSAGE);
+//                }
+                File archivo_task=new File(Main.ruta_program);
+                if(archivo_task.exists()){
+                    archivo_task.setWritable(true);
+                    try {
+                        FileWriter fw = new FileWriter(archivo_task);
+                        PrintWriter pw = new PrintWriter(fw);
+                        String e;
+                        String e1;
+                        if (enable_prog.isSelected()) {
+                            e="1";
+                        } else {
+                            e="0";
+                        }
+                        if (en_task.isSelected()) {
+                            e1="1";
+                        } else {
+                            e1="0";
+                        }
+                        pw.println( Encriptar.Encriptar(e+"*"+hh_prog.getSelectedItem().toString()+"*"+mm_prog.getSelectedItem().toString()+"*"+sql_dump.getText()+"*"+sql_file.getText()+"*"+e1+"*"+tipo_estacion.getSelectedItem().toString()));
+                        archivo.setReadable(true);
+                        fw.close();
+                        pw.close();
+                    } catch (IOException | HeadlessException ex) {
+                        ex.printStackTrace();
+                        JOptionPane.showMessageDialog(this,ex, "Error",JOptionPane.ERROR_MESSAGE);
+                    }
+                }else{
+                    JOptionPane.showMessageDialog(this,"Archivo de tareas no existe en la ruta: "+Main.ruta_program, "Confirmación",JOptionPane.ERROR_MESSAGE);
+                }
+                JOptionPane.showMessageDialog(this,"Configuracion guardada", "Confirmacion",JOptionPane.INFORMATION_MESSAGE);
+                dispose();
+            }
+        }else{
+        JOptionPane.showMessageDialog(null,"Por favor complete todos los campos", "Error",JOptionPane.ERROR_MESSAGE);
+        }
+}//GEN-LAST:event_jButton1ActionPerformed
+
+private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+         // TODO add your handling code here:
+        this.dispose();
+}//GEN-LAST:event_jButton2ActionPerformed
+
+    private void enable_progItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_enable_progItemStateChanged
+        // TODO add your handling code here:
+        if (enable_prog.isSelected()) {
+            hh_prog.setEnabled(true);
+            mm_prog.setEnabled(true);
+            brow1.setEnabled(true);
+        } else {
+            hh_prog.setEnabled(false);
+            mm_prog.setEnabled(false);
+            brow1.setEnabled(false);
+        }
+    }//GEN-LAST:event_enable_progItemStateChanged
+
+    private void brow1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_brow1ActionPerformed
+        // TODO add your handling code here:
+        JFileChooser fc_dump = new JFileChooser(sql_dump.getText());
+        fc_dump.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+        if(fc_dump.showOpenDialog(this)==JFileChooser.APPROVE_OPTION){
+            sql_dump.setText(fc_dump.getSelectedFile().getAbsolutePath());
+        }
+    }//GEN-LAST:event_brow1ActionPerformed
+
+    private void brow2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_brow2ActionPerformed
+        // TODO add your handling code here:
+        JFileChooser fc_sql = new JFileChooser(sql_file.getText());
+        fc_sql.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+        if(fc_sql.showOpenDialog(this)==JFileChooser.APPROVE_OPTION){
+            sql_file.setText(fc_sql.getSelectedFile().getAbsolutePath());
+        }
+    }//GEN-LAST:event_brow2ActionPerformed
+
+    private void brow3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_brow3ActionPerformed
+        // TODO add your handling code here:
+        JFileChooser fc_restore = new JFileChooser(sql_restore.getText());
+        //fc_restore.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+        if(fc_restore.showOpenDialog(this)==JFileChooser.APPROVE_OPTION){
+            sql_restore.setText(fc_restore.getSelectedFile().getAbsolutePath());
+        }
+    }//GEN-LAST:event_brow3ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        if (sql_restore.getText().contains(".sql")) {
+            int conf = JOptionPane.showConfirmDialog(this,"Esta seguro que desea continuar?","Confirmación",JOptionPane.OK_CANCEL_OPTION,JOptionPane.QUESTION_MESSAGE);
+            if (conf == JOptionPane.YES_OPTION) {
+                this.setCursor(new Cursor(Cursor.WAIT_CURSOR));
+                String executeCmd = "";
+                executeCmd = Main.ruta_sql_bin+"/mysql -u "+Main.usu+" -p"+Main.cont+"";
+                System.out.println(executeCmd);
+                try {
+                    Process runtimeProcess = Runtime.getRuntime().exec(executeCmd);
+                    OutputStream os = runtimeProcess.getOutputStream();
+                    FileInputStream fis = new FileInputStream(sql_restore.getText());
+                    byte[] buffer = new byte[10000];
+                    int leido = fis.read(buffer);
+                    while (leido > 0) {
+                       os.write(buffer, 0, leido);
+                       leido = fis.read(buffer);
+                    }
+                    os.flush();
+                    os.close();
+                    fis.close();
+                    int processComplete = runtimeProcess.waitFor();
+                    if(processComplete == 0){
+                        this.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+                        JOptionPane.showMessageDialog(this,"Base de datos restaurada correctamente.", "Información",JOptionPane.INFORMATION_MESSAGE);
+                    } else {
+                        JOptionPane.showMessageDialog(this,"Base de datos no pudo ser restaurada.", "Error",JOptionPane.ERROR_MESSAGE);
+                    }
+                }catch (IOException | InterruptedException | HeadlessException e) {
+                    e.printStackTrace();
+                }
+            }
+            
+        } else {
+            JOptionPane.showMessageDialog(this,"Seleccione un rchivo valido.", "Error",JOptionPane.ERROR_MESSAGE);
+        }
+        
+        
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
+        Conexion con=new Conexion();
+        if(con.test(host1.getText()+"."+host2.getText()+"."+host3.getText()+"."+host4.getText(), bd.getText(), usu.getText(), new String(cont.getPassword()))){
+            JOptionPane.showMessageDialog(this,"Test exitoso.", "Información",JOptionPane.INFORMATION_MESSAGE);
+            con.cerrar();
+        }else{
+            JOptionPane.showMessageDialog(this,"Test fallido.", "Error",JOptionPane.ERROR_MESSAGE);
+        }
+        
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void brow4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_brow4ActionPerformed
+        // TODO add your handling code here:
+        boolean conf=true;
+        JFileChooser fc_dump = new JFileChooser(sql_file.getText());
+        fc_dump.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+        //FileFilter filter = new FileNameExtensionFilter("Copia de seguridad MySql (*.sql)","sql");
+        //fc_dump.setFileFilter(filter);
+        //fc_dump.setSelectedFile(new File("Backup_"+new SimpleDateFormat("dd-MM-yyyy_HH-mm-ss").format(new Date())+".sql"));
+        if(fc_dump.showSaveDialog(this)==JFileChooser.APPROVE_OPTION){
+            this.setCursor(new Cursor(Cursor.WAIT_CURSOR));
+            for (int i = 0; i < Main.conection_list.size(); i++) {
+                String [] p= (String[])Main.conection_list.get(i);
+                String executeCmd = "";
+                if (tipo_estacion.getSelectedItem().equals("CLIENTE")) {
+                    executeCmd = Main.ruta_sql_bin+"/mysqldump -u "+p[2]+" -p"+p[3]+" --add-drop-database -B --host="+host1.getText()+"."+host2.getText()+"."+host3.getText()+"."+host4.getText()+" "+p[1]+"";
+                } else {
+                    executeCmd = Main.ruta_sql_bin+"/mysqldump -u "+p[2]+" -p"+p[3]+" --add-drop-database -B "+p[1]+"";
+                }
+                System.out.println(executeCmd);
+                try{
+                    Process runtimeProcess = Runtime.getRuntime().exec(executeCmd);
+                    InputStream is = runtimeProcess.getInputStream();
+                    FileOutputStream fos = new FileOutputStream(fc_dump.getSelectedFile().getAbsolutePath()+"\\Backup_"+p[1]+"_"+new SimpleDateFormat("dd-MM-yyyy_HH-mm-ss").format(new Date())+".sql");
+                    byte[] buffer = new byte[10000];
+                    int leido = is.read(buffer);
+                    while (leido > 0) {
+                       fos.write(buffer, 0, leido);
+                       leido = is.read(buffer);
+                    }
+                    fos.close();  
+                    this.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+                    int processComplete = runtimeProcess.waitFor();
+                    if(processComplete == 0){
+                        conf=conf&true;
+                    } else {
+                        conf=conf&false;
+                    }
+                }catch (IOException | HeadlessException | InterruptedException e) {
+                    e.printStackTrace();
+                    JOptionPane.showMessageDialog(null,e.getMessage(), "Error",JOptionPane.ERROR_MESSAGE);
+                }
+            }
+            if (conf) {
+                JOptionPane.showMessageDialog(this,"Copia de seguridad realizada correctamente.", "Información",JOptionPane.INFORMATION_MESSAGE);
+            }else{
+                JOptionPane.showMessageDialog(this,"Error al realizar la copia de seguridad.", "Error",JOptionPane.ERROR_MESSAGE);
+            }
+        }
+        
+        
+        
+        
+        
+        
+        
+        
+            
+        
+    }//GEN-LAST:event_brow4ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton5ActionPerformed
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Windows".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(Opciones.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(Opciones.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(Opciones.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(Opciones.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+
+        /* Create and display the dialog */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+
+            public void run() {
+                Opciones dialog = new Opciones(new javax.swing.JFrame(), true);
+                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
+
+                    @Override
+                    public void windowClosing(java.awt.event.WindowEvent e) {
+                        System.exit(0);
+                    }
+                });
+                dialog.setVisible(true);
+            }
+        });
+    }
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    public javax.swing.JTextField bd;
+    private javax.swing.JButton brow1;
+    private javax.swing.JButton brow2;
+    private javax.swing.JButton brow3;
+    private javax.swing.JButton brow4;
+    private javax.swing.JPasswordField cont;
+    private javax.swing.JCheckBox en_task;
+    private javax.swing.JCheckBox enable_prog;
+    private javax.swing.JComboBox<String> hh_prog;
+    public javax.swing.JTextField host1;
+    public javax.swing.JTextField host2;
+    public javax.swing.JTextField host3;
+    public javax.swing.JTextField host4;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel11;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel9;
+    private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JPanel jp_advance;
+    private javax.swing.JPanel jp_backup;
+    private javax.swing.JPanel jp_base_datos;
+    private javax.swing.JPanel jp_general;
+    private javax.swing.JPanel jp_restore;
+    private javax.swing.JPanel jp_rutas;
+    private javax.swing.JComboBox<String> mm_prog;
+    private javax.swing.JTextField sql_dump;
+    private javax.swing.JTextField sql_file;
+    private javax.swing.JTextField sql_restore;
+    private javax.swing.JComboBox<String> tipo_estacion;
+    private javax.swing.JTextField usu;
+    private org.jdesktop.beansbinding.BindingGroup bindingGroup;
+    // End of variables declaration//GEN-END:variables
+public void enable_panel(){
+    if(Main.rol.getText().equalsIgnoreCase("MASTER")){
+        if (tipo_estacion.getSelectedItem().toString().equals("CLIENTE")) {
+            jp_general.setEnabled(false);
+            jp_base_datos.setEnabled(true);
+            jp_backup.setEnabled(false);
+            jp_restore.setEnabled(false);
+            jp_rutas.setEnabled(false);
+            jp_advance.setEnabled(true);
+        }else{
+            if (tipo_estacion.getSelectedItem().toString().equals("SERVIDOR")) {
+                jp_general.setEnabled(true);
+                jp_base_datos.setEnabled(true);
+                jp_backup.setEnabled(true);
+                jp_restore.setEnabled(true);
+                jp_rutas.setEnabled(true);
+                jp_advance.setEnabled(true);
+            }
+        }
+    }
+    if(Main.rol.getText().equalsIgnoreCase("ADMINISTRADOR")){
+        if (tipo_estacion.getSelectedItem().toString().equals("CLIENTE")) {
+            jp_general.setEnabled(false);
+            jp_base_datos.setEnabled(true);
+            jp_backup.setEnabled(false);
+            jp_restore.setEnabled(false);
+            jp_rutas.setEnabled(false);
+            jp_advance.setEnabled(false);
+        }else{
+            if (tipo_estacion.getSelectedItem().toString().equals("SERVIDOR")) {
+                jp_general.setEnabled(true);
+                jp_base_datos.setEnabled(true);
+                jp_backup.setEnabled(true);
+                jp_restore.setEnabled(true);
+                jp_rutas.setEnabled(true);
+                jp_advance.setEnabled(false);
+            }
+        }
+    }
+    if(Main.rol.getText().equalsIgnoreCase("OPERADOR")){
+        jp_general.setEnabled(false);
+        jp_base_datos.setEnabled(false);
+        jp_backup.setEnabled(false);
+        jp_restore.setEnabled(false);
+        jp_rutas.setEnabled(false);
+        jp_advance.setEnabled(false);
+    }
+    
+}
+public ArrayList load_file_conection(String r){
+    ArrayList ret = new ArrayList();
+    String[] con;
+    String a;
+    String t;
+    File arc = new File(r);
+    if(arc.exists()){
+        try{
+            FileReader fr = new FileReader (arc);
+            BufferedReader br = new BufferedReader(fr);
+            while((a=br.readLine())!=null){
+                t = Encriptar.Desencriptar(a);
+                con=t.split("\\*");
+                ret.add(con);
+            }
+            br.close();
+            fr.close();
+
+        }catch(Exception e){
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(null,e.getMessage(), "Error",JOptionPane.ERROR_MESSAGE);
+        }
+    }
+    return ret;
+    }
+public String[] load_task(String r){
+    String aux;
+    String temp;
+    String[] param = null;
+    File arch = new File(r);
+    if(arch.exists()){
+        try{
+            FileReader fr = new FileReader (arch);
+            BufferedReader br = new BufferedReader(fr);
+            while((aux=br.readLine())!=null){
+                temp = Encriptar.Desencriptar(aux);
+                param=temp.split("\\*");
+            }
+            br.close();
+            fr.close();
+        }catch(Exception e){
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(null,e.getMessage(), "Error",JOptionPane.ERROR_MESSAGE);
+        }
+    }
+    return param;
+}
+}

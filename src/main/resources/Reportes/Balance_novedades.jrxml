@@ -1,0 +1,333 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Balance novedades" pageWidth="612" pageHeight="792" columnWidth="598" leftMargin="7" rightMargin="7" topMargin="20" bottomMargin="10" scriptletClass="Paquete.ScriptletsBalance" uuid="7db4d154-afa9-4d97-87b8-8ea7cd5a7e19">
+	<property name="ireport.zoom" value="1.607691607500001"/>
+	<property name="ireport.x" value="354"/>
+	<property name="ireport.y" value="0"/>
+	<import value="Paquete.ScriptletsBalance"/>
+	<parameter name="Fecha_inicial" class="java.util.Date">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="Fecha_final" class="java.util.Date">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="host" class="java.lang.String"/>
+	<parameter name="db" class="java.lang.String"/>
+	<parameter name="usu" class="java.lang.String"/>
+	<parameter name="cont" class="java.lang.String"/>
+	<parameter name="Fecha_desp" class="java.util.Date"/>
+	<parameter name="Fecha_ant" class="java.util.Date"/>
+	<queryString>
+		<![CDATA[SELECT t_novedades.ID_EMPRESA, NOMBRE_EMPRESA FROM t_novedades 
+INNER JOIN t_empresas 
+	ON (t_novedades.ID_EMPRESA = t_empresas.ID_EMPRESA)
+WHERE	ID_TIPO IN (1,2) 
+AND ((t_novedades.`FECHA_INGRESO` < $P{Fecha_desp} AND t_novedades.`FECHA_RETIRO` = '1900-01-01')
+  OR (t_novedades.`FECHA_INGRESO` < $P{Fecha_desp} AND t_novedades.`FECHA_RETIRO` >= $P{Fecha_inicial}))
+  GROUP BY t_novedades.ID_EMPRESA
+  ORDER	BY t_novedades.ID_EMPRESA ASC]]>
+	</queryString>
+	<field name="ID_EMPRESA" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="NOMBRE_EMPRESA" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<variable name="Total_AI" class="java.lang.Long" calculation="Sum">
+		<variableExpression><![CDATA[$P{REPORT_SCRIPTLET}.calc_activos( $P{Fecha_inicial}, $F{ID_EMPRESA}, $P{host}, $P{db}, $P{usu}, $P{cont} )]]></variableExpression>
+	</variable>
+	<variable name="Total_AF" class="java.lang.Long" calculation="Sum">
+		<variableExpression><![CDATA[$P{REPORT_SCRIPTLET}.calc_activos($P{Fecha_desp}, $F{ID_EMPRESA}, $P{host}, $P{db}, $P{usu}, $P{cont} )]]></variableExpression>
+	</variable>
+	<variable name="Total_IM" class="java.lang.Long" calculation="Sum">
+		<variableExpression><![CDATA[$P{REPORT_SCRIPTLET}.ingresos_mes( $P{Fecha_inicial}, $P{Fecha_final}, $F{ID_EMPRESA}, $P{host}, $P{db}, $P{usu}, $P{cont} )]]></variableExpression>
+	</variable>
+	<variable name="Total_RM" class="java.lang.Long" calculation="Sum">
+		<variableExpression><![CDATA[$P{REPORT_SCRIPTLET}.retiros_mes( $P{Fecha_inicial}, $P{Fecha_final}, $F{ID_EMPRESA}, $P{host}, $P{db}, $P{usu}, $P{cont} )]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="60" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="598" height="20" uuid="bc78090a-1e02-4882-9045-3f31a9cf9931"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true" isItalic="true" isStrikeThrough="false"/>
+				</textElement>
+				<text><![CDATA[BALANCE DE NOVEDADES]]></text>
+			</staticText>
+			<textField pattern="EEEEE dd &apos;de&apos; MMMMM &apos;de&apos; yyyy">
+				<reportElement x="0" y="32" width="598" height="13" isPrintInFirstWholeBand="true" isPrintWhenDetailOverflows="true" uuid="3714ba9e-1be3-4712-a245-367b7218ad39"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isUnderline="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Fecha de validez: "+new SimpleDateFormat("dd-MM-yyyy").format($P{Fecha_inicial})+" al "+new SimpleDateFormat("dd-MM-yyyy").format($P{Fecha_final})]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="15" splitType="Stretch">
+			<printWhenExpression><![CDATA[$V{PAGE_NUMBER}==1]]></printWhenExpression>
+			<staticText>
+				<reportElement mode="Opaque" x="46" y="0" width="35" height="15" forecolor="#000000" backcolor="#999999" uuid="ebefc53f-60df-41b7-8328-3f8cec236ce7"/>
+				<box>
+					<topPen lineWidth="1.5"/>
+					<leftPen lineWidth="1.5"/>
+					<bottomPen lineWidth="1.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="Arial" size="6" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[No.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="81" y="0" width="57" height="15" forecolor="#000000" backcolor="#999999" uuid="3f134ded-3fdd-499c-a27f-34e26c05093a"/>
+				<box>
+					<topPen lineWidth="1.5"/>
+					<bottomPen lineWidth="1.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="Arial" size="6" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[NIT EMPRESA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="295" y="0" width="60" height="15" forecolor="#000000" backcolor="#999999" uuid="3ad9688b-957c-414e-b42e-88c2a3f31086"/>
+				<box>
+					<topPen lineWidth="1.5"/>
+					<bottomPen lineWidth="1.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="Arial" size="6" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[ACTIVOS INICIAL]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="475" y="0" width="60" height="15" forecolor="#000000" backcolor="#999999" uuid="1214646d-3398-4a1f-bae8-874266eb0784"/>
+				<box>
+					<topPen lineWidth="1.5"/>
+					<bottomPen lineWidth="1.5"/>
+					<rightPen lineWidth="1.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="Arial" size="6" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[ACTIVOS FINAL]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="138" y="0" width="157" height="15" forecolor="#000000" backcolor="#999999" uuid="0bfb9ddb-425e-475a-988b-668f4f97e0c6"/>
+				<box>
+					<topPen lineWidth="1.5"/>
+					<bottomPen lineWidth="1.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="Arial" size="6" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[NOMBRE EMPRESA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="355" y="0" width="60" height="15" forecolor="#000000" backcolor="#999999" uuid="7d2bef88-245a-409b-a5c3-649fba772c69"/>
+				<box>
+					<topPen lineWidth="1.5"/>
+					<bottomPen lineWidth="1.5"/>
+					<rightPen lineWidth="1.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="Arial" size="6" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[INGRESOS MES]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="415" y="0" width="60" height="15" forecolor="#000000" backcolor="#999999" uuid="5fd702a4-074c-496f-a5ca-9d1afd0c2e15"/>
+				<box>
+					<topPen lineWidth="1.5"/>
+					<bottomPen lineWidth="1.5"/>
+					<rightPen lineWidth="1.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="Arial" size="6" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[RETIROS MES]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="10" splitType="Stretch">
+			<textField>
+				<reportElement x="46" y="0" width="35" height="10" uuid="2a0024b6-6038-4a9c-84b7-2ff5d8457545"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{REPORT_COUNT}]]></textFieldExpression>
+			</textField>
+			<textField pattern="" isBlankWhenNull="false">
+				<reportElement mode="Transparent" x="81" y="0" width="57" height="10" forecolor="#000000" backcolor="#FFFFFF" uuid="1f7cee92-6b5b-4fa7-810c-384a888f3f63"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="Arial" size="5" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ID_EMPRESA}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd-MM-yyyy" isBlankWhenNull="false">
+				<reportElement mode="Transparent" x="138" y="0" width="157" height="10" isPrintWhenDetailOverflows="true" forecolor="#000000" backcolor="#FFFFFF" uuid="89caef24-4347-4356-98f0-612b2a11e5d2"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="Arial" size="5" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{NOMBRE_EMPRESA}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0" isBlankWhenNull="false">
+				<reportElement mode="Transparent" x="475" y="0" width="60" height="10" isPrintWhenDetailOverflows="true" forecolor="#000000" backcolor="#FFFFFF" uuid="058fb5d7-dbe8-4ab3-86c0-bdc115d99288"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="Arial" size="5" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{REPORT_SCRIPTLET}.calc_activos($P{Fecha_desp}, $F{ID_EMPRESA}, $P{host}, $P{db}, $P{usu}, $P{cont} )]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0" isBlankWhenNull="false">
+				<reportElement mode="Transparent" x="295" y="0" width="60" height="10" isPrintWhenDetailOverflows="true" forecolor="#000000" backcolor="#FFFFFF" uuid="99469318-d75f-49ef-92af-b38c2e04e642"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="Arial" size="5" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{REPORT_SCRIPTLET}.calc_activos( $P{Fecha_inicial}, $F{ID_EMPRESA}, $P{host}, $P{db}, $P{usu}, $P{cont} )]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0" isBlankWhenNull="false">
+				<reportElement mode="Transparent" x="355" y="0" width="60" height="10" isPrintWhenDetailOverflows="true" forecolor="#000000" backcolor="#FFFFFF" uuid="fbac100b-7b2b-467c-a2e5-a503638d245b"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="Arial" size="5" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{REPORT_SCRIPTLET}.ingresos_mes( $P{Fecha_inicial}, $P{Fecha_final}, $F{ID_EMPRESA}, $P{host}, $P{db}, $P{usu}, $P{cont} )]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0" isBlankWhenNull="false">
+				<reportElement mode="Transparent" x="415" y="0" width="60" height="10" isPrintWhenDetailOverflows="true" forecolor="#000000" backcolor="#FFFFFF" uuid="e46ff739-be4f-4900-87a7-fd6b06976f49"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="Arial" size="5" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{REPORT_SCRIPTLET}.retiros_mes( $P{Fecha_inicial}, $P{Fecha_final}, $F{ID_EMPRESA}, $P{host}, $P{db}, $P{usu}, $P{cont} )]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<summary>
+		<band height="10">
+			<textField pattern="###0" isBlankWhenNull="false">
+				<reportElement mode="Transparent" x="295" y="0" width="60" height="10" isPrintWhenDetailOverflows="true" forecolor="#000000" backcolor="#FFFFFF" uuid="50ef320b-c0eb-4fea-b95e-43149ed7a8cf"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="Arial" size="5" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{Total_AI}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0" isBlankWhenNull="false">
+				<reportElement mode="Transparent" x="475" y="0" width="60" height="10" isPrintWhenDetailOverflows="true" forecolor="#000000" backcolor="#FFFFFF" uuid="dfd4ac65-9bd7-4bf4-8bbe-c94154f7c1bc"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="Arial" size="5" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{Total_AF}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0" isBlankWhenNull="false">
+				<reportElement mode="Transparent" x="355" y="0" width="60" height="10" isPrintWhenDetailOverflows="true" forecolor="#000000" backcolor="#FFFFFF" uuid="5eb12df4-ba0a-4b00-9175-72cb9c1911c0"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="Arial" size="5" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{Total_IM}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0" isBlankWhenNull="false">
+				<reportElement mode="Transparent" x="415" y="0" width="60" height="10" isPrintWhenDetailOverflows="true" forecolor="#000000" backcolor="#FFFFFF" uuid="ae9a5070-4c72-4091-94b5-c113766caf68"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="Arial" size="5" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{Total_RM}]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>

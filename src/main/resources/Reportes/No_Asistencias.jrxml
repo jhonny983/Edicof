@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="No_Asistencias" pageWidth="612" pageHeight="792" columnWidth="572" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="a91c5b98-7b63-4fc8-a057-65f2f3653bdc">
+	<property name="ireport.zoom" value="1.3995221406292007"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="NOMBRE_EMPRESA" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="FECHA" class="java.util.Date">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="DIAS" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT A.*
+FROM  (SELECT
+	     t_novedades.ID_EMPLEADO AS ID_EMP,
+	     t_empleados.NOMBRE_1_EMP AS NOMBRE_1_EMP,
+	     t_empleados.NOMBRE_2_EMP AS NOMBRE_2_EMP,
+	     t_empleados.APELLIDO_1_EMP AS APELLIDO_1_EMP,
+	     t_empleados.APELLIDO_2_EMP AS APELLIDO_2_EMP
+	     
+	FROM
+	t_novedades
+	INNER JOIN t_obra 
+		ON (t_novedades.ID_OBRA = t_obra.ID_OBRA)
+	INNER JOIN t_municipios 
+		ON (t_obra.ID_MUN_OBRA = t_municipios.ID_MUN)
+	INNER JOIN t_departamentos 
+		ON (t_municipios.ID_DEP = t_departamentos.ID_DEP)
+	INNER JOIN t_afp 
+		ON (t_novedades.ID_AFP = t_afp.ID_AFP)
+	INNER JOIN t_eps 
+		ON (t_novedades.ID_EPS = t_eps.ID_EPS)
+	INNER JOIN t_empresas 
+		ON (t_novedades.ID_EMPRESA = t_empresas.ID_EMPRESA)
+	INNER JOIN t_empleados 
+		ON (t_novedades.ID_EMPLEADO = t_empleados.ID_EMP)
+	INNER JOIN t_tipo_novedad 
+		ON (t_novedades.ID_TIPO = t_tipo_novedad.ID_TIPO)
+	WHERE t_empresas.NOMBRE_EMPRESA = $P{NOMBRE_EMPRESA}
+	AND  t_novedades.ID_TIPO IN (1,2)
+	AND ((t_novedades.`FECHA_INGRESO` <= $P{FECHA} AND t_novedades.`FECHA_RETIRO` = '1900-01-01')
+		OR ( t_novedades.`FECHA_INGRESO` <= $P{FECHA} AND t_novedades.`FECHA_RETIRO` >= $P{FECHA}))
+	ORDER BY
+	     t_novedades.`ID_EMPLEADO` ASC) AS A
+LEFT JOIN (SELECT t_empleados.ID_EMP AS ID_EMP,
+		t_empleados.NOMBRE_1_EMP AS NOMBRE_1_EMP, 
+		t_empleados.NOMBRE_2_EMP AS NOMBRE_2_EMP, 
+		t_empleados.APELLIDO_1_EMP AS APELLIDO_1_EMP, 
+		t_empleados.APELLIDO_2_EMP AS APELLIDO_2_EMP
+	FROM
+	    t_asistencias
+	    INNER JOIN t_empleados 
+		ON (t_asistencias.ID_EMPLEADO = t_empleados.ID_EMP)
+	    INNER JOIN t_empresas 
+		ON (t_asistencias.ID_EMPRESA = t_empresas.ID_EMPRESA)
+	WHERE t_empresas.NOMBRE_EMPRESA = $P{NOMBRE_EMPRESA} AND t_asistencias.F_ASISTENCIA BETWEEN DATE_SUB($P{FECHA}, INTERVAL $P{DIAS} DAY) AND $P{FECHA} GROUP BY t_asistencias.ID_EMPLEADO HAVING COUNT(t_asistencias.ID_EMPLEADO)>1) AS B
+ON A.ID_EMP = B.ID_EMP
+WHERE B.ID_EMP IS NULL]]>
+	</queryString>
+	<field name="ID_EMP" class="java.lang.Long"/>
+	<field name="NOMBRE_1_EMP" class="java.lang.String"/>
+	<field name="NOMBRE_2_EMP" class="java.lang.String"/>
+	<field name="APELLIDO_1_EMP" class="java.lang.String"/>
+	<field name="APELLIDO_2_EMP" class="java.lang.String"/>
+	<variable name="ID_EMP" class="java.lang.Integer" calculation="Count">
+		<variableExpression><![CDATA[$F{ID_EMP}]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="60" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="572" height="20" uuid="508c7dee-d832-41d7-a212-5a6b87755016"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true" isItalic="true" isStrikeThrough="false"/>
+				</textElement>
+				<text><![CDATA[LISTADO DE ASISTENCIAS]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="110" y="33" width="278" height="13" uuid="307db476-7ac6-4b95-97df-b55bd45205be"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{NOMBRE_EMPRESA}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="30" y="33" width="80" height="13" uuid="9c308fd3-a693-4e18-b782-6b625f9fe910"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Contratista:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="30" y="20" width="80" height="13" uuid="cf14a7a2-666d-4bdc-b6c3-0773f6de81be"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Fecha de validez:]]></text>
+			</staticText>
+			<textField pattern="EEEEE dd &apos;de&apos; MMMMM &apos;de&apos; yyyy">
+				<reportElement x="110" y="20" width="278" height="13" isPrintInFirstWholeBand="true" isPrintWhenDetailOverflows="true" uuid="ed0123f4-2277-4149-a8cb-1361b2990eaf"/>
+				<textElement>
+					<font size="8" isUnderline="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new SimpleDateFormat("EEEEE dd 'de' MMMMM 'de' yyyy").format($P{FECHA}) + " ultimos " +$P{DIAS}+ " dias."]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="400" y="33" width="28" height="13" uuid="f0cdf234-6da7-4eb0-9e72-fff192677218"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Total:]]></text>
+			</staticText>
+			<textField evaluationTime="Report">
+				<reportElement x="428" y="33" width="45" height="13" uuid="c43294ca-a762-4657-9845-b3a01eca7004"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{ID_EMP}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="12" splitType="Stretch">
+			<staticText>
+				<reportElement mode="Opaque" x="91" y="0" width="77" height="12" forecolor="#000000" backcolor="#999999" uuid="d21632a8-98fa-49be-bfe7-20ee4ad0313a"/>
+				<box>
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="Arial" size="8" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[CEDULA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="168" y="0" width="278" height="12" forecolor="#000000" backcolor="#999999" uuid="0c075d02-1af9-4f9b-8ae3-3cdd55c80ecc"/>
+				<box>
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="Arial" size="8" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[NOMBRE COMPLETO]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="12" splitType="Stretch">
+			<textField>
+				<reportElement x="91" y="0" width="77" height="12" uuid="27341051-bc8e-4685-ae22-af34e1844737"/>
+				<box>
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ID_EMP}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="168" y="0" width="278" height="12" uuid="d35c597a-6134-4b16-a509-324ac519985b"/>
+				<box>
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{NOMBRE_1_EMP}+" "+$F{NOMBRE_2_EMP}+" "+$F{APELLIDO_1_EMP}+" "+$F{APELLIDO_2_EMP}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

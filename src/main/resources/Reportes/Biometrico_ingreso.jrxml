@@ -1,0 +1,461 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Biometrico" pageWidth="792" pageHeight="612" orientation="Landscape" columnWidth="792" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="f8fbbc8d-ffa5-43ff-a82f-c0b9b466e6ad">
+	<property name="ireport.zoom" value="1.3310000000000028"/>
+	<property name="ireport.x" value="144"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="F_INICIAL" class="java.util.Date">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="F_FINAL" class="java.util.Date">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="TIPO" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="EMPRESA" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+     t_novedades.`ID_EMPLEADO` AS t_novedades_ID_EMPLEADO,
+     t_novedades.`FECHA_INGRESO` AS t_novedades_FECHA_INGRESO,
+     t_novedades.`FECHA_RETIRO` AS t_novedades_FECHA_RETIRO,
+     t_novedades.`SALARIO_NOVEDAD` AS t_novedades_SALARIO_NOVEDAD,
+     t_novedades.`ID_EPS` AS t_novedades_ID_EPS,
+     t_novedades.`ID_AFP` AS t_novedades_ID_AFP,
+     t_novedades.`ARL_NOV` AS t_novedades_ARL_NOV,
+     t_novedades.`CCF_NOV` AS t_novedades_CCF_NOV,
+     t_novedades.`F_NAC_NOV` AS t_novedades_F_NAC_NOV,
+     t_novedades.`F_EXP_NOV` AS t_novedades_F_EXP_NOV,
+     t_novedades.`DIR_EMP_NOV` AS t_novedades_DIR_EMP_NOV,
+     t_novedades.`BARRIO_NOV` AS t_novedades_BARRIO_NOV,
+     t_novedades.`ID_MUN_NOV` AS t_novedades_ID_MUN_NOV,
+     t_novedades.`TEL_NOV` AS t_novedades_TEL_NOV,
+     t_novedades.`MAIL_NOV` AS t_novedades_MAIL_NOV,
+     t_novedades.`ACUD_NOV` AS t_novedades_ACUD_NOV,
+     t_novedades.`ID_PAR_ACU_NOV` AS t_novedades_ID_PAR_ACU_NOV,
+     t_novedades.`TEL_ACUD_NOV` AS t_novedades_TEL_ACUD_NOV,
+     t_novedades.`OBS_NOV` AS t_novedades_OBS_NOV,
+     t_novedades.`ID_OBRA` AS t_novedades_ID_OBRA,
+     t_novedades.`ID_TIPO` AS t_novedades_ID_TIPO,
+     t_obra.`NOMBRE_OBRA` AS t_obra_NOMBRE_OBRA,
+     t_afp.`NOMBRE_AFP` AS t_afp_NOMBRE_AFP,
+     t_eps.`NOMBRE_EPS` AS t_eps_NOMBRE_EPS,
+     t_empresas.`NOMBRE_EMPRESA` AS t_empresas_NOMBRE_EMPRESA,
+     t_empleados.`NOMBRE_1_EMP` AS t_empleados_NOMBRE_1_EMP,
+     t_empleados.`NOMBRE_2_EMP` AS t_empleados_NOMBRE_2_EMP,
+     t_empleados.`APELLIDO_1_EMP` AS t_empleados_APELLIDO_1_EMP,
+     t_empleados.`APELLIDO_2_EMP` AS t_empleados_APELLIDO_2_EMP,
+     t_novedades.`ID_EMPRESA` AS t_novedades_ID_EMPRESA,
+     t_tipo_novedad.`ID_TIPO` AS t_tipo_novedad_ID_TIPO,
+     t_tipo_novedad.`NOMBRE_TIPO` AS t_tipo_novedad_NOMBRE_TIPO,
+     t_obra.`ID_MUN_OBRA` AS t_obra_ID_MUN_OBRA
+FROM
+t_novedades
+INNER JOIN t_obra 
+	ON (t_novedades.ID_OBRA = t_obra.ID_OBRA)
+INNER JOIN t_municipios 
+	ON (t_obra.ID_MUN_OBRA = t_municipios.ID_MUN)
+INNER JOIN t_departamentos 
+	ON (t_municipios.ID_DEP = t_departamentos.ID_DEP)
+INNER JOIN t_afp 
+	ON (t_novedades.ID_AFP = t_afp.ID_AFP)
+INNER JOIN t_eps 
+	ON (t_novedades.ID_EPS = t_eps.ID_EPS)
+INNER JOIN t_empresas 
+        ON (t_novedades.ID_EMPRESA = t_empresas.ID_EMPRESA)
+INNER JOIN t_empleados 
+        ON (t_novedades.ID_EMPLEADO = t_empleados.ID_EMP)
+INNER JOIN t_tipo_novedad 
+        ON (t_novedades.ID_TIPO = t_tipo_novedad.ID_TIPO)
+WHERE   t_empresas.NOMBRE_EMPRESA =  $P{EMPRESA}    
+
+AND     t_novedades.`FECHA_INGRESO` BETWEEN $P{F_INICIAL} AND $P{F_FINAL}
+AND     t_tipo_novedad.`NOMBRE_TIPO`=$P{TIPO}
+ORDER BY 
+	t_novedades.`FECHA_INGRESO` DESC]]>
+	</queryString>
+	<field name="t_novedades_ID_EMPLEADO" class="java.lang.Long"/>
+	<field name="t_novedades_FECHA_INGRESO" class="java.sql.Date"/>
+	<field name="t_novedades_FECHA_RETIRO" class="java.sql.Date"/>
+	<field name="t_novedades_SALARIO_NOVEDAD" class="java.lang.Float"/>
+	<field name="t_novedades_ID_EPS" class="java.lang.Integer"/>
+	<field name="t_novedades_ID_AFP" class="java.lang.Integer"/>
+	<field name="t_novedades_ARL_NOV" class="java.lang.String"/>
+	<field name="t_novedades_CCF_NOV" class="java.lang.String"/>
+	<field name="t_novedades_F_NAC_NOV" class="java.sql.Date"/>
+	<field name="t_novedades_F_EXP_NOV" class="java.sql.Date"/>
+	<field name="t_novedades_DIR_EMP_NOV" class="java.lang.String"/>
+	<field name="t_novedades_BARRIO_NOV" class="java.lang.String"/>
+	<field name="t_novedades_ID_MUN_NOV" class="java.lang.Integer"/>
+	<field name="t_novedades_TEL_NOV" class="java.lang.String"/>
+	<field name="t_novedades_MAIL_NOV" class="java.lang.String"/>
+	<field name="t_novedades_ACUD_NOV" class="java.lang.String"/>
+	<field name="t_novedades_ID_PAR_ACU_NOV" class="java.lang.Integer"/>
+	<field name="t_novedades_TEL_ACUD_NOV" class="java.lang.String"/>
+	<field name="t_novedades_OBS_NOV" class="java.lang.String"/>
+	<field name="t_novedades_ID_OBRA" class="java.lang.Integer"/>
+	<field name="t_novedades_ID_TIPO" class="java.lang.Integer"/>
+	<field name="t_obra_NOMBRE_OBRA" class="java.lang.String"/>
+	<field name="t_afp_NOMBRE_AFP" class="java.lang.String"/>
+	<field name="t_eps_NOMBRE_EPS" class="java.lang.String"/>
+	<field name="t_empresas_NOMBRE_EMPRESA" class="java.lang.String"/>
+	<field name="t_empleados_NOMBRE_1_EMP" class="java.lang.String"/>
+	<field name="t_empleados_NOMBRE_2_EMP" class="java.lang.String"/>
+	<field name="t_empleados_APELLIDO_1_EMP" class="java.lang.String"/>
+	<field name="t_empleados_APELLIDO_2_EMP" class="java.lang.String"/>
+	<field name="t_novedades_ID_EMPRESA" class="java.lang.String"/>
+	<field name="t_tipo_novedad_ID_TIPO" class="java.lang.Integer"/>
+	<field name="t_tipo_novedad_NOMBRE_TIPO" class="java.lang.String"/>
+	<field name="t_obra_ID_MUN_OBRA" class="java.lang.Integer"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="15">
+			<printWhenExpression><![CDATA[$V{PAGE_NUMBER}==1]]></printWhenExpression>
+			<staticText>
+				<reportElement x="0" y="0" width="792" height="15" uuid="a43cf2db-deab-44f2-ae22-2e97e5b3bdb8"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Usuarios]]></text>
+			</staticText>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="20" splitType="Stretch">
+			<printWhenExpression><![CDATA[$V{PAGE_NUMBER}==1]]></printWhenExpression>
+			<staticText>
+				<reportElement mode="Opaque" x="45" y="0" width="106" height="20" forecolor="#000000" backcolor="#999999" uuid="a9d7428d-fac2-4ad0-b660-e1234098bda3"/>
+				<box>
+					<topPen lineWidth="1.5"/>
+					<bottomPen lineWidth="1.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="Arial" size="8" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[Nombre]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="0" width="45" height="20" forecolor="#000000" backcolor="#999999" uuid="37c0f5aa-660c-46e7-9ee3-183ed3c7f28a"/>
+				<box>
+					<topPen lineWidth="1.5"/>
+					<leftPen lineWidth="1.5"/>
+					<bottomPen lineWidth="1.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="Arial" size="8" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[ID]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="151" y="0" width="120" height="20" forecolor="#000000" backcolor="#999999" uuid="97586f58-ca3b-474e-b30d-b4afaf97c203"/>
+				<box>
+					<topPen lineWidth="1.5"/>
+					<bottomPen lineWidth="1.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="Arial" size="8" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[Apellido]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="271" y="0" width="80" height="20" forecolor="#000000" backcolor="#999999" uuid="841053db-e428-4a59-b85b-7b52d4b043ee"/>
+				<box>
+					<topPen lineWidth="1.5"/>
+					<bottomPen lineWidth="1.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="Arial" size="8" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[ID de Departamento]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="351" y="0" width="104" height="20" forecolor="#000000" backcolor="#999999" uuid="6b6ac497-755f-4764-856f-abfbd9d2bf33"/>
+				<box>
+					<topPen lineWidth="1.5"/>
+					<bottomPen lineWidth="1.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="Arial" size="8" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[Nombre de Departamento]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="455" y="0" width="42" height="20" forecolor="#000000" backcolor="#999999" uuid="ebea2df9-8875-4231-ac72-02dadba70f41"/>
+				<box>
+					<topPen lineWidth="1.5"/>
+					<bottomPen lineWidth="1.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="Arial" size="8" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[Tarjeta]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="537" y="0" width="62" height="20" forecolor="#000000" backcolor="#999999" uuid="8a5765da-9ef1-454e-942f-0d81d1eaeb4f"/>
+				<box>
+					<topPen lineWidth="1.5"/>
+					<bottomPen lineWidth="1.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="Arial" size="8" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[Contraseña]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="497" y="0" width="40" height="20" forecolor="#000000" backcolor="#999999" uuid="fca58b08-c394-472d-9e84-84ad0e8a97af"/>
+				<box>
+					<topPen lineWidth="1.5"/>
+					<bottomPen lineWidth="1.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="Arial" size="8" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[Género]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="642" y="0" width="50" height="20" forecolor="#000000" backcolor="#999999" uuid="1ed5bedb-8119-4477-ae27-5b46fe8780b2"/>
+				<box>
+					<topPen lineWidth="1.5"/>
+					<bottomPen lineWidth="1.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="Arial" size="8" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[Fecha de
+creacion]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="692" y="0" width="38" height="20" forecolor="#000000" backcolor="#999999" uuid="278926eb-1a43-4184-a086-c44f049d3b9c"/>
+				<box>
+					<topPen lineWidth="1.5"/>
+					<bottomPen lineWidth="1.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="Arial" size="8" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[E mail]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="730" y="0" width="62" height="20" forecolor="#000000" backcolor="#999999" uuid="39977a4e-a260-45b6-8632-fcadb6e3f462"/>
+				<box>
+					<topPen lineWidth="1.5"/>
+					<bottomPen lineWidth="1.5"/>
+					<rightPen lineWidth="1.5" lineStyle="Double"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="Arial" size="8" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[Cumpleaños]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="599" y="0" width="43" height="20" forecolor="#000000" backcolor="#999999" uuid="9fda11c0-f903-434e-a727-7afd15ca3773"/>
+				<box>
+					<topPen lineWidth="1.5"/>
+					<bottomPen lineWidth="1.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="Arial" size="8" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[Celular]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="25" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="45" height="25" uuid="48fe8b4e-d917-4174-bb82-52f753f0ed96"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{t_novedades_ID_EMPLEADO}]]></textFieldExpression>
+			</textField>
+			<textField pattern="" isBlankWhenNull="false">
+				<reportElement mode="Transparent" x="45" y="0" width="106" height="25" forecolor="#000000" backcolor="#FFFFFF" uuid="1751918e-f139-4d54-a177-b270a6b1c8d7"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="Arial" size="7" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{t_empleados_NOMBRE_1_EMP}+" "+$F{t_empleados_NOMBRE_2_EMP}]]></textFieldExpression>
+			</textField>
+			<textField pattern="" isBlankWhenNull="false">
+				<reportElement mode="Transparent" x="151" y="0" width="120" height="25" forecolor="#000000" backcolor="#FFFFFF" uuid="c632cfbc-7a81-4c82-a781-1d91e38db105"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="Arial" size="7" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{t_empleados_APELLIDO_1_EMP}+" "+$F{t_empleados_APELLIDO_2_EMP}]]></textFieldExpression>
+			</textField>
+			<textField pattern="" isBlankWhenNull="false">
+				<reportElement mode="Transparent" x="271" y="0" width="80" height="25" forecolor="#000000" backcolor="#FFFFFF" uuid="acd39182-28f6-4617-8e10-b0d920ab465c"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="Arial" size="7" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{t_novedades_ID_EMPRESA}]]></textFieldExpression>
+			</textField>
+			<textField pattern="" isBlankWhenNull="false">
+				<reportElement mode="Transparent" x="351" y="0" width="104" height="25" forecolor="#000000" backcolor="#FFFFFF" uuid="7833af56-13ad-4a16-9a40-df9254db6e14"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="Arial" size="7" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{t_empresas_NOMBRE_EMPRESA}]]></textFieldExpression>
+			</textField>
+			<textField pattern="" isBlankWhenNull="false">
+				<reportElement mode="Transparent" x="455" y="0" width="42" height="25" forecolor="#000000" backcolor="#FFFFFF" uuid="2b65cde7-55e6-4e52-8e02-ffbb0feadc8c"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="Arial" size="7" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[""]]></textFieldExpression>
+			</textField>
+			<textField pattern="" isBlankWhenNull="false">
+				<reportElement mode="Transparent" x="497" y="0" width="40" height="25" forecolor="#000000" backcolor="#FFFFFF" uuid="58e5ec90-c7ec-499f-acb2-419b0a605837"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="Arial" size="7" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[""]]></textFieldExpression>
+			</textField>
+			<textField pattern="" isBlankWhenNull="false">
+				<reportElement mode="Transparent" x="537" y="0" width="62" height="25" forecolor="#000000" backcolor="#FFFFFF" uuid="af214569-524a-42bd-a010-d2cd496bbf9a"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="Arial" size="7" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{t_novedades_ID_EMPLEADO}.toString().substring($F{t_novedades_ID_EMPLEADO}.toString().length()-6,$F{t_novedades_ID_EMPLEADO}.toString().length())]]></textFieldExpression>
+			</textField>
+			<textField pattern="" isBlankWhenNull="false">
+				<reportElement mode="Transparent" x="599" y="0" width="43" height="25" forecolor="#000000" backcolor="#FFFFFF" uuid="9780b4b8-bfae-45a8-8fa5-b2467ea3f7ab"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="Arial" size="7" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[( $F{t_novedades_TEL_NOV}.equals("123456") ? "" : $F{t_novedades_TEL_NOV} )]]></textFieldExpression>
+			</textField>
+			<textField pattern="" isBlankWhenNull="false">
+				<reportElement mode="Transparent" x="642" y="0" width="50" height="25" forecolor="#000000" backcolor="#FFFFFF" uuid="03bde7f2-e85b-4a5b-9712-5904eabb0e75"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="Arial" size="7" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[""]]></textFieldExpression>
+			</textField>
+			<textField pattern="" isBlankWhenNull="false">
+				<reportElement mode="Transparent" x="692" y="0" width="38" height="25" forecolor="#000000" backcolor="#FFFFFF" uuid="7109f46c-8e56-4194-afaf-6587339abef3"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="Arial" size="7" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[( $F{t_novedades_MAIL_NOV}.equals("123456@HOTMAIL.COM") ? "" : $F{t_novedades_MAIL_NOV} )]]></textFieldExpression>
+			</textField>
+			<textField pattern="" isBlankWhenNull="false">
+				<reportElement mode="Transparent" x="730" y="0" width="62" height="25" forecolor="#000000" backcolor="#FFFFFF" uuid="21eb4ebd-a6c0-486a-bfce-4ea20a0e063f"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="Arial" size="7" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[( new SimpleDateFormat("dd-MM-yyyy").format($F{t_novedades_F_NAC_NOV}).equals("01-01-1900") ? "" : new SimpleDateFormat("dd-MM-yyyy").format($F{t_novedades_F_NAC_NOV}) )]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>
