@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.jm</groupId>
     <artifactId>Outhelp</artifactId>
-    <version>-Maven</version>
+    <version>Maven</version>
     <packaging>jar</packaging>
     <dependencies>
         <dependency>
