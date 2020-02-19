@@ -75,7 +75,7 @@ static boolean mainperm = false;
 public static Programacion tarea=null ;
 public static Dimension size =null;
 public int version;
-public static String ver_str="2.0.4.6";
+public static String ver_str="3.0.0.0";
 public String url_info_update = "https://www.dropbox.com/s/zhgd5xyrspf7r9t/Info_Update.txt?dl=1";//Ruta del archivo que contiene la informacion de la ultima version del software
 public String url_permission = "https://www.dropbox.com/s/c9bbt0blodjnrrs/PERMISOS.txt?dl=1";//Ruta del archivo que contiene la informacion de la ultima version del software
 public static ArrayList conection_list = new ArrayList();
