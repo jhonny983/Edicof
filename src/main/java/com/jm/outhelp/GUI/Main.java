@@ -75,9 +75,9 @@ static boolean mainperm = false;
 public static Programacion tarea=null ;
 public static Dimension size =null;
 public int version;
-public static String ver_str="3.0.0.0";
-public String url_info_update = "https://www.dropbox.com/s/zhgd5xyrspf7r9t/Info_Update.txt?dl=1";//Ruta del archivo que contiene la informacion de la ultima version del software
-public String url_permission = "https://www.dropbox.com/s/c9bbt0blodjnrrs/PERMISOS.txt?dl=1";//Ruta del archivo que contiene la informacion de la ultima version del software
+public static String ver_str="3.0.1.0";
+public String url_info_update = "https://onedrive.live.com/download?cid=51049062522CB054&resid=51049062522CB054%21219574&authkey=AP_5XduLgOsOxQg";//Ruta del archivo que contiene la informacion de la ultima version del software
+//public String url_permission = "https://www.dropbox.com/s/c9bbt0blodjnrrs/PERMISOS.txt?dl=1";//Ruta del archivo que contiene la informacion de la ultima version del software
 public static ArrayList conection_list = new ArrayList();
     /**
      * Creates new form Main
@@ -88,6 +88,8 @@ public static ArrayList conection_list = new ArrayList();
         if (check_update(url_info_update)) {
             int conf = JOptionPane.showConfirmDialog(this,"Hay una nueva version del software disponible\n Desea actualizar?","Confirmación",JOptionPane.OK_CANCEL_OPTION,JOptionPane.QUESTION_MESSAGE);
             if (conf == JOptionPane.YES_OPTION) {
+                System.out.println("Url instalador: "+get_url_update(url_info_update));
+                System.out.println("Version: "+get_ver_update(url_info_update));
                 HiloUpdate h_up = new HiloUpdate(get_url_update(url_info_update),get_ver_update(url_info_update));
                 h_up.start();
                 System.exit(0);
