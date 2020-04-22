@@ -251,6 +251,7 @@ public class Rep_personal_activo extends javax.swing.JDialog {
                             fc_rep_diario.setFileFilter(filter);
                             fc_rep_diario.setSelectedFile(new File("Reporte_diario_consolidado_"+new SimpleDateFormat("dd-MM-yyyy").format(fecha_rep)+".xlsx"));
                         }
+                        System.out.println("Fecha: "+fecha_rep);
                         if(fc_rep_diario.showSaveDialog(this)==JFileChooser.APPROVE_OPTION){
                             if (fc_rep_diario.getSelectedFile().exists()) {
                                 int conf = JOptionPane.showConfirmDialog(this,"El archivo ya existe\ndesea sobreescribirlo?","Confirmación",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE);
