@@ -83,7 +83,7 @@ INNER JOIN t_tipo_novedad
         ON (t_novedades.ID_TIPO = t_tipo_novedad.ID_TIPO)
      
 WHERE
-t_novedades.ID_TIPO IN (1,2)
+t_novedades.ID_TIPO IN (1,2,4)
 AND
 t_novedades.`ID_EMPRESA` = $P{ID_EMPRESA}
 AND t_grupo_empresa.NOMBRE_GRUPO = $P{grupo}

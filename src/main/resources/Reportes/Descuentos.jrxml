@@ -38,7 +38,7 @@ INNER JOIN t_empleados
 INNER JOIN t_tipo_novedad 
 	ON (t_novedades.ID_TIPO = t_tipo_novedad.ID_TIPO)
 WHERE
-t_novedades.ID_TIPO IN (1,2)
+t_novedades.ID_TIPO IN (1,2,4)
 AND ((t_novedades.`FECHA_INGRESO` <= $P{F_FINAL} AND t_novedades.`FECHA_RETIRO` = '1900-01-01')
   OR (t_novedades.`FECHA_INGRESO` <= $P{F_FINAL} AND t_novedades.`FECHA_RETIRO` >= $P{F_INICIAL}))
 ORDER BY NOMBRE_MUN ASC]]>
@@ -118,6 +118,9 @@ ORDER BY NOMBRE_MUN ASC]]>
 	<field name="ID_MUN_OBRA" class="java.lang.Integer">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
+	<field name="ID_GRUPO" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
 	<field name="ID_MUN" class="java.lang.Integer">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
@@ -143,6 +146,39 @@ ORDER BY NOMBRE_MUN ASC]]>
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<field name="ID_CCF" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="CORREO_INTERNO" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="CORREO_CONTRATISTA_1" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="CORREO_CONTRATISTA_2" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="CORREO_CONTRATISTA_3" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="ENABLE_INTERNO" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="ENABLE_1" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="ENABLE_2" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="ENABLE_3" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="REPRESENTANTE_LEGAL" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="TELEFONOS" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="ID_ACTIVIDAD" class="java.lang.Integer">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<field name="ID_EMP" class="java.lang.Long">

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Personal Activo" pageWidth="612" pageHeight="792" columnWidth="598" leftMargin="7" rightMargin="7" topMargin="20" bottomMargin="20" uuid="7db4d154-afa9-4d97-87b8-8ea7cd5a7e19">
 	<property name="ireport.zoom" value="1.7524694974069663"/>
-	<property name="ireport.x" value="371"/>
+	<property name="ireport.x" value="287"/>
 	<property name="ireport.y" value="0"/>
 	<parameter name="ID_EMPRESA" class="java.lang.String">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
@@ -63,7 +63,7 @@ INNER JOIN t_empleados
 INNER JOIN t_tipo_novedad 
         ON (t_novedades.ID_TIPO = t_tipo_novedad.ID_TIPO)
 WHERE t_novedades.`ID_EMPRESA` = $P{ID_EMPRESA}
-AND  t_novedades.ID_TIPO IN (1,2)
+AND  t_novedades.ID_TIPO IN (1,2,4)
 AND ((t_novedades.`FECHA_INGRESO` <= $P{Fecha} AND t_novedades.`FECHA_RETIRO` = '1900-01-01')
 	OR ( t_novedades.`FECHA_INGRESO` <= $P{Fecha} AND t_novedades.`FECHA_RETIRO` >= $P{Fecha}))
 ORDER BY

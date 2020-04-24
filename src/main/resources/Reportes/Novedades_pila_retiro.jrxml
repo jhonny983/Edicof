@@ -28,7 +28,7 @@ FROM
         ON (t_novedades.ID_OBRA = t_obra.ID_OBRA)
     INNER JOIN t_municipios 
         ON (t_obra.ID_MUN_OBRA = t_municipios.ID_MUN)
-    WHERE	ID_TIPO IN (1,2) 
+    WHERE	ID_TIPO IN (1,2,4) 
 	AND t_novedades.ID_EMPRESA = $P{ID_EMPRESA}
 	AND (FECHA_RETIRO BETWEEN $P{F_INICIAL} AND $P{F_FINAL})
 	AND (FECHA_INGRESO < $P{F_INICIAL})
@@ -172,6 +172,9 @@ FROM
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<field name="ID_MUN_OBRA" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="ID_GRUPO" class="java.lang.Integer">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<field name="ID_MUN" class="java.lang.Integer">
@@ -804,8 +807,7 @@ FROM
 					<font fontName="Arial" size="7" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
 					<paragraph lineSpacing="Single"/>
 				</textElement>
-				<textFieldExpression><![CDATA[
-( new SimpleDateFormat("dd").format($F{FECHA_RETIRO}).equals("31") ? "30" : new SimpleDateFormat("dd").format($F{FECHA_RETIRO}) )]]></textFieldExpression>
+				<textFieldExpression><![CDATA[( new SimpleDateFormat("dd").format($F{FECHA_RETIRO}).equals("31") ? "30" : new SimpleDateFormat("dd").format($F{FECHA_RETIRO}) )]]></textFieldExpression>
 			</textField>
 			<textField pattern="" isBlankWhenNull="false">
 				<reportElement mode="Transparent" x="596" y="0" width="41" height="25" forecolor="#000000" backcolor="#FFFFFF" uuid="1ae819c9-313c-489a-9b4c-042192b48e4c"/>

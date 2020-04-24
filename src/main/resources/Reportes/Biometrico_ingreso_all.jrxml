@@ -66,7 +66,7 @@ INNER JOIN t_empleados
 INNER JOIN t_tipo_novedad 
         ON (t_novedades.ID_TIPO = t_tipo_novedad.ID_TIPO)
 WHERE   t_novedades.`FECHA_INGRESO` BETWEEN $P{F_INICIAL} AND $P{F_FINAL}
-AND     t_tipo_novedad.`NOMBRE_TIPO`=$P{TIPO}
+AND     t_novedades.ID_TIPO = 1
 ORDER BY 
 	t_novedades.`FECHA_INGRESO` DESC]]>
 	</queryString>
