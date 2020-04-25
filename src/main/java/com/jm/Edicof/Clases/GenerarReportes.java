@@ -7,7 +7,7 @@ package com.jm.Edicof.Clases;
 
 import com.jm.Edicof.GUI.Main;
 import com.jm.Edicof.GUI.Wait_rep;
-import Paquete.ScriptletsPrecalculo;
+import com.jm.ScriptletsJasper.ScriptletsPrecalculo;
 import java.awt.Cursor;
 import java.awt.HeadlessException;
 import java.awt.Toolkit;

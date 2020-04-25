@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="PrecalculoSeguridad" pageWidth="612" pageHeight="792" columnWidth="602" leftMargin="5" rightMargin="5" topMargin="20" bottomMargin="20" scriptletClass="Paquete.ScriptletsPrecalculo" uuid="cf43ecd0-0690-4a98-9ec7-c6b6666d372b">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="PrecalculoSeguridad" pageWidth="612" pageHeight="792" columnWidth="602" leftMargin="5" rightMargin="5" topMargin="20" bottomMargin="20" scriptletClass="com.jm.ScriptletsJasper.ScriptletsPrecalculo" uuid="cf43ecd0-0690-4a98-9ec7-c6b6666d372b">
 	<property name="ireport.zoom" value="1.927716447147658"/>
-	<property name="ireport.x" value="336"/>
+	<property name="ireport.x" value="319"/>
 	<property name="ireport.y" value="0"/>
-	<import value="Paquete.ScriptletsPrecalculo"/>
+	<import value="com.jm.ScriptletsJasper.ScriptletsPrecalculo"/>
 	<parameter name="ID_EMPRESA" class="java.lang.String">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
@@ -138,7 +138,7 @@ ORDER BY
 		<variableExpression><![CDATA[$P{REPORT_SCRIPTLET}.calc_SALUD( $F{t_novedades_FECHA_INGRESO}, $F{t_novedades_FECHA_RETIRO},$P{F_INICIAL},$P{F_FINAL} ,$F{t_novedades_SALARIO_NOVEDAD})]]></variableExpression>
 	</variable>
 	<variable name="Total_pension" class="java.lang.Float" calculation="Sum">
-		<variableExpression><![CDATA[$P{REPORT_SCRIPTLET}.calc_PENSION( $F{t_novedades_FECHA_INGRESO}, $F{t_novedades_FECHA_RETIRO},$P{F_INICIAL},$P{F_FINAL} ,$F{t_novedades_SALARIO_NOVEDAD})]]></variableExpression>
+		<variableExpression><![CDATA[$P{REPORT_SCRIPTLET}.calc_PENSION( $F{t_novedades_FECHA_INGRESO}, $F{t_novedades_FECHA_RETIRO},$P{F_INICIAL},$P{F_FINAL} ,$F{t_novedades_SALARIO_NOVEDAD},$F{t_afp_NOMBRE_AFP})]]></variableExpression>
 	</variable>
 	<variable name="Total_arp" class="java.lang.Float" calculation="Sum">
 		<variableExpression><![CDATA[$P{REPORT_SCRIPTLET}.calc_ARP( $F{t_novedades_FECHA_INGRESO}, $F{t_novedades_FECHA_RETIRO},$P{F_INICIAL},$P{F_FINAL} ,$F{t_novedades_SALARIO_NOVEDAD})]]></variableExpression>
@@ -147,7 +147,7 @@ ORDER BY
 		<variableExpression><![CDATA[$P{REPORT_SCRIPTLET}.calc_CCF( $F{t_novedades_FECHA_INGRESO}, $F{t_novedades_FECHA_RETIRO},$P{F_INICIAL},$P{F_FINAL} ,$F{t_novedades_SALARIO_NOVEDAD})]]></variableExpression>
 	</variable>
 	<variable name="Total_total" class="java.lang.Float" calculation="Sum">
-		<variableExpression><![CDATA[$P{REPORT_SCRIPTLET}.calc_TOTAL( $F{t_novedades_FECHA_INGRESO}, $F{t_novedades_FECHA_RETIRO},$P{F_INICIAL},$P{F_FINAL} ,$F{t_novedades_SALARIO_NOVEDAD})]]></variableExpression>
+		<variableExpression><![CDATA[$P{REPORT_SCRIPTLET}.calc_TOTAL( $F{t_novedades_FECHA_INGRESO}, $F{t_novedades_FECHA_RETIRO},$P{F_INICIAL},$P{F_FINAL} ,$F{t_novedades_SALARIO_NOVEDAD},$F{t_afp_NOMBRE_AFP})]]></variableExpression>
 	</variable>
 	<variable name="Total_FIC" class="java.lang.Float"/>
 	<background>
@@ -428,7 +428,7 @@ ORDER BY
 					<font fontName="SansSerif" size="5" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
 					<paragraph lineSpacing="Single"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$P{REPORT_SCRIPTLET}.calc_PENSION( $F{t_novedades_FECHA_INGRESO}, $F{t_novedades_FECHA_RETIRO},$P{F_INICIAL},$P{F_FINAL} ,$F{t_novedades_SALARIO_NOVEDAD})]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$P{REPORT_SCRIPTLET}.calc_PENSION( $F{t_novedades_FECHA_INGRESO}, $F{t_novedades_FECHA_RETIRO},$P{F_INICIAL},$P{F_FINAL} ,$F{t_novedades_SALARIO_NOVEDAD},$F{t_afp_NOMBRE_AFP})]]></textFieldExpression>
 			</textField>
 			<textField pattern="$ #,##0" isBlankWhenNull="true">
 				<reportElement mode="Transparent" x="374" y="0" width="35" height="10" forecolor="#000000" backcolor="#FFFFFF" uuid="70e0fd06-e4c6-4a5b-83b7-edbc129d187a"/>
@@ -452,7 +452,7 @@ ORDER BY
 					<font fontName="SansSerif" size="5" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
 					<paragraph lineSpacing="Single"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$P{REPORT_SCRIPTLET}.calc_TOTAL( $F{t_novedades_FECHA_INGRESO}, $F{t_novedades_FECHA_RETIRO},$P{F_INICIAL},$P{F_FINAL} ,$F{t_novedades_SALARIO_NOVEDAD})]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$P{REPORT_SCRIPTLET}.calc_TOTAL( $F{t_novedades_FECHA_INGRESO}, $F{t_novedades_FECHA_RETIRO},$P{F_INICIAL},$P{F_FINAL} ,$F{t_novedades_SALARIO_NOVEDAD},$F{t_afp_NOMBRE_AFP})]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>
