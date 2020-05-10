@@ -43,7 +43,7 @@ import javax.swing.table.TableCellEditor;
  *
  * @author ADMIN
  */
-public class Add_Ingresos extends javax.swing.JDialog {
+public class Add_Externos extends javax.swing.JDialog {
     //private final static Logger LOGGER = Logger.getLogger(Add_Ingresos.class.getName());
     static Dimension screenSize = null;
     TextAutoCompleter tac_empleador = null;
@@ -76,7 +76,7 @@ public class Add_Ingresos extends javax.swing.JDialog {
     /**
      * Creates new form Add_Preingresos
      */
-    public Add_Ingresos(java.awt.Frame parent, boolean modal) {
+    public Add_Externos(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         //////////////////----------------------------------------
@@ -365,7 +365,7 @@ class MyTableCellEditorDate extends AbstractCellEditor implements TableCellEdito
         jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
-        setTitle("Agregar Ingresos");
+        setTitle("Agregar Externos");
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
                 formWindowClosing(evt);
@@ -1079,7 +1079,6 @@ class MyTableCellEditorDate extends AbstractCellEditor implements TableCellEdito
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         // TODO add your handling code here:
-        String usu="";
         boolean confirm = false;
         if(verify_data()){
             int conf = JOptionPane.showConfirmDialog(this,"La informacion de la tabla esta completa\nEsta seguro que desea continuar?","Confirmación",JOptionPane.OK_CANCEL_OPTION,JOptionPane.QUESTION_MESSAGE);
@@ -1091,17 +1090,16 @@ class MyTableCellEditorDate extends AbstractCellEditor implements TableCellEdito
                 for (int i = 0; i < jTable1.getRowCount(); i++) {
                     try {
                         if (!get_id_empleador(modelo.getValueAt(i, 2)).equals("")) {
-                            r = con.s.executeQuery ("SELECT * FROM `t_novedades` WHERE (ID_EMPLEADO ="+modelo.getValueAt(i, 0)+" AND ID_EMPRESA='"+get_id_empleador(modelo.getValueAt(i, 2))+"' AND FECHA_INGRESO='"+new SimpleDateFormat("yyyy-MM-dd").format(new SimpleDateFormat("dd-MM-yyyy").parse(modelo.getValueAt(i, 3).toString()))+"' AND FECHA_RETIRO='1900-01-01' AND ID_TIPO IN(1));");
+                            r = con.s.executeQuery ("SELECT * FROM `t_novedades` WHERE (ID_EMPLEADO ="+modelo.getValueAt(i, 0)+" AND ID_EMPRESA='"+get_id_empleador(modelo.getValueAt(i, 2))+"' AND FECHA_INGRESO='"+new SimpleDateFormat("yyyy-MM-dd").format(new SimpleDateFormat("dd-MM-yyyy").parse(modelo.getValueAt(i, 3).toString()))+"' AND FECHA_RETIRO='1900-01-01' AND ID_TIPO IN(5));");
                             if(r.next()){
-                                JOptionPane.showMessageDialog(this,"Esta novedad de ingreso ya existe.","Error",JOptionPane.ERROR_MESSAGE);
+                                JOptionPane.showMessageDialog(this,"Esta novedad de Externo ya existe.","Error",JOptionPane.ERROR_MESSAGE);
                                 confirm = false;
                                 jTable1.changeSelection(i,0, false, false);
                                 jTable1.requestFocus();
                                 break;
                             }else{
-                                //System.out.println("UPDATE `t_novedades` SET `ID_EPS`="+get_id_eps(modelo.getValueAt(i, 5))+",`ID_AFP`="+get_id_afp(modelo.getValueAt(i, 6))+",`ID_ARL`="+get_id_arl(modelo.getValueAt(i, 7))+",`ID_CCF`="+get_id_ccf(modelo.getValueAt(i, 8))+",`OBS_NOV`='"+modelo.getValueAt(i, 10).toString().toUpperCase()+"',`ID_TIPO`=1 WHERE ID_EMPLEADO="+modelo.getValueAt(i, 0)+" AND ID_EMPRESA='"+get_id_empleador(modelo.getValueAt(i, 2))+"' AND FECHA_INGRESO='"+new SimpleDateFormat("yyyy-MM-dd").format(new SimpleDateFormat("dd-MM-yyyy").parse(modelo.getValueAt(i, 3).toString()))+"' AND FECHA_RETIRO='1900-01-01' AND ID_TIPO=3");
-                                con.s.executeUpdate("UPDATE `t_novedades` SET `ID_EPS`="+get_id_eps(modelo.getValueAt(i, 5))+",`ID_AFP`="+get_id_afp(modelo.getValueAt(i, 6))+",`ARL_NOV`='"+modelo.getValueAt(i, 7)+"',`CCF_NOV`='"+modelo.getValueAt(i, 8)+"',`OBS_NOV`='INGRESO>"+Main.login.getText()+">"+new SimpleDateFormat("dd-MM-yyyy").format(new Date())+">"+modelo.getValueAt(i, 3).toString()+","+modelo.getValueAt(i, 10).toString().toUpperCase()+"',`ID_TIPO`=1 WHERE ID_EMPLEADO="+modelo.getValueAt(i, 0)+" AND ID_EMPRESA='"+get_id_empleador(modelo.getValueAt(i, 2))+"' AND FECHA_INGRESO='"+new SimpleDateFormat("yyyy-MM-dd").format(new SimpleDateFormat("dd-MM-yyyy").parse(modelo.getValueAt(i, 3).toString()))+"' AND FECHA_RETIRO='1900-01-01' AND ID_TIPO=3");
-                                con.s.executeUpdate("INSERT INTO `t_registro` (ID_EMPLEADO,ID_EMPRESA,F_INGRESO,F_RETIRO,ID_TIPO, REGISTRO, F_REGISTRO, FECHA, ID_USUARIO) VALUES ("+modelo.getValueAt(i, 0)+",'"+get_id_empleador(modelo.getValueAt(i, 2))+"','"+new SimpleDateFormat("yyyy-MM-dd").format(new SimpleDateFormat("dd-MM-yyyy").parse(modelo.getValueAt(i, 3).toString()))+"','1900-01-01',1,'INGRESO','"+new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date())+"','"+new SimpleDateFormat("yyyy-MM-dd").format(new SimpleDateFormat("dd-MM-yyyy").parse(modelo.getValueAt(i, 3).toString()))+"','"+Main.id_usuario+"')");
+                                con.s.executeUpdate("UPDATE `t_novedades` SET `ID_EPS`="+get_id_eps(modelo.getValueAt(i, 5))+",`ID_AFP`="+get_id_afp(modelo.getValueAt(i, 6))+",`ARL_NOV`='"+modelo.getValueAt(i, 7)+"',`CCF_NOV`='"+modelo.getValueAt(i, 8)+"',`OBS_NOV`='EXTERNO>"+Main.login.getText()+">"+new SimpleDateFormat("dd-MM-yyyy").format(new Date())+">"+modelo.getValueAt(i, 3).toString()+","+modelo.getValueAt(i, 10).toString().toUpperCase()+"',`ID_TIPO`=5 WHERE ID_EMPLEADO="+modelo.getValueAt(i, 0)+" AND ID_EMPRESA='"+get_id_empleador(modelo.getValueAt(i, 2))+"' AND FECHA_INGRESO='"+new SimpleDateFormat("yyyy-MM-dd").format(new SimpleDateFormat("dd-MM-yyyy").parse(modelo.getValueAt(i, 3).toString()))+"' AND FECHA_RETIRO='1900-01-01' AND ID_TIPO=3");
+                                con.s.executeUpdate("INSERT INTO `t_registro` (ID_EMPLEADO,ID_EMPRESA,F_INGRESO,F_RETIRO,ID_TIPO, REGISTRO, F_REGISTRO, FECHA, ID_USUARIO) VALUES ("+modelo.getValueAt(i, 0)+",'"+get_id_empleador(modelo.getValueAt(i, 2))+"','"+new SimpleDateFormat("yyyy-MM-dd").format(new SimpleDateFormat("dd-MM-yyyy").parse(modelo.getValueAt(i, 3).toString()))+"','1900-01-01',5,'EXTERNO','"+new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date())+"','"+new SimpleDateFormat("yyyy-MM-dd").format(new SimpleDateFormat("dd-MM-yyyy").parse(modelo.getValueAt(i, 3).toString()))+"','"+Main.id_usuario+"')");
                                 modelo.removeRow(i);
                                 i=i-1;
                                 confirm = true;
@@ -1208,14 +1206,18 @@ class MyTableCellEditorDate extends AbstractCellEditor implements TableCellEdito
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Add_Ingresos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Add_Externos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Add_Ingresos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Add_Externos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Add_Ingresos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Add_Externos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Add_Ingresos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Add_Externos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -1224,7 +1226,7 @@ class MyTableCellEditorDate extends AbstractCellEditor implements TableCellEdito
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                Add_Ingresos dialog = new Add_Ingresos(new javax.swing.JFrame(), true);
+                Add_Externos dialog = new Add_Externos(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {

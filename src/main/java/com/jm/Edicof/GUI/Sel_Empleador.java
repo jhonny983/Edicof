@@ -18,7 +18,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author ADMIN
  */
-public class Sel_Empleador_1 extends javax.swing.JDialog {
+public class Sel_Empleador extends javax.swing.JDialog {
 static DefaultTableModel modelo = new DefaultTableModel();
 String ced=null;
 String tip=null;
@@ -27,7 +27,7 @@ ArrayList<String> ret = new ArrayList<String>();
     /**
      * Creates new form Sel_Empleador
      */
-    public Sel_Empleador_1(javax.swing.JDialog parent, boolean modal, String c, String t) {
+    public Sel_Empleador(javax.swing.JDialog parent, boolean modal, String c, String t) {
         super(parent, modal);
         this.ced=c;
         this.tip=t;
@@ -67,7 +67,7 @@ ArrayList<String> ret = new ArrayList<String>();
                 + "    ON (t_novedades.ID_OBRA = t_obra.ID_OBRA)\n"
                 + "  INNER JOIN t_tipo_novedad\n"
                 + "    ON (t_novedades.ID_TIPO = t_tipo_novedad.ID_TIPO)\n"
-                + "WHERE (ID_EMP = "+this.ced+" AND t_novedades.ID_TIPO = 1)\n"
+                + "WHERE (ID_EMP = "+this.ced+" AND t_novedades.ID_TIPO IN ("+this.tip+"))\n"
                 + "ORDER BY FECHA_INGRESO DESC;");
             while(r.next()){
                 modelo.addRow(fila);
@@ -373,14 +373,22 @@ ArrayList<String> ret = new ArrayList<String>();
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Sel_Empleador_1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Sel_Empleador.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Sel_Empleador_1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Sel_Empleador.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Sel_Empleador_1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Sel_Empleador.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Sel_Empleador_1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Sel_Empleador.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -393,7 +401,7 @@ ArrayList<String> ret = new ArrayList<String>();
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                Sel_Empleador_1 dialog = new Sel_Empleador_1(new javax.swing.JDialog(), true, new String(), new String());
+                Sel_Empleador dialog = new Sel_Empleador(new javax.swing.JDialog(), true, new String(), new String());
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {

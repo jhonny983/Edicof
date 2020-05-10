@@ -74,7 +74,7 @@ static boolean mainperm = false;
 public static Programacion tarea=null ;
 public static Dimension size =null;
 public int version;
-public static String ver_str="3.0.1.2";
+public static String ver_str="3.0.1.3";
 public String url_info_update = "https://onedrive.live.com/download?cid=51049062522CB054&resid=51049062522CB054%21219574&authkey=AP_5XduLgOsOxQg";//Ruta del archivo que contiene la informacion de la ultima version del software
 //public String url_permission = "https://www.dropbox.com/s/c9bbt0blodjnrrs/PERMISOS.txt?dl=1";//Ruta del archivo que contiene la informacion de la ultima version del software
 public static ArrayList conection_list = new ArrayList();
@@ -258,6 +258,7 @@ public static ArrayList conection_list = new ArrayList();
         jMenuItem29 = new javax.swing.JMenuItem();
         jMenuItem36 = new javax.swing.JMenuItem();
         jMenuItem37 = new javax.swing.JMenuItem();
+        jMenuItem68 = new javax.swing.JMenuItem();
         jMenuItem12 = new javax.swing.JMenuItem();
         jMenu21 = new javax.swing.JMenu();
         jMenuItem26 = new javax.swing.JMenuItem();
@@ -307,7 +308,9 @@ public static ArrayList conection_list = new ArrayList();
         jMenuItem32 = new javax.swing.JMenuItem();
         jMenuItem33 = new javax.swing.JMenuItem();
         jm_reportes = new javax.swing.JMenu();
+        jMenu23 = new javax.swing.JMenu();
         jMenuItem14 = new javax.swing.JMenuItem();
+        jMenuItem69 = new javax.swing.JMenuItem();
         jMenu12 = new javax.swing.JMenu();
         jMenuItem58 = new javax.swing.JMenuItem();
         jMenuItem35 = new javax.swing.JMenuItem();
@@ -971,6 +974,20 @@ public static ArrayList conection_list = new ArrayList();
         });
         jMenu10.add(jMenuItem37);
 
+        jMenuItem68.setIcon(new javax.swing.ImageIcon(getClass().getResource("/date_next.png"))); // NOI18N
+        jMenuItem68.setText("Agregar Externos");
+        jMenuItem68.setToolTipText("");
+
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, jm_novedades, org.jdesktop.beansbinding.ELProperty.create("${enabled}"), jMenuItem68, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
+        bindingGroup.addBinding(binding);
+
+        jMenuItem68.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem68ActionPerformed(evt);
+            }
+        });
+        jMenu10.add(jMenuItem68);
+
         jm_novedades.add(jMenu10);
 
         jMenuItem12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/date_magnify.png"))); // NOI18N
@@ -1497,6 +1514,11 @@ public static ArrayList conection_list = new ArrayList();
         jm_reportes.setText("Reportes");
         jm_reportes.setEnabled(false);
 
+        jMenu23.setText("Personal Activo");
+
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, jm_reportes, org.jdesktop.beansbinding.ELProperty.create("${enabled}"), jMenu23, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
+        bindingGroup.addBinding(binding);
+
         jMenuItem14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/user_green.png"))); // NOI18N
         jMenuItem14.setText("Personal activo");
 
@@ -1508,7 +1530,22 @@ public static ArrayList conection_list = new ArrayList();
                 jMenuItem14ActionPerformed(evt);
             }
         });
-        jm_reportes.add(jMenuItem14);
+        jMenu23.add(jMenuItem14);
+
+        jMenuItem69.setIcon(new javax.swing.ImageIcon(getClass().getResource("/user_gray.png"))); // NOI18N
+        jMenuItem69.setText("Personal Activo Externos");
+
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, jm_reportes, org.jdesktop.beansbinding.ELProperty.create("${enabled}"), jMenuItem69, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
+        bindingGroup.addBinding(binding);
+
+        jMenuItem69.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem69ActionPerformed(evt);
+            }
+        });
+        jMenu23.add(jMenuItem69);
+
+        jm_reportes.add(jMenu23);
 
         jMenu12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/book_go.png"))); // NOI18N
         jMenu12.setText("Precalculo Seguridad");
@@ -2583,6 +2620,20 @@ public static ArrayList conection_list = new ArrayList();
         ct.setVisible(true);
     }//GEN-LAST:event_jMenuItem67ActionPerformed
 
+    private void jMenuItem68ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem68ActionPerformed
+        // TODO add your handling code here:
+        Add_Externos add_ext=new Add_Externos(this,false);
+        add_ext.setLocationRelativeTo(this);
+        add_ext.setVisible(true);
+    }//GEN-LAST:event_jMenuItem68ActionPerformed
+
+    private void jMenuItem69ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem69ActionPerformed
+        // TODO add your handling code here:
+        Rep_personal_activo_externos rep_per_act_ext = new Rep_personal_activo_externos(this, false);
+        rep_per_act_ext.setLocationRelativeTo(this);
+        rep_per_act_ext.setVisible(true);
+    }//GEN-LAST:event_jMenuItem69ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -2666,6 +2717,7 @@ public static ArrayList conection_list = new ArrayList();
     private javax.swing.JMenu jMenu20;
     private javax.swing.JMenu jMenu21;
     private javax.swing.JMenu jMenu22;
+    private javax.swing.JMenu jMenu23;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenu jMenu5;
@@ -2738,6 +2790,8 @@ public static ArrayList conection_list = new ArrayList();
     private javax.swing.JMenuItem jMenuItem65;
     private javax.swing.JMenuItem jMenuItem66;
     private javax.swing.JMenuItem jMenuItem67;
+    private javax.swing.JMenuItem jMenuItem68;
+    private javax.swing.JMenuItem jMenuItem69;
     private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JMenuItem jMenuItem8;
     private javax.swing.JMenuItem jMenuItem9;

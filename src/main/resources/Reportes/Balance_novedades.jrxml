@@ -20,7 +20,7 @@
 		<![CDATA[SELECT t_novedades.ID_EMPRESA, NOMBRE_EMPRESA FROM t_novedades 
 INNER JOIN t_empresas 
 	ON (t_novedades.ID_EMPRESA = t_empresas.ID_EMPRESA)
-WHERE	ID_TIPO IN (1,2,4) 
+WHERE	ID_TIPO IN (1,2,4,6) 
 AND ((t_novedades.`FECHA_INGRESO` < $P{Fecha_desp} AND t_novedades.`FECHA_RETIRO` = '1900-01-01')
   OR (t_novedades.`FECHA_INGRESO` < $P{Fecha_desp} AND t_novedades.`FECHA_RETIRO` >= $P{Fecha_inicial}))
   GROUP BY t_novedades.ID_EMPRESA

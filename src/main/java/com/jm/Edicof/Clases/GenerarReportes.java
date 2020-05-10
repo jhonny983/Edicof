@@ -58,6 +58,8 @@ public class GenerarReportes extends Thread{
     Struct_precalculo_seguridad_empresa_obra s_p_s_e_o;
     Struct_personal_activo s_p_a;
     Struct_personal_activo_semanal s_p_a_s;
+    Struct_personal_activo_externo s_p_a_e;
+    Struct_personal_activo_semanal_externo s_p_a_s_e;
     Struct_asistencias s_a;
     Struct_asistencias_empresas s_a_e;
     Struct_asistencias_obras s_a_o;
@@ -161,6 +163,18 @@ public class GenerarReportes extends Thread{
                                                                                 if (rep instanceof Struct_Cruce_Tesoreria) {
                                                                                     s_c_t = (Struct_Cruce_Tesoreria)rep;
                                                                                     cruce_tesoreria(s_c_t.path, s_c_t.formato, s_c_t.id_prec);
+                                                                                }else{
+                                                                                    if (rep instanceof Struct_personal_activo_externo) {
+                                                                                        System.out.println("Personal Activo Externo Consolidado");
+                                                                                        s_p_a_e = (Struct_personal_activo_externo)rep;
+                                                                                        personal_activo_externo(s_p_a_e.path, s_p_a_e.formato, s_p_a_e.fecha);
+                                                                                    }else{
+                                                                                        if (rep instanceof Struct_personal_activo_semanal_externo) {
+                                                                                            System.out.println("Personal Activo Externo Semanal");
+                                                                                            s_p_a_s_e = (Struct_personal_activo_semanal_externo)rep;
+                                                                                            personal_activo_semanal_externo(s_p_a_s_e.path, s_p_a_s_e.formato, s_p_a_s_e.fecha);
+                                                                                        }
+                                                                                    }
                                                                                 }
                                                                             }
                                                                         }
@@ -235,6 +249,59 @@ public class GenerarReportes extends Thread{
         } 
     
     }
+    public void personal_activo_externo (String path, String formato, Date fecha){
+        try {
+            Wait_rep.btn_aceptar.setEnabled(false);
+            s_p_a_e.dialog.setCursor(new Cursor(Cursor.WAIT_CURSOR));
+            Wait_rep.mensaje.setText("Generando reporte de personal activo externo");
+            Wait_rep.bar.setMaximum(1);
+            Conexion con = new Conexion();
+            con.conexion();
+            ClassLoader cl= this.getClass().getClassLoader();
+            InputStream fis = (cl.getResourceAsStream("Reportes/listado_diario_obra_externo.jasper"));
+            JasperReport rep = (JasperReport) JRLoader.loadObject(fis);
+            Map par = new HashMap();
+            par.put("Fecha",fecha);
+            JasperPrint jprint = JasperFillManager.fillReport(rep,par,con.c);
+            con.cerrar();
+            Wait_rep.progreso_1.setText(s_p_a_e.file);
+            Wait_rep.bar.setValue(1);
+            if (formato.equals(".pdf")) {
+                JasperExportManager.exportReportToPdfFile(jprint,path);
+            }
+            if (formato.equals(".xls")) {
+                System.out.println("Clases.GenerarReportes.personal_activo()");
+                JRXlsxExporter exporterXLS = new JRXlsxExporter();
+                Map<String, String> dateFormats = new HashMap<String, String>();
+                dateFormats.put("EEEEE, MMM d, yyyy", "ddd, mmm d, yyyy");
+                SimpleXlsxReportConfiguration repConfig = new SimpleXlsxReportConfiguration();
+                exporterXLS.setExporterInput(new SimpleExporterInput(jprint));
+                exporterXLS.setExporterOutput(new SimpleOutputStreamExporterOutput(path));       
+                repConfig.setWrapText(Boolean.TRUE);//
+                repConfig.setOnePagePerSheet(Boolean.FALSE);
+                repConfig.setDetectCellType(Boolean.TRUE);
+                repConfig.setWhitePageBackground(Boolean.TRUE);
+                repConfig.setRemoveEmptySpaceBetweenRows(Boolean.TRUE);
+                repConfig.setRemoveEmptySpaceBetweenColumns(Boolean.TRUE);
+                repConfig.setFormatPatternsMap(dateFormats);
+                repConfig.setCollapseRowSpan(Boolean.TRUE);//
+                exporterXLS.setConfiguration(repConfig);
+                exporterXLS.exportReport();
+                
+            }
+            Toolkit.getDefaultToolkit().beep();
+            JOptionPane.showMessageDialog(null,"El reporte se ha generado correctamente","Información",JOptionPane.INFORMATION_MESSAGE);
+            s_p_a_e.dialog.dispose();
+            
+           JasperViewer jv = new JasperViewer(jprint,false);
+//            jv.setTitle("Reporte Personal Activo");
+//            jv.setVisible(true);
+        } catch (JRException e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(null,e,"Error",JOptionPane.ERROR_MESSAGE);
+        } 
+    
+    }
     public void personal_activo_semanal (String path, String formato, Date fecha){
         Wait_rep.btn_aceptar.setEnabled(false);
         s_p_a_s.dialog.setCursor(new Cursor(Cursor.WAIT_CURSOR));
@@ -272,7 +339,7 @@ public class GenerarReportes extends Thread{
                                     "INNER JOIN t_tipo_novedad \n" +
                                     "        ON (t_novedades.ID_TIPO = t_tipo_novedad.ID_TIPO)\n" +
                                     "WHERE\n" +
-                                    "t_novedades.ID_TIPO IN (1,2,4)\n" +
+                                    "t_novedades.ID_TIPO IN (1,2,4,6)\n" +
                                     "AND ((t_novedades.`FECHA_INGRESO` <= '"+new SimpleDateFormat("yyyy-MM-dd").format(fecha)+"' AND t_novedades.`FECHA_RETIRO` = '1900-01-01')\n" +
                                     "	OR ( t_novedades.`FECHA_INGRESO` <= '"+new SimpleDateFormat("yyyy-MM-dd").format(fecha)+"' AND t_novedades.`FECHA_RETIRO` >= '"+new SimpleDateFormat("yyyy-MM-dd").format(fecha)+"'))\n" +
                                     "GROUP BY t_novedades.ID_EMPRESA");
@@ -315,6 +382,93 @@ public class GenerarReportes extends Thread{
             JOptionPane.showMessageDialog(null,"El reporte se ha generado correctamente","Información",JOptionPane.INFORMATION_MESSAGE);
             con.cerrar();
             s_p_a_s.dialog.dispose();
+            
+        } catch (SQLException | JRException | HeadlessException e) {
+            con.cerrar();
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(null,e,"Error",JOptionPane.ERROR_MESSAGE);
+        }
+    }
+    public void personal_activo_semanal_externo (String path, String formato, Date fecha){
+        Wait_rep.btn_aceptar.setEnabled(false);
+        s_p_a_s_e.dialog.setCursor(new Cursor(Cursor.WAIT_CURSOR));
+        Wait_rep.mensaje.setText("Generando reportes de personal activo semanal externo");
+        path=path+"\\PERSONAL_ACTIVO_SEMANAL_EXTERNO_"+new SimpleDateFormat("yyyy-MM-dd").format(fecha);
+        File folder = new File(path);
+        folder.mkdirs();
+        List<InputStream> list = new ArrayList<>();
+        XSSFWorkbook wb=null;
+        if (formato.equals(".xls")) {
+            wb = new XSSFWorkbook(); // Carga todo el archivo
+        }
+        Conexion con = new Conexion();
+        con.conexion();
+        try {
+            
+            ResultSet r;
+            r = con.s.executeQuery ("SELECT t_novedades.ID_EMPRESA,t_empresas.NOMBRE_EMPRESA,COUNT(t_novedades.ID_EMPRESA) AS NUMERO_EMPLEADOS\n" +
+                                    "FROM\n" +
+                                    "t_novedades\n" +
+                                    "INNER JOIN t_obra \n" +
+                                    "	ON (t_novedades.ID_OBRA = t_obra.ID_OBRA)\n" +
+                                    "INNER JOIN t_municipios \n" +
+                                    "	ON (t_obra.ID_MUN_OBRA = t_municipios.ID_MUN)\n" +
+                                    "INNER JOIN t_departamentos \n" +
+                                    "	ON (t_municipios.ID_DEP = t_departamentos.ID_DEP)\n" +
+                                    "INNER JOIN t_afp \n" +
+                                    "	ON (t_novedades.ID_AFP = t_afp.ID_AFP)\n" +
+                                    "INNER JOIN t_eps \n" +
+                                    "	ON (t_novedades.ID_EPS = t_eps.ID_EPS)\n" +
+                                    "INNER JOIN t_empresas \n" +
+                                    "        ON (t_novedades.ID_EMPRESA = t_empresas.ID_EMPRESA)\n" +
+                                    "INNER JOIN t_empleados \n" +
+                                    "        ON (t_novedades.ID_EMPLEADO = t_empleados.ID_EMP)\n" +
+                                    "INNER JOIN t_tipo_novedad \n" +
+                                    "        ON (t_novedades.ID_TIPO = t_tipo_novedad.ID_TIPO)\n" +
+                                    "WHERE\n" +
+                                    "t_novedades.ID_TIPO IN (5,7)\n" +
+                                    "AND ((t_novedades.`FECHA_INGRESO` <= '"+new SimpleDateFormat("yyyy-MM-dd").format(fecha)+"' AND t_novedades.`FECHA_RETIRO` = '1900-01-01')\n" +
+                                    "	OR ( t_novedades.`FECHA_INGRESO` <= '"+new SimpleDateFormat("yyyy-MM-dd").format(fecha)+"' AND t_novedades.`FECHA_RETIRO` >= '"+new SimpleDateFormat("yyyy-MM-dd").format(fecha)+"'))\n" +
+                                    "GROUP BY t_novedades.ID_EMPRESA");
+            Wait_rep.bar.setMaximum(getRowCount(r));
+            while(r.next()){
+                ClassLoader cl= this.getClass().getClassLoader();
+                InputStream fis = (cl.getResourceAsStream("Reportes/Personal_activo_empresa_externo.jasper"));
+                JasperReport rep = (JasperReport) JRLoader.loadObject(fis);
+                Map par = new HashMap();
+                par.put("ID_EMPRESA", r.getString("ID_EMPRESA"));
+                par.put("Fecha",fecha);
+                JasperPrint jprint = JasperFillManager.fillReport(rep,par,con.c);
+                if (formato.equals(".pdf")) {
+                    Wait_rep.progreso_1.setText(r.getString("ID_EMPRESA")+"-"+r.getString("NOMBRE_EMPRESA")+"_.pdf");
+                    JasperExportManager.exportReportToPdfFile(jprint,path+"\\"+r.getString("ID_EMPRESA")+"-"+r.getString("NOMBRE_EMPRESA")+"_.pdf");
+                }
+                if (formato.equals(".xls")) {
+                    Wait_rep.progreso_1.setText(r.getString("ID_EMPRESA")+"-"+r.getString("NOMBRE_EMPRESA")+"_.xlsx");
+                    JRXlsxExporter exporterXLS = new JRXlsxExporter();
+                    Map<String, String> dateFormats = new HashMap<String, String>();
+                    dateFormats.put("EEEEE, MMM d, yyyy", "ddd, mmm d, yyyy");
+                    SimpleXlsxReportConfiguration repConfig = new SimpleXlsxReportConfiguration();
+                    exporterXLS.setExporterInput(new SimpleExporterInput(jprint));
+                    exporterXLS.setExporterOutput(new SimpleOutputStreamExporterOutput(path+"\\"+r.getString("ID_EMPRESA")+"-"+r.getString("NOMBRE_EMPRESA")+"_.xlsx"));       
+                    repConfig.setWrapText(Boolean.TRUE);//
+                    repConfig.setOnePagePerSheet(Boolean.FALSE);
+                    repConfig.setDetectCellType(Boolean.TRUE);
+                    repConfig.setWhitePageBackground(Boolean.TRUE);
+                    repConfig.setRemoveEmptySpaceBetweenRows(Boolean.TRUE);
+                    repConfig.setRemoveEmptySpaceBetweenColumns(Boolean.TRUE);
+                    repConfig.setFormatPatternsMap(dateFormats);
+                    repConfig.setCollapseRowSpan(Boolean.TRUE);//
+                    exporterXLS.setConfiguration(repConfig);
+                    exporterXLS.exportReport();
+                    
+                }
+                Wait_rep.bar.setValue(r.getRow());
+            }
+            Toolkit.getDefaultToolkit().beep();
+            JOptionPane.showMessageDialog(null,"El reporte se ha generado correctamente","Información",JOptionPane.INFORMATION_MESSAGE);
+            con.cerrar();
+            s_p_a_s_e.dialog.dispose();
             
         } catch (SQLException | JRException | HeadlessException e) {
             con.cerrar();
@@ -369,7 +523,7 @@ public class GenerarReportes extends Thread{
                                     "INNER JOIN t_tipo_novedad \n" +
                                     "	ON (t_novedades.ID_TIPO = t_tipo_novedad.ID_TIPO)\n" +
                                     "WHERE\n" +
-                                    "t_novedades.ID_TIPO IN (1,2,4)\n" +
+                                    "t_novedades.ID_TIPO IN (1,2,4,6)\n" +
                                     "AND ((t_novedades.`FECHA_INGRESO` <= '"+fechafin+"' AND t_novedades.`FECHA_RETIRO` = '1900-01-01')\n" +
                                     "	OR ( t_novedades.`FECHA_INGRESO` <= '"+fechafin+"' AND t_novedades.`FECHA_RETIRO` >= '"+fechaini+"'))\n" +
                                     "GROUP BY t_novedades.ID_EMPRESA");
@@ -527,7 +681,7 @@ public class GenerarReportes extends Thread{
                                     "INNER JOIN t_tipo_novedad \n" +
                                     "	ON (t_novedades.ID_TIPO = t_tipo_novedad.ID_TIPO)\n" +
                                     "WHERE\n" +
-                                    "t_novedades.ID_TIPO IN (1,2,4)\n" +
+                                    "t_novedades.ID_TIPO IN (1,2,4,6)\n" +
                                     "AND t_grupo_empresa.NOMBRE_GRUPO = '"+g+"'\n" +
                                     "AND ((t_novedades.`FECHA_INGRESO` <= '"+fechafin+"' AND t_novedades.`FECHA_RETIRO` = '1900-01-01')\n" +
                                     "	OR ( t_novedades.`FECHA_INGRESO` <= '"+fechafin+"' AND t_novedades.`FECHA_RETIRO` >= '"+fechaini+"'))\n" +
@@ -1256,7 +1410,7 @@ public class GenerarReportes extends Thread{
                                     "        ON (t_novedades.ID_OBRA = t_obra.ID_OBRA)\n" +
                                     "    INNER JOIN t_municipios \n" +
                                     "        ON (t_obra.ID_MUN_OBRA = t_municipios.ID_MUN)\n" +
-                                    "    WHERE	ID_TIPO IN (1,2,4) \n" +
+                                    "    WHERE	ID_TIPO IN (1,2,4,6) \n" +
                                     "	AND (FECHA_INGRESO BETWEEN '"+fechaini+"' AND '"+fechafin+"')\n" +
                                     "	GROUP BY t_novedades.ID_EMPRESA\n" +
                                     "UNION\n" +
@@ -1346,7 +1500,7 @@ public class GenerarReportes extends Thread{
                                     "        ON (t_novedades.ID_OBRA = t_obra.ID_OBRA)\n" +
                                     "    INNER JOIN t_municipios \n" +
                                     "        ON (t_obra.ID_MUN_OBRA = t_municipios.ID_MUN)\n" +
-                                    "    WHERE	ID_TIPO IN (1,2,4) \n" +
+                                    "    WHERE	ID_TIPO IN (1,2,4,6) \n" +
                                     "   AND t_novedades.ID_EMPRESA = '"+id_empresa+"'\n" +
                                     "	AND (FECHA_INGRESO BETWEEN '"+fechaini+"' AND '"+fechafin+"')\n" +
                                     "	GROUP BY t_novedades.ID_EMPRESA\n" +
@@ -1448,7 +1602,7 @@ public class GenerarReportes extends Thread{
                                     "        ON (t_novedades.ID_OBRA = t_obra.ID_OBRA)\n" +
                                     "    INNER JOIN t_municipios \n" +
                                     "        ON (t_obra.ID_MUN_OBRA = t_municipios.ID_MUN)\n" +
-                                    "    WHERE	ID_TIPO IN (1,2,4) \n" +
+                                    "    WHERE	ID_TIPO IN (1,2,4,6) \n" +
                                     "	AND (FECHA_RETIRO BETWEEN '"+fechaini+"' AND '"+fechafin+"')\n" +
                                     "	AND (FECHA_INGRESO < '"+fechaini+"')\n" +
                                     "	GROUP BY t_novedades.ID_EMPRESA");
@@ -1517,7 +1671,7 @@ public class GenerarReportes extends Thread{
                                     "        ON (t_novedades.ID_OBRA = t_obra.ID_OBRA)\n" +
                                     "    INNER JOIN t_municipios \n" +
                                     "        ON (t_obra.ID_MUN_OBRA = t_municipios.ID_MUN)\n" +
-                                    "    WHERE	ID_TIPO IN (1,2,4) \n" +
+                                    "    WHERE	ID_TIPO IN (1,2,4,6) \n" +
                                     "	AND (FECHA_RETIRO BETWEEN '"+fechaini+"' AND '"+fechafin+"')\n" +
                                     "	AND (FECHA_INGRESO < '"+fechaini+"')\n" +
                                     "   AND t_novedades.ID_EMPRESA = '"+id_empresa+"'\n" +

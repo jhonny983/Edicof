@@ -1030,7 +1030,7 @@ public boolean chech_char(String s, String c){
     return true;
 }
 public  ArrayList call_sel_emp(String c, String t){
-    Sel_Empleador_1 sel=new Sel_Empleador_1(this,true,c,t);
+    Sel_Empleador sel=new Sel_Empleador(this,true,c,t);
     sel.setLocationRelativeTo(this);
     sel.setVisible(true);
 return sel.getRet();

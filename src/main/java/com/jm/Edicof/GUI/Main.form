@@ -187,6 +187,21 @@
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem37ActionPerformed"/>
                   </Events>
                 </MenuItem>
+                <MenuItem class="javax.swing.JMenuItem" name="jMenuItem68">
+                  <Properties>
+                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                      <Image iconType="3" name="/date_next.png"/>
+                    </Property>
+                    <Property name="text" type="java.lang.String" value="Agregar Externos"/>
+                    <Property name="toolTipText" type="java.lang.String" value=""/>
+                  </Properties>
+                  <BindingProperties>
+                    <BindingProperty name="enabled" source="jm_novedades" sourcePath="${enabled}" target="jMenuItem68" targetPath="enabled" updateStrategy="0" immediately="false"/>
+                  </BindingProperties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem68ActionPerformed"/>
+                  </Events>
+                </MenuItem>
               </SubComponents>
             </Menu>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItem12">
@@ -788,20 +803,44 @@
             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="12"/>
           </AuxValues>
           <SubComponents>
-            <MenuItem class="javax.swing.JMenuItem" name="jMenuItem14">
+            <Menu class="javax.swing.JMenu" name="jMenu23">
               <Properties>
-                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/user_green.png"/>
-                </Property>
-                <Property name="text" type="java.lang.String" value="Personal activo"/>
+                <Property name="text" type="java.lang.String" value="Personal Activo"/>
               </Properties>
               <BindingProperties>
-                <BindingProperty name="enabled" source="jm_reportes" sourcePath="${enabled}" target="jMenuItem14" targetPath="enabled" updateStrategy="0" immediately="false"/>
+                <BindingProperty name="enabled" source="jm_reportes" sourcePath="${enabled}" target="jMenu23" targetPath="enabled" updateStrategy="0" immediately="false"/>
               </BindingProperties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem14ActionPerformed"/>
-              </Events>
-            </MenuItem>
+              <SubComponents>
+                <MenuItem class="javax.swing.JMenuItem" name="jMenuItem14">
+                  <Properties>
+                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                      <Image iconType="3" name="/user_green.png"/>
+                    </Property>
+                    <Property name="text" type="java.lang.String" value="Personal activo"/>
+                  </Properties>
+                  <BindingProperties>
+                    <BindingProperty name="enabled" source="jm_reportes" sourcePath="${enabled}" target="jMenuItem14" targetPath="enabled" updateStrategy="0" immediately="false"/>
+                  </BindingProperties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem14ActionPerformed"/>
+                  </Events>
+                </MenuItem>
+                <MenuItem class="javax.swing.JMenuItem" name="jMenuItem69">
+                  <Properties>
+                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                      <Image iconType="3" name="/user_gray.png"/>
+                    </Property>
+                    <Property name="text" type="java.lang.String" value="Personal Activo Externos"/>
+                  </Properties>
+                  <BindingProperties>
+                    <BindingProperty name="enabled" source="jm_reportes" sourcePath="${enabled}" target="jMenuItem69" targetPath="enabled" updateStrategy="0" immediately="false"/>
+                  </BindingProperties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem69ActionPerformed"/>
+                  </Events>
+                </MenuItem>
+              </SubComponents>
+            </Menu>
             <Menu class="javax.swing.JMenu" name="jMenu12">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">

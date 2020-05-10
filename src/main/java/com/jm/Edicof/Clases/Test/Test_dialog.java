@@ -119,7 +119,7 @@ public class Test_dialog extends javax.swing.JDialog {
         // TODO add your handling code here:
         EmailSenderService send = new EmailSenderService();
         //if (send.enviarcorreo("afiliaciones@cbolivar.com", "afiliaciones08", "jhonny983@gmail.com", "Mensaje de prueba JMailJava", "Prueva JavaMail","","")) {
-        if (send.enviarcorreo("aplicativo.masivos@outlook.com", "870510LUIS", "jhonny983@hotmail.com", "Mensaje de prueba JMailJava", "Prueva JavaMail","","")) {
+        if (send.enviarcorreo("jhonny983@hotmail.com", "jhonny29681237", "jhonny983@hotmail.com", "Mensaje de prueba JMailJava", "Prueva JavaMail","","")) {
         //if (send.enviarcorreo("jhonny983@hotmail.com", "jhonny29681237", "ventass.jmingenieria@outlook.com", "Mensaje de prueba JMailJava", "Prueva JavaMail","","")) {
             JOptionPane.showMessageDialog(this,"Mensaje enviado","Información",JOptionPane.INFORMATION_MESSAGE);
         }else{

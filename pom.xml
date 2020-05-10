@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.jm</groupId>
     <artifactId>Edicof</artifactId>
-    <version>3.0.1.2</version>
+    <version>3.0.1.3</version>
     <packaging>jar</packaging>
     <dependencies>
         <dependency>
@@ -32,9 +32,9 @@
         </dependency>
         <!-- https://mvnrepository.com/artifact/javax.mail/javax.mail-api -->
         <dependency>
-            <groupId>javax.mail</groupId>
-            <artifactId>javax.mail-api</artifactId>
-            <version>1.6.2</version>
+            <groupId>com.sun.mail</groupId>
+            <artifactId>javax.mail</artifactId>
+            <version>1.6.0</version>
         </dependency>
         <!-- https://mvnrepository.com/artifact/org.quartz-scheduler/quartz -->
         <dependency>

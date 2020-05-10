@@ -2189,12 +2189,6 @@ public void ac_obra(){
     }
 
 }
-public ArrayList call_sel_emp(String c, String t){
-    Sel_Empleador_1_3 sel=new Sel_Empleador_1_3(this,true,c,t);
-    sel.setLocationRelativeTo(this);
-    sel.setVisible(true);
-    return sel.getRet();
-}
 public Boolean call_info_emp(String c){
     Info_Empleador info=new Info_Empleador(this,true,c);
     info.setLocationRelativeTo(this);

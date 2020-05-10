@@ -68,9 +68,7 @@ INNER JOIN t_empleados
         ON (t_novedades.ID_EMPLEADO = t_empleados.ID_EMP)
 INNER JOIN t_tipo_novedad 
         ON (t_novedades.ID_TIPO = t_tipo_novedad.ID_TIPO)
-WHERE   (t_empresas.NOMBRE_EMPRESA =  $P{EMPRESA}    
-AND     t_novedades.`FECHA_RETIRO` BETWEEN $P{F_INICIAL} AND $P{F_FINAL})
-OR      (t_novedades.ID_TIPO = 4 AND(t_novedades.`FECHA_INGRESO` <= $P{F_FINAL} AND t_novedades.`FECHA_RETIRO` = '1900-01-01')OR(t_novedades.`FECHA_INGRESO` <= $P{F_FINAL} AND t_novedades.`FECHA_RETIRO` >= $P{F_INICIAL}))
+WHERE   (t_empresas.NOMBRE_EMPRESA =  $P{EMPRESA} AND t_novedades.ID_TIPO IN (2,6) AND t_novedades.`FECHA_RETIRO` BETWEEN $P{F_INICIAL} AND $P{F_FINAL})
 ORDER BY 
 	t_novedades.`FECHA_RETIRO` DESC]]>
 	</queryString>

@@ -1749,7 +1749,7 @@ public void ac_obra(){
 
 }
 public ArrayList call_sel_emp(String c, String t){
-    Sel_Empleador_1_3 sel=new Sel_Empleador_1_3(this,true,c,t);
+    Sel_Empleador sel=new Sel_Empleador(this,true,c,t);
     sel.setLocationRelativeTo(this);
     sel.setVisible(true);
     return sel.getRet();
@@ -1806,7 +1806,7 @@ public void callback_empleado(String s){
                 if (r.next()) {
                     if (r.getInt("COUNT(ID_EMPLEADO)")>1) {
                         JOptionPane.showMessageDialog(this,"El empleado actualmente esta activo con varios empleadores.","Información",JOptionPane.INFORMATION_MESSAGE);
-                        ret_nov=call_sel_emp(s,"1");
+                        ret_nov=call_sel_emp(s,"1,3,4,5");
                         if (!ret_nov.isEmpty()) {
                             r = con.s.executeQuery ("SELECT\n"
                                                     + "*\n"

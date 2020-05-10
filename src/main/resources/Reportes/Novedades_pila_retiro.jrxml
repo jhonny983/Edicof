@@ -28,7 +28,7 @@ FROM
         ON (t_novedades.ID_OBRA = t_obra.ID_OBRA)
     INNER JOIN t_municipios 
         ON (t_obra.ID_MUN_OBRA = t_municipios.ID_MUN)
-    WHERE	ID_TIPO IN (1,2,4) 
+    WHERE	ID_TIPO IN (1,2,4,6) 
 	AND t_novedades.ID_EMPRESA = $P{ID_EMPRESA}
 	AND (FECHA_RETIRO BETWEEN $P{F_INICIAL} AND $P{F_FINAL})
 	AND (FECHA_INGRESO < $P{F_INICIAL})

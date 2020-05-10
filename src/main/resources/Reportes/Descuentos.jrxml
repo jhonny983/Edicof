@@ -38,7 +38,7 @@ INNER JOIN t_empleados
 INNER JOIN t_tipo_novedad 
 	ON (t_novedades.ID_TIPO = t_tipo_novedad.ID_TIPO)
 WHERE
-t_novedades.ID_TIPO IN (1,2,4)
+t_novedades.ID_TIPO IN (1,2,4,6)
 AND ((t_novedades.`FECHA_INGRESO` <= $P{F_FINAL} AND t_novedades.`FECHA_RETIRO` = '1900-01-01')
   OR (t_novedades.`FECHA_INGRESO` <= $P{F_FINAL} AND t_novedades.`FECHA_RETIRO` >= $P{F_INICIAL}))
 ORDER BY NOMBRE_MUN ASC]]>

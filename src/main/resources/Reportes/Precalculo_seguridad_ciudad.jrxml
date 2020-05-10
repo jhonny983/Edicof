@@ -83,7 +83,7 @@ INNER JOIN t_tipo_novedad
         ON (t_novedades.ID_TIPO = t_tipo_novedad.ID_TIPO)
      
 WHERE
-t_novedades.ID_TIPO IN (1,2,4)
+t_novedades.ID_TIPO IN (1,2,4,6)
 AND
 t_novedades.`ID_EMPRESA` = $P{ID_EMPRESA}
 AND ((t_novedades.`FECHA_INGRESO` <= $P{F_FINAL} AND t_novedades.`FECHA_RETIRO` = '1900-01-01')
