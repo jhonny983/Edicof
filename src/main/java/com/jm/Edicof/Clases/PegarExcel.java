@@ -24,7 +24,7 @@ private Clipboard system;
 private StringSelection stringSelection,stsel;
 private JTable jTable1 ;
 int pasteRows=0;
-Object [] fila = new Object[16];
+Object [] fila = new Object[22];
 //----------------------------------------------------------------------------------------------------------------------
 public PegarExcel(JTable myJTable)
 {

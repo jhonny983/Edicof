@@ -17,20 +17,18 @@ import java.util.*;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
 //----------------------------------------------------------------------------------------------------------------------
-public class PegarExcel_cruce_arl implements ActionListener
+public class PegarExcel_retiros implements ActionListener
 {
 private String rowstring,value;
 private Clipboard system;
 private StringSelection stringSelection,stsel;
 private JTable jTable1 ;
 int pasteRows=0;
-Object [] fila = new Object[16];
+Object [] fila = new Object[22];
 //----------------------------------------------------------------------------------------------------------------------
-public PegarExcel_cruce_arl(JTable myJTable)
+public PegarExcel_retiros(JTable myJTable)
 {
 jTable1 = myJTable;
 
@@ -85,48 +83,24 @@ void pasteAction(){
         while(st.hasMoreTokens()){
             stTmp=new StringTokenizer (st.nextToken (),"\t");
             colCount=0;
+            //System.out.println("Pegar: "+stTmp.nextToken());
             while(stTmp.hasMoreTokens ()){
+                String aux = stTmp.nextToken();
                 if (colCount==0) {
-                    jTable1.setValueAt(Long.parseLong(stTmp.nextToken()),rowCount+selectRow,colCount+selectCol);
-                    jTable1.changeSelection(rowCount+selectRow,colCount+selectCol, false, false);
-                    jTable1.requestFocus();
-                    colCount++;
-                }else{
-                    if (colCount==1) {
-                        jTable1.setValueAt(stTmp.nextToken(),rowCount+selectRow,colCount+selectCol);
-                        jTable1.changeSelection(rowCount+selectRow,colCount+selectCol, false, false);
-                        jTable1.requestFocus();
-                        colCount++;
-                    }else{
-                        if (colCount==2) {
-                            jTable1.setValueAt(new SimpleDateFormat("dd-MM-yyyy").parse(stTmp.nextToken()),rowCount+selectRow,colCount+selectCol);
-                            jTable1.changeSelection(rowCount+selectRow,colCount+selectCol, false, false);
-                            jTable1.requestFocus();
-                            colCount++;
-                        }else{
-                            if (colCount==3) {
-                                jTable1.setValueAt(Float.parseFloat(stTmp.nextToken()),rowCount+selectRow,colCount+selectCol);
-                                jTable1.changeSelection(rowCount+selectRow,colCount+selectCol, false, false);
-                                jTable1.requestFocus();
-                                colCount++;
-                            }else{
-
-                            }
-                        }
-                    }
+                    System.out.println("Pegar Excel: "+aux);
                 }
-                
+                jTable1.setValueAt(aux,rowCount+selectRow,colCount+selectCol);
+                jTable1.changeSelection(rowCount+selectRow,colCount+selectCol, false, false);
+                jTable1.requestFocus();
+                colCount++;
             }
             rowCount++;
         }
     }
     catch(UnsupportedFlavorException uf){
         System.out.println ("uf="+uf.getMessage ());
-    }
-    catch(IOException io){
+    }catch(IOException io){
         System.out.println ("io="+io.getMessage ());
-    } catch (ParseException ex) {
-        System.out.println ("pe="+ex.getMessage ());
     }
 
 }

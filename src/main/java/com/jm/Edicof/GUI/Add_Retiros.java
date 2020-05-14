@@ -8,8 +8,7 @@ package com.jm.Edicof.GUI;
 import com.jm.Edicof.Clases.AutoCompletion;
 import com.jm.Edicof.Clases.CellRender_Retiros;
 import com.jm.Edicof.Clases.Conexion;
-import com.jm.Edicof.Clases.PegarExcel;
-import com.jm.Edicof.Clases.Struct_novedades_asist;
+import com.jm.Edicof.Clases.PegarExcel_retiros;
 import com.mxrck.autocompleter.AutoCompleterCallback;
 import com.mxrck.autocompleter.TextAutoCompleter;
 import java.awt.Component;
@@ -28,8 +27,6 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.StringTokenizer;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.AbstractCellEditor;
 import javax.swing.InputMap;
 import javax.swing.JComponent;
@@ -41,6 +38,7 @@ import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellEditor;
+import javax.swing.table.TableModel;
 
 /**
  *
@@ -87,13 +85,17 @@ public class Add_Retiros extends javax.swing.JDialog {
         jTable1.getModel().addTableModelListener(new TableModelListener() {
             @Override
             public void tableChanged(TableModelEvent e) {
+                
                 if (e.getType() == TableModelEvent.UPDATE) {
-                    int fila = e.getFirstRow();
-                    int columna = e.getColumn();
-                    if (columna != 0) {
-                        return;
-                    }else{
-                        check_empleado();
+                    int row = e.getFirstRow();
+                    int column = e.getColumn();
+                    TableModel model = (TableModel)e.getSource();
+                    String columnName = model.getColumnName(column);
+                    Object data = model.getValueAt(row, column);
+                    if (columnName.equals("Cedula*")) {
+                        System.out.println("Registro nuevo: "+data);
+                        check_empleado(data,model,row);
+                        
                     }
                     
                 }
@@ -140,7 +142,7 @@ public class Add_Retiros extends javax.swing.JDialog {
         InputMap map2 = jTable1.getInputMap(jTable1.WHEN_FOCUSED);
         map2.put(KeyStroke.getKeyStroke(KeyEvent.VK_C, Event.CTRL_MASK), "null");
         /////////////////-----------------------------------------
-        jTable1.getColumnModel().getColumn(0).setCellEditor(new MyTableCellEditorDate(tb_cedula_table,true));
+        //jTable1.getColumnModel().getColumn(0).setCellEditor(new MyTableCellEditorDate(tb_cedula_table,true));
         jTable1.getColumnModel().getColumn(3).setCellEditor(new MyTableCellEditorDate(true));
 //        
 //        TableColumn column0 = jTable1.getColumnModel().getColumn(0);
@@ -176,6 +178,7 @@ class MyTableCellEditorDate extends AbstractCellEditor implements TableCellEdito
     private MyTableCellEditorDate(JTextField tf, boolean list) {
         component = tf;
         par_list = list;
+        
     }
     private MyTableCellEditorDate(boolean date) {
         component = new JTextField();
@@ -185,6 +188,7 @@ class MyTableCellEditorDate extends AbstractCellEditor implements TableCellEdito
     @Override
     public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected,
         int rowIndex, int vColIndex) {
+        //((JTextField) component).setEditable(false);
         ((JTextField) component).setText((String) value);
         ((JTextField) component).addKeyListener(new KeyAdapter(){
         @Override
@@ -272,6 +276,7 @@ class MyTableCellEditorDate extends AbstractCellEditor implements TableCellEdito
             }
         }
         });
+        
         return component;
     }
     
@@ -781,7 +786,7 @@ class MyTableCellEditorDate extends AbstractCellEditor implements TableCellEdito
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Información de pre-ingresos"));
 
-        new PegarExcel(jTable1);
+        new PegarExcel_retiros(jTable1);
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null}
@@ -1236,13 +1241,13 @@ class MyTableCellEditorDate extends AbstractCellEditor implements TableCellEdito
                 for (int i = 0; i < jTable1.getRowCount(); i++) {
                     try {
                         if (new SimpleDateFormat("dd-MM-yyyy").parse(modelo.getValueAt(i, 3).toString()).compareTo(get_last_asist(modelo.getValueAt(i, 0).toString())) >= 0) {
-                            if (modelo.getValueAt(i, 3).toString().equals("INGRESO")) {
+                            if (modelo.getValueAt(i, 21).toString().equals("INGRESO")) {
                                 con.s.executeUpdate("UPDATE `t_novedades` SET `F_REGISTRO`='"+new SimpleDateFormat("yyyy-MM-dd").format(new Date())+"', `FECHA_RETIRO`='"+new SimpleDateFormat("yyyy-MM-dd").format(new SimpleDateFormat("dd-MM-yyyy").parse(modelo.getValueAt(i, 3).toString()))+"', `OBS_NOV`='RETIRO>"+Main.login.getText()+">"+new SimpleDateFormat("dd-MM-yyyy").format(new Date())+">"+modelo.getValueAt(i, 3).toString()+","+modelo.getValueAt(i, 20).toString().toUpperCase()+"',`ID_TIPO`=2 WHERE ID_EMPLEADO="+modelo.getValueAt(i, 0)+" AND ID_EMPRESA='"+get_id_empleador(modelo.getValueAt(i, 1))+"' AND FECHA_INGRESO='"+new SimpleDateFormat("yyyy-MM-dd").format(new SimpleDateFormat("dd-MM-yyyy").parse(modelo.getValueAt(i, 2).toString()))+"' AND FECHA_RETIRO='1900-01-01' AND ID_TIPO=1");
                                 con.s.executeUpdate("INSERT INTO `t_registro` (ID_EMPLEADO,ID_EMPRESA,F_INGRESO,F_RETIRO,ID_TIPO, REGISTRO, F_REGISTRO, FECHA, ID_USUARIO) VALUES ("+modelo.getValueAt(i, 0)+",'"+get_id_empleador(modelo.getValueAt(i, 1))+"','"+new SimpleDateFormat("yyyy-MM-dd").format(new SimpleDateFormat("dd-MM-yyyy").parse(modelo.getValueAt(i, 2).toString()))+"','"+new SimpleDateFormat("yyyy-MM-dd").format(new SimpleDateFormat("dd-MM-yyyy").parse(modelo.getValueAt(i, 3).toString()))+"',2,'RETIRO','"+new SimpleDateFormat("yyyy-MM-dd").format(new Date())+"','"+new SimpleDateFormat("yyyy-MM-dd").format(new SimpleDateFormat("dd-MM-yyyy").parse(modelo.getValueAt(i, 3).toString()))+"','"+Main.id_usuario+"')");
-                            }else if (modelo.getValueAt(i, 3).toString().equals("BLOQUEADO")) {
+                            }else if (modelo.getValueAt(i, 21).toString().equals("BLOQUEADO")) {
                                 con.s.executeUpdate("UPDATE `t_novedades` SET `F_REGISTRO`='"+new SimpleDateFormat("yyyy-MM-dd").format(new Date())+"', `FECHA_RETIRO`='"+new SimpleDateFormat("yyyy-MM-dd").format(new SimpleDateFormat("dd-MM-yyyy").parse(modelo.getValueAt(i, 3).toString()))+"', `OBS_NOV`='RETIRO>"+Main.login.getText()+">"+new SimpleDateFormat("dd-MM-yyyy").format(new Date())+">"+modelo.getValueAt(i, 3).toString()+","+modelo.getValueAt(i, 20).toString().toUpperCase()+"',`ID_TIPO`=6 WHERE ID_EMPLEADO="+modelo.getValueAt(i, 0)+" AND ID_EMPRESA='"+get_id_empleador(modelo.getValueAt(i, 1))+"' AND FECHA_INGRESO='"+new SimpleDateFormat("yyyy-MM-dd").format(new SimpleDateFormat("dd-MM-yyyy").parse(modelo.getValueAt(i, 2).toString()))+"' AND FECHA_RETIRO='1900-01-01' AND ID_TIPO=4");
                                 con.s.executeUpdate("INSERT INTO `t_registro` (ID_EMPLEADO,ID_EMPRESA,F_INGRESO,F_RETIRO,ID_TIPO, REGISTRO, F_REGISTRO, FECHA, ID_USUARIO) VALUES ("+modelo.getValueAt(i, 0)+",'"+get_id_empleador(modelo.getValueAt(i, 1))+"','"+new SimpleDateFormat("yyyy-MM-dd").format(new SimpleDateFormat("dd-MM-yyyy").parse(modelo.getValueAt(i, 2).toString()))+"','"+new SimpleDateFormat("yyyy-MM-dd").format(new SimpleDateFormat("dd-MM-yyyy").parse(modelo.getValueAt(i, 3).toString()))+"',6,'RETIRO BLOQUEADO','"+new SimpleDateFormat("yyyy-MM-dd").format(new Date())+"','"+new SimpleDateFormat("yyyy-MM-dd").format(new SimpleDateFormat("dd-MM-yyyy").parse(modelo.getValueAt(i, 3).toString()))+"','"+Main.id_usuario+"')");
-                            }else if (modelo.getValueAt(i, 3).toString().equals("EXTERNO")) {
+                            }else if (modelo.getValueAt(i, 21).toString().equals("EXTERNO")) {
                                 con.s.executeUpdate("UPDATE `t_novedades` SET `F_REGISTRO`='"+new SimpleDateFormat("yyyy-MM-dd").format(new Date())+"', `FECHA_RETIRO`='"+new SimpleDateFormat("yyyy-MM-dd").format(new SimpleDateFormat("dd-MM-yyyy").parse(modelo.getValueAt(i, 3).toString()))+"', `OBS_NOV`='RETIRO>"+Main.login.getText()+">"+new SimpleDateFormat("dd-MM-yyyy").format(new Date())+">"+modelo.getValueAt(i, 3).toString()+","+modelo.getValueAt(i, 20).toString().toUpperCase()+"',`ID_TIPO`=7 WHERE ID_EMPLEADO="+modelo.getValueAt(i, 0)+" AND ID_EMPRESA='"+get_id_empleador(modelo.getValueAt(i, 1))+"' AND FECHA_INGRESO='"+new SimpleDateFormat("yyyy-MM-dd").format(new SimpleDateFormat("dd-MM-yyyy").parse(modelo.getValueAt(i, 2).toString()))+"' AND FECHA_RETIRO='1900-01-01' AND ID_TIPO=5");
                                 con.s.executeUpdate("INSERT INTO `t_registro` (ID_EMPLEADO,ID_EMPRESA,F_INGRESO,F_RETIRO,ID_TIPO, REGISTRO, F_REGISTRO, FECHA, ID_USUARIO) VALUES ("+modelo.getValueAt(i, 0)+",'"+get_id_empleador(modelo.getValueAt(i, 1))+"','"+new SimpleDateFormat("yyyy-MM-dd").format(new SimpleDateFormat("dd-MM-yyyy").parse(modelo.getValueAt(i, 2).toString()))+"','"+new SimpleDateFormat("yyyy-MM-dd").format(new SimpleDateFormat("dd-MM-yyyy").parse(modelo.getValueAt(i, 3).toString()))+"',7,'RETIRO BLOQUEADO','"+new SimpleDateFormat("yyyy-MM-dd").format(new Date())+"','"+new SimpleDateFormat("yyyy-MM-dd").format(new SimpleDateFormat("dd-MM-yyyy").parse(modelo.getValueAt(i, 3).toString()))+"','"+Main.id_usuario+"')");
                             }
@@ -1269,28 +1274,39 @@ class MyTableCellEditorDate extends AbstractCellEditor implements TableCellEdito
                     }
                 }else{
                     confirm = true;
-                    int q = JOptionPane.showConfirmDialog(this,"Estas novedades tienen restriccion por fecha de asistencia\n Desea registrarlas?","Verificacion",JOptionPane.OK_CANCEL_OPTION,JOptionPane.QUESTION_MESSAGE);
-                    if (q==JOptionPane.YES_OPTION) {
-                        for (int i = 0; i < jTable1.getRowCount(); i++) {
-                            try {
-                                con.s.executeUpdate("UPDATE `t_novedades` SET `F_REGISTRO`='"+new SimpleDateFormat("yyyy-MM-dd").format(new Date())+"', `FECHA_RETIRO`='"+new SimpleDateFormat("yyyy-MM-dd").format(new SimpleDateFormat("dd-MM-yyyy").parse(modelo.getValueAt(i, 3).toString()))+"', `OBS_NOV`='RETIRO>"+Main.login.getText()+">"+new SimpleDateFormat("dd-MM-yyyy").format(new Date())+">"+modelo.getValueAt(i, 3).toString()+","+modelo.getValueAt(i, 20).toString().toUpperCase()+"',`ID_TIPO`=2 WHERE ID_EMPLEADO="+modelo.getValueAt(i, 0)+" AND ID_EMPRESA='"+get_id_empleador(modelo.getValueAt(i, 1))+"' AND FECHA_INGRESO='"+new SimpleDateFormat("yyyy-MM-dd").format(new SimpleDateFormat("dd-MM-yyyy").parse(modelo.getValueAt(i, 2).toString()))+"' AND FECHA_RETIRO='1900-01-01' AND ID_TIPO=1");
-                                con.s.executeUpdate("INSERT INTO `t_registro` (ID_EMPLEADO,ID_EMPRESA,F_INGRESO,F_RETIRO,ID_TIPO, REGISTRO, F_REGISTRO, FECHA, ID_USUARIO) VALUES ("+modelo.getValueAt(i, 0)+",'"+get_id_empleador(modelo.getValueAt(i, 1))+"','"+new SimpleDateFormat("yyyy-MM-dd").format(new SimpleDateFormat("dd-MM-yyyy").parse(modelo.getValueAt(i, 2).toString()))+"','"+new SimpleDateFormat("yyyy-MM-dd").format(new SimpleDateFormat("dd-MM-yyyy").parse(modelo.getValueAt(i, 3).toString()))+"',2,'RETIRO','"+new SimpleDateFormat("yyyy-MM-dd").format(new Date())+"','"+new SimpleDateFormat("yyyy-MM-dd").format(new SimpleDateFormat("dd-MM-yyyy").parse(modelo.getValueAt(i, 3).toString()))+"','"+Main.id_usuario+"')");
-                                modelo.removeRow(i);
-                                i=i-1;
-                                confirm = confirm & true;
-                            } catch (ParseException | SQLException e) {
-                                con.cerrar();
-                                e.printStackTrace();
-                                JOptionPane.showMessageDialog(null,e,"Error",JOptionPane.ERROR_MESSAGE);
-                                break;
+                    if (jTable1.getRowCount()>0) {
+                        int q = JOptionPane.showConfirmDialog(this,"Estas novedades tienen restriccion por fecha de asistencia\n Desea registrarlas?","Verificacion",JOptionPane.OK_CANCEL_OPTION,JOptionPane.QUESTION_MESSAGE);
+                        if (q==JOptionPane.YES_OPTION) {
+                            for (int i = 0; i < jTable1.getRowCount(); i++) {
+                                try {
+                                    if (modelo.getValueAt(i, 21).toString().equals("INGRESO")) {
+                                        con.s.executeUpdate("UPDATE `t_novedades` SET `F_REGISTRO`='"+new SimpleDateFormat("yyyy-MM-dd").format(new Date())+"', `FECHA_RETIRO`='"+new SimpleDateFormat("yyyy-MM-dd").format(new SimpleDateFormat("dd-MM-yyyy").parse(modelo.getValueAt(i, 3).toString()))+"', `OBS_NOV`='RETIRO>"+Main.login.getText()+">"+new SimpleDateFormat("dd-MM-yyyy").format(new Date())+">"+modelo.getValueAt(i, 3).toString()+","+modelo.getValueAt(i, 20).toString().toUpperCase()+"',`ID_TIPO`=2 WHERE ID_EMPLEADO="+modelo.getValueAt(i, 0)+" AND ID_EMPRESA='"+get_id_empleador(modelo.getValueAt(i, 1))+"' AND FECHA_INGRESO='"+new SimpleDateFormat("yyyy-MM-dd").format(new SimpleDateFormat("dd-MM-yyyy").parse(modelo.getValueAt(i, 2).toString()))+"' AND FECHA_RETIRO='1900-01-01' AND ID_TIPO=1");
+                                        con.s.executeUpdate("INSERT INTO `t_registro` (ID_EMPLEADO,ID_EMPRESA,F_INGRESO,F_RETIRO,ID_TIPO, REGISTRO, F_REGISTRO, FECHA, ID_USUARIO) VALUES ("+modelo.getValueAt(i, 0)+",'"+get_id_empleador(modelo.getValueAt(i, 1))+"','"+new SimpleDateFormat("yyyy-MM-dd").format(new SimpleDateFormat("dd-MM-yyyy").parse(modelo.getValueAt(i, 2).toString()))+"','"+new SimpleDateFormat("yyyy-MM-dd").format(new SimpleDateFormat("dd-MM-yyyy").parse(modelo.getValueAt(i, 3).toString()))+"',2,'RETIRO','"+new SimpleDateFormat("yyyy-MM-dd").format(new Date())+"','"+new SimpleDateFormat("yyyy-MM-dd").format(new SimpleDateFormat("dd-MM-yyyy").parse(modelo.getValueAt(i, 3).toString()))+"','"+Main.id_usuario+"')");
+                                    }else if (modelo.getValueAt(i, 21).toString().equals("BLOQUEADO")) {
+                                        con.s.executeUpdate("UPDATE `t_novedades` SET `F_REGISTRO`='"+new SimpleDateFormat("yyyy-MM-dd").format(new Date())+"', `FECHA_RETIRO`='"+new SimpleDateFormat("yyyy-MM-dd").format(new SimpleDateFormat("dd-MM-yyyy").parse(modelo.getValueAt(i, 3).toString()))+"', `OBS_NOV`='RETIRO>"+Main.login.getText()+">"+new SimpleDateFormat("dd-MM-yyyy").format(new Date())+">"+modelo.getValueAt(i, 3).toString()+","+modelo.getValueAt(i, 20).toString().toUpperCase()+"',`ID_TIPO`=6 WHERE ID_EMPLEADO="+modelo.getValueAt(i, 0)+" AND ID_EMPRESA='"+get_id_empleador(modelo.getValueAt(i, 1))+"' AND FECHA_INGRESO='"+new SimpleDateFormat("yyyy-MM-dd").format(new SimpleDateFormat("dd-MM-yyyy").parse(modelo.getValueAt(i, 2).toString()))+"' AND FECHA_RETIRO='1900-01-01' AND ID_TIPO=4");
+                                        con.s.executeUpdate("INSERT INTO `t_registro` (ID_EMPLEADO,ID_EMPRESA,F_INGRESO,F_RETIRO,ID_TIPO, REGISTRO, F_REGISTRO, FECHA, ID_USUARIO) VALUES ("+modelo.getValueAt(i, 0)+",'"+get_id_empleador(modelo.getValueAt(i, 1))+"','"+new SimpleDateFormat("yyyy-MM-dd").format(new SimpleDateFormat("dd-MM-yyyy").parse(modelo.getValueAt(i, 2).toString()))+"','"+new SimpleDateFormat("yyyy-MM-dd").format(new SimpleDateFormat("dd-MM-yyyy").parse(modelo.getValueAt(i, 3).toString()))+"',6,'RETIRO BLOQUEADO','"+new SimpleDateFormat("yyyy-MM-dd").format(new Date())+"','"+new SimpleDateFormat("yyyy-MM-dd").format(new SimpleDateFormat("dd-MM-yyyy").parse(modelo.getValueAt(i, 3).toString()))+"','"+Main.id_usuario+"')");
+                                    }else if (modelo.getValueAt(i, 21).toString().equals("EXTERNO")) {
+                                        con.s.executeUpdate("UPDATE `t_novedades` SET `F_REGISTRO`='"+new SimpleDateFormat("yyyy-MM-dd").format(new Date())+"', `FECHA_RETIRO`='"+new SimpleDateFormat("yyyy-MM-dd").format(new SimpleDateFormat("dd-MM-yyyy").parse(modelo.getValueAt(i, 3).toString()))+"', `OBS_NOV`='RETIRO>"+Main.login.getText()+">"+new SimpleDateFormat("dd-MM-yyyy").format(new Date())+">"+modelo.getValueAt(i, 3).toString()+","+modelo.getValueAt(i, 20).toString().toUpperCase()+"',`ID_TIPO`=7 WHERE ID_EMPLEADO="+modelo.getValueAt(i, 0)+" AND ID_EMPRESA='"+get_id_empleador(modelo.getValueAt(i, 1))+"' AND FECHA_INGRESO='"+new SimpleDateFormat("yyyy-MM-dd").format(new SimpleDateFormat("dd-MM-yyyy").parse(modelo.getValueAt(i, 2).toString()))+"' AND FECHA_RETIRO='1900-01-01' AND ID_TIPO=5");
+                                        con.s.executeUpdate("INSERT INTO `t_registro` (ID_EMPLEADO,ID_EMPRESA,F_INGRESO,F_RETIRO,ID_TIPO, REGISTRO, F_REGISTRO, FECHA, ID_USUARIO) VALUES ("+modelo.getValueAt(i, 0)+",'"+get_id_empleador(modelo.getValueAt(i, 1))+"','"+new SimpleDateFormat("yyyy-MM-dd").format(new SimpleDateFormat("dd-MM-yyyy").parse(modelo.getValueAt(i, 2).toString()))+"','"+new SimpleDateFormat("yyyy-MM-dd").format(new SimpleDateFormat("dd-MM-yyyy").parse(modelo.getValueAt(i, 3).toString()))+"',7,'RETIRO BLOQUEADO','"+new SimpleDateFormat("yyyy-MM-dd").format(new Date())+"','"+new SimpleDateFormat("yyyy-MM-dd").format(new SimpleDateFormat("dd-MM-yyyy").parse(modelo.getValueAt(i, 3).toString()))+"','"+Main.id_usuario+"')");
+                                    }
+                                    modelo.removeRow(i);
+                                    i=i-1;
+                                    confirm = confirm & true;
+                                } catch (ParseException | SQLException e) {
+                                    con.cerrar();
+                                    e.printStackTrace();
+                                    JOptionPane.showMessageDialog(null,e,"Error",JOptionPane.ERROR_MESSAGE);
+                                    break;
+                                }
+                            }
+                            cr_ret_asist.setEnabled(true);
+                            if (confirm) {
+                                JOptionPane.showMessageDialog(this,"La información ha sido ingresada correctamente","Informacion",JOptionPane.INFORMATION_MESSAGE);
                             }
                         }
                         cr_ret_asist.setEnabled(true);
-                        if (confirm) {
-                            JOptionPane.showMessageDialog(this,"La información ha sido ingresada correctamente","Informacion",JOptionPane.INFORMATION_MESSAGE);
-                        }
                     }
-                    cr_ret_asist.setEnabled(true);
+                    
                 }
                 con.cerrar();
             }
@@ -1403,21 +1419,28 @@ class MyTableCellEditorDate extends AbstractCellEditor implements TableCellEdito
     private javax.swing.JTextField t_obra;
     private javax.swing.JTextField t_parentesco;
     // End of variables declaration//GEN-END:variables
-public void check_empleado(){
+public void check_empleado(Object emp, TableModel model_1, int row){
     ArrayList<String> ret_nov = new ArrayList<String>();
     if (true) { //& !jTable1.isEditing()
-        modelo = (DefaultTableModel)jTable1.getModel();
-        if (check_cedula(modelo.getValueAt(jTable1.getSelectedRow(),jTable1.getSelectedColumn()))) {
+        //TableModel model = jTable1.getModel();
+        if (check_cedula(model_1.getValueAt(row,0))) {
             Conexion con = new Conexion();
             con.conexion();
             ResultSet r;
             ResultSet r1;
             ResultSet r2;
+            ResultSet r3;
             try {
-                r = con.s.executeQuery ("SELECT COUNT(ID_EMPLEADO) FROM t_novedades WHERE ID_EMPLEADO = "+modelo.getValueAt(jTable1.getSelectedRow(),jTable1.getSelectedColumn()).toString().trim()+" AND ID_TIPO IN (1,3)");
+                r = con.s.executeQuery ("SELECT COUNT(ID_EMPLEADO),ID_EMPLEADO,ID_EMPRESA,FECHA_INGRESO,FECHA_RETIRO,ID_TIPO FROM t_novedades WHERE ID_EMPLEADO = "+emp.toString()+" AND ID_TIPO IN (1,4,5)");//modelo.getValueAt(jTable1.getSelectedRow(),jTable1.getSelectedColumn()).toString().trim()
                 if (r.next()) {
-                    if (r.getInt("COUNT(ID_EMPLEADO)")>0) {
-                        ret_nov=call_sel_emp(modelo.getValueAt(jTable1.getSelectedRow(),jTable1.getSelectedColumn()).toString().trim(),"1,4,5");
+                    int count = r.getInt("COUNT(ID_EMPLEADO)");
+                    String id_empleado = r.getString("ID_EMPLEADO");
+                    String id_empresa = r.getString("ID_EMPRESA");
+                    String f_ingreso = r.getString("FECHA_INGRESO");
+                    String f_retiro = r.getString("FECHA_RETIRO");
+                    int id_tipo = r.getInt("ID_TIPO");
+                    if (count>1) {
+                        ret_nov=call_sel_emp(emp.toString(),"1,4,5");
                         //System.out.println("Tamaño: "+ret_nov.size());
                         if (!ret_nov.isEmpty()) {
                             r = con.s.executeQuery ("SELECT\n"
@@ -1442,27 +1465,27 @@ public void check_empleado(){
                                                     + "WHERE (t_novedades.ID_EMPLEADO = "+ret_nov.get(0)+" AND t_novedades.ID_EMPRESA = '"+ret_nov.get(1)+"' AND t_novedades.FECHA_INGRESO = '"+ret_nov.get(2)+"' AND t_novedades.FECHA_RETIRO = '"+ret_nov.get(3)+"' AND t_novedades.ID_TIPO = "+ret_nov.get(4)+")\n"
                                                     + "ORDER BY FECHA_INGRESO DESC;");
                             if(r.next()){
-                                modelo.setValueAt(r.getString("NOMBRE_EMPRESA"),jTable1.getSelectedRow(),1);
-                                modelo.setValueAt(new SimpleDateFormat("dd-MM-yyyy").format(new SimpleDateFormat("yyyy-MM-dd").parse(r.getString("FECHA_INGRESO"))),jTable1.getSelectedRow(),2);
-                                modelo.setValueAt(new SimpleDateFormat("dd-MM-yyy").format(new SimpleDateFormat("yyyy-MM-dd").parse(r.getString("FECHA_RETIRO"))).replace("01-01-1900",""),jTable1.getRowCount()-1,3);
-                                modelo.setValueAt(r.getString("SALARIO_NOVEDAD"),jTable1.getSelectedRow(),4);
-                                modelo.setValueAt(r.getString("NOMBRE_EPS"),jTable1.getSelectedRow(),5);
-                                modelo.setValueAt(r.getString("NOMBRE_AFP"),jTable1.getSelectedRow(),6);
-                                modelo.setValueAt(r.getString("ARL_NOV"),jTable1.getSelectedRow(),7);
-                                modelo.setValueAt(r.getString("CCF_NOV"),jTable1.getSelectedRow(),8);
-                                modelo.setValueAt(new SimpleDateFormat("dd-MM-yyyy").format(new SimpleDateFormat("yyyy-MM-dd").parse(r.getString("F_NAC_NOV"))),jTable1.getSelectedRow(),9);
-                                modelo.setValueAt(new SimpleDateFormat("dd-MM-yyyy").format(new SimpleDateFormat("yyyy-MM-dd").parse(r.getString("F_EXP_NOV"))),jTable1.getSelectedRow(),10);
+                                model_1.setValueAt(r.getString("NOMBRE_EMPRESA"),row,1);
+                                model_1.setValueAt(new SimpleDateFormat("dd-MM-yyyy").format(new SimpleDateFormat("yyyy-MM-dd").parse(r.getString("FECHA_INGRESO"))),row,2);
+                                model_1.setValueAt(new SimpleDateFormat("dd-MM-yyy").format(new SimpleDateFormat("yyyy-MM-dd").parse(r.getString("FECHA_RETIRO"))).replace("01-01-1900",""),jTable1.getRowCount()-1,3);
+                                model_1.setValueAt(r.getString("SALARIO_NOVEDAD"),row,4);
+                                model_1.setValueAt(r.getString("NOMBRE_EPS"),row,5);
+                                model_1.setValueAt(r.getString("NOMBRE_AFP"),row,6);
+                                model_1.setValueAt(r.getString("ARL_NOV"),row,7);
+                                model_1.setValueAt(r.getString("CCF_NOV"),row,8);
+                                model_1.setValueAt(new SimpleDateFormat("dd-MM-yyyy").format(new SimpleDateFormat("yyyy-MM-dd").parse(r.getString("F_NAC_NOV"))),row,9);
+                                model_1.setValueAt(new SimpleDateFormat("dd-MM-yyyy").format(new SimpleDateFormat("yyyy-MM-dd").parse(r.getString("F_EXP_NOV"))),row,10);
                                 int id_obra = r.getInt("ID_OBRA");
-                                modelo.setValueAt(r.getString("DIR_EMP_NOV"),jTable1.getSelectedRow(),12);
-                                modelo.setValueAt(r.getString("BARRIO_NOV"),jTable1.getSelectedRow(),13);
+                                model_1.setValueAt(r.getString("DIR_EMP_NOV"),row,12);
+                                model_1.setValueAt(r.getString("BARRIO_NOV"),row,13);
                                 int id_mun = r.getInt("ID_MUN_NOV");
-                                modelo.setValueAt(r.getString("TEL_NOV"),jTable1.getSelectedRow(),15);
-                                modelo.setValueAt(r.getString("MAIL_NOV"),jTable1.getSelectedRow(),16);
-                                modelo.setValueAt(r.getString("ACUD_NOV"),jTable1.getSelectedRow(),17);
-                                modelo.setValueAt(r.getString("NOMBRE_PAR"),jTable1.getSelectedRow(),18);
-                                modelo.setValueAt(r.getString("TEL_ACUD_NOV"),jTable1.getSelectedRow(),19);
-                                modelo.setValueAt(r.getString("OBS_NOV"),jTable1.getSelectedRow(),20);
-                                modelo.setValueAt(r.getString("NOMBRE_TIPO"),jTable1.getSelectedRow(),21);
+                                model_1.setValueAt(r.getString("TEL_NOV"),row,15);
+                                model_1.setValueAt(r.getString("MAIL_NOV"),row,16);
+                                model_1.setValueAt(r.getString("ACUD_NOV"),row,17);
+                                model_1.setValueAt(r.getString("NOMBRE_PAR"),row,18);
+                                model_1.setValueAt(r.getString("TEL_ACUD_NOV"),row,19);
+                                model_1.setValueAt(r.getString("OBS_NOV"),row,20);
+                                model_1.setValueAt(r.getString("NOMBRE_TIPO"),row,21);
                                 r1 = con.s.executeQuery ("SELECT *\n" +
                                                         "FROM\n" +
                                                         "    t_obra\n" +
@@ -1471,7 +1494,7 @@ public void check_empleado(){
                                                         "    INNER JOIN t_departamentos \n" +
                                                         "        ON (t_municipios.ID_DEP = t_departamentos.ID_DEP) WHERE ID_OBRA ="+id_obra);
                                 if (r1.next()) {
-                                    modelo.setValueAt(r1.getString("NOMBRE_OBRA")+"-"+r1.getString("NOMBRE_MUN")+"-"+r1.getString("NOMBRE_DEP"),jTable1.getSelectedRow(),11);
+                                    model_1.setValueAt(r1.getString("NOMBRE_OBRA")+"-"+r1.getString("NOMBRE_MUN")+"-"+r1.getString("NOMBRE_DEP"),row,11);
                                 }
 
                                 r2 = con.s.executeQuery ("SELECT *\n" +
@@ -1480,30 +1503,97 @@ public void check_empleado(){
                                                             "    INNER JOIN t_departamentos \n" +
                                                             "        ON (t_municipios.ID_DEP = t_departamentos.ID_DEP) WHERE ID_MUN ="+id_mun);
                                 if (r2.next()) {
-                                    modelo.setValueAt(r2.getString("NOMBRE_MUN")+"-"+r2.getString("NOMBRE_DEP"),jTable1.getSelectedRow(),14);
+                                    model_1.setValueAt(r2.getString("NOMBRE_MUN")+"-"+r2.getString("NOMBRE_DEP"),row,14);
                                 }
                             }
                         }
-                    }else{
+                    }else if (count==0){
                         JOptionPane.showMessageDialog(null,"El empleado no se encuentra activo","Error",JOptionPane.ERROR_MESSAGE);
-                        modelo = (DefaultTableModel) jTable1.getModel();
+                        //model = (DefaultTableModel) jTable1.getModel();
                         for (int i = 0; i < jTable1.getColumnCount(); i++) {
-                            modelo.setValueAt("",jTable1.getSelectedRow(),i);
+                            model_1.setValueAt("",row,i);
                         }
-                        jTable1.setModel(modelo);
+                        //jTable1.setModel(modelo);
+                    }else if (count==1) {
+                        r = con.s.executeQuery ("SELECT\n"
+                                                    + "*\n"
+                                                    + "FROM t_novedades\n"
+                                                    + "  INNER JOIN t_empleados\n"
+                                                    + "    ON (t_novedades.ID_EMPLEADO = t_empleados.ID_EMP)\n"
+                                                    + "  INNER JOIN t_empresas\n"
+                                                    + "    ON (t_novedades.ID_EMPRESA = t_empresas.ID_EMPRESA)\n"
+                                                    + "  INNER JOIN t_eps\n"
+                                                    + "    ON (t_novedades.ID_EPS = t_eps.ID_EPS)\n"
+                                                    + "  INNER JOIN t_afp\n"
+                                                    + "    ON (t_novedades.ID_AFP = t_afp.ID_AFP)\n"
+                                                    + "  INNER JOIN t_municipios\n"
+                                                    + "    ON (t_novedades.ID_MUN_NOV = t_municipios.ID_MUN)\n"
+                                                    + "  INNER JOIN t_parentesco\n"
+                                                    + "    ON (t_novedades.ID_PAR_ACU_NOV = t_parentesco.ID_PAR)\n"
+                                                    + "  INNER JOIN t_obra\n"
+                                                    + "    ON (t_novedades.ID_OBRA = t_obra.ID_OBRA)\n"
+                                                    + "  INNER JOIN t_tipo_novedad\n"
+                                                    + "    ON (t_novedades.ID_TIPO = t_tipo_novedad.ID_TIPO)\n"
+                                                    + "WHERE (t_novedades.ID_EMPLEADO = "+id_empleado+" AND t_novedades.ID_EMPRESA = '"+id_empresa+"' AND t_novedades.FECHA_INGRESO = '"+f_ingreso+"' AND t_novedades.FECHA_RETIRO = '"+f_retiro+"' AND t_novedades.ID_TIPO = "+id_tipo+")\n"
+                                                    + "ORDER BY FECHA_INGRESO DESC;");
+                        if(r.next()){
+                            model_1.setValueAt(r.getString("NOMBRE_EMPRESA"),row,1);
+                            model_1.setValueAt(new SimpleDateFormat("dd-MM-yyyy").format(new SimpleDateFormat("yyyy-MM-dd").parse(r.getString("FECHA_INGRESO"))),row,2);
+                            model_1.setValueAt(new SimpleDateFormat("dd-MM-yyy").format(new SimpleDateFormat("yyyy-MM-dd").parse(r.getString("FECHA_RETIRO"))).replace("01-01-1900",""),jTable1.getRowCount()-1,3);
+                            model_1.setValueAt(r.getString("SALARIO_NOVEDAD"),row,4);
+                            model_1.setValueAt(r.getString("NOMBRE_EPS"),row,5);
+                            model_1.setValueAt(r.getString("NOMBRE_AFP"),row,6);
+                            model_1.setValueAt(r.getString("ARL_NOV"),row,7);
+                            model_1.setValueAt(r.getString("CCF_NOV"),row,8);
+                            model_1.setValueAt(new SimpleDateFormat("dd-MM-yyyy").format(new SimpleDateFormat("yyyy-MM-dd").parse(r.getString("F_NAC_NOV"))),row,9);
+                            model_1.setValueAt(new SimpleDateFormat("dd-MM-yyyy").format(new SimpleDateFormat("yyyy-MM-dd").parse(r.getString("F_EXP_NOV"))),row,10);
+                            int id_obra = r.getInt("ID_OBRA");
+                            model_1.setValueAt(r.getString("DIR_EMP_NOV"),row,12);
+                            model_1.setValueAt(r.getString("BARRIO_NOV"),row,13);
+                            int id_mun = r.getInt("ID_MUN_NOV");
+                            model_1.setValueAt(r.getString("TEL_NOV"),row,15);
+                            model_1.setValueAt(r.getString("MAIL_NOV"),row,16);
+                            model_1.setValueAt(r.getString("ACUD_NOV"),row,17);
+                            model_1.setValueAt(r.getString("NOMBRE_PAR"),row,18);
+                            model_1.setValueAt(r.getString("TEL_ACUD_NOV"),row,19);
+                            model_1.setValueAt(r.getString("OBS_NOV"),row,20);
+                            model_1.setValueAt(r.getString("NOMBRE_TIPO"),row,21);
+                            r1 = con.s.executeQuery ("SELECT *\n" +
+                                                    "FROM\n" +
+                                                    "    t_obra\n" +
+                                                    "    INNER JOIN t_municipios \n" +
+                                                    "        ON (t_obra.ID_MUN_OBRA = t_municipios.ID_MUN)\n" +
+                                                    "    INNER JOIN t_departamentos \n" +
+                                                    "        ON (t_municipios.ID_DEP = t_departamentos.ID_DEP) WHERE ID_OBRA ="+id_obra);
+                            if (r1.next()) {
+                                model_1.setValueAt(r1.getString("NOMBRE_OBRA")+"-"+r1.getString("NOMBRE_MUN")+"-"+r1.getString("NOMBRE_DEP"),row,11);
+                            }
+
+                            r2 = con.s.executeQuery ("SELECT *\n" +
+                                                        "FROM\n" +
+                                                        "    t_municipios\n" +
+                                                        "    INNER JOIN t_departamentos \n" +
+                                                        "        ON (t_municipios.ID_DEP = t_departamentos.ID_DEP) WHERE ID_MUN ="+id_mun);
+                            if (r2.next()) {
+                                model_1.setValueAt(r2.getString("NOMBRE_MUN")+"-"+r2.getString("NOMBRE_DEP"),row,14);
+                            }
+                        }
+                        
                     }
+                }
+                else{
+                    JOptionPane.showMessageDialog(null,"El empleado no se encuentra activo","Error",JOptionPane.ERROR_MESSAGE);
+                    //model = (DefaultTableModel) jTable1.getModel();
+                    for (int i = 0; i < jTable1.getColumnCount(); i++) {
+                        model_1.setValueAt("",row,i);
+                    }
+                    //jTable1.setModel(modelo);
                 }
                 con.cerrar();
             } catch (SQLException | HeadlessException | ParseException e) {
                 con.cerrar();
                 e.printStackTrace();
             }
-        }else{
-            modelo = (DefaultTableModel) jTable1.getModel();
-            for (int i = 1; i < jTable1.getColumnCount(); i++) {
-                modelo.setValueAt("",jTable1.getSelectedRow(),i);
-            }
-            jTable1.setModel(modelo);
         }
     }
 }
