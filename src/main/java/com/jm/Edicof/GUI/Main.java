@@ -265,6 +265,7 @@ public static ArrayList conection_list = new ArrayList();
         jm_informacion = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
         jMenuItem15 = new javax.swing.JMenuItem();
+        jMenuItem70 = new javax.swing.JMenuItem();
         jMenuItem16 = new javax.swing.JMenuItem();
         jMenuItem28 = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
@@ -1046,6 +1047,19 @@ public static ArrayList conection_list = new ArrayList();
             }
         });
         jMenu2.add(jMenuItem15);
+
+        jMenuItem70.setIcon(new javax.swing.ImageIcon(getClass().getResource("/group.png"))); // NOI18N
+        jMenuItem70.setText("Ingreso masivo");
+
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, jm_informacion, org.jdesktop.beansbinding.ELProperty.create("${enabled}"), jMenuItem70, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
+        bindingGroup.addBinding(binding);
+
+        jMenuItem70.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem70ActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMenuItem70);
 
         jMenuItem16.setIcon(new javax.swing.ImageIcon(getClass().getResource("/group_edit.png"))); // NOI18N
         jMenuItem16.setText("Editar Empleado");
@@ -2634,6 +2648,13 @@ public static ArrayList conection_list = new ArrayList();
         rep_per_act_ext.setVisible(true);
     }//GEN-LAST:event_jMenuItem69ActionPerformed
 
+    private void jMenuItem70ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem70ActionPerformed
+        // TODO add your handling code here:
+        Add_Empleado_Masivos add_emp_mas = new Add_Empleado_Masivos(this, false);
+        add_emp_mas.setLocationRelativeTo(this);
+        add_emp_mas.setVisible(true);
+    }//GEN-LAST:event_jMenuItem70ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -2793,6 +2814,7 @@ public static ArrayList conection_list = new ArrayList();
     private javax.swing.JMenuItem jMenuItem68;
     private javax.swing.JMenuItem jMenuItem69;
     private javax.swing.JMenuItem jMenuItem7;
+    private javax.swing.JMenuItem jMenuItem70;
     private javax.swing.JMenuItem jMenuItem8;
     private javax.swing.JMenuItem jMenuItem9;
     private javax.swing.JPanel jPanel1;

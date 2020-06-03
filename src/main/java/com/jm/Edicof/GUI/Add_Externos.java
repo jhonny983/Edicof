@@ -1298,7 +1298,7 @@ public void check_empleado(){
             ResultSet r1;
             ResultSet r2;
             try {
-                r = con.s.executeQuery ("SELECT COUNT(ID_EMPLEADO) FROM t_novedades WHERE ID_EMPLEADO = "+modelo.getValueAt(jTable1.getSelectedRow(),jTable1.getSelectedColumn()).toString().trim()+" AND ID_TIPO IN (1,3)");
+                r = con.s.executeQuery ("SELECT COUNT(ID_EMPLEADO) FROM t_novedades WHERE ID_EMPLEADO = "+modelo.getValueAt(jTable1.getSelectedRow(),jTable1.getSelectedColumn()).toString().trim()+" AND ID_TIPO IN (1,3,4,5)");
                 if (r.next()) {
                     if (r.getInt("COUNT(ID_EMPLEADO)")>0) {
                         JOptionPane.showMessageDialog(this,"El empleado actualmente esta activo con varios empleadores.","Información",JOptionPane.INFORMATION_MESSAGE);

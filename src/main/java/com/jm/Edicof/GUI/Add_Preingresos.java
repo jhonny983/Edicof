@@ -310,12 +310,7 @@ class MyTableCellEditorDate extends AbstractCellEditor implements TableCellEdito
             //load_data_barrio(selectedItem.toString());
         }
         });
-//        tac_barrio_table = new TextAutoCompleter(tb_barrio_table, new AutoCompleterCallback() {
-//        @Override
-//        public void callback(Object selectedItem) {
-//            //load_data_barrio(selectedItem.toString());
-//        }
-//        });
+
         tac_parentesco_table = new TextAutoCompleter(tb_parentesco_table, new AutoCompleterCallback() {
         @Override
         public void callback(Object selectedItem) {
@@ -769,7 +764,7 @@ class MyTableCellEditorDate extends AbstractCellEditor implements TableCellEdito
         ));
         jTable1.setToolTipText("");
         jTable1.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
-        jTable1.setCellSelectionEnabled(true);
+        jTable1.setColumnSelectionAllowed(false);
         jTable1.setComponentPopupMenu(jPopupMenu1);
         jTable1.getTableHeader().setReorderingAllowed(false);
         jTable1.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -1383,7 +1378,7 @@ public void check_empleado(){
                 r = con.s.executeQuery ("SELECT COUNT(ID_EMPLEADO) FROM t_novedades WHERE ID_EMPLEADO = "+modelo.getValueAt(jTable1.getSelectedRow(),jTable1.getSelectedColumn()).toString().trim()+" AND ID_TIPO IN (1,3)");
                 if (r.next()) {
                     if (r.getInt("COUNT(ID_EMPLEADO)")>0) {
-                        JOptionPane.showMessageDialog(this,"El empleado actualmente esta activo con varios empleadores.","Información",JOptionPane.INFORMATION_MESSAGE);
+                        JOptionPane.showMessageDialog(this,"El empleado actualmente esta activo con 1 o varios empleadores.","Información",JOptionPane.INFORMATION_MESSAGE);
                         ret_nov=call_sel_emp(modelo.getValueAt(jTable1.getSelectedRow(),jTable1.getSelectedColumn()).toString().trim(),"1,3,4,5");
                         if (!ret_nov.isEmpty()) {
                             r = con.s.executeQuery ("SELECT\n"
@@ -2526,7 +2521,7 @@ public boolean check_active(String id_empleado, String empleador){
                                 "    t_novedades\n" +
                                 "    INNER JOIN t_empresas \n" +
                                 "        ON (t_novedades.ID_EMPRESA = t_empresas.ID_EMPRESA)" +
-                                "    WHERE t_novedades.ID_EMPLEADO ="+id_empleado+"  AND t_empresas.NOMBRE_EMPRESA='"+empleador+"' AND t_novedades.ID_TIPO IN(1,3);");
+                                "    WHERE t_novedades.ID_EMPLEADO ="+id_empleado+"  AND t_empresas.NOMBRE_EMPRESA='"+empleador+"' AND t_novedades.ID_TIPO IN(1,3,4,5);");
         ret = !r.next();
         con.cerrar();
     }catch(SQLException j){

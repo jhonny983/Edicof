@@ -17,7 +17,7 @@ import java.util.*;
 import java.io.IOException;
 import javax.swing.table.DefaultTableModel;
 //----------------------------------------------------------------------------------------------------------------------
-public class PegarExcel implements ActionListener
+public class PegarExcel_Empleados_Masivo implements ActionListener
 {
 private String rowstring,value;
 private Clipboard system;
@@ -26,16 +26,12 @@ private JTable jTable1 ;
 int pasteRows=0;
 Object [] fila = new Object[22];
 //----------------------------------------------------------------------------------------------------------------------
-public PegarExcel(JTable myJTable)
+public PegarExcel_Empleados_Masivo(JTable myJTable)
 {
-
-jTable1 = myJTable;
-
-KeyStroke paste = KeyStroke.getKeyStroke(KeyEvent.VK_V,ActionEvent.CTRL_MASK,false);
-
-jTable1.registerKeyboardAction(this,"Paste",paste,JComponent.WHEN_FOCUSED);
-
-system = Toolkit.getDefaultToolkit().getSystemClipboard();
+    jTable1 = myJTable;
+    KeyStroke paste = KeyStroke.getKeyStroke(KeyEvent.VK_V,ActionEvent.CTRL_MASK,false);
+    jTable1.registerKeyboardAction(this,"Paste",paste,JComponent.WHEN_FOCUSED);
+    system = Toolkit.getDefaultToolkit().getSystemClipboard();
 }
 //----------------------------------------------------------------------------------------------------------------------
 public JTable getJTable() {return jTable1;}
@@ -61,10 +57,11 @@ void pasteAction(){
             return;
         }
         //devuelve clipboard contenido
+        //System.out.println("Data: "+data);
         StringTokenizer st,stTmp;
         st=new StringTokenizer(data,"\n");
         pasteRows=st.countTokens ();
-        st=new StringTokenizer(st.nextToken ().trim (),"\t");
+        st=new StringTokenizer(st.nextToken().trim(),"\t");
         int pasteCols=st.countTokens ();
         int marginCols=jTable1.getColumnCount()-selectCol;
         int marginRows=jTable1.getRowCount()-selectRow;
@@ -77,15 +74,24 @@ void pasteAction(){
         int rowCount=0,colCount;
         //copia a la tabla
         while(st.hasMoreTokens()){
-            stTmp=new StringTokenizer (st.nextToken (),"\t");
+            String t =st.nextToken ();
+            //String []temp=t.split("\t");
+            //System.out.println("Columnas: "+temp.length);
+            stTmp=getStringTokenizerStrict(t,"\t",true);//new StringTokenizer (t,"\t")
+            //System.out.println("Columnas 1: "+stTmp.countTokens());
             colCount=0;
-        while(stTmp.hasMoreTokens ()){
-            jTable1.setValueAt(stTmp.nextToken (),rowCount+selectRow,colCount+selectCol);
-            jTable1.changeSelection(rowCount+selectRow,colCount+selectCol, false, false);
-            jTable1.requestFocus();
-            colCount++;
-        }
-        rowCount++;
+            while(stTmp.hasMoreTokens ()){
+                String t1 = stTmp.nextToken();
+                if (t1.equals(" ")) {
+                    jTable1.setValueAt("",rowCount+selectRow,colCount+selectCol);
+                }else{
+                    jTable1.setValueAt(t1,rowCount+selectRow,colCount+selectCol);
+                }
+                jTable1.changeSelection(rowCount+selectRow,colCount+selectCol, false, false);
+                jTable1.requestFocus();
+                colCount++;
+            }
+            rowCount++;
         }
     }
     catch(UnsupportedFlavorException uf){
@@ -127,9 +133,7 @@ public void actionPerformed(ActionEvent e){
         catch(IOException io){
             System.out.println ("io="+io.getMessage ());
         }
-        //System.out.println("Filas actuales: "+pasteRows);
         while(jTable1.getRowCount()<pasteRows){
-            //System.out.println("qwert");
             modelo.addRow(fila);
             jTable1.setModel(modelo);
         }
@@ -137,4 +141,20 @@ public void actionPerformed(ActionEvent e){
         return;
     }
 }
+public StringTokenizer getStringTokenizerStrict(String str, String delim, boolean strict) {
+    StringTokenizer st = new StringTokenizer(str, delim, strict);
+    StringBuffer sb = new StringBuffer();
+    while (st.hasMoreTokens()) {
+        String s = st.nextToken();
+        if (s.equals(delim)) {
+            sb.append(" ").append(delim);
+        } else {
+            sb.append(s).append(delim);
+            if (st.hasMoreTokens())
+                st.nextToken();
+        }
+    }
+    return (new StringTokenizer(sb.toString(), delim));
 }
+}
+

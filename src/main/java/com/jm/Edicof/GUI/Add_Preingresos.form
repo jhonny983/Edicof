@@ -684,7 +684,6 @@
                         </Property>
                         <Property name="toolTipText" type="java.lang.String" value=""/>
                         <Property name="autoResizeMode" type="int" value="0"/>
-                        <Property name="cellSelectionEnabled" type="boolean" value="true"/>
                         <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
                           <TableColumnModel selectionModel="0">
                             <Column maxWidth="80" minWidth="80" prefWidth="80" resizable="true">

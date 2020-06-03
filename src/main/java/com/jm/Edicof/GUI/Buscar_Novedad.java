@@ -622,7 +622,7 @@ public class Buscar_Novedad extends javax.swing.JDialog {
                 modelo.setValueAt(r.getString("NOMBRE_EMPRESA"),novedades.getRowCount()-1,3);
                 modelo.setValueAt(new SimpleDateFormat("yyyy-MM-dd").parse(r.getString("FECHA_INGRESO")),novedades.getRowCount()-1,4);
                 modelo.setValueAt(new SimpleDateFormat("yyyy-MM-dd").parse(r.getString("FECHA_RETIRO")),novedades.getRowCount()-1,5);
-                modelo.setValueAt(Integer.parseInt(r.getString("SALARIO_NOVEDAD")),novedades.getRowCount()-1,6);
+                modelo.setValueAt(String.format ("%.0f", Float.parseFloat(r.getString("SALARIO_NOVEDAD"))),novedades.getRowCount()-1,6);
                 modelo.setValueAt(r.getString("NOMBRE_OBRA"),novedades.getRowCount()-1,7);
                 modelo.setValueAt(r.getString("NOMBRE_EPS"),novedades.getRowCount()-1,8);
                 modelo.setValueAt(r.getString("NOMBRE_AFP"),novedades.getRowCount()-1,9);
