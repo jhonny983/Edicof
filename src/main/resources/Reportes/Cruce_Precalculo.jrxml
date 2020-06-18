@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Cruce_Precalculo" pageWidth="612" pageHeight="792" columnWidth="572" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isIgnorePagination="true" uuid="a3e15edc-a4ee-4dc2-9523-227ca1795bf6">
-	<property name="ireport.zoom" value="2.357947691000002"/>
-	<property name="ireport.x" value="133"/>
+	<property name="ireport.zoom" value="2.0"/>
+	<property name="ireport.x" value="150"/>
 	<property name="ireport.y" value="0"/>
 	<parameter name="ID_PREC" class="java.lang.Integer">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
@@ -183,7 +183,7 @@ WHERE t_cruce_precalculo.ID_PREC = $P{ID_PREC} ORDER BY t_det_cruce_precalculo.I
 	<columnHeader>
 		<band height="10" splitType="Stretch">
 			<staticText>
-				<reportElement mode="Opaque" x="97" y="0" width="104" height="10" forecolor="#000000" backcolor="#999999" uuid="75cdd0d0-4299-40ad-a652-1b1d07ae0441"/>
+				<reportElement mode="Opaque" x="35" y="0" width="229" height="10" forecolor="#000000" backcolor="#999999" uuid="75cdd0d0-4299-40ad-a652-1b1d07ae0441"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
 					<font fontName="Arial" size="5" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
 					<paragraph lineSpacing="Single"/>
@@ -191,7 +191,7 @@ WHERE t_cruce_precalculo.ID_PREC = $P{ID_PREC} ORDER BY t_det_cruce_precalculo.I
 				<text><![CDATA[NOMBRE EMPRESA]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Opaque" x="415" y="0" width="47" height="10" forecolor="#000000" backcolor="#999999" uuid="23a3cd67-9d00-4c14-841f-03d52c6a83a5"/>
+				<reportElement mode="Opaque" x="478" y="0" width="47" height="10" forecolor="#000000" backcolor="#999999" uuid="23a3cd67-9d00-4c14-841f-03d52c6a83a5"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
 					<font fontName="Arial" size="5" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
 					<paragraph lineSpacing="Single"/>
@@ -199,7 +199,7 @@ WHERE t_cruce_precalculo.ID_PREC = $P{ID_PREC} ORDER BY t_det_cruce_precalculo.I
 				<text><![CDATA[FIC ANTERIOR]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Opaque" x="62" y="0" width="35" height="10" forecolor="#000000" backcolor="#999999" uuid="b8d884e3-70af-4d6b-bb55-6586e4ff75d8"/>
+				<reportElement mode="Opaque" x="0" y="0" width="35" height="10" forecolor="#000000" backcolor="#999999" uuid="b8d884e3-70af-4d6b-bb55-6586e4ff75d8"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
 					<font fontName="Arial" size="5" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
 					<paragraph lineSpacing="Single"/>
@@ -207,7 +207,7 @@ WHERE t_cruce_precalculo.ID_PREC = $P{ID_PREC} ORDER BY t_det_cruce_precalculo.I
 				<text><![CDATA[NIT]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Opaque" x="251" y="0" width="50" height="10" forecolor="#000000" backcolor="#999999" uuid="0632339c-239a-49a0-bd4c-40db283dacbc"/>
+				<reportElement mode="Opaque" x="314" y="0" width="50" height="10" forecolor="#000000" backcolor="#999999" uuid="0632339c-239a-49a0-bd4c-40db283dacbc"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
 					<font fontName="Arial" size="5" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
 					<paragraph lineSpacing="Single"/>
@@ -215,7 +215,7 @@ WHERE t_cruce_precalculo.ID_PREC = $P{ID_PREC} ORDER BY t_det_cruce_precalculo.I
 				<text><![CDATA[SGSS ANTERIOR]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Opaque" x="368" y="0" width="47" height="10" forecolor="#000000" backcolor="#999999" uuid="3eef8fb7-55da-4334-b04b-97d4ecebdd04"/>
+				<reportElement mode="Opaque" x="431" y="0" width="47" height="10" forecolor="#000000" backcolor="#999999" uuid="3eef8fb7-55da-4334-b04b-97d4ecebdd04"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
 					<font fontName="Arial" size="5" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
 					<paragraph lineSpacing="Single"/>
@@ -223,7 +223,7 @@ WHERE t_cruce_precalculo.ID_PREC = $P{ID_PREC} ORDER BY t_det_cruce_precalculo.I
 				<text><![CDATA[FIC ACTUAL]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Opaque" x="462" y="0" width="47" height="10" forecolor="#000000" backcolor="#999999" uuid="cf790c85-e059-4236-899e-f899eba573ba"/>
+				<reportElement mode="Opaque" x="525" y="0" width="47" height="10" forecolor="#000000" backcolor="#999999" uuid="cf790c85-e059-4236-899e-f899eba573ba"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
 					<font fontName="Arial" size="5" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
 					<paragraph lineSpacing="Single"/>
@@ -231,7 +231,7 @@ WHERE t_cruce_precalculo.ID_PREC = $P{ID_PREC} ORDER BY t_det_cruce_precalculo.I
 				<text><![CDATA[DIFERENCIA FIC]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Opaque" x="201" y="0" width="50" height="10" forecolor="#000000" backcolor="#999999" uuid="0c8bd3ed-385d-4560-9e56-652b1a90de5f"/>
+				<reportElement mode="Opaque" x="264" y="0" width="50" height="10" forecolor="#000000" backcolor="#999999" uuid="0c8bd3ed-385d-4560-9e56-652b1a90de5f"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
 					<font fontName="Arial" size="5" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
 					<paragraph lineSpacing="Single"/>
@@ -239,7 +239,7 @@ WHERE t_cruce_precalculo.ID_PREC = $P{ID_PREC} ORDER BY t_det_cruce_precalculo.I
 				<text><![CDATA[SGSS ACTUAL]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Opaque" x="301" y="0" width="67" height="10" forecolor="#000000" backcolor="#999999" uuid="510299d5-b014-4328-959a-581c68ce4e35"/>
+				<reportElement mode="Opaque" x="364" y="0" width="67" height="10" forecolor="#000000" backcolor="#999999" uuid="510299d5-b014-4328-959a-581c68ce4e35"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
 					<font fontName="Arial" size="5" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
 					<paragraph lineSpacing="Single"/>
@@ -251,7 +251,7 @@ WHERE t_cruce_precalculo.ID_PREC = $P{ID_PREC} ORDER BY t_det_cruce_precalculo.I
 	<detail>
 		<band height="10" splitType="Stretch">
 			<textField pattern="" isBlankWhenNull="false">
-				<reportElement mode="Transparent" x="62" y="0" width="35" height="10" forecolor="#000000" backcolor="#FFFFFF" uuid="c183c53b-e084-47e4-a928-b5fca37efb7b"/>
+				<reportElement mode="Transparent" x="0" y="0" width="35" height="10" forecolor="#000000" backcolor="#FFFFFF" uuid="c183c53b-e084-47e4-a928-b5fca37efb7b"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
 					<font fontName="SansSerif" size="5" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
 					<paragraph lineSpacing="Single"/>
@@ -259,7 +259,7 @@ WHERE t_cruce_precalculo.ID_PREC = $P{ID_PREC} ORDER BY t_det_cruce_precalculo.I
 				<textFieldExpression><![CDATA[$F{ID_EMPRESA}]]></textFieldExpression>
 			</textField>
 			<textField pattern="" isBlankWhenNull="false">
-				<reportElement mode="Transparent" x="97" y="0" width="104" height="10" forecolor="#000000" backcolor="#FFFFFF" uuid="dfc81d41-0f33-4d6d-a641-bc32f9de791b"/>
+				<reportElement mode="Transparent" x="35" y="0" width="229" height="10" forecolor="#000000" backcolor="#FFFFFF" uuid="dfc81d41-0f33-4d6d-a641-bc32f9de791b"/>
 				<textElement textAlignment="Left" verticalAlignment="Middle" rotation="None" markup="none">
 					<font fontName="SansSerif" size="5" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
 					<paragraph lineSpacing="Single"/>
@@ -267,7 +267,7 @@ WHERE t_cruce_precalculo.ID_PREC = $P{ID_PREC} ORDER BY t_det_cruce_precalculo.I
 				<textFieldExpression><![CDATA[$F{NOMBRE_EMPRESA}]]></textFieldExpression>
 			</textField>
 			<textField pattern="$ #,##0" isBlankWhenNull="false">
-				<reportElement mode="Transparent" x="201" y="0" width="50" height="10" forecolor="#000000" backcolor="#FFFFFF" uuid="9c42c93c-fdc2-4c96-808e-9a040ea66e5c"/>
+				<reportElement mode="Transparent" x="264" y="0" width="50" height="10" forecolor="#000000" backcolor="#FFFFFF" uuid="9c42c93c-fdc2-4c96-808e-9a040ea66e5c"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
 					<font fontName="SansSerif" size="5" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
 					<paragraph lineSpacing="Single"/>
@@ -275,7 +275,7 @@ WHERE t_cruce_precalculo.ID_PREC = $P{ID_PREC} ORDER BY t_det_cruce_precalculo.I
 				<textFieldExpression><![CDATA[$F{TOT_ACT}]]></textFieldExpression>
 			</textField>
 			<textField pattern="$ #,##0" isBlankWhenNull="true">
-				<reportElement mode="Transparent" x="301" y="0" width="67" height="10" forecolor="#000000" backcolor="#FFFFFF" uuid="33577e35-0ee3-4135-b13a-2914c32dc5aa"/>
+				<reportElement mode="Transparent" x="364" y="0" width="67" height="10" forecolor="#000000" backcolor="#FFFFFF" uuid="33577e35-0ee3-4135-b13a-2914c32dc5aa"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
 					<font fontName="SansSerif" size="5" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
 					<paragraph lineSpacing="Single"/>
@@ -283,7 +283,7 @@ WHERE t_cruce_precalculo.ID_PREC = $P{ID_PREC} ORDER BY t_det_cruce_precalculo.I
 				<textFieldExpression><![CDATA[$F{DIF_TOT}]]></textFieldExpression>
 			</textField>
 			<textField pattern="$ #,##0" isBlankWhenNull="false">
-				<reportElement mode="Transparent" x="251" y="0" width="50" height="10" forecolor="#000000" backcolor="#FFFFFF" uuid="4afcaff1-6b07-4865-b07d-478e0e67380f"/>
+				<reportElement mode="Transparent" x="314" y="0" width="50" height="10" forecolor="#000000" backcolor="#FFFFFF" uuid="4afcaff1-6b07-4865-b07d-478e0e67380f"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
 					<font fontName="SansSerif" size="5" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
 					<paragraph lineSpacing="Single"/>
@@ -291,7 +291,7 @@ WHERE t_cruce_precalculo.ID_PREC = $P{ID_PREC} ORDER BY t_det_cruce_precalculo.I
 				<textFieldExpression><![CDATA[$F{TOT_ANT}]]></textFieldExpression>
 			</textField>
 			<textField pattern="$ #,##0" isBlankWhenNull="false">
-				<reportElement mode="Transparent" x="415" y="0" width="47" height="10" forecolor="#000000" backcolor="#FFFFFF" uuid="24b04578-7190-43f8-87ae-19c5d479a3f1"/>
+				<reportElement mode="Transparent" x="478" y="0" width="47" height="10" forecolor="#000000" backcolor="#FFFFFF" uuid="24b04578-7190-43f8-87ae-19c5d479a3f1"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
 					<font fontName="SansSerif" size="5" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
 					<paragraph lineSpacing="Single"/>
@@ -299,7 +299,7 @@ WHERE t_cruce_precalculo.ID_PREC = $P{ID_PREC} ORDER BY t_det_cruce_precalculo.I
 				<textFieldExpression><![CDATA[$F{FIC_ANT}]]></textFieldExpression>
 			</textField>
 			<textField pattern="$ #,##0" isBlankWhenNull="false">
-				<reportElement mode="Transparent" x="368" y="0" width="47" height="10" forecolor="#000000" backcolor="#FFFFFF" uuid="411fb44e-49e0-42c5-9c26-d914a6ce7eff"/>
+				<reportElement mode="Transparent" x="431" y="0" width="47" height="10" forecolor="#000000" backcolor="#FFFFFF" uuid="411fb44e-49e0-42c5-9c26-d914a6ce7eff"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
 					<font fontName="SansSerif" size="5" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
 					<paragraph lineSpacing="Single"/>
@@ -307,7 +307,7 @@ WHERE t_cruce_precalculo.ID_PREC = $P{ID_PREC} ORDER BY t_det_cruce_precalculo.I
 				<textFieldExpression><![CDATA[$F{FIC_ACT}]]></textFieldExpression>
 			</textField>
 			<textField pattern="$ #,##0" isBlankWhenNull="false">
-				<reportElement mode="Transparent" x="462" y="0" width="47" height="10" forecolor="#000000" backcolor="#FFFFFF" uuid="2f092621-5b26-4160-8cb7-aa52a721b7b4"/>
+				<reportElement mode="Transparent" x="525" y="0" width="47" height="10" forecolor="#000000" backcolor="#FFFFFF" uuid="2f092621-5b26-4160-8cb7-aa52a721b7b4"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
 					<font fontName="SansSerif" size="5" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
 					<paragraph lineSpacing="Single"/>
@@ -319,7 +319,7 @@ WHERE t_cruce_precalculo.ID_PREC = $P{ID_PREC} ORDER BY t_det_cruce_precalculo.I
 	<summary>
 		<band height="10" splitType="Stretch">
 			<staticText>
-				<reportElement mode="Transparent" x="97" y="0" width="104" height="10" forecolor="#000000" backcolor="#FFFFFF" uuid="7ff3b31a-187a-4ec0-bc74-63b32532a261"/>
+				<reportElement mode="Transparent" x="160" y="0" width="104" height="10" forecolor="#000000" backcolor="#FFFFFF" uuid="7ff3b31a-187a-4ec0-bc74-63b32532a261"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle" rotation="None" markup="none">
 					<font fontName="SansSerif" size="6" isBold="true" isItalic="true" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
 					<paragraph lineSpacing="Single"/>
@@ -327,7 +327,7 @@ WHERE t_cruce_precalculo.ID_PREC = $P{ID_PREC} ORDER BY t_det_cruce_precalculo.I
 				<text><![CDATA[TOTALES]]></text>
 			</staticText>
 			<textField evaluationTime="Report" pattern="$ #,##0" isBlankWhenNull="true">
-				<reportElement mode="Transparent" x="201" y="0" width="50" height="10" forecolor="#000000" backcolor="#FFFFFF" uuid="46383746-1895-41bb-9f1d-30a9c4e068b1"/>
+				<reportElement mode="Transparent" x="264" y="0" width="50" height="10" forecolor="#000000" backcolor="#FFFFFF" uuid="46383746-1895-41bb-9f1d-30a9c4e068b1"/>
 				<box>
 					<topPen lineWidth="0.5"/>
 				</box>
@@ -338,7 +338,7 @@ WHERE t_cruce_precalculo.ID_PREC = $P{ID_PREC} ORDER BY t_det_cruce_precalculo.I
 				<textFieldExpression><![CDATA[$V{TOT_TOT_ACT}]]></textFieldExpression>
 			</textField>
 			<textField evaluationTime="Report" pattern="$ #,##0" isBlankWhenNull="true">
-				<reportElement mode="Transparent" x="301" y="0" width="67" height="10" forecolor="#000000" backcolor="#FFFFFF" uuid="228eb131-fe9b-4ff3-b262-9cc0f845d224"/>
+				<reportElement mode="Transparent" x="364" y="0" width="67" height="10" forecolor="#000000" backcolor="#FFFFFF" uuid="228eb131-fe9b-4ff3-b262-9cc0f845d224"/>
 				<box>
 					<topPen lineWidth="0.5"/>
 				</box>
@@ -349,7 +349,7 @@ WHERE t_cruce_precalculo.ID_PREC = $P{ID_PREC} ORDER BY t_det_cruce_precalculo.I
 				<textFieldExpression><![CDATA[$V{TOTAL_DIFER_TOT}]]></textFieldExpression>
 			</textField>
 			<textField pattern="$ #,##0" isBlankWhenNull="true">
-				<reportElement mode="Transparent" x="251" y="0" width="50" height="10" forecolor="#000000" backcolor="#FFFFFF" uuid="4495741d-b343-4460-96f6-15108a385065"/>
+				<reportElement mode="Transparent" x="314" y="0" width="50" height="10" forecolor="#000000" backcolor="#FFFFFF" uuid="4495741d-b343-4460-96f6-15108a385065"/>
 				<box>
 					<topPen lineWidth="0.5"/>
 				</box>
@@ -360,7 +360,7 @@ WHERE t_cruce_precalculo.ID_PREC = $P{ID_PREC} ORDER BY t_det_cruce_precalculo.I
 				<textFieldExpression><![CDATA[$V{TOT_TOT_ANT}]]></textFieldExpression>
 			</textField>
 			<textField pattern="$ #,##0" isBlankWhenNull="true">
-				<reportElement mode="Transparent" x="415" y="0" width="47" height="10" forecolor="#000000" backcolor="#FFFFFF" uuid="9754b79d-ceea-4efa-910e-678059d71986"/>
+				<reportElement mode="Transparent" x="478" y="0" width="47" height="10" forecolor="#000000" backcolor="#FFFFFF" uuid="9754b79d-ceea-4efa-910e-678059d71986"/>
 				<box>
 					<topPen lineWidth="0.5"/>
 				</box>
@@ -371,7 +371,7 @@ WHERE t_cruce_precalculo.ID_PREC = $P{ID_PREC} ORDER BY t_det_cruce_precalculo.I
 				<textFieldExpression><![CDATA[$V{TOT_FIC_ANT}]]></textFieldExpression>
 			</textField>
 			<textField pattern="$ #,##0" isBlankWhenNull="true">
-				<reportElement mode="Transparent" x="368" y="0" width="47" height="10" forecolor="#000000" backcolor="#FFFFFF" uuid="ddcf8754-a239-40a3-a44d-79559f8d0b9a"/>
+				<reportElement mode="Transparent" x="431" y="0" width="47" height="10" forecolor="#000000" backcolor="#FFFFFF" uuid="ddcf8754-a239-40a3-a44d-79559f8d0b9a"/>
 				<box>
 					<topPen lineWidth="0.5"/>
 				</box>
@@ -382,7 +382,7 @@ WHERE t_cruce_precalculo.ID_PREC = $P{ID_PREC} ORDER BY t_det_cruce_precalculo.I
 				<textFieldExpression><![CDATA[$V{TOT_FIC_ACT}]]></textFieldExpression>
 			</textField>
 			<textField pattern="$ #,##0" isBlankWhenNull="true">
-				<reportElement mode="Transparent" x="462" y="0" width="47" height="10" forecolor="#000000" backcolor="#FFFFFF" uuid="d28b7a31-a950-464c-9ce9-d08f48a9d0b1"/>
+				<reportElement mode="Transparent" x="525" y="0" width="47" height="10" forecolor="#000000" backcolor="#FFFFFF" uuid="d28b7a31-a950-464c-9ce9-d08f48a9d0b1"/>
 				<box>
 					<topPen lineWidth="0.5"/>
 				</box>
