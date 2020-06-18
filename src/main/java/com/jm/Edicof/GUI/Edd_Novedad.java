@@ -904,7 +904,7 @@ Boolean block=true;
                                                             if (!tel_emp.getText().equals("")) {
                                                                 if (!barrio.getText().equals("")) {
                                                                     if (!cb_mun.getSelectedItem().equals("Seleccione..")) {
-                                                                        if (mail_emp.getText().contains("@") && ( mail_emp.getText().contains(".co") | mail_emp.getText().contains(".com") | mail_emp.getText().contains(".COM"))) {
+                                                                        if (check_field_mail(mail_emp.getText())) {
                                                                             if (!acud.getText().equals("")) {
                                                                                 if (!cb_par.getSelectedItem().equals("Seleccione..")) {
                                                                                     if (!tel_acud.getText().equals("")) {
@@ -1086,7 +1086,7 @@ Boolean block=true;
                                                                 if (!tel_emp.getText().equals("")) {
                                                                     if (!barrio.getText().equals("")) {
                                                                         if (!cb_mun.getSelectedItem().equals("Seleccione..")) {
-                                                                            if (mail_emp.getText().contains("@") && ( mail_emp.getText().contains(".co") | mail_emp.getText().contains(".com") | mail_emp.getText().contains(".COM"))) {
+                                                                            if (check_field_mail(mail_emp.getText())) {
                                                                                 if (!acud.getText().equals("")) {
                                                                                     if (!cb_par.getSelectedItem().equals("Seleccione..")) {
                                                                                         if (!tel_acud.getText().equals("")) {
@@ -1275,7 +1275,7 @@ Boolean block=true;
                                                             if (!tel_emp.getText().equals("")) {
                                                                 if (!barrio.getText().equals("")) {
                                                                     if (!cb_mun.getSelectedItem().equals("Seleccione..")) {
-                                                                        if (mail_emp.getText().contains("@") && ( mail_emp.getText().contains(".co") | mail_emp.getText().contains(".com") | mail_emp.getText().contains(".COM"))) {
+                                                                        if (check_field_mail(mail_emp.getText())) {
                                                                             if (!acud.getText().equals("")) {
                                                                                 if (!cb_par.getSelectedItem().equals("Seleccione..")) {
                                                                                     if (!tel_acud.getText().equals("")) {
@@ -2107,7 +2107,31 @@ public void disable_ingreso(){
     Busc_cedula.requestFocus();
 
 }
+public boolean check_field_mail (Object field){
+boolean ret=false;
+    if (field!=null) {
+        if (chech_char(field.toString().trim(),"'$%&()=?¡¿/*+[]{};:<>,") & !chech_char(field.toString().trim(),"@") & !chech_char(field.toString().trim(),".") ) {
+            if (!field.toString().equals("")) {
+               ret=true;
+            }
+        }
+    }
 
+return ret;
+}
+public boolean chech_char(String s, String c){
+    //boolean ret=false;
+    char []char_s=s.toCharArray();
+    char []char_c=c.toCharArray();  
+    for (int i = 0; i < char_s.length; i++) {
+        for (int j = 0; j < char_c.length; j++) {
+            if (char_s[i]==char_c[j]) {
+                return false;
+            }
+        }
+    }
+    return true;
+}
 private void sel_campos(String ced, String nit, Date f_ingreso, Date f_retiro, String tip) {
     int id_tipo=0;
     Conexion con = new Conexion();
