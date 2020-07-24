@@ -264,26 +264,12 @@
                 <BindingProperty name="enabled" source="jm_informacion" sourcePath="${enabled}" target="jMenu2" targetPath="enabled" updateStrategy="0" immediately="false"/>
               </BindingProperties>
               <SubComponents>
-                <MenuItem class="javax.swing.JMenuItem" name="jMenuItem15">
+                <MenuItem class="javax.swing.JMenuItem" name="jMenuItem70">
                   <Properties>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                       <Image iconType="3" name="/group_add.png"/>
                     </Property>
-                    <Property name="text" type="java.lang.String" value="Crear Empleado"/>
-                  </Properties>
-                  <BindingProperties>
-                    <BindingProperty name="enabled" source="jm_informacion" sourcePath="${enabled}" target="jMenuItem15" targetPath="enabled" updateStrategy="0" immediately="false"/>
-                  </BindingProperties>
-                  <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem15ActionPerformed"/>
-                  </Events>
-                </MenuItem>
-                <MenuItem class="javax.swing.JMenuItem" name="jMenuItem70">
-                  <Properties>
-                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/group.png"/>
-                    </Property>
-                    <Property name="text" type="java.lang.String" value="Ingreso masivo"/>
+                    <Property name="text" type="java.lang.String" value="Crear Empleados"/>
                   </Properties>
                   <BindingProperties>
                     <BindingProperty name="enabled" source="jm_informacion" sourcePath="${enabled}" target="jMenuItem70" targetPath="enabled" updateStrategy="0" immediately="false"/>

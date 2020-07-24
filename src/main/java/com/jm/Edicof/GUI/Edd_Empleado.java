@@ -12,6 +12,11 @@ import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.StringTokenizer;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.InputMap;
 import javax.swing.JOptionPane;
 import javax.swing.KeyStroke;
@@ -30,6 +35,10 @@ public class Edd_Empleado extends javax.swing.JDialog {
         initComponents();
         this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/group_gear.png")));
         ac_cedula();
+        ac_mun();
+        ac_tip_ident();
+        ac_tip_sangre();
+        ac_genero();
         InputMap map1 = cedula.getInputMap(cedula.WHEN_FOCUSED);
         map1.put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Event.CTRL_MASK), "null");
     }
@@ -38,6 +47,7 @@ public class Edd_Empleado extends javax.swing.JDialog {
         initComponents();
         this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/group_gear.png")));
         ac_cedula();
+        ac_mun();
         InputMap map1 = cedula.getInputMap(cedula.WHEN_FOCUSED);
         map1.put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Event.CTRL_MASK), "null");
     }
@@ -52,6 +62,7 @@ public class Edd_Empleado extends javax.swing.JDialog {
     private void initComponents() {
 
         jButton2 = new javax.swing.JButton();
+        jDateChooser1 = new com.toedter.calendar.JDateChooser();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         nombre_1 = new javax.swing.JTextField();
@@ -65,6 +76,18 @@ public class Edd_Empleado extends javax.swing.JDialog {
         ape_2 = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         cb_cedula = new javax.swing.JComboBox<>();
+        jLabel7 = new javax.swing.JLabel();
+        cb_ciudad_exp = new javax.swing.JComboBox<>();
+        jLabel8 = new javax.swing.JLabel();
+        cb_tip_id = new javax.swing.JComboBox<>();
+        jLabel9 = new javax.swing.JLabel();
+        cb_tip_sangre = new javax.swing.JComboBox<>();
+        jLabel10 = new javax.swing.JLabel();
+        cb_genero = new javax.swing.JComboBox<>();
+        jLabel11 = new javax.swing.JLabel();
+        cb_ciudad_nac = new javax.swing.JComboBox<>();
+        jLabel12 = new javax.swing.JLabel();
+        fecha_nac = new com.toedter.calendar.JDateChooser();
         jButton1 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
 
@@ -72,6 +95,8 @@ public class Edd_Empleado extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Editar Empleado");
+        setResizable(false);
+        setSize(new java.awt.Dimension(0, 0));
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Informacion del empleado"));
 
@@ -135,49 +160,84 @@ public class Edd_Empleado extends javax.swing.JDialog {
             }
         });
 
+        jLabel7.setText("Ciudad Expedicion");
+
+        AutoCompletion.enable(cb_ciudad_exp);
+        cb_ciudad_exp.setEditable(true);
+
+        jLabel8.setText("Tipo Identificacion");
+
+        jLabel9.setText("Tipo Sangre");
+
+        jLabel10.setText("Genero");
+
+        jLabel11.setText("Ciudad Nacimiento");
+
+        AutoCompletion.enable(cb_ciudad_nac);
+        cb_ciudad_nac.setEditable(true);
+        cb_ciudad_nac.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cb_ciudad_nacActionPerformed(evt);
+            }
+        });
+
+        jLabel12.setText("Fecha Nacimiento");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap(16, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
                     .addComponent(jLabel2)
-                    .addComponent(jLabel3))
+                    .addComponent(jLabel8)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel9)
+                    .addComponent(jLabel11))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(nombre_1, javax.swing.GroupLayout.DEFAULT_SIZE, 144, Short.MAX_VALUE)
-                            .addComponent(cb_cedula, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(10, 10, 10)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel4)
-                                .addGap(18, 18, 18)
-                                .addComponent(nombre_2, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel6)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(cedula, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(ape_1, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel5)
-                        .addGap(18, 18, 18)
-                        .addComponent(ape_2, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap())
+                    .addComponent(cb_tip_sangre, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cb_cedula, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cb_tip_id, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(nombre_1, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(ape_1, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cb_ciudad_nac, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel6)
+                    .addComponent(jLabel7)
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel5)
+                    .addComponent(jLabel10)
+                    .addComponent(jLabel12))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(cb_ciudad_exp, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(nombre_2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(ape_2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cedula, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cb_genero, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(fecha_nac, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(16, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cedula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2)
                     .addComponent(jLabel6)
                     .addComponent(cb_cedula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel8)
+                        .addComponent(cb_tip_id, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel7))
+                    .addComponent(cb_ciudad_exp, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(nombre_1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -190,6 +250,19 @@ public class Edd_Empleado extends javax.swing.JDialog {
                     .addComponent(ape_1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5)
                     .addComponent(ape_2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel9)
+                    .addComponent(cb_tip_sangre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel10)
+                    .addComponent(cb_genero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel11)
+                        .addComponent(cb_ciudad_nac, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel12))
+                    .addComponent(fecha_nac, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -214,27 +287,27 @@ public class Edd_Empleado extends javax.swing.JDialog {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(154, 154, 154)
+                        .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jButton1)
-                        .addGap(38, 38, 38)
-                        .addComponent(jButton3)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButton3)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
                     .addComponent(jButton3))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         pack();
@@ -306,27 +379,51 @@ public class Edd_Empleado extends javax.swing.JDialog {
         if (!cedula.getText().equals("")) {
             if (!nombre_1.getText().equals("")) {
                 if (!ape_1.getText().equals("")) {
-                    Conexion con = new Conexion();
-                    con.conexion();
-                    ResultSet r;
-                    try {
-                        r = con.s.executeQuery ("SELECT * FROM `t_empleados` WHERE ID_EMP = "+cedula.getText()+" AND ID_EMP <>"+cb_cedula.getSelectedItem());
-                        if(r.next()){
-                            JOptionPane.showMessageDialog(this,"El empleado que desea ingresar ya existe","Error",JOptionPane.ERROR_MESSAGE);
-                        }else{
-                            int conf = JOptionPane.showConfirmDialog(this,"Esta seguro que desea continuar?","Confirmación",JOptionPane.OK_CANCEL_OPTION,JOptionPane.QUESTION_MESSAGE);
-                            if (conf == JOptionPane.YES_OPTION) {
-                                con.s.executeUpdate("UPDATE `t_empleados` SET `ID_EMP`="+cedula.getText()+",`NOMBRE_1_EMP`='"+nombre_1.getText().toUpperCase()+"',`NOMBRE_2_EMP`='"+nombre_2.getText().toUpperCase()+"',`APELLIDO_1_EMP`='"+ape_1.getText().toUpperCase()+"',`APELLIDO_2_EMP`='"+ape_2.getText().toUpperCase()+"' WHERE ID_EMP="+cb_cedula.getSelectedItem());
-                                JOptionPane.showMessageDialog(this,"El empleado fue actualizado correctamente","Información",JOptionPane.INFORMATION_MESSAGE);
-                                con.cerrar();
-                                this.dispose();
+                    if (!cb_tip_id.getSelectedItem().toString().equals("Seleccione..")) {
+                        if (!cb_ciudad_exp.getSelectedItem().toString().equals("Seleccione..")) {
+                            if (!cb_tip_sangre.getSelectedItem().toString().equals("Seleccione..")) {
+                                if (!cb_genero.getSelectedItem().toString().equals("Seleccione..")) {
+                                    if (!cb_ciudad_nac.getSelectedItem().toString().equals("Seleccione..")) {
+                                        if (fecha_nac.getDate()!=null) {
+                                            Conexion con = new Conexion();
+                                            con.conexion();
+                                            ResultSet r;
+                                            try {
+                                                r = con.s.executeQuery ("SELECT * FROM `t_empleados` WHERE ID_EMP = "+cedula.getText()+" AND ID_EMP <>"+cb_cedula.getSelectedItem());
+                                                if(r.next()){
+                                                    JOptionPane.showMessageDialog(this,"El empleado que desea ingresar ya existe","Error",JOptionPane.ERROR_MESSAGE);
+                                                }else{
+                                                    int conf = JOptionPane.showConfirmDialog(this,"Esta seguro que desea continuar?","Confirmación",JOptionPane.OK_CANCEL_OPTION,JOptionPane.QUESTION_MESSAGE);
+                                                    if (conf == JOptionPane.YES_OPTION) {
+                                                        con.s.executeUpdate("UPDATE `t_empleados` SET `ID_EMP`="+cedula.getText()+",`NOMBRE_1_EMP`='"+nombre_1.getText().toUpperCase()+"',`NOMBRE_2_EMP`='"+nombre_2.getText().toUpperCase()+"',`APELLIDO_1_EMP`='"+ape_1.getText().toUpperCase()+"',`APELLIDO_2_EMP`='"+ape_2.getText().toUpperCase()+"',`ID_TIPO_IDENT`="+get_id_tip_ident(cb_tip_id.getSelectedItem())+",`ID_MUN_EXPEDICION`="+get_id_municipio(cb_ciudad_exp.getSelectedItem())+",`ID_TIPO_SANGRE`="+get_id_tip_sangre(cb_tip_sangre.getSelectedItem())+",`ID_TIPO_GENERO`="+get_id_genero(cb_genero.getSelectedItem())+",`ID_MUN_NACIMIENTO`="+get_id_municipio(cb_ciudad_nac.getSelectedItem())+",`FECHA_NAC`='"+new SimpleDateFormat("yyyy-MM-dd").format(fecha_nac.getDate())+"' WHERE ID_EMP="+cb_cedula.getSelectedItem());
+                                                        JOptionPane.showMessageDialog(this,"El empleado fue actualizado correctamente","Información",JOptionPane.INFORMATION_MESSAGE);
+                                                        con.cerrar();
+                                                        this.dispose();
+                                                    }
+                                                }
+                                                con.cerrar();
+                                            } catch (SQLException e) {
+                                                con.cerrar();
+                                                e.printStackTrace();
+                                                JOptionPane.showMessageDialog(this,e,"Error",JOptionPane.ERROR_MESSAGE);
+                                            }
+                                        } else {
+                                            JOptionPane.showMessageDialog(this,"Seleccione la fecha de nacimiento del empleado","Error",JOptionPane.ERROR_MESSAGE);
+                                        }
+                                    } else {
+                                        JOptionPane.showMessageDialog(this,"Seleccione la ciudad de nacimiento del empleado","Error",JOptionPane.ERROR_MESSAGE);
+                                    }
+                                } else {
+                                    JOptionPane.showMessageDialog(this,"Seleccione el genero del empleado","Error",JOptionPane.ERROR_MESSAGE);
+                                }
+                            } else {
+                                JOptionPane.showMessageDialog(this,"Seleccione el tipo de sangre del empleado","Error",JOptionPane.ERROR_MESSAGE);
                             }
+                        } else {
+                            JOptionPane.showMessageDialog(this,"Seleccione la ciudad de expedicion del ID del empleado","Error",JOptionPane.ERROR_MESSAGE);
                         }
-                        con.cerrar();
-                    } catch (SQLException e) {
-                        con.cerrar();
-                        e.printStackTrace();
-                        JOptionPane.showMessageDialog(this,e,"Error",JOptionPane.ERROR_MESSAGE);
+                    } else {
+                        JOptionPane.showMessageDialog(this,"Seleccione el tipo de ID del empleado","Error",JOptionPane.ERROR_MESSAGE);
                     }
                 } else {
                     JOptionPane.showMessageDialog(this,"Digite el primer apellido del empleado","Error",JOptionPane.ERROR_MESSAGE);
@@ -357,6 +454,10 @@ public class Edd_Empleado extends javax.swing.JDialog {
         // TODO add your handling code here:
         load_data();
     }//GEN-LAST:event_cb_cedulaItemStateChanged
+
+    private void cb_ciudad_nacActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cb_ciudad_nacActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cb_ciudad_nacActionPerformed
 
     /**
      * @param args the command line arguments
@@ -408,16 +509,29 @@ public class Edd_Empleado extends javax.swing.JDialog {
     private static javax.swing.JTextField ape_1;
     private javax.swing.JTextField ape_2;
     private javax.swing.JComboBox<String> cb_cedula;
+    private javax.swing.JComboBox<String> cb_ciudad_exp;
+    private javax.swing.JComboBox<String> cb_ciudad_nac;
+    private javax.swing.JComboBox<String> cb_genero;
+    private javax.swing.JComboBox<String> cb_tip_id;
+    private javax.swing.JComboBox<String> cb_tip_sangre;
     private static javax.swing.JTextField cedula;
+    private com.toedter.calendar.JDateChooser fecha_nac;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private com.toedter.calendar.JDateChooser jDateChooser1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private static javax.swing.JTextField nombre_1;
     private javax.swing.JTextField nombre_2;
@@ -447,16 +561,40 @@ public void load_data(){
         con.conexion();
         ResultSet r;
         try {
-            r = con.s.executeQuery ("SELECT * FROM T_EMPLEADOS WHERE ID_EMP = "+cb_cedula.getSelectedItem());
+            //r = con.s.executeQuery ("SELECT * FROM T_EMPLEADOS WHERE ID_EMP = "+cb_cedula.getSelectedItem());
+            r = con.s.executeQuery ("SELECT *\n" +
+                                    "FROM\n" +
+                                    "    t_empleados\n" +
+                                    "    INNER JOIN t_tipo_ident \n" +
+                                    "        ON (t_empleados.ID_TIPO_IDENT = t_tipo_ident.ID_TIPO_IDENT)\n" +
+                                    "    INNER JOIN t_municipios as mun_nac\n" +
+                                    "        ON (t_empleados.ID_MUN_NACIMIENTO = mun_nac.ID_MUN) \n" +
+                                    "    INNER JOIN t_municipios as mun_exp    \n" +
+                                    "        on (t_empleados.ID_MUN_EXPEDICION = mun_exp.ID_MUN)\n" +
+                                    "    INNER JOIN t_departamentos as dep_nac\n" +
+                                    "        ON (mun_nac.ID_DEP = dep_nac.ID_DEP)\n" +
+                                    "    INNER JOIN t_departamentos as dep_exp\n" +
+                                    "        ON (mun_exp.ID_DEP = dep_exp.ID_DEP)\n" +
+                                    "    INNER JOIN t_tipo_sangre \n" +
+                                    "        ON (t_empleados.ID_TIPO_SANGRE = t_tipo_sangre.ID_TIPO)\n" +
+                                    "    INNER JOIN t_genero \n" +
+                                    "        ON (t_empleados.ID_TIPO_GENERO = t_genero.ID_GENERO)\n" +
+                                    "    where t_empleados.ID_EMP = "+cb_cedula.getSelectedItem());
             if (r.next()) {
-                cedula.setText(r.getString("ID_EMP"));
-                nombre_1.setText(r.getString("NOMBRE_1_EMP"));
-                nombre_2.setText(r.getString("NOMBRE_2_EMP"));
-                ape_1.setText(r.getString("APELLIDO_1_EMP"));
-                ape_2.setText(r.getString("APELLIDO_2_EMP"));
+                cb_tip_id.setSelectedItem(r.getString("t_tipo_ident.NOMBRE_TIPO_IDENT"));
+                cb_ciudad_exp.setSelectedItem(r.getString("mun_exp.NOMBRE_MUN")+"-"+r.getString("dep_exp.NOMBRE_DEP"));
+                cedula.setText(r.getString("t_empleados.ID_EMP"));
+                nombre_1.setText(r.getString("t_empleados.NOMBRE_1_EMP"));
+                nombre_2.setText(r.getString("t_empleados.NOMBRE_2_EMP"));
+                ape_1.setText(r.getString("t_empleados.APELLIDO_1_EMP"));
+                ape_2.setText(r.getString("t_empleados.APELLIDO_2_EMP"));
+                cb_tip_sangre.setSelectedItem(r.getString("t_tipo_sangre.NOMBRE_TIPO"));
+                cb_genero.setSelectedItem(r.getString("t_genero.NOMBRE_GENERO"));
+                cb_ciudad_nac.setSelectedItem(r.getString("mun_nac.NOMBRE_MUN")+"-"+r.getString("dep_nac.NOMBRE_DEP"));
+                fecha_nac.setDate(new SimpleDateFormat("yyyy-MM-dd").parse(r.getString("t_empleados.FECHA_NAC")));
             }
             con.cerrar();
-        }catch(SQLException j){
+        }catch(SQLException | ParseException j){
             con.cerrar();
             j.printStackTrace();
             JOptionPane.showMessageDialog(this,j,"Error",JOptionPane.ERROR_MESSAGE);
@@ -468,10 +606,204 @@ public void load_data(){
         nombre_2.setText("");
         ape_1.setText("");
         ape_2.setText("");
+        cb_tip_id.setSelectedItem("Seleccione..");
+        cb_ciudad_exp.setSelectedItem("Seleccione..");
+        cb_ciudad_nac.setSelectedItem("Seleccione..");
+        cb_genero.setSelectedItem("Seleccione..");
+        cb_tip_sangre.setSelectedItem("Seleccione..");
     }
-    
-
+}
+public void ac_mun(){
+    cb_ciudad_exp.removeAllItems();
+    cb_ciudad_nac.removeAllItems();
+    cb_ciudad_exp.addItem("Seleccione..");
+    cb_ciudad_nac.addItem("Seleccione..");
+    Conexion con = new Conexion();
+    con.conexion();
+    ResultSet r;
+    try{
+        r = con.s.executeQuery ("SELECT *\n" +
+                                "FROM\n" +
+                                "    t_municipios\n" +
+                                "    INNER JOIN t_departamentos \n" +
+                                "        ON (t_municipios.ID_DEP = t_departamentos.ID_DEP) ORDER BY NOMBRE_MUN ASC;");
+        while(r.next()){
+            String str=r.getString("NOMBRE_MUN")+"-"+r.getString("NOMBRE_DEP");
+            cb_ciudad_exp.addItem(str);
+            cb_ciudad_nac.addItem(str);
+        }
+        con.cerrar();
+    }catch(SQLException j){
+        con.cerrar();
+        JOptionPane.showMessageDialog(null,j,"Error",JOptionPane.ERROR_MESSAGE);
+    }
 
 }
+public void ac_tip_ident(){
+    cb_tip_id.removeAllItems();
+    cb_tip_id.addItem("Seleccione..");
+    Conexion con = new Conexion();
+    con.conexion();
+    ResultSet r;
+    try{
+        r = con.s.executeQuery ("SELECT *\n" +
+                                "FROM\n" +
+                                "    t_tipo_ident\n" +
+                                "order by t_tipo_ident.NOMBRE_TIPO_IDENT   asc ");
+        while(r.next()){
+            String str=r.getString("NOMBRE_TIPO_IDENT");
+            cb_tip_id.addItem(str);
+            
+        }
+        con.cerrar();
+    }catch(SQLException j){
+        con.cerrar();
+        JOptionPane.showMessageDialog(null,j,"Error",JOptionPane.ERROR_MESSAGE);
+    }
 
+}
+private void ac_tip_sangre(){
+        cb_tip_sangre.removeAllItems();
+        cb_tip_sangre.addItem("Seleccione..");
+        Conexion con = new Conexion();
+        con.conexion();
+        ResultSet r;
+        try{
+            r = con.s.executeQuery ("SELECT *\n" +
+                                    "FROM\n" +
+                                    "    t_tipo_sangre\n" +
+                                    "order by t_tipo_sangre.NOMBRE_TIPO asc ");
+            while(r.next()){
+                String str=r.getString("NOMBRE_TIPO");
+                cb_tip_sangre.addItem(str);
+            }
+            con.cerrar();
+        }catch(SQLException j){
+            con.cerrar();
+            j.printStackTrace();
+            JOptionPane.showMessageDialog(null,j,"Error",JOptionPane.ERROR_MESSAGE);
+        }
+    }
+private void ac_genero(){
+        cb_genero.removeAllItems();
+        cb_genero.addItem("Seleccione..");
+        Conexion con = new Conexion();
+        con.conexion();
+        ResultSet r;
+        try{
+            r = con.s.executeQuery ("SELECT *\n" +
+                                    "FROM\n" +
+                                    "    t_genero\n" +
+                                    "order by t_genero.NOMBRE_GENERO asc");
+            while(r.next()){
+                String str=r.getString("NOMBRE_GENERO");
+                cb_genero.addItem(str);
+            }
+            con.cerrar();
+        }catch(SQLException j){
+            con.cerrar();
+            j.printStackTrace();
+            JOptionPane.showMessageDialog(null,j,"Error",JOptionPane.ERROR_MESSAGE);
+        }
+    }
+public String get_id_municipio(Object municipio){
+        String i = "";
+        String str_mun="";
+        String str_dep="";
+        StringTokenizer tokens=new StringTokenizer(municipio.toString().trim(), "-");
+        while(tokens.hasMoreTokens()){
+            str_mun=tokens.nextToken().trim();
+            str_dep=tokens.nextToken().trim();
+        }
+        Conexion con = new Conexion();
+        con.conexion();
+        ResultSet r;
+        try{
+            r = con.s.executeQuery ("SELECT *\n" +
+                                    "FROM\n" +
+                                    "    t_municipios\n" +
+                                    "    INNER JOIN t_departamentos \n" +
+                                    "        ON (t_municipios.ID_DEP = t_departamentos.ID_DEP) WHERE NOMBRE_MUN='"+str_mun+"' AND NOMBRE_DEP='"+str_dep+"'");
+            if(r.next()){
+                i = r.getString("ID_MUN");
+            }else{
+                i="";
+            }
+            con.cerrar();
+        }catch(SQLException j){
+            i="";
+            con.cerrar();
+            j.printStackTrace();
+        }
+        return i;
+    }
+public String get_id_tip_ident(Object tip_ident){
+    String i = "";
+    Conexion con = new Conexion();
+    con.conexion();
+    ResultSet r;
+    try{
+        r = con.s.executeQuery ("SELECT *\n" +
+                                "FROM\n" +
+                                "    t_tipo_ident\n" +
+                                "WHERE t_tipo_ident.NOMBRE_TIPO_IDENT = '"+tip_ident.toString()+"'");
+        if(r.next()){
+            i = r.getString("ID_TIPO_IDENT");
+        }else{
+            i="";
+        }
+        con.cerrar();
+    }catch(SQLException j){
+        i="";
+        con.cerrar();
+        j.printStackTrace();
+    }
+    return i;
+}
+public String get_id_tip_sangre(Object tip_sangre){
+    String i = "";
+    Conexion con = new Conexion();
+    con.conexion();
+    ResultSet r;
+    try{
+        r = con.s.executeQuery ("SELECT *\n" +
+                                "FROM\n" +
+                                "    t_tipo_sangre\n" +
+                                "WHERE t_tipo_sangre.NOMBRE_TIPO = '"+tip_sangre.toString()+"'");
+        if(r.next()){
+            i = r.getString("ID_TIPO");
+        }else{
+            i="";
+        }
+        con.cerrar();
+    }catch(SQLException j){
+        i="";
+        con.cerrar();
+        j.printStackTrace();
+    }
+    return i;
+}
+public String get_id_genero(Object genero){
+    String i = "";
+    Conexion con = new Conexion();
+    con.conexion();
+    ResultSet r;
+    try{
+        r = con.s.executeQuery ("SELECT *\n" +
+                                "FROM\n" +
+                                "    t_genero\n" +
+                                "WHERE t_genero.NOMBRE_GENERO = '"+genero.toString()+"'");
+        if(r.next()){
+            i = r.getString("ID_GENERO");
+        }else{
+            i="";
+        }
+        con.cerrar();
+    }catch(SQLException j){
+        i="";
+        con.cerrar();
+        j.printStackTrace();
+    }
+    return i;
+}
 }

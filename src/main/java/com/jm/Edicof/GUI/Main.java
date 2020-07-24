@@ -264,7 +264,6 @@ public static ArrayList conection_list = new ArrayList();
         jMenuItem26 = new javax.swing.JMenuItem();
         jm_informacion = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
-        jMenuItem15 = new javax.swing.JMenuItem();
         jMenuItem70 = new javax.swing.JMenuItem();
         jMenuItem16 = new javax.swing.JMenuItem();
         jMenuItem28 = new javax.swing.JMenuItem();
@@ -603,7 +602,7 @@ public static ArrayList conection_list = new ArrayList();
         jButton11.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButton11.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
 
-        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, jMenuItem15, org.jdesktop.beansbinding.ELProperty.create("${enabled}"), jButton11, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, new javax.swing.JMenuItem(), org.jdesktop.beansbinding.ELProperty.create("${enabled}"), jButton11, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
         bindingGroup.addBinding(binding);
 
         jButton11.addActionListener(new java.awt.event.ActionListener() {
@@ -1035,21 +1034,8 @@ public static ArrayList conection_list = new ArrayList();
         binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, jm_informacion, org.jdesktop.beansbinding.ELProperty.create("${enabled}"), jMenu2, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
         bindingGroup.addBinding(binding);
 
-        jMenuItem15.setIcon(new javax.swing.ImageIcon(getClass().getResource("/group_add.png"))); // NOI18N
-        jMenuItem15.setText("Crear Empleado");
-
-        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, jm_informacion, org.jdesktop.beansbinding.ELProperty.create("${enabled}"), jMenuItem15, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
-        bindingGroup.addBinding(binding);
-
-        jMenuItem15.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem15ActionPerformed(evt);
-            }
-        });
-        jMenu2.add(jMenuItem15);
-
-        jMenuItem70.setIcon(new javax.swing.ImageIcon(getClass().getResource("/group.png"))); // NOI18N
-        jMenuItem70.setText("Ingreso masivo");
+        jMenuItem70.setIcon(new javax.swing.ImageIcon(getClass().getResource("/group_add.png"))); // NOI18N
+        jMenuItem70.setText("Crear Empleados");
 
         binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, jm_informacion, org.jdesktop.beansbinding.ELProperty.create("${enabled}"), jMenuItem70, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
         bindingGroup.addBinding(binding);
@@ -2753,7 +2739,6 @@ public static ArrayList conection_list = new ArrayList();
     private javax.swing.JMenuItem jMenuItem12;
     private javax.swing.JMenuItem jMenuItem13;
     private javax.swing.JMenuItem jMenuItem14;
-    private javax.swing.JMenuItem jMenuItem15;
     private javax.swing.JMenuItem jMenuItem16;
     private javax.swing.JMenuItem jMenuItem17;
     private javax.swing.JMenuItem jMenuItem18;
