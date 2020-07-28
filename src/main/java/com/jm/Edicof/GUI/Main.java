@@ -265,11 +265,12 @@ public static ArrayList conection_list = new ArrayList();
         jm_informacion = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
         jMenuItem70 = new javax.swing.JMenuItem();
-        jMenuItem16 = new javax.swing.JMenuItem();
         jMenuItem28 = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
         jMenuItem42 = new javax.swing.JMenuItem();
         jMenuItem46 = new javax.swing.JMenuItem();
+        jMenu24 = new javax.swing.JMenu();
+        jMenuItem15 = new javax.swing.JMenuItem();
         jMenu13 = new javax.swing.JMenu();
         jMenuItem13 = new javax.swing.JMenuItem();
         jMenuItem17 = new javax.swing.JMenuItem();
@@ -601,10 +602,6 @@ public static ArrayList conection_list = new ArrayList();
         jButton11.setFocusable(false);
         jButton11.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButton11.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-
-        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, new javax.swing.JMenuItem(), org.jdesktop.beansbinding.ELProperty.create("${enabled}"), jButton11, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
-        bindingGroup.addBinding(binding);
-
         jButton11.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem15ActionPerformed(evt);
@@ -618,7 +615,7 @@ public static ArrayList conection_list = new ArrayList();
         jButton12.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButton12.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
 
-        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, jMenuItem16, org.jdesktop.beansbinding.ELProperty.create("${enabled}"), jButton12, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, new javax.swing.JMenuItem(), org.jdesktop.beansbinding.ELProperty.create("${enabled}"), jButton12, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
         bindingGroup.addBinding(binding);
 
         jButton12.addActionListener(new java.awt.event.ActionListener() {
@@ -1047,19 +1044,6 @@ public static ArrayList conection_list = new ArrayList();
         });
         jMenu2.add(jMenuItem70);
 
-        jMenuItem16.setIcon(new javax.swing.ImageIcon(getClass().getResource("/group_edit.png"))); // NOI18N
-        jMenuItem16.setText("Editar Empleado");
-
-        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, jm_informacion, org.jdesktop.beansbinding.ELProperty.create("${enabled}"), jMenuItem16, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
-        bindingGroup.addBinding(binding);
-
-        jMenuItem16.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem16ActionPerformed(evt);
-            }
-        });
-        jMenu2.add(jMenuItem16);
-
         jMenuItem28.setIcon(new javax.swing.ImageIcon(getClass().getResource("/table_tab_search.png"))); // NOI18N
         jMenuItem28.setText("Buscar Empleado");
 
@@ -1073,11 +1057,13 @@ public static ArrayList conection_list = new ArrayList();
         });
         jMenu2.add(jMenuItem28);
 
+        jMenu3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/delete.png"))); // NOI18N
         jMenu3.setText("Vetados");
 
         binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, jm_informacion, org.jdesktop.beansbinding.ELProperty.create("${enabled}"), jMenu3, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
         bindingGroup.addBinding(binding);
 
+        jMenuItem42.setIcon(new javax.swing.ImageIcon(getClass().getResource("/map.png"))); // NOI18N
         jMenuItem42.setText("Ingresar Vetados");
 
         binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, jMenu3, org.jdesktop.beansbinding.ELProperty.create("${enabled}"), jMenuItem42, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
@@ -1090,6 +1076,7 @@ public static ArrayList conection_list = new ArrayList();
         });
         jMenu3.add(jMenuItem42);
 
+        jMenuItem46.setIcon(new javax.swing.ImageIcon(getClass().getResource("/document_inspector.png"))); // NOI18N
         jMenuItem46.setText("Lista de vetados");
 
         binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, jMenu3, org.jdesktop.beansbinding.ELProperty.create("${enabled}"), jMenuItem46, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
@@ -1103,6 +1090,26 @@ public static ArrayList conection_list = new ArrayList();
         jMenu3.add(jMenuItem46);
 
         jMenu2.add(jMenu3);
+
+        jMenu24.setText("Info Socio Demografica");
+
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, jm_informacion, org.jdesktop.beansbinding.ELProperty.create("${enabled}"), jMenu24, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
+        bindingGroup.addBinding(binding);
+
+        jMenuItem15.setIcon(new javax.swing.ImageIcon(getClass().getResource("/add.png"))); // NOI18N
+        jMenuItem15.setText("Agregar Masivos");
+
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, jMenu24, org.jdesktop.beansbinding.ELProperty.create("${enabled}"), jMenuItem15, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
+        bindingGroup.addBinding(binding);
+
+        jMenuItem15.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem15ActionPerformed1(evt);
+            }
+        });
+        jMenu24.add(jMenuItem15);
+
+        jMenu2.add(jMenu24);
 
         jm_informacion.add(jMenu2);
 
@@ -2641,6 +2648,13 @@ public static ArrayList conection_list = new ArrayList();
         add_emp_mas.setVisible(true);
     }//GEN-LAST:event_jMenuItem70ActionPerformed
 
+    private void jMenuItem15ActionPerformed1(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem15ActionPerformed1
+        // TODO add your handling code here:
+        Add_Info_Socio_Demografica_Masivos add_inf_mas = new Add_Info_Socio_Demografica_Masivos(this, false);
+        add_inf_mas.setLocationRelativeTo(this);
+        add_inf_mas.setVisible(true);
+    }//GEN-LAST:event_jMenuItem15ActionPerformed1
+
     /**
      * @param args the command line arguments
      */
@@ -2725,6 +2739,7 @@ public static ArrayList conection_list = new ArrayList();
     private javax.swing.JMenu jMenu21;
     private javax.swing.JMenu jMenu22;
     private javax.swing.JMenu jMenu23;
+    private javax.swing.JMenu jMenu24;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenu jMenu5;
@@ -2739,7 +2754,7 @@ public static ArrayList conection_list = new ArrayList();
     private javax.swing.JMenuItem jMenuItem12;
     private javax.swing.JMenuItem jMenuItem13;
     private javax.swing.JMenuItem jMenuItem14;
-    private javax.swing.JMenuItem jMenuItem16;
+    private javax.swing.JMenuItem jMenuItem15;
     private javax.swing.JMenuItem jMenuItem17;
     private javax.swing.JMenuItem jMenuItem18;
     private javax.swing.JMenuItem jMenuItem19;

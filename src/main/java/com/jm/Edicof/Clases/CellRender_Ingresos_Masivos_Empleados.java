@@ -133,6 +133,17 @@ public class CellRender_Ingresos_Masivos_Empleados extends DefaultTableCellRende
                                                         cell.setForeground(Color.white);
                                                     }
                                                 } else {
+                                                    if (table.getColumnName(column).equals("Estatura (cm)*")){//Estatura (cm)*
+                                                        if (check_estat(value)) {
+                                                            cell.setOpaque(true);
+                                                            cell.setBackground(new Color(150,240,160));
+                                                            cell.setForeground(Color.black);
+                                                        } else {
+                                                            cell.setOpaque(true);
+                                                            cell.setBackground(Color.red);
+                                                            cell.setForeground(Color.white);
+                                                        }
+                                                    } 
                                                 }
                                             }
                                         }
@@ -143,18 +154,8 @@ public class CellRender_Ingresos_Masivos_Empleados extends DefaultTableCellRende
                     }
                     
                 }
-                
-                
-                
-                
-                
-                
             }
-            
         }
-        
-        
-        
         if (hasFocus | isSelected) {
             cell.setOpaque(true);
             cell.setBackground(new Color(0,128,255));
@@ -171,6 +172,26 @@ public boolean check_cedula(Object ced){
     }
     return ret;  
 }
+public boolean check_estat(Object ced){
+        boolean ret=false;
+        long num = 0;
+        if (ced!=null) {
+            if (check_char(ced.toString().trim(),"'#$%&()=?¡¿/*+[]{};:<>,.")) {
+                if (!ced.toString().equals("")) {
+                    try{
+                        num = Long.parseLong(ced.toString());
+                        return num > 0 && num <= 220;
+                        
+                    }catch (Exception e){
+                        e.printStackTrace();
+                        return false;
+                    }
+                    
+                }
+            }
+        }
+        return ret;  
+    }
 public boolean check_field (Object field){
 boolean ret=false;
     if (field!=null) {

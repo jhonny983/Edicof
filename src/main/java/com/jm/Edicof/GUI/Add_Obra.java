@@ -11,6 +11,7 @@ import com.mxrck.autocompleter.AutoCompleterCallback;
 import com.mxrck.autocompleter.TextAutoCompleter;
 import java.awt.HeadlessException;
 import java.awt.Toolkit;
+import java.awt.event.KeyEvent;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
@@ -77,6 +78,9 @@ public class Add_Obra extends javax.swing.JDialog {
         jPanel3 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         grupos = new javax.swing.JComboBox<>();
+        jPanel4 = new javax.swing.JPanel();
+        jLabel5 = new javax.swing.JLabel();
+        centro_costo = new javax.swing.JTextField();
 
         jButton2.setText("jButton2");
 
@@ -193,7 +197,7 @@ public class Add_Obra extends javax.swing.JDialog {
                 .addComponent(jLabel4)
                 .addGap(61, 61, 61)
                 .addComponent(grupos, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(78, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -205,44 +209,77 @@ public class Add_Obra extends javax.swing.JDialog {
                 .addGap(17, 17, 17))
         );
 
+        jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder("Centro de Costo"));
+
+        jLabel5.setText("Centro");
+
+        centro_costo.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        centro_costo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                centro_costoKeyTyped(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGap(49, 49, 49)
+                .addComponent(jLabel5)
+                .addGap(50, 50, 50)
+                .addComponent(centro_costo, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(centro_costo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(91, 91, 91)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addGap(79, 79, 79)
                                 .addComponent(jButton1)
                                 .addGap(38, 38, 38)
                                 .addComponent(jButton3)))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addContainerGap())
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jPanel4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
+                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
                     .addComponent(jButton3))
-                .addGap(19, 19, 19))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -252,8 +289,8 @@ public class Add_Obra extends javax.swing.JDialog {
         // TODO add your handling code here:
 //        char a=evt.getKeyChar();
 //        a = Character.toUpperCase(a);
-//        if (a!=KeyEvent.VK_PERIOD & a!=KeyEvent.VK_MINUS & a!=KeyEvent.VK_SPACE) {
-//            if(!(a>=KeyEvent.VK_A && a<=KeyEvent.VK_Z)) {
+//        if (a!=KeyEvent.VK_SPACE) {
+//            if(!(a>=KeyEvent.VK_A && a<=KeyEvent.VK_Z) | !(a>=KeyEvent.VK_0 && a<=KeyEvent.VK_9)) {
 //                evt.consume();
 //            }
 //        }
@@ -278,7 +315,7 @@ public class Add_Obra extends javax.swing.JDialog {
                                                 "FROM\n" +
                                                 "    t_obra\n" +
                                                 "    INNER JOIN t_municipios \n" +
-                                                "        ON (t_obra.ID_MUN_OBRA = t_municipios.ID_MUN) WHERE NOMBRE_OBRA = '"+nombre_obra.getText().toUpperCase()+"' AND NOMBRE_MUN ='"+cb_mun.getSelectedItem()+"'");
+                                                "        ON (t_obra.ID_MUN_OBRA = t_municipios.ID_MUN) WHERE ID_OBRA = "+centro_costo.getText().toUpperCase());
                         if(r.next()){
                             JOptionPane.showMessageDialog(this,"La OBRA que intenta ingresar ya existe","Error",JOptionPane.ERROR_MESSAGE);
                         }
@@ -292,7 +329,7 @@ public class Add_Obra extends javax.swing.JDialog {
                                 r = con.s.executeQuery ("SELECT * FROM T_MUNICIPIOS WHERE NOMBRE_MUN='"+cb_mun.getSelectedItem().toString().toUpperCase()+"' AND ID_DEP ="+id_dep);
                                 if (r.next()) {
                                     id_mun = r.getString("ID_MUN");
-                                    con.s.executeUpdate("INSERT INTO `t_obra`(`NOMBRE_OBRA`,`ID_MUN_OBRA`,`ID_GRUPO`) VALUES ('"+nombre_obra.getText().toUpperCase().trim()+"',"+id_mun+",(SELECT ID_GRUPO FROM T_GRUPO_EMPRESA WHERE NOMBRE_GRUPO='"+grupos.getSelectedItem()+"'))");
+                                    con.s.executeUpdate("INSERT INTO `t_obra`(`ID_OBRA`,`NOMBRE_OBRA`,`ID_MUN_OBRA`,`ID_GRUPO`) VALUES ("+centro_costo.getText().trim()+",'"+nombre_obra.getText().toUpperCase().trim()+"',"+id_mun+",(SELECT ID_GRUPO FROM T_GRUPO_EMPRESA WHERE NOMBRE_GRUPO='"+grupos.getSelectedItem()+"'))");
                                     JOptionPane.showMessageDialog(this,"La OBRA fue ingresada correctamente","Información",JOptionPane.INFORMATION_MESSAGE);
                                     con.cerrar();
                                     this.dispose();
@@ -336,6 +373,16 @@ public class Add_Obra extends javax.swing.JDialog {
         }
         
     }//GEN-LAST:event_cb_depItemStateChanged
+
+    private void centro_costoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_centro_costoKeyTyped
+        // TODO add your handling code here:
+        char a=evt.getKeyChar();
+        a = Character.toUpperCase(a);
+        if(!(a>=KeyEvent.VK_0 && a<=KeyEvent.VK_9)) {
+                evt.consume();
+        }
+        
+    }//GEN-LAST:event_centro_costoKeyTyped
 
     /**
      * @param args the command line arguments
@@ -397,6 +444,7 @@ public class Add_Obra extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> cb_dep;
     private javax.swing.JComboBox<String> cb_mun;
+    private static javax.swing.JTextField centro_costo;
     private javax.swing.JComboBox<String> grupos;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
@@ -405,9 +453,11 @@ public class Add_Obra extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
     private static javax.swing.JTextField nombre_obra;
     // End of variables declaration//GEN-END:variables
 

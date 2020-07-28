@@ -123,7 +123,7 @@
             <Component class="javax.swing.JTable" name="empleados">
               <Properties>
                 <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                  <Table columnCount="11" rowCount="1">
+                  <Table columnCount="12" rowCount="1">
                     <Column editable="true" title="Tipo Ident*" type="java.lang.Object"/>
                     <Column editable="true" title="Id*" type="java.lang.Object"/>
                     <Column editable="true" title="Ciudad Expedicion Id*" type="java.lang.Object"/>
@@ -135,9 +135,11 @@
                     <Column editable="true" title="G&#xe9;nero (M-F)*" type="java.lang.Object"/>
                     <Column editable="true" title="Ciudad nacimiento*" type="java.lang.Object"/>
                     <Column editable="true" title="Fecha nacimiento (DD-MM-AAAA)*" type="java.lang.Object"/>
+                    <Column editable="true" title="Estatura (cm)*" type="java.lang.Object"/>
                   </Table>
                 </Property>
                 <Property name="autoResizeMode" type="int" value="0"/>
+                <Property name="cellSelectionEnabled" type="boolean" value="true"/>
                 <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
                   <TableColumnModel selectionModel="0">
                     <Column maxWidth="80" minWidth="80" prefWidth="80" resizable="true">
@@ -186,6 +188,11 @@
                       <Renderer/>
                     </Column>
                     <Column maxWidth="150" minWidth="150" prefWidth="150" resizable="true">
+                      <Title/>
+                      <Editor/>
+                      <Renderer/>
+                    </Column>
+                    <Column maxWidth="100" minWidth="100" prefWidth="100" resizable="true">
                       <Title/>
                       <Editor/>
                       <Renderer/>

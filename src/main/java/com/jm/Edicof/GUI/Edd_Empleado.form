@@ -90,15 +90,17 @@
                       <Component id="jLabel3" alignment="0" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel9" alignment="0" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel11" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="jLabel13" alignment="0" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="cb_tip_sangre" min="-2" pref="175" max="-2" attributes="0"/>
-                      <Component id="cb_cedula" alignment="0" min="-2" pref="175" max="-2" attributes="0"/>
-                      <Component id="cb_tip_id" alignment="0" min="-2" pref="175" max="-2" attributes="0"/>
-                      <Component id="nombre_1" alignment="0" min="-2" pref="175" max="-2" attributes="1"/>
-                      <Component id="ape_1" alignment="0" min="-2" pref="175" max="-2" attributes="1"/>
-                      <Component id="cb_ciudad_nac" min="-2" pref="175" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                      <Component id="cb_tip_sangre" pref="175" max="32767" attributes="0"/>
+                      <Component id="cb_cedula" alignment="0" pref="175" max="32767" attributes="0"/>
+                      <Component id="cb_tip_id" alignment="0" pref="175" max="32767" attributes="0"/>
+                      <Component id="nombre_1" alignment="0" pref="175" max="32767" attributes="1"/>
+                      <Component id="ape_1" alignment="0" pref="175" max="32767" attributes="1"/>
+                      <Component id="cb_ciudad_nac" pref="175" max="32767" attributes="0"/>
+                      <Component id="estatura" alignment="0" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
@@ -170,6 +172,11 @@
                           <Component id="jLabel12" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <Component id="fecha_nac" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="jLabel13" min="-2" max="-2" attributes="0"/>
+                      <Component id="estatura" alignment="0" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="32767" attributes="0"/>
               </Group>
@@ -360,6 +367,17 @@
           </Properties>
         </Component>
         <Component class="com.toedter.calendar.JDateChooser" name="fecha_nac">
+        </Component>
+        <Component class="com.toedter.components.JSpinField" name="estatura">
+          <Properties>
+            <Property name="maximum" type="int" value="220"/>
+            <Property name="minimum" type="int" value="0"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="jLabel13">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Estatura (cm)"/>
+          </Properties>
         </Component>
       </SubComponents>
     </Container>

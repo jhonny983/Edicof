@@ -15,8 +15,6 @@ import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.StringTokenizer;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.InputMap;
 import javax.swing.JOptionPane;
 import javax.swing.KeyStroke;
@@ -48,10 +46,28 @@ public class Edd_Empleado extends javax.swing.JDialog {
         this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/group_gear.png")));
         ac_cedula();
         ac_mun();
+        ac_tip_ident();
+        ac_tip_sangre();
+        ac_genero();
         InputMap map1 = cedula.getInputMap(cedula.WHEN_FOCUSED);
         map1.put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Event.CTRL_MASK), "null");
     }
-
+    public Edd_Empleado(javax.swing.JDialog parent, boolean modal, String ced) {
+        super(parent, modal);
+        initComponents();
+        this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/group_gear.png")));
+        ac_cedula();
+        ac_mun();
+        ac_tip_ident();
+        ac_tip_sangre();
+        ac_genero();
+        cb_cedula.setSelectedItem(ced);
+        cb_cedula.setEnabled(false);
+        InputMap map1 = cedula.getInputMap(cedula.WHEN_FOCUSED);
+        map1.put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Event.CTRL_MASK), "null");
+    }
+//**********************************************************************************************************
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -88,6 +104,8 @@ public class Edd_Empleado extends javax.swing.JDialog {
         cb_ciudad_nac = new javax.swing.JComboBox<>();
         jLabel12 = new javax.swing.JLabel();
         fecha_nac = new com.toedter.calendar.JDateChooser();
+        estatura = new com.toedter.components.JSpinField();
+        jLabel13 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
 
@@ -183,6 +201,11 @@ public class Edd_Empleado extends javax.swing.JDialog {
 
         jLabel12.setText("Fecha Nacimiento");
 
+        estatura.setMaximum(220);
+        estatura.setMinimum(0);
+
+        jLabel13.setText("Estatura (cm)");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -195,15 +218,17 @@ public class Edd_Empleado extends javax.swing.JDialog {
                     .addComponent(jLabel1)
                     .addComponent(jLabel3)
                     .addComponent(jLabel9)
-                    .addComponent(jLabel11))
+                    .addComponent(jLabel11)
+                    .addComponent(jLabel13))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(cb_tip_sangre, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cb_cedula, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cb_tip_id, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(nombre_1, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(ape_1, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cb_ciudad_nac, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(cb_tip_sangre, 0, 175, Short.MAX_VALUE)
+                    .addComponent(cb_cedula, 0, 175, Short.MAX_VALUE)
+                    .addComponent(cb_tip_id, 0, 175, Short.MAX_VALUE)
+                    .addComponent(nombre_1, javax.swing.GroupLayout.DEFAULT_SIZE, 175, Short.MAX_VALUE)
+                    .addComponent(ape_1, javax.swing.GroupLayout.DEFAULT_SIZE, 175, Short.MAX_VALUE)
+                    .addComponent(cb_ciudad_nac, 0, 175, Short.MAX_VALUE)
+                    .addComponent(estatura, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel6)
@@ -263,6 +288,10 @@ public class Edd_Empleado extends javax.swing.JDialog {
                         .addComponent(cb_ciudad_nac, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel12))
                     .addComponent(fecha_nac, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel13)
+                    .addComponent(estatura, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -385,27 +414,31 @@ public class Edd_Empleado extends javax.swing.JDialog {
                                 if (!cb_genero.getSelectedItem().toString().equals("Seleccione..")) {
                                     if (!cb_ciudad_nac.getSelectedItem().toString().equals("Seleccione..")) {
                                         if (fecha_nac.getDate()!=null) {
-                                            Conexion con = new Conexion();
-                                            con.conexion();
-                                            ResultSet r;
-                                            try {
-                                                r = con.s.executeQuery ("SELECT * FROM `t_empleados` WHERE ID_EMP = "+cedula.getText()+" AND ID_EMP <>"+cb_cedula.getSelectedItem());
-                                                if(r.next()){
-                                                    JOptionPane.showMessageDialog(this,"El empleado que desea ingresar ya existe","Error",JOptionPane.ERROR_MESSAGE);
-                                                }else{
-                                                    int conf = JOptionPane.showConfirmDialog(this,"Esta seguro que desea continuar?","Confirmación",JOptionPane.OK_CANCEL_OPTION,JOptionPane.QUESTION_MESSAGE);
-                                                    if (conf == JOptionPane.YES_OPTION) {
-                                                        con.s.executeUpdate("UPDATE `t_empleados` SET `ID_EMP`="+cedula.getText()+",`NOMBRE_1_EMP`='"+nombre_1.getText().toUpperCase()+"',`NOMBRE_2_EMP`='"+nombre_2.getText().toUpperCase()+"',`APELLIDO_1_EMP`='"+ape_1.getText().toUpperCase()+"',`APELLIDO_2_EMP`='"+ape_2.getText().toUpperCase()+"',`ID_TIPO_IDENT`="+get_id_tip_ident(cb_tip_id.getSelectedItem())+",`ID_MUN_EXPEDICION`="+get_id_municipio(cb_ciudad_exp.getSelectedItem())+",`ID_TIPO_SANGRE`="+get_id_tip_sangre(cb_tip_sangre.getSelectedItem())+",`ID_TIPO_GENERO`="+get_id_genero(cb_genero.getSelectedItem())+",`ID_MUN_NACIMIENTO`="+get_id_municipio(cb_ciudad_nac.getSelectedItem())+",`FECHA_NAC`='"+new SimpleDateFormat("yyyy-MM-dd").format(fecha_nac.getDate())+"' WHERE ID_EMP="+cb_cedula.getSelectedItem());
-                                                        JOptionPane.showMessageDialog(this,"El empleado fue actualizado correctamente","Información",JOptionPane.INFORMATION_MESSAGE);
-                                                        con.cerrar();
-                                                        this.dispose();
+                                            if (estatura.getValue()>0 && estatura.getValue()<=220) {
+                                                Conexion con = new Conexion();
+                                                con.conexion();
+                                                ResultSet r;
+                                                try {
+                                                    r = con.s.executeQuery ("SELECT * FROM `t_empleados` WHERE ID_EMP = "+cedula.getText()+" AND ID_EMP <>"+cb_cedula.getSelectedItem());
+                                                    if(r.next()){
+                                                        JOptionPane.showMessageDialog(this,"El empleado que desea ingresar ya existe","Error",JOptionPane.ERROR_MESSAGE);
+                                                    }else{
+                                                        int conf = JOptionPane.showConfirmDialog(this,"Esta seguro que desea continuar?","Confirmación",JOptionPane.OK_CANCEL_OPTION,JOptionPane.QUESTION_MESSAGE);
+                                                        if (conf == JOptionPane.YES_OPTION) {
+                                                            con.s.executeUpdate("UPDATE `t_empleados` SET `ID_EMP`="+cedula.getText()+",`NOMBRE_1_EMP`='"+nombre_1.getText().toUpperCase()+"',`NOMBRE_2_EMP`='"+nombre_2.getText().toUpperCase()+"',`APELLIDO_1_EMP`='"+ape_1.getText().toUpperCase()+"',`APELLIDO_2_EMP`='"+ape_2.getText().toUpperCase()+"',`ID_TIPO_IDENT`="+get_id_tip_ident(cb_tip_id.getSelectedItem())+",`ID_MUN_EXPEDICION`="+get_id_municipio(cb_ciudad_exp.getSelectedItem())+",`ID_TIPO_SANGRE`="+get_id_tip_sangre(cb_tip_sangre.getSelectedItem())+",`ID_TIPO_GENERO`="+get_id_genero(cb_genero.getSelectedItem())+",`ID_MUN_NACIMIENTO`="+get_id_municipio(cb_ciudad_nac.getSelectedItem())+",`FECHA_NAC`='"+new SimpleDateFormat("yyyy-MM-dd").format(fecha_nac.getDate())+"',`ESTATURA`= "+estatura.getValue()+" WHERE ID_EMP="+cb_cedula.getSelectedItem());
+                                                            JOptionPane.showMessageDialog(this,"El empleado fue actualizado correctamente","Información",JOptionPane.INFORMATION_MESSAGE);
+                                                            con.cerrar();
+                                                            this.dispose();
+                                                        }
                                                     }
+                                                    con.cerrar();
+                                                } catch (SQLException e) {
+                                                    con.cerrar();
+                                                    e.printStackTrace();
+                                                    JOptionPane.showMessageDialog(this,e,"Error",JOptionPane.ERROR_MESSAGE);
                                                 }
-                                                con.cerrar();
-                                            } catch (SQLException e) {
-                                                con.cerrar();
-                                                e.printStackTrace();
-                                                JOptionPane.showMessageDialog(this,e,"Error",JOptionPane.ERROR_MESSAGE);
+                                            } else {
+                                                JOptionPane.showMessageDialog(this,"Verifique la estatura del empleado","Error",JOptionPane.ERROR_MESSAGE);
                                             }
                                         } else {
                                             JOptionPane.showMessageDialog(this,"Seleccione la fecha de nacimiento del empleado","Error",JOptionPane.ERROR_MESSAGE);
@@ -515,6 +548,7 @@ public class Edd_Empleado extends javax.swing.JDialog {
     private javax.swing.JComboBox<String> cb_tip_id;
     private javax.swing.JComboBox<String> cb_tip_sangre;
     private static javax.swing.JTextField cedula;
+    private com.toedter.components.JSpinField estatura;
     private com.toedter.calendar.JDateChooser fecha_nac;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
@@ -524,6 +558,7 @@ public class Edd_Empleado extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -536,7 +571,7 @@ public class Edd_Empleado extends javax.swing.JDialog {
     private static javax.swing.JTextField nombre_1;
     private javax.swing.JTextField nombre_2;
     // End of variables declaration//GEN-END:variables
-public void ac_cedula(){
+public final void ac_cedula(){
     cb_cedula.removeAllItems();
     cb_cedula.addItem("Seleccione..");
     Conexion con = new Conexion();
@@ -592,6 +627,7 @@ public void load_data(){
                 cb_genero.setSelectedItem(r.getString("t_genero.NOMBRE_GENERO"));
                 cb_ciudad_nac.setSelectedItem(r.getString("mun_nac.NOMBRE_MUN")+"-"+r.getString("dep_nac.NOMBRE_DEP"));
                 fecha_nac.setDate(new SimpleDateFormat("yyyy-MM-dd").parse(r.getString("t_empleados.FECHA_NAC")));
+                estatura.setValue(r.getInt("t_empleados.ESTATURA"));
             }
             con.cerrar();
         }catch(SQLException | ParseException j){
@@ -613,7 +649,7 @@ public void load_data(){
         cb_tip_sangre.setSelectedItem("Seleccione..");
     }
 }
-public void ac_mun(){
+public final void ac_mun(){
     cb_ciudad_exp.removeAllItems();
     cb_ciudad_nac.removeAllItems();
     cb_ciudad_exp.addItem("Seleccione..");
@@ -639,7 +675,7 @@ public void ac_mun(){
     }
 
 }
-public void ac_tip_ident(){
+public final void ac_tip_ident(){
     cb_tip_id.removeAllItems();
     cb_tip_id.addItem("Seleccione..");
     Conexion con = new Conexion();

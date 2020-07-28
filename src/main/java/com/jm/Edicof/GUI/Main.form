@@ -278,20 +278,6 @@
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem70ActionPerformed"/>
                   </Events>
                 </MenuItem>
-                <MenuItem class="javax.swing.JMenuItem" name="jMenuItem16">
-                  <Properties>
-                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/group_edit.png"/>
-                    </Property>
-                    <Property name="text" type="java.lang.String" value="Editar Empleado"/>
-                  </Properties>
-                  <BindingProperties>
-                    <BindingProperty name="enabled" source="jm_informacion" sourcePath="${enabled}" target="jMenuItem16" targetPath="enabled" updateStrategy="0" immediately="false"/>
-                  </BindingProperties>
-                  <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem16ActionPerformed"/>
-                  </Events>
-                </MenuItem>
                 <MenuItem class="javax.swing.JMenuItem" name="jMenuItem28">
                   <Properties>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
@@ -308,6 +294,9 @@
                 </MenuItem>
                 <Menu class="javax.swing.JMenu" name="jMenu3">
                   <Properties>
+                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                      <Image iconType="3" name="/delete.png"/>
+                    </Property>
                     <Property name="text" type="java.lang.String" value="Vetados"/>
                   </Properties>
                   <BindingProperties>
@@ -316,6 +305,9 @@
                   <SubComponents>
                     <MenuItem class="javax.swing.JMenuItem" name="jMenuItem42">
                       <Properties>
+                        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                          <Image iconType="3" name="/map.png"/>
+                        </Property>
                         <Property name="text" type="java.lang.String" value="Ingresar Vetados"/>
                       </Properties>
                       <BindingProperties>
@@ -327,6 +319,9 @@
                     </MenuItem>
                     <MenuItem class="javax.swing.JMenuItem" name="jMenuItem46">
                       <Properties>
+                        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                          <Image iconType="3" name="/document_inspector.png"/>
+                        </Property>
                         <Property name="text" type="java.lang.String" value="Lista de vetados"/>
                       </Properties>
                       <BindingProperties>
@@ -334,6 +329,30 @@
                       </BindingProperties>
                       <Events>
                         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem46ActionPerformed"/>
+                      </Events>
+                    </MenuItem>
+                  </SubComponents>
+                </Menu>
+                <Menu class="javax.swing.JMenu" name="jMenu24">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Info Socio Demografica"/>
+                  </Properties>
+                  <BindingProperties>
+                    <BindingProperty name="enabled" source="jm_informacion" sourcePath="${enabled}" target="jMenu24" targetPath="enabled" updateStrategy="0" immediately="false"/>
+                  </BindingProperties>
+                  <SubComponents>
+                    <MenuItem class="javax.swing.JMenuItem" name="jMenuItem15">
+                      <Properties>
+                        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                          <Image iconType="3" name="/add.png"/>
+                        </Property>
+                        <Property name="text" type="java.lang.String" value="Agregar Masivos"/>
+                      </Properties>
+                      <BindingProperties>
+                        <BindingProperty name="enabled" source="jMenu24" sourcePath="${enabled}" target="jMenuItem15" targetPath="enabled" updateStrategy="0" immediately="false"/>
+                      </BindingProperties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem15ActionPerformed1"/>
                       </Events>
                     </MenuItem>
                   </SubComponents>
@@ -1704,9 +1723,6 @@
             <Property name="horizontalTextPosition" type="int" value="0"/>
             <Property name="verticalTextPosition" type="int" value="3"/>
           </Properties>
-          <BindingProperties>
-            <BindingProperty name="enabled" source="jMenuItem15" sourcePath="${enabled}" target="jButton11" targetPath="enabled" updateStrategy="0" immediately="false"/>
-          </BindingProperties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem15ActionPerformed"/>
           </Events>
