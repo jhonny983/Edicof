@@ -251,13 +251,14 @@ public class Add_Empleado_Masivos extends javax.swing.JDialog {
         new PegarExcel_Empleados_Masivo(empleados);
         empleados.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Tipo Ident*", "Id*", "Ciudad Expedicion Id*", "Nombre 1*", "Nombre 2", "Apellido 1*", "Apellido 2", "Tipo de sangre*", "Género (M-F)*", "Ciudad nacimiento*", "Fecha nacimiento (DD-MM-AAAA)*"
+                "Tipo Ident*", "Id*", "Ciudad Expedicion Id*", "Nombre 1*", "Nombre 2", "Apellido 1*", "Apellido 2", "Tipo de sangre*", "Género (M-F)*", "Ciudad nacimiento*", "Fecha nacimiento (DD-MM-AAAA)*", "Estatura (cm)*"
             }
         ));
         empleados.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
+        empleados.setCellSelectionEnabled(true);
         jScrollPane2.setViewportView(empleados);
         if (empleados.getColumnModel().getColumnCount() > 0) {
             empleados.getColumnModel().getColumn(0).setMinWidth(80);
@@ -293,6 +294,9 @@ public class Add_Empleado_Masivos extends javax.swing.JDialog {
             empleados.getColumnModel().getColumn(10).setMinWidth(100);
             empleados.getColumnModel().getColumn(10).setPreferredWidth(100);
             empleados.getColumnModel().getColumn(10).setMaxWidth(100);
+            empleados.getColumnModel().getColumn(11).setMinWidth(100);
+            empleados.getColumnModel().getColumn(11).setPreferredWidth(100);
+            empleados.getColumnModel().getColumn(11).setMaxWidth(100);
         }
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -565,7 +569,7 @@ public class Add_Empleado_Masivos extends javax.swing.JDialog {
                                                 }else{
                                                     ape2=modelo.getValueAt(i, 6).toString().trim().toUpperCase();
                                                 }
-                                                con.s.executeUpdate("INSERT INTO `t_empleados`(`ID_EMP`, `NOMBRE_1_EMP`, `NOMBRE_2_EMP`, `APELLIDO_1_EMP`, `APELLIDO_2_EMP`, `ID_TIPO_IDENT`, `ID_MUN_EXPEDICION`, `ID_TIPO_SANGRE`, `ID_TIPO_GENERO`, `ID_MUN_NACIMIENTO`, `FECHA_NAC`) VALUES ("+modelo.getValueAt(i, 1).toString().trim()+",'"+modelo.getValueAt(i, 3).toString().toUpperCase().trim()+"','"+nomb2+"','"+modelo.getValueAt(i, 5).toString().toUpperCase().trim()+"','"+ape2+"',"+get_id_tip_ident(modelo.getValueAt(i, 0))+","+get_id_municipio(modelo.getValueAt(i, 2))+","+get_id_tip_sangre(modelo.getValueAt(i, 7))+","+get_id_genero(modelo.getValueAt(i, 8))+","+get_id_municipio(modelo.getValueAt(i, 9))+",'"+new SimpleDateFormat("yyyy-MM-dd").format(new SimpleDateFormat("dd-MM-yyyy").parse(modelo.getValueAt(i, 10).toString()))+"')");
+                                                con.s.executeUpdate("INSERT INTO `t_empleados`(`ID_EMP`, `NOMBRE_1_EMP`, `NOMBRE_2_EMP`, `APELLIDO_1_EMP`, `APELLIDO_2_EMP`, `ID_TIPO_IDENT`, `ID_MUN_EXPEDICION`, `ID_TIPO_SANGRE`, `ID_TIPO_GENERO`, `ID_MUN_NACIMIENTO`, `FECHA_NAC`, `ESTATURA`) VALUES ("+modelo.getValueAt(i, 1).toString().trim()+",'"+modelo.getValueAt(i, 3).toString().toUpperCase().trim()+"','"+nomb2+"','"+modelo.getValueAt(i, 5).toString().toUpperCase().trim()+"','"+ape2+"',"+get_id_tip_ident(modelo.getValueAt(i, 0))+","+get_id_municipio(modelo.getValueAt(i, 2))+","+get_id_tip_sangre(modelo.getValueAt(i, 7))+","+get_id_genero(modelo.getValueAt(i, 8))+","+get_id_municipio(modelo.getValueAt(i, 9))+",'"+new SimpleDateFormat("yyyy-MM-dd").format(new SimpleDateFormat("dd-MM-yyyy").parse(modelo.getValueAt(i, 10).toString()))+"',"+modelo.getValueAt(i, 11)+")");
                                                 modelo.removeRow(i);
                                                 i=i-1;
                                                 confirm = confirm & true;
@@ -601,12 +605,7 @@ public class Add_Empleado_Masivos extends javax.swing.JDialog {
                             JOptionPane.showMessageDialog(this,"Verifique el tipo de Id del empleado","Error",JOptionPane.ERROR_MESSAGE);
                             break;
                         }
-                        
-                        
-                        
-                        
-                        
-                    } catch (Exception ex) {
+                   } catch (Exception ex) {
                         con.cerrar();
                         ex.printStackTrace();
                         JOptionPane.showMessageDialog(null,ex,"Error",JOptionPane.ERROR_MESSAGE);
@@ -703,7 +702,15 @@ public class Add_Empleado_Masivos extends javax.swing.JDialog {
                                                 if (check_genero(modelo.getValueAt(i, 8))) {
                                                     if (check_municipio(modelo.getValueAt(i, 9))) {
                                                         if (check_fecha(modelo.getValueAt(i, 10))) {
-                                                            ret=true&ret;
+                                                            if (check_estat(modelo.getValueAt(i, 11))) {
+                                                                ret=true&ret;
+                                                            } else {
+                                                                empleados.changeSelection(i,11, false, false);
+                                                                empleados.requestFocus();
+                                                                JOptionPane.showMessageDialog(this,"Verifique la estatura del empleado","Error",JOptionPane.ERROR_MESSAGE);
+                                                                ret=false&ret;
+                                                                break;
+                                                            }
                                                         } else {
                                                             empleados.changeSelection(i,10, false, false);
                                                             empleados.requestFocus();
@@ -711,7 +718,6 @@ public class Add_Empleado_Masivos extends javax.swing.JDialog {
                                                             ret=false&ret;
                                                             break;
                                                         }
-                                                        
                                                     } else {
                                                         empleados.changeSelection(i,9, false, false);
                                                         empleados.requestFocus();
@@ -797,6 +803,26 @@ public class Add_Empleado_Masivos extends javax.swing.JDialog {
             if (check_char(ced.toString().trim(),"'#$%&()=?¡¿/*+[]{};:<>,.")) {
                 if (!ced.toString().equals("")) {
                     ret=checkLong(ced.toString().trim());
+                }
+            }
+        }
+        return ret;  
+    }
+    public boolean check_estat(Object ced){
+        boolean ret=false;
+        long num = 0;
+        if (ced!=null) {
+            if (check_char(ced.toString().trim(),"'#$%&()=?¡¿/*+[]{};:<>,.")) {
+                if (!ced.toString().equals("")) {
+                    try{
+                        num = Long.parseLong(ced.toString());
+                        return num > 0 && num <= 220;
+                        
+                    }catch (Exception e){
+                        e.printStackTrace();
+                        return false;
+                    }
+                    
                 }
             }
         }
