@@ -8,31 +8,16 @@ package com.jm.Edicof.GUI;
 import com.jm.Edicof.Clases.Conexion;
 import java.awt.Dimension;
 import java.awt.Toolkit;
-import java.io.ByteArrayOutputStream;
-import java.sql.Blob;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-import java.util.Objects;
 import java.util.StringTokenizer;
 import java.util.stream.Collectors;
-import javax.sql.rowset.serial.SerialBlob;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
-import javax.swing.table.DefaultTableModel;
-import org.apache.poi.hssf.usermodel.HSSFCell;
-import org.apache.poi.hssf.usermodel.HSSFCellStyle;
-import org.apache.poi.hssf.usermodel.HSSFRow;
-import org.apache.poi.hssf.usermodel.HSSFSheet;
-import org.apache.poi.hssf.usermodel.HSSFWorkbook;
-import org.apache.poi.ss.usermodel.CreationHelper;
-import org.apache.poi.ss.util.CellRangeAddress;
 
 /**
  *
@@ -42,17 +27,17 @@ public class Preview_Cruce_PILA extends javax.swing.JDialog {
 static Dimension screenSize = null;
 //JTable tabla_pila;
 static ArrayList<ArrayList<String>> pila = new ArrayList<>();
-static ArrayList<ArrayList<String>> no_emp = new ArrayList<>();
-static ArrayList<ArrayList<String>> no_eps = new ArrayList<>();
-static ArrayList<ArrayList<String>> no_arl = new ArrayList<>();
-static ArrayList<ArrayList<String>> no_afp = new ArrayList<>();
-static ArrayList<ArrayList<String>> no_ccf = new ArrayList<>();
+//static ArrayList<ArrayList<String>> no_emp = new ArrayList<>();
+//static ArrayList<ArrayList<String>> no_eps = new ArrayList<>();
+//static ArrayList<ArrayList<String>> no_arl = new ArrayList<>();
+//static ArrayList<ArrayList<String>> no_afp = new ArrayList<>();
+//static ArrayList<ArrayList<String>> no_ccf = new ArrayList<>();
 String f_ini,f_fin;
 List<String> nit_list = new ArrayList<>();
     /**
      * Creates new form Preview_Cruce
      */
-    public Preview_Cruce_PILA(java.awt.Frame parent, boolean modal, JTable j, int m, int y) {
+    public Preview_Cruce_PILA(java.awt.Frame parent, boolean modal, JTable t_pila, int mes, int año) {
         super(parent, modal);
         initComponents(); 
         this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/group_gear.png")));
@@ -60,12 +45,9 @@ List<String> nit_list = new ArrayList<>();
         screenSize = Main.getsize();
         this.setSize(screenSize.width-20, screenSize.height-10);
         this.setLocationRelativeTo(null);
-        //this.tabla_pila=j;
-        pila = load_table_to_list(j);
+        //pila = load_table_to_list(t_pila);
         nit_list = get_nit_list();
-        get_fecha(m,y);
-//        System.out.println("Fecha inicial: "+f_ini);
-//        System.out.println("Fecha final: "+f_fin);
+        get_fecha(mes,año);
         sys_no(nit_list,pila);
 
     }
@@ -77,12 +59,9 @@ List<String> nit_list = new ArrayList<>();
         screenSize = Main.getsize();
         this.setSize(screenSize.width-20, screenSize.height-10);
         this.setLocationRelativeTo(null);
-        //this.tabla_pila=j;
-        pila = load_table_to_list(j);
+        //pila = load_table_to_list(j);
         nit_list = get_nit_list();
         get_fecha(m,y);
-//        System.out.println("Fecha inicial: "+f_ini);
-//        System.out.println("Fecha final: "+f_fin);
         sys_no(nit_list,pila);
 
     }
@@ -98,13 +77,13 @@ List<String> nit_list = new ArrayList<>();
 
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        emp_eps_diff = new javax.swing.JTable();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        emp_arl_diff = new javax.swing.JTable();
         jPanel4 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jTable3 = new javax.swing.JTable();
+        emp_afp_diff = new javax.swing.JTable();
         jPanel2 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         n_novedades = new javax.swing.JLabel();
@@ -118,7 +97,7 @@ List<String> nit_list = new ArrayList<>();
         jButton2 = new javax.swing.JButton();
         jPanel7 = new javax.swing.JPanel();
         jScrollPane4 = new javax.swing.JScrollPane();
-        jTable4 = new javax.swing.JTable();
+        emp_ccf_diff = new javax.swing.JTable();
         jPanel8 = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
         n_novedades3 = new javax.swing.JLabel();
@@ -129,8 +108,8 @@ List<String> nit_list = new ArrayList<>();
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Empleados del sistema con EPS diferente"));
 
-        jTable1.setAutoCreateRowSorter(true);
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        emp_eps_diff.setAutoCreateRowSorter(true);
+        emp_eps_diff.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null},
                 {null, null},
@@ -156,12 +135,12 @@ List<String> nit_list = new ArrayList<>();
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(jTable1);
-        if (jTable1.getColumnModel().getColumnCount() > 0) {
-            jTable1.getColumnModel().getColumn(0).setMinWidth(150);
-            jTable1.getColumnModel().getColumn(0).setPreferredWidth(150);
-            jTable1.getColumnModel().getColumn(0).setMaxWidth(150);
-            jTable1.getColumnModel().getColumn(1).setResizable(false);
+        jScrollPane1.setViewportView(emp_eps_diff);
+        if (emp_eps_diff.getColumnModel().getColumnCount() > 0) {
+            emp_eps_diff.getColumnModel().getColumn(0).setMinWidth(150);
+            emp_eps_diff.getColumnModel().getColumn(0).setPreferredWidth(150);
+            emp_eps_diff.getColumnModel().getColumn(0).setMaxWidth(150);
+            emp_eps_diff.getColumnModel().getColumn(1).setResizable(false);
         }
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -183,7 +162,7 @@ List<String> nit_list = new ArrayList<>();
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Empleados del sistema con ARL diferente"));
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        emp_arl_diff.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null},
                 {null, null},
@@ -202,11 +181,11 @@ List<String> nit_list = new ArrayList<>();
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane2.setViewportView(jTable2);
-        if (jTable2.getColumnModel().getColumnCount() > 0) {
-            jTable2.getColumnModel().getColumn(0).setMinWidth(150);
-            jTable2.getColumnModel().getColumn(0).setPreferredWidth(150);
-            jTable2.getColumnModel().getColumn(0).setMaxWidth(150);
+        jScrollPane2.setViewportView(emp_arl_diff);
+        if (emp_arl_diff.getColumnModel().getColumnCount() > 0) {
+            emp_arl_diff.getColumnModel().getColumn(0).setMinWidth(150);
+            emp_arl_diff.getColumnModel().getColumn(0).setPreferredWidth(150);
+            emp_arl_diff.getColumnModel().getColumn(0).setMaxWidth(150);
         }
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -229,7 +208,7 @@ List<String> nit_list = new ArrayList<>();
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder("Empleados del sistema con AFP diferente"));
         jPanel4.setPreferredSize(new java.awt.Dimension(484, 218));
 
-        jTable3.setModel(new javax.swing.table.DefaultTableModel(
+        emp_afp_diff.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null},
                 {null, null},
@@ -248,11 +227,11 @@ List<String> nit_list = new ArrayList<>();
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane3.setViewportView(jTable3);
-        if (jTable3.getColumnModel().getColumnCount() > 0) {
-            jTable3.getColumnModel().getColumn(0).setMinWidth(150);
-            jTable3.getColumnModel().getColumn(0).setPreferredWidth(150);
-            jTable3.getColumnModel().getColumn(0).setMaxWidth(150);
+        jScrollPane3.setViewportView(emp_afp_diff);
+        if (emp_afp_diff.getColumnModel().getColumnCount() > 0) {
+            emp_afp_diff.getColumnModel().getColumn(0).setMinWidth(150);
+            emp_afp_diff.getColumnModel().getColumn(0).setPreferredWidth(150);
+            emp_afp_diff.getColumnModel().getColumn(0).setMaxWidth(150);
         }
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
@@ -268,7 +247,7 @@ List<String> nit_list = new ArrayList<>();
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 123, Short.MAX_VALUE)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 122, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -384,7 +363,7 @@ List<String> nit_list = new ArrayList<>();
         jPanel7.setBorder(javax.swing.BorderFactory.createTitledBorder("Empleados del sistema con CCF diferente"));
         jPanel7.setPreferredSize(new java.awt.Dimension(484, 218));
 
-        jTable4.setModel(new javax.swing.table.DefaultTableModel(
+        emp_ccf_diff.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null},
                 {null, null},
@@ -403,11 +382,11 @@ List<String> nit_list = new ArrayList<>();
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane4.setViewportView(jTable4);
-        if (jTable4.getColumnModel().getColumnCount() > 0) {
-            jTable4.getColumnModel().getColumn(0).setMinWidth(150);
-            jTable4.getColumnModel().getColumn(0).setPreferredWidth(150);
-            jTable4.getColumnModel().getColumn(0).setMaxWidth(150);
+        jScrollPane4.setViewportView(emp_ccf_diff);
+        if (emp_ccf_diff.getColumnModel().getColumnCount() > 0) {
+            emp_ccf_diff.getColumnModel().getColumn(0).setMinWidth(150);
+            emp_ccf_diff.getColumnModel().getColumn(0).setPreferredWidth(150);
+            emp_ccf_diff.getColumnModel().getColumn(0).setMaxWidth(150);
         }
 
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
@@ -423,7 +402,7 @@ List<String> nit_list = new ArrayList<>();
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel7Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 123, Short.MAX_VALUE)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 122, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -798,6 +777,10 @@ List<String> nit_list = new ArrayList<>();
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTable emp_afp_diff;
+    private javax.swing.JTable emp_arl_diff;
+    private javax.swing.JTable emp_ccf_diff;
+    private javax.swing.JTable emp_eps_diff;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel6;
@@ -816,10 +799,6 @@ List<String> nit_list = new ArrayList<>();
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable2;
-    private javax.swing.JTable jTable3;
-    private javax.swing.JTable jTable4;
     private javax.swing.JLabel n_novedades;
     private javax.swing.JLabel n_novedades1;
     private javax.swing.JLabel n_novedades2;
@@ -974,11 +953,11 @@ public void sys_arl_fecha_dif(){
     } 
 
 }*/
-public void sys_no(List l, ArrayList<ArrayList<String>> p){
-    for (int j = 0; j < l.size(); j++) {//SE RECORRE LISTA DE EMPRESAS
-        for (int i = 0; i < p.size(); i++) {//SE RECORRE ARREGLO PRINCIPAL DE LOS DATOS DE LA PILA
-            List<String> t=(List)p.get(i);
-            if (t.get(1).trim().equals(l.get(j).toString().trim())) {//SE COMPARA CADA FILA DE LOS DATOS DE PILA SI ES IGUAL A CADA FILA DE LA LISTA DE EMPRESAS
+public void sys_no(List list_empresas, ArrayList<ArrayList<String>> pila){
+    for (int j = 0; j < list_empresas.size(); j++) {//SE RECORRE LISTA DE EMPRESAS
+        for (int i = 0; i < pila.size(); i++) {//SE RECORRE ARREGLO PRINCIPAL DE LOS DATOS DE LA PILA
+            List<String> t=(List)pila.get(i);
+            if (t.get(1).trim().equals(list_empresas.get(j).toString().trim())) {//SE COMPARA CADA FILA DE LOS DATOS DE PILA SI ES IGUAL A CADA FILA DE LA LISTA DE EMPRESAS
                 Conexion con = new Conexion();
                 con.conexion();
                 ResultSet r;

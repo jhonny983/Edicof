@@ -36,15 +36,15 @@ Object [] fila = new Object[6];
         super(parent, modal);
         initComponents();
         this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/group_gear.png")));
-        info_pila.setDefaultRenderer (Object.class, new CellRender_Cruce_Arl());
-        DefaultTableCellRenderer tcr = (DefaultTableCellRenderer)info_pila.getDefaultRenderer(Object.class);
+        t_info_pila.setDefaultRenderer (Object.class, new CellRender_Cruce_Arl());
+        DefaultTableCellRenderer tcr = (DefaultTableCellRenderer)t_info_pila.getDefaultRenderer(Object.class);
         tcr.setHorizontalAlignment(SwingConstants.CENTER);
-        info_pila.getColumnModel().getColumn(0).setCellRenderer(tcr);
-        info_pila.getColumnModel().getColumn(1).setCellRenderer(tcr);
-        info_pila.getColumnModel().getColumn(2).setCellRenderer(tcr);
-        info_pila.getColumnModel().getColumn(3).setCellRenderer(tcr);
-        info_pila.getColumnModel().getColumn(4).setCellRenderer(tcr);
-        info_pila.getColumnModel().getColumn(5).setCellRenderer(tcr);
+        t_info_pila.getColumnModel().getColumn(0).setCellRenderer(tcr);
+        t_info_pila.getColumnModel().getColumn(1).setCellRenderer(tcr);
+        t_info_pila.getColumnModel().getColumn(2).setCellRenderer(tcr);
+        t_info_pila.getColumnModel().getColumn(3).setCellRenderer(tcr);
+        t_info_pila.getColumnModel().getColumn(4).setCellRenderer(tcr);
+        t_info_pila.getColumnModel().getColumn(5).setCellRenderer(tcr);
     }
     
     /**
@@ -58,7 +58,7 @@ Object [] fila = new Object[6];
 
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        info_pila = new javax.swing.JTable();
+        t_info_pila = new javax.swing.JTable();
         jPanel3 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
@@ -74,9 +74,9 @@ Object [] fila = new Object[6];
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Información descargada de la EPS"));
 
-        new ClipBoardActionListener(info_pila);
-        info_pila.setAutoCreateRowSorter(true);
-        info_pila.setModel(new javax.swing.table.DefaultTableModel(
+        new ClipBoardActionListener(t_info_pila);
+        t_info_pila.setAutoCreateRowSorter(true);
+        t_info_pila.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null}
             },
@@ -84,8 +84,8 @@ Object [] fila = new Object[6];
                 "Cedula", "NIT", "EPS", "ARL", "AFP", "CCF"
             }
         ));
-        info_pila.setToolTipText("Pegue aqui los datos descargados de la ARL del empleador seleccionado.");
-        jScrollPane1.setViewportView(info_pila);
+        t_info_pila.setToolTipText("Pegue aqui los datos descargados de la ARL del empleador seleccionado.");
+        jScrollPane1.setViewportView(t_info_pila);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -221,7 +221,7 @@ Object [] fila = new Object[6];
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, 455, Short.MAX_VALUE)
+                        .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, 519, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
@@ -244,9 +244,9 @@ Object [] fila = new Object[6];
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-            if (info_pila.getRowCount()!=0) {
-                if (check_table(info_pila)) {
-                    Preview_Cruce_PILA pp = new Preview_Cruce_PILA(this, false, info_pila,mes.getMonth(),año.getYear());
+            if (t_info_pila.getRowCount()!=0) {
+                if (check_table(t_info_pila)) {
+                    Preview_Cruce_PILA pp = new Preview_Cruce_PILA(this, false, t_info_pila,mes.getMonth(),año.getYear());
                     this.setCursor(new Cursor(Cursor.WAIT_CURSOR));
                     pp.setLocationRelativeTo(null);
                     pp.setVisible(true);
@@ -260,11 +260,11 @@ Object [] fila = new Object[6];
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-        if (info_pila.getRowCount()>0) {
-            if (info_pila.getSelectedRow()>-1) {
-                modelo = (DefaultTableModel) info_pila.getModel();
-                modelo.removeRow(info_pila.getSelectedRow());
-                info_pila.setModel(modelo);
+        if (t_info_pila.getRowCount()>0) {
+            if (t_info_pila.getSelectedRow()>-1) {
+                modelo = (DefaultTableModel) t_info_pila.getModel();
+                modelo.removeRow(t_info_pila.getSelectedRow());
+                t_info_pila.setModel(modelo);
             }else{
                 JOptionPane.showMessageDialog(this,"No se ha seleccionado ningun registro","Error",JOptionPane.ERROR_MESSAGE);
             }
@@ -275,12 +275,12 @@ Object [] fila = new Object[6];
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        modelo = (DefaultTableModel) info_pila.getModel();
-        if (info_pila.getRowCount()>0) {
-            int j = info_pila.getRowCount();
+        modelo = (DefaultTableModel) t_info_pila.getModel();
+        if (t_info_pila.getRowCount()>0) {
+            int j = t_info_pila.getRowCount();
             for (int i = 0; i < j; i++) {
-                modelo.removeRow(info_pila.getRowCount()-1);
-                info_pila.setModel(modelo);
+                modelo.removeRow(t_info_pila.getRowCount()-1);
+                t_info_pila.setModel(modelo);
             }
         }else{
             JOptionPane.showMessageDialog(this,"La tabla no contiene registros","Error",JOptionPane.ERROR_MESSAGE);
@@ -288,9 +288,9 @@ Object [] fila = new Object[6];
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        modelo = (DefaultTableModel) info_pila.getModel();
-        modelo.insertRow(info_pila.getSelectedRow()+1, fila);
-        info_pila.setModel(modelo);
+        modelo = (DefaultTableModel) t_info_pila.getModel();
+        modelo.insertRow(t_info_pila.getSelectedRow()+1, fila);
+        t_info_pila.setModel(modelo);
 
     }//GEN-LAST:event_jButton5ActionPerformed
 
@@ -345,7 +345,6 @@ Object [] fila = new Object[6];
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private com.toedter.calendar.JYearChooser año;
-    private javax.swing.JTable info_pila;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
@@ -356,6 +355,7 @@ Object [] fila = new Object[6];
     private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
     private com.toedter.calendar.JMonthChooser mes;
+    private javax.swing.JTable t_info_pila;
     // End of variables declaration//GEN-END:variables
 
 public void ac_empleador(){
@@ -424,36 +424,36 @@ public boolean check_table(JTable j){
     for (int i = 0; i < j.getRowCount(); i++) {
         if(check_cedula(modelo.getValueAt(i, 0))){
             if(check_nit(modelo.getValueAt(i, 1))){
-                if (chech_char(modelo.getValueAt(i, 2),"'#$%&=?¡¿/*+[]{};:<>,")) {
-                    if (chech_char(modelo.getValueAt(i, 3),"'#$%&=?¡¿/*+[]{};:<>,")) {
-                        if (chech_char(modelo.getValueAt(i, 4),"'#$%&=?¡¿/*+[]{};:<>,")) {
-                            if (chech_char(modelo.getValueAt(i, 5),"'#$%&=?¡¿/*+[]{};:<>,")) {
+                if (check_eps(modelo.getValueAt(i, 2))) {
+                    if (check_arl(modelo.getValueAt(i, 3))) {
+                        if (check_afp(modelo.getValueAt(i, 4))) {
+                            if (check_ccf(modelo.getValueAt(i, 5))) {
                                 ret=ret&true;
                             }else{
                                 j.changeSelection(i,5, false, false);
                                 j.requestFocus();
-                                JOptionPane.showMessageDialog(null,"Verifique que en el campo CCF no contenga ningun caracter especial.","Error",JOptionPane.ERROR_MESSAGE);
+                                JOptionPane.showMessageDialog(null,"Verifique que la caja de compensación familiar esté en la lista.","Error",JOptionPane.ERROR_MESSAGE);
                                 ret=ret&false;
                                 break;
                             }
                         }else{
                             j.changeSelection(i,4, false, false);
                             j.requestFocus();
-                            JOptionPane.showMessageDialog(null,"Verifique que en el campo AFP no contenga ningun caracter especial.","Error",JOptionPane.ERROR_MESSAGE);
+                            JOptionPane.showMessageDialog(null,"Verifique que la AFP esté en la lista.","Error",JOptionPane.ERROR_MESSAGE);
                             ret=ret&false;
                             break;
                         }
                     }else{
                         j.changeSelection(i,3, false, false);
                         j.requestFocus();
-                        JOptionPane.showMessageDialog(null,"Verifique que en el campo ARL no contenga ningun caracter especial.","Error",JOptionPane.ERROR_MESSAGE);
+                        JOptionPane.showMessageDialog(null,"Verifique que la ARL esté en la lista.","Error",JOptionPane.ERROR_MESSAGE);
                         ret=ret&false;
                         break;
                     }
                 }else{
                     j.changeSelection(i,2, false, false);
                     j.requestFocus();
-                    JOptionPane.showMessageDialog(null,"Verifique que en el campo EPS no contenga ningun caracter especial.","Error",JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(null,"Verifique que la EPS esté en la lista.","Error",JOptionPane.ERROR_MESSAGE);
                     ret=ret&false;
                     break;
                 }
@@ -596,32 +596,7 @@ public boolean check_eps(Object eps){
                 con.conexion();
                 ResultSet r;
                 try{
-                    r = con.s.executeQuery ("SELECT * FROM T_EPS WHERE NOMBRE_EPS LIKE '%"+eps.toString().trim()+"%'");
-                    if(r.next()){
-                        ret=true;
-                    }
-                    con.cerrar();
-                }catch(SQLException j){
-                    con.cerrar();
-                    j.printStackTrace();
-                    return false;
-                    //JOptionPane.showMessageDialog(null,j,"Error",JOptionPane.ERROR_MESSAGE);
-                }
-            }
-        }
-    }
-    return ret;
-}
-public boolean check_afp(Object afp){
-    boolean ret=false;
-    if (afp!=null) {
-        if (!afp.toString().trim().equals("")) {
-            if (chech_char(afp.toString().trim(),"'#$%&()=?¡¿/*+[]{};:<>,")) {
-                Conexion con = new Conexion();
-                con.conexion();
-                ResultSet r;
-                try{
-                    r = con.s.executeQuery ("SELECT * FROM T_AFP WHERE NOMBRE_AFP LIKE '%"+afp.toString().trim()+"%'");
+                    r = con.s.executeQuery ("SELECT * FROM T_EPS WHERE NOMBRE_EPS='"+eps.toString().trim()+"'");
                     if(r.next()){
                         ret=true;
                     }
@@ -646,7 +621,32 @@ public boolean check_arl(Object arl){
                 con.conexion();
                 ResultSet r;
                 try{
-                    r = con.s.executeQuery ("SELECT * FROM T_ARL WHERE NOMBRE_ARL LIKE '%"+arl.toString().trim()+"%'");
+                    r = con.s.executeQuery ("SELECT * FROM T_ARL WHERE NOMBRE_ARL='"+arl.toString().trim()+"'");
+                    if(r.next()){
+                        ret=true;
+                    }
+                    con.cerrar();
+                }catch(SQLException j){
+                    con.cerrar();
+                    j.printStackTrace();
+                    return false;
+                    //JOptionPane.showMessageDialog(null,j,"Error",JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        }
+    }
+    return ret;
+}
+public boolean check_afp(Object afp){
+    boolean ret=false;
+    if (afp!=null) {
+        if (!afp.toString().trim().equals("")) {
+            if (chech_char(afp.toString().trim(),"'#$%&()=?¡¿/*+[]{};:<>,")) {
+                Conexion con = new Conexion();
+                con.conexion();
+                ResultSet r;
+                try{
+                    r = con.s.executeQuery ("SELECT * FROM T_AFP WHERE NOMBRE_AFP='"+afp.toString().trim()+"'");
                     if(r.next()){
                         ret=true;
                     }
@@ -671,7 +671,7 @@ public boolean check_ccf(Object ccf){
                 con.conexion();
                 ResultSet r;
                 try{
-                    r = con.s.executeQuery ("SELECT * FROM T_CCF WHERE NOMBRE_CCF LIKE '%"+ccf.toString().trim()+"%'");
+                    r = con.s.executeQuery ("SELECT * FROM T_CCF WHERE NOMBRE_CCF='"+ccf.toString().trim()+"'");
                     if(r.next()){
                         ret=true;
                     }

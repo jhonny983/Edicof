@@ -89,13 +89,13 @@ Float tasa;
 
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        emp_no_arl = new javax.swing.JTable();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        emp_tarifa_dif = new javax.swing.JTable();
         jPanel4 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jTable3 = new javax.swing.JTable();
+        emp_f_ingreso_dif = new javax.swing.JTable();
         jPanel2 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         n_novedades = new javax.swing.JLabel();
@@ -114,8 +114,8 @@ Float tasa;
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Empleados del sistema que no estan en la lista de la ARL"));
 
-        jTable1.setAutoCreateRowSorter(true);
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        emp_no_arl.setAutoCreateRowSorter(true);
+        emp_no_arl.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -141,7 +141,7 @@ Float tasa;
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(emp_no_arl);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -162,7 +162,7 @@ Float tasa;
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Empleados del sistema que estan en la lista de la ARL con tarifa diferente"));
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        emp_tarifa_dif.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -181,7 +181,7 @@ Float tasa;
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane2.setViewportView(jTable2);
+        jScrollPane2.setViewportView(emp_tarifa_dif);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -203,7 +203,7 @@ Float tasa;
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder("Empleados del sistema que estan en la lista de la ARL con fecha de ingreso diferente"));
         jPanel4.setPreferredSize(new java.awt.Dimension(484, 218));
 
-        jTable3.setModel(new javax.swing.table.DefaultTableModel(
+        emp_f_ingreso_dif.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
                 {null, null, null, null, null},
@@ -222,7 +222,7 @@ Float tasa;
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane3.setViewportView(jTable3);
+        jScrollPane3.setViewportView(emp_f_ingreso_dif);
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -465,22 +465,22 @@ Float tasa;
                 HSSFCell cellE8 = row8.createCell(4);
                 cellE8.setCellValue("Tasa (%)");
                 
-                int x = jTable1.getRowCount();
+                int x = emp_no_arl.getRowCount();
                 
-                for (int i = 0; i < jTable1.getRowCount(); i++) {
+                for (int i = 0; i < emp_no_arl.getRowCount(); i++) {
                     HSSFRow row = sheet.createRow(8+i);
-                    for (int j = 0; j < jTable1.getColumnCount(); j++) {
+                    for (int j = 0; j < emp_no_arl.getColumnCount(); j++) {
                         HSSFCell cell = row.createCell(1+j);
                         if (j==0) {
 //                            cell.setCellType(HSSFCell.CELL_TYPE_NUMERIC);
-                            cell.setCellValue(Double.parseDouble(jTable1.getValueAt(i, j).toString()));
+                            cell.setCellValue(Double.parseDouble(emp_no_arl.getValueAt(i, j).toString()));
                         }
                         if (j==1) {
 //                            cell.setCellType(HSSFCell.CELL_TYPE_STRING);
-                            cell.setCellValue(jTable1.getValueAt(i, j).toString());
+                            cell.setCellValue(emp_no_arl.getValueAt(i, j).toString());
                         }
                         if (j==2) {
-                            cell.setCellValue(new SimpleDateFormat("dd-mm-yyyy").parse(jTable1.getValueAt(i, j).toString()));
+                            cell.setCellValue(new SimpleDateFormat("dd-mm-yyyy").parse(emp_no_arl.getValueAt(i, j).toString()));
                             cellStyle = workbook.createCellStyle();
                             createHelper = workbook.getCreationHelper();
                             cellStyle.setDataFormat(
@@ -489,7 +489,7 @@ Float tasa;
                         }
                         if (j==3) {
                             cell.setCellType(HSSFCell.CELL_TYPE_NUMERIC);
-                            cell.setCellValue(Double.parseDouble(jTable1.getValueAt(i, j).toString().replace(',', '.')));
+                            cell.setCellValue(Double.parseDouble(emp_no_arl.getValueAt(i, j).toString().replace(',', '.')));
                         }
                     }
                 }
@@ -511,21 +511,21 @@ Float tasa;
                 HSSFCell cellEy = rowy.createCell(4);
                 cellEy.setCellValue("Tasa (%)");
                 
-                int w = 11 + x + jTable2.getRowCount();
-                for (int i = 0; i < jTable2.getRowCount(); i++) {
+                int w = 11 + x + emp_tarifa_dif.getRowCount();
+                for (int i = 0; i < emp_tarifa_dif.getRowCount(); i++) {
                     HSSFRow row = sheet.createRow(11+x+i);
-                    for (int j = 0; j < jTable2.getColumnCount(); j++) {
+                    for (int j = 0; j < emp_tarifa_dif.getColumnCount(); j++) {
                         HSSFCell cell = row.createCell(1+j);
                         if (j==0) {
 //                            cell.setCellType(HSSFCell.CELL_TYPE_NUMERIC);
-                            cell.setCellValue(Double.parseDouble(jTable2.getValueAt(i, j).toString()));
+                            cell.setCellValue(Double.parseDouble(emp_tarifa_dif.getValueAt(i, j).toString()));
                         }
                         if (j==1) {
 //                            cell.setCellType(HSSFCell.CELL_TYPE_STRING);
-                            cell.setCellValue(jTable2.getValueAt(i, j).toString());
+                            cell.setCellValue(emp_tarifa_dif.getValueAt(i, j).toString());
                         }
                         if (j==2) {
-                          cell.setCellValue(new SimpleDateFormat("dd-mm-yyyy").parse(jTable2.getValueAt(i, j).toString()));
+                          cell.setCellValue(new SimpleDateFormat("dd-mm-yyyy").parse(emp_tarifa_dif.getValueAt(i, j).toString()));
                             cellStyle = workbook.createCellStyle();
                             createHelper = workbook.getCreationHelper();
                             cellStyle.setDataFormat(
@@ -534,7 +534,7 @@ Float tasa;
                         }
                         if (j==3) {
                             cell.setCellType(HSSFCell.CELL_TYPE_NUMERIC);
-                            cell.setCellValue(Double.parseDouble(jTable2.getValueAt(i, j).toString().replace(',', '.')));
+                            cell.setCellValue(Double.parseDouble(emp_tarifa_dif.getValueAt(i, j).toString().replace(',', '.')));
                         }
                     }
                 }
@@ -559,20 +559,20 @@ Float tasa;
                 HSSFCell cellFz = rowz.createCell(5);
                 cellFz.setCellValue("Tasa (%)");
                 
-                for (int i = 0; i < jTable3.getRowCount(); i++) {
+                for (int i = 0; i < emp_f_ingreso_dif.getRowCount(); i++) {
                     HSSFRow row = sheet.createRow(w+3+i);
-                    for (int j = 0; j < jTable3.getColumnCount(); j++) {
+                    for (int j = 0; j < emp_f_ingreso_dif.getColumnCount(); j++) {
                         HSSFCell cell = row.createCell(1+j);
                         if (j==0) {
 //                            cell.setCellType(HSSFCell.CELL_TYPE_NUMERIC);
-                            cell.setCellValue(Double.parseDouble(jTable3.getValueAt(i, j).toString()));
+                            cell.setCellValue(Double.parseDouble(emp_f_ingreso_dif.getValueAt(i, j).toString()));
                         }
                         if (j==1) {
 //                            cell.setCellType(HSSFCell.CELL_TYPE_STRING);
-                            cell.setCellValue(jTable3.getValueAt(i, j).toString());
+                            cell.setCellValue(emp_f_ingreso_dif.getValueAt(i, j).toString());
                         }
                         if (j==2) {
-                          cell.setCellValue(new SimpleDateFormat("dd/mm/yyyy").parse(jTable3.getValueAt(i, j).toString()));
+                          cell.setCellValue(new SimpleDateFormat("dd/mm/yyyy").parse(emp_f_ingreso_dif.getValueAt(i, j).toString()));
                             cellStyle = workbook.createCellStyle();
                             createHelper = workbook.getCreationHelper();
                             cellStyle.setDataFormat(
@@ -580,7 +580,7 @@ Float tasa;
                             cell.setCellStyle(cellStyle);//dddd, d "de" mmmm "de" yyyy
                         }
                         if (j==3) {
-                          cell.setCellValue(new SimpleDateFormat("dd/mm/yyyy").parse(jTable3.getValueAt(i, j).toString()));
+                          cell.setCellValue(new SimpleDateFormat("dd/mm/yyyy").parse(emp_f_ingreso_dif.getValueAt(i, j).toString()));
                             cellStyle = workbook.createCellStyle();
                             createHelper = workbook.getCreationHelper();
                             cellStyle.setDataFormat(
@@ -589,7 +589,7 @@ Float tasa;
                         }
                         if (j==4) {
                             cell.setCellType(HSSFCell.CELL_TYPE_NUMERIC);
-                            cell.setCellValue(Double.parseDouble(jTable3.getValueAt(i, j).toString().replace(',', '.')));
+                            cell.setCellValue(Double.parseDouble(emp_f_ingreso_dif.getValueAt(i, j).toString().replace(',', '.')));
                         }
                     }
                 }
@@ -681,6 +681,9 @@ Float tasa;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTable emp_f_ingreso_dif;
+    private javax.swing.JTable emp_no_arl;
+    private javax.swing.JTable emp_tarifa_dif;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel6;
@@ -695,21 +698,18 @@ Float tasa;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable2;
-    private javax.swing.JTable jTable3;
     private javax.swing.JLabel n_novedades;
     private javax.swing.JLabel n_novedades1;
     private javax.swing.JLabel n_novedades2;
     // End of variables declaration//GEN-END:variables
 public void sys_no_arl(){
-    DefaultTableModel modelo = (DefaultTableModel)jTable1.getModel();
+    DefaultTableModel modelo = (DefaultTableModel)emp_no_arl.getModel();
     Object [] fila = new Object[4];
-    if (jTable1.getRowCount()>0) {
-        int j = jTable1.getRowCount();
+    if (emp_no_arl.getRowCount()>0) {
+        int j = emp_no_arl.getRowCount();
         for (int i = 0; i < j; i++) {
-            modelo.removeRow(jTable1.getRowCount()-1);
-            jTable1.setModel(modelo);
+            modelo.removeRow(emp_no_arl.getRowCount()-1);
+            emp_no_arl.setModel(modelo);
         }
     }
     Conexion con = new Conexion();
@@ -726,7 +726,7 @@ public void sys_no_arl(){
                                 "INNER JOIN t_tipo_novedad \n" +
                                 "        ON (t_novedades.ID_TIPO = t_tipo_novedad.ID_TIPO)\n" +
                                 "WHERE t_empresas.`NOMBRE_EMPRESA` = '"+empresa+"'\n" +
-                                "AND  t_novedades.ID_TIPO IN (1)\n" +
+                                "AND  t_novedades.ID_TIPO IN (1,4,5)\n" +
                                 "ORDER BY\n" +
                                 "     t_novedades.`ID_EMPLEADO` ASC");
         while(r.next()){
@@ -738,13 +738,13 @@ public void sys_no_arl(){
             }
             if (!q) {
                 modelo.addRow(fila);
-                modelo.setValueAt(Long.parseLong(r.getString("ID_EMPLEADO")),jTable1.getRowCount()-1,0);
-                modelo.setValueAt(r.getString("APELLIDO_1_EMP")+" "+r.getString("APELLIDO_2_EMP")+" "+r.getString("NOMBRE_1_EMP")+" "+r.getString("NOMBRE_2_EMP"),jTable1.getRowCount()-1,1);
-                modelo.setValueAt(new SimpleDateFormat("dd-MM-yyyy").format(new SimpleDateFormat("yyyy-MM-dd").parse(r.getString("FECHA_INGRESO"))),jTable1.getRowCount()-1,2);
-                modelo.setValueAt("6,96",jTable1.getRowCount()-1,3);
+                modelo.setValueAt(Long.parseLong(r.getString("ID_EMPLEADO")),emp_no_arl.getRowCount()-1,0);
+                modelo.setValueAt(r.getString("APELLIDO_1_EMP")+" "+r.getString("APELLIDO_2_EMP")+" "+r.getString("NOMBRE_1_EMP")+" "+r.getString("NOMBRE_2_EMP"),emp_no_arl.getRowCount()-1,1);
+                modelo.setValueAt(new SimpleDateFormat("dd-MM-yyyy").format(new SimpleDateFormat("yyyy-MM-dd").parse(r.getString("FECHA_INGRESO"))),emp_no_arl.getRowCount()-1,2);
+                modelo.setValueAt("6,96",emp_no_arl.getRowCount()-1,3);
             }
         }
-        n_novedades.setText(String.valueOf(jTable1.getRowCount()));
+        n_novedades.setText(String.valueOf(emp_no_arl.getRowCount()));
         con.cerrar();
     }catch(SQLException | ParseException j){
         con.cerrar();
@@ -753,13 +753,13 @@ public void sys_no_arl(){
 
 }
 public void sys_arl_tasa_dif(){
-    DefaultTableModel modelo = (DefaultTableModel)jTable2.getModel();
+    DefaultTableModel modelo = (DefaultTableModel)emp_tarifa_dif.getModel();
     Object [] fila = new Object[4];
-    if (jTable2.getRowCount()>0) {
-        int j = jTable2.getRowCount();
+    if (emp_tarifa_dif.getRowCount()>0) {
+        int j = emp_tarifa_dif.getRowCount();
         for (int i = 0; i < j; i++) {
-            modelo.removeRow(jTable2.getRowCount()-1);
-            jTable2.setModel(modelo);
+            modelo.removeRow(emp_tarifa_dif.getRowCount()-1);
+            emp_tarifa_dif.setModel(modelo);
         }
     }
     Conexion con = new Conexion();
@@ -776,7 +776,7 @@ public void sys_arl_tasa_dif(){
                                 "INNER JOIN t_tipo_novedad \n" +
                                 "        ON (t_novedades.ID_TIPO = t_tipo_novedad.ID_TIPO)\n" +
                                 "WHERE t_empresas.`NOMBRE_EMPRESA` = '"+empresa+"'\n" +
-                                "AND  t_novedades.ID_TIPO IN (1)\n" +
+                                "AND  t_novedades.ID_TIPO IN (1,4,5)\n" +
                                 "ORDER BY\n" +
                                 "     t_novedades.`ID_EMPLEADO` ASC");
         while(r.next()){
@@ -786,15 +786,15 @@ public void sys_arl_tasa_dif(){
 //                    System.out.println("Tasa Campo: "+get_porc(tasa));
                     if (!Objects.equals(get_porc(tabla_arl.getValueAt(i, 3).toString().replace(',', '.')), get_porc(tasa))) {
                         modelo.addRow(fila);
-                        modelo.setValueAt(Long.parseLong(r.getString("ID_EMPLEADO")),jTable2.getRowCount()-1,0);
-                        modelo.setValueAt(r.getString("APELLIDO_1_EMP")+" "+r.getString("APELLIDO_2_EMP")+" "+r.getString("NOMBRE_1_EMP")+" "+r.getString("NOMBRE_2_EMP"),jTable2.getRowCount()-1,1);
-                        modelo.setValueAt(new SimpleDateFormat("dd-MM-yyyy").format(new SimpleDateFormat("yyyy-MM-dd").parse(r.getString("FECHA_INGRESO"))),jTable2.getRowCount()-1,2);
-                        modelo.setValueAt(tabla_arl.getValueAt(i, 3),jTable2.getRowCount()-1,3);
+                        modelo.setValueAt(Long.parseLong(r.getString("ID_EMPLEADO")),emp_tarifa_dif.getRowCount()-1,0);
+                        modelo.setValueAt(r.getString("APELLIDO_1_EMP")+" "+r.getString("APELLIDO_2_EMP")+" "+r.getString("NOMBRE_1_EMP")+" "+r.getString("NOMBRE_2_EMP"),emp_tarifa_dif.getRowCount()-1,1);
+                        modelo.setValueAt(new SimpleDateFormat("dd-MM-yyyy").format(new SimpleDateFormat("yyyy-MM-dd").parse(r.getString("FECHA_INGRESO"))),emp_tarifa_dif.getRowCount()-1,2);
+                        modelo.setValueAt(tabla_arl.getValueAt(i, 3),emp_tarifa_dif.getRowCount()-1,3);
                     }
                 }
             }
         }
-        n_novedades1.setText(String.valueOf(jTable2.getRowCount()));
+        n_novedades1.setText(String.valueOf(emp_tarifa_dif.getRowCount()));
         con.cerrar();
     }catch(SQLException | ParseException j){
         con.cerrar();
@@ -803,13 +803,13 @@ public void sys_arl_tasa_dif(){
 
 }
 public void sys_arl_fecha_dif(){
-    DefaultTableModel modelo = (DefaultTableModel)jTable3.getModel();
+    DefaultTableModel modelo = (DefaultTableModel)emp_f_ingreso_dif.getModel();
     Object [] fila = new Object[4];
-    if (jTable3.getRowCount()>0) {
-        int j = jTable3.getRowCount();
+    if (emp_f_ingreso_dif.getRowCount()>0) {
+        int j = emp_f_ingreso_dif.getRowCount();
         for (int i = 0; i < j; i++) {
-            modelo.removeRow(jTable3.getRowCount()-1);
-            jTable3.setModel(modelo);
+            modelo.removeRow(emp_f_ingreso_dif.getRowCount()-1);
+            emp_f_ingreso_dif.setModel(modelo);
         }
     }
     Conexion con = new Conexion();
@@ -826,7 +826,7 @@ public void sys_arl_fecha_dif(){
                                 "INNER JOIN t_tipo_novedad \n" +
                                 "        ON (t_novedades.ID_TIPO = t_tipo_novedad.ID_TIPO)\n" +
                                 "WHERE t_empresas.`NOMBRE_EMPRESA` = '"+empresa+"'\n" +
-                                "AND  t_novedades.ID_TIPO IN (1)\n" +
+                                "AND  t_novedades.ID_TIPO IN (1,4,5)\n" +
                                 "ORDER BY\n" +
                                 "     t_novedades.`ID_EMPLEADO` ASC");
         while(r.next()){
@@ -834,16 +834,16 @@ public void sys_arl_fecha_dif(){
                 if (r.getString("ID_EMPLEADO").equals(tabla_arl.getValueAt(i, 0).toString())) {
                     if (get_fecha(tabla_arl.getValueAt(i, 2).toString().trim()).compareTo(new SimpleDateFormat("yyyy-MM-dd").parse(r.getString("FECHA_INGRESO")))!=0) {
                         modelo.addRow(fila);
-                        modelo.setValueAt(Long.parseLong(r.getString("ID_EMPLEADO")),jTable3.getRowCount()-1,0);
-                        modelo.setValueAt(r.getString("APELLIDO_1_EMP")+" "+r.getString("APELLIDO_2_EMP")+" "+r.getString("NOMBRE_1_EMP")+" "+r.getString("NOMBRE_2_EMP"),jTable3.getRowCount()-1,1);
-                        modelo.setValueAt(tabla_arl.getValueAt(i, 2).toString().trim(),jTable3.getRowCount()-1,2);
-                        modelo.setValueAt(new SimpleDateFormat("dd/MM/yyyy").format(new SimpleDateFormat("yyyy-MM-dd").parse(r.getString("FECHA_INGRESO"))),jTable3.getRowCount()-1,3);
-                        modelo.setValueAt(tabla_arl.getValueAt(i, 3).toString().trim(),jTable3.getRowCount()-1,4);
+                        modelo.setValueAt(Long.parseLong(r.getString("ID_EMPLEADO")),emp_f_ingreso_dif.getRowCount()-1,0);
+                        modelo.setValueAt(r.getString("APELLIDO_1_EMP")+" "+r.getString("APELLIDO_2_EMP")+" "+r.getString("NOMBRE_1_EMP")+" "+r.getString("NOMBRE_2_EMP"),emp_f_ingreso_dif.getRowCount()-1,1);
+                        modelo.setValueAt(tabla_arl.getValueAt(i, 2).toString().trim(),emp_f_ingreso_dif.getRowCount()-1,2);
+                        modelo.setValueAt(new SimpleDateFormat("dd/MM/yyyy").format(new SimpleDateFormat("yyyy-MM-dd").parse(r.getString("FECHA_INGRESO"))),emp_f_ingreso_dif.getRowCount()-1,3);
+                        modelo.setValueAt(tabla_arl.getValueAt(i, 3).toString().trim(),emp_f_ingreso_dif.getRowCount()-1,4);
                     }
                 }
             }
         }
-        n_novedades2.setText(String.valueOf(jTable3.getRowCount()));
+        n_novedades2.setText(String.valueOf(emp_f_ingreso_dif.getRowCount()));
         con.cerrar();
     }catch(SQLException | ParseException j){
         con.cerrar();
