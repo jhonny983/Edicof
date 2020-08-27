@@ -86,6 +86,7 @@ Object [] fila = new Object[5];
         empleados = new javax.swing.JTable();
         jButton4 = new javax.swing.JButton();
 
+        jMenuItem2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/delete.png"))); // NOI18N
         jMenuItem2.setText("Eliminar de lista Vetados");
         jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -94,6 +95,7 @@ Object [] fila = new Object[5];
         });
         jPopupMenu1.add(jMenuItem2);
 
+        jMenuItem1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/user_delete.png"))); // NOI18N
         jMenuItem1.setText("Eliminar");
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -387,9 +389,9 @@ Object [] fila = new Object[5];
             int conf = JOptionPane.showConfirmDialog(this,"Esta seguro que desea eliminar al empleado de la lista de Vetados?","Confirmación",JOptionPane.OK_CANCEL_OPTION,JOptionPane.QUESTION_MESSAGE);
             if (conf == JOptionPane.YES_OPTION) {
                 modelo = (DefaultTableModel)empleados.getModel(); 
-                r = con.s.executeQuery ("SELECT FROM t_vetados WHERE ID_EMPLEADO ="+modelo.getValueAt(empleados.getSelectedRow(),0));
+                r = con.s.executeQuery ("SELECT * FROM t_vetados WHERE ID_EMPLEADO = "+modelo.getValueAt(empleados.getSelectedRow(),0));
                 if (r.next()) {
-                    con.s.executeUpdate("DELETE FROM t_vetados WHERE ID_EMPLEADO="+modelo.getValueAt(empleados.getSelectedRow(), 0));
+                    con.s.executeUpdate("DELETE FROM t_vetados WHERE ID_EMPLEADO = "+modelo.getValueAt(empleados.getSelectedRow(),0));
                     JOptionPane.showMessageDialog(this,"El empleado fue eliminado de la lista correctamente","Información",JOptionPane.INFORMATION_MESSAGE);
                     con.cerrar();
                     this.dispose();

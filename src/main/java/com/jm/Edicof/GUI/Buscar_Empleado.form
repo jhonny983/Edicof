@@ -10,6 +10,9 @@
       <SubComponents>
         <MenuItem class="javax.swing.JMenuItem" name="jMenuItem2">
           <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/delete.png"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Eliminar de lista Vetados"/>
           </Properties>
           <Events>
@@ -18,6 +21,9 @@
         </MenuItem>
         <MenuItem class="javax.swing.JMenuItem" name="jMenuItem1">
           <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/user_delete.png"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Eliminar"/>
           </Properties>
           <Events>

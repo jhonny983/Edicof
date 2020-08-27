@@ -322,6 +322,9 @@
                 </MenuItem>
                 <Menu class="javax.swing.JMenu" name="jMenu3">
                   <Properties>
+                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                      <Image iconType="3" name="/group_delete.png"/>
+                    </Property>
                     <Property name="text" type="java.lang.String" value="Vetados"/>
                   </Properties>
                   <BindingProperties>
@@ -330,6 +333,9 @@
                   <SubComponents>
                     <MenuItem class="javax.swing.JMenuItem" name="jMenuItem42">
                       <Properties>
+                        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                          <Image iconType="3" name="/add.png"/>
+                        </Property>
                         <Property name="text" type="java.lang.String" value="Ingresar Vetados"/>
                       </Properties>
                       <BindingProperties>
@@ -1088,6 +1094,7 @@
                       <Image iconType="3" name="/document_signature.png"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="Pila"/>
+                    <Property name="enabled" type="boolean" value="false"/>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem65ActionPerformed"/>

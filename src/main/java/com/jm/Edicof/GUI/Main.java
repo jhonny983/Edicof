@@ -1087,11 +1087,13 @@ public static ArrayList conection_list = new ArrayList();
         });
         jMenu2.add(jMenuItem28);
 
+        jMenu3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/group_delete.png"))); // NOI18N
         jMenu3.setText("Vetados");
 
         binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, jm_informacion, org.jdesktop.beansbinding.ELProperty.create("${enabled}"), jMenu3, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
         bindingGroup.addBinding(binding);
 
+        jMenuItem42.setIcon(new javax.swing.ImageIcon(getClass().getResource("/add.png"))); // NOI18N
         jMenuItem42.setText("Ingresar Vetados");
 
         binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, jMenu3, org.jdesktop.beansbinding.ELProperty.create("${enabled}"), jMenuItem42, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
@@ -1764,6 +1766,7 @@ public static ArrayList conection_list = new ArrayList();
 
         jMenuItem65.setIcon(new javax.swing.ImageIcon(getClass().getResource("/document_signature.png"))); // NOI18N
         jMenuItem65.setText("Pila");
+        jMenuItem65.setEnabled(false);
         jMenuItem65.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem65ActionPerformed(evt);
