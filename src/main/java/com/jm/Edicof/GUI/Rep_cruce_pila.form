@@ -31,7 +31,7 @@
                   <Group type="102" attributes="0">
                       <Component id="jPanel5" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jPanel4" pref="519" max="32767" attributes="0"/>
+                      <Component id="jPanel4" pref="522" max="32767" attributes="0"/>
                       <EmptySpace min="-2" max="-2" attributes="0"/>
                       <Component id="jPanel3" max="32767" attributes="0"/>
                   </Group>
@@ -315,6 +315,9 @@
       </Layout>
       <SubComponents>
         <Component class="com.toedter.calendar.JMonthChooser" name="mes">
+          <Properties>
+            <Property name="month" type="int" value="0"/>
+          </Properties>
         </Component>
         <Component class="com.toedter.calendar.JYearChooser" name="a&#xf1;o">
         </Component>
