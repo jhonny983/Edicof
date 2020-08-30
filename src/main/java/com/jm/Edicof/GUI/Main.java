@@ -74,7 +74,7 @@ static boolean mainperm = false;
 public static Programacion tarea=null ;
 public static Dimension size =null;
 public int version;
-public static String ver_str="3.0.4.2";
+public static String ver_str="3.0.4.3";
 public String url_info_update = "https://onedrive.live.com/download?cid=51049062522CB054&resid=51049062522CB054%21219574&authkey=AP_5XduLgOsOxQg";//Ruta del archivo que contiene la informacion de la ultima version del software
 //public String url_permission = "https://www.dropbox.com/s/c9bbt0blodjnrrs/PERMISOS.txt?dl=1";//Ruta del archivo que contiene la informacion de la ultima version del software
 public static ArrayList conection_list = new ArrayList();
@@ -330,7 +330,9 @@ public static ArrayList conection_list = new ArrayList();
         jMenu22 = new javax.swing.JMenu();
         jMenuItem55 = new javax.swing.JMenuItem();
         jMenuItem59 = new javax.swing.JMenuItem();
+        jMenu24 = new javax.swing.JMenu();
         jMenuItem65 = new javax.swing.JMenuItem();
+        jMenuItem71 = new javax.swing.JMenuItem();
         jMenuItem66 = new javax.swing.JMenuItem();
         jMenuItem67 = new javax.swing.JMenuItem();
         jm_pqr = new javax.swing.JMenu();
@@ -1536,7 +1538,7 @@ public static ArrayList conection_list = new ArrayList();
         bindingGroup.addBinding(binding);
 
         jMenuItem14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/user_green.png"))); // NOI18N
-        jMenuItem14.setText("Personal activo");
+        jMenuItem14.setText("Personal Activo");
 
         binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, jm_reportes, org.jdesktop.beansbinding.ELProperty.create("${enabled}"), jMenuItem14, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
         bindingGroup.addBinding(binding);
@@ -1764,15 +1766,37 @@ public static ArrayList conection_list = new ArrayList();
 
         jMenu14.add(jMenu22);
 
-        jMenuItem65.setIcon(new javax.swing.ImageIcon(getClass().getResource("/document_signature.png"))); // NOI18N
-        jMenuItem65.setText("Pila");
-        jMenuItem65.setEnabled(false);
+        jMenu24.setIcon(new javax.swing.ImageIcon(getClass().getResource("/document_signature.png"))); // NOI18N
+        jMenu24.setText("PILA");
+
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, jm_reportes, org.jdesktop.beansbinding.ELProperty.create("${enabled}"), jMenu24, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
+        bindingGroup.addBinding(binding);
+
+        jMenuItem65.setText("Agregar Cruce Pila");
+
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, jMenu24, org.jdesktop.beansbinding.ELProperty.create("${enabled}"), jMenuItem65, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
+        bindingGroup.addBinding(binding);
+
         jMenuItem65.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem65ActionPerformed(evt);
             }
         });
-        jMenu14.add(jMenuItem65);
+        jMenu24.add(jMenuItem65);
+
+        jMenuItem71.setText("Consultar Cruce");
+
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, jMenu24, org.jdesktop.beansbinding.ELProperty.create("${enabled}"), jMenuItem71, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
+        bindingGroup.addBinding(binding);
+
+        jMenuItem71.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem71ActionPerformed(evt);
+            }
+        });
+        jMenu24.add(jMenuItem71);
+
+        jMenu14.add(jMenu24);
 
         jMenuItem66.setIcon(new javax.swing.ImageIcon(getClass().getResource("/book_go.png"))); // NOI18N
         jMenuItem66.setText("Precalculo");
@@ -2654,6 +2678,13 @@ public static ArrayList conection_list = new ArrayList();
         add_emp_mas.setVisible(true);
     }//GEN-LAST:event_jMenuItem70ActionPerformed
 
+    private void jMenuItem71ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem71ActionPerformed
+        // TODO add your handling code here:
+        Busc_cruce_pila bc = new Busc_cruce_pila(this, false);
+        bc.setLocationRelativeTo(this);
+        bc.setVisible(true);
+    }//GEN-LAST:event_jMenuItem71ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -2738,6 +2769,7 @@ public static ArrayList conection_list = new ArrayList();
     private javax.swing.JMenu jMenu21;
     private javax.swing.JMenu jMenu22;
     private javax.swing.JMenu jMenu23;
+    private javax.swing.JMenu jMenu24;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenu jMenu5;
@@ -2814,6 +2846,7 @@ public static ArrayList conection_list = new ArrayList();
     private javax.swing.JMenuItem jMenuItem69;
     private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JMenuItem jMenuItem70;
+    private javax.swing.JMenuItem jMenuItem71;
     private javax.swing.JMenuItem jMenuItem8;
     private javax.swing.JMenuItem jMenuItem9;
     private javax.swing.JPanel jPanel1;

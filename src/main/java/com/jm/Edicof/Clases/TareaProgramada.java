@@ -30,7 +30,7 @@ public class TareaProgramada implements Job {
     for (int i = 0; i < Main.conection_list.size(); i++) {
         String [] p= (String[])Main.conection_list.get(i);
         //executeCmd = Main.ruta_sql_bin+"/mysqldump -u "+Main.usu+" -p"+Main.cont+" --add-drop-database -B "+Main.bd+"";
-        executeCmd = Main.ruta_sql_bin+"/mysqldump -u "+p[2]+" -p"+p[3]+" --add-drop-database -B "+p[1]+"";
+        executeCmd = Main.ruta_sql_bin+"/mysqldump -u "+p[2]+" -p"+p[3]+" "+p[1]+"";
         System.out.println(executeCmd);
         try {   
                 Process runtimeProcess = Runtime.getRuntime().exec(executeCmd);

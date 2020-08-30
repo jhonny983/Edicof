@@ -965,9 +965,9 @@ private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
                 String [] p= (String[])Main.conection_list.get(i);
                 String executeCmd = "";
                 if (tipo_estacion.getSelectedItem().equals("CLIENTE")) {
-                    executeCmd = Main.ruta_sql_bin+"/mysqldump -u "+p[2]+" -p"+p[3]+" --add-drop-database -B --host="+host1.getText()+"."+host2.getText()+"."+host3.getText()+"."+host4.getText()+" "+p[1]+"";
+                    executeCmd = Main.ruta_sql_bin+"/mysqldump -u "+p[2]+" -p"+p[3]+" --host="+host1.getText()+"."+host2.getText()+"."+host3.getText()+"."+host4.getText()+" "+p[1]+"";
                 } else {
-                    executeCmd = Main.ruta_sql_bin+"/mysqldump -u "+p[2]+" -p"+p[3]+" --add-drop-database -B "+p[1]+"";
+                    executeCmd = Main.ruta_sql_bin+"/mysqldump -u "+p[2]+" -p"+p[3]+" "+p[1]+"";//executeCmd = Main.ruta_sql_bin+"/mysqldump -u "+p[2]+" -p"+p[3]+" --add-drop-database -B "+p[1]+"";
                 }
                 System.out.println(executeCmd);
                 try{

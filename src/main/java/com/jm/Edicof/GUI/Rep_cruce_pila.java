@@ -5,7 +5,7 @@
  */
 package com.jm.Edicof.GUI;
 
-import com.jm.Edicof.Clases.CellRender_Cruce_Arl;
+import com.jm.Edicof.Clases.CellRender_Cruce_Pila;
 import com.jm.Edicof.Clases.ClipBoardActionListener;
 import com.jm.Edicof.Clases.Conexion;
 import com.mxrck.autocompleter.TextAutoCompleter;
@@ -18,6 +18,8 @@ import java.util.StringTokenizer;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.SwingConstants;
+import javax.swing.event.TableModelEvent;
+import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
@@ -36,7 +38,15 @@ Object [] fila = new Object[6];
         super(parent, modal);
         initComponents();
         this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/group_gear.png")));
-        t_info_pila.setDefaultRenderer (Object.class, new CellRender_Cruce_Arl());
+        //***********************************************
+        t_info_pila.getModel().addTableModelListener(new TableModelListener() {
+            @Override
+            public void tableChanged(TableModelEvent e) {
+                n_novedades.setText(String.valueOf(t_info_pila.getRowCount()));
+            }
+        });
+        //***********************************************
+        t_info_pila.setDefaultRenderer (Object.class, new CellRender_Cruce_Pila());
         DefaultTableCellRenderer tcr = (DefaultTableCellRenderer)t_info_pila.getDefaultRenderer(Object.class);
         tcr.setHorizontalAlignment(SwingConstants.CENTER);
         t_info_pila.getColumnModel().getColumn(0).setCellRenderer(tcr);
@@ -68,6 +78,9 @@ Object [] fila = new Object[6];
         jPanel5 = new javax.swing.JPanel();
         mes = new com.toedter.calendar.JMonthChooser();
         año = new com.toedter.calendar.JYearChooser();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel6 = new javax.swing.JLabel();
+        n_novedades = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Cruce EPS");
@@ -84,7 +97,7 @@ Object [] fila = new Object[6];
                 "Cedula", "NIT", "EPS", "ARL", "AFP", "CCF"
             }
         ));
-        t_info_pila.setToolTipText("Pegue aqui los datos descargados de la ARL del empleador seleccionado.");
+        t_info_pila.setToolTipText("Inserte aqui los datos descargados de la PILA.");
         jScrollPane1.setViewportView(t_info_pila);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -93,14 +106,14 @@ Object [] fila = new Object[6];
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1000, Short.MAX_VALUE)
+                .addComponent(jScrollPane1)
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 241, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 246, Short.MAX_VALUE)
                 .addGap(12, 12, 12))
         );
 
@@ -167,13 +180,13 @@ Object [] fila = new Object[6];
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(39, Short.MAX_VALUE)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton4)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(40, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -210,6 +223,36 @@ Object [] fila = new Object[6];
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Resumen"));
+
+        jLabel6.setText("Numero de Novedades");
+
+        n_novedades.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        n_novedades.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(31, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel6)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(n_novedades, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(33, 33, 33)))
+                .addContainerGap(22, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel6)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(n_novedades)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -221,7 +264,9 @@ Object [] fila = new Object[6];
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, 519, Short.MAX_VALUE)
+                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 325, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
@@ -233,7 +278,8 @@ Object [] fila = new Object[6];
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, 101, Short.MAX_VALUE)
-                    .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
@@ -250,6 +296,7 @@ Object [] fila = new Object[6];
                     this.setCursor(new Cursor(Cursor.WAIT_CURSOR));
                     pp.setLocationRelativeTo(null);
                     pp.setVisible(true);
+                    this.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
                 }
             }else{
                 JOptionPane.showMessageDialog(null,"La tabla esta vacia","Error",JOptionPane.ERROR_MESSAGE);
@@ -349,12 +396,15 @@ Object [] fila = new Object[6];
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
     private com.toedter.calendar.JMonthChooser mes;
+    private javax.swing.JLabel n_novedades;
     private javax.swing.JTable t_info_pila;
     // End of variables declaration//GEN-END:variables
 
@@ -424,36 +474,36 @@ public boolean check_table(JTable j){
     for (int i = 0; i < j.getRowCount(); i++) {
         if(check_cedula(modelo.getValueAt(i, 0))){
             if(check_nit(modelo.getValueAt(i, 1))){
-                if (check_eps(modelo.getValueAt(i, 2))) {
-                    if (check_arl(modelo.getValueAt(i, 3))) {
-                        if (check_afp(modelo.getValueAt(i, 4))) {
-                            if (check_ccf(modelo.getValueAt(i, 5))) {
+                if (check_eps(modelo.getValueAt(i, 2)) | modelo.getValueAt(i, 2)==null) {
+                    if (check_arl(modelo.getValueAt(i, 3)) | modelo.getValueAt(i, 3)==null) {
+                        if (check_afp(modelo.getValueAt(i, 4)) | modelo.getValueAt(i, 4)==null) {
+                            if (check_ccf(modelo.getValueAt(i, 5)) | modelo.getValueAt(i, 5)==null) {
                                 ret=ret&true;
                             }else{
                                 j.changeSelection(i,5, false, false);
                                 j.requestFocus();
-                                JOptionPane.showMessageDialog(null,"Verifique que la caja de compensación familiar esté en la lista.","Error",JOptionPane.ERROR_MESSAGE);
+                                JOptionPane.showMessageDialog(null,"Verifique que la caja de compensación familiar se encuentre ingresada en la aplicacion.","Error",JOptionPane.ERROR_MESSAGE);
                                 ret=ret&false;
                                 break;
                             }
                         }else{
                             j.changeSelection(i,4, false, false);
                             j.requestFocus();
-                            JOptionPane.showMessageDialog(null,"Verifique que la AFP esté en la lista.","Error",JOptionPane.ERROR_MESSAGE);
+                            JOptionPane.showMessageDialog(null,"Verifique que la AFP se encuentre ingresada en la lista de AFP's de la aplicacion.","Error",JOptionPane.ERROR_MESSAGE);
                             ret=ret&false;
                             break;
                         }
                     }else{
                         j.changeSelection(i,3, false, false);
                         j.requestFocus();
-                        JOptionPane.showMessageDialog(null,"Verifique que la ARL esté en la lista.","Error",JOptionPane.ERROR_MESSAGE);
+                        JOptionPane.showMessageDialog(null,"Verifique que la ARL se encuentre ingresada en la lista de ARL's de laaplicacion.","Error",JOptionPane.ERROR_MESSAGE);
                         ret=ret&false;
                         break;
                     }
                 }else{
                     j.changeSelection(i,2, false, false);
                     j.requestFocus();
-                    JOptionPane.showMessageDialog(null,"Verifique que la EPS esté en la lista.","Error",JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(null,"Verifique que la EPS se encuentre ingresada en la lista de EPS's de aplicacion.","Error",JOptionPane.ERROR_MESSAGE);
                     ret=ret&false;
                     break;
                 }
@@ -488,13 +538,13 @@ public boolean check_cedula(Object ced){
     return ret;  
 }
 public static boolean comprobarLong (String cadena){
-try{
-    long num = Long.parseLong(cadena);
-}catch (Exception e){
-    e.printStackTrace();
-    return false;
-}
-return true;
+    try{
+        long num = Long.parseLong(cadena);
+    }catch (Exception e){
+        e.printStackTrace();
+        return false;
+    }
+    return true;
 }
 public boolean check_fecha(Object fecha){
     boolean ret=false;
@@ -683,6 +733,57 @@ public boolean check_ccf(Object ccf){
                     //JOptionPane.showMessageDialog(null,j,"Error",JOptionPane.ERROR_MESSAGE);
                 }
             }
+        }
+    }
+    return ret;
+}
+public String get_fecha_ini(int m, int y){
+    Calendar ahoraCal = Calendar.getInstance();
+    Calendar f_inicio = Calendar.getInstance();
+    ahoraCal.set(Calendar.MONTH,m);
+    ahoraCal.set(Calendar.YEAR,y);
+    f_inicio.set(Calendar.DATE, ahoraCal.getActualMinimum(Calendar.DATE));
+    f_inicio.set(Calendar.HOUR_OF_DAY,0);
+    f_inicio.set(Calendar.MINUTE,0);
+    f_inicio.set(Calendar.SECOND,0);
+    return f_inicio.getTime().toString();
+}
+public String get_fecha_fin(int m, int y){
+    Calendar ahoraCal = Calendar.getInstance();
+    Calendar f_final = Calendar.getInstance();
+    ahoraCal.set(Calendar.MONTH,m);
+    ahoraCal.set(Calendar.YEAR,y);
+    f_final.set(Calendar.DATE, ahoraCal.getActualMaximum(Calendar.DATE));
+    f_final.set(Calendar.HOUR_OF_DAY,0);
+    f_final.set(Calendar.MINUTE,0);
+    f_final.set(Calendar.SECOND,0);
+    return  f_final.getTime().toString();
+}
+public boolean check_empleado(String ced, String nit, int mes, int año){
+    boolean ret =false;
+    if (!ced.equals("") & !nit.equals("")) {
+        Conexion con = new Conexion();
+        con.conexion();
+        ResultSet r;
+        try{
+            r = con.s.executeQuery ("SELECT *\n" +
+                                    "FROM\n" +
+                                    "    t_novedades\n" +
+                                    "    WHERE t_novedades.ID_EMPRESA = '"+nit+"'\n" +
+                                    "    AND t_novedades.ID_EMPLEADO = "+ced+"\n" +
+                                    "    AND  t_novedades.ID_TIPO IN (1,4,5)\n"+
+                                    "    AND ((t_novedades.FECHA_INGRESO <= '"+get_fecha_fin(mes, año)+"' AND t_novedades.FECHA_RETIRO = '1900-01-01')\n" +
+                                    "	     OR ( t_novedades.FECHA_INGRESO <= '"+get_fecha_fin(mes, año)+"' AND t_novedades.FECHA_RETIRO >= '"+get_fecha_ini(mes, año)+"'))\n"+
+                                    "    ORDER BY t_novedades.FECHA_INGRESO DESC");
+            if(r.next()){
+                ret=true;
+            }
+            con.cerrar();
+        }catch(SQLException j){
+            con.cerrar();
+            j.printStackTrace();
+            return false;
+            //JOptionPane.showMessageDialog(null,j,"Error",JOptionPane.ERROR_MESSAGE);
         }
     }
     return ret;
