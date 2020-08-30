@@ -109,7 +109,7 @@ public class CellRender_Cruce_Pila extends DefaultTableCellRenderer{
                     if (table.getColumnName(column).equals("ARL")) {
                         if (value!=null) {
                             if (chech_char(value.toString().trim(),"'#$%&()=?¡¿/*+[]{};:<>")) {
-                                if (check_arl(value.toString())) {
+                                if (check_arl(value.toString()) | value.toString().trim().equals("")) {
                                     cell.setOpaque(true);
                                     cell.setBackground(new Color(150,240,160));
                                     cell.setForeground(Color.black);
@@ -132,7 +132,7 @@ public class CellRender_Cruce_Pila extends DefaultTableCellRenderer{
                         if (table.getColumnName(column).equals("AFP")) {
                             if (value!=null) {
                                 if (chech_char(value.toString().trim(),"'#$%&()=?¡¿/*+[]{};:<>")) {
-                                    if (check_afp(value.toString())) {
+                                    if (check_afp(value.toString()) | value.toString().trim().equals("")) {
                                         cell.setOpaque(true);
                                         cell.setBackground(new Color(150,240,160));
                                         cell.setForeground(Color.black);
@@ -155,7 +155,7 @@ public class CellRender_Cruce_Pila extends DefaultTableCellRenderer{
                             if (table.getColumnName(column).equals("CCF")) {
                                 if (value!=null) {
                                     if (chech_char(value.toString().trim(),"'#$%&()=?¡¿/*+[]{};:<>")) {
-                                        if (check_ccf(value.toString())) {
+                                        if (check_ccf(value.toString()) | value.toString().trim().equals("")) {
                                             cell.setOpaque(true);
                                             cell.setBackground(new Color(150,240,160));
                                             cell.setForeground(Color.black);

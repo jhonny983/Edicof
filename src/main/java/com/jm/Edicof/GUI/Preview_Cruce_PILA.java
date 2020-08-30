@@ -23,6 +23,8 @@ import java.util.StringTokenizer;
 import javax.sql.rowset.serial.SerialBlob;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
+import javax.swing.event.TableModelEvent;
+import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableModel;
 import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.hssf.usermodel.HSSFCellStyle;
@@ -38,15 +40,7 @@ import org.apache.poi.ss.util.CellRangeAddress;
  */
 public final class Preview_Cruce_PILA extends javax.swing.JDialog {
 static Dimension screenSize = null;
-//JTable tabla_pila;
-//static ArrayList<ArrayList<String>> pila = new ArrayList<>();
-//static ArrayList<ArrayList<String>> no_emp = new ArrayList<>();
-//static ArrayList<ArrayList<String>> no_eps = new ArrayList<>();
-//static ArrayList<ArrayList<String>> no_arl = new ArrayList<>();
-//static ArrayList<ArrayList<String>> no_afp = new ArrayList<>();
-//static ArrayList<ArrayList<String>> no_ccf = new ArrayList<>();
-//String f_ini,f_fin;
-//List<String> nit_list = new ArrayList<>();
+int mes,año=0;
     /**
      * Creates new form Preview_Cruce
      */
@@ -58,9 +52,36 @@ static Dimension screenSize = null;
         screenSize = Main.getsize();
         this.setSize(screenSize.width-20, screenSize.height-10);
         this.setLocationRelativeTo(null);
-        //pila = load_table_to_list(t_pila);
-        //nit_list = get_nit_list();
-        //get_fecha(mes,año);
+        this.mes=mes;
+        this.año=año;
+        //***********************************************
+        emp_eps_diff.getModel().addTableModelListener(new TableModelListener() {
+            @Override
+            public void tableChanged(TableModelEvent e) {
+                n_eps_dif.setText(String.valueOf(emp_eps_diff.getRowCount()));
+            }
+        });
+        //***********************************************
+        emp_arl_diff.getModel().addTableModelListener(new TableModelListener() {
+            @Override
+            public void tableChanged(TableModelEvent e) {
+                n_arl_diff.setText(String.valueOf(emp_arl_diff.getRowCount()));
+            }
+        });
+        //***********************************************
+        emp_afp_diff.getModel().addTableModelListener(new TableModelListener() {
+            @Override
+            public void tableChanged(TableModelEvent e) {
+                n_afp_diff.setText(String.valueOf(emp_afp_diff.getRowCount()));
+            }
+        });
+        //***********************************************
+        emp_ccf_diff.getModel().addTableModelListener(new TableModelListener() {
+            @Override
+            public void tableChanged(TableModelEvent e) {
+                n_ccf_diff.setText(String.valueOf(emp_ccf_diff.getRowCount()));
+            }
+        });
         sys_no(t_pila,mes,año);
 
     }
@@ -72,9 +93,37 @@ static Dimension screenSize = null;
         screenSize = Main.getsize();
         this.setSize(screenSize.width-20, screenSize.height-10);
         this.setLocationRelativeTo(null);
-        //pila = load_table_to_list(j);
-        //nit_list = get_nit_list();
-        //get_fecha(m,y);
+        this.mes=mes;
+        this.año=año;
+        //***********************************************
+        emp_eps_diff.getModel().addTableModelListener(new TableModelListener() {
+            @Override
+            public void tableChanged(TableModelEvent e) {
+                n_eps_dif.setText(String.valueOf(emp_eps_diff.getRowCount()));
+            }
+        });
+        //***********************************************
+        emp_arl_diff.getModel().addTableModelListener(new TableModelListener() {
+            @Override
+            public void tableChanged(TableModelEvent e) {
+                n_arl_diff.setText(String.valueOf(emp_arl_diff.getRowCount()));
+            }
+        });
+        //***********************************************
+        emp_afp_diff.getModel().addTableModelListener(new TableModelListener() {
+            @Override
+            public void tableChanged(TableModelEvent e) {
+                n_afp_diff.setText(String.valueOf(emp_afp_diff.getRowCount()));
+            }
+        });
+        //***********************************************
+        emp_ccf_diff.getModel().addTableModelListener(new TableModelListener() {
+            @Override
+            public void tableChanged(TableModelEvent e) {
+                n_ccf_diff.setText(String.valueOf(emp_ccf_diff.getRowCount()));
+            }
+        });
+        //***********************************************
         sys_no(t_pila,mes,año);
 
     }
@@ -124,10 +173,7 @@ static Dimension screenSize = null;
         emp_eps_diff.setAutoCreateRowSorter(true);
         emp_eps_diff.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
                 "Cedula", "Nombre", "EPS Pila", "EPS sistema"
@@ -148,6 +194,7 @@ static Dimension screenSize = null;
                 return canEdit [columnIndex];
             }
         });
+        emp_eps_diff.setCellSelectionEnabled(true);
         jScrollPane1.setViewportView(emp_eps_diff);
         if (emp_eps_diff.getColumnModel().getColumnCount() > 0) {
             emp_eps_diff.getColumnModel().getColumn(0).setMinWidth(150);
@@ -168,18 +215,16 @@ static Dimension screenSize = null;
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 122, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Empleados del sistema con ARL diferente"));
 
+        emp_arl_diff.setAutoCreateRowSorter(true);
         emp_arl_diff.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
                 "Cedula", "Nombre", "ARL Pila", "ARL sistema"
@@ -193,6 +238,7 @@ static Dimension screenSize = null;
                 return canEdit [columnIndex];
             }
         });
+        emp_arl_diff.setCellSelectionEnabled(true);
         jScrollPane2.setViewportView(emp_arl_diff);
         if (emp_arl_diff.getColumnModel().getColumnCount() > 0) {
             emp_arl_diff.getColumnModel().getColumn(0).setMinWidth(150);
@@ -213,19 +259,17 @@ static Dimension screenSize = null;
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 123, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder("Empleados del sistema con AFP diferente"));
         jPanel4.setPreferredSize(new java.awt.Dimension(484, 218));
 
+        emp_afp_diff.setAutoCreateRowSorter(true);
         emp_afp_diff.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
                 "Cedula", "Nombre", "AFP Pila", "AFP sistema"
@@ -239,6 +283,7 @@ static Dimension screenSize = null;
                 return canEdit [columnIndex];
             }
         });
+        emp_afp_diff.setCellSelectionEnabled(true);
         jScrollPane3.setViewportView(emp_afp_diff);
         if (emp_afp_diff.getColumnModel().getColumnCount() > 0) {
             emp_afp_diff.getColumnModel().getColumn(0).setMinWidth(150);
@@ -259,7 +304,7 @@ static Dimension screenSize = null;
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 125, Short.MAX_VALUE)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 88, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -287,11 +332,11 @@ static Dimension screenSize = null;
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(34, Short.MAX_VALUE)
                 .addComponent(jLabel6)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(n_eps_dif)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(34, Short.MAX_VALUE))
         );
 
         jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder("Resumen"));
@@ -318,11 +363,11 @@ static Dimension screenSize = null;
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(34, Short.MAX_VALUE)
                 .addComponent(jLabel7)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(n_arl_diff)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(34, Short.MAX_VALUE))
         );
 
         jPanel6.setBorder(javax.swing.BorderFactory.createTitledBorder("Resumen"));
@@ -349,11 +394,11 @@ static Dimension screenSize = null;
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(34, Short.MAX_VALUE)
                 .addComponent(jLabel8)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(n_afp_diff)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(34, Short.MAX_VALUE))
         );
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/accept_1.png"))); // NOI18N
@@ -375,12 +420,10 @@ static Dimension screenSize = null;
         jPanel7.setBorder(javax.swing.BorderFactory.createTitledBorder("Empleados del sistema con CCF diferente"));
         jPanel7.setPreferredSize(new java.awt.Dimension(484, 218));
 
+        emp_ccf_diff.setAutoCreateRowSorter(true);
         emp_ccf_diff.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
                 "Cedula", "Nombre", "CCF Pila", "CCF sistema"
@@ -394,11 +437,14 @@ static Dimension screenSize = null;
                 return canEdit [columnIndex];
             }
         });
+        emp_ccf_diff.setCellSelectionEnabled(true);
         jScrollPane4.setViewportView(emp_ccf_diff);
         if (emp_ccf_diff.getColumnModel().getColumnCount() > 0) {
             emp_ccf_diff.getColumnModel().getColumn(0).setMinWidth(150);
             emp_ccf_diff.getColumnModel().getColumn(0).setPreferredWidth(150);
             emp_ccf_diff.getColumnModel().getColumn(0).setMaxWidth(150);
+            emp_ccf_diff.getColumnModel().getColumn(2).setHeaderValue("CCF Pila");
+            emp_ccf_diff.getColumnModel().getColumn(3).setHeaderValue("CCF sistema");
         }
 
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
@@ -414,7 +460,7 @@ static Dimension screenSize = null;
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel7Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 123, Short.MAX_VALUE)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 88, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -442,11 +488,11 @@ static Dimension screenSize = null;
         jPanel8Layout.setVerticalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel8Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(34, Short.MAX_VALUE)
                 .addComponent(jLabel9)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(n_ccf_diff)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(34, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -456,6 +502,12 @@ static Dimension screenSize = null;
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jButton1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButton2)
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, 812, Short.MAX_VALUE)
@@ -463,44 +515,37 @@ static Dimension screenSize = null;
                             .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jPanel4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 812, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jPanel5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jPanel8, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jButton1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton2)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jPanel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(11, 11, 11)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE)
-                    .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(1, 1, 1)
+                    .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, 168, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
                     .addComponent(jButton2))
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -522,16 +567,14 @@ static Dimension screenSize = null;
 //                FileInputStream fis;
 //                fis = new FileInputStream(path);
                 HSSFWorkbook workbook = new HSSFWorkbook();
-                HSSFSheet sheet = workbook.createSheet("Cruce_"+new SimpleDateFormat("dd-MM-yyyy").format(new Date()));
+                HSSFSheet sheet = workbook.createSheet("Cruce_PILA_"+new SimpleDateFormat("dd-MM-yyyy").format(new Date()));
                 CellRangeAddress region = CellRangeAddress.valueOf("B1:F1");
                 sheet.addMergedRegion(region);
                 region = CellRangeAddress.valueOf("B3:F3");
                 sheet.addMergedRegion(region);
-                region = CellRangeAddress.valueOf("B4:F4");
+                region = CellRangeAddress.valueOf("B5:F5");
                 sheet.addMergedRegion(region);
-                region = CellRangeAddress.valueOf("B7:F7");
-                sheet.addMergedRegion(region);
-                
+                                
                 HSSFRow row_tittle = sheet.createRow(0);
                 HSSFCell cellB1 = row_tittle.createCell(1);
                 cellB1.setCellValue("CRUCE PILA");
@@ -539,7 +582,7 @@ static Dimension screenSize = null;
                 centerstyle.setAlignment(HSSFCellStyle.ALIGN_CENTER);
                 cellB1.setCellStyle(centerstyle);
                                 
-                HSSFRow row_date = sheet.createRow(3);
+                HSSFRow row_date = sheet.createRow(2);
                 HSSFCell cellB4 = row_date.createCell(1);
                 cellB4.setCellValue(new Date());
                 HSSFCellStyle cellStyle = workbook.createCellStyle();
@@ -550,12 +593,12 @@ static Dimension screenSize = null;
                 cellB4.setCellStyle(cellStyle);
                 
                 
-                HSSFRow row_eps = sheet.createRow(6);
+                HSSFRow row_eps = sheet.createRow(4);
                 HSSFCell cellB7 = row_eps.createCell(1);
                 cellB7.setCellValue("Empleados del sistema con EPS diferente");
                 cellB7.setCellStyle(centerstyle);
                 
-                HSSFRow row_eps_det = sheet.createRow(7);
+                HSSFRow row_eps_det = sheet.createRow(5);
                 HSSFCell cellB8 = row_eps_det.createCell(1);
                 cellB8.setCellValue("Cedula - ID");
                 HSSFCell cellC8 = row_eps_det.createCell(2);
@@ -565,7 +608,7 @@ static Dimension screenSize = null;
                 HSSFCell cellE8 = row_eps_det.createCell(4);
                 cellE8.setCellValue("EPS Sistema");
                 
-                int cell_start = 8;
+                int cell_start = 6;
                 int cell_eps_end = cell_start + emp_eps_diff.getRowCount();
                 for (int i = 0; i < emp_eps_diff.getRowCount(); i++) {
                     HSSFRow eps_det = sheet.createRow(cell_start+i);
@@ -710,27 +753,22 @@ static Dimension screenSize = null;
                 byte[] xls = baos.toByteArray();
                 
                 ResultSet r;
-                String id=null;
                 Blob blob=new SerialBlob(xls);
                 Calendar ahoraCal = Calendar.getInstance();
                 
-//                r = con.s.executeQuery ("SELECT ID_EMPRESA FROM T_EMPRESAS WHERE NOMBRE_EMPRESA='"+empresa+"'");
-//                if(r.next()){
-//                    id=r.getString("ID_EMPRESA");
-//                }
-//                PreparedStatement ps = con.c.prepareStatement("INSERT INTO `t_cruce_arl`(ID_EMPRESA, CRUCE, FECHA_CRUCE) VALUES (?,?,?)");
-//                ps.setString(1, id);
-//                ps.setBlob(2, blob);
-//                ps.setObject(3, new java.sql.Timestamp(ahoraCal.getTimeInMillis()));
-//                ps.execute();
-//                con.cerrar();
-//                term = true;
+                PreparedStatement ps = con.c.prepareStatement("INSERT INTO `t_cruce_pila`(`CRUCE`, `VIGENCIA_CRUCE`, `FECHA_CRUCE`) VALUES (?,?,?)");
+                ps.setBlob(1, blob);
+                ps.setString(2, get_fecha_fin(this.mes, this.año));
+                ps.setObject(3, new java.sql.Timestamp(ahoraCal.getTimeInMillis()));
+                ps.execute();
+                con.cerrar();
+                term = true;
                 
-                
-                FileOutputStream fileOut;
-                fileOut = new FileOutputStream("C:\\Users\\Johnnatan\\Documents\\CrucePILA.xls");
-                workbook.write(fileOut);
-                fileOut.close();
+//                
+//                FileOutputStream fileOut;
+//                fileOut = new FileOutputStream("C:\\Users\\Johnnatan\\Documents\\CrucePILA.xls");
+//                workbook.write(fileOut);
+//                fileOut.close();
             } catch (NumberFormatException | IOException | SQLException e) {
                 e.printStackTrace();
                 JOptionPane.showMessageDialog(this,e,"Error",JOptionPane.ERROR_MESSAGE);
@@ -824,155 +862,7 @@ static Dimension screenSize = null;
     private javax.swing.JLabel n_ccf_diff;
     private javax.swing.JLabel n_eps_dif;
     // End of variables declaration//GEN-END:variables
-/*public void sys_no_arl(){
-    DefaultTableModel modelo = (DefaultTableModel)jTable1.getModel();
-    Object [] fila = new Object[4];
-    if (jTable1.getRowCount()>0) {
-        int j = jTable1.getRowCount();
-        for (int i = 0; i < j; i++) {
-            modelo.removeRow(jTable1.getRowCount()-1);
-            jTable1.setModel(modelo);
-        }
-    }
-    Conexion con = new Conexion();
-    con.conexion();
-    ResultSet r;
-    try{
-        r = con.s.executeQuery ("SELECT *\n" +
-                                "FROM\n" +
-                                "t_novedades\n" +
-                                "INNER JOIN t_empresas \n" +
-                                "        ON (t_novedades.ID_EMPRESA = t_empresas.ID_EMPRESA)\n" +
-                                "INNER JOIN t_empleados \n" +
-                                "        ON (t_novedades.ID_EMPLEADO = t_empleados.ID_EMP)\n" +
-                                "INNER JOIN t_tipo_novedad \n" +
-                                "        ON (t_novedades.ID_TIPO = t_tipo_novedad.ID_TIPO)\n" +
-                                "WHERE t_empresas.`NOMBRE_EMPRESA` = '"+tabla_pila+"'\n" +
-                                "AND  t_novedades.ID_TIPO IN (1)\n" +
-                                "ORDER BY\n" +
-                                "     t_novedades.`ID_EMPLEADO` ASC");
-        while(r.next()){
-            boolean q=false;
-            for (int i = 0; i < tabla_pila.getRowCount(); i++) {
-                if (r.getString("ID_EMPLEADO").equals(tabla_pila.getValueAt(i, 0).toString())) {
-                   q=true;
-                }
-            }
-            if (!q) {
-                modelo.addRow(fila);
-                modelo.setValueAt(Long.parseLong(r.getString("ID_EMPLEADO")),jTable1.getRowCount()-1,0);
-                modelo.setValueAt(r.getString("APELLIDO_1_EMP")+" "+r.getString("APELLIDO_2_EMP")+" "+r.getString("NOMBRE_1_EMP")+" "+r.getString("NOMBRE_2_EMP"),jTable1.getRowCount()-1,1);
-                modelo.setValueAt(new SimpleDateFormat("dd-MM-yyyy").format(new SimpleDateFormat("yyyy-MM-dd").parse(r.getString("FECHA_INGRESO"))),jTable1.getRowCount()-1,2);
-                modelo.setValueAt("6,96",jTable1.getRowCount()-1,3);
-            }
-        }
-        n_novedades.setText(String.valueOf(jTable1.getRowCount()));
-        con.cerrar();
-    }catch(SQLException | ParseException j){
-        con.cerrar();
-        j.printStackTrace();
-    } 
 
-}
-public void sys_arl_tasa_dif(){
-    DefaultTableModel modelo = (DefaultTableModel)jTable2.getModel();
-    Object [] fila = new Object[4];
-    if (jTable2.getRowCount()>0) {
-        int j = jTable2.getRowCount();
-        for (int i = 0; i < j; i++) {
-            modelo.removeRow(jTable2.getRowCount()-1);
-            jTable2.setModel(modelo);
-        }
-    }
-    Conexion con = new Conexion();
-    con.conexion();
-    ResultSet r;
-    try{
-        r = con.s.executeQuery ("SELECT *\n" +
-                                "FROM\n" +
-                                "t_novedades\n" +
-                                "INNER JOIN t_empresas \n" +
-                                "        ON (t_novedades.ID_EMPRESA = t_empresas.ID_EMPRESA)\n" +
-                                "INNER JOIN t_empleados \n" +
-                                "        ON (t_novedades.ID_EMPLEADO = t_empleados.ID_EMP)\n" +
-                                "INNER JOIN t_tipo_novedad \n" +
-                                "        ON (t_novedades.ID_TIPO = t_tipo_novedad.ID_TIPO)\n" +
-                                "WHERE t_empresas.`NOMBRE_EMPRESA` = '"+tabla_pila+"'\n" +
-                                "AND  t_novedades.ID_TIPO IN (1)\n" +
-                                "ORDER BY\n" +
-                                "     t_novedades.`ID_EMPLEADO` ASC");
-        while(r.next()){
-            for (int i = 0; i < tabla_pila.getRowCount(); i++) {
-                if (r.getString("ID_EMPLEADO").equals(tabla_pila.getValueAt(i, 0).toString())) {
-//                    System.out.println("Tasa ARL: "+ get_porc(tabla_arl.getValueAt(i, 3).toString().replace(',', '.')));
-//                    System.out.println("Tasa Campo: "+get_porc(tasa));
-                    if (!Objects.equals(get_porc(tabla_pila.getValueAt(i, 3).toString().replace(',', '.')), get_porc(tabla_pila))) {
-                        modelo.addRow(fila);
-                        modelo.setValueAt(Long.parseLong(r.getString("ID_EMPLEADO")),jTable2.getRowCount()-1,0);
-                        modelo.setValueAt(r.getString("APELLIDO_1_EMP")+" "+r.getString("APELLIDO_2_EMP")+" "+r.getString("NOMBRE_1_EMP")+" "+r.getString("NOMBRE_2_EMP"),jTable2.getRowCount()-1,1);
-                        modelo.setValueAt(new SimpleDateFormat("dd-MM-yyyy").format(new SimpleDateFormat("yyyy-MM-dd").parse(r.getString("FECHA_INGRESO"))),jTable2.getRowCount()-1,2);
-                        modelo.setValueAt(tabla_pila.getValueAt(i, 3),jTable2.getRowCount()-1,3);
-                    }
-                }
-            }
-        }
-        n_novedades1.setText(String.valueOf(jTable2.getRowCount()));
-        con.cerrar();
-    }catch(SQLException | ParseException j){
-        con.cerrar();
-        j.printStackTrace();
-    } 
-
-}
-public void sys_arl_fecha_dif(){
-    DefaultTableModel modelo = (DefaultTableModel)jTable3.getModel();
-    Object [] fila = new Object[4];
-    if (jTable3.getRowCount()>0) {
-        int j = jTable3.getRowCount();
-        for (int i = 0; i < j; i++) {
-            modelo.removeRow(jTable3.getRowCount()-1);
-            jTable3.setModel(modelo);
-        }
-    }
-    Conexion con = new Conexion();
-    con.conexion();
-    ResultSet r;
-    try{
-        r = con.s.executeQuery ("SELECT *\n" +
-                                "FROM\n" +
-                                "t_novedades\n" +
-                                "INNER JOIN t_empresas \n" +
-                                "        ON (t_novedades.ID_EMPRESA = t_empresas.ID_EMPRESA)\n" +
-                                "INNER JOIN t_empleados \n" +
-                                "        ON (t_novedades.ID_EMPLEADO = t_empleados.ID_EMP)\n" +
-                                "INNER JOIN t_tipo_novedad \n" +
-                                "        ON (t_novedades.ID_TIPO = t_tipo_novedad.ID_TIPO)\n" +
-                                "WHERE t_empresas.`NOMBRE_EMPRESA` = '"+tabla_pila+"'\n" +
-                                "AND  t_novedades.ID_TIPO IN (1)\n" +
-                                "ORDER BY\n" +
-                                "     t_novedades.`ID_EMPLEADO` ASC");
-        while(r.next()){
-            for (int i = 0; i < tabla_pila.getRowCount(); i++) {
-                if (r.getString("ID_EMPLEADO").equals(tabla_pila.getValueAt(i, 0).toString())) {
-                    if (get_fecha(tabla_pila.getValueAt(i, 2).toString().trim()).compareTo(new SimpleDateFormat("yyyy-MM-dd").parse(r.getString("FECHA_INGRESO")))!=0) {
-                        modelo.addRow(fila);
-                        modelo.setValueAt(Long.parseLong(r.getString("ID_EMPLEADO")),jTable3.getRowCount()-1,0);
-                        modelo.setValueAt(r.getString("APELLIDO_1_EMP")+" "+r.getString("APELLIDO_2_EMP")+" "+r.getString("NOMBRE_1_EMP")+" "+r.getString("NOMBRE_2_EMP"),jTable3.getRowCount()-1,1);
-                        modelo.setValueAt(tabla_pila.getValueAt(i, 2).toString().trim(),jTable3.getRowCount()-1,2);
-                        modelo.setValueAt(new SimpleDateFormat("dd/MM/yyyy").format(new SimpleDateFormat("yyyy-MM-dd").parse(r.getString("FECHA_INGRESO"))),jTable3.getRowCount()-1,3);
-                        modelo.setValueAt(tabla_pila.getValueAt(i, 3).toString().trim(),jTable3.getRowCount()-1,4);
-                    }
-                }
-            }
-        }
-        n_novedades2.setText(String.valueOf(jTable3.getRowCount()));
-        con.cerrar();
-    }catch(SQLException | ParseException j){
-        con.cerrar();
-        j.printStackTrace();
-    } 
-
-}*/
 @SuppressWarnings("CallToPrintStackTrace")
 public void sys_no(JTable pila,int m, int y){
     DefaultTableModel modelo_eps = (DefaultTableModel)emp_eps_diff.getModel();
@@ -1146,7 +1036,7 @@ public String get_fecha_ini(int m, int y){
     f_inicio.set(Calendar.HOUR_OF_DAY,0);
     f_inicio.set(Calendar.MINUTE,0);
     f_inicio.set(Calendar.SECOND,0);
-    return f_inicio.getTime().toString();
+    return new SimpleDateFormat("yyyy-MM-dd").format(f_inicio.getTime());
 }
 public String get_fecha_fin(int m, int y){
     Calendar ahoraCal = Calendar.getInstance();
@@ -1157,7 +1047,7 @@ public String get_fecha_fin(int m, int y){
     f_final.set(Calendar.HOUR_OF_DAY,0);
     f_final.set(Calendar.MINUTE,0);
     f_final.set(Calendar.SECOND,0);
-    return  f_final.getTime().toString();
+    return  new SimpleDateFormat("yyyy-MM-dd").format(f_final.getTime());
 }
 public Float get_porc(Object porc){
     Float ret=null;

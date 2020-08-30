@@ -830,7 +830,7 @@
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                       <Image iconType="3" name="/user_green.png"/>
                     </Property>
-                    <Property name="text" type="java.lang.String" value="Personal activo"/>
+                    <Property name="text" type="java.lang.String" value="Personal Activo"/>
                   </Properties>
                   <BindingProperties>
                     <BindingProperty name="enabled" source="jm_reportes" sourcePath="${enabled}" target="jMenuItem14" targetPath="enabled" updateStrategy="0" immediately="false"/>
@@ -1082,17 +1082,41 @@
                     </MenuItem>
                   </SubComponents>
                 </Menu>
-                <MenuItem class="javax.swing.JMenuItem" name="jMenuItem65">
+                <Menu class="javax.swing.JMenu" name="jMenu24">
                   <Properties>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                       <Image iconType="3" name="/document_signature.png"/>
                     </Property>
-                    <Property name="text" type="java.lang.String" value="Pila"/>
+                    <Property name="text" type="java.lang.String" value="PILA"/>
                   </Properties>
-                  <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem65ActionPerformed"/>
-                  </Events>
-                </MenuItem>
+                  <BindingProperties>
+                    <BindingProperty name="enabled" source="jm_reportes" sourcePath="${enabled}" target="jMenu24" targetPath="enabled" updateStrategy="0" immediately="false"/>
+                  </BindingProperties>
+                  <SubComponents>
+                    <MenuItem class="javax.swing.JMenuItem" name="jMenuItem65">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="Agregar Cruce Pila"/>
+                      </Properties>
+                      <BindingProperties>
+                        <BindingProperty name="enabled" source="jMenu24" sourcePath="${enabled}" target="jMenuItem65" targetPath="enabled" updateStrategy="0" immediately="false"/>
+                      </BindingProperties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem65ActionPerformed"/>
+                      </Events>
+                    </MenuItem>
+                    <MenuItem class="javax.swing.JMenuItem" name="jMenuItem71">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="Consultar Cruce"/>
+                      </Properties>
+                      <BindingProperties>
+                        <BindingProperty name="enabled" source="jMenu24" sourcePath="${enabled}" target="jMenuItem71" targetPath="enabled" updateStrategy="0" immediately="false"/>
+                      </BindingProperties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem71ActionPerformed"/>
+                      </Events>
+                    </MenuItem>
+                  </SubComponents>
+                </Menu>
                 <MenuItem class="javax.swing.JMenuItem" name="jMenuItem66">
                   <Properties>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">

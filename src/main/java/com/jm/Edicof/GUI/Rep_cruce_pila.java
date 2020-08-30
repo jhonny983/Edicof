@@ -482,28 +482,28 @@ public boolean check_table(JTable j){
                             }else{
                                 j.changeSelection(i,5, false, false);
                                 j.requestFocus();
-                                JOptionPane.showMessageDialog(null,"Verifique que la caja de compensación familiar esté en la lista.","Error",JOptionPane.ERROR_MESSAGE);
+                                JOptionPane.showMessageDialog(null,"Verifique que la caja de compensación familiar se encuentre ingresada en la aplicacion.","Error",JOptionPane.ERROR_MESSAGE);
                                 ret=ret&false;
                                 break;
                             }
                         }else{
                             j.changeSelection(i,4, false, false);
                             j.requestFocus();
-                            JOptionPane.showMessageDialog(null,"Verifique que la AFP esté en la lista.","Error",JOptionPane.ERROR_MESSAGE);
+                            JOptionPane.showMessageDialog(null,"Verifique que la AFP se encuentre ingresada en la lista de AFP's de la aplicacion.","Error",JOptionPane.ERROR_MESSAGE);
                             ret=ret&false;
                             break;
                         }
                     }else{
                         j.changeSelection(i,3, false, false);
                         j.requestFocus();
-                        JOptionPane.showMessageDialog(null,"Verifique que la ARL esté en la lista.","Error",JOptionPane.ERROR_MESSAGE);
+                        JOptionPane.showMessageDialog(null,"Verifique que la ARL se encuentre ingresada en la lista de ARL's de laaplicacion.","Error",JOptionPane.ERROR_MESSAGE);
                         ret=ret&false;
                         break;
                     }
                 }else{
                     j.changeSelection(i,2, false, false);
                     j.requestFocus();
-                    JOptionPane.showMessageDialog(null,"Verifique que la EPS esté en la lista.","Error",JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(null,"Verifique que la EPS se encuentre ingresada en la lista de EPS's de aplicacion.","Error",JOptionPane.ERROR_MESSAGE);
                     ret=ret&false;
                     break;
                 }
@@ -538,13 +538,13 @@ public boolean check_cedula(Object ced){
     return ret;  
 }
 public static boolean comprobarLong (String cadena){
-try{
-    long num = Long.parseLong(cadena);
-}catch (Exception e){
-    e.printStackTrace();
-    return false;
-}
-return true;
+    try{
+        long num = Long.parseLong(cadena);
+    }catch (Exception e){
+        e.printStackTrace();
+        return false;
+    }
+    return true;
 }
 public boolean check_fecha(Object fecha){
     boolean ret=false;
@@ -733,6 +733,57 @@ public boolean check_ccf(Object ccf){
                     //JOptionPane.showMessageDialog(null,j,"Error",JOptionPane.ERROR_MESSAGE);
                 }
             }
+        }
+    }
+    return ret;
+}
+public String get_fecha_ini(int m, int y){
+    Calendar ahoraCal = Calendar.getInstance();
+    Calendar f_inicio = Calendar.getInstance();
+    ahoraCal.set(Calendar.MONTH,m);
+    ahoraCal.set(Calendar.YEAR,y);
+    f_inicio.set(Calendar.DATE, ahoraCal.getActualMinimum(Calendar.DATE));
+    f_inicio.set(Calendar.HOUR_OF_DAY,0);
+    f_inicio.set(Calendar.MINUTE,0);
+    f_inicio.set(Calendar.SECOND,0);
+    return f_inicio.getTime().toString();
+}
+public String get_fecha_fin(int m, int y){
+    Calendar ahoraCal = Calendar.getInstance();
+    Calendar f_final = Calendar.getInstance();
+    ahoraCal.set(Calendar.MONTH,m);
+    ahoraCal.set(Calendar.YEAR,y);
+    f_final.set(Calendar.DATE, ahoraCal.getActualMaximum(Calendar.DATE));
+    f_final.set(Calendar.HOUR_OF_DAY,0);
+    f_final.set(Calendar.MINUTE,0);
+    f_final.set(Calendar.SECOND,0);
+    return  f_final.getTime().toString();
+}
+public boolean check_empleado(String ced, String nit, int mes, int año){
+    boolean ret =false;
+    if (!ced.equals("") & !nit.equals("")) {
+        Conexion con = new Conexion();
+        con.conexion();
+        ResultSet r;
+        try{
+            r = con.s.executeQuery ("SELECT *\n" +
+                                    "FROM\n" +
+                                    "    t_novedades\n" +
+                                    "    WHERE t_novedades.ID_EMPRESA = '"+nit+"'\n" +
+                                    "    AND t_novedades.ID_EMPLEADO = "+ced+"\n" +
+                                    "    AND  t_novedades.ID_TIPO IN (1,4,5)\n"+
+                                    "    AND ((t_novedades.FECHA_INGRESO <= '"+get_fecha_fin(mes, año)+"' AND t_novedades.FECHA_RETIRO = '1900-01-01')\n" +
+                                    "	     OR ( t_novedades.FECHA_INGRESO <= '"+get_fecha_fin(mes, año)+"' AND t_novedades.FECHA_RETIRO >= '"+get_fecha_ini(mes, año)+"'))\n"+
+                                    "    ORDER BY t_novedades.FECHA_INGRESO DESC");
+            if(r.next()){
+                ret=true;
+            }
+            con.cerrar();
+        }catch(SQLException j){
+            con.cerrar();
+            j.printStackTrace();
+            return false;
+            //JOptionPane.showMessageDialog(null,j,"Error",JOptionPane.ERROR_MESSAGE);
         }
     }
     return ret;
