@@ -525,13 +525,12 @@ public boolean check_porc(Object porc){
 }
 public String get_fecha_fin(int m, int y){
     Calendar ahoraCal = Calendar.getInstance();
-    Calendar f_final = Calendar.getInstance();
     ahoraCal.set(Calendar.MONTH,m);
     ahoraCal.set(Calendar.YEAR,y);
-    f_final.set(Calendar.DATE, ahoraCal.getActualMaximum(Calendar.DATE));
-    f_final.set(Calendar.HOUR_OF_DAY,0);
-    f_final.set(Calendar.MINUTE,0);
-    f_final.set(Calendar.SECOND,0);
-    return new SimpleDateFormat("yyyy-MM-dd").format(f_final.getTime());
+    ahoraCal.set(Calendar.DATE, ahoraCal.getActualMaximum(Calendar.DATE));
+    ahoraCal.set(Calendar.HOUR_OF_DAY,0);
+    ahoraCal.set(Calendar.MINUTE,0);
+    ahoraCal.set(Calendar.SECOND,0);
+    return  new SimpleDateFormat("yyyy-MM-dd").format(ahoraCal.getTime());
 }
 }

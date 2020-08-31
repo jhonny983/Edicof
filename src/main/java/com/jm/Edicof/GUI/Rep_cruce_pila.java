@@ -202,6 +202,8 @@ Object [] fila = new Object[6];
 
         jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder("Fecha"));
 
+        mes.setMonth(0);
+
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
@@ -290,6 +292,8 @@ Object [] fila = new Object[6];
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        System.out.println("Enviado Mes: "+mes.getMonth());
+        System.out.println("Enviado Año: "+año.getYear());
             if (t_info_pila.getRowCount()!=0) {
                 if (check_table(t_info_pila)) {
                     Preview_Cruce_PILA pp = new Preview_Cruce_PILA(this, false, t_info_pila,mes.getMonth(),año.getYear());

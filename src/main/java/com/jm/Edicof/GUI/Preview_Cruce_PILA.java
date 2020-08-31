@@ -85,7 +85,7 @@ int mes,año=0;
         sys_no(t_pila,mes,año);
 
     }
-    public Preview_Cruce_PILA(javax.swing.JDialog parent, boolean modal, JTable t_pila, int mes, int año) {
+    public Preview_Cruce_PILA(javax.swing.JDialog parent, boolean modal, JTable t_pila, int m, int y) {
         super(parent, modal);
         initComponents();
         this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/group_gear.png")));
@@ -93,8 +93,8 @@ int mes,año=0;
         screenSize = Main.getsize();
         this.setSize(screenSize.width-20, screenSize.height-10);
         this.setLocationRelativeTo(null);
-        this.mes=mes;
-        this.año=año;
+        this.mes=m;
+        this.año=y;
         //***********************************************
         emp_eps_diff.getModel().addTableModelListener(new TableModelListener() {
             @Override
@@ -124,7 +124,7 @@ int mes,año=0;
             }
         });
         //***********************************************
-        sys_no(t_pila,mes,año);
+        sys_no(t_pila,m,y);
 
     }
 
@@ -541,11 +541,11 @@ int mes,año=0;
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
                     .addComponent(jButton2))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         pack();
@@ -584,7 +584,7 @@ int mes,año=0;
                                 
                 HSSFRow row_date = sheet.createRow(2);
                 HSSFCell cellB4 = row_date.createCell(1);
-                cellB4.setCellValue(new Date());
+                cellB4.setCellValue(get_fecha_fin(mes, año, 1));
                 HSSFCellStyle cellStyle = workbook.createCellStyle();
                 CreationHelper createHelper = workbook.getCreationHelper();
                 cellStyle.setDataFormat(
@@ -1029,25 +1029,33 @@ public Date get_fecha(Object fecha){
 }
 public String get_fecha_ini(int m, int y){
     Calendar ahoraCal = Calendar.getInstance();
-    Calendar f_inicio = Calendar.getInstance();
     ahoraCal.set(Calendar.MONTH,m);
     ahoraCal.set(Calendar.YEAR,y);
-    f_inicio.set(Calendar.DATE, ahoraCal.getActualMinimum(Calendar.DATE));
-    f_inicio.set(Calendar.HOUR_OF_DAY,0);
-    f_inicio.set(Calendar.MINUTE,0);
-    f_inicio.set(Calendar.SECOND,0);
-    return new SimpleDateFormat("yyyy-MM-dd").format(f_inicio.getTime());
+    ahoraCal.set(Calendar.DATE, ahoraCal.getActualMinimum(Calendar.DATE));
+    ahoraCal.set(Calendar.HOUR_OF_DAY,0);
+    ahoraCal.set(Calendar.MINUTE,0);
+    ahoraCal.set(Calendar.SECOND,0);
+    return new SimpleDateFormat("yyyy-MM-dd").format(ahoraCal.getTime());
 }
 public String get_fecha_fin(int m, int y){
     Calendar ahoraCal = Calendar.getInstance();
-    Calendar f_final = Calendar.getInstance();
     ahoraCal.set(Calendar.MONTH,m);
     ahoraCal.set(Calendar.YEAR,y);
-    f_final.set(Calendar.DATE, ahoraCal.getActualMaximum(Calendar.DATE));
-    f_final.set(Calendar.HOUR_OF_DAY,0);
-    f_final.set(Calendar.MINUTE,0);
-    f_final.set(Calendar.SECOND,0);
-    return  new SimpleDateFormat("yyyy-MM-dd").format(f_final.getTime());
+    ahoraCal.set(Calendar.DATE, ahoraCal.getActualMaximum(Calendar.DATE));
+    ahoraCal.set(Calendar.HOUR_OF_DAY,0);
+    ahoraCal.set(Calendar.MINUTE,0);
+    ahoraCal.set(Calendar.SECOND,0);
+    return  new SimpleDateFormat("yyyy-MM-dd").format(ahoraCal.getTime());
+}
+public Date get_fecha_fin(int m, int y , int z){
+    Calendar ahoraCal = Calendar.getInstance();
+    ahoraCal.set(Calendar.MONTH,m);
+    ahoraCal.set(Calendar.YEAR,y);
+    ahoraCal.set(Calendar.DATE, ahoraCal.getActualMaximum(Calendar.DATE));
+    ahoraCal.set(Calendar.HOUR_OF_DAY,0);
+    ahoraCal.set(Calendar.MINUTE,0);
+    ahoraCal.set(Calendar.SECOND,0);
+    return  ahoraCal.getTime();
 }
 public Float get_porc(Object porc){
     Float ret=null;
