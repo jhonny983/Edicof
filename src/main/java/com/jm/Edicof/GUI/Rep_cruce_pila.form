@@ -318,6 +318,9 @@
       </Layout>
       <SubComponents>
         <Component class="com.toedter.calendar.JMonthChooser" name="mes">
+          <Properties>
+            <Property name="month" type="int" value="0"/>
+          </Properties>
         </Component>
         <Component class="com.toedter.calendar.JYearChooser" name="a&#xf1;o">
         </Component>

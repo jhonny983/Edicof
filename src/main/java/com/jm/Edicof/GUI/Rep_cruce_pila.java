@@ -202,6 +202,8 @@ Object [] fila = new Object[6];
 
         jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder("Fecha"));
 
+        mes.setMonth(0);
+
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
