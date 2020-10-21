@@ -74,7 +74,7 @@ static boolean mainperm = false;
 public static Programacion tarea=null ;
 public static Dimension size =null;
 public int version;
-public static String ver_str="3.0.4.0";
+public static String ver_str="3.0.4.4";
 public String url_info_update = "https://onedrive.live.com/download?cid=51049062522CB054&resid=51049062522CB054%21219574&authkey=AP_5XduLgOsOxQg";//Ruta del archivo que contiene la informacion de la ultima version del software
 //public String url_permission = "https://www.dropbox.com/s/c9bbt0blodjnrrs/PERMISOS.txt?dl=1";//Ruta del archivo que contiene la informacion de la ultima version del software
 public static ArrayList conection_list = new ArrayList();
@@ -289,7 +289,6 @@ public static ArrayList conection_list = new ArrayList();
         jMenu16 = new javax.swing.JMenu();
         jMenu5 = new javax.swing.JMenu();
         jMenuItem24 = new javax.swing.JMenuItem();
-        jMenuItem25 = new javax.swing.JMenuItem();
         jMenuItem50 = new javax.swing.JMenuItem();
         jMenu6 = new javax.swing.JMenu();
         jMenuItem47 = new javax.swing.JMenuItem();
@@ -614,10 +613,6 @@ public static ArrayList conection_list = new ArrayList();
         jButton12.setFocusable(false);
         jButton12.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButton12.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-
-        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, new javax.swing.JMenuItem(), org.jdesktop.beansbinding.ELProperty.create("${enabled}"), jButton12, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
-        bindingGroup.addBinding(binding);
-
         jButton12.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem16ActionPerformed(evt);
@@ -1295,19 +1290,6 @@ public static ArrayList conection_list = new ArrayList();
             }
         });
         jMenu5.add(jMenuItem24);
-
-        jMenuItem25.setIcon(new javax.swing.ImageIcon(getClass().getResource("/building_edit.png"))); // NOI18N
-        jMenuItem25.setText("Editar Empresa");
-
-        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, jMenu5, org.jdesktop.beansbinding.ELProperty.create("${enabled}"), jMenuItem25, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
-        bindingGroup.addBinding(binding);
-
-        jMenuItem25.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem25ActionPerformed(evt);
-            }
-        });
-        jMenu5.add(jMenuItem25);
 
         jMenuItem50.setIcon(new javax.swing.ImageIcon(getClass().getResource("/table_tab_search.png"))); // NOI18N
         jMenuItem50.setText("Buscar Empresa");
@@ -2177,13 +2159,6 @@ public static ArrayList conection_list = new ArrayList();
         add_empresa.setVisible(true);
     }//GEN-LAST:event_jMenuItem24ActionPerformed
 
-    private void jMenuItem25ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem25ActionPerformed
-        // TODO add your handling code here:
-        Edd_Empresa edd_empresa = new Edd_Empresa(this, false, "");
-        edd_empresa.setLocationRelativeTo(this);
-        edd_empresa.setVisible(true);
-    }//GEN-LAST:event_jMenuItem25ActionPerformed
-
     private void jMenuItem30ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem30ActionPerformed
         // TODO add your handling code here:
         Add_Obra add_obra = new Add_Obra(this, false);
@@ -2764,7 +2739,6 @@ public static ArrayList conection_list = new ArrayList();
     private javax.swing.JMenuItem jMenuItem22;
     private javax.swing.JMenuItem jMenuItem23;
     private javax.swing.JMenuItem jMenuItem24;
-    private javax.swing.JMenuItem jMenuItem25;
     private javax.swing.JMenuItem jMenuItem26;
     private javax.swing.JMenuItem jMenuItem27;
     private javax.swing.JMenuItem jMenuItem28;
