@@ -9,6 +9,7 @@ import com.jm.Edicof.Clases.AutoCompletion;
 import com.jm.Edicof.Clases.Conexion;
 import java.awt.HeadlessException;
 import java.awt.Toolkit;
+import java.awt.event.KeyEvent;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.StringTokenizer;
@@ -56,6 +57,8 @@ public class Edd_Obra extends javax.swing.JDialog {
         jLabel6 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         nom_mun_old = new javax.swing.JTextField();
+        jLabel8 = new javax.swing.JLabel();
+        centro_costo_old = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
@@ -65,6 +68,8 @@ public class Edd_Obra extends javax.swing.JDialog {
         cb_mun = new javax.swing.JComboBox<>();
         nom_obra_new = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        centro_costo_new = new javax.swing.JTextField();
         jPanel3 = new javax.swing.JPanel();
         busc_obra = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -96,27 +101,34 @@ public class Edd_Obra extends javax.swing.JDialog {
         nom_mun_old.setEditable(false);
         nom_mun_old.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 
+        jLabel8.setText("Centro Costo");
+
+        centro_costo_old.setEditable(false);
+        centro_costo_old.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(29, 29, 29)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2)
                     .addComponent(jLabel6)
-                    .addComponent(jLabel5))
+                    .addComponent(jLabel5)
+                    .addComponent(jLabel8))
                 .addGap(23, 23, 23)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(nom_dep_old)
-                    .addComponent(nom_obra_old, javax.swing.GroupLayout.DEFAULT_SIZE, 226, Short.MAX_VALUE)
-                    .addComponent(nom_mun_old))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(centro_costo_old)
+                    .addComponent(nom_dep_old, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(nom_obra_old, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 226, Short.MAX_VALUE)
+                    .addComponent(nom_mun_old, javax.swing.GroupLayout.Alignment.LEADING))
                 .addGap(20, 20, 20))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(nom_obra_old, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
@@ -128,7 +140,11 @@ public class Edd_Obra extends javax.swing.JDialog {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(nom_mun_old, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(10, 10, 10))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel8)
+                    .addComponent(centro_costo_old, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(18, Short.MAX_VALUE))
         );
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/accept_1.png"))); // NOI18N
@@ -175,6 +191,15 @@ public class Edd_Obra extends javax.swing.JDialog {
 
         jLabel1.setText("Nuevo nombre");
 
+        jLabel9.setText("Centro Costo");
+
+        centro_costo_new.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        centro_costo_new.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                centro_costo_newKeyTyped(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -184,13 +209,15 @@ public class Edd_Obra extends javax.swing.JDialog {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel3)
                     .addComponent(jLabel1)
-                    .addComponent(jLabel4))
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel9))
                 .addGap(21, 21, 21)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(nom_obra_new, javax.swing.GroupLayout.DEFAULT_SIZE, 226, Short.MAX_VALUE)
                     .addComponent(cb_dep, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(cb_mun, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(cb_mun, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(centro_costo_new))
+                .addContainerGap(21, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -207,7 +234,11 @@ public class Edd_Obra extends javax.swing.JDialog {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(cb_mun, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel9)
+                    .addComponent(centro_costo_new, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(14, Short.MAX_VALUE))
         );
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Buscar obra"));
@@ -222,6 +253,11 @@ public class Edd_Obra extends javax.swing.JDialog {
         list_obra.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 list_obraMouseClicked(evt);
+            }
+        });
+        list_obra.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                list_obraValueChanged(evt);
             }
         });
         jScrollPane1.setViewportView(list_obra);
@@ -331,27 +367,39 @@ public class Edd_Obra extends javax.swing.JDialog {
         String id_dep_new="";
         String id_dep_old="";
         if (!nom_obra_old.getText().equals("")) {
-            if (!nom_dep_old.getText().equals("")) {
-                if (!nom_mun_old.getText().equals("")) {
-                    if (!nom_obra_new.getText().equals("")) {
-                        if(cb_mun.getItemCount()!=0){
-                            Conexion con = new Conexion();
-                            con.conexion();
-                            ResultSet r;
-                            try {
-                                r = con.s.executeQuery ("SELECT * FROM T_DEPARTAMENTOS WHERE NOMBRE_DEP='"+nom_dep_old.getText().toUpperCase()+"';");
-                                if (r.next()) {
-                                    id_dep_old = r.getString("ID_DEP");
-                                }
-                                r = con.s.executeQuery ("SELECT * FROM T_MUNICIPIOS WHERE NOMBRE_MUN='"+nom_mun_old.getText().toUpperCase()+"' AND ID_DEP = "+id_dep_old+";");
-                                if (r.next()) {
-                                    id_mun_old = r.getString("ID_MUN");
-                                }
-                                r = con.s.executeQuery ("SELECT * FROM `t_obra` WHERE NOMBRE_OBRA = '"+nom_obra_old.getText().toUpperCase()+"' AND ID_MUN_OBRA ="+id_mun_old);
-                                if(!r.next()){
-                                    JOptionPane.showMessageDialog(this,"La OBRA que intenta modificar no existe","Error",JOptionPane.ERROR_MESSAGE);
-                                }
-                                else{
+            if (!nom_obra_new.getText().equals("")) {
+                if(cb_mun.getItemCount()!=0){
+                    Conexion con = new Conexion();
+                    con.conexion();
+                    ResultSet r;
+                    try {
+                        r = con.s.executeQuery ("SELECT * FROM T_DEPARTAMENTOS WHERE NOMBRE_DEP='"+nom_dep_old.getText().toUpperCase()+"';");
+                        if (r.next()) {
+                            id_dep_old = r.getString("ID_DEP");
+                        }
+                        r = con.s.executeQuery ("SELECT * FROM T_MUNICIPIOS WHERE NOMBRE_MUN='"+nom_mun_old.getText().toUpperCase()+"' AND ID_DEP = "+id_dep_old+";");
+                        if (r.next()) {
+                            id_mun_old = r.getString("ID_MUN");
+                        }
+                        r = con.s.executeQuery ("SELECT * FROM `t_obra` WHERE NOMBRE_OBRA = '"+nom_obra_old.getText().toUpperCase()+"' AND ID_MUN_OBRA ="+id_mun_old);
+                        if(!r.next()){
+                            JOptionPane.showMessageDialog(this,"La OBRA que intenta modificar no existe","Error",JOptionPane.ERROR_MESSAGE);
+                        }
+                        else{
+                            r = con.s.executeQuery ("SELECT * FROM T_DEPARTAMENTOS WHERE NOMBRE_DEP='"+cb_dep.getSelectedItem().toString().toUpperCase()+"';");
+                            if (r.next()) {
+                                id_dep_new = r.getString("ID_DEP");
+                            }
+                            r = con.s.executeQuery ("SELECT * FROM T_MUNICIPIOS WHERE NOMBRE_MUN='"+cb_mun.getSelectedItem().toString().toUpperCase()+"' AND ID_DEP = "+id_dep_new+";");
+                            if (r.next()) {
+                                id_mun_new = r.getString("ID_MUN");
+                            }
+                            r = con.s.executeQuery ("SELECT * FROM `t_obra` WHERE NOMBRE_OBRA = '"+nom_obra_new.getText().toUpperCase()+"' AND ID_MUN_OBRA ="+id_mun_new);
+                            if(r.next() & !nom_obra_old.getText().equals(nom_obra_new.getText())){
+                                JOptionPane.showMessageDialog(this,"Los nuevos datos de la OBRA que intenta modificar ya existen.","Error",JOptionPane.ERROR_MESSAGE);
+                            }else{
+                                int conf = JOptionPane.showConfirmDialog(this,"Esta seguro que desea continuar?","Confirmación",JOptionPane.OK_CANCEL_OPTION,JOptionPane.QUESTION_MESSAGE);
+                                if (conf == JOptionPane.YES_OPTION) {
                                     r = con.s.executeQuery ("SELECT * FROM T_DEPARTAMENTOS WHERE NOMBRE_DEP='"+cb_dep.getSelectedItem().toString().toUpperCase()+"';");
                                     if (r.next()) {
                                         id_dep_new = r.getString("ID_DEP");
@@ -359,52 +407,32 @@ public class Edd_Obra extends javax.swing.JDialog {
                                     r = con.s.executeQuery ("SELECT * FROM T_MUNICIPIOS WHERE NOMBRE_MUN='"+cb_mun.getSelectedItem().toString().toUpperCase()+"' AND ID_DEP = "+id_dep_new+";");
                                     if (r.next()) {
                                         id_mun_new = r.getString("ID_MUN");
-                                    }
-                                    r = con.s.executeQuery ("SELECT * FROM `t_obra` WHERE NOMBRE_OBRA = '"+nom_obra_new.getText().toUpperCase()+"' AND ID_MUN_OBRA ="+id_mun_new);
-                                    if(r.next() & !nom_obra_old.getText().equals(nom_obra_new.getText())){
-                                        JOptionPane.showMessageDialog(this,"Los nuevos datos de la OBRA que intenta modificar ya existen.","Error",JOptionPane.ERROR_MESSAGE);
+                                        con.s.executeUpdate("UPDATE `t_obra` SET `ID_OBRA`= "+centro_costo_new.getText()+",`NOMBRE_OBRA`= '"+nom_obra_new.getText().toUpperCase()+"',`ID_MUN_OBRA`="+id_mun_new+", `ID_GRUPO`=(SELECT ID_GRUPO FROM T_GRUPO_EMPRESA WHERE NOMBRE_GRUPO='"+grupos.getSelectedItem()+"') WHERE `ID_OBRA`="+centro_costo_old.getText().toUpperCase());
+                                        JOptionPane.showMessageDialog(this,"La OBRA fue editada correctamente","Información",JOptionPane.INFORMATION_MESSAGE);
+                                        con.cerrar();
+                                        this.dispose();
                                     }else{
-                                        int conf = JOptionPane.showConfirmDialog(this,"Esta seguro que desea continuar?","Confirmación",JOptionPane.OK_CANCEL_OPTION,JOptionPane.QUESTION_MESSAGE);
-                                        if (conf == JOptionPane.YES_OPTION) {
-                                            r = con.s.executeQuery ("SELECT * FROM T_DEPARTAMENTOS WHERE NOMBRE_DEP='"+cb_dep.getSelectedItem().toString().toUpperCase()+"';");
-                                            if (r.next()) {
-                                                id_dep_new = r.getString("ID_DEP");
-                                            }
-                                            r = con.s.executeQuery ("SELECT * FROM T_MUNICIPIOS WHERE NOMBRE_MUN='"+cb_mun.getSelectedItem().toString().toUpperCase()+"' AND ID_DEP = "+id_dep_new+";");
-                                            if (r.next()) {
-                                                id_mun_new = r.getString("ID_MUN");
-                                                con.s.executeUpdate("UPDATE `t_obra` SET `NOMBRE_OBRA`='"+nom_obra_new.getText().toUpperCase()+"',`ID_MUN_OBRA`="+id_mun_new+", `ID_GRUPO`=(SELECT ID_GRUPO FROM T_GRUPO_EMPRESA WHERE NOMBRE_GRUPO='"+grupos.getSelectedItem()+"') WHERE `NOMBRE_OBRA`='"+nom_obra_old.getText().toUpperCase()+"' AND ID_MUN_OBRA="+id_mun_old);
-                                                JOptionPane.showMessageDialog(this,"La OBRA fue editada correctamente","Información",JOptionPane.INFORMATION_MESSAGE);
-                                                con.cerrar();
-                                                this.dispose();
-                                            }else{
-                                                JOptionPane.showMessageDialog(this,"El municipio de la OBRA que intenta ingresar no existe","Error",JOptionPane.ERROR_MESSAGE);
-                                            }
-                                        }
+                                        JOptionPane.showMessageDialog(this,"El municipio de la OBRA que intenta ingresar no existe","Error",JOptionPane.ERROR_MESSAGE);
                                     }
                                 }
-                                con.cerrar();
-                            } catch (SQLException | HeadlessException e) {
-                                con.cerrar();
-                                e.printStackTrace();
-                                JOptionPane.showMessageDialog(this,e,"Error",JOptionPane.ERROR_MESSAGE);
                             }
-                        }else{
-                            JOptionPane.showMessageDialog(this,"Digite el nuevo nombre del municipio de la OBRA que desea modificar","Error",JOptionPane.ERROR_MESSAGE);
                         }
-
-                    } else {
-                        JOptionPane.showMessageDialog(this,"Digite el nuevo nombre de la OBRA que desea modificar","Error",JOptionPane.ERROR_MESSAGE);
+                        con.cerrar();
+                    } catch (SQLException | HeadlessException e) {
+                        con.cerrar();
+                        e.printStackTrace();
+                        JOptionPane.showMessageDialog(this,e,"Error",JOptionPane.ERROR_MESSAGE);
                     }
                 }else{
-                    JOptionPane.showMessageDialog(this,"Seleccione la OBRA que desea modificar","Error",JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(this,"Digite el nuevo nombre del municipio de la OBRA que desea modificar","Error",JOptionPane.ERROR_MESSAGE);
                 }
-            }else{
-                JOptionPane.showMessageDialog(this,"Seleccione la OBRA que desea modificar","Error",JOptionPane.ERROR_MESSAGE);
+
+            } else {
+                JOptionPane.showMessageDialog(this,"Digite el nuevo nombre de la OBRA que desea modificar","Error",JOptionPane.ERROR_MESSAGE);
             }
-            
+                
         } else {
-            JOptionPane.showMessageDialog(this,"Seleccione la OBRA que desea modificar","Error",JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this,"Escriba un nombre de la OBRA valido","Error",JOptionPane.ERROR_MESSAGE);
         }
            
         
@@ -456,46 +484,69 @@ public class Edd_Obra extends javax.swing.JDialog {
     private void list_obraMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_list_obraMouseClicked
         // TODO add your handling code here:
         if (evt.getClickCount() == 1) {
-            String str_obra="";
-            String str_mun="";
-            StringTokenizer tokens=new StringTokenizer(list_obra.getSelectedValue(), "-");
-            while(tokens.hasMoreTokens()){
-                str_obra=tokens.nextToken();
-                str_mun=tokens.nextToken();
-                //                System.out.println(tokens.nextToken());
-            }
-            Conexion con = new Conexion();
-            con.conexion();
-            ResultSet r;
-            try{
-                r = con.s.executeQuery ("SELECT *\n" +
-                                    "FROM\n" +
-                                    "t_obra\n" +
-                                    "INNER JOIN t_grupo_empresa \n" +
-                                    "ON (t_obra.ID_GRUPO = t_grupo_empresa.ID_GRUPO)" +
-                                    "INNER JOIN t_municipios \n" +
-                                    "ON (t_obra.ID_MUN_OBRA = t_municipios.ID_MUN)" +
-                                    "INNER JOIN t_departamentos \n" +
-                                    "ON (t_municipios.ID_DEP = t_departamentos.ID_DEP) WHERE NOMBRE_OBRA = '"+str_obra+"' AND NOMBRE_MUN = '"+str_mun+"';");
-                if(r.next()){
-                    String str=r.getString("NOMBRE_OBRA");
-                    nom_obra_old.setText(str);
-                    nom_obra_new.setText(str);
-                    String str1=r.getString("NOMBRE_DEP");
-                    nom_dep_old.setText(str1);
-                    cb_dep.setSelectedItem(str1);
-                    String str2=r.getString("NOMBRE_MUN");
-                    nom_mun_old.setText(str2);
-                    cb_mun.setSelectedItem(str2);
-                    grupos.setSelectedItem(r.getString("NOMBRE_GRUPO"));
-                }
-                con.cerrar();
-            }catch(SQLException j){
-                con.cerrar();
-                JOptionPane.showMessageDialog(null,j,"Error",JOptionPane.ERROR_MESSAGE);
-            }
+            
         }
     }//GEN-LAST:event_list_obraMouseClicked
+
+    private void centro_costo_newKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_centro_costo_newKeyTyped
+        // TODO add your handling code here:
+        char a=evt.getKeyChar();
+        a = Character.toUpperCase(a);
+        if(!(a>=KeyEvent.VK_0 && a<=KeyEvent.VK_9)) {
+                evt.consume();
+        }
+    }//GEN-LAST:event_centro_costo_newKeyTyped
+
+    private void list_obraValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_list_obraValueChanged
+        // TODO add your handling code here:
+        String str_obra="";
+        String str_mun="";
+        //int n = 0;
+        StringTokenizer tokens=new StringTokenizer(list_obra.getSelectedValue(), "-");
+        int n=tokens.countTokens();
+        for (int i = 1; i <= n; i++) {
+            if (i==n) {
+                str_mun=tokens.nextToken();
+            }else{
+                str_obra=str_obra+tokens.nextToken();
+                if (i<(n-1)) {
+                    str_obra=str_obra+"-";
+                }
+            }
+        }
+        Conexion con = new Conexion();
+        con.conexion();
+        ResultSet r;
+        try{
+            r = con.s.executeQuery ("SELECT *\n" +
+                                "FROM\n" +
+                                "t_obra\n" +
+                                "INNER JOIN t_grupo_empresa \n" +
+                                "ON (t_obra.ID_GRUPO = t_grupo_empresa.ID_GRUPO)" +
+                                "INNER JOIN t_municipios \n" +
+                                "ON (t_obra.ID_MUN_OBRA = t_municipios.ID_MUN)" +
+                                "INNER JOIN t_departamentos \n" +
+                                "ON (t_municipios.ID_DEP = t_departamentos.ID_DEP) WHERE NOMBRE_OBRA = '"+str_obra+"' AND NOMBRE_MUN = '"+str_mun+"';");
+            if(r.next()){
+                centro_costo_old.setText(r.getString("ID_OBRA"));
+                centro_costo_new.setText(centro_costo_old.getText());
+                String str=r.getString("NOMBRE_OBRA");
+                nom_obra_old.setText(str);
+                nom_obra_new.setText(str);
+                String str1=r.getString("NOMBRE_DEP");
+                nom_dep_old.setText(str1);
+                cb_dep.setSelectedItem(str1);
+                String str2=r.getString("NOMBRE_MUN");
+                nom_mun_old.setText(str2);
+                cb_mun.setSelectedItem(str2);
+                grupos.setSelectedItem(r.getString("NOMBRE_GRUPO"));
+            }
+            con.cerrar();
+        }catch(SQLException j){
+            con.cerrar();
+            JOptionPane.showMessageDialog(null,j,"Error",JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_list_obraValueChanged
 
     /**
      * @param args the command line arguments
@@ -558,6 +609,8 @@ public class Edd_Obra extends javax.swing.JDialog {
     private javax.swing.JTextField busc_obra;
     private javax.swing.JComboBox<String> cb_dep;
     private javax.swing.JComboBox<String> cb_mun;
+    private javax.swing.JTextField centro_costo_new;
+    private javax.swing.JTextField centro_costo_old;
     private javax.swing.JComboBox<String> grupos;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
@@ -569,6 +622,8 @@ public class Edd_Obra extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;

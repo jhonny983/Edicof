@@ -65,6 +65,8 @@ public class Add_EPS extends javax.swing.JDialog {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         nombre_eps = new javax.swing.JTextField();
+        codigo_eps = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
 
@@ -85,15 +87,30 @@ public class Add_EPS extends javax.swing.JDialog {
             }
         });
 
+        codigo_eps.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        codigo_eps.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                codigo_epsKeyTyped(evt);
+            }
+        });
+
+        jLabel2.setText("Codigo");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(49, 49, 49)
-                .addComponent(jLabel1)
-                .addGap(18, 18, 18)
-                .addComponent(nombre_eps, javax.swing.GroupLayout.PREFERRED_SIZE, 347, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addGap(18, 18, 18)
+                        .addComponent(codigo_eps, javax.swing.GroupLayout.PREFERRED_SIZE, 347, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(18, 18, 18)
+                        .addComponent(nombre_eps, javax.swing.GroupLayout.PREFERRED_SIZE, 347, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(55, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -103,7 +120,11 @@ public class Add_EPS extends javax.swing.JDialog {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(nombre_eps, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1))
-                .addContainerGap(24, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(codigo_eps, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2))
+                .addContainerGap(19, Short.MAX_VALUE))
         );
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/accept_1.png"))); // NOI18N
@@ -170,29 +191,32 @@ public class Add_EPS extends javax.swing.JDialog {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         if (!nombre_eps.getText().equals("")) {
-            Conexion con = new Conexion();
-            con.conexion();
-            ResultSet r;
-            try {
-                r = con.s.executeQuery ("SELECT * FROM `t_eps` WHERE NOMBRE_EPS = '"+nombre_eps.getText().toUpperCase()+"'");
-                if(r.next()){
-                    JOptionPane.showMessageDialog(this,"La EPS que intenta ingresar ya existe","Error",JOptionPane.ERROR_MESSAGE);
-                }
-                else{
-                    int conf = JOptionPane.showConfirmDialog(this,"Esta seguro que desea continuar?","Confirmación",JOptionPane.OK_CANCEL_OPTION,JOptionPane.QUESTION_MESSAGE);
-                    if (conf == JOptionPane.YES_OPTION) {
-                        con.s.executeUpdate("INSERT INTO `t_eps`(`NOMBRE_EPS`) VALUES ('"+nombre_eps.getText().toUpperCase().trim()+"')");
-                        JOptionPane.showMessageDialog(this,"La EPS fue ingresada correctamente","Información",JOptionPane.INFORMATION_MESSAGE);
-                        con.cerrar();
-                        this.dispose();
+            if (!codigo_eps.getText().equals("")) {
+                Conexion con = new Conexion();
+                con.conexion();
+                ResultSet r;
+                try {
+                    r = con.s.executeQuery ("SELECT * FROM `t_eps` WHERE NOMBRE_EPS = '"+nombre_eps.getText().toUpperCase()+"'");
+                    if(r.next()){
+                        JOptionPane.showMessageDialog(this,"La EPS que intenta ingresar ya existe","Error",JOptionPane.ERROR_MESSAGE);
                     }
-
+                    else{
+                        int conf = JOptionPane.showConfirmDialog(this,"Esta seguro que desea continuar?","Confirmación",JOptionPane.OK_CANCEL_OPTION,JOptionPane.QUESTION_MESSAGE);
+                        if (conf == JOptionPane.YES_OPTION) {
+                            con.s.executeUpdate("INSERT INTO `t_eps`(`ID_EPS`, `NOMBRE_EPS`) VALUES ('"+codigo_eps.getText().toUpperCase().trim()+"','"+nombre_eps.getText().toUpperCase().trim()+"')");
+                            JOptionPane.showMessageDialog(this,"La EPS fue ingresada correctamente","Información",JOptionPane.INFORMATION_MESSAGE);
+                            con.cerrar();
+                            this.dispose();
+                        }
+                    } 
+                    con.cerrar();
+                } catch (SQLException | HeadlessException e) {
+                    con.cerrar();
+                    e.printStackTrace();
+                    JOptionPane.showMessageDialog(this,e,"Error",JOptionPane.ERROR_MESSAGE);
                 }
-                con.cerrar();
-            } catch (SQLException | HeadlessException e) {
-                con.cerrar();
-                e.printStackTrace();
-                JOptionPane.showMessageDialog(this,e,"Error",JOptionPane.ERROR_MESSAGE);
+            }else{
+                JOptionPane.showMessageDialog(this,"Digite el codigo de la EPS","Error",JOptionPane.ERROR_MESSAGE);
             }
         } else {
             JOptionPane.showMessageDialog(this,"Digite el nombre de la EPS","Error",JOptionPane.ERROR_MESSAGE);
@@ -206,6 +230,10 @@ public class Add_EPS extends javax.swing.JDialog {
         // TODO add your handling code here:
         this.dispose();
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void codigo_epsKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_codigo_epsKeyTyped
+        // TODO add your handling code here:
+    }//GEN-LAST:event_codigo_epsKeyTyped
 
     /**
      * @param args the command line arguments
@@ -253,10 +281,12 @@ public class Add_EPS extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private static javax.swing.JTextField codigo_eps;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private static javax.swing.JTextField nombre_eps;
     // End of variables declaration//GEN-END:variables

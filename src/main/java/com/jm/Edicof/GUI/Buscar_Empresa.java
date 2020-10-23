@@ -64,6 +64,7 @@ Object [] fila = new Object[11];
     private void initComponents() {
 
         jPopupMenu1 = new javax.swing.JPopupMenu();
+        jMenuItem2 = new javax.swing.JMenuItem();
         jMenuItem1 = new javax.swing.JMenuItem();
         jScrollPane1 = new javax.swing.JScrollPane();
         jPanel1 = new javax.swing.JPanel();
@@ -88,6 +89,15 @@ Object [] fila = new Object[11];
         jPanel5 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
         n_empresas = new javax.swing.JLabel();
+
+        jMenuItem2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/eye.png"))); // NOI18N
+        jMenuItem2.setText("Visualizar");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
+        jPopupMenu1.add(jMenuItem2);
 
         jMenuItem1.setText("Editar Empresa");
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
@@ -370,7 +380,7 @@ Object [] fila = new Object[11];
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         clear_empresas();
-        System.out.println(query(cb_nit, t_empleador, tf_obra, tf_arl, tf_ccf,actividad));
+        //System.out.println(query(cb_nit, t_empleador, tf_obra, tf_arl, tf_ccf,actividad));
         Conexion con = new Conexion();
         con.conexion();
         ResultSet r;
@@ -435,11 +445,28 @@ Object [] fila = new Object[11];
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         // TODO add your handling code here:
-        Edd_Empresa edd_empresa = new Edd_Empresa(this, true, empresas.getValueAt(empresas.getSelectedRow(),0).toString());
-        edd_empresa.setLocationRelativeTo(this);
-        edd_empresa.setVisible(true);
-        jButton1ActionPerformed(evt);
+        if (empresas.getSelectedRow()!=-1) {
+            Edd_Empresa edd_empresa = new Edd_Empresa(this, true, empresas.getValueAt(empresas.getSelectedRow(),0).toString());
+            edd_empresa.setLocationRelativeTo(this);
+            edd_empresa.setVisible(true);
+            jButton1ActionPerformed(evt);   
+        } else {
+            JOptionPane.showMessageDialog(null,"Debe seleccionar un registro para editarlo","Error",JOptionPane.ERROR_MESSAGE);
+        }
+        
     }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        // TODO add your handling code here:
+        if (empresas.getSelectedRow()!=-1) {
+            View_Empresa view_empresa = new View_Empresa(this, true, empresas.getValueAt(empresas.getSelectedRow(),0).toString());
+            view_empresa.setLocationRelativeTo(this);
+            view_empresa.setVisible(true);
+            
+        } else {
+            JOptionPane.showMessageDialog(null,"Debe seleccionar un registro para visualizarlo","Error",JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -498,6 +525,7 @@ Object [] fila = new Object[11];
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
