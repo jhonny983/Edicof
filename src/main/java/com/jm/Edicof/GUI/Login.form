@@ -154,6 +154,7 @@
         <Component class="javax.swing.JTextField" name="usuario">
           <Properties>
             <Property name="horizontalAlignment" type="int" value="0"/>
+            <Property name="text" type="java.lang.String" value="jmera"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel2">
@@ -164,6 +165,7 @@
         <Component class="javax.swing.JPasswordField" name="cont">
           <Properties>
             <Property name="horizontalAlignment" type="int" value="0"/>
+            <Property name="text" type="java.lang.String" value="123456"/>
           </Properties>
           <Events>
             <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="contKeyTyped"/>

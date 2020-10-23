@@ -335,6 +335,9 @@
                 </Menu>
                 <Menu class="javax.swing.JMenu" name="jMenu24">
                   <Properties>
+                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                      <Image iconType="3" name="/map.png"/>
+                    </Property>
                     <Property name="text" type="java.lang.String" value="Info Socio Demografica"/>
                   </Properties>
                   <BindingProperties>
@@ -353,6 +356,21 @@
                       </BindingProperties>
                       <Events>
                         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem15ActionPerformed1"/>
+                      </Events>
+                    </MenuItem>
+                  </SubComponents>
+                </Menu>
+                <Menu class="javax.swing.JMenu" name="jMenu26">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Informacion de Transporte"/>
+                  </Properties>
+                  <SubComponents>
+                    <MenuItem class="javax.swing.JMenuItem" name="jMenuItem16">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="Agregar"/>
+                      </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem16ActionPerformed1"/>
                       </Events>
                     </MenuItem>
                   </SubComponents>
@@ -1073,7 +1091,7 @@
                     </MenuItem>
                   </SubComponents>
                 </Menu>
-                <Menu class="javax.swing.JMenu" name="jMenu24">
+                <Menu class="javax.swing.JMenu" name="jMenu25">
                   <Properties>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                       <Image iconType="3" name="/document_signature.png"/>
@@ -1081,7 +1099,7 @@
                     <Property name="text" type="java.lang.String" value="PILA"/>
                   </Properties>
                   <BindingProperties>
-                    <BindingProperty name="enabled" source="jm_reportes" sourcePath="${enabled}" target="jMenu24" targetPath="enabled" updateStrategy="0" immediately="false"/>
+                    <BindingProperty name="enabled" source="jm_reportes" sourcePath="${enabled}" target="jMenu25" targetPath="enabled" updateStrategy="0" immediately="false"/>
                   </BindingProperties>
                   <SubComponents>
                     <MenuItem class="javax.swing.JMenuItem" name="jMenuItem65">

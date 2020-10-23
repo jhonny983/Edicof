@@ -441,27 +441,39 @@ Object [] fila = new Object[5];
 
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
         // TODO add your handling code here:
-        modelo = (DefaultTableModel)empleados.getModel(); 
-        if (!search_info(modelo.getValueAt(empleados.getSelectedRow(),0).toString())) {
-            Add_Info_Socio_Demografico add_ent = new Add_Info_Socio_Demografico(this, false, modelo.getValueAt(empleados.getSelectedRow(),0).toString());
-            add_ent.setLocationRelativeTo(this);
-            add_ent.setVisible(true);
-            search();
-        }else{
-            JOptionPane.showMessageDialog(this,"El empleado seleccionado ya tiene asociada informacion sociodemografica, si desea consultarla o editarla por favor acceda al menu correspondiente.","Error",JOptionPane.ERROR_MESSAGE);
+        if (empleados.getSelectedRow()!=-1) {
+            modelo = (DefaultTableModel)empleados.getModel(); 
+            if (!search_info(modelo.getValueAt(empleados.getSelectedRow(),0).toString())) {
+                Add_Info_Socio_Demografico add_ent = new Add_Info_Socio_Demografico(this, false, modelo.getValueAt(empleados.getSelectedRow(),0).toString());
+                add_ent.setLocationRelativeTo(this);
+                add_ent.setVisible(true);
+                search();
+            }else{
+                JOptionPane.showMessageDialog(this,"El empleado seleccionado ya tiene asociada informacion sociodemografica, si desea consultarla o editarla por favor acceda al menu correspondiente.","Error",JOptionPane.ERROR_MESSAGE);
+            }
+        } else {
+            JOptionPane.showMessageDialog(this,"Debe seleccionar por lo menos 1 registro de la tabla.","Error",JOptionPane.ERROR_MESSAGE);
         }
+            
         
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 
     private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
         // TODO add your handling code here:
-        if (search_info(modelo.getValueAt(empleados.getSelectedRow(),0).toString())) {
-            Edd_Info_Socio_Demografico edd_ent = new Edd_Info_Socio_Demografico(this, false, modelo.getValueAt(empleados.getSelectedRow(),0).toString());
-            edd_ent.setLocationRelativeTo(this);
-            edd_ent.setVisible(true);
-        }else{
-            JOptionPane.showMessageDialog(this,"El empleado seleccionado no tiene asociada informacion sociodemografica.","Error",JOptionPane.ERROR_MESSAGE);
+        if (empleados.getSelectedRow()!=-1) {
+             if (search_info(modelo.getValueAt(empleados.getSelectedRow(),0).toString())) {
+                Edd_Info_Socio_Demografico edd_ent = new Edd_Info_Socio_Demografico(this, false, modelo.getValueAt(empleados.getSelectedRow(),0).toString());
+                edd_ent.setLocationRelativeTo(this);
+                edd_ent.setVisible(true);
+            }else{
+                JOptionPane.showMessageDialog(this,"El empleado seleccionado no tiene asociada informacion sociodemografica.","Error",JOptionPane.ERROR_MESSAGE);
+            }
+        } else {
+            JOptionPane.showMessageDialog(this,"Debe seleccionar por lo menos 1 registro de la tabla.","Error",JOptionPane.ERROR_MESSAGE);
         }
+        
+        
+           
     }//GEN-LAST:event_jMenuItem5ActionPerformed
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed

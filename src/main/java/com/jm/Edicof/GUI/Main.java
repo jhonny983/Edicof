@@ -271,6 +271,8 @@ public static ArrayList conection_list = new ArrayList();
         jMenuItem46 = new javax.swing.JMenuItem();
         jMenu24 = new javax.swing.JMenu();
         jMenuItem15 = new javax.swing.JMenuItem();
+        jMenu26 = new javax.swing.JMenu();
+        jMenuItem16 = new javax.swing.JMenuItem();
         jMenu13 = new javax.swing.JMenu();
         jMenuItem13 = new javax.swing.JMenuItem();
         jMenuItem17 = new javax.swing.JMenuItem();
@@ -329,7 +331,7 @@ public static ArrayList conection_list = new ArrayList();
         jMenu22 = new javax.swing.JMenu();
         jMenuItem55 = new javax.swing.JMenuItem();
         jMenuItem59 = new javax.swing.JMenuItem();
-        jMenu24 = new javax.swing.JMenu();
+        jMenu25 = new javax.swing.JMenu();
         jMenuItem65 = new javax.swing.JMenuItem();
         jMenuItem71 = new javax.swing.JMenuItem();
         jMenuItem66 = new javax.swing.JMenuItem();
@@ -1088,6 +1090,7 @@ public static ArrayList conection_list = new ArrayList();
 
         jMenu2.add(jMenu3);
 
+        jMenu24.setIcon(new javax.swing.ImageIcon(getClass().getResource("/map.png"))); // NOI18N
         jMenu24.setText("Info Socio Demografica");
 
         binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, jm_informacion, org.jdesktop.beansbinding.ELProperty.create("${enabled}"), jMenu24, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
@@ -1107,6 +1110,18 @@ public static ArrayList conection_list = new ArrayList();
         jMenu24.add(jMenuItem15);
 
         jMenu2.add(jMenu24);
+
+        jMenu26.setText("Informacion de Transporte");
+
+        jMenuItem16.setText("Agregar");
+        jMenuItem16.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem16ActionPerformed1(evt);
+            }
+        });
+        jMenu26.add(jMenuItem16);
+
+        jMenu2.add(jMenu26);
 
         jm_informacion.add(jMenu2);
 
@@ -1739,10 +1754,10 @@ public static ArrayList conection_list = new ArrayList();
 
         jMenu14.add(jMenu22);
 
-        jMenu24.setIcon(new javax.swing.ImageIcon(getClass().getResource("/document_signature.png"))); // NOI18N
-        jMenu24.setText("PILA");
+        jMenu25.setIcon(new javax.swing.ImageIcon(getClass().getResource("/document_signature.png"))); // NOI18N
+        jMenu25.setText("PILA");
 
-        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, jm_reportes, org.jdesktop.beansbinding.ELProperty.create("${enabled}"), jMenu24, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, jm_reportes, org.jdesktop.beansbinding.ELProperty.create("${enabled}"), jMenu25, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
         bindingGroup.addBinding(binding);
 
         jMenuItem65.setText("Agregar Cruce Pila");
@@ -1755,7 +1770,7 @@ public static ArrayList conection_list = new ArrayList();
                 jMenuItem65ActionPerformed(evt);
             }
         });
-        jMenu24.add(jMenuItem65);
+        jMenu25.add(jMenuItem65);
 
         jMenuItem71.setText("Consultar Cruce");
 
@@ -1767,9 +1782,9 @@ public static ArrayList conection_list = new ArrayList();
                 jMenuItem71ActionPerformed(evt);
             }
         });
-        jMenu24.add(jMenuItem71);
+        jMenu25.add(jMenuItem71);
 
-        jMenu14.add(jMenu24);
+        jMenu14.add(jMenu25);
 
         jMenuItem66.setIcon(new javax.swing.ImageIcon(getClass().getResource("/book_go.png"))); // NOI18N
         jMenuItem66.setText("Precalculo");
@@ -2657,6 +2672,13 @@ public static ArrayList conection_list = new ArrayList();
         bc.setVisible(true);
     }//GEN-LAST:event_jMenuItem71ActionPerformed
 
+    private void jMenuItem16ActionPerformed1(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem16ActionPerformed1
+        // TODO add your handling code here:
+        Add_Info_Transporte add_tr = new Add_Info_Transporte(this,false);
+        add_tr.setLocationRelativeTo(this);
+        add_tr.setVisible(true);
+    }//GEN-LAST:event_jMenuItem16ActionPerformed1
+
     /**
      * @param args the command line arguments
      */
@@ -2742,6 +2764,8 @@ public static ArrayList conection_list = new ArrayList();
     private javax.swing.JMenu jMenu22;
     private javax.swing.JMenu jMenu23;
     private javax.swing.JMenu jMenu24;
+    private javax.swing.JMenu jMenu25;
+    private javax.swing.JMenu jMenu26;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenu jMenu5;
@@ -2757,6 +2781,7 @@ public static ArrayList conection_list = new ArrayList();
     private javax.swing.JMenuItem jMenuItem13;
     private javax.swing.JMenuItem jMenuItem14;
     private javax.swing.JMenuItem jMenuItem15;
+    private javax.swing.JMenuItem jMenuItem16;
     private javax.swing.JMenuItem jMenuItem17;
     private javax.swing.JMenuItem jMenuItem18;
     private javax.swing.JMenuItem jMenuItem19;

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<actions>
+        <action>
+            <actionName>run</actionName>
+            <packagings>
+                <packaging>jar</packaging>
+            </packagings>
+            <goals>
+                <goal>process-classes</goal>
+                <goal>com.akathist.maven.plugins.launch4j:launch4j-maven-plugin:1.7.16:launch4j</goal>
+                <goal>org.apache.maven.plugins:maven-assembly-plugin:2.2-beta-5:single</goal>
+                <goal>org.codehaus.mojo:exec-maven-plugin:1.2.1:exec</goal>
+                
+            </goals>
+            <properties>
+                <launch4j.headerType>"gui"</launch4j.headerType>
+            </properties>
+        </action>
+        <action>
+            <actionName>CUSTOM-Distribuir</actionName>
+            <displayName>Distribuir</displayName>
+            <goals>
+                <goal>clean</goal>
+                <goal>org.apache.maven.plugins:maven-assembly-plugin:2.2-beta-5:single</goal>
+                <goal>install</goal>
+                
+                
+            </goals>
+        </action>
+        <action>
+            <actionName>build-with-dependencies</actionName>
+            <reactor>also-make</reactor>
+            <packagings>
+                <packaging>*</packaging>
+            </packagings>
+            <goals>
+                <goal>install</goal>
+                <goal>assembly:single</goal>
+            </goals>
+        </action>
+    </actions>
