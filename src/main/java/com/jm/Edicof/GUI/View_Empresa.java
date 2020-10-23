@@ -5,9 +5,7 @@
  */
 package com.jm.Edicof.GUI;
 
-import com.jm.Edicof.Clases.AutoCompletion;
 import com.jm.Edicof.Clases.Conexion;
-import com.mxrck.autocompleter.AutoCompleterCallback;
 import com.mxrck.autocompleter.TextAutoCompleter;
 import java.awt.Event;
 import java.awt.HeadlessException;
@@ -15,7 +13,10 @@ import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.InputMap;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
@@ -25,20 +26,21 @@ import javax.swing.KeyStroke;
  *
  * @author ADMIN
  */
-public class Add_Empresa extends javax.swing.JDialog {
+public class View_Empresa extends javax.swing.JDialog {
     TextAutoCompleter tac_nit = null;
     boolean perm=false;
     boolean perm_mun=false;
- 
+    String nit_emp="";
     /**
      * Creates new form Add_Empleado
      * @param parent
      * @param modal
      */
-    public Add_Empresa(java.awt.Frame parent, boolean modal) {
+    public View_Empresa(java.awt.Frame parent, boolean modal, String n) {
         super(parent, modal);
         initComponents();
         this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/group_gear.png")));
+        //this.nit_emp=n;
         init();
         ac_tip_nit();
         ac_nit();
@@ -53,11 +55,13 @@ public class Add_Empresa extends javax.swing.JDialog {
         map1.put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Event.CTRL_MASK), "null");
         perm=true;
         perm_mun=true;
+        load_data(n);
     }
-    public Add_Empresa(javax.swing.JDialog parent, boolean modal) {
+    public View_Empresa(javax.swing.JDialog parent, boolean modal, String n) {
         super(parent, modal);
         initComponents();
         this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/group_gear.png")));
+        //this.nit_emp=n;
         init();
         ac_tip_nit();
         ac_nit();
@@ -72,10 +76,11 @@ public class Add_Empresa extends javax.swing.JDialog {
         map1.put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Event.CTRL_MASK), "null");
         perm=true;
         perm_mun=true;
+        load_data(n);
     }
     public final void init(){
         tac_nit = new TextAutoCompleter(nit, (Object selectedItem) -> {
-            load_data(selectedItem.toString());
+            load_name_emp(selectedItem.toString());
         });
     }
 
@@ -105,7 +110,6 @@ public class Add_Empresa extends javax.swing.JDialog {
         cb_actividad = new javax.swing.JComboBox<>();
         cb_tip_nit = new javax.swing.JComboBox<>();
         jLabel12 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
@@ -147,7 +151,7 @@ public class Add_Empresa extends javax.swing.JDialog {
         f_ren_reg_mercantil = new com.toedter.calendar.JDateChooser();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Agregar Empresa");
+        setTitle("Visualizar Empresa");
         setResizable(false);
         addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
@@ -160,6 +164,7 @@ public class Add_Empresa extends javax.swing.JDialog {
         jLabel1.setText("Nombre Empresa");
 
         nombre_empresa.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        nombre_empresa.setEnabled(false);
         nombre_empresa.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 nombre_empresaKeyTyped(evt);
@@ -169,6 +174,7 @@ public class Add_Empresa extends javax.swing.JDialog {
         jLabel2.setText("NIT");
 
         nit.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        nit.setEnabled(false);
         nit.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 nitKeyTyped(evt);
@@ -176,6 +182,7 @@ public class Add_Empresa extends javax.swing.JDialog {
         });
 
         //AutoCompletion.enable(cb_arl);
+        cb_arl.setEnabled(false);
 
         add_arl.setIcon(new javax.swing.ImageIcon(getClass().getResource("/link_add.png"))); // NOI18N
         add_arl.setToolTipText("Agregar ARL");
@@ -190,6 +197,7 @@ public class Add_Empresa extends javax.swing.JDialog {
         jLabel21.setText("CCF");
 
         //AutoCompletion.enable(cb_ccf);
+        cb_ccf.setEnabled(false);
 
         add_ccf.setIcon(new javax.swing.ImageIcon(getClass().getResource("/heart_add.png"))); // NOI18N
         add_ccf.setToolTipText("Agregar CCF");
@@ -218,6 +226,9 @@ public class Add_Empresa extends javax.swing.JDialog {
         jLabel11.setText("Actividad");
 
         //AutoCompletion.enable(cb_actividad);
+        cb_actividad.setEnabled(false);
+
+        cb_tip_nit.setEnabled(false);
 
         jLabel12.setText("Tipo NIT");
 
@@ -302,14 +313,6 @@ public class Add_Empresa extends javax.swing.JDialog {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/accept_1.png"))); // NOI18N
-        jButton1.setText("Aceptar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-
         jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cancel_1.png"))); // NOI18N
         jButton3.setText("Cancelar");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -323,20 +326,32 @@ public class Add_Empresa extends javax.swing.JDialog {
         jLabel3.setText("Correo interno");
 
         correo_interno.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        correo_interno.setEnabled(false);
 
         jLabel4.setText("Correo contratista 1");
 
         correo_1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        correo_1.setEnabled(false);
 
         jLabel5.setText("Correo contratista 2");
 
         correo_2.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        correo_2.setEnabled(false);
 
         jLabel6.setText("Correo contratista 3");
 
         correo_3.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        correo_3.setEnabled(false);
+
+        sel_1.setEnabled(false);
+
+        sel_3.setEnabled(false);
+
+        sel_2.setEnabled(false);
 
         jLabel7.setText("Sel.");
+
+        sel_int.setEnabled(false);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -397,10 +412,12 @@ public class Add_Empresa extends javax.swing.JDialog {
         jLabel8.setText("Representante legal");
 
         representante.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        representante.setEnabled(false);
 
         jLabel10.setText("Telefonos");
 
         telefonos.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        telefonos.setEnabled(false);
         telefonos.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 telefonosKeyTyped(evt);
@@ -408,6 +425,7 @@ public class Add_Empresa extends javax.swing.JDialog {
         });
 
         tb_id_rl.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tb_id_rl.setEnabled(false);
         tb_id_rl.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 tb_id_rlKeyTyped(evt);
@@ -457,8 +475,10 @@ public class Add_Empresa extends javax.swing.JDialog {
         jLabel13.setText("Direccion");
 
         dir_empresa.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        dir_empresa.setEnabled(false);
 
         cb_dep.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " " }));
+        cb_dep.setEnabled(false);
         cb_dep.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 cb_depItemStateChanged(evt);
@@ -468,12 +488,14 @@ public class Add_Empresa extends javax.swing.JDialog {
         jLabel14.setText("Departamento");
 
         cb_mun.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " " }));
+        cb_mun.setEnabled(false);
 
         jLabel15.setText("Ciudad");
 
         jLabel16.setText("Teléfono");
 
         tel_empresa.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tel_empresa.setEnabled(false);
         tel_empresa.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 tel_empresaKeyTyped(evt);
@@ -526,6 +548,7 @@ public class Add_Empresa extends javax.swing.JDialog {
         jLabel18.setText("No Empleados");
 
         cb_tamaño.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " " }));
+        cb_tamaño.setEnabled(false);
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -553,8 +576,11 @@ public class Add_Empresa extends javax.swing.JDialog {
         jLabel19.setText("Registro Mercantil");
 
         reg_mercantil.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        reg_mercantil.setEnabled(false);
 
         jLabel20.setText("Fecha Renovación");
+
+        f_ren_reg_mercantil.setEnabled(false);
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
@@ -605,8 +631,6 @@ public class Add_Empresa extends javax.swing.JDialog {
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jButton1)
-                        .addGap(20, 20, 20)
                         .addComponent(jButton3)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
@@ -626,197 +650,12 @@ public class Add_Empresa extends javax.swing.JDialog {
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton3))
+                .addComponent(jButton3)
                 .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-        
-        if (!cb_tip_nit.getSelectedItem().equals("Seleccione..")) {
-            if (!nit.getText().equals("")) {
-                if (!nombre_empresa.getText().equals("")) {
-                    if (!cb_arl.getSelectedItem().equals("Seleccione..")) {
-                        if (!cb_ccf.getSelectedItem().equals("Seleccione..")) {
-                            if (!cb_actividad.getSelectedItem().equals("Seleccione..")) {
-                                if (!tb_id_rl.getText().equals("")) {
-                                    if (!representante.getText().equals("")) {
-                                        if (!telefonos.getText().equals("")) {
-                                            if (check_mail(correo_interno.getText())) {
-                                                if (check_mail(correo_1.getText())) {
-                                                    if (check_mail(correo_2.getText())) {
-                                                        if (check_mail(correo_3.getText())) {
-                                                            if (sel_int.isSelected() | sel_1.isSelected() | sel_2.isSelected() | sel_3.isSelected()) {
-                                                                if (!(correo_interno.getText().equals("") & sel_int.isSelected())) {
-                                                                    if (!(correo_1.getText().equals("") & sel_1.isSelected())) {
-                                                                        if (!(correo_2.getText().equals("") & sel_2.isSelected())) {
-                                                                            if (!(correo_3.getText().equals("") & sel_3.isSelected())) {
-                                                                                if (!tel_empresa.getText().equals("")) {
-                                                                                    if (!dir_empresa.getText().equals("")) {
-                                                                                        if (!cb_dep.getSelectedItem().equals("Seleccione..")) {
-                                                                                            if (!cb_mun.getSelectedItem().equals("Seleccione..")) {
-                                                                                                if (!cb_tamaño.getSelectedItem().equals("Seleccione..")) {
-                                                                                                    if (!reg_mercantil.getText().equals("")) {
-                                                                                                        if (f_ren_reg_mercantil.getDate()!=null){   
-                                                                                                            Conexion con = new Conexion();
-                                                                                                            con.conexion();
-                                                                                                            ResultSet r;
-                                                                                                            try {
-                                                                                                                r = con.s.executeQuery ("SELECT * FROM `t_empresas` WHERE ID_EMPRESA = '"+nit.getText()+"'");
-                                                                                                                if(r.next()){
-                                                                                                                    JOptionPane.showMessageDialog(this,"La empresa que intenta ingresar ya existe","Error",JOptionPane.ERROR_MESSAGE);
-                                                                                                                }
-                                                                                                                else{
-                                                                                                                    int conf = JOptionPane.showConfirmDialog(this,"Esta seguro que desea continuar?","Confirmación",JOptionPane.OK_CANCEL_OPTION,JOptionPane.QUESTION_MESSAGE);
-                                                                                                                    if (conf == JOptionPane.YES_OPTION) {
-                                                                                                                        int id_tip_nit = 0;
-                                                                                                                        int id_arl = 0;
-                                                                                                                        int id_ccf = 0;
-                                                                                                                        int id_act = 0;
-                                                                                                                        int id_mun =0;
-                                                                                                                        int id_tam=0;
-                                                                                                                        r = con.s.executeQuery ("SELECT ID_TIPO_NIT FROM `t_tipo_nit` WHERE NOMBRE_TIPO_NIT ='"+cb_tip_nit.getSelectedItem().toString()+"';");
-                                                                                                                        if(r.next()){
-                                                                                                                            id_tip_nit=r.getInt("ID_TIPO_NIT");    
-                                                                                                                        }
-                                                                                                                        r = con.s.executeQuery ("SELECT ID_ARL FROM `t_arl` WHERE (NOMBRE_ARL ='"+cb_arl.getSelectedItem().toString()+"');");
-                                                                                                                        if(r.next()){
-                                                                                                                            id_arl=r.getInt("ID_ARL");    
-                                                                                                                        }
-                                                                                                                        r = con.s.executeQuery ("SELECT ID_CCF FROM `t_ccf` WHERE (NOMBRE_CCF ='"+cb_ccf.getSelectedItem().toString()+"');");
-                                                                                                                        if(r.next()){
-                                                                                                                            id_ccf=r.getInt("ID_CCF");    
-                                                                                                                        }
-                                                                                                                        r = con.s.executeQuery ("SELECT ID_ACTIVIDAD FROM `t_actividades` WHERE NOMBRE_ACTIVIDAD ='"+cb_actividad.getSelectedItem().toString()+"';");
-                                                                                                                        if(r.next()){
-                                                                                                                            id_act=r.getInt("ID_ACTIVIDAD");    
-                                                                                                                        }
-                                                                                                                        r = con.s.executeQuery ("SELECT * FROM t_municipios WHERE NOMBRE_MUN = '"+cb_mun.getSelectedItem()+"';");
-                                                                                                                        if(r.next()){
-                                                                                                                            id_mun=r.getInt("ID_MUN");
-                                                                                                                        }
-                                                                                                                        r = con.s.executeQuery ("SELECT ID_TAMAÑO FROM t_tamaño_empresa WHERE NOMBRE_TAMAÑO = '"+cb_tamaño.getSelectedItem()+"';");
-                                                                                                                        if(r.next()){
-                                                                                                                            id_tam=r.getInt("ID_TAMAÑO");
-                                                                                                                        }
-                                                                                                                        con.s.executeUpdate("INSERT INTO `t_empresas`(`ID_TIPO_NIT`, `ID_EMPRESA`, `NOMBRE_EMPRESA`, `ID_ARL`, `ID_CCF`, `ID_ACTIVIDAD`, `ID_REP_EMPRESA`, `REPRESENTANTE_LEGAL`, `TEL_CEL_RL_EMPRESA`, `CORREO_INTERNO`, `CORREO_CONTRATISTA_1`, `CORREO_CONTRATISTA_2`, `CORREO_CONTRATISTA_3`, `ENABLE_INTERNO`, `ENABLE_1`, `ENABLE_2`, `ENABLE_3`, `TELEFONOS`, `DIR_EMPRESA`, `ID_MUN_EMPRESA`, `ID_TAM_EMPRESA`, `REG_MER_EMPRESA`, `F_REN_REG_MERC`)"
-                                                                                                                                        + " VALUES ("+id_tip_nit+",'"+nit.getText().toUpperCase().trim()+"','"+nombre_empresa.getText().toUpperCase().trim()+"',"+id_arl+","+id_ccf+","+id_act+","+tb_id_rl.getText().trim()+",'"+representante.getText().trim()+"','"+telefonos.getText().trim()+"','"+correo_interno.getText()+"','"+correo_1.getText()+"','"+correo_2.getText()+"','"+correo_3.getText()+"',"+bool_to_int(sel_int.isSelected())+","+bool_to_int(sel_1.isSelected())+","+bool_to_int(sel_2.isSelected())+","+bool_to_int(sel_3.isSelected())+",'"+tel_empresa.getText()+"','"+dir_empresa.getText().trim()+"',"+id_mun+","+id_tam+",'"+reg_mercantil.getText().trim()+"','"+new SimpleDateFormat("yyyy-MM-dd").format(f_ren_reg_mercantil.getDate())+"')");
-                                                                                                                        JOptionPane.showMessageDialog(this,"La empresa fue ingresada correctamente","Información",JOptionPane.INFORMATION_MESSAGE);
-                                                                                                                        con.cerrar();
-                                                                                                                        this.dispose();
-                                                                                                                    }
-                                                                                                                }
-                                                                                                                con.cerrar();
-                                                                                                            } catch (SQLException | HeadlessException e) {
-                                                                                                                con.cerrar();
-                                                                                                                e.printStackTrace();
-                                                                                                                JOptionPane.showMessageDialog(this,e,"Error",JOptionPane.ERROR_MESSAGE);
-                                                                                                            }
-                                                                                                        } else {
-                                                                                                            f_ren_reg_mercantil.requestFocus();
-                                                                                                            JOptionPane.showMessageDialog(this,"Ingrese la fecha de renovación del registro mercantil de la empresa","Error",JOptionPane.ERROR_MESSAGE);
-                                                                                                        }
-                                                                                                    } else {
-                                                                                                        cb_tamaño.requestFocus();
-                                                                                                        JOptionPane.showMessageDialog(this,"Ingrese el registro mercantil de la empresa","Error",JOptionPane.ERROR_MESSAGE);
-                                                                                                    }
-                                                                                                } else {
-                                                                                                    cb_tamaño.requestFocus();
-                                                                                                    JOptionPane.showMessageDialog(this,"Seleccione el tamaño de la empresa","Error",JOptionPane.ERROR_MESSAGE);
-                                                                                                }
-                                                                                            } else {
-                                                                                                cb_mun.requestFocus();
-                                                                                                JOptionPane.showMessageDialog(this,"Seleccione el municipio donde se ubica la empresa","Error",JOptionPane.ERROR_MESSAGE);
-                                                                                            }
-                                                                                        } else {
-                                                                                            cb_dep.requestFocus();
-                                                                                            JOptionPane.showMessageDialog(this,"Seleccione el departamento donde se ubica la empresa","Error",JOptionPane.ERROR_MESSAGE);
-                                                                                        }
-
-                                                                                    } else {
-                                                                                        dir_empresa.requestFocus();
-                                                                                        JOptionPane.showMessageDialog(this,"Ingrese la dirección de la empresa","Error",JOptionPane.ERROR_MESSAGE);
-                                                                                    }
-                                                                                } else {
-                                                                                    tel_empresa.requestFocus();
-                                                                                    JOptionPane.showMessageDialog(this,"Ingrese el teléfono de la empresa","Error",JOptionPane.ERROR_MESSAGE);
-                                                                                }
-                                                                            }else{
-                                                                                sel_3.requestFocus();
-                                                                                JOptionPane.showMessageDialog(this,"No se debe seleccionar un correo no valido","Error",JOptionPane.ERROR_MESSAGE);
-                                                                            }
-                                                                        }else{
-                                                                            sel_2.requestFocus();
-                                                                            JOptionPane.showMessageDialog(this,"No se debe seleccionar un correo no valido","Error",JOptionPane.ERROR_MESSAGE);
-                                                                        }
-                                                                    }else{
-                                                                        sel_1.requestFocus();
-                                                                        JOptionPane.showMessageDialog(this,"No se debe seleccionar un correo no valido","Error",JOptionPane.ERROR_MESSAGE);
-                                                                    }
-                                                                }else{
-                                                                    sel_int.requestFocus();
-                                                                    JOptionPane.showMessageDialog(this,"No se debe seleccionar un correo no valido","Error",JOptionPane.ERROR_MESSAGE);
-                                                                }
-                                                            }else{
-                                                                JOptionPane.showMessageDialog(this,"Seleccione al menos una direccion de correo para el envio automatico de informes.","Error",JOptionPane.ERROR_MESSAGE);
-                                                            }
-                                                        }else{
-                                                            correo_3.requestFocus();
-                                                            JOptionPane.showMessageDialog(this,"Verifique el correo alterno 3 de la empresa","Error",JOptionPane.ERROR_MESSAGE);
-                                                        }
-                                                    }else{
-                                                        correo_2.requestFocus();
-                                                        JOptionPane.showMessageDialog(this,"Verifique el correo alterno 2 de la empresa","Error",JOptionPane.ERROR_MESSAGE);
-                                                    }
-                                                }else{
-                                                    correo_1.requestFocus();
-                                                    JOptionPane.showMessageDialog(this,"Verifique el correo alterno 1 de la empresa","Error",JOptionPane.ERROR_MESSAGE);
-                                                }
-                                            }else{
-                                                correo_interno.requestFocus();
-                                                JOptionPane.showMessageDialog(this,"Verifique el correo interno de la empresa","Error",JOptionPane.ERROR_MESSAGE);
-                                            }
-                                        } else {
-                                            tb_id_rl.requestFocus();
-                                            JOptionPane.showMessageDialog(this,"Ingrese los telefonos del representante legal de la empresa","Error",JOptionPane.ERROR_MESSAGE);
-                                        }
-                                    } else {
-                                        tb_id_rl.requestFocus();
-                                        JOptionPane.showMessageDialog(this,"Ingrese el nombre del representante legal de la empresa","Error",JOptionPane.ERROR_MESSAGE);
-                                    }
-                                } else {
-                                    tb_id_rl.requestFocus();
-                                    JOptionPane.showMessageDialog(this,"Ingrese la identificacion o NIT del representante legal de la empresa","Error",JOptionPane.ERROR_MESSAGE);
-                                }
-                            }else{
-                                cb_actividad.requestFocus();
-                                JOptionPane.showMessageDialog(this,"Seleccione la Actividad de la empresa","Error",JOptionPane.ERROR_MESSAGE);
-                            }
-                        }else {
-                            cb_ccf.requestFocus();
-                            JOptionPane.showMessageDialog(this,"Seleccione la CCF de la empresa","Error",JOptionPane.ERROR_MESSAGE);
-                        }
-                    }else {
-                        cb_arl.requestFocus();
-                        JOptionPane.showMessageDialog(this,"Seleccione la ARL de la empresa","Error",JOptionPane.ERROR_MESSAGE);
-                    }
-                } else {
-                    JOptionPane.showMessageDialog(this,"Digite el nombre de la empresa","Error",JOptionPane.ERROR_MESSAGE);
-                }
-            } else {
-                JOptionPane.showMessageDialog(this,"Digite el NIT de la empresa","Error",JOptionPane.ERROR_MESSAGE);
-            }
-        }else{
-            cb_actividad.requestFocus();
-            JOptionPane.showMessageDialog(this,"Seleccione el tipo de nit de la empresa","Error",JOptionPane.ERROR_MESSAGE);
-        }
-        
-    }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
@@ -949,14 +788,18 @@ public class Add_Empresa extends javax.swing.JDialog {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Add_Empresa.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(View_Empresa.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Add_Empresa.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(View_Empresa.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Add_Empresa.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(View_Empresa.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Add_Empresa.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(View_Empresa.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -965,7 +808,7 @@ public class Add_Empresa extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                Add_Empresa dialog = new Add_Empresa(new javax.swing.JFrame(), true);
+                View_Empresa dialog = new View_Empresa(new javax.swing.JFrame(), true, new String());
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -995,7 +838,6 @@ public class Add_Empresa extends javax.swing.JDialog {
     private javax.swing.JTextField dir_empresa;
     private javax.swing.JButton edd_arl;
     private com.toedter.calendar.JDateChooser f_ren_reg_mercantil;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -1036,7 +878,7 @@ public class Add_Empresa extends javax.swing.JDialog {
     private javax.swing.JTextField tel_empresa;
     private javax.swing.JTextField telefonos;
     // End of variables declaration//GEN-END:variables
-public final void ac_tip_nit(){
+private final void ac_tip_nit(){
     cb_tip_nit.removeAllItems();
     cb_tip_nit.addItem("Seleccione..");
     Conexion con = new Conexion();
@@ -1054,7 +896,7 @@ public final void ac_tip_nit(){
         JOptionPane.showMessageDialog(null,j,"Error",JOptionPane.ERROR_MESSAGE);
     }
 }  
-public final void ac_nit(){
+private final void ac_nit(){
     tac_nit.removeAllItems();
     tac_nit.addItem("Seleccione..");
     Conexion con = new Conexion();
@@ -1072,7 +914,7 @@ public final void ac_nit(){
         JOptionPane.showMessageDialog(null,j,"Error",JOptionPane.ERROR_MESSAGE);
     }
 }   
-public final void ac_arl(){
+private final void ac_arl(){
     cb_arl.removeAllItems();
     cb_arl.addItem("Seleccione..");
     Conexion con = new Conexion();
@@ -1091,7 +933,7 @@ public final void ac_arl(){
     }
 
 }
-public final void ac_ccf(){
+private final void ac_ccf(){
     cb_ccf.removeAllItems();
     cb_ccf.addItem("Seleccione..");
     Conexion con = new Conexion();
@@ -1110,7 +952,7 @@ public final void ac_ccf(){
     }
 
 }
-public final void ac_act(){
+private final void ac_act(){
     cb_actividad.removeAllItems();
     cb_actividad.addItem("Seleccione..");
     Conexion con = new Conexion();
@@ -1128,7 +970,7 @@ public final void ac_act(){
         JOptionPane.showMessageDialog(null,j,"Error",JOptionPane.ERROR_MESSAGE);
     }
 }  
-public final void ac_dep(){
+private final void ac_dep(){
     cb_dep.removeAllItems();
     cb_dep.addItem("Seleccione..");
     Conexion con = new Conexion();
@@ -1150,7 +992,7 @@ public final void ac_dep(){
     }
 
 }
-public final void ac_mun(String dep){
+private final void ac_mun(String dep){
     cb_mun.removeAllItems();
     if (dep.equals("Seleccione..")) {
         cb_mun.addItem("Seleccione..");
@@ -1179,7 +1021,7 @@ public final void ac_mun(String dep){
     
 
 }
-public final void ac_tamaño(){
+private final void ac_tamaño(){
     cb_tamaño.removeAllItems();
     cb_tamaño.addItem("Seleccione..");
     Conexion con = new Conexion();
@@ -1197,7 +1039,7 @@ public final void ac_tamaño(){
         JOptionPane.showMessageDialog(null,j,"Error",JOptionPane.ERROR_MESSAGE);
     }
 }  
-public void load_data(String nit){
+private void load_name_emp(String nit){
     if (!nit.equals("Seleccione..")) {
         Conexion con = new Conexion();
         con.conexion();
@@ -1219,7 +1061,7 @@ public void load_data(String nit){
         
     }
 }
-public boolean check_mail(String mail){
+private boolean check_mail(String mail){
 boolean ret=false;
     if (!mail.equals("")) {
         if (mail.contains("@") & count_char(mail, '@')==1) {
@@ -1230,7 +1072,7 @@ boolean ret=false;
     }
 return ret;
 }
-public int count_char(String str, char c){
+private int count_char(String str, char c){
     String pr=str.trim();
     char _toCompare=c;
     int veces=0;
@@ -1242,11 +1084,84 @@ public int count_char(String str, char c){
 }
     return veces;
 }
-public int bool_to_int(boolean b){
+private int bool_to_int(boolean b){
     if (b) {
         return 1;
     }else{
         return 0;
     }
+}
+private void load_data(String n){
+    Conexion con = new Conexion();
+    con.conexion();
+    ResultSet r;
+    try {
+        r = con.s.executeQuery ("SELECT *\n" +
+                                "FROM\n" +
+                                "    `t_empresas`\n" +
+                                "    INNER JOIN `t_tipo_nit` \n" +
+                                "        ON (`t_empresas`.`ID_TIPO_NIT` = `t_tipo_nit`.`ID_TIPO_NIT`)\n" +
+                                "    INNER JOIN `t_arl` \n" +
+                                "        ON (`t_empresas`.`ID_ARL` = `t_arl`.`ID_ARL`)\n" +
+                                "    INNER JOIN `t_ccf` \n" +
+                                "        ON (`t_empresas`.`ID_CCF` = `t_ccf`.`ID_CCF`)\n" +
+                                "    INNER JOIN `t_actividades` \n" +
+                                "        ON (`t_empresas`.`ID_ACTIVIDAD` = `t_actividades`.`ID_ACTIVIDAD`)\n" +
+                                "    INNER JOIN `t_municipios` \n" +
+                                "        ON (`t_empresas`.`ID_MUN_EMPRESA` = `t_municipios`.`ID_MUN`)\n" +
+                                "    INNER JOIN `t_departamentos` \n" +
+                                "        ON (`t_municipios`.`ID_DEP` = `t_departamentos`.`ID_DEP`)\n" +
+                                "    INNER JOIN `t_tamaño_empresa` \n" +
+                                "        ON (`t_empresas`.`ID_TAM_EMPRESA` = `t_tamaño_empresa`.`ID_TAMAÑO`) WHERE t_empresas.ID_EMPRESA = '"+n+"'");
+        if (r.next()) {
+            cb_tip_nit.setSelectedItem(r.getString("NOMBRE_TIPO_NIT"));
+            nit.setText(r.getString("ID_EMPRESA"));
+            nombre_empresa.setText(r.getString("NOMBRE_EMPRESA"));
+            cb_arl.setSelectedItem(r.getString("NOMBRE_ARL"));
+            cb_ccf.setSelectedItem(r.getString("NOMBRE_CCF"));
+            cb_actividad.setSelectedItem(r.getString("NOMBRE_ACTIVIDAD"));
+            tb_id_rl.setText(r.getString("ID_REP_EMPRESA"));
+            representante.setText(r.getString("REPRESENTANTE_LEGAL"));
+            telefonos.setText(r.getString("TEL_CEL_RL_EMPRESA"));
+            correo_interno.setText(r.getString("CORREO_INTERNO"));
+            correo_1.setText(r.getString("CORREO_CONTRATISTA_1"));
+            correo_2.setText(r.getString("CORREO_CONTRATISTA_2"));
+            correo_3.setText(r.getString("CORREO_CONTRATISTA_3"));
+            if (r.getString("ENABLE_INTERNO").equals("1")) {
+                sel_int.setSelected(true);
+            }else{
+                sel_int.setSelected(false);
+            }
+            if (r.getString("ENABLE_1").equals("1")) {
+                sel_1.setSelected(true);
+            }else{
+                sel_1.setSelected(false);
+            }
+            if (r.getString("ENABLE_2").equals("1")) {
+                sel_2.setSelected(true);
+            }else{
+                sel_2.setSelected(false);
+            }
+            if (r.getString("ENABLE_3").equals("1")) {
+                sel_3.setSelected(true);
+            }else{
+                sel_3.setSelected(false);
+            }
+            tel_empresa.setText(r.getString("TELEFONOS"));
+            dir_empresa.setText(r.getString("DIR_EMPRESA"));
+            cb_dep.setSelectedItem(r.getString("NOMBRE_DEP"));
+            cb_mun.setSelectedItem(r.getString("NOMBRE_MUN"));
+            cb_tamaño.setSelectedItem(r.getString("NOMBRE_TAMAÑO"));
+            reg_mercantil.setText(r.getString("REG_MER_EMPRESA"));
+            f_ren_reg_mercantil.setDate(new SimpleDateFormat("yyyy-MM-dd").parse(r.getString("F_REN_REG_MERC")));
+        }
+        con.cerrar();
+    }catch(ParseException  | SQLException j){
+        con.cerrar();
+        j.printStackTrace();
+        JOptionPane.showMessageDialog(this,j,"Error",JOptionPane.ERROR_MESSAGE);
+    }
+
+
 }
 }

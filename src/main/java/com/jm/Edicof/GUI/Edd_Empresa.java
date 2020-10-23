@@ -5,7 +5,6 @@
  */
 package com.jm.Edicof.GUI;
 
-import com.jm.Edicof.Clases.AutoCompletion;
 import com.jm.Edicof.Clases.Conexion;
 import java.awt.Event;
 import java.awt.HeadlessException;
@@ -13,6 +12,8 @@ import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import javax.swing.InputMap;
 import javax.swing.JOptionPane;
 import javax.swing.KeyStroke;
@@ -22,7 +23,8 @@ import javax.swing.KeyStroke;
  * @author ADMIN
  */
 public class Edd_Empresa extends javax.swing.JDialog {
-
+    boolean perm=false;
+    boolean perm_mun=false;
     /**
      * Creates new form Edd_Empresa1
      */
@@ -30,12 +32,18 @@ public class Edd_Empresa extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/group_gear.png")));
+        ac_tip_nit();
         ac_nit();
         ac_arl();
         ac_ccf();
         ac_act();
+        ac_dep();
+        ac_mun(cb_dep.getSelectedItem().toString());
+        ac_tamaño();
         InputMap map1 = nit.getInputMap(nit.WHEN_FOCUSED);
         map1.put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Event.CTRL_MASK), "null");
+        perm=true;
+        perm_mun=true;
         if (!n.equals("")) {
             load_data(n);
             cb_nit.setEnabled(false);
@@ -45,12 +53,18 @@ public class Edd_Empresa extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/group_gear.png")));
+        ac_tip_nit();
         ac_nit();
         ac_arl();
         ac_ccf();
         ac_act();
+        ac_dep();
+        ac_mun(cb_dep.getSelectedItem().toString());
+        ac_tamaño();
         InputMap map1 = nit.getInputMap(nit.WHEN_FOCUSED);
         map1.put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Event.CTRL_MASK), "null");
+        perm=true;
+        perm_mun=true;
         if (!n.equals("")) {
             load_data(n);
             cb_nit.setEnabled(false);
@@ -83,6 +97,8 @@ public class Edd_Empresa extends javax.swing.JDialog {
         add_ccf1 = new javax.swing.JButton();
         jLabel12 = new javax.swing.JLabel();
         cb_actividad = new javax.swing.JComboBox<>();
+        jLabel17 = new javax.swing.JLabel();
+        cb_tip_nit = new javax.swing.JComboBox<>();
         jButton1 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jPanel5 = new javax.swing.JPanel();
@@ -90,6 +106,8 @@ public class Edd_Empresa extends javax.swing.JDialog {
         representante = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
         telefonos = new javax.swing.JTextField();
+        jLabel22 = new javax.swing.JLabel();
+        tb_id_rl = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         correo_interno = new javax.swing.JTextField();
@@ -104,6 +122,23 @@ public class Edd_Empresa extends javax.swing.JDialog {
         sel_2 = new javax.swing.JCheckBox();
         jLabel11 = new javax.swing.JLabel();
         sel_int = new javax.swing.JCheckBox();
+        jPanel3 = new javax.swing.JPanel();
+        jLabel13 = new javax.swing.JLabel();
+        dir_empresa = new javax.swing.JTextField();
+        cb_dep = new javax.swing.JComboBox<>();
+        jLabel14 = new javax.swing.JLabel();
+        cb_mun = new javax.swing.JComboBox<>();
+        jLabel15 = new javax.swing.JLabel();
+        jLabel16 = new javax.swing.JLabel();
+        tel_empresa = new javax.swing.JTextField();
+        jPanel4 = new javax.swing.JPanel();
+        jLabel18 = new javax.swing.JLabel();
+        cb_tamaño = new javax.swing.JComboBox<>();
+        jPanel6 = new javax.swing.JPanel();
+        jLabel19 = new javax.swing.JLabel();
+        reg_mercantil = new javax.swing.JTextField();
+        jLabel20 = new javax.swing.JLabel();
+        f_ren_reg_mercantil = new com.toedter.calendar.JDateChooser();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Editar Empresa");
@@ -132,8 +167,8 @@ public class Edd_Empresa extends javax.swing.JDialog {
 
         jLabel3.setText("Nuevo NIT");
 
-        AutoCompletion.enable(cb_nit);
-        cb_nit.setEditable(true);
+        //AutoCompletion.enable(cb_nit);
+        cb_nit.setEnabled(false);
         cb_nit.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 cb_nitItemStateChanged(evt);
@@ -149,11 +184,9 @@ public class Edd_Empresa extends javax.swing.JDialog {
 
         jLabel21.setText("CCF");
 
-        AutoCompletion.enable(cb_arl);
-        cb_arl.setEditable(true);
+        //AutoCompletion.enable(cb_arl);
 
-        AutoCompletion.enable(cb_ccf);
-        cb_ccf.setEditable(true);
+        //AutoCompletion.enable(cb_ccf);
 
         add_arl.setIcon(new javax.swing.ImageIcon(getClass().getResource("/link_add.png"))); // NOI18N
         add_arl.setToolTipText("Agregar ARL");
@@ -189,8 +222,9 @@ public class Edd_Empresa extends javax.swing.JDialog {
 
         jLabel12.setText("Actividad");
 
-        cb_actividad.setEditable(true);
-        AutoCompletion.enable(cb_actividad);
+        //AutoCompletion.enable(cb_actividad);
+
+        jLabel17.setText("Tipo NIT");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -199,22 +233,6 @@ public class Edd_Empresa extends javax.swing.JDialog {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel2))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(cb_nit, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jLabel3)
-                                .addGap(190, 190, 190))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(nombre_empresa, javax.swing.GroupLayout.PREFERRED_SIZE, 398, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(nit, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addContainerGap())))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel9)
@@ -235,12 +253,35 @@ public class Edd_Empresa extends javax.swing.JDialog {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(add_ccf1, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(edd_arl, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel17))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(nombre_empresa, javax.swing.GroupLayout.PREFERRED_SIZE, 398, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(nit, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addContainerGap())
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(cb_tip_nit, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(cb_nit, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabel3)
+                                .addGap(190, 190, 190))))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(4, 4, 4)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cb_tip_nit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel17))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(nit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2)
@@ -304,19 +345,31 @@ public class Edd_Empresa extends javax.swing.JDialog {
             }
         });
 
+        jLabel22.setText("Cedula");
+
+        tb_id_rl.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tb_id_rl.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                tb_id_rlKeyTyped(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel8)
-                    .addComponent(jLabel10))
+                    .addComponent(jLabel10)
+                    .addComponent(jLabel22))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(telefonos)
-                    .addComponent(representante, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(tb_id_rl, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(telefonos)
+                        .addComponent(representante, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
@@ -324,13 +377,17 @@ public class Edd_Empresa extends javax.swing.JDialog {
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(tb_id_rl, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel22))
+                .addGap(10, 10, 10)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
                     .addComponent(representante, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel10)
                     .addComponent(telefonos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(18, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Informacion de correo"));
@@ -358,7 +415,7 @@ public class Edd_Empresa extends javax.swing.JDialog {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(26, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel4)
                     .addComponent(jLabel5)
@@ -379,7 +436,7 @@ public class Edd_Empresa extends javax.swing.JDialog {
                         .addComponent(sel_2)
                         .addComponent(sel_3))
                     .addComponent(sel_int))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(26, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -408,36 +465,182 @@ public class Edd_Empresa extends javax.swing.JDialog {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Información de ubicación"));
+
+        jLabel13.setText("Direccion");
+
+        dir_empresa.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+
+        cb_dep.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " " }));
+        cb_dep.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cb_depItemStateChanged(evt);
+            }
+        });
+
+        jLabel14.setText("Departamento");
+
+        cb_mun.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " " }));
+
+        jLabel15.setText("Ciudad");
+
+        jLabel16.setText("Teléfono");
+
+        tel_empresa.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tel_empresa.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                tel_empresaKeyTyped(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel13)
+                    .addComponent(jLabel14)
+                    .addComponent(jLabel15)
+                    .addComponent(jLabel16))
+                .addGap(47, 47, 47)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(cb_mun, 0, 207, Short.MAX_VALUE)
+                    .addComponent(cb_dep, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(dir_empresa)
+                    .addComponent(tel_empresa))
+                .addGap(20, 20, 20))
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(tel_empresa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel16))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel13)
+                    .addComponent(dir_empresa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cb_dep, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel14))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cb_mun, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel15))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder("Tamaño Empresa"));
+
+        jLabel18.setText("No Empleados");
+
+        cb_tamaño.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " " }));
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
+                .addComponent(cb_tamaño, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20))
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap(20, Short.MAX_VALUE)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cb_tamaño, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel18))
+                .addContainerGap(20, Short.MAX_VALUE))
+        );
+
+        jPanel6.setBorder(javax.swing.BorderFactory.createTitledBorder("Informacion Registro Mercantil"));
+
+        jLabel19.setText("Registro Mercantil");
+
+        reg_mercantil.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+
+        jLabel20.setText("Fecha Renovación");
+
+        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
+        jPanel6.setLayout(jPanel6Layout);
+        jPanel6Layout.setHorizontalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel19)
+                    .addComponent(jLabel20))
+                .addGap(32, 32, 32)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(f_ren_reg_mercantil, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(reg_mercantil, javax.swing.GroupLayout.DEFAULT_SIZE, 203, Short.MAX_VALUE))
+                .addGap(20, 20, 20))
+        );
+        jPanel6Layout.setVerticalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel19)
+                    .addComponent(reg_mercantil, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel20)
+                    .addComponent(f_ren_reg_mercantil, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jButton1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton3)
-                        .addGap(0, 0, Short.MAX_VALUE))
+                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 3, Short.MAX_VALUE))
-                    .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
+                        .addGap(379, 379, 379)
+                        .addComponent(jButton1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton3)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(54, 54, 54)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
                     .addComponent(jButton3))
@@ -489,201 +692,183 @@ public class Edd_Empresa extends javax.swing.JDialog {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        int id_arl=0;
-        int id_ccf=0;
-        int id_act=0;
-        if (!nit.getText().equals("")) {
-            if (!nombre_empresa.getText().equals("")) {
-                if (!cb_arl.getSelectedItem().equals("Seleccione..")) {
-                    if (!cb_ccf.getSelectedItem().equals("Seleccione..")) {
-                        if (!cb_actividad.getSelectedItem().equals("Seleccione..")) {
-                            if (check_mail(correo_interno.getText())) {
-                                if (check_mail(correo_1.getText())) {
-                                    if (check_mail(correo_2.getText())) {
-                                        if (check_mail(correo_3.getText())) {
-                                            if (sel_int.isSelected() | sel_1.isSelected() | sel_2.isSelected() | sel_3.isSelected()) {
-                                                if (!(correo_interno.getText().equals("") & sel_int.isSelected())) {
-                                                    if (!(correo_1.getText().equals("") & sel_1.isSelected())) {
-                                                        if (!(correo_2.getText().equals("") & sel_2.isSelected())) {
-                                                            if (!(correo_3.getText().equals("") & sel_3.isSelected())) {
-                                                                Conexion con = new Conexion();
-                                                                con.conexion();
-                                                                ResultSet r;
-                                                                try {
-                                                                    if (!nit.getText().equals(cb_nit.getSelectedItem())) {
-                                                                        r = con.s.executeQuery ("SELECT * FROM `t_empresas` WHERE ID_EMPRESA = '"+nit.getText()+"'");
-                                                                        if(r.next()){
-                                                                            JOptionPane.showMessageDialog(this,"La empresa que intenta ingresar ya existe","Error",JOptionPane.ERROR_MESSAGE);
-                                                                        }
-                                                                        else{
-                                                                            int conf = JOptionPane.showConfirmDialog(this,"Esta seguro que desea continuar?","Confirmación",JOptionPane.OK_CANCEL_OPTION,JOptionPane.QUESTION_MESSAGE);
-                                                                            if (conf == JOptionPane.YES_OPTION) {
-                                                                                r = con.s.executeQuery ("SELECT * FROM `t_arl` WHERE (NOMBRE_ARL ='"+cb_arl.getSelectedItem().toString()+"');");
-                                                                                if(r.next()){
-                                                                                    id_arl=r.getInt("ID_ARL");    
+
+        if (!cb_tip_nit.getSelectedItem().equals("Seleccione..")) {
+            if (!nit.getText().equals("")) {
+                if (!nombre_empresa.getText().equals("")) {
+                    if (!cb_arl.getSelectedItem().equals("Seleccione..")) {
+                        if (!cb_ccf.getSelectedItem().equals("Seleccione..")) {
+                            if (!cb_actividad.getSelectedItem().equals("Seleccione..")) {
+                                if (!tb_id_rl.getText().equals("")) {
+                                    if (!representante.getText().equals("")) {
+                                        if (!telefonos.getText().equals("")) {
+                                            if (check_mail(correo_interno.getText())) {
+                                                if (check_mail(correo_1.getText())) {
+                                                    if (check_mail(correo_2.getText())) {
+                                                        if (check_mail(correo_3.getText())) {
+                                                            if (sel_int.isSelected() | sel_1.isSelected() | sel_2.isSelected() | sel_3.isSelected()) {
+                                                                if (!(correo_interno.getText().equals("") & sel_int.isSelected())) {
+                                                                    if (!(correo_1.getText().equals("") & sel_1.isSelected())) {
+                                                                        if (!(correo_2.getText().equals("") & sel_2.isSelected())) {
+                                                                            if (!(correo_3.getText().equals("") & sel_3.isSelected())) {
+                                                                                if (!tel_empresa.getText().equals("")) {
+                                                                                    if (!dir_empresa.getText().equals("")) {
+                                                                                        if (!cb_dep.getSelectedItem().equals("Seleccione..")) {
+                                                                                            if (!cb_mun.getSelectedItem().equals("Seleccione..")) {
+                                                                                                if (!cb_tamaño.getSelectedItem().equals("Seleccione..")) {
+                                                                                                    if (!reg_mercantil.getText().equals("")) {
+                                                                                                        if (f_ren_reg_mercantil.getDate()!=null){   
+                                                                                                            Conexion con = new Conexion();
+                                                                                                            con.conexion();
+                                                                                                            ResultSet r;
+                                                                                                            try {
+                                                                                                                r = con.s.executeQuery ("SELECT * FROM `t_empresas` WHERE ID_EMPRESA = '"+cb_nit.getSelectedItem()+"'");
+                                                                                                                if(!r.next()){
+                                                                                                                    JOptionPane.showMessageDialog(this,"La empresa que intenta ingresar no existe","Error",JOptionPane.ERROR_MESSAGE);
+                                                                                                                }
+                                                                                                                else{
+                                                                                                                    int conf = JOptionPane.showConfirmDialog(this,"Esta seguro que desea continuar?","Confirmación",JOptionPane.OK_CANCEL_OPTION,JOptionPane.QUESTION_MESSAGE);
+                                                                                                                    if (conf == JOptionPane.YES_OPTION) {
+                                                                                                                        int id_tip_nit = 0;
+                                                                                                                        int id_arl = 0;
+                                                                                                                        int id_ccf = 0;
+                                                                                                                        int id_act = 0;
+                                                                                                                        int id_mun =0;
+                                                                                                                        int id_tam=0;
+                                                                                                                        r = con.s.executeQuery ("SELECT ID_TIPO_NIT FROM `t_tipo_nit` WHERE NOMBRE_TIPO_NIT ='"+cb_tip_nit.getSelectedItem().toString()+"';");
+                                                                                                                        if(r.next()){
+                                                                                                                            id_tip_nit=r.getInt("ID_TIPO_NIT");    
+                                                                                                                        }
+                                                                                                                        r = con.s.executeQuery ("SELECT ID_ARL FROM `t_arl` WHERE (NOMBRE_ARL ='"+cb_arl.getSelectedItem().toString()+"');");
+                                                                                                                        if(r.next()){
+                                                                                                                            id_arl=r.getInt("ID_ARL");    
+                                                                                                                        }
+                                                                                                                        r = con.s.executeQuery ("SELECT ID_CCF FROM `t_ccf` WHERE (NOMBRE_CCF ='"+cb_ccf.getSelectedItem().toString()+"');");
+                                                                                                                        if(r.next()){
+                                                                                                                            id_ccf=r.getInt("ID_CCF");    
+                                                                                                                        }
+                                                                                                                        r = con.s.executeQuery ("SELECT ID_ACTIVIDAD FROM `t_actividades` WHERE NOMBRE_ACTIVIDAD ='"+cb_actividad.getSelectedItem().toString()+"';");
+                                                                                                                        if(r.next()){
+                                                                                                                            id_act=r.getInt("ID_ACTIVIDAD");    
+                                                                                                                        }
+                                                                                                                        r = con.s.executeQuery ("SELECT * FROM t_municipios WHERE NOMBRE_MUN = '"+cb_mun.getSelectedItem()+"';");
+                                                                                                                        if(r.next()){
+                                                                                                                            id_mun=r.getInt("ID_MUN");
+                                                                                                                        }
+                                                                                                                        r = con.s.executeQuery ("SELECT ID_TAMAÑO FROM t_tamaño_empresa WHERE NOMBRE_TAMAÑO = '"+cb_tamaño.getSelectedItem()+"';");
+                                                                                                                        if(r.next()){
+                                                                                                                            id_tam=r.getInt("ID_TAMAÑO");
+                                                                                                                        }
+                                                                                                                        con.s.executeUpdate("UPDATE `t_empresas` SET `ID_TIPO_NIT`="+id_tip_nit+",`ID_EMPRESA`='"+nit.getText()+"',`NOMBRE_EMPRESA`='"+nombre_empresa.getText()+"',`ID_ARL`="+id_arl+",`ID_CCF`="+id_ccf+",`ID_ACTIVIDAD`="+id_act+",`ID_REP_EMPRESA`='"+tb_id_rl.getText()+"',`REPRESENTANTE_LEGAL`='"+representante.getText().toUpperCase()+"',`TEL_CEL_RL_EMPRESA`='"+telefonos.getText()+"',CORREO_INTERNO = '"+correo_interno.getText()+"', CORREO_CONTRATISTA_1 = '"+correo_1.getText()+"', CORREO_CONTRATISTA_2 = '"+correo_2.getText()+"', CORREO_CONTRATISTA_3 = '"+correo_3.getText()+"', ENABLE_INTERNO = "+bool_to_int(sel_int.isSelected())+", ENABLE_1 = "+bool_to_int(sel_1.isSelected())+", ENABLE_2 = "+bool_to_int(sel_2.isSelected())+", ENABLE_3 = "+bool_to_int(sel_3.isSelected())+",`TELEFONOS`='"+tel_empresa.getText()+"',`DIR_EMPRESA`='"+dir_empresa.getText()+"',`ID_MUN_EMPRESA`="+id_mun+",`ID_TAM_EMPRESA`="+id_tam+",`REG_MER_EMPRESA`='"+reg_mercantil.getText().trim()+"',`F_REN_REG_MERC`='"+new SimpleDateFormat("yyyy-MM-dd").format(f_ren_reg_mercantil.getDate())+"' WHERE ID_EMPRESA = '"+cb_nit.getSelectedItem().toString()+"'");
+                                                                                                                        JOptionPane.showMessageDialog(this,"La empresa fue modificada correctamente","Información",JOptionPane.INFORMATION_MESSAGE);
+                                                                                                                        con.cerrar();
+                                                                                                                        this.dispose();
+                                                                                                                    }
+                                                                                                                }
+                                                                                                                con.cerrar();
+                                                                                                            } catch (SQLException | HeadlessException e) {
+                                                                                                                con.cerrar();
+                                                                                                                e.printStackTrace();
+                                                                                                                JOptionPane.showMessageDialog(this,e,"Error",JOptionPane.ERROR_MESSAGE);
+                                                                                                            }
+                                                                                                        } else {
+                                                                                                            f_ren_reg_mercantil.requestFocus();
+                                                                                                            JOptionPane.showMessageDialog(this,"Ingrese la fecha de renovación del registro mercantil de la empresa","Error",JOptionPane.ERROR_MESSAGE);
+                                                                                                        }
+                                                                                                    } else {
+                                                                                                        cb_tamaño.requestFocus();
+                                                                                                        JOptionPane.showMessageDialog(this,"Ingrese el registro mercantil de la empresa","Error",JOptionPane.ERROR_MESSAGE);
+                                                                                                    }
+                                                                                                } else {
+                                                                                                    cb_tamaño.requestFocus();
+                                                                                                    JOptionPane.showMessageDialog(this,"Seleccione el tamaño de la empresa","Error",JOptionPane.ERROR_MESSAGE);
+                                                                                                }
+                                                                                            } else {
+                                                                                                cb_mun.requestFocus();
+                                                                                                JOptionPane.showMessageDialog(this,"Seleccione el municipio donde se ubica la empresa","Error",JOptionPane.ERROR_MESSAGE);
+                                                                                            }
+                                                                                        } else {
+                                                                                            cb_dep.requestFocus();
+                                                                                            JOptionPane.showMessageDialog(this,"Seleccione el departamento donde se ubica la empresa","Error",JOptionPane.ERROR_MESSAGE);
+                                                                                        }
+
+                                                                                    } else {
+                                                                                        dir_empresa.requestFocus();
+                                                                                        JOptionPane.showMessageDialog(this,"Ingrese la dirección de la empresa","Error",JOptionPane.ERROR_MESSAGE);
+                                                                                    }
+                                                                                } else {
+                                                                                    tel_empresa.requestFocus();
+                                                                                    JOptionPane.showMessageDialog(this,"Ingrese el teléfono de la empresa","Error",JOptionPane.ERROR_MESSAGE);
                                                                                 }
-                                                                                r = con.s.executeQuery ("SELECT * FROM `t_ccf` WHERE (NOMBRE_CCF ='"+cb_ccf.getSelectedItem().toString()+"');");
-                                                                                if(r.next()){
-                                                                                    id_ccf=r.getInt("ID_CCF");    
-                                                                                }
-                                                                                r = con.s.executeQuery ("SELECT * FROM `t_actividades` WHERE (NOMBRE_ACTIVIDAD ='"+cb_actividad.getSelectedItem().toString()+"');");
-                                                                                if(r.next()){
-                                                                                    id_act=r.getInt("ID_ACTIVIDAD");    
-                                                                                }
-                                                                                con.s.executeUpdate("UPDATE `t_empresas` SET `ID_EMPRESA`='"+nit.getText()+"',`NOMBRE_EMPRESA`='"+nombre_empresa.getText()+"',`ID_ARL`="+id_arl+",`ID_CCF`="+id_ccf+", ID_ACTIVIDAD="+id_act+", REPRESENTANTE_LEGAL='"+representante.getText()+"', TELEFONOS = '"+telefonos.getText()+"', CORREO_INTERNO = '"+correo_interno.getText()+"', CORREO_CONTRATISTA_1 = '"+correo_1.getText()+"', CORREO_CONTRATISTA_2 = '"+correo_2.getText()+"', CORREO_CONTRATISTA_3 = '"+correo_3.getText()+"', ENABLE_INTERNO = "+bool_to_int(sel_int.isSelected())+", ENABLE_1 = "+bool_to_int(sel_1.isSelected())+", ENABLE_2 = "+bool_to_int(sel_2.isSelected())+", ENABLE_3 = "+bool_to_int(sel_3.isSelected())+" WHERE ID_EMPRESA = '"+cb_nit.getSelectedItem().toString()+"'");
-                                                                                JOptionPane.showMessageDialog(this,"La empresa fue modificada correctamente","Información",JOptionPane.INFORMATION_MESSAGE);
-                                                                                con.cerrar();
-                                                                                this.dispose();
+                                                                            }else{
+                                                                                sel_3.requestFocus();
+                                                                                JOptionPane.showMessageDialog(this,"No se debe seleccionar un correo no valido","Error",JOptionPane.ERROR_MESSAGE);
                                                                             }
+                                                                        }else{
+                                                                            sel_2.requestFocus();
+                                                                            JOptionPane.showMessageDialog(this,"No se debe seleccionar un correo no valido","Error",JOptionPane.ERROR_MESSAGE);
                                                                         }
                                                                     }else{
-                                                                        int conf = JOptionPane.showConfirmDialog(this,"Esta seguro que desea continuar?","Confirmación",JOptionPane.OK_CANCEL_OPTION,JOptionPane.QUESTION_MESSAGE);
-                                                                        if (conf == JOptionPane.YES_OPTION) {
-                                                                            r = con.s.executeQuery ("SELECT * FROM `t_arl` WHERE (NOMBRE_ARL ='"+cb_arl.getSelectedItem().toString()+"');");
-                                                                            if(r.next()){
-                                                                                id_arl=r.getInt("ID_ARL");    
-                                                                            }
-                                                                            r = con.s.executeQuery ("SELECT * FROM `t_ccf` WHERE (NOMBRE_CCF ='"+cb_ccf.getSelectedItem().toString()+"');");
-                                                                            if(r.next()){
-                                                                                id_ccf=r.getInt("ID_CCF");    
-                                                                            }
-                                                                            r = con.s.executeQuery ("SELECT * FROM `t_actividades` WHERE (NOMBRE_ACTIVIDAD ='"+cb_actividad.getSelectedItem().toString()+"');");
-                                                                            if(r.next()){
-                                                                                id_act=r.getInt("ID_ACTIVIDAD");    
-                                                                            }
-                                                                            con.s.executeUpdate("UPDATE `t_empresas` SET `ID_EMPRESA`='"+nit.getText()+"',`NOMBRE_EMPRESA`='"+nombre_empresa.getText()+"',`ID_ARL`="+id_arl+",`ID_CCF`="+id_ccf+", ID_ACTIVIDAD="+id_act+", REPRESENTANTE_LEGAL='"+representante.getText()+"', TELEFONOS = '"+telefonos.getText()+"', CORREO_INTERNO = '"+correo_interno.getText()+"', CORREO_CONTRATISTA_1 = '"+correo_1.getText()+"', CORREO_CONTRATISTA_2 = '"+correo_2.getText()+"', CORREO_CONTRATISTA_3 = '"+correo_3.getText()+"', ENABLE_INTERNO = "+bool_to_int(sel_int.isSelected())+", ENABLE_1 = "+bool_to_int(sel_1.isSelected())+", ENABLE_2 = "+bool_to_int(sel_2.isSelected())+", ENABLE_3 = "+bool_to_int(sel_3.isSelected())+" WHERE ID_EMPRESA = '"+cb_nit.getSelectedItem().toString()+"'");
-                                                                            JOptionPane.showMessageDialog(this,"La empresa fue modificada correctamente","Información",JOptionPane.INFORMATION_MESSAGE);
-                                                                            con.cerrar();
-                                                                            this.dispose();
-                                                                        }
+                                                                        sel_1.requestFocus();
+                                                                        JOptionPane.showMessageDialog(this,"No se debe seleccionar un correo no valido","Error",JOptionPane.ERROR_MESSAGE);
                                                                     }
-                                                                } catch (SQLException | HeadlessException e) {
-                                                                    con.cerrar();
-                                                                    e.printStackTrace();
-                                                                    JOptionPane.showMessageDialog(this,e,"Error",JOptionPane.ERROR_MESSAGE);
+                                                                }else{
+                                                                    sel_int.requestFocus();
+                                                                    JOptionPane.showMessageDialog(this,"No se debe seleccionar un correo no valido","Error",JOptionPane.ERROR_MESSAGE);
                                                                 }
                                                             }else{
-                                                                sel_3.requestFocus();
-                                                                JOptionPane.showMessageDialog(this,"No se debe seleccionar un correo no valido","Error",JOptionPane.ERROR_MESSAGE);
+                                                                JOptionPane.showMessageDialog(this,"Seleccione al menos una direccion de correo para el envio automatico de informes.","Error",JOptionPane.ERROR_MESSAGE);
                                                             }
                                                         }else{
-                                                            sel_2.requestFocus();
-                                                            JOptionPane.showMessageDialog(this,"No se debe seleccionar un correo no valido","Error",JOptionPane.ERROR_MESSAGE);
+                                                            correo_3.requestFocus();
+                                                            JOptionPane.showMessageDialog(this,"Verifique el correo alterno 3 de la empresa","Error",JOptionPane.ERROR_MESSAGE);
                                                         }
                                                     }else{
-                                                        sel_1.requestFocus();
-                                                        JOptionPane.showMessageDialog(this,"No se debe seleccionar un correo no valido","Error",JOptionPane.ERROR_MESSAGE);
+                                                        correo_2.requestFocus();
+                                                        JOptionPane.showMessageDialog(this,"Verifique el correo alterno 2 de la empresa","Error",JOptionPane.ERROR_MESSAGE);
                                                     }
                                                 }else{
-                                                    sel_int.requestFocus();
-                                                    JOptionPane.showMessageDialog(this,"No se debe seleccionar un correo no valido","Error",JOptionPane.ERROR_MESSAGE);
+                                                    correo_1.requestFocus();
+                                                    JOptionPane.showMessageDialog(this,"Verifique el correo alterno 1 de la empresa","Error",JOptionPane.ERROR_MESSAGE);
                                                 }
                                             }else{
-                                                JOptionPane.showMessageDialog(this,"Seleccione al menos una direccion de correo para el envio automatico de informes.","Error",JOptionPane.ERROR_MESSAGE);
+                                                correo_interno.requestFocus();
+                                                JOptionPane.showMessageDialog(this,"Verifique el correo interno de la empresa","Error",JOptionPane.ERROR_MESSAGE);
                                             }
-                                        }else{
-                                            correo_3.requestFocus();
-                                            JOptionPane.showMessageDialog(this,"Verifique el correo alterno 3 de la empresa","Error",JOptionPane.ERROR_MESSAGE);
+                                        } else {
+                                            tb_id_rl.requestFocus();
+                                            JOptionPane.showMessageDialog(this,"Ingrese los telefonos del representante legal de la empresa","Error",JOptionPane.ERROR_MESSAGE);
                                         }
-                                    }else{
-                                        correo_2.requestFocus();
-                                        JOptionPane.showMessageDialog(this,"Verifique el correo alterno 2 de la empresa","Error",JOptionPane.ERROR_MESSAGE);
+                                    } else {
+                                        tb_id_rl.requestFocus();
+                                        JOptionPane.showMessageDialog(this,"Ingrese el nombre del representante legal de la empresa","Error",JOptionPane.ERROR_MESSAGE);
                                     }
-                                }else{
-                                    correo_1.requestFocus();
-                                    JOptionPane.showMessageDialog(this,"Verifique el correo alterno 1 de la empresa","Error",JOptionPane.ERROR_MESSAGE);
+                                } else {
+                                    tb_id_rl.requestFocus();
+                                    JOptionPane.showMessageDialog(this,"Ingrese la identificacion o NIT del representante legal de la empresa","Error",JOptionPane.ERROR_MESSAGE);
                                 }
                             }else{
-                                correo_interno.requestFocus();
-                                JOptionPane.showMessageDialog(this,"Verifique el correo interno de la empresa","Error",JOptionPane.ERROR_MESSAGE);
+                                cb_actividad.requestFocus();
+                                JOptionPane.showMessageDialog(this,"Seleccione la Actividad de la empresa","Error",JOptionPane.ERROR_MESSAGE);
                             }
-                        }else{
-                            cb_actividad.requestFocus();
-                            JOptionPane.showMessageDialog(this,"Seleccione la Actividad de la empresa","Error",JOptionPane.ERROR_MESSAGE);
+                        }else {
+                            cb_ccf.requestFocus();
+                            JOptionPane.showMessageDialog(this,"Seleccione la CCF de la empresa","Error",JOptionPane.ERROR_MESSAGE);
                         }
                     }else {
-                        cb_ccf.requestFocus();
-                        JOptionPane.showMessageDialog(this,"Seleccione la CCF de la empresa","Error",JOptionPane.ERROR_MESSAGE);
+                        cb_arl.requestFocus();
+                        JOptionPane.showMessageDialog(this,"Seleccione la ARL de la empresa","Error",JOptionPane.ERROR_MESSAGE);
                     }
-                }else {
-                    cb_arl.requestFocus();
-                    JOptionPane.showMessageDialog(this,"Seleccione la ARL de la empresa","Error",JOptionPane.ERROR_MESSAGE);
+                } else {
+                    JOptionPane.showMessageDialog(this,"Digite el nombre de la empresa","Error",JOptionPane.ERROR_MESSAGE);
                 }
             } else {
-                JOptionPane.showMessageDialog(this,"Digite el nombre de la empresa","Error",JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this,"Digite el NIT de la empresa","Error",JOptionPane.ERROR_MESSAGE);
             }
-        } else {
-            JOptionPane.showMessageDialog(this,"Digite el NIT de la empresa","Error",JOptionPane.ERROR_MESSAGE);
+        }else{
+            cb_actividad.requestFocus();
+            JOptionPane.showMessageDialog(this,"Seleccione el tipo de nit de la empresa","Error",JOptionPane.ERROR_MESSAGE);
         }
-//        if (!cb_nit.getSelectedItem().equals("Seleccione..")) {
-//            if (!nit.getText().equals("")) {
-//                if (!nombre_empresa.getText().equals("")) {
-//                    Conexion con = new Conexion();
-//                    con.conexion();
-//                    ResultSet r;
-//                    try {
-//                        if (!nit.getText().equals(cb_nit.getSelectedItem().toString())) {
-//                            System.out.println("CB_NIT: "+cb_nit.getSelectedItem().toString());
-//                            System.out.println("NIT: "+nit.getText());
-//                            r = con.s.executeQuery ("SELECT * FROM `t_empresas` WHERE ID_EMPRESA = '"+nit.getText()+"'");
-//                            if(r.next()){
-//                                JOptionPane.showMessageDialog(this,"La empresa que intenta ingresar ya existe","Error",JOptionPane.ERROR_MESSAGE);
-//                            }
-//                            else{
-//                                int conf = JOptionPane.showConfirmDialog(this,"Esta seguro que desea continuar?","Confirmación",JOptionPane.OK_CANCEL_OPTION,JOptionPane.QUESTION_MESSAGE);
-//                                if (conf == JOptionPane.YES_OPTION) {
-//                                    r = con.s.executeQuery ("SELECT * FROM `t_arl` WHERE (NOMBRE_ARL ='"+cb_arl.getSelectedItem().toString()+"');");
-//                                    if(r.next()){
-//                                        id_arl=r.getInt("ID_ARL");    
-//                                    }
-//                                    r = con.s.executeQuery ("SELECT * FROM `t_ccf` WHERE (NOMBRE_CCF ='"+cb_ccf.getSelectedItem().toString()+"');");
-//                                    if(r.next()){
-//                                        id_ccf=r.getInt("ID_CCF");    
-//                                    }
-//                                    System.out.println("Empresa diferente");
-//                                    System.out.println("UPDATE `t_empresas` SET `ID_EMPRESA`='"+nit.getText()+"',`NOMBRE_EMPRESA`='"+nombre_empresa.getText()+"',`ID_ARL`="+id_arl+",`ID_CCF`="+id_ccf+" WHERE ID_EMPRESA = '"+cb_nit.getSelectedItem().toString()+"'");
-//                                    con.s.executeUpdate("UPDATE `t_empresas` SET `ID_EMPRESA`='"+nit.getText()+"',`NOMBRE_EMPRESA`='"+nombre_empresa.getText()+"',`ID_ARL`="+id_arl+",`ID_CCF`="+id_ccf+" WHERE ID_EMPRESA = '"+cb_nit.getSelectedItem().toString()+"'");
-//                                    JOptionPane.showMessageDialog(this,"La empresa fue modificada correctamente","Información",JOptionPane.INFORMATION_MESSAGE);
-//                                    con.cerrar();
-//                                    this.dispose();
-//                                }
-//                            }
-//                           
-//                        }else{
-//                            int conf = JOptionPane.showConfirmDialog(this,"Esta seguro que desea continuar?","Confirmación",JOptionPane.OK_CANCEL_OPTION,JOptionPane.QUESTION_MESSAGE);
-//                            if (conf == JOptionPane.YES_OPTION) {
-//                                r = con.s.executeQuery ("SELECT * FROM `t_arl` WHERE (NOMBRE_ARL ='"+cb_arl.getSelectedItem().toString()+"');");
-//                                if(r.next()){
-//                                    id_arl=r.getInt("ID_ARL");    
-//                                }
-//                                r = con.s.executeQuery ("SELECT * FROM `t_ccf` WHERE (NOMBRE_CCF ='"+cb_ccf.getSelectedItem().toString()+"');");
-//                                if(r.next()){
-//                                    id_ccf=r.getInt("ID_CCF");    
-//                                }
-//                                System.out.println("Empresa igual");
-//                                System.out.println("UPDATE `t_empresas` SET `ID_EMPRESA`='"+nit.getText()+"',`NOMBRE_EMPRESA`='"+nombre_empresa.getText()+"',`ID_ARL`="+id_arl+",`ID_CCF`="+id_ccf+" WHERE ID_EMPRESA = '"+cb_nit.getSelectedItem().toString()+"'");
-//                                con.s.executeUpdate("UPDATE `t_empresas` SET `ID_EMPRESA`='"+nit.getText()+"',`NOMBRE_EMPRESA`='"+nombre_empresa.getText()+"',`ID_ARL`="+id_arl+",`ID_CCF`="+id_ccf+" WHERE ID_EMPRESA = '"+cb_nit.getSelectedItem().toString()+"'");
-//                                JOptionPane.showMessageDialog(this,"La empresa fue modificada correctamente","Información",JOptionPane.INFORMATION_MESSAGE);
-//                                con.cerrar();
-//                                this.dispose();
-//                            }
-//                        }
-//                        con.cerrar();
-//                    } catch (SQLException | HeadlessException e) {
-//                        con.cerrar();
-//                        e.printStackTrace();
-//                        JOptionPane.showMessageDialog(this,e,"Error",JOptionPane.ERROR_MESSAGE);
-//                    }
-//
-//                } else {
-//                    JOptionPane.showMessageDialog(this,"Digite el nuevo nombre de la empresa","Error",JOptionPane.ERROR_MESSAGE);
-//                }
-//            } else {
-//                JOptionPane.showMessageDialog(this,"Digite el nuevo NIT de la empresa","Error",JOptionPane.ERROR_MESSAGE);
-//            }
-//        } else {
-//            JOptionPane.showMessageDialog(this,"Digite el NIT de la empresa que desea modificar","Error",JOptionPane.ERROR_MESSAGE);
-//        }
 
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -729,6 +914,38 @@ public class Edd_Empresa extends javax.swing.JDialog {
             }
         }
     }//GEN-LAST:event_telefonosKeyTyped
+
+    private void cb_depItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cb_depItemStateChanged
+        // TODO add your handling code here:
+        if (perm) {
+            //perm_mun=false;
+            ac_mun(cb_dep.getSelectedItem().toString());
+            //perm_mun=true;
+        }
+    }//GEN-LAST:event_cb_depItemStateChanged
+
+    private void tel_empresaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tel_empresaKeyTyped
+        // TODO add your handling code here:
+        char a=evt.getKeyChar();
+        if(a!=KeyEvent.VK_MINUS){
+            if(!(a>=KeyEvent.VK_0 && a<=KeyEvent.VK_9)) {
+                evt.consume();
+            }
+        }
+    }//GEN-LAST:event_tel_empresaKeyTyped
+
+    private void tb_id_rlKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tb_id_rlKeyTyped
+        // TODO add your handling code here:
+        char a=evt.getKeyChar();
+        if(a!=KeyEvent.VK_MINUS){
+            if(!(a>=KeyEvent.VK_0 && a<=KeyEvent.VK_9)) {
+                evt.consume();
+            }
+        }
+        if(nit.getText().length()>15){
+            evt.consume();
+        }
+    }//GEN-LAST:event_tb_id_rlKeyTyped
 
     /**
      * @param args the command line arguments
@@ -787,20 +1004,35 @@ public class Edd_Empresa extends javax.swing.JDialog {
     private javax.swing.JComboBox<String> cb_actividad;
     private javax.swing.JComboBox<String> cb_arl;
     private javax.swing.JComboBox<String> cb_ccf;
+    private javax.swing.JComboBox<String> cb_dep;
+    private javax.swing.JComboBox<String> cb_mun;
     private javax.swing.JComboBox<String> cb_nit;
+    private javax.swing.JComboBox<String> cb_tamaño;
+    private javax.swing.JComboBox<String> cb_tip_nit;
     private javax.swing.JTextField correo_1;
     private javax.swing.JTextField correo_2;
     private javax.swing.JTextField correo_3;
     private javax.swing.JTextField correo_interno;
+    private javax.swing.JTextField dir_empresa;
     private javax.swing.JButton edd_arl;
+    private com.toedter.calendar.JDateChooser f_ren_reg_mercantil;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -810,34 +1042,22 @@ public class Edd_Empresa extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
     private static javax.swing.JTextField nit;
     private static javax.swing.JTextField nombre_empresa;
+    private javax.swing.JTextField reg_mercantil;
     private javax.swing.JTextField representante;
     private javax.swing.JCheckBox sel_1;
     private javax.swing.JCheckBox sel_2;
     private javax.swing.JCheckBox sel_3;
     private javax.swing.JCheckBox sel_int;
+    private javax.swing.JTextField tb_id_rl;
+    private javax.swing.JTextField tel_empresa;
     private javax.swing.JTextField telefonos;
     // End of variables declaration//GEN-END:variables
-public void ac_nit(){
-    cb_nit.removeAllItems();
-    cb_nit.addItem("Seleccione..");
-    Conexion con = new Conexion();
-    con.conexion();
-    ResultSet r;
-    try{
-        r = con.s.executeQuery ("SELECT * FROM T_EMPRESAS ORDER BY ID_EMPRESA ASC;");
-        while(r.next()){
-            String str=r.getString("ID_EMPRESA");
-            cb_nit.addItem(str);
-        }
-        con.cerrar();
-    }catch(SQLException j){
-        con.cerrar();
-        JOptionPane.showMessageDialog(null,j,"Error",JOptionPane.ERROR_MESSAGE);
-    }
-}    
 public void load_data(){
     if (!cb_nit.getSelectedItem().equals("Seleccione..")) {
         Conexion con = new Conexion();
@@ -900,29 +1120,39 @@ public void load_data(){
         nit.setText("");
     }
 }
-public void load_data(String n){
+private void load_data(String n){
     Conexion con = new Conexion();
     con.conexion();
     ResultSet r;
     try {
         r = con.s.executeQuery ("SELECT *\n" +
                                 "FROM\n" +
-                                "    t_empresas\n" +
-                                "    INNER JOIN t_arl \n" +
-                                "        ON (t_empresas.ID_ARL = t_arl.ID_ARL)\n" +
-                                "    INNER JOIN t_ccf \n" +
-                                "        ON (t_empresas.ID_CCF = t_ccf.ID_CCF)\n" +
-                                "    INNER JOIN t_actividades \n" +
-                                "        ON (t_empresas.ID_ACTIVIDAD = t_actividades.ID_ACTIVIDAD) WHERE t_empresas.ID_EMPRESA = '"+n+"'");
+                                "    `t_empresas`\n" +
+                                "    INNER JOIN `t_tipo_nit` \n" +
+                                "        ON (`t_empresas`.`ID_TIPO_NIT` = `t_tipo_nit`.`ID_TIPO_NIT`)\n" +
+                                "    INNER JOIN `t_arl` \n" +
+                                "        ON (`t_empresas`.`ID_ARL` = `t_arl`.`ID_ARL`)\n" +
+                                "    INNER JOIN `t_ccf` \n" +
+                                "        ON (`t_empresas`.`ID_CCF` = `t_ccf`.`ID_CCF`)\n" +
+                                "    INNER JOIN `t_actividades` \n" +
+                                "        ON (`t_empresas`.`ID_ACTIVIDAD` = `t_actividades`.`ID_ACTIVIDAD`)\n" +
+                                "    INNER JOIN `t_municipios` \n" +
+                                "        ON (`t_empresas`.`ID_MUN_EMPRESA` = `t_municipios`.`ID_MUN`)\n" +
+                                "    INNER JOIN `t_departamentos` \n" +
+                                "        ON (`t_municipios`.`ID_DEP` = `t_departamentos`.`ID_DEP`)\n" +
+                                "    INNER JOIN `t_tamaño_empresa` \n" +
+                                "        ON (`t_empresas`.`ID_TAM_EMPRESA` = `t_tamaño_empresa`.`ID_TAMAÑO`) WHERE t_empresas.ID_EMPRESA = '"+n+"'");
         if (r.next()) {
+            cb_tip_nit.setSelectedItem(r.getString("NOMBRE_TIPO_NIT"));
             cb_nit.setSelectedItem(r.getString("ID_EMPRESA"));
-            nombre_empresa.setText(r.getString("NOMBRE_EMPRESA"));
             nit.setText(r.getString("ID_EMPRESA"));
+            nombre_empresa.setText(r.getString("NOMBRE_EMPRESA"));
             cb_arl.setSelectedItem(r.getString("NOMBRE_ARL"));
             cb_ccf.setSelectedItem(r.getString("NOMBRE_CCF"));
             cb_actividad.setSelectedItem(r.getString("NOMBRE_ACTIVIDAD"));
+            tb_id_rl.setText(r.getString("ID_REP_EMPRESA"));
             representante.setText(r.getString("REPRESENTANTE_LEGAL"));
-            telefonos.setText(r.getString("TELEFONOS"));
+            telefonos.setText(r.getString("TEL_CEL_RL_EMPRESA"));
             correo_interno.setText(r.getString("CORREO_INTERNO"));
             correo_1.setText(r.getString("CORREO_CONTRATISTA_1"));
             correo_2.setText(r.getString("CORREO_CONTRATISTA_2"));
@@ -947,16 +1177,60 @@ public void load_data(String n){
             }else{
                 sel_3.setSelected(false);
             }
+            tel_empresa.setText(r.getString("TELEFONOS"));
+            dir_empresa.setText(r.getString("DIR_EMPRESA"));
+            cb_dep.setSelectedItem(r.getString("NOMBRE_DEP"));
+            cb_mun.setSelectedItem(r.getString("NOMBRE_MUN"));
+            cb_tamaño.setSelectedItem(r.getString("NOMBRE_TAMAÑO"));
+            reg_mercantil.setText(r.getString("REG_MER_EMPRESA"));
+            f_ren_reg_mercantil.setDate(new SimpleDateFormat("yyyy-MM-dd").parse(r.getString("F_REN_REG_MERC")));
         }
         con.cerrar();
-    }catch(SQLException j){
+    }catch(ParseException  | SQLException j){
         con.cerrar();
         j.printStackTrace();
         JOptionPane.showMessageDialog(this,j,"Error",JOptionPane.ERROR_MESSAGE);
     }
-    
+
+
 }
-public void ac_arl(){
+public final void ac_tip_nit(){
+    cb_tip_nit.removeAllItems();
+    cb_tip_nit.addItem("Seleccione..");
+    Conexion con = new Conexion();
+    con.conexion();
+    ResultSet r;
+    try{
+        r = con.s.executeQuery ("SELECT * FROM `t_tipo_nit` ORDER BY NOMBRE_TIPO_NIT ASC;");
+        while(r.next()){
+            String str=r.getString("NOMBRE_TIPO_NIT");
+            cb_tip_nit.addItem(str);
+        }
+        con.cerrar();
+    }catch(SQLException j){
+        con.cerrar();
+        JOptionPane.showMessageDialog(null,j,"Error",JOptionPane.ERROR_MESSAGE);
+    }
+}  
+public final void ac_nit(){
+    cb_nit.removeAllItems();
+    cb_nit.addItem("Seleccione..");
+    Conexion con = new Conexion();
+    con.conexion();
+    ResultSet r;
+    try{
+        r = con.s.executeQuery ("SELECT * FROM T_EMPRESAS ORDER BY ID_EMPRESA ASC;");
+        while(r.next()){
+            String str=r.getString("ID_EMPRESA");
+            cb_nit.addItem(str);
+        }
+        con.cerrar();
+    }catch(SQLException j){
+        con.cerrar();
+        JOptionPane.showMessageDialog(null,j,"Error",JOptionPane.ERROR_MESSAGE);
+    }
+}   
+public final void ac_arl(){
     cb_arl.removeAllItems();
     cb_arl.addItem("Seleccione..");
     Conexion con = new Conexion();
@@ -975,7 +1249,7 @@ public void ac_arl(){
     }
 
 }
-public void ac_ccf(){
+public final void ac_ccf(){
     cb_ccf.removeAllItems();
     cb_ccf.addItem("Seleccione..");
     Conexion con = new Conexion();
@@ -994,7 +1268,7 @@ public void ac_ccf(){
     }
 
 }
-public void ac_act(){
+public final void ac_act(){
     cb_actividad.removeAllItems();
     cb_actividad.addItem("Seleccione..");
     Conexion con = new Conexion();
@@ -1012,6 +1286,75 @@ public void ac_act(){
         JOptionPane.showMessageDialog(null,j,"Error",JOptionPane.ERROR_MESSAGE);
     }
 }  
+public final void ac_dep(){
+    cb_dep.removeAllItems();
+    cb_dep.addItem("Seleccione..");
+    Conexion con = new Conexion();
+    con.conexion();
+    ResultSet r;
+    try{
+        r = con.s.executeQuery ("SELECT *\n" +
+                                "FROM\n" +
+                                "    t_departamentos ORDER BY NOMBRE_DEP ASC;");
+        while(r.next()){
+            String str=r.getString("NOMBRE_DEP");
+            cb_dep.addItem(str);
+            
+        }
+        con.cerrar();
+    }catch(SQLException j){
+        con.cerrar();
+        JOptionPane.showMessageDialog(null,j,"Error",JOptionPane.ERROR_MESSAGE);
+    }
+
+}
+public final void ac_mun(String dep){
+    cb_mun.removeAllItems();
+    if (dep.equals("Seleccione..")) {
+        cb_mun.addItem("Seleccione..");
+    } else {
+        cb_mun.addItem("Seleccione..");
+        Conexion con = new Conexion();
+        con.conexion();
+        ResultSet r;
+        try{
+            r = con.s.executeQuery ("SELECT *\n" +
+                                    "FROM\n" +
+                                    "    t_municipios\n" +
+                                    "    INNER JOIN t_departamentos \n" +
+                                    "        ON (t_municipios.ID_DEP = t_departamentos.ID_DEP) WHERE NOMBRE_DEP = '"+dep+"' ORDER BY NOMBRE_MUN ASC;");
+            while(r.next()){
+                String str=r.getString("NOMBRE_MUN");
+                cb_mun.addItem(str);
+            }
+            con.cerrar();
+        }catch(SQLException j){
+            con.cerrar();
+            JOptionPane.showMessageDialog(null,j,"Error",JOptionPane.ERROR_MESSAGE);
+        }
+    }
+    
+    
+
+}
+public final void ac_tamaño(){
+    cb_tamaño.removeAllItems();
+    cb_tamaño.addItem("Seleccione..");
+    Conexion con = new Conexion();
+    con.conexion();
+    ResultSet r;
+    try{
+        r = con.s.executeQuery ("SELECT * FROM `t_tamaño_empresa` ORDER BY NOMBRE_TAMAÑO ASC;");
+        while(r.next()){
+            String str=r.getString("NOMBRE_TAMAÑO");
+            cb_tamaño.addItem(str);
+        }
+        con.cerrar();
+    }catch(SQLException j){
+        con.cerrar();
+        JOptionPane.showMessageDialog(null,j,"Error",JOptionPane.ERROR_MESSAGE);
+    }
+}   
 public boolean check_mail(String mail){
 boolean ret=false;
     if (!mail.equals("")) {

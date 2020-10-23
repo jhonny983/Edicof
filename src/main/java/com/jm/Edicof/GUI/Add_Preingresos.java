@@ -764,7 +764,6 @@ class MyTableCellEditorDate extends AbstractCellEditor implements TableCellEdito
         ));
         jTable1.setToolTipText("");
         jTable1.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
-        jTable1.setColumnSelectionAllowed(false);
         jTable1.setComponentPopupMenu(jPopupMenu1);
         jTable1.getTableHeader().setReorderingAllowed(false);
         jTable1.addKeyListener(new java.awt.event.KeyAdapter() {

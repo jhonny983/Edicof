@@ -8,13 +8,26 @@ package com.jm.Edicof.GUI;
 import com.jm.Edicof.Clases.CellRender_Ingresos_Masivos_Empleados;
 import com.jm.Edicof.Clases.Conexion;
 import com.jm.Edicof.Clases.PegarExcel_Empleados_Masivo;
+import com.mxrck.autocompleter.TextAutoCompleter;
+import java.awt.Component;
 import java.awt.Toolkit;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+import java.util.StringTokenizer;
+import javax.swing.AbstractCellEditor;
+import javax.swing.JComponent;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import javax.swing.JTextField;
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableCellEditor;
 
 /**
  *
@@ -23,6 +36,17 @@ import javax.swing.table.DefaultTableModel;
 public class Add_Empleado_Masivos extends javax.swing.JDialog {
     DefaultTableModel modelo = null;
     Object [] fila = new Object[5];
+    //******************************/////////////
+    TextAutoCompleter tac_municipio_table = null;
+    TextAutoCompleter tac_tip_ident_table = null;
+    TextAutoCompleter tac_tip_sangre_table = null;
+    TextAutoCompleter tac_genero_table = null;
+    JTextField tb_municipio_table = null;
+    JTextField tb_tip_ident_table = null;
+    JTextField tb_tip_sangre_table = null;
+    JTextField tb_genero_table = null;
+    //******************************/////////////
+    String before_edit_cell = null;
     /**
      * Creates new form Add_Empleado
      */
@@ -39,9 +63,150 @@ public class Add_Empleado_Masivos extends javax.swing.JDialog {
                 }
             }
         });
+        tb_municipio_table = new JTextField();
+        tb_tip_ident_table = new JTextField();
+        tb_tip_sangre_table = new JTextField();
+        tb_genero_table = new JTextField();
+        
+        tac_municipio_table = new TextAutoCompleter(tb_municipio_table);
+        tac_tip_ident_table = new TextAutoCompleter(tb_tip_ident_table);
+        tac_tip_sangre_table = new TextAutoCompleter(tb_tip_sangre_table);
+        tac_genero_table = new TextAutoCompleter(tb_genero_table);
+        
+        tac_municipio();
+        tac_tip_ident();
+        tac_tip_sangre();
+        tac_genero();
+        
+        tac_municipio_table.setMode(0);
+        tac_tip_ident_table.setMode(0);
+        tac_tip_sangre_table.setMode(0);
+        tac_genero_table.setMode(0);
+        
+        empleados.getColumnModel().getColumn(0).setCellEditor(new MyTableCellEditorDate(tb_tip_ident_table,true));
+        empleados.getColumnModel().getColumn(2).setCellEditor(new MyTableCellEditorDate(tb_municipio_table,true));
+        empleados.getColumnModel().getColumn(7).setCellEditor(new MyTableCellEditorDate(tb_tip_sangre_table,true));
+        empleados.getColumnModel().getColumn(8).setCellEditor(new MyTableCellEditorDate(tb_genero_table,true));
+        empleados.getColumnModel().getColumn(9).setCellEditor(new MyTableCellEditorDate(tb_municipio_table,true));
+        empleados.getColumnModel().getColumn(10).setCellEditor(new MyTableCellEditorDate(true));
     }
-    
+    class MyTableCellEditorDate extends AbstractCellEditor implements TableCellEditor {
+        JComponent component=null;
+        boolean par_date=false;
+        boolean par_list=false;
 
+        private MyTableCellEditorDate(JTextField tf) {
+            component = tf;
+        }
+        private MyTableCellEditorDate(JTextField tf, boolean list) {
+            component = tf;
+            par_list = list;
+        }
+        private MyTableCellEditorDate(boolean date) {
+            component = new JTextField();
+            par_date = date;
+        }
+
+        @Override
+        public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected,
+            int rowIndex, int vColIndex) {
+            ((JTextField) component).setText((String) value);
+            ((JTextField) component).addKeyListener(new KeyAdapter(){
+            @Override
+            public void keyReleased(KeyEvent evt) {
+                try {
+                    char a=evt.getKeyChar();
+                    int b=evt.getKeyCode();
+                    System.out.println("Key Released Cell: '"+a+"'("+b+")");
+                    if (par_date) {
+                        autocomplete_date_released(b,empleados);
+                    }
+                }catch(Exception ev){
+                    ev.printStackTrace();
+                }
+            }
+
+            @Override
+            public void keyTyped(KeyEvent e) {
+            }
+
+            @Override
+            public void keyPressed(KeyEvent evt) {
+                char a=evt.getKeyChar();
+                int b=evt.getKeyCode();
+                //System.out.println("Key Pressed Cell: '"+a+"'("+b+")");
+                if (par_date) {
+                    autocomplete_date_pressed(b,empleados);
+                }
+                if((b>=96 & b<=105)|(b>=65 & b<=90)) {
+                    if (empleados.getModel().isCellEditable(empleados.getSelectedRow(),empleados.getSelectedColumn())) {
+                        modelo = (DefaultTableModel) empleados.getModel();
+                        String aux = (String)modelo.getValueAt(empleados.getSelectedRow(), empleados.getSelectedColumn());
+                        if (aux!=null) {
+                            if (aux.length()>0) {
+                                before_edit_cell= aux;
+                                modelo.setValueAt("",empleados.getSelectedRow(),empleados.getSelectedColumn());
+                                empleados.setModel(modelo);
+                                empleados.requestFocus();
+                            }
+                        }else{
+                            before_edit_cell = "";
+                        }
+                    }
+                }else{
+                    if(a==KeyEvent.VK_DELETE) {
+                        if (empleados.getModel().isCellEditable(empleados.getSelectedRow(),empleados.getSelectedColumn())) {
+                            modelo = (DefaultTableModel) empleados.getModel();
+                            modelo.setValueAt("",empleados.getSelectedRow(),empleados.getSelectedColumn());
+                            empleados.setModel(modelo);
+                            before_edit_cell = "";
+                            if (empleados.isEditing()){
+                                empleados.getCellEditor().stopCellEditing();
+                            }
+                            evt.consume();
+                        }
+
+                    }else{
+                        if(a==KeyEvent.VK_ESCAPE) {
+                            modelo = (DefaultTableModel) empleados.getModel();
+                            String aux = (String)modelo.getValueAt(empleados.getSelectedRow(), empleados.getSelectedColumn());
+                            if (aux!=null) {
+                                if (empleados.isEditing()){
+                                    modelo.setValueAt(before_edit_cell,empleados.getSelectedRow(),empleados.getSelectedColumn());
+                                    empleados.setModel(modelo);
+                                    empleados.getCellEditor().cancelCellEditing();
+                                    evt.setKeyCode(10);
+                                }else{
+                                    evt.consume();
+                                }
+                                evt.consume();
+                            }else{
+                                if (empleados.isEditing()){
+                                    empleados.getCellEditor().cancelCellEditing();
+                                }
+                                evt.consume();
+                            }
+                        }else{
+                            if (a==KeyEvent.VK_TAB) {
+                                if (par_list) {
+                                    evt.setKeyCode(10);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            });
+            return component;
+        }
+    
+        @Override
+        public Object getCellEditorValue() {
+            return ((JTextField) component).getText();
+        }
+        
+    }    
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -86,14 +251,53 @@ public class Add_Empleado_Masivos extends javax.swing.JDialog {
         new PegarExcel_Empleados_Masivo(empleados);
         empleados.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null}
+                {null, null, null, null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Cedula (*)", "Nombre 1 (*)", "Nombre 2", "Apellido 1 (*)", "Apellido 2"
+                "Tipo Ident*", "Id*", "Ciudad Expedicion Id*", "Nombre 1*", "Nombre 2", "Apellido 1*", "Apellido 2", "Tipo de sangre*", "Género (M-F)*", "Ciudad nacimiento*", "Fecha nacimiento (DD-MM-AAAA)*", "Estatura (cm)*"
             }
         ));
-        empleados.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_NEXT_COLUMN);
+        empleados.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
+        empleados.setCellSelectionEnabled(true);
         jScrollPane2.setViewportView(empleados);
+        if (empleados.getColumnModel().getColumnCount() > 0) {
+            empleados.getColumnModel().getColumn(0).setMinWidth(80);
+            empleados.getColumnModel().getColumn(0).setPreferredWidth(80);
+            empleados.getColumnModel().getColumn(0).setMaxWidth(80);
+            empleados.getColumnModel().getColumn(1).setMinWidth(100);
+            empleados.getColumnModel().getColumn(1).setPreferredWidth(100);
+            empleados.getColumnModel().getColumn(1).setMaxWidth(100);
+            empleados.getColumnModel().getColumn(2).setMinWidth(180);
+            empleados.getColumnModel().getColumn(2).setPreferredWidth(180);
+            empleados.getColumnModel().getColumn(2).setMaxWidth(180);
+            empleados.getColumnModel().getColumn(3).setMinWidth(180);
+            empleados.getColumnModel().getColumn(3).setPreferredWidth(180);
+            empleados.getColumnModel().getColumn(3).setMaxWidth(180);
+            empleados.getColumnModel().getColumn(4).setMinWidth(180);
+            empleados.getColumnModel().getColumn(4).setPreferredWidth(180);
+            empleados.getColumnModel().getColumn(4).setMaxWidth(180);
+            empleados.getColumnModel().getColumn(5).setMinWidth(180);
+            empleados.getColumnModel().getColumn(5).setPreferredWidth(180);
+            empleados.getColumnModel().getColumn(5).setMaxWidth(180);
+            empleados.getColumnModel().getColumn(6).setMinWidth(180);
+            empleados.getColumnModel().getColumn(6).setPreferredWidth(180);
+            empleados.getColumnModel().getColumn(6).setMaxWidth(180);
+            empleados.getColumnModel().getColumn(7).setMinWidth(100);
+            empleados.getColumnModel().getColumn(7).setPreferredWidth(100);
+            empleados.getColumnModel().getColumn(7).setMaxWidth(100);
+            empleados.getColumnModel().getColumn(8).setMinWidth(100);
+            empleados.getColumnModel().getColumn(8).setPreferredWidth(100);
+            empleados.getColumnModel().getColumn(8).setMaxWidth(100);
+            empleados.getColumnModel().getColumn(9).setMinWidth(150);
+            empleados.getColumnModel().getColumn(9).setPreferredWidth(150);
+            empleados.getColumnModel().getColumn(9).setMaxWidth(150);
+            empleados.getColumnModel().getColumn(10).setMinWidth(100);
+            empleados.getColumnModel().getColumn(10).setPreferredWidth(100);
+            empleados.getColumnModel().getColumn(10).setMaxWidth(100);
+            empleados.getColumnModel().getColumn(11).setMinWidth(100);
+            empleados.getColumnModel().getColumn(11).setPreferredWidth(100);
+            empleados.getColumnModel().getColumn(11).setMaxWidth(100);
+        }
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -101,7 +305,7 @@ public class Add_Empleado_Masivos extends javax.swing.JDialog {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 797, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 855, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -252,11 +456,11 @@ public class Add_Empleado_Masivos extends javax.swing.JDialog {
                         .addComponent(jButton3)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 266, Short.MAX_VALUE)
+                        .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 295, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE))
+                        .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, 329, Short.MAX_VALUE))
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -341,40 +545,67 @@ public class Add_Empleado_Masivos extends javax.swing.JDialog {
                 ResultSet r;
                 for (int i = 0; i < empleados.getRowCount(); i++) {
                     try {
-                        r = con.s.executeQuery ("SELECT * FROM `t_empleados` WHERE ID_EMP ="+modelo.getValueAt(i, 0).toString());
-                        if(r.next()){
-                            JOptionPane.showMessageDialog(this,"El empleado que intenta ingresar ya existe","Error",JOptionPane.ERROR_MESSAGE);
+                        if (!get_id_tip_ident(modelo.getValueAt(i, 0)).equals("")) {
+                            if (!get_id_municipio(modelo.getValueAt(i, 2)).equals("")) {
+                                if (!get_id_tip_sangre(modelo.getValueAt(i, 7)).equals("")) {
+                                    if (!get_id_genero(modelo.getValueAt(i, 8)).equals("")) {
+                                        if (!get_id_municipio(modelo.getValueAt(i, 9)).equals("")) {
+                                            r = con.s.executeQuery ("SELECT * FROM `t_empleados` WHERE ID_EMP = "+modelo.getValueAt(i, 1).toString());
+                                            if(r.next()){
+                                                JOptionPane.showMessageDialog(this,"El empleado que intenta ingresar ya existe","Error",JOptionPane.ERROR_MESSAGE);
+                                                empleados.changeSelection(i,0, false, false);
+                                                empleados.requestFocus();
+                                                confirm=false;
+                                                break;
+                                            } else{
+                                                String nomb2,ape2="";
+                                                if (modelo.getValueAt(i, 4)==null) {
+                                                    nomb2="";
+                                                }else{
+                                                    nomb2=modelo.getValueAt(i, 4).toString().trim().toUpperCase();
+                                                }
+                                                if (modelo.getValueAt(i, 6)==null) {
+                                                    ape2="";
+                                                }else{
+                                                    ape2=modelo.getValueAt(i, 6).toString().trim().toUpperCase();
+                                                }
+                                                con.s.executeUpdate("INSERT INTO `t_empleados`(`ID_EMP`, `NOMBRE_1_EMP`, `NOMBRE_2_EMP`, `APELLIDO_1_EMP`, `APELLIDO_2_EMP`, `ID_TIPO_IDENT`, `ID_MUN_EXPEDICION`, `ID_TIPO_SANGRE`, `ID_TIPO_GENERO`, `ID_MUN_NACIMIENTO`, `FECHA_NAC`, `ESTATURA`) VALUES ("+modelo.getValueAt(i, 1).toString().trim()+",'"+modelo.getValueAt(i, 3).toString().toUpperCase().trim()+"','"+nomb2+"','"+modelo.getValueAt(i, 5).toString().toUpperCase().trim()+"','"+ape2+"',"+get_id_tip_ident(modelo.getValueAt(i, 0))+","+get_id_municipio(modelo.getValueAt(i, 2))+","+get_id_tip_sangre(modelo.getValueAt(i, 7))+","+get_id_genero(modelo.getValueAt(i, 8))+","+get_id_municipio(modelo.getValueAt(i, 9))+",'"+new SimpleDateFormat("yyyy-MM-dd").format(new SimpleDateFormat("dd-MM-yyyy").parse(modelo.getValueAt(i, 10).toString()))+"',"+modelo.getValueAt(i, 11)+")");
+                                                modelo.removeRow(i);
+                                                i=i-1;
+                                                confirm = confirm & true;
+                                            }
+                                        } else {
+                                            empleados.changeSelection(i,9, false, false);
+                                            empleados.requestFocus();
+                                            JOptionPane.showMessageDialog(this,"Verifique el lugar de nacimiento del empleado","Error",JOptionPane.ERROR_MESSAGE);
+                                            break;
+                                        }
+                                    } else {
+                                        empleados.changeSelection(i,8, false, false);
+                                        empleados.requestFocus();
+                                        JOptionPane.showMessageDialog(this,"Verifique el genero del empleado","Error",JOptionPane.ERROR_MESSAGE);
+                                        break;
+                                    }
+                                } else {
+                                    empleados.changeSelection(i,7, false, false);
+                                    empleados.requestFocus();
+                                    JOptionPane.showMessageDialog(this,"Verifique el tipo de sangre del empleado","Error",JOptionPane.ERROR_MESSAGE);
+                                    break;
+                                }
+                            } else {
+                                empleados.changeSelection(i,2, false, false);
+                                empleados.requestFocus();
+                                JOptionPane.showMessageDialog(this,"Verifique la ciudad de expedición del Id del empleado","Error",JOptionPane.ERROR_MESSAGE);
+                                break;
+                            }
+                            
+                        } else {
                             empleados.changeSelection(i,0, false, false);
-                            confirm=false;
+                            empleados.requestFocus();
+                            JOptionPane.showMessageDialog(this,"Verifique el tipo de Id del empleado","Error",JOptionPane.ERROR_MESSAGE);
                             break;
                         }
-                        else{
-//                            System.out.println("1: "+modelo.getValueAt(i, 0).toString().trim());
-//                            System.out.println("2: "+modelo.getValueAt(i, 1).toString().trim());
-//                            System.out.println("3: "+modelo.getValueAt(i, 2).toString().trim());
-//                            System.out.println("4: "+modelo.getValueAt(i, 3).toString().trim());
-//                            System.out.println("5: "+modelo.getValueAt(i, 4).toString().trim());
-//                            System.out.println("INSERT INTO `t_empleados`(`ID_EMP`, `NOMBRE_1_EMP`, `NOMBRE_2_EMP`, `APELLIDO_1_EMP`, `APELLIDO_2_EMP`) VALUES ("+modelo.getValueAt(i, 0).toString().trim()+",'"+modelo.getValueAt(i, 1).toString().toUpperCase().trim()+"','"+modelo.getValueAt(i, 2).toString().toUpperCase().trim()+"','"+modelo.getValueAt(i, 3).toString().toUpperCase().trim()+"','"+modelo.getValueAt(i, 4).toString().toUpperCase().trim()+"')");
-                            
-                            String nomb2="";
-                            String ape2="";
-                            if (modelo.getValueAt(i, 2)==null) {
-                                nomb2="";
-                            }else{
-                                nomb2=modelo.getValueAt(i, 2).toString().trim();
-                            }
-                            if (modelo.getValueAt(i, 4)==null) {
-                                ape2="";
-                            }else{
-                                ape2=modelo.getValueAt(i, 4).toString().trim();
-                            }
-                            con.s.executeUpdate("INSERT INTO `t_empleados`(`ID_EMP`, `NOMBRE_1_EMP`, `NOMBRE_2_EMP`, `APELLIDO_1_EMP`, `APELLIDO_2_EMP`) VALUES ("+modelo.getValueAt(i, 0).toString().trim()+",'"+modelo.getValueAt(i, 1).toString().toUpperCase().trim()+"','"+nomb2+"','"+modelo.getValueAt(i, 3).toString().toUpperCase().trim()+"','"+ape2+"')");
-                            modelo.removeRow(i);
-                            i=i-1;
-                            confirm = confirm & true;
-                        }
-                        
-                    } catch (Exception ex) {
+                   } catch (Exception ex) {
                         con.cerrar();
                         ex.printStackTrace();
                         JOptionPane.showMessageDialog(null,ex,"Error",JOptionPane.ERROR_MESSAGE);
@@ -453,54 +684,112 @@ public class Add_Empleado_Masivos extends javax.swing.JDialog {
     private javax.swing.JLabel n_registros;
     // End of variables declaration//GEN-END:variables
     public boolean verify_data(){
-        Conexion con = new Conexion();
-        con.conexion();
-        ResultSet r;
+//        Conexion con = new Conexion();
+//        con.conexion();
+//        ResultSet r;
         boolean ret=true;
         modelo = (DefaultTableModel)empleados.getModel(); 
         if (empleados.getRowCount()>0) {
             for (int i = 0; i < empleados.getRowCount(); i++) {
-                if (check_cedula(modelo.getValueAt(i, 0))) {
-                    if (check_field(modelo.getValueAt(i, 1))){
-                        if (check_char(modelo.getValueAt(i, 2),"'#$%&()=?¡¿/*+[]{};:<>,.")) {
+                if (check_tip_ident(modelo.getValueAt(i, 0))) {
+                    if (check_cedula(modelo.getValueAt(i, 1))) {
+                        if (check_municipio(modelo.getValueAt(i, 2))) {
                             if (check_field(modelo.getValueAt(i, 3))){
                                 if (check_char(modelo.getValueAt(i, 4),"'#$%&()=?¡¿/*+[]{};:<>,.")) {
-                                    ret=true&ret;
-                                }else {
-                                    empleados.changeSelection(i,4, false, false);
+                                    if (check_field(modelo.getValueAt(i, 5))){
+                                        if (check_char(modelo.getValueAt(i, 6),"'#$%&()=?¡¿/*+[]{};:<>,.")) {
+                                            if (check_tip_sangre(modelo.getValueAt(i, 7))) {
+                                                if (check_genero(modelo.getValueAt(i, 8))) {
+                                                    if (check_municipio(modelo.getValueAt(i, 9))) {
+                                                        if (check_fecha(modelo.getValueAt(i, 10))) {
+                                                            if (check_estat(modelo.getValueAt(i, 11))) {
+                                                                ret=true&ret;
+                                                            } else {
+                                                                empleados.changeSelection(i,11, false, false);
+                                                                empleados.requestFocus();
+                                                                JOptionPane.showMessageDialog(this,"Verifique la estatura del empleado","Error",JOptionPane.ERROR_MESSAGE);
+                                                                ret=false&ret;
+                                                                break;
+                                                            }
+                                                        } else {
+                                                            empleados.changeSelection(i,10, false, false);
+                                                            empleados.requestFocus();
+                                                            JOptionPane.showMessageDialog(this,"Verifique la fecha de nacimiento del empleado","Error",JOptionPane.ERROR_MESSAGE);
+                                                            ret=false&ret;
+                                                            break;
+                                                        }
+                                                    } else {
+                                                        empleados.changeSelection(i,9, false, false);
+                                                        empleados.requestFocus();
+                                                        JOptionPane.showMessageDialog(this,"Verifique la ciudad de nacimiento del empleado","Error",JOptionPane.ERROR_MESSAGE);
+                                                        ret=false&ret;
+                                                        break;
+                                                    }
+                                                } else {
+                                                    empleados.changeSelection(i,8, false, false);
+                                                    empleados.requestFocus();
+                                                    JOptionPane.showMessageDialog(this,"Verifique el genero del empleado","Error",JOptionPane.ERROR_MESSAGE);
+                                                    ret=false&ret;
+                                                    break;
+                                                }
+                                            } else {
+                                                empleados.changeSelection(i,7, false, false);
+                                                empleados.requestFocus();
+                                                JOptionPane.showMessageDialog(this,"Verifique el tipo de sangre del empleado","Error",JOptionPane.ERROR_MESSAGE);
+                                                ret=false&ret;
+                                                break;
+                                            }
+                                        }else {
+                                            empleados.changeSelection(i,5, false, false);
+                                            empleados.requestFocus();
+                                            JOptionPane.showMessageDialog(this,"Verifique que el segundo apellido del empleado no tenga caracteres especiales","Error",JOptionPane.ERROR_MESSAGE);
+                                            ret=false&ret;
+                                            break;
+                                        }
+                                    } else {
+                                        empleados.changeSelection(i,4, false, false);
+                                        empleados.requestFocus();
+                                        JOptionPane.showMessageDialog(this,"Verifique el primer apellido del empleado","Error",JOptionPane.ERROR_MESSAGE);
+                                        ret=false&ret;
+                                        break;
+                                    }
+                                } else {
+                                    empleados.changeSelection(i,3, false, false);
                                     empleados.requestFocus();
-                                    JOptionPane.showMessageDialog(this,"Verifique que el segundo apellido del empleado no tenga caracteres especiales","Error",JOptionPane.ERROR_MESSAGE);
+                                    JOptionPane.showMessageDialog(this,"Verifique que el segundo nombre del empleado no tenga caracteres especiales","Error",JOptionPane.ERROR_MESSAGE);
                                     ret=false&ret;
                                     break;
                                 }
                             } else {
-                                empleados.changeSelection(i,3, false, false);
+                                empleados.changeSelection(i,2, false, false);
                                 empleados.requestFocus();
-                                JOptionPane.showMessageDialog(this,"Verifique el primer apellido del empleado","Error",JOptionPane.ERROR_MESSAGE);
+                                JOptionPane.showMessageDialog(this,"Verifique el primer nombre del empleado","Error",JOptionPane.ERROR_MESSAGE);
                                 ret=false&ret;
                                 break;
                             }
                         } else {
                             empleados.changeSelection(i,2, false, false);
                             empleados.requestFocus();
-                            JOptionPane.showMessageDialog(this,"Verifique que el segundo nombre del empleado no tenga caracteres especiales","Error",JOptionPane.ERROR_MESSAGE);
+                            JOptionPane.showMessageDialog(this,"Verifique la ciudad de expedicion del Id del empleado","Error",JOptionPane.ERROR_MESSAGE);
                             ret=false&ret;
                             break;
                         }
+                        
                     } else {
                         empleados.changeSelection(i,1, false, false);
                         empleados.requestFocus();
-                        JOptionPane.showMessageDialog(this,"Verifique el primer nombre del empleado","Error",JOptionPane.ERROR_MESSAGE);
+                        JOptionPane.showMessageDialog(this,"Verifique la Cedula del empleado","Error",JOptionPane.ERROR_MESSAGE);
                         ret=false&ret;
                         break;
                     }
-                } else {
+                }else{
                     empleados.changeSelection(i,0, false, false);
                     empleados.requestFocus();
-                    JOptionPane.showMessageDialog(this,"Verifique la Cedula del empleado","Error",JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(this,"Verifique el tipo de identificacion del empleado","Error",JOptionPane.ERROR_MESSAGE);
                     ret=false&ret;
                     break;
                 }
+                
             }
         }else{
             JOptionPane.showMessageDialog(this,"La tabla no tiene registros","Error",JOptionPane.ERROR_MESSAGE);
@@ -514,6 +803,26 @@ public class Add_Empleado_Masivos extends javax.swing.JDialog {
             if (check_char(ced.toString().trim(),"'#$%&()=?¡¿/*+[]{};:<>,.")) {
                 if (!ced.toString().equals("")) {
                     ret=checkLong(ced.toString().trim());
+                }
+            }
+        }
+        return ret;  
+    }
+    public boolean check_estat(Object ced){
+        boolean ret=false;
+        long num = 0;
+        if (ced!=null) {
+            if (check_char(ced.toString().trim(),"'#$%&()=?¡¿/*+[]{};:<>,.")) {
+                if (!ced.toString().equals("")) {
+                    try{
+                        num = Long.parseLong(ced.toString());
+                        return num > 0 && num <= 220;
+                        
+                    }catch (Exception e){
+                        e.printStackTrace();
+                        return false;
+                    }
+                    
                 }
             }
         }
@@ -558,4 +867,466 @@ public class Add_Empleado_Masivos extends javax.swing.JDialog {
 
         return ret;
         }
+    public int count_char(String str, char c){
+    String pr=str.trim();
+    char _toCompare=c;
+    int veces=0;
+    char []caracteres=pr.toCharArray();
+    for(int i=0;i<=caracteres.length-1;i++){
+        if(_toCompare ==caracteres[i]){
+                veces++;
+        }
+    }
+    return veces;
+}
+    public boolean check_municipio(Object municipio){
+    boolean ret=false;
+    if (municipio!=null) {
+        if (check_char(municipio.toString().trim(),"'#$%&()=?¡¿/*+[]{};:<>,.")) {
+            if (!municipio.toString().trim().equals("")& count_char(municipio.toString().trim(),'-')==1){
+                String str_mun="";
+                String str_dep="";
+                StringTokenizer tokens=new StringTokenizer(municipio.toString().trim(), "-");
+                while(tokens.hasMoreTokens()){
+                    str_mun=tokens.nextToken().trim();
+                    str_dep=tokens.nextToken().trim();
+                }
+                Conexion con = new Conexion();
+                con.conexion();
+                ResultSet r;
+                try{
+                    r = con.s.executeQuery ("SELECT *\n" +
+                                            "FROM\n" +
+                                            "    t_municipios\n" +
+                                            "    INNER JOIN t_departamentos \n" +
+                                            "        ON (t_municipios.ID_DEP = t_departamentos.ID_DEP) WHERE NOMBRE_MUN='"+str_mun+"' AND NOMBRE_DEP='"+str_dep+"'");
+                    if(r.next()){
+                        ret=true;
+                    }
+                    con.cerrar();
+                }catch(SQLException j){
+                    con.cerrar();
+                    j.printStackTrace();
+                    JOptionPane.showMessageDialog(null,j,"Error",JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        }
+    }
+    return ret;
+    }
+    public boolean check_tip_ident(Object tipo){
+    boolean ret=false;
+    if (tipo!=null) {
+        if (check_char(tipo.toString().trim(),"'#$%&()=?¡¿/*+[]{};:<>,.")) {
+            Conexion con = new Conexion();
+            con.conexion();
+            ResultSet r;
+            try{
+                r = con.s.executeQuery ("SELECT *\n" +
+                                        "FROM\n" +
+                                        "    t_tipo_ident\n" +
+                                        "where t_tipo_ident.NOMBRE_TIPO_IDENT ='"+tipo+"'");
+                if(r.next()){
+                    ret=true;
+                }
+                con.cerrar();
+            }catch(SQLException j){
+                con.cerrar();
+                j.printStackTrace();
+                JOptionPane.showMessageDialog(null,j,"Error",JOptionPane.ERROR_MESSAGE);
+            }
+        }
+    }
+    return ret;
+    }
+    public boolean check_tip_sangre(Object tipo){
+    boolean ret=false;
+    if (tipo!=null) {
+        if (check_char(tipo.toString().trim(),"'#$%&()=?¡¿/*[]{};:<>,.")) {
+            Conexion con = new Conexion();
+            con.conexion();
+            ResultSet r;
+            try{
+                r = con.s.executeQuery ("SELECT *\n" +
+                                        "FROM\n" +
+                                        "    t_tipo_sangre\n" +
+                                        "where t_tipo_sangre.NOMBRE_TIPO ='"+tipo+"'");
+                if(r.next()){
+                    ret=true;
+                }
+                con.cerrar();
+            }catch(SQLException j){
+                con.cerrar();
+                j.printStackTrace();
+                JOptionPane.showMessageDialog(null,j,"Error",JOptionPane.ERROR_MESSAGE);
+            }
+        }
+    }
+    return ret;
+    }
+    public boolean check_genero(Object genero){
+    boolean ret=false;
+    if (genero!=null) {
+        if (check_char(genero.toString().trim(),"'#$%&()=?¡¿/*+-[]{};:<>,.")) {
+            Conexion con = new Conexion();
+            con.conexion();
+            ResultSet r;
+            try{
+                r = con.s.executeQuery ("SELECT *\n" +
+                                        "FROM\n" +
+                                        "    t_genero\n" +
+                                        "where t_genero.NOMBRE_GENERO ='"+genero+"'");
+                if(r.next()){
+                    ret=true;
+                }
+                con.cerrar();
+            }catch(SQLException j){
+                con.cerrar();
+                j.printStackTrace();
+                JOptionPane.showMessageDialog(null,j,"Error",JOptionPane.ERROR_MESSAGE);
+            }
+        }
+    }
+    return ret;
+    }
+    public boolean check_fecha(Object fecha){
+    boolean ret=false;
+    if (fecha!=null) {
+        if (check_char(fecha.toString().trim(),"'#$%&()=?¡¿/*+[]{};:<>,.")) {
+            if (!fecha.toString().trim().equals("") & count_char(fecha.toString().trim(),'-')==2) {
+                int str_año=0;
+                int str_mes=0;
+                int str_dia=0;
+                try {
+                    StringTokenizer tokens=new StringTokenizer(fecha.toString().trim(),"-");
+                    while(tokens.hasMoreTokens()){
+                        str_dia=Integer.parseInt(tokens.nextToken().trim());
+                        str_mes=Integer.parseInt(tokens.nextToken().trim());
+                        str_año=Integer.parseInt(tokens.nextToken().trim());
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    return false;
+                }
+                if (str_dia>0 & str_dia<=31) {
+                    if (str_mes>0 & str_mes<=12) {
+                        if (str_año>=1900 & str_año<=2050) {
+                            Calendar ahoraCal = Calendar.getInstance();
+                            ahoraCal.set(str_año,str_mes-1,1);
+                            ahoraCal.set(Calendar.DATE, ahoraCal.getActualMaximum(Calendar.DATE));
+                            int f = ahoraCal.get(Calendar.DAY_OF_MONTH);
+                            if (str_dia<=f) {
+                                ret=true;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    return ret;
+}
+    private void tac_municipio(){
+        tac_municipio_table.removeAllItems();
+        Conexion con = new Conexion();
+        con.conexion();
+        ResultSet r;
+        try{
+            r = con.s.executeQuery ("SELECT *\n" +
+                                    "FROM\n" +
+                                    "    t_municipios\n" +
+                                    "    INNER JOIN t_departamentos \n" +
+                                    "        ON (t_municipios.ID_DEP = t_departamentos.ID_DEP) ORDER BY NOMBRE_MUN ASC;");
+            while(r.next()){
+                String str=r.getString("NOMBRE_MUN");
+                String str1=r.getString("NOMBRE_DEP");
+                tac_municipio_table.addItem(str+"-"+str1);
+            }
+            con.cerrar();
+        }catch(SQLException j){
+            con.cerrar();
+            j.printStackTrace();
+            JOptionPane.showMessageDialog(null,j,"Error",JOptionPane.ERROR_MESSAGE);
+        }
+    }
+    private void tac_tip_ident(){
+        tac_tip_ident_table.removeAllItems();
+        Conexion con = new Conexion();
+        con.conexion();
+        ResultSet r;
+        try{
+            r = con.s.executeQuery ("SELECT *\n" +
+                                    "FROM\n" +
+                                    "    t_tipo_ident\n" +
+                                    "ORDER BY t_tipo_ident.NOMBRE_TIPO_IDENT  ASC ");
+            while(r.next()){
+                String str=r.getString("NOMBRE_TIPO_IDENT");
+                tac_tip_ident_table.addItem(str);
+            }
+            con.cerrar();
+        }catch(SQLException j){
+            con.cerrar();
+            j.printStackTrace();
+            JOptionPane.showMessageDialog(null,j,"Error",JOptionPane.ERROR_MESSAGE);
+        }
+    }
+    private void tac_tip_sangre(){
+        tac_tip_sangre_table.removeAllItems();
+        Conexion con = new Conexion();
+        con.conexion();
+        ResultSet r;
+        try{
+            r = con.s.executeQuery ("SELECT *\n" +
+                                    "FROM\n" +
+                                    "    t_tipo_sangre\n" +
+                                    "order by t_tipo_sangre.NOMBRE_TIPO asc ");
+            while(r.next()){
+                String str=r.getString("NOMBRE_TIPO");
+                tac_tip_sangre_table.addItem(str);
+            }
+            con.cerrar();
+        }catch(SQLException j){
+            con.cerrar();
+            j.printStackTrace();
+            JOptionPane.showMessageDialog(null,j,"Error",JOptionPane.ERROR_MESSAGE);
+        }
+    }
+    private void tac_genero(){
+        tac_genero_table.removeAllItems();
+        Conexion con = new Conexion();
+        con.conexion();
+        ResultSet r;
+        try{
+            r = con.s.executeQuery ("SELECT *\n" +
+                                    "FROM\n" +
+                                    "    t_genero\n" +
+                                    "order by t_genero.NOMBRE_GENERO asc");
+            while(r.next()){
+                String str=r.getString("NOMBRE_GENERO");
+                tac_genero_table.addItem(str);
+            }
+            System.out.println(tac_genero_table);
+            con.cerrar();
+        }catch(SQLException j){
+            con.cerrar();
+            j.printStackTrace();
+            JOptionPane.showMessageDialog(null,j,"Error",JOptionPane.ERROR_MESSAGE);
+        }
+    }
+    public String get_id_municipio(Object municipio){
+        String i = "";
+        String str_mun="";
+        String str_dep="";
+        StringTokenizer tokens=new StringTokenizer(municipio.toString().trim(), "-");
+        while(tokens.hasMoreTokens()){
+            str_mun=tokens.nextToken().trim();
+            str_dep=tokens.nextToken().trim();
+        }
+        Conexion con = new Conexion();
+        con.conexion();
+        ResultSet r;
+        try{
+            r = con.s.executeQuery ("SELECT *\n" +
+                                    "FROM\n" +
+                                    "    t_municipios\n" +
+                                    "    INNER JOIN t_departamentos \n" +
+                                    "        ON (t_municipios.ID_DEP = t_departamentos.ID_DEP) WHERE NOMBRE_MUN='"+str_mun+"' AND NOMBRE_DEP='"+str_dep+"'");
+            if(r.next()){
+                i = r.getString("ID_MUN");
+            }else{
+                i="";
+            }
+            con.cerrar();
+        }catch(SQLException j){
+            i="";
+            con.cerrar();
+            j.printStackTrace();
+        }
+        return i;
+    }
+    public String get_id_tip_ident(Object tip_ident){
+        String i = "";
+        Conexion con = new Conexion();
+        con.conexion();
+        ResultSet r;
+        try{
+            r = con.s.executeQuery ("SELECT *\n" +
+                                    "FROM\n" +
+                                    "    t_tipo_ident\n" +
+                                    "WHERE t_tipo_ident.NOMBRE_TIPO_IDENT = '"+tip_ident.toString()+"'");
+            if(r.next()){
+                i = r.getString("ID_TIPO_IDENT");
+            }else{
+                i="";
+            }
+            con.cerrar();
+        }catch(SQLException j){
+            i="";
+            con.cerrar();
+            j.printStackTrace();
+        }
+        return i;
+    }
+    public String get_id_tip_sangre(Object tip_sangre){
+        String i = "";
+        Conexion con = new Conexion();
+        con.conexion();
+        ResultSet r;
+        try{
+            r = con.s.executeQuery ("SELECT *\n" +
+                                    "FROM\n" +
+                                    "    t_tipo_sangre\n" +
+                                    "WHERE t_tipo_sangre.NOMBRE_TIPO = '"+tip_sangre.toString()+"'");
+            if(r.next()){
+                i = r.getString("ID_TIPO");
+            }else{
+                i="";
+            }
+            con.cerrar();
+        }catch(SQLException j){
+            i="";
+            con.cerrar();
+            j.printStackTrace();
+        }
+        return i;
+    }
+    public String get_id_genero(Object genero){
+        String i = "";
+        Conexion con = new Conexion();
+        con.conexion();
+        ResultSet r;
+        try{
+            r = con.s.executeQuery ("SELECT *\n" +
+                                    "FROM\n" +
+                                    "    t_genero\n" +
+                                    "WHERE t_genero.NOMBRE_GENERO = '"+genero.toString()+"'");
+            if(r.next()){
+                i = r.getString("ID_GENERO");
+            }else{
+                i="";
+            }
+            con.cerrar();
+        }catch(SQLException j){
+            i="";
+            con.cerrar();
+            j.printStackTrace();
+        }
+        return i;
+    }
+    public void autocomplete_date_released(int b, JTable jTable1) {
+        Calendar c = new GregorianCalendar();
+        String annio = Integer.toString(c.get(Calendar.YEAR));
+        switch (((JTextField) jTable1.getEditorComponent()).getText().length()) {
+            case 2:
+                if (b!=KeyEvent.VK_BACK_SPACE) {
+                    ((JTextField) jTable1.getEditorComponent()).setText(((JTextField) jTable1.getEditorComponent()).getText() + "-");
+                }
+                break;
+            case 5:
+                if (b!=KeyEvent.VK_BACK_SPACE) {
+                    ((JTextField) jTable1.getEditorComponent()).setText(((JTextField) jTable1.getEditorComponent()).getText() + "-");
+                }else{
+                    if (b==KeyEvent.VK_ENTER) {
+                        ((JTextField) jTable1.getEditorComponent()).setText(((JTextField) jTable1.getEditorComponent()).getText() + "-"+annio);
+                    }
+                }
+                break;
+            default:
+                break;
+        }
+    }
+    public void autocomplete_date_pressed(int b, JTable jTable1){
+    Calendar c = new GregorianCalendar();
+    String annio = Integer.toString(c.get(Calendar.YEAR));
+    switch (((JTextField) jTable1.getEditorComponent()).getText().length()) {
+        case 5:
+            if (b!=KeyEvent.VK_BACK_SPACE) {
+                    ((JTextField) jTable1.getEditorComponent()).setText(((JTextField) jTable1.getEditorComponent()).getText() + "-");
+                }else{
+                    if (b==KeyEvent.VK_ENTER) {
+                    ((JTextField) jTable1.getEditorComponent()).setText(((JTextField) jTable1.getEditorComponent()).getText() + "-"+annio);
+                    }
+                }
+            break;
+        case 6:
+            if (KeyEvent.VK_ENTER == b) {
+                ((JTextField) jTable1.getEditorComponent()).setText(((JTextField) jTable1.getEditorComponent()).getText() + annio);
+                int str_año=0;
+                int str_mes=0;
+                int str_dia=0;
+                try {
+                    StringTokenizer tokens=new StringTokenizer(((JTextField) jTable1.getEditorComponent()).getText().trim(),"-");
+                    while(tokens.hasMoreTokens()){
+                        str_dia=Integer.parseInt(tokens.nextToken().trim());
+                        str_mes=Integer.parseInt(tokens.nextToken().trim());
+                        str_año=Integer.parseInt(tokens.nextToken().trim());
+                    }
+                    if (str_dia>0 & str_dia<=31) {
+                        if (str_mes>0 & str_mes<=12) {
+                            if (str_año>=1900 & str_año<=2050) {
+                                Calendar ahoraCal = Calendar.getInstance();
+                                ahoraCal.set(str_año,str_mes-1,1);
+                                ahoraCal.set(Calendar.DATE, ahoraCal.getActualMaximum(Calendar.DATE));
+                                int f = ahoraCal.get(Calendar.DAY_OF_MONTH);
+                                if (str_dia>f) {
+                                    ((JTextField) jTable1.getEditorComponent()).setText("");
+                                }
+                                //System.out.println(ahoraCal.getTime());
+                            }else{
+                                ((JTextField) jTable1.getEditorComponent()).setText("");
+                            }
+                        }else{
+                            ((JTextField) jTable1.getEditorComponent()).setText("");
+                        }
+                    }else{
+                        ((JTextField) jTable1.getEditorComponent()).setText("");
+                    }
+                } catch (Exception e) {
+                    //e.printStackTrace();
+                    ((JTextField) jTable1.getEditorComponent()).setText("");
+                }
+            }   break;
+        case 10:
+            System.out.println("test");
+            if (KeyEvent.VK_ENTER == b) {
+                int str_año=0;
+                int str_mes=0;
+                int str_dia=0;
+                try {
+                    StringTokenizer tokens=new StringTokenizer(((JTextField) jTable1.getEditorComponent()).getText().trim(),"-");
+                    while(tokens.hasMoreTokens()){
+                        str_dia=Integer.parseInt(tokens.nextToken().trim());
+                        str_mes=Integer.parseInt(tokens.nextToken().trim());
+                        str_año=Integer.parseInt(tokens.nextToken().trim());
+                    }
+                    if (str_dia>0 & str_dia<=31) {
+                        if (str_mes>0 & str_mes<=12) {
+                            if (str_año>=1900 & str_año<=2050) {
+                                Calendar ahoraCal = Calendar.getInstance();
+                                ahoraCal.set(str_año,str_mes-1,1);
+                                ahoraCal.set(Calendar.DATE, ahoraCal.getActualMaximum(Calendar.DATE));
+                                int f = ahoraCal.get(Calendar.DAY_OF_MONTH);
+                                if (str_dia>f) {
+                                    ((JTextField) jTable1.getEditorComponent()).setText("");
+                                }
+                                //System.out.println(ahoraCal.getTime());
+                            }else{
+                                ((JTextField) jTable1.getEditorComponent()).setText("");
+                            }
+                        }else{
+                            ((JTextField) jTable1.getEditorComponent()).setText("");
+                        }
+                    }else{
+                        ((JTextField) jTable1.getEditorComponent()).setText("");
+                    }
+                } catch (Exception e) {
+                    //e.printStackTrace();
+                    ((JTextField) jTable1.getEditorComponent()).setText("");
+                }
+                
+            }   break;
+        default:
+            break;
+    }
+}
 }

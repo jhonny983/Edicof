@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.jm</groupId>
     <artifactId>Edicof</artifactId>
-    <version>3.0.4.3</version>
+    <version>3.0.4.4</version>
     <packaging>jar</packaging>
     <dependencies>
         <dependency>
@@ -40,7 +40,7 @@
         <dependency>
             <groupId>org.quartz-scheduler</groupId>
             <artifactId>quartz</artifactId>
-            <version>2.2.3</version>
+            <version>2.3.2</version><!-- <version>2.2.3</version> -->
         </dependency>
         <dependency>
             <groupId>com.jm</groupId>
@@ -68,7 +68,7 @@
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
-            <version>5.1.40</version>
+            <version>8.0.16</version> <!-- <version>5.1.40</version> -->
         </dependency>
         <!-- https://mvnrepository.com/artifact/commons-io/commons-io -->
         <dependency>
@@ -114,4 +114,5 @@
             </plugin>
         </plugins>
     </build>
+    <description>538fc30856a58d888c141affab1178dff677e1cb</description>
 </project>
