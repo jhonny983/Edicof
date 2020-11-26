@@ -3,15 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.jm.Edicof.Clases.Test;
+package com.jm.Edicof.Clases;
 
-import com.google.gson.Gson;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
 import org.apache.http.Header;
 import org.apache.http.HttpEntity;
-import org.apache.http.HttpHeaders;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
@@ -27,65 +22,57 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-
 /**
  *
  * @author Johnnatan
  */
-public class TestARHI {
+public class WebServiceARHI {
     // one instance, reuse
     private final CloseableHttpClient httpClient = HttpClients.createDefault();
 
-    public static void main(String[] args) throws Exception {
+//    public static void main(String[] args) throws Exception {
+//
+//        WebServiceARHI obj = new WebServiceARHI();
+//
+//        try {
+//            System.out.println("Testing 1 - Send Http GET request");
+//            obj.sendGet();
+//
+//            System.out.println("Testing 2 - Send Http POST request");
+//            obj.sendPost();
+//        } finally {
+//            obj.close();
+//        }
+//    }
 
-        TestARHI obj = new TestARHI();
-
+    private void close(){
         try {
-            System.out.println("Testing 1 - Send Http GET request");
-            obj.sendGet();
-
-            System.out.println("Testing 2 - Send Http POST request");
-            obj.sendPost();
-        } finally {
-            obj.close();
+            httpClient.close();
+        } catch (IOException ex) {
+            ex.printStackTrace();
         }
     }
+    private void sendGet(String url) throws Exception {
 
-    private void close() throws IOException {
-        httpClient.close();
-    }
-
-    private JsonArray sendGet() throws Exception {
-        JsonArray jsonArray=null;
-        HttpGet request = new HttpGet("http://190.84.50.115:8080/awebservicearhi/webresources/entidad.wsordentrabajo");
-        // add request headers
+        HttpGet request = new HttpGet(url);
         request.addHeader("AUTHORIZATION", "F50B2000C84C66EA1707502AFB8B8A493D7EB5CA0B4DAB1045310141B3F3F5A1");
-        //request.addHeader(HttpHeaders.USER_AGENT, "Googlebot");
         try (CloseableHttpResponse response = httpClient.execute(request)) {
             // Get HttpResponse Status
-            System.out.println("Status: "+response.getStatusLine().getStatusCode());
-            if (response.getStatusLine().getStatusCode()==200) {
-                HttpEntity entity = response.getEntity();
-//            Header headers = entity.getContentType();
-//            System.out.println("Headers: "+headers);
-                if (entity != null) {
-                    // return it as a String
-                    String result = EntityUtils.toString(entity);
-                    JsonParser jsonParser = new JsonParser();
-                    jsonArray = jsonParser.parse(result).getAsJsonArray();
-                    System.out.println("Result: "+jsonArray);
-//                    for (int i = 0; i < jsonArray.size(); i++){
-//                        System.out.println(jsonArray.get(i));
-//                    }
-                    
-                }
+            System.out.println(response.getStatusLine().toString());
+
+            HttpEntity entity = response.getEntity();
+            Header headers = entity.getContentType();
+            System.out.println(headers);
+
+            if (entity != null) {
+                // return it as a String
+                String result = EntityUtils.toString(entity);
+                System.out.println(result);
             }
-            
 
         }
-        return jsonArray;
-    }
 
+    }
     private void sendPost() throws Exception {
 
         HttpPost post = new HttpPost("https://httpbin.org/post");

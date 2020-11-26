@@ -251,14 +251,14 @@ public class Add_Empleado_Masivos extends javax.swing.JDialog {
         new PegarExcel_Empleados_Masivo(empleados);
         empleados.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Tipo Ident*", "Id*", "Ciudad Expedicion Id*", "Nombre 1*", "Nombre 2", "Apellido 1*", "Apellido 2", "Tipo de sangre*", "Género (M-F)*", "Ciudad nacimiento*", "Fecha nacimiento (DD-MM-AAAA)*", "Estatura (cm)*"
+                "Tipo Ident*", "Id*", "Ciudad Expedicion Id*", "Fecha expedicion (DD-MM-AAAA)*", "Nombre 1*", "Nombre 2", "Apellido 1*", "Apellido 2", "Tipo de sangre*", "Género (M-F)*", "Ciudad nacimiento*", "Fecha nacimiento (DD-MM-AAAA)*", "Estatura (cm)*"
             }
         ));
         empleados.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
-        empleados.setCellSelectionEnabled(true);
+        empleados.setColumnSelectionAllowed(false);
         jScrollPane2.setViewportView(empleados);
         if (empleados.getColumnModel().getColumnCount() > 0) {
             empleados.getColumnModel().getColumn(0).setMinWidth(80);
@@ -270,9 +270,9 @@ public class Add_Empleado_Masivos extends javax.swing.JDialog {
             empleados.getColumnModel().getColumn(2).setMinWidth(180);
             empleados.getColumnModel().getColumn(2).setPreferredWidth(180);
             empleados.getColumnModel().getColumn(2).setMaxWidth(180);
-            empleados.getColumnModel().getColumn(3).setMinWidth(180);
-            empleados.getColumnModel().getColumn(3).setPreferredWidth(180);
-            empleados.getColumnModel().getColumn(3).setMaxWidth(180);
+            empleados.getColumnModel().getColumn(3).setMinWidth(100);
+            empleados.getColumnModel().getColumn(3).setPreferredWidth(100);
+            empleados.getColumnModel().getColumn(3).setMaxWidth(100);
             empleados.getColumnModel().getColumn(4).setMinWidth(180);
             empleados.getColumnModel().getColumn(4).setPreferredWidth(180);
             empleados.getColumnModel().getColumn(4).setMaxWidth(180);
@@ -282,21 +282,24 @@ public class Add_Empleado_Masivos extends javax.swing.JDialog {
             empleados.getColumnModel().getColumn(6).setMinWidth(180);
             empleados.getColumnModel().getColumn(6).setPreferredWidth(180);
             empleados.getColumnModel().getColumn(6).setMaxWidth(180);
-            empleados.getColumnModel().getColumn(7).setMinWidth(100);
-            empleados.getColumnModel().getColumn(7).setPreferredWidth(100);
-            empleados.getColumnModel().getColumn(7).setMaxWidth(100);
+            empleados.getColumnModel().getColumn(7).setMinWidth(180);
+            empleados.getColumnModel().getColumn(7).setPreferredWidth(180);
+            empleados.getColumnModel().getColumn(7).setMaxWidth(180);
             empleados.getColumnModel().getColumn(8).setMinWidth(100);
             empleados.getColumnModel().getColumn(8).setPreferredWidth(100);
             empleados.getColumnModel().getColumn(8).setMaxWidth(100);
-            empleados.getColumnModel().getColumn(9).setMinWidth(150);
-            empleados.getColumnModel().getColumn(9).setPreferredWidth(150);
-            empleados.getColumnModel().getColumn(9).setMaxWidth(150);
-            empleados.getColumnModel().getColumn(10).setMinWidth(100);
-            empleados.getColumnModel().getColumn(10).setPreferredWidth(100);
-            empleados.getColumnModel().getColumn(10).setMaxWidth(100);
+            empleados.getColumnModel().getColumn(9).setMinWidth(100);
+            empleados.getColumnModel().getColumn(9).setPreferredWidth(100);
+            empleados.getColumnModel().getColumn(9).setMaxWidth(100);
+            empleados.getColumnModel().getColumn(10).setMinWidth(150);
+            empleados.getColumnModel().getColumn(10).setPreferredWidth(150);
+            empleados.getColumnModel().getColumn(10).setMaxWidth(150);
             empleados.getColumnModel().getColumn(11).setMinWidth(100);
             empleados.getColumnModel().getColumn(11).setPreferredWidth(100);
             empleados.getColumnModel().getColumn(11).setMaxWidth(100);
+            empleados.getColumnModel().getColumn(12).setMinWidth(100);
+            empleados.getColumnModel().getColumn(12).setPreferredWidth(100);
+            empleados.getColumnModel().getColumn(12).setMaxWidth(100);
         }
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -559,17 +562,17 @@ public class Add_Empleado_Masivos extends javax.swing.JDialog {
                                                 break;
                                             } else{
                                                 String nomb2,ape2="";
-                                                if (modelo.getValueAt(i, 4)==null) {
+                                                if (modelo.getValueAt(i, 5)==null) {
                                                     nomb2="";
                                                 }else{
-                                                    nomb2=modelo.getValueAt(i, 4).toString().trim().toUpperCase();
+                                                    nomb2=modelo.getValueAt(i, 5).toString().trim().toUpperCase();
                                                 }
-                                                if (modelo.getValueAt(i, 6)==null) {
+                                                if (modelo.getValueAt(i, 7)==null) {
                                                     ape2="";
                                                 }else{
-                                                    ape2=modelo.getValueAt(i, 6).toString().trim().toUpperCase();
+                                                    ape2=modelo.getValueAt(i, 7).toString().trim().toUpperCase();
                                                 }
-                                                con.s.executeUpdate("INSERT INTO `t_empleados`(`ID_EMP`, `NOMBRE_1_EMP`, `NOMBRE_2_EMP`, `APELLIDO_1_EMP`, `APELLIDO_2_EMP`, `ID_TIPO_IDENT`, `ID_MUN_EXPEDICION`, `ID_TIPO_SANGRE`, `ID_TIPO_GENERO`, `ID_MUN_NACIMIENTO`, `FECHA_NAC`, `ESTATURA`) VALUES ("+modelo.getValueAt(i, 1).toString().trim()+",'"+modelo.getValueAt(i, 3).toString().toUpperCase().trim()+"','"+nomb2+"','"+modelo.getValueAt(i, 5).toString().toUpperCase().trim()+"','"+ape2+"',"+get_id_tip_ident(modelo.getValueAt(i, 0))+","+get_id_municipio(modelo.getValueAt(i, 2))+","+get_id_tip_sangre(modelo.getValueAt(i, 7))+","+get_id_genero(modelo.getValueAt(i, 8))+","+get_id_municipio(modelo.getValueAt(i, 9))+",'"+new SimpleDateFormat("yyyy-MM-dd").format(new SimpleDateFormat("dd-MM-yyyy").parse(modelo.getValueAt(i, 10).toString()))+"',"+modelo.getValueAt(i, 11)+")");
+                                                con.s.executeUpdate("INSERT INTO `t_empleados`(`ID_EMP`, `NOMBRE_1_EMP`, `NOMBRE_2_EMP`, `APELLIDO_1_EMP`, `APELLIDO_2_EMP`, `ID_TIPO_IDENT`, `ID_MUN_EXPEDICION`, `ID_TIPO_SANGRE`, `ID_TIPO_GENERO`, `ID_MUN_NACIMIENTO`, `FECHA_NAC`, `ESTATURA`, `FECHA_EXP`) VALUES ("+modelo.getValueAt(i, 1).toString().trim()+",'"+modelo.getValueAt(i, 4).toString().toUpperCase().trim()+"','"+nomb2+"','"+modelo.getValueAt(i, 6).toString().toUpperCase().trim()+"','"+ape2+"',"+get_id_tip_ident(modelo.getValueAt(i, 0))+","+get_id_municipio(modelo.getValueAt(i, 2))+","+get_id_tip_sangre(modelo.getValueAt(i, 8))+","+get_id_genero(modelo.getValueAt(i, 9))+","+get_id_municipio(modelo.getValueAt(i, 10))+",'"+new SimpleDateFormat("yyyy-MM-dd").format(new SimpleDateFormat("dd-MM-yyyy").parse(modelo.getValueAt(i, 11).toString()))+"',"+modelo.getValueAt(i, 12)+",'"+new SimpleDateFormat("yyyy-MM-dd").format(new SimpleDateFormat("dd-MM-yyyy").parse(modelo.getValueAt(i, 3).toString()))+"')");
                                                 modelo.removeRow(i);
                                                 i=i-1;
                                                 confirm = confirm & true;
@@ -694,76 +697,84 @@ public class Add_Empleado_Masivos extends javax.swing.JDialog {
                 if (check_tip_ident(modelo.getValueAt(i, 0))) {
                     if (check_cedula(modelo.getValueAt(i, 1))) {
                         if (check_municipio(modelo.getValueAt(i, 2))) {
-                            if (check_field(modelo.getValueAt(i, 3))){
-                                if (check_char(modelo.getValueAt(i, 4),"'#$%&()=?¡¿/*+[]{};:<>,.")) {
-                                    if (check_field(modelo.getValueAt(i, 5))){
-                                        if (check_char(modelo.getValueAt(i, 6),"'#$%&()=?¡¿/*+[]{};:<>,.")) {
-                                            if (check_tip_sangre(modelo.getValueAt(i, 7))) {
-                                                if (check_genero(modelo.getValueAt(i, 8))) {
-                                                    if (check_municipio(modelo.getValueAt(i, 9))) {
-                                                        if (check_fecha(modelo.getValueAt(i, 10))) {
-                                                            if (check_estat(modelo.getValueAt(i, 11))) {
-                                                                ret=true&ret;
+                            if (check_fecha(modelo.getValueAt(i, 3))) {
+                                if (check_field(modelo.getValueAt(i, 4))){
+                                    if (check_char(modelo.getValueAt(i, 5),"'#$%&()=?¡¿/*+[]{};:<>,.")) {
+                                        if (check_field(modelo.getValueAt(i, 6))){
+                                            if (check_char(modelo.getValueAt(i, 7),"'#$%&()=?¡¿/*+[]{};:<>,.")) {
+                                                if (check_tip_sangre(modelo.getValueAt(i, 8))) {
+                                                    if (check_genero(modelo.getValueAt(i, 9))) {
+                                                        if (check_municipio(modelo.getValueAt(i, 10))) {
+                                                            if (check_fecha(modelo.getValueAt(i, 11))) {
+                                                                if (check_estat(modelo.getValueAt(i, 12))) {
+                                                                    ret=true&ret;
+                                                                } else {
+                                                                    empleados.changeSelection(i,12, false, false);
+                                                                    empleados.requestFocus();
+                                                                    JOptionPane.showMessageDialog(this,"Verifique la estatura del empleado","Error",JOptionPane.ERROR_MESSAGE);
+                                                                    ret=false&ret;
+                                                                    break;
+                                                                }
                                                             } else {
                                                                 empleados.changeSelection(i,11, false, false);
                                                                 empleados.requestFocus();
-                                                                JOptionPane.showMessageDialog(this,"Verifique la estatura del empleado","Error",JOptionPane.ERROR_MESSAGE);
+                                                                JOptionPane.showMessageDialog(this,"Verifique la fecha de nacimiento del empleado","Error",JOptionPane.ERROR_MESSAGE);
                                                                 ret=false&ret;
                                                                 break;
                                                             }
                                                         } else {
                                                             empleados.changeSelection(i,10, false, false);
                                                             empleados.requestFocus();
-                                                            JOptionPane.showMessageDialog(this,"Verifique la fecha de nacimiento del empleado","Error",JOptionPane.ERROR_MESSAGE);
+                                                            JOptionPane.showMessageDialog(this,"Verifique la ciudad de nacimiento del empleado","Error",JOptionPane.ERROR_MESSAGE);
                                                             ret=false&ret;
                                                             break;
                                                         }
                                                     } else {
                                                         empleados.changeSelection(i,9, false, false);
                                                         empleados.requestFocus();
-                                                        JOptionPane.showMessageDialog(this,"Verifique la ciudad de nacimiento del empleado","Error",JOptionPane.ERROR_MESSAGE);
+                                                        JOptionPane.showMessageDialog(this,"Verifique el genero del empleado","Error",JOptionPane.ERROR_MESSAGE);
                                                         ret=false&ret;
                                                         break;
                                                     }
                                                 } else {
                                                     empleados.changeSelection(i,8, false, false);
                                                     empleados.requestFocus();
-                                                    JOptionPane.showMessageDialog(this,"Verifique el genero del empleado","Error",JOptionPane.ERROR_MESSAGE);
+                                                    JOptionPane.showMessageDialog(this,"Verifique el tipo de sangre del empleado","Error",JOptionPane.ERROR_MESSAGE);
                                                     ret=false&ret;
                                                     break;
                                                 }
-                                            } else {
+                                            }else {
                                                 empleados.changeSelection(i,7, false, false);
                                                 empleados.requestFocus();
-                                                JOptionPane.showMessageDialog(this,"Verifique el tipo de sangre del empleado","Error",JOptionPane.ERROR_MESSAGE);
+                                                JOptionPane.showMessageDialog(this,"Verifique que el segundo apellido del empleado no tenga caracteres especiales","Error",JOptionPane.ERROR_MESSAGE);
                                                 ret=false&ret;
                                                 break;
                                             }
-                                        }else {
-                                            empleados.changeSelection(i,5, false, false);
+                                        } else {
+                                            empleados.changeSelection(i,6, false, false);
                                             empleados.requestFocus();
-                                            JOptionPane.showMessageDialog(this,"Verifique que el segundo apellido del empleado no tenga caracteres especiales","Error",JOptionPane.ERROR_MESSAGE);
+                                            JOptionPane.showMessageDialog(this,"Verifique el primer apellido del empleado","Error",JOptionPane.ERROR_MESSAGE);
                                             ret=false&ret;
                                             break;
                                         }
                                     } else {
-                                        empleados.changeSelection(i,4, false, false);
+                                        empleados.changeSelection(i,5, false, false);
                                         empleados.requestFocus();
-                                        JOptionPane.showMessageDialog(this,"Verifique el primer apellido del empleado","Error",JOptionPane.ERROR_MESSAGE);
+                                        JOptionPane.showMessageDialog(this,"Verifique que el segundo nombre del empleado no tenga caracteres especiales","Error",JOptionPane.ERROR_MESSAGE);
                                         ret=false&ret;
                                         break;
                                     }
                                 } else {
-                                    empleados.changeSelection(i,3, false, false);
+                                    empleados.changeSelection(i,4, false, false);
                                     empleados.requestFocus();
-                                    JOptionPane.showMessageDialog(this,"Verifique que el segundo nombre del empleado no tenga caracteres especiales","Error",JOptionPane.ERROR_MESSAGE);
+                                    JOptionPane.showMessageDialog(this,"Verifique el primer nombre del empleado","Error",JOptionPane.ERROR_MESSAGE);
                                     ret=false&ret;
                                     break;
                                 }
-                            } else {
-                                empleados.changeSelection(i,2, false, false);
+                            }else {
+                                empleados.changeSelection(i,3, false, false);
                                 empleados.requestFocus();
-                                JOptionPane.showMessageDialog(this,"Verifique el primer nombre del empleado","Error",JOptionPane.ERROR_MESSAGE);
+                                JOptionPane.showMessageDialog(this,"Verifique la fecha de nacimiento del empleado","Error",JOptionPane.ERROR_MESSAGE);
                                 ret=false&ret;
                                 break;
                             }

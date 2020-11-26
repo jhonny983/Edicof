@@ -106,6 +106,8 @@ public class Edd_Empleado extends javax.swing.JDialog {
         fecha_nac = new com.toedter.calendar.JDateChooser();
         estatura = new com.toedter.components.JSpinField();
         jLabel13 = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
+        fecha_exp = new com.toedter.calendar.JDateChooser();
         jButton1 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
 
@@ -167,6 +169,7 @@ public class Edd_Empleado extends javax.swing.JDialog {
 
         AutoCompletion.enable(cb_cedula);
         cb_cedula.setEditable(true);
+        cb_cedula.setEnabled(false);
         cb_cedula.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 cb_cedulaItemStateChanged(evt);
@@ -206,6 +209,8 @@ public class Edd_Empleado extends javax.swing.JDialog {
 
         jLabel13.setText("Estatura (cm)");
 
+        jLabel14.setText("Fecha Expedicion");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -236,63 +241,75 @@ public class Edd_Empleado extends javax.swing.JDialog {
                     .addComponent(jLabel4)
                     .addComponent(jLabel5)
                     .addComponent(jLabel10)
-                    .addComponent(jLabel12))
+                    .addComponent(jLabel12)
+                    .addComponent(jLabel14))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(cb_ciudad_exp, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(nombre_2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(ape_2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cedula, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cb_genero, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(fecha_nac, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(cb_ciudad_exp, 0, 180, Short.MAX_VALUE)
+                    .addComponent(nombre_2, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)
+                    .addComponent(ape_2, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)
+                    .addComponent(cedula, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)
+                    .addComponent(cb_genero, 0, 180, Short.MAX_VALUE)
+                    .addComponent(fecha_nac, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)
+                    .addComponent(fecha_exp, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(16, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cedula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel6)
-                    .addComponent(cb_cedula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel8)
-                        .addComponent(cb_tip_id, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel7))
-                    .addComponent(cb_ciudad_exp, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(nombre_1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel4)
-                    .addComponent(nombre_2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(ape_1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5)
-                    .addComponent(ape_2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel9)
-                    .addComponent(cb_tip_sangre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel10)
-                    .addComponent(cb_genero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel11)
-                        .addComponent(cb_ciudad_nac, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel12))
-                    .addComponent(fecha_nac, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel13)
-                    .addComponent(estatura, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(cedula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel6)
+                            .addComponent(cb_cedula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jLabel8)
+                                .addComponent(cb_tip_id, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel7))
+                            .addComponent(cb_ciudad_exp, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(nombre_1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel4)
+                            .addComponent(nombre_2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel3)
+                            .addComponent(ape_1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel5)
+                            .addComponent(ape_2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel9)
+                            .addComponent(cb_tip_sangre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel10)
+                            .addComponent(cb_genero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jLabel11)
+                                .addComponent(cb_ciudad_nac, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel12))
+                            .addComponent(fecha_nac, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                            .addComponent(fecha_exp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel14))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(197, 197, 197)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(estatura, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addComponent(jLabel13))))
+                .addContainerGap())
         );
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/accept_1.png"))); // NOI18N
@@ -414,31 +431,35 @@ public class Edd_Empleado extends javax.swing.JDialog {
                                 if (!cb_genero.getSelectedItem().toString().equals("Seleccione..")) {
                                     if (!cb_ciudad_nac.getSelectedItem().toString().equals("Seleccione..")) {
                                         if (fecha_nac.getDate()!=null) {
-                                            if (estatura.getValue()>0 && estatura.getValue()<=220) {
-                                                Conexion con = new Conexion();
-                                                con.conexion();
-                                                ResultSet r;
-                                                try {
-                                                    r = con.s.executeQuery ("SELECT * FROM `t_empleados` WHERE ID_EMP = "+cedula.getText()+" AND ID_EMP <>"+cb_cedula.getSelectedItem());
-                                                    if(r.next()){
-                                                        JOptionPane.showMessageDialog(this,"El empleado que desea ingresar ya existe","Error",JOptionPane.ERROR_MESSAGE);
-                                                    }else{
-                                                        int conf = JOptionPane.showConfirmDialog(this,"Esta seguro que desea continuar?","Confirmación",JOptionPane.OK_CANCEL_OPTION,JOptionPane.QUESTION_MESSAGE);
-                                                        if (conf == JOptionPane.YES_OPTION) {
-                                                            con.s.executeUpdate("UPDATE `t_empleados` SET `ID_EMP`="+cedula.getText()+",`NOMBRE_1_EMP`='"+nombre_1.getText().toUpperCase()+"',`NOMBRE_2_EMP`='"+nombre_2.getText().toUpperCase()+"',`APELLIDO_1_EMP`='"+ape_1.getText().toUpperCase()+"',`APELLIDO_2_EMP`='"+ape_2.getText().toUpperCase()+"',`ID_TIPO_IDENT`="+get_id_tip_ident(cb_tip_id.getSelectedItem())+",`ID_MUN_EXPEDICION`="+get_id_municipio(cb_ciudad_exp.getSelectedItem())+",`ID_TIPO_SANGRE`="+get_id_tip_sangre(cb_tip_sangre.getSelectedItem())+",`ID_TIPO_GENERO`="+get_id_genero(cb_genero.getSelectedItem())+",`ID_MUN_NACIMIENTO`="+get_id_municipio(cb_ciudad_nac.getSelectedItem())+",`FECHA_NAC`='"+new SimpleDateFormat("yyyy-MM-dd").format(fecha_nac.getDate())+"',`ESTATURA`= "+estatura.getValue()+" WHERE ID_EMP="+cb_cedula.getSelectedItem());
-                                                            JOptionPane.showMessageDialog(this,"El empleado fue actualizado correctamente","Información",JOptionPane.INFORMATION_MESSAGE);
-                                                            con.cerrar();
-                                                            this.dispose();
+                                            if (fecha_exp.getDate()!=null) {
+                                                if (estatura.getValue()>0 && estatura.getValue()<=220) {
+                                                    Conexion con = new Conexion();
+                                                    con.conexion();
+                                                    ResultSet r;
+                                                    try {
+                                                        r = con.s.executeQuery ("SELECT * FROM `t_empleados` WHERE ID_EMP = "+cedula.getText()+" AND ID_EMP <>"+cb_cedula.getSelectedItem());
+                                                        if(r.next()){
+                                                            JOptionPane.showMessageDialog(this,"El empleado que desea ingresar ya existe","Error",JOptionPane.ERROR_MESSAGE);
+                                                        }else{
+                                                            int conf = JOptionPane.showConfirmDialog(this,"Esta seguro que desea continuar?","Confirmación",JOptionPane.OK_CANCEL_OPTION,JOptionPane.QUESTION_MESSAGE);
+                                                            if (conf == JOptionPane.YES_OPTION) {
+                                                                con.s.executeUpdate("UPDATE `t_empleados` SET `ID_EMP`="+cedula.getText()+",`NOMBRE_1_EMP`='"+nombre_1.getText().toUpperCase()+"',`NOMBRE_2_EMP`='"+nombre_2.getText().toUpperCase()+"',`APELLIDO_1_EMP`='"+ape_1.getText().toUpperCase()+"',`APELLIDO_2_EMP`='"+ape_2.getText().toUpperCase()+"',`ID_TIPO_IDENT`="+get_id_tip_ident(cb_tip_id.getSelectedItem())+",`ID_MUN_EXPEDICION`="+get_id_municipio(cb_ciudad_exp.getSelectedItem())+",`ID_TIPO_SANGRE`="+get_id_tip_sangre(cb_tip_sangre.getSelectedItem())+",`ID_TIPO_GENERO`="+get_id_genero(cb_genero.getSelectedItem())+",`ID_MUN_NACIMIENTO`="+get_id_municipio(cb_ciudad_nac.getSelectedItem())+",`FECHA_NAC`='"+new SimpleDateFormat("yyyy-MM-dd").format(fecha_nac.getDate())+"',`ESTATURA`= "+estatura.getValue()+",`FECHA_EXP`='"+new SimpleDateFormat("yyyy-MM-dd").format(fecha_exp.getDate())+"' WHERE ID_EMP="+cb_cedula.getSelectedItem());
+                                                                JOptionPane.showMessageDialog(this,"El empleado fue actualizado correctamente","Información",JOptionPane.INFORMATION_MESSAGE);
+                                                                con.cerrar();
+                                                                this.dispose();
+                                                            }
                                                         }
+                                                        con.cerrar();
+                                                    } catch (SQLException e) {
+                                                        con.cerrar();
+                                                        e.printStackTrace();
+                                                        JOptionPane.showMessageDialog(this,e,"Error",JOptionPane.ERROR_MESSAGE);
                                                     }
-                                                    con.cerrar();
-                                                } catch (SQLException e) {
-                                                    con.cerrar();
-                                                    e.printStackTrace();
-                                                    JOptionPane.showMessageDialog(this,e,"Error",JOptionPane.ERROR_MESSAGE);
+                                                } else {
+                                                    JOptionPane.showMessageDialog(this,"Verifique la estatura del empleado","Error",JOptionPane.ERROR_MESSAGE);
                                                 }
-                                            } else {
-                                                JOptionPane.showMessageDialog(this,"Verifique la estatura del empleado","Error",JOptionPane.ERROR_MESSAGE);
+                                            }else {
+                                                JOptionPane.showMessageDialog(this,"Seleccione la fecha de expedicion de la cedula del empleado","Error",JOptionPane.ERROR_MESSAGE);
                                             }
                                         } else {
                                             JOptionPane.showMessageDialog(this,"Seleccione la fecha de nacimiento del empleado","Error",JOptionPane.ERROR_MESSAGE);
@@ -549,6 +570,7 @@ public class Edd_Empleado extends javax.swing.JDialog {
     private javax.swing.JComboBox<String> cb_tip_sangre;
     private static javax.swing.JTextField cedula;
     private com.toedter.components.JSpinField estatura;
+    private com.toedter.calendar.JDateChooser fecha_exp;
     private com.toedter.calendar.JDateChooser fecha_nac;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
@@ -559,6 +581,7 @@ public class Edd_Empleado extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

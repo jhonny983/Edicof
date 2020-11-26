@@ -423,15 +423,15 @@ class MyTableCellEditorDate extends AbstractCellEditor implements TableCellEdito
         new PegarExcel(info_soci_demo);
         info_soci_demo.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Id*", "Direccion*", "Tel/Cel*", "Municipio Residencia*", "Barrio*", "Estrato*", "Tipo Vivienda*", "Area Trabajo*", "Cargo*", "Estado Civil*", "No Hijos*", "Nivel Academico*", "Nacionalidad*", "Personas a Cargo*", "Personas en el Hogar*", "Aportantes Hogar*", "Nombre Acudiente*", "Tel/Cel Acudiente*", "Parentesco Acudiente*", "Productos Financieros*", "Tiempo Libre*", "Servicios Publicos*", "Ahorro*", "Fuente Ahorro*"
+                "Id*", "Direccion*", "Tel/Cel*", "Municipio Residencia*", "Barrio*", "Estrato*", "Tipo Vivienda*", "Estado Civil*", "No Hijos*", "Nivel Academico*", "Nacionalidad*", "Personas a Cargo*", "Personas en el Hogar*", "Aportantes Hogar*", "Nombre Acudiente*", "Tel/Cel Acudiente*", "Parentesco Acudiente*", "Productos Financieros*", "Tiempo Libre*", "Servicios Publicos*", "Ahorro*", "Fuente Ahorro*"
             }
         ));
         info_soci_demo.setToolTipText("");
         info_soci_demo.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
-        info_soci_demo.setCellSelectionEnabled(true);
+        info_soci_demo.setColumnSelectionAllowed(false);
         info_soci_demo.setComponentPopupMenu(jPopupMenu1);
         info_soci_demo.getTableHeader().setReorderingAllowed(false);
         info_soci_demo.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -465,57 +465,51 @@ class MyTableCellEditorDate extends AbstractCellEditor implements TableCellEdito
             info_soci_demo.getColumnModel().getColumn(6).setMinWidth(150);
             info_soci_demo.getColumnModel().getColumn(6).setPreferredWidth(150);
             info_soci_demo.getColumnModel().getColumn(6).setMaxWidth(150);
-            info_soci_demo.getColumnModel().getColumn(7).setMinWidth(160);
-            info_soci_demo.getColumnModel().getColumn(7).setPreferredWidth(160);
-            info_soci_demo.getColumnModel().getColumn(7).setMaxWidth(160);
-            info_soci_demo.getColumnModel().getColumn(8).setMinWidth(250);
-            info_soci_demo.getColumnModel().getColumn(8).setPreferredWidth(250);
-            info_soci_demo.getColumnModel().getColumn(8).setMaxWidth(250);
-            info_soci_demo.getColumnModel().getColumn(9).setMinWidth(100);
-            info_soci_demo.getColumnModel().getColumn(9).setPreferredWidth(100);
-            info_soci_demo.getColumnModel().getColumn(9).setMaxWidth(100);
+            info_soci_demo.getColumnModel().getColumn(7).setMinWidth(100);
+            info_soci_demo.getColumnModel().getColumn(7).setPreferredWidth(100);
+            info_soci_demo.getColumnModel().getColumn(7).setMaxWidth(100);
+            info_soci_demo.getColumnModel().getColumn(8).setMinWidth(100);
+            info_soci_demo.getColumnModel().getColumn(8).setPreferredWidth(100);
+            info_soci_demo.getColumnModel().getColumn(8).setMaxWidth(100);
+            info_soci_demo.getColumnModel().getColumn(9).setMinWidth(150);
+            info_soci_demo.getColumnModel().getColumn(9).setPreferredWidth(150);
+            info_soci_demo.getColumnModel().getColumn(9).setMaxWidth(150);
             info_soci_demo.getColumnModel().getColumn(10).setMinWidth(100);
             info_soci_demo.getColumnModel().getColumn(10).setPreferredWidth(100);
             info_soci_demo.getColumnModel().getColumn(10).setMaxWidth(100);
             info_soci_demo.getColumnModel().getColumn(11).setMinWidth(150);
             info_soci_demo.getColumnModel().getColumn(11).setPreferredWidth(150);
             info_soci_demo.getColumnModel().getColumn(11).setMaxWidth(150);
-            info_soci_demo.getColumnModel().getColumn(12).setMinWidth(100);
-            info_soci_demo.getColumnModel().getColumn(12).setPreferredWidth(100);
-            info_soci_demo.getColumnModel().getColumn(12).setMaxWidth(100);
+            info_soci_demo.getColumnModel().getColumn(12).setMinWidth(150);
+            info_soci_demo.getColumnModel().getColumn(12).setPreferredWidth(150);
+            info_soci_demo.getColumnModel().getColumn(12).setMaxWidth(150);
             info_soci_demo.getColumnModel().getColumn(13).setMinWidth(150);
             info_soci_demo.getColumnModel().getColumn(13).setPreferredWidth(150);
             info_soci_demo.getColumnModel().getColumn(13).setMaxWidth(150);
-            info_soci_demo.getColumnModel().getColumn(14).setMinWidth(150);
-            info_soci_demo.getColumnModel().getColumn(14).setPreferredWidth(150);
-            info_soci_demo.getColumnModel().getColumn(14).setMaxWidth(150);
+            info_soci_demo.getColumnModel().getColumn(14).setMinWidth(250);
+            info_soci_demo.getColumnModel().getColumn(14).setPreferredWidth(250);
+            info_soci_demo.getColumnModel().getColumn(14).setMaxWidth(250);
             info_soci_demo.getColumnModel().getColumn(15).setMinWidth(150);
             info_soci_demo.getColumnModel().getColumn(15).setPreferredWidth(150);
             info_soci_demo.getColumnModel().getColumn(15).setMaxWidth(150);
-            info_soci_demo.getColumnModel().getColumn(16).setMinWidth(250);
-            info_soci_demo.getColumnModel().getColumn(16).setPreferredWidth(250);
-            info_soci_demo.getColumnModel().getColumn(16).setMaxWidth(250);
-            info_soci_demo.getColumnModel().getColumn(17).setMinWidth(150);
-            info_soci_demo.getColumnModel().getColumn(17).setPreferredWidth(150);
-            info_soci_demo.getColumnModel().getColumn(17).setMaxWidth(150);
-            info_soci_demo.getColumnModel().getColumn(18).setMinWidth(150);
-            info_soci_demo.getColumnModel().getColumn(18).setPreferredWidth(150);
-            info_soci_demo.getColumnModel().getColumn(18).setMaxWidth(150);
+            info_soci_demo.getColumnModel().getColumn(16).setMinWidth(150);
+            info_soci_demo.getColumnModel().getColumn(16).setPreferredWidth(150);
+            info_soci_demo.getColumnModel().getColumn(16).setMaxWidth(150);
+            info_soci_demo.getColumnModel().getColumn(17).setMinWidth(250);
+            info_soci_demo.getColumnModel().getColumn(17).setPreferredWidth(250);
+            info_soci_demo.getColumnModel().getColumn(17).setMaxWidth(250);
+            info_soci_demo.getColumnModel().getColumn(18).setMinWidth(200);
+            info_soci_demo.getColumnModel().getColumn(18).setPreferredWidth(200);
+            info_soci_demo.getColumnModel().getColumn(18).setMaxWidth(200);
             info_soci_demo.getColumnModel().getColumn(19).setMinWidth(250);
             info_soci_demo.getColumnModel().getColumn(19).setPreferredWidth(250);
             info_soci_demo.getColumnModel().getColumn(19).setMaxWidth(250);
-            info_soci_demo.getColumnModel().getColumn(20).setMinWidth(200);
-            info_soci_demo.getColumnModel().getColumn(20).setPreferredWidth(200);
-            info_soci_demo.getColumnModel().getColumn(20).setMaxWidth(200);
-            info_soci_demo.getColumnModel().getColumn(21).setMinWidth(250);
-            info_soci_demo.getColumnModel().getColumn(21).setPreferredWidth(250);
-            info_soci_demo.getColumnModel().getColumn(21).setMaxWidth(250);
-            info_soci_demo.getColumnModel().getColumn(22).setMinWidth(60);
-            info_soci_demo.getColumnModel().getColumn(22).setPreferredWidth(60);
-            info_soci_demo.getColumnModel().getColumn(22).setMaxWidth(60);
-            info_soci_demo.getColumnModel().getColumn(23).setMinWidth(300);
-            info_soci_demo.getColumnModel().getColumn(23).setPreferredWidth(300);
-            info_soci_demo.getColumnModel().getColumn(23).setMaxWidth(300);
+            info_soci_demo.getColumnModel().getColumn(20).setMinWidth(60);
+            info_soci_demo.getColumnModel().getColumn(20).setPreferredWidth(60);
+            info_soci_demo.getColumnModel().getColumn(20).setMaxWidth(60);
+            info_soci_demo.getColumnModel().getColumn(21).setMinWidth(300);
+            info_soci_demo.getColumnModel().getColumn(21).setPreferredWidth(300);
+            info_soci_demo.getColumnModel().getColumn(21).setMaxWidth(300);
         }
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
