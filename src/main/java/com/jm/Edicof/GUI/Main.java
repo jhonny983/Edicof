@@ -325,7 +325,12 @@ public static ArrayList conection_list = new ArrayList();
         jMenuItem60 = new javax.swing.JMenuItem();
         jMenuItem64 = new javax.swing.JMenuItem();
         jMenuItem41 = new javax.swing.JMenuItem();
+        jMenu27 = new javax.swing.JMenu();
         jMenuItem52 = new javax.swing.JMenuItem();
+        jSeparator8 = new javax.swing.JPopupMenu.Separator();
+        jMenu28 = new javax.swing.JMenu();
+        jMenuItem25 = new javax.swing.JMenuItem();
+        jMenuItem72 = new javax.swing.JMenuItem();
         jMenuItem53 = new javax.swing.JMenuItem();
         jMenu14 = new javax.swing.JMenu();
         jMenu22 = new javax.swing.JMenu();
@@ -1689,10 +1694,15 @@ public static ArrayList conection_list = new ArrayList();
         });
         jm_reportes.add(jMenuItem41);
 
+        jMenu27.setText("Empresas");
+
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, jm_reportes, org.jdesktop.beansbinding.ELProperty.create("${enabled}"), jMenu27, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
+        bindingGroup.addBinding(binding);
+
         jMenuItem52.setIcon(new javax.swing.ImageIcon(getClass().getResource("/small_business.png"))); // NOI18N
         jMenuItem52.setText("Empresas");
 
-        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, jm_reportes, org.jdesktop.beansbinding.ELProperty.create("${enabled}"), jMenuItem52, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, jMenu27, org.jdesktop.beansbinding.ELProperty.create("${enabled}"), jMenuItem52, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
         bindingGroup.addBinding(binding);
 
         jMenuItem52.addActionListener(new java.awt.event.ActionListener() {
@@ -1700,7 +1710,28 @@ public static ArrayList conection_list = new ArrayList();
                 jMenuItem52ActionPerformed(evt);
             }
         });
-        jm_reportes.add(jMenuItem52);
+        jMenu27.add(jMenuItem52);
+        jMenu27.add(jSeparator8);
+
+        jMenu28.setText("Fecha Limite");
+
+        jMenuItem25.setText("Reporte agrupado");
+
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, jMenu28, org.jdesktop.beansbinding.ELProperty.create("${enabled}"), jMenuItem25, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
+        bindingGroup.addBinding(binding);
+
+        jMenu28.add(jMenuItem25);
+
+        jMenuItem72.setText("Reporte por dia");
+
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, jMenu28, org.jdesktop.beansbinding.ELProperty.create("${enabled}"), jMenuItem72, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
+        bindingGroup.addBinding(binding);
+
+        jMenu28.add(jMenuItem72);
+
+        jMenu27.add(jMenu28);
+
+        jm_reportes.add(jMenu27);
 
         jMenuItem53.setIcon(new javax.swing.ImageIcon(getClass().getResource("/email_send_receive.png"))); // NOI18N
         jMenuItem53.setText("Envio de Correos");
@@ -2766,6 +2797,8 @@ public static ArrayList conection_list = new ArrayList();
     private javax.swing.JMenu jMenu24;
     private javax.swing.JMenu jMenu25;
     private javax.swing.JMenu jMenu26;
+    private javax.swing.JMenu jMenu27;
+    private javax.swing.JMenu jMenu28;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenu jMenu5;
@@ -2791,6 +2824,7 @@ public static ArrayList conection_list = new ArrayList();
     private javax.swing.JMenuItem jMenuItem22;
     private javax.swing.JMenuItem jMenuItem23;
     private javax.swing.JMenuItem jMenuItem24;
+    private javax.swing.JMenuItem jMenuItem25;
     private javax.swing.JMenuItem jMenuItem26;
     private javax.swing.JMenuItem jMenuItem27;
     private javax.swing.JMenuItem jMenuItem28;
@@ -2842,6 +2876,7 @@ public static ArrayList conection_list = new ArrayList();
     private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JMenuItem jMenuItem70;
     private javax.swing.JMenuItem jMenuItem71;
+    private javax.swing.JMenuItem jMenuItem72;
     private javax.swing.JMenuItem jMenuItem8;
     private javax.swing.JMenuItem jMenuItem9;
     private javax.swing.JPanel jPanel1;
@@ -2852,6 +2887,7 @@ public static ArrayList conection_list = new ArrayList();
     private javax.swing.JToolBar.Separator jSeparator5;
     private javax.swing.JToolBar.Separator jSeparator6;
     private javax.swing.JToolBar.Separator jSeparator7;
+    private javax.swing.JPopupMenu.Separator jSeparator8;
     private javax.swing.JToolBar jToolBar1;
     private javax.swing.JMenu jm_asistencias;
     protected static javax.swing.JMenuItem jm_cambio_contraseña;

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="PrecalculoSeguridad" pageWidth="612" pageHeight="792" columnWidth="602" leftMargin="5" rightMargin="5" topMargin="20" bottomMargin="20" scriptletClass="com.jm.ScriptletsJasper.ScriptletsPrecalculo" uuid="cf43ecd0-0690-4a98-9ec7-c6b6666d372b">
 	<property name="ireport.zoom" value="1.927716447147658"/>
-	<property name="ireport.x" value="319"/>
-	<property name="ireport.y" value="0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="112"/>
 	<import value="com.jm.ScriptletsJasper.ScriptletsPrecalculo"/>
 	<parameter name="ID_EMPRESA" class="java.lang.String">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
@@ -25,16 +25,7 @@
      t_novedades.`ID_AFP` AS t_novedades_ID_AFP,
      t_novedades.`ARL_NOV` AS t_novedades_ARL_NOV,
      t_novedades.`CCF_NOV` AS t_novedades_CCF_NOV,
-     t_novedades.`F_NAC_NOV` AS t_novedades_F_NAC_NOV,
-     t_novedades.`F_EXP_NOV` AS t_novedades_F_EXP_NOV,
-     t_novedades.`DIR_EMP_NOV` AS t_novedades_DIR_EMP_NOV,
-     t_novedades.`BARRIO_NOV` AS t_novedades_BARRIO_NOV,
-     t_novedades.`ID_MUN_NOV` AS t_novedades_ID_MUN_NOV,
-     t_novedades.`TEL_NOV` AS t_novedades_TEL_NOV,
      t_novedades.`MAIL_NOV` AS t_novedades_MAIL_NOV,
-     t_novedades.`ACUD_NOV` AS t_novedades_ACUD_NOV,
-     t_novedades.`ID_PAR_ACU_NOV` AS t_novedades_ID_PAR_ACU_NOV,
-     t_novedades.`TEL_ACUD_NOV` AS t_novedades_TEL_ACUD_NOV,
      t_novedades.`OBS_NOV` AS t_novedades_OBS_NOV,
      t_novedades.`ID_OBRA` AS t_novedades_ID_OBRA,
      t_novedades.`ID_TIPO` AS t_novedades_ID_TIPO,
@@ -92,20 +83,11 @@ ORDER BY
 	<field name="t_novedades_FECHA_INGRESO" class="java.sql.Date"/>
 	<field name="t_novedades_FECHA_RETIRO" class="java.sql.Date"/>
 	<field name="t_novedades_SALARIO_NOVEDAD" class="java.lang.Float"/>
-	<field name="t_novedades_ID_EPS" class="java.lang.Integer"/>
-	<field name="t_novedades_ID_AFP" class="java.lang.Integer"/>
+	<field name="t_novedades_ID_EPS" class="java.lang.String"/>
+	<field name="t_novedades_ID_AFP" class="java.lang.String"/>
 	<field name="t_novedades_ARL_NOV" class="java.lang.String"/>
 	<field name="t_novedades_CCF_NOV" class="java.lang.String"/>
-	<field name="t_novedades_F_NAC_NOV" class="java.sql.Date"/>
-	<field name="t_novedades_F_EXP_NOV" class="java.sql.Date"/>
-	<field name="t_novedades_DIR_EMP_NOV" class="java.lang.String"/>
-	<field name="t_novedades_BARRIO_NOV" class="java.lang.String"/>
-	<field name="t_novedades_ID_MUN_NOV" class="java.lang.Integer"/>
-	<field name="t_novedades_TEL_NOV" class="java.lang.String"/>
 	<field name="t_novedades_MAIL_NOV" class="java.lang.String"/>
-	<field name="t_novedades_ACUD_NOV" class="java.lang.String"/>
-	<field name="t_novedades_ID_PAR_ACU_NOV" class="java.lang.Integer"/>
-	<field name="t_novedades_TEL_ACUD_NOV" class="java.lang.String"/>
 	<field name="t_novedades_OBS_NOV" class="java.lang.String"/>
 	<field name="t_novedades_ID_OBRA" class="java.lang.Integer"/>
 	<field name="t_novedades_ID_TIPO" class="java.lang.Integer"/>
@@ -116,12 +98,12 @@ ORDER BY
 	<field name="t_empleados_NOMBRE_1_EMP" class="java.lang.String"/>
 	<field name="t_empresas_ID_EMPRESA" class="java.lang.String"/>
 	<field name="t_empresas_NOMBRE_EMPRESA" class="java.lang.String"/>
-	<field name="t_eps_ID_EPS" class="java.lang.Integer"/>
+	<field name="t_eps_ID_EPS" class="java.lang.String"/>
 	<field name="t_eps_NOMBRE_EPS" class="java.lang.String"/>
-	<field name="t_afp_ID_AFP" class="java.lang.Integer"/>
+	<field name="t_afp_ID_AFP" class="java.lang.String"/>
 	<field name="t_afp_NOMBRE_AFP" class="java.lang.String"/>
 	<field name="t_municipios_ID_MUN" class="java.lang.Integer"/>
-	<field name="t_municipios_ID_DEP" class="java.lang.Integer"/>
+	<field name="t_municipios_ID_DEP" class="java.lang.String"/>
 	<field name="t_municipios_NOMBRE_MUN" class="java.lang.String"/>
 	<field name="t_obra_ID_OBRA" class="java.lang.Integer"/>
 	<field name="t_obra_NOMBRE_OBRA" class="java.lang.String"/>

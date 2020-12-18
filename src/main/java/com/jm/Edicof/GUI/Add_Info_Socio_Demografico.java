@@ -36,7 +36,7 @@ boolean perm_mun=false;
 //        ac_cargo();
         ac_estado();
         ac_niv_acad();
-        ac_nacionalidad();
+        //ac_nacionalidad();
         ac_parentesco();
         perm=true;
         perm_mun=true;
@@ -54,7 +54,7 @@ boolean perm_mun=false;
 //        ac_cargo();
         ac_estado();
         ac_niv_acad();
-        ac_nacionalidad();
+        //ac_nacionalidad();
         ac_parentesco();
         perm=true;
         perm_mun=true;
@@ -81,8 +81,6 @@ boolean perm_mun=false;
         cb_num_pers_cargo = new javax.swing.JComboBox<>();
         jLabel14 = new javax.swing.JLabel();
         cb_niv = new javax.swing.JComboBox<>();
-        jLabel16 = new javax.swing.JLabel();
-        cb_nacion = new javax.swing.JComboBox<>();
         jLabel17 = new javax.swing.JLabel();
         cb_pers_hogar = new javax.swing.JComboBox<>();
         jLabel18 = new javax.swing.JLabel();
@@ -156,8 +154,6 @@ boolean perm_mun=false;
 
         jLabel14.setText("Nivel Academico");
 
-        jLabel16.setText("Nacionalidad");
-
         jLabel17.setText("Personas en el hogar");
 
         cb_pers_hogar.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione..", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10" }));
@@ -178,18 +174,16 @@ boolean perm_mun=false;
                     .addComponent(jLabel18)
                     .addComponent(jLabel17)
                     .addComponent(jLabel14)
-                    .addComponent(jLabel13)
-                    .addComponent(jLabel16))
-                .addGap(18, 18, Short.MAX_VALUE)
+                    .addComponent(jLabel13))
+                .addGap(18, 19, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(cb_num_hijos, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cb_est_civil, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cb_niv, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cb_nacion, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cb_num_pers_cargo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cb_pers_hogar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cb_pers_aport, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(27, Short.MAX_VALUE))
+                .addContainerGap(28, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -208,10 +202,6 @@ boolean perm_mun=false;
                     .addComponent(jLabel14))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cb_nacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel16))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cb_num_pers_cargo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel13))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -222,7 +212,7 @@ boolean perm_mun=false;
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cb_pers_aport, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel18))
-                .addContainerGap(14, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Servicios Publicos"));
@@ -308,8 +298,8 @@ boolean perm_mun=false;
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap(32, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(sp_alcanarillado)
@@ -327,7 +317,7 @@ boolean perm_mun=false;
                         .addComponent(sp_gas)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(sp_aseo)))
-                .addContainerGap(32, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel7.setBorder(javax.swing.BorderFactory.createTitledBorder("Productos financieros"));
@@ -453,7 +443,7 @@ boolean perm_mun=false;
                 .addComponent(fa_f_empleados)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(fa_ninguno)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(11, Short.MAX_VALUE))
         );
 
         jPanel6.setBorder(javax.swing.BorderFactory.createTitledBorder("Ahorro"));
@@ -740,24 +730,25 @@ boolean perm_mun=false;
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(2, 2, 2)
+                                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jPanel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
@@ -777,11 +768,11 @@ boolean perm_mun=false;
                 int id_mun_res=0;
                 int id_barrio=0;
                 int id_tip_vivienda=0;
-                int id_area=0;
-                int id_cargo=0;
+//                int id_area=0;
+//                int id_cargo=0;
                 int id_est_civil=0;
                 int id_niv_acad=0;
-                int id_nacion=0;
+//                int id_nacion=0;
                 int id_par=0;
                 Conexion con = new Conexion();
                 con.conexion();
@@ -836,13 +827,13 @@ boolean perm_mun=false;
                     if(r.next()){
                         id_niv_acad=r.getInt("ID_NIVEL");
                     }
-                    //**************GET ID NACIONALIDAD
-                    r = con.s.executeQuery ("SELECT *\n" +
-                                            "FROM\n" +
-                                            "    t_nacionalidad WHERE NOMBRE_NACION = '"+cb_nacion.getSelectedItem()+"';");
-                    if(r.next()){
-                        id_nacion=r.getInt("ID_NACION");
-                    }
+//                    //**************GET ID NACIONALIDAD
+//                    r = con.s.executeQuery ("SELECT *\n" +
+//                                            "FROM\n" +
+//                                            "    t_nacionalidad WHERE NOMBRE_NACION = '"+cb_nacion.getSelectedItem()+"';");
+//                    if(r.next()){
+//                        id_nacion=r.getInt("ID_NACION");
+//                    }
                     //**************GET ID PARENTESCO
                     r = con.s.executeQuery ("SELECT *\n" +
                                             "FROM\n" +
@@ -1131,8 +1122,8 @@ boolean perm_mun=false;
 //                    con.s.executeUpdate("INSERT INTO `t_info_sociodemografica`(`ID_EMP`, `DIRECCION_EMP`, `TEL_CEL_EMP`, `ID_ESTADO_CIVIL_EMP`, `NUM_HIJOS_EMP`, `ID_CARGO`, `ID_AREA_TRABAJO_EMP`, `NOMBRE_ACUDIENTE_EMP`, `TEL_CEL_ACU_EMP`, `ID_PAR_ACU_EMP`, `ID_BARRIO`, `ID_MUN_RES_EMP`, `ESTRATO_EMP`, `PER_CARGO_EMP`, `ID_NIV_ACAD_EMP`, `ID_TIP_VIV_EMP`, `ID_NACION_EMP`, `PERS_HOGAR_EMP`, `PERS_AP_HOGAR_EMP`, `AHORRO_EMP`) "
 //                            + "VALUES ("+cedula+",'"+direccion.getText().toUpperCase()+"','"+cel_tel.getText().toUpperCase()+"',"+id_est_civil+","+cb_num_hijos.getSelectedItem().toString()+","+id_cargo+","+id_area+",'"+nomb_acud.getText().toUpperCase()+"','"+cel_tel_acu.getText()+"',"+id_par+","+id_barrio+","+id_mun_res+","+cb_estrato.getSelectedItem().toString()+","+cb_num_pers_cargo.getSelectedItem().toString()+","+id_niv_acad+","+id_tip_vivienda+","+id_nacion+","+cb_pers_hogar.getSelectedItem().toString()+","+cb_pers_aport.getSelectedItem().toString()+",'"+ahorro+"')");
 //                    
-                    con.s.executeUpdate("INSERT INTO `t_info_sociodemografica`(`ID_EMP`, `DIRECCION_EMP`, `TEL_CEL_EMP`, `ID_ESTADO_CIVIL_EMP`, `NUM_HIJOS_EMP`, `NOMBRE_ACUDIENTE_EMP`, `TEL_CEL_ACU_EMP`, `ID_PAR_ACU_EMP`, `ID_BARRIO`, `ID_MUN_RES_EMP`, `ESTRATO_EMP`, `PER_CARGO_EMP`, `ID_NIV_ACAD_EMP`, `ID_TIP_VIV_EMP`, `ID_NACION_EMP`, `PERS_HOGAR_EMP`, `PERS_AP_HOGAR_EMP`, `AHORRO_EMP`) "
-                            + "VALUES ("+cedula+",'"+direccion.getText().toUpperCase()+"','"+cel_tel.getText().toUpperCase()+"',"+id_est_civil+","+cb_num_hijos.getSelectedItem().toString()+",'"+nomb_acud.getText().toUpperCase()+"','"+cel_tel_acu.getText()+"',"+id_par+","+id_barrio+","+id_mun_res+","+cb_estrato.getSelectedItem().toString()+","+cb_num_pers_cargo.getSelectedItem().toString()+","+id_niv_acad+","+id_tip_vivienda+","+id_nacion+","+cb_pers_hogar.getSelectedItem().toString()+","+cb_pers_aport.getSelectedItem().toString()+",'"+ahorro+"')");
+                    con.s.executeUpdate("INSERT INTO `t_info_sociodemografica`(`ID_EMP`, `DIRECCION_EMP`, `TEL_CEL_EMP`, `ID_ESTADO_CIVIL_EMP`, `NUM_HIJOS_EMP`, `NOMBRE_ACUDIENTE_EMP`, `TEL_CEL_ACU_EMP`, `ID_PAR_ACU_EMP`, `ID_BARRIO`, `ID_MUN_RES_EMP`, `ESTRATO_EMP`, `PER_CARGO_EMP`, `ID_NIV_ACAD_EMP`, `ID_TIP_VIV_EMP`, `PERS_HOGAR_EMP`, `PERS_AP_HOGAR_EMP`, `AHORRO_EMP`) "
+                            + "VALUES ("+cedula+",'"+direccion.getText().toUpperCase()+"','"+cel_tel.getText().toUpperCase()+"',"+id_est_civil+","+cb_num_hijos.getSelectedItem().toString()+",'"+nomb_acud.getText().toUpperCase()+"','"+cel_tel_acu.getText()+"',"+id_par+","+id_barrio+","+id_mun_res+","+cb_estrato.getSelectedItem().toString()+","+cb_num_pers_cargo.getSelectedItem().toString()+","+id_niv_acad+","+id_tip_vivienda+","+cb_pers_hogar.getSelectedItem().toString()+","+cb_pers_aport.getSelectedItem().toString()+",'"+ahorro+"')");
                     JOptionPane.showMessageDialog(null,"La información ha sido almacenada correctamente","Confirmación",JOptionPane.INFORMATION_MESSAGE);
                     con.cerrar();
                     this.dispose();
@@ -1420,7 +1411,6 @@ boolean perm_mun=false;
     private javax.swing.JComboBox<String> cb_est_civil;
     private javax.swing.JComboBox<String> cb_estrato;
     private javax.swing.JComboBox<String> cb_mun;
-    private javax.swing.JComboBox<String> cb_nacion;
     private javax.swing.JComboBox<String> cb_niv;
     private javax.swing.JComboBox<String> cb_num_hijos;
     private javax.swing.JComboBox<String> cb_num_pers_cargo;
@@ -1445,7 +1435,6 @@ boolean perm_mun=false;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel2;
@@ -1670,28 +1659,28 @@ public final void ac_tip_vivienda(){
         JOptionPane.showMessageDialog(null,j,"Error",JOptionPane.ERROR_MESSAGE);
     }
 }
-public final void ac_nacionalidad(){
-    cb_nacion.removeAllItems();
-    cb_nacion.addItem("Seleccione..");
-    Conexion con = new Conexion();
-    con.conexion();
-    ResultSet r;
-    try{
-        r = con.s.executeQuery ("SELECT *\n" +
-                                "FROM\n" +
-                                "    t_nacionalidad\n" +
-                                "ORDER BY NOMBRE_NACION ASC;");
-        while(r.next()){
-            String str=r.getString("NOMBRE_NACION");
-            cb_nacion.addItem(str);
-            
-        }
-        con.cerrar();
-    }catch(SQLException j){
-        con.cerrar();
-        JOptionPane.showMessageDialog(null,j,"Error",JOptionPane.ERROR_MESSAGE);
-    }
-}
+//public final void ac_nacionalidad(){
+//    cb_nacion.removeAllItems();
+//    cb_nacion.addItem("Seleccione..");
+//    Conexion con = new Conexion();
+//    con.conexion();
+//    ResultSet r;
+//    try{
+//        r = con.s.executeQuery ("SELECT *\n" +
+//                                "FROM\n" +
+//                                "    t_nacionalidad\n" +
+//                                "ORDER BY NOMBRE_NACION ASC;");
+//        while(r.next()){
+//            String str=r.getString("NOMBRE_NACION");
+//            cb_nacion.addItem(str);
+//            
+//        }
+//        con.cerrar();
+//    }catch(SQLException j){
+//        con.cerrar();
+//        JOptionPane.showMessageDialog(null,j,"Error",JOptionPane.ERROR_MESSAGE);
+//    }
+//}
 public final void ac_parentesco(){
     cb_parentesco.removeAllItems();
     cb_parentesco.addItem("Seleccione..");
@@ -1728,7 +1717,7 @@ private boolean verify(){
                                         if (!cb_est_civil.getSelectedItem().equals("Seleccione..")) {
                                             if (!cb_num_hijos.getSelectedItem().equals("Seleccione..")) {
                                                 if (!cb_niv.getSelectedItem().equals("Seleccione..")) {
-                                                    if (!cb_nacion.getSelectedItem().equals("Seleccione..")) {
+//                                                    if (!cb_nacion.getSelectedItem().equals("Seleccione..")) {
                                                         if (!cb_num_pers_cargo.getSelectedItem().equals("Seleccione..")) {
                                                             if (!cb_pers_hogar.getSelectedItem().equals("Seleccione..")) {
                                                                 if (!cb_pers_aport.getSelectedItem().equals("Seleccione..")) {
@@ -1783,11 +1772,11 @@ private boolean verify(){
                                                             ret=false&ret;
                                                         }
 
-                                                    } else {
-                                                        cb_nacion.requestFocus();
-                                                        JOptionPane.showMessageDialog(this,"Seleccione la nacionalidad del empleado","Error",JOptionPane.ERROR_MESSAGE);
-                                                        ret=false&ret;
-                                                    }
+//                                                    } else {
+//                                                        cb_nacion.requestFocus();
+//                                                        JOptionPane.showMessageDialog(this,"Seleccione la nacionalidad del empleado","Error",JOptionPane.ERROR_MESSAGE);
+//                                                        ret=false&ret;
+//                                                    }
 
                                                 } else {
                                                     cb_niv.requestFocus();

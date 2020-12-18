@@ -36,7 +36,7 @@ boolean perm_mun=false;
 //        ac_cargo();
         ac_estado();
         ac_niv_acad();
-        ac_nacionalidad();
+        //ac_nacionalidad();
         ac_parentesco();
         
         perm=true;
@@ -56,7 +56,7 @@ boolean perm_mun=false;
 //        ac_cargo();
         ac_estado();
         ac_niv_acad();
-        ac_nacionalidad();
+        //ac_nacionalidad();
         ac_parentesco();
         
         perm=true;
@@ -84,8 +84,6 @@ boolean perm_mun=false;
         cb_num_pers_cargo = new javax.swing.JComboBox<>();
         jLabel14 = new javax.swing.JLabel();
         cb_niv = new javax.swing.JComboBox<>();
-        jLabel16 = new javax.swing.JLabel();
-        cb_nacion = new javax.swing.JComboBox<>();
         jLabel17 = new javax.swing.JLabel();
         cb_pers_hogar = new javax.swing.JComboBox<>();
         jLabel18 = new javax.swing.JLabel();
@@ -159,8 +157,6 @@ boolean perm_mun=false;
 
         jLabel14.setText("Nivel Academico");
 
-        jLabel16.setText("Nacionalidad");
-
         jLabel17.setText("Personas en el hogar");
 
         cb_pers_hogar.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione..", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10" }));
@@ -181,14 +177,12 @@ boolean perm_mun=false;
                     .addComponent(jLabel18)
                     .addComponent(jLabel17)
                     .addComponent(jLabel14)
-                    .addComponent(jLabel13)
-                    .addComponent(jLabel16))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel13))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 5, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(cb_num_hijos, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cb_est_civil, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cb_niv, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cb_nacion, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cb_num_pers_cargo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cb_pers_hogar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cb_pers_aport, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -209,10 +203,6 @@ boolean perm_mun=false;
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cb_niv, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel14))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cb_nacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel16))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cb_num_pers_cargo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -450,7 +440,7 @@ boolean perm_mun=false;
                 .addComponent(fa_f_empleados)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(fa_ninguno)
-                .addContainerGap(8, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel6.setBorder(javax.swing.BorderFactory.createTitledBorder("Ahorro"));
@@ -772,11 +762,11 @@ boolean perm_mun=false;
                 int id_mun_res=0;
                 int id_barrio=0;
                 int id_tip_vivienda=0;
-                int id_area=0;
-                int id_cargo=0;
+//                int id_area=0;
+//                int id_cargo=0;
                 int id_est_civil=0;
                 int id_niv_acad=0;
-                int id_nacion=0;
+//                int id_nacion=0;
                 int id_par=0;
                 Conexion con = new Conexion();
                 con.conexion();
@@ -831,13 +821,13 @@ boolean perm_mun=false;
                     if(r.next()){
                         id_niv_acad=r.getInt("ID_NIVEL");
                     }
-                    //**************GET ID NACIONALIDAD
-                    r = con.s.executeQuery ("SELECT *\n" +
-                                            "FROM\n" +
-                                            "    t_nacionalidad WHERE NOMBRE_NACION = '"+cb_nacion.getSelectedItem()+"';");
-                    if(r.next()){
-                        id_nacion=r.getInt("ID_NACION");
-                    }
+//                    //**************GET ID NACIONALIDAD
+//                    r = con.s.executeQuery ("SELECT *\n" +
+//                                            "FROM\n" +
+//                                            "    t_nacionalidad WHERE NOMBRE_NACION = '"+cb_nacion.getSelectedItem()+"';");
+//                    if(r.next()){
+//                        id_nacion=r.getInt("ID_NACION");
+//                    }
                     //**************GET ID PARENTESCO
                     r = con.s.executeQuery ("SELECT *\n" +
                                             "FROM\n" +
@@ -1103,7 +1093,7 @@ boolean perm_mun=false;
 //                            +"`ID_PAR_ACU_EMP`="+id_par+",`ID_BARRIO`="+id_barrio+",`ID_MUN_RES_EMP`="+id_mun_res+",`ESTRATO_EMP`="+cb_estrato.getSelectedItem().toString()+",`PER_CARGO_EMP`="+cb_num_pers_cargo.getSelectedItem().toString()+",`ID_NIV_ACAD_EMP`="+id_niv_acad+",`ID_TIP_VIV_EMP`="+id_tip_vivienda+",`ID_NACION_EMP`="+id_nacion+",`PERS_HOGAR_EMP`="+cb_pers_hogar.getSelectedItem().toString()+",`PERS_AP_HOGAR_EMP`="+cb_pers_aport.getSelectedItem().toString()+",`AHORRO_EMP`='"+ahorro+"' WHERE `ID_EMP`="+cedula+";");
                     
                     con.s.executeUpdate("UPDATE `t_info_sociodemografica` SET `DIRECCION_EMP`='"+direccion.getText().toUpperCase()+"',`TEL_CEL_EMP`='"+cel_tel.getText().toUpperCase()+"',`ID_ESTADO_CIVIL_EMP`="+id_est_civil+",`NUM_HIJOS_EMP`="+cb_num_hijos.getSelectedItem().toString()+",`NOMBRE_ACUDIENTE_EMP`='"+nomb_acud.getText().toUpperCase()+"',`TEL_CEL_ACU_EMP`='"+cel_tel_acu.getText()+"',\n"
-                            +"`ID_PAR_ACU_EMP`="+id_par+",`ID_BARRIO`="+id_barrio+",`ID_MUN_RES_EMP`="+id_mun_res+",`ESTRATO_EMP`="+cb_estrato.getSelectedItem().toString()+",`PER_CARGO_EMP`="+cb_num_pers_cargo.getSelectedItem().toString()+",`ID_NIV_ACAD_EMP`="+id_niv_acad+",`ID_TIP_VIV_EMP`="+id_tip_vivienda+",`ID_NACION_EMP`="+id_nacion+",`PERS_HOGAR_EMP`="+cb_pers_hogar.getSelectedItem().toString()+",`PERS_AP_HOGAR_EMP`="+cb_pers_aport.getSelectedItem().toString()+",`AHORRO_EMP`='"+ahorro+"' WHERE `ID_EMP`="+cedula+";");
+                            +"`ID_PAR_ACU_EMP`="+id_par+",`ID_BARRIO`="+id_barrio+",`ID_MUN_RES_EMP`="+id_mun_res+",`ESTRATO_EMP`="+cb_estrato.getSelectedItem().toString()+",`PER_CARGO_EMP`="+cb_num_pers_cargo.getSelectedItem().toString()+",`ID_NIV_ACAD_EMP`="+id_niv_acad+",`ID_TIP_VIV_EMP`="+id_tip_vivienda+",`PERS_HOGAR_EMP`="+cb_pers_hogar.getSelectedItem().toString()+",`PERS_AP_HOGAR_EMP`="+cb_pers_aport.getSelectedItem().toString()+",`AHORRO_EMP`='"+ahorro+"' WHERE `ID_EMP`="+cedula+";");
                     JOptionPane.showMessageDialog(null,"La información ha sido almacenada correctamente","Confirmación",JOptionPane.INFORMATION_MESSAGE);
                     con.cerrar();
                     this.dispose();
@@ -1391,7 +1381,6 @@ boolean perm_mun=false;
     private javax.swing.JComboBox<String> cb_est_civil;
     private javax.swing.JComboBox<String> cb_estrato;
     private javax.swing.JComboBox<String> cb_mun;
-    private javax.swing.JComboBox<String> cb_nacion;
     private javax.swing.JComboBox<String> cb_niv;
     private javax.swing.JComboBox<String> cb_num_hijos;
     private javax.swing.JComboBox<String> cb_num_pers_cargo;
@@ -1416,7 +1405,6 @@ boolean perm_mun=false;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel2;
@@ -1642,28 +1630,28 @@ public final void ac_tip_vivienda(){
         JOptionPane.showMessageDialog(null,j,"Error",JOptionPane.ERROR_MESSAGE);
     }
 }
-public final void ac_nacionalidad(){
-    cb_nacion.removeAllItems();
-    cb_nacion.addItem("Seleccione..");
-    Conexion con = new Conexion();
-    con.conexion();
-    ResultSet r;
-    try{
-        r = con.s.executeQuery ("SELECT *\n" +
-                                "FROM\n" +
-                                "    t_nacionalidad\n" +
-                                "ORDER BY NOMBRE_NACION ASC;");
-        while(r.next()){
-            String str=r.getString("NOMBRE_NACION");
-            cb_nacion.addItem(str);
-            
-        }
-        con.cerrar();
-    }catch(SQLException j){
-        con.cerrar();
-        JOptionPane.showMessageDialog(null,j,"Error",JOptionPane.ERROR_MESSAGE);
-    }
-}
+//public final void ac_nacionalidad(){
+//    cb_nacion.removeAllItems();
+//    cb_nacion.addItem("Seleccione..");
+//    Conexion con = new Conexion();
+//    con.conexion();
+//    ResultSet r;
+//    try{
+//        r = con.s.executeQuery ("SELECT *\n" +
+//                                "FROM\n" +
+//                                "    t_nacionalidad\n" +
+//                                "ORDER BY NOMBRE_NACION ASC;");
+//        while(r.next()){
+//            String str=r.getString("NOMBRE_NACION");
+//            cb_nacion.addItem(str);
+//            
+//        }
+//        con.cerrar();
+//    }catch(SQLException j){
+//        con.cerrar();
+//        JOptionPane.showMessageDialog(null,j,"Error",JOptionPane.ERROR_MESSAGE);
+//    }
+//}
 public final void ac_parentesco(){
     cb_parentesco.removeAllItems();
     cb_parentesco.addItem("Seleccione..");
@@ -1700,7 +1688,7 @@ private boolean verify(){
                                         if (!cb_est_civil.getSelectedItem().equals("Seleccione..")) {
                                             if (!cb_num_hijos.getSelectedItem().equals("Seleccione..")) {
                                                 if (!cb_niv.getSelectedItem().equals("Seleccione..")) {
-                                                    if (!cb_nacion.getSelectedItem().equals("Seleccione..")) {
+//                                                    if (!cb_nacion.getSelectedItem().equals("Seleccione..")) {
                                                         if (!cb_num_pers_cargo.getSelectedItem().equals("Seleccione..")) {
                                                             if (!cb_pers_hogar.getSelectedItem().equals("Seleccione..")) {
                                                                 if (!cb_pers_aport.getSelectedItem().equals("Seleccione..")) {
@@ -1755,11 +1743,11 @@ private boolean verify(){
                                                             ret=false&ret;
                                                         }
 
-                                                    } else {
-                                                        cb_nacion.requestFocus();
-                                                        JOptionPane.showMessageDialog(this,"Seleccione la nacionalidad del empleado","Error",JOptionPane.ERROR_MESSAGE);
-                                                        ret=false&ret;
-                                                    }
+//                                                    } else {
+//                                                        cb_nacion.requestFocus();
+//                                                        JOptionPane.showMessageDialog(this,"Seleccione la nacionalidad del empleado","Error",JOptionPane.ERROR_MESSAGE);
+//                                                        ret=false&ret;
+//                                                    }
 
                                                 } else {
                                                     cb_niv.requestFocus();
@@ -1900,10 +1888,10 @@ public void load_info(String ced){
                                 "    `t_info_sociodemografica`\n" +
                                 "    INNER JOIN `t_estado_civil` \n" +
                                 "        ON (`t_info_sociodemografica`.`ID_ESTADO_CIVIL_EMP` = `t_estado_civil`.`ID_ESTADO`)\n" +
-                                "    INNER JOIN `t_cargo` \n" +
-                                "        ON (`t_info_sociodemografica`.`ID_CARGO` = `t_cargo`.`ID_CARGO`)\n" +
-                                "    INNER JOIN `t_actividades` \n" +
-                                "        ON (`t_info_sociodemografica`.`ID_AREA_TRABAJO_EMP` = `t_actividades`.`ID_ACTIVIDAD`)\n" +
+//                                "    INNER JOIN `t_cargo` \n" +
+//                                "        ON (`t_info_sociodemografica`.`ID_CARGO` = `t_cargo`.`ID_CARGO`)\n" +
+//                                "    INNER JOIN `t_actividades` \n" +
+//                                "        ON (`t_info_sociodemografica`.`ID_AREA_TRABAJO_EMP` = `t_actividades`.`ID_ACTIVIDAD`)\n" +
                                 "    INNER JOIN `t_parentesco` \n" +
                                 "        ON (`t_info_sociodemografica`.`ID_PAR_ACU_EMP` = `t_parentesco`.`ID_PAR`)\n" +
                                 "    INNER JOIN `t_barrio` \n" +
@@ -1916,8 +1904,8 @@ public void load_info(String ced){
                                 "        ON (`t_info_sociodemografica`.`ID_NIV_ACAD_EMP` = `t_nivel_academico`.`ID_NIVEL`)\n" +
                                 "    INNER JOIN `t_tipo_vivienda` \n" +
                                 "        ON (`t_info_sociodemografica`.`ID_TIP_VIV_EMP` = `t_tipo_vivienda`.`ID_TIPO_VIVIENDA`)\n" +
-                                "    INNER JOIN `t_nacionalidad` \n" +
-                                "        ON (`t_info_sociodemografica`.`ID_NACION_EMP` = `t_nacionalidad`.`ID_NACION`)\n" +
+//                                "    INNER JOIN `t_nacionalidad` \n" +
+//                                "        ON (`t_info_sociodemografica`.`ID_NACION_EMP` = `t_nacionalidad`.`ID_NACION`)\n" +
                                 "       WHERE ID_EMP = "+ced+";");
         if(r.next()){
             direccion.setText(r.getString("DIRECCION_EMP"));
@@ -1932,7 +1920,7 @@ public void load_info(String ced){
             cb_est_civil.setSelectedItem(r.getString("NOMBRE_ESTADO"));
             cb_num_hijos.setSelectedItem(r.getString("NUM_HIJOS_EMP"));
             cb_niv.setSelectedItem(r.getString("NOMBRE_NIVEL"));
-            cb_nacion.setSelectedItem(r.getString("NOMBRE_NACION"));
+//            cb_nacion.setSelectedItem(r.getString("NOMBRE_NACION"));
             cb_num_pers_cargo.setSelectedItem(r.getString("PER_CARGO_EMP"));
             cb_pers_hogar.setSelectedItem(r.getString("PERS_HOGAR_EMP"));
             cb_pers_aport.setSelectedItem(r.getString("PERS_AP_HOGAR_EMP"));

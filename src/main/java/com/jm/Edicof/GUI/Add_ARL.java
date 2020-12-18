@@ -65,6 +65,11 @@ public class Add_ARL extends javax.swing.JDialog {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         nombre_arl = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        codigo_arl = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
 
@@ -85,16 +90,49 @@ public class Add_ARL extends javax.swing.JDialog {
             }
         });
 
+        jLabel2.setText("Codigo");
+
+        codigo_arl.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        codigo_arl.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                codigo_arlKeyTyped(evt);
+            }
+        });
+
+        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 0, 0));
+        jLabel3.setText("Nota:");
+
+        jLabel4.setText("Al momento de ingresar el codigo de la ARL asegurese que este corresponda");
+
+        jLabel5.setText("al codigo nacional, esto es indispensable para la sincronización con ARHI.");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(49, 49, 49)
-                .addComponent(jLabel1)
-                .addGap(18, 18, 18)
-                .addComponent(nombre_arl, javax.swing.GroupLayout.PREFERRED_SIZE, 347, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(55, Short.MAX_VALUE))
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel2))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel5)
+                                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 380, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(18, 18, 18))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(22, 22, 22)
+                                .addComponent(codigo_arl, javax.swing.GroupLayout.PREFERRED_SIZE, 347, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(18, 18, 18)
+                        .addComponent(nombre_arl, javax.swing.GroupLayout.PREFERRED_SIZE, 347, javax.swing.GroupLayout.PREFERRED_SIZE))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -103,7 +141,17 @@ public class Add_ARL extends javax.swing.JDialog {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(nombre_arl, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1))
-                .addContainerGap(24, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(codigo_arl, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel4))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel5)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/accept_1.png"))); // NOI18N
@@ -128,14 +176,14 @@ public class Add_ARL extends javax.swing.JDialog {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addGap(155, 155, 155)
-                .addComponent(jButton1)
-                .addGap(38, 38, 38)
-                .addComponent(jButton3)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 442, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButton3)
+                .addGap(131, 131, 131))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -169,34 +217,46 @@ public class Add_ARL extends javax.swing.JDialog {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        if (!nombre_arl.getText().equals("")) {
-            Conexion con = new Conexion();
-            con.conexion();
-            ResultSet r;
-            try {
-                r = con.s.executeQuery ("SELECT * FROM `t_arl` WHERE NOMBRE_ARL = '"+nombre_arl.getText().toUpperCase()+"'");
-                if(r.next()){
-                    JOptionPane.showMessageDialog(this,"La ARL que intenta ingresar ya existe","Error",JOptionPane.ERROR_MESSAGE);
-                }
-                else{
-                    int conf = JOptionPane.showConfirmDialog(this,"Esta seguro que desea continuar?","Confirmación",JOptionPane.OK_CANCEL_OPTION,JOptionPane.QUESTION_MESSAGE);
-                    if (conf == JOptionPane.YES_OPTION) {
-                        con.s.executeUpdate("INSERT INTO `t_arl`(`NOMBRE_ARL`) VALUES ('"+nombre_arl.getText().toUpperCase().trim()+"')");
-                        JOptionPane.showMessageDialog(this,"La ARL fue ingresada correctamente","Información",JOptionPane.INFORMATION_MESSAGE);
-                        Toolkit.getDefaultToolkit().beep();
-                        con.cerrar();
-                        this.dispose();
+        if (check_field (nombre_arl.getText())) {
+            if (check_field (codigo_arl.getText())) {
+                Conexion con = new Conexion();
+                con.conexion();
+                ResultSet r;
+                try {
+                    r = con.s.executeQuery ("SELECT * FROM `t_arl` WHERE NOMBRE_ARL = '"+nombre_arl.getText().toUpperCase()+"'");
+                    if(r.next()){
+                        JOptionPane.showMessageDialog(this,"La ARL que intenta ingresar ya existe","Error",JOptionPane.ERROR_MESSAGE);
                     }
+                    else{
+                        r = con.s.executeQuery ("SELECT * FROM `t_arl` WHERE ID_ARL = '"+codigo_arl.getText().toUpperCase()+"'");
+                        if(r.next()){
+                            JOptionPane.showMessageDialog(this,"La ARL que intenta ingresar ya existe","Error",JOptionPane.ERROR_MESSAGE);
+                        }
+                        else{
+                            int conf = JOptionPane.showConfirmDialog(this,"Esta seguro que desea continuar?","Confirmación",JOptionPane.OK_CANCEL_OPTION,JOptionPane.QUESTION_MESSAGE);
+                            if (conf == JOptionPane.YES_OPTION) {
+                                con.s.executeUpdate("INSERT INTO `t_arl`(`ID_ARL`, `NOMBRE_ARL`) VALUES ('"+codigo_arl.getText().toUpperCase().trim()+"', '"+nombre_arl.getText().toUpperCase().trim()+"')");
+                                JOptionPane.showMessageDialog(this,"La ARL fue ingresada correctamente","Información",JOptionPane.INFORMATION_MESSAGE);
+                                Toolkit.getDefaultToolkit().beep();
+                                con.cerrar();
+                                this.dispose();
+                            }
+                        }
+                        
 
+                    }
+                    con.cerrar();
+                } catch (SQLException | HeadlessException e) {
+                    con.cerrar();
+                    e.printStackTrace();
+                    JOptionPane.showMessageDialog(this,e,"Error",JOptionPane.ERROR_MESSAGE);
                 }
-                con.cerrar();
-            } catch (SQLException | HeadlessException e) {
-                con.cerrar();
-                e.printStackTrace();
-                JOptionPane.showMessageDialog(this,e,"Error",JOptionPane.ERROR_MESSAGE);
+            }else{
+                JOptionPane.showMessageDialog(this,"Verifique que el codigo de la ARL no este vacio ni contenga caracteres especiales.","Error",JOptionPane.ERROR_MESSAGE);
             }
+                
         } else {
-            JOptionPane.showMessageDialog(this,"Digite el nombre de la ARL","Error",JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this,"Verifique que el nombre de la ARL no este vacio ni contenga caracteres especiales.","Error",JOptionPane.ERROR_MESSAGE);
         }
            
         
@@ -207,6 +267,10 @@ public class Add_ARL extends javax.swing.JDialog {
         // TODO add your handling code here:
         this.dispose();
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void codigo_arlKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_codigo_arlKeyTyped
+        // TODO add your handling code here:
+    }//GEN-LAST:event_codigo_arlKeyTyped
 
     /**
      * @param args the command line arguments
@@ -258,10 +322,15 @@ public class Add_ARL extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private static javax.swing.JTextField codigo_arl;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private static javax.swing.JTextField nombre_arl;
     // End of variables declaration//GEN-END:variables
@@ -306,5 +375,30 @@ public void load_data(String arl){
         
     }
 }
-
+public boolean check_field (Object field){
+boolean ret=false;
+    if (field!=null) {
+        if (!field.toString().trim().equals("")) {
+            if (chech_char(field.toString().trim(),"'$%&()=?¡¿/*+[]{};:<>,-")) {
+                if (!field.toString().equals("")) {
+                   ret=true;
+                }
+            } 
+        }
+    }
+return ret;
+}
+public boolean chech_char(String s, String c){
+    //boolean ret=false;
+    char []char_s=s.toCharArray();
+    char []char_c=c.toCharArray();  
+    for (int i = 0; i < char_s.length; i++) {
+        for (int j = 0; j < char_c.length; j++) {
+            if (char_s[i]==char_c[j]) {
+                return false;
+            }
+        }
+    }
+    return true;
+}
 }

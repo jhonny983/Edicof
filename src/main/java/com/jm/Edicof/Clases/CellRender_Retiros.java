@@ -233,7 +233,7 @@ public class CellRender_Retiros extends DefaultTableCellRenderer{
                                                                                         cell.setForeground(Color.white);
                                                                                     }
                                                                                 }else{
-                                                                                    if (table.getColumnName(column).equals("Telefono Acudiente")) {
+                                                                                    if (table.getColumnName(column).equals("Tipo")) {
                                                                                         if (check_field(value)) {
                                                                                             cell.setOpaque(true);
                                                                                             cell.setBackground(new Color(150,240,160));
@@ -517,7 +517,7 @@ public boolean check_fecha(Object fecha){
 public boolean check_salario(Object salario){
     boolean ret=false;
     if (salario!=null) {
-        if (chech_char(salario.toString().trim(),"'#$%&()=?¡¿/*+[]{};:<>,.")) {
+        if (chech_char(salario.toString().trim(),"'#$%&()=?¡¿/*+[]{};:<>")) {
             if (!salario.toString().equals("")) {
                 if ( comprobarFloat(salario.toString())) {
                     ret = true;
@@ -658,7 +658,7 @@ public boolean check_parentesco(Object par){
 public boolean check_field (Object field){
 boolean ret=false;
     if (field!=null) {
-        if (chech_char(field.toString().trim(),"'$#%&()=?¡¿/*+[]{};:<>,")) {
+        if (chech_char(field.toString().trim(),"'$#%&()=?¡¿/*+[]{};<")) {
             if (!field.toString().equals("")) {
                ret=true;
             }

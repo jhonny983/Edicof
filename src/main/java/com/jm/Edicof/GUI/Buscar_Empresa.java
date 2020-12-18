@@ -418,7 +418,7 @@ Object [] fila = new Object[11];
                     modelo.setValueAt("NO",empresas.getRowCount()-1,11);
                 }
                 modelo.setValueAt(r.getString("REPRESENTANTE_LEGAL"),empresas.getRowCount()-1,12);
-                modelo.setValueAt(r.getString("TELEFONOS"),empresas.getRowCount()-1,13);
+                modelo.setValueAt(r.getString("TEL_CEL_EMPRESA"),empresas.getRowCount()-1,13);
                 modelo.setValueAt(r.getString("NOMBRE_ACTIVIDAD"),empresas.getRowCount()-1,14);
             }
             n_empresas.setText(String.valueOf(empresas.getRowCount()));

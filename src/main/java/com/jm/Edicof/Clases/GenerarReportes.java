@@ -1281,7 +1281,7 @@ public class GenerarReportes extends Thread{
                                     "		ON (t_novedades.ID_EMPLEADO = t_empleados.ID_EMP)\n" +
                                     "	INNER JOIN t_tipo_novedad \n" +
                                     "		ON (t_novedades.ID_TIPO = t_tipo_novedad.ID_TIPO)\n" +
-                                    "	WHERE t_novedades.ID_TIPO IN (1,2)\n" +
+                                    "	WHERE t_novedades.ID_TIPO IN (1,2,4,6)\n" +
                                     "	AND ((t_novedades.`FECHA_INGRESO` <= '"+fecha+"' AND t_novedades.`FECHA_RETIRO` = '1900-01-01')\n" +
                                     "		OR ( t_novedades.`FECHA_INGRESO` <= '"+fecha+"' AND t_novedades.`FECHA_RETIRO` >= '"+fecha+"'))\n" +
                                     "	GROUP BY t_novedades.ID_EMPRESA");

@@ -285,7 +285,7 @@ public boolean check_fecha(Object fecha){
 public boolean check_salario(Object salario){
     boolean ret=false;
     if (salario!=null) {
-        if (chech_char(salario.toString().trim(),"'#$%&()=?¡¿/*+[]{};:<>,.")) {
+        if (chech_char(salario.toString().trim(),"'#$%&()=?¡¿/*+[]{};:<>")) {
             if (!salario.toString().equals("")) {
                 if ( comprobarFloat(salario.toString())) {
                     ret = true;

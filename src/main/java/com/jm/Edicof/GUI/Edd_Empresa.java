@@ -139,6 +139,9 @@ public class Edd_Empresa extends javax.swing.JDialog {
         reg_mercantil = new javax.swing.JTextField();
         jLabel20 = new javax.swing.JLabel();
         f_ren_reg_mercantil = new com.toedter.calendar.JDateChooser();
+        jPanel8 = new javax.swing.JPanel();
+        jLabel23 = new javax.swing.JLabel();
+        f_limit_seg_empresa = new com.toedter.components.JSpinField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Editar Empresa");
@@ -598,6 +601,34 @@ public class Edd_Empresa extends javax.swing.JDialog {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        jPanel8.setBorder(javax.swing.BorderFactory.createTitledBorder("Seguridad Social"));
+
+        jLabel23.setText("Fecha limite");
+
+        f_limit_seg_empresa.setMaximum(30);
+        f_limit_seg_empresa.setMinimum(1);
+
+        javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
+        jPanel8.setLayout(jPanel8Layout);
+        jPanel8Layout.setHorizontalGroup(
+            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel8Layout.createSequentialGroup()
+                .addGap(24, 24, 24)
+                .addComponent(jLabel23)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(f_limit_seg_empresa, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel8Layout.setVerticalGroup(
+            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel8Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(f_limit_seg_empresa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel23))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -614,7 +645,8 @@ public class Edd_Empresa extends javax.swing.JDialog {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jPanel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(379, 379, 379)
                         .addComponent(jButton1)
@@ -634,13 +666,15 @@ public class Edd_Empresa extends javax.swing.JDialog {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
+                        .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(54, 54, 54)))
+                        .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
                     .addComponent(jButton3))
@@ -718,59 +752,91 @@ public class Edd_Empresa extends javax.swing.JDialog {
                                                                                                 if (!cb_tamaño.getSelectedItem().equals("Seleccione..")) {
                                                                                                     if (!reg_mercantil.getText().equals("")) {
                                                                                                         if (f_ren_reg_mercantil.getDate()!=null){   
-                                                                                                            Conexion con = new Conexion();
-                                                                                                            con.conexion();
-                                                                                                            ResultSet r;
-                                                                                                            try {
-                                                                                                                r = con.s.executeQuery ("SELECT * FROM `t_empresas` WHERE ID_EMPRESA = '"+cb_nit.getSelectedItem()+"'");
-                                                                                                                if(!r.next()){
-                                                                                                                    JOptionPane.showMessageDialog(this,"La empresa que intenta ingresar no existe","Error",JOptionPane.ERROR_MESSAGE);
-                                                                                                                }
-                                                                                                                else{
-                                                                                                                    int conf = JOptionPane.showConfirmDialog(this,"Esta seguro que desea continuar?","Confirmación",JOptionPane.OK_CANCEL_OPTION,JOptionPane.QUESTION_MESSAGE);
-                                                                                                                    if (conf == JOptionPane.YES_OPTION) {
-                                                                                                                        int id_tip_nit = 0;
-                                                                                                                        int id_arl = 0;
-                                                                                                                        int id_ccf = 0;
-                                                                                                                        int id_act = 0;
-                                                                                                                        int id_mun =0;
-                                                                                                                        int id_tam=0;
-                                                                                                                        r = con.s.executeQuery ("SELECT ID_TIPO_NIT FROM `t_tipo_nit` WHERE NOMBRE_TIPO_NIT ='"+cb_tip_nit.getSelectedItem().toString()+"';");
-                                                                                                                        if(r.next()){
-                                                                                                                            id_tip_nit=r.getInt("ID_TIPO_NIT");    
-                                                                                                                        }
-                                                                                                                        r = con.s.executeQuery ("SELECT ID_ARL FROM `t_arl` WHERE (NOMBRE_ARL ='"+cb_arl.getSelectedItem().toString()+"');");
-                                                                                                                        if(r.next()){
-                                                                                                                            id_arl=r.getInt("ID_ARL");    
-                                                                                                                        }
-                                                                                                                        r = con.s.executeQuery ("SELECT ID_CCF FROM `t_ccf` WHERE (NOMBRE_CCF ='"+cb_ccf.getSelectedItem().toString()+"');");
-                                                                                                                        if(r.next()){
-                                                                                                                            id_ccf=r.getInt("ID_CCF");    
-                                                                                                                        }
-                                                                                                                        r = con.s.executeQuery ("SELECT ID_ACTIVIDAD FROM `t_actividades` WHERE NOMBRE_ACTIVIDAD ='"+cb_actividad.getSelectedItem().toString()+"';");
-                                                                                                                        if(r.next()){
-                                                                                                                            id_act=r.getInt("ID_ACTIVIDAD");    
-                                                                                                                        }
-                                                                                                                        r = con.s.executeQuery ("SELECT * FROM t_municipios WHERE NOMBRE_MUN = '"+cb_mun.getSelectedItem()+"';");
-                                                                                                                        if(r.next()){
-                                                                                                                            id_mun=r.getInt("ID_MUN");
-                                                                                                                        }
-                                                                                                                        r = con.s.executeQuery ("SELECT ID_TAMAÑO FROM t_tamaño_empresa WHERE NOMBRE_TAMAÑO = '"+cb_tamaño.getSelectedItem()+"';");
-                                                                                                                        if(r.next()){
-                                                                                                                            id_tam=r.getInt("ID_TAMAÑO");
-                                                                                                                        }
-                                                                                                                        con.s.executeUpdate("UPDATE `t_empresas` SET `ID_TIPO_NIT`="+id_tip_nit+",`ID_EMPRESA`='"+nit.getText()+"',`NOMBRE_EMPRESA`='"+nombre_empresa.getText()+"',`ID_ARL`="+id_arl+",`ID_CCF`="+id_ccf+",`ID_ACTIVIDAD`="+id_act+",`ID_REP_EMPRESA`='"+tb_id_rl.getText()+"',`REPRESENTANTE_LEGAL`='"+representante.getText().toUpperCase()+"',`TEL_CEL_RL_EMPRESA`='"+telefonos.getText()+"',CORREO_INTERNO = '"+correo_interno.getText()+"', CORREO_CONTRATISTA_1 = '"+correo_1.getText()+"', CORREO_CONTRATISTA_2 = '"+correo_2.getText()+"', CORREO_CONTRATISTA_3 = '"+correo_3.getText()+"', ENABLE_INTERNO = "+bool_to_int(sel_int.isSelected())+", ENABLE_1 = "+bool_to_int(sel_1.isSelected())+", ENABLE_2 = "+bool_to_int(sel_2.isSelected())+", ENABLE_3 = "+bool_to_int(sel_3.isSelected())+",`TELEFONOS`='"+tel_empresa.getText()+"',`DIR_EMPRESA`='"+dir_empresa.getText()+"',`ID_MUN_EMPRESA`="+id_mun+",`ID_TAM_EMPRESA`="+id_tam+",`REG_MER_EMPRESA`='"+reg_mercantil.getText().trim()+"',`F_REN_REG_MERC`='"+new SimpleDateFormat("yyyy-MM-dd").format(f_ren_reg_mercantil.getDate())+"' WHERE ID_EMPRESA = '"+cb_nit.getSelectedItem().toString()+"'");
-                                                                                                                        JOptionPane.showMessageDialog(this,"La empresa fue modificada correctamente","Información",JOptionPane.INFORMATION_MESSAGE);
-                                                                                                                        con.cerrar();
-                                                                                                                        this.dispose();
+                                                                                                            if (f_limit_seg_empresa.getValue()>0 & f_limit_seg_empresa.getValue()<=30) {
+                                                                                                                Conexion con = new Conexion();
+                                                                                                                con.conexion();
+                                                                                                                ResultSet r;
+                                                                                                                try {
+                                                                                                                    r = con.s.executeQuery ("SELECT * FROM `t_empresas` WHERE ID_EMPRESA = '"+cb_nit.getSelectedItem()+"'");
+                                                                                                                    if(!r.next()){
+                                                                                                                        JOptionPane.showMessageDialog(this,"La empresa que intenta ingresar no existe","Error",JOptionPane.ERROR_MESSAGE);
                                                                                                                     }
+                                                                                                                    else{
+                                                                                                                        int conf = JOptionPane.showConfirmDialog(this,"Esta seguro que desea continuar?","Confirmación",JOptionPane.OK_CANCEL_OPTION,JOptionPane.QUESTION_MESSAGE);
+                                                                                                                        if (conf == JOptionPane.YES_OPTION) {
+                                                                                                                            int id_tip_nit = 0;
+                                                                                                                            int id_arl = 0;
+                                                                                                                            int id_ccf = 0;
+                                                                                                                            int id_act = 0;
+                                                                                                                            int id_mun =0;
+                                                                                                                            int id_tam=0;
+                                                                                                                            r = con.s.executeQuery ("SELECT ID_TIPO_NIT FROM `t_tipo_nit` WHERE NOMBRE_TIPO_NIT ='"+cb_tip_nit.getSelectedItem().toString()+"';");
+                                                                                                                            if(r.next()){
+                                                                                                                                id_tip_nit=r.getInt("ID_TIPO_NIT");    
+                                                                                                                            }
+                                                                                                                            r = con.s.executeQuery ("SELECT ID_ARL FROM `t_arl` WHERE (NOMBRE_ARL ='"+cb_arl.getSelectedItem().toString()+"');");
+                                                                                                                            if(r.next()){
+                                                                                                                                id_arl=r.getInt("ID_ARL");    
+                                                                                                                            }
+                                                                                                                            r = con.s.executeQuery ("SELECT ID_CCF FROM `t_ccf` WHERE (NOMBRE_CCF ='"+cb_ccf.getSelectedItem().toString()+"');");
+                                                                                                                            if(r.next()){
+                                                                                                                                id_ccf=r.getInt("ID_CCF");    
+                                                                                                                            }
+                                                                                                                            r = con.s.executeQuery ("SELECT ID_ACTIVIDAD FROM `t_actividades` WHERE NOMBRE_ACTIVIDAD ='"+cb_actividad.getSelectedItem().toString()+"';");
+                                                                                                                            if(r.next()){
+                                                                                                                                id_act=r.getInt("ID_ACTIVIDAD");    
+                                                                                                                            }
+                                                                                                                            r = con.s.executeQuery ("SELECT * FROM t_municipios WHERE NOMBRE_MUN = '"+cb_mun.getSelectedItem()+"';");
+                                                                                                                            if(r.next()){
+                                                                                                                                id_mun=r.getInt("ID_MUN");
+                                                                                                                            }
+                                                                                                                            r = con.s.executeQuery ("SELECT ID_TAMAÑO FROM t_tamaño_empresa WHERE NOMBRE_TAMAÑO = '"+cb_tamaño.getSelectedItem()+"';");
+                                                                                                                            if(r.next()){
+                                                                                                                                id_tam=r.getInt("ID_TAMAÑO");
+                                                                                                                            }
+                                                                                                                            con.s.executeUpdate("update `e_occidente`.`t_empresas`\n" +
+                                                                                                                                                "set `ID_TIPO_NIT` = "+id_tip_nit+",\n" +
+                                                                                                                                                "  `ID_EMPRESA` = '"+nit.getText()+"',\n" +
+                                                                                                                                                "  `NOMBRE_EMPRESA` = '"+nombre_empresa.getText()+"',\n" +
+                                                                                                                                                "  `ID_ARL` = '"+id_arl+"',\n" +
+                                                                                                                                                "  `ID_CCF` = '"+id_ccf+"',\n" +
+                                                                                                                                                "  `ID_ACTIVIDAD` = "+id_act+",\n" +
+                                                                                                                                                "  `ID_REP_EMPRESA` = "+tb_id_rl.getText()+",\n" +
+                                                                                                                                                "  `REPRESENTANTE_LEGAL` = '"+representante.getText().toUpperCase()+"',\n" +
+                                                                                                                                                "  `TEL_CEL_RL_EMPRESA` = '"+telefonos.getText()+"',\n" +
+                                                                                                                                                "  `CORREO_INTERNO` = '"+correo_interno.getText()+"',\n" +
+                                                                                                                                                "  `CORREO_CONTRATISTA_1` = '"+correo_1.getText()+"',\n" +
+                                                                                                                                                "  `CORREO_CONTRATISTA_2` = '"+correo_2.getText()+"',\n" +
+                                                                                                                                                "  `CORREO_CONTRATISTA_3` = '"+correo_3.getText()+"',\n" +
+                                                                                                                                                "  `ENABLE_INTERNO` = "+bool_to_int(sel_int.isSelected())+",\n" +
+                                                                                                                                                "  `ENABLE_1` = "+bool_to_int(sel_1.isSelected())+",\n" +
+                                                                                                                                                "  `ENABLE_2` = "+bool_to_int(sel_2.isSelected())+",\n" +
+                                                                                                                                                "  `ENABLE_3` = "+bool_to_int(sel_3.isSelected())+",\n" +
+                                                                                                                                                "  `TEL_CEL_EMPRESA` = '"+tel_empresa.getText()+"',\n" +
+                                                                                                                                                "  `DIR_EMPRESA` = '"+dir_empresa.getText()+"',\n" +
+                                                                                                                                                "  `ID_MUN_EMPRESA` = "+id_mun+",\n" +
+                                                                                                                                                "  `ID_TAM_EMPRESA` = "+id_tam+",\n" +
+                                                                                                                                                "  `REG_MER_EMPRESA` = '"+reg_mercantil.getText().trim()+"',\n" +
+                                                                                                                                                "  `F_REN_REG_MERC` = '"+new SimpleDateFormat("yyyy-MM-dd").format(f_ren_reg_mercantil.getDate())+"',\n" +
+                                                                                                                                                "  `F_LIM_SEG` = '"+f_limit_seg_empresa.getValue()+"',\n" +
+                                                                                                                                                "where `ID_EMPRESA` = '"+cb_nit.getSelectedItem().toString()+"';");
+                                                                                                                            //con.s.executeUpdate("UPDATE `t_empresas` SET `ID_TIPO_NIT`="+id_tip_nit+",`ID_EMPRESA`='"+nit.getText()+"',`NOMBRE_EMPRESA`='"+nombre_empresa.getText()+"',`ID_ARL`='"+id_arl+"',`ID_CCF`='"+id_ccf+"',`ID_ACTIVIDAD`="+id_act+",`ID_REP_EMPRESA`='"+tb_id_rl.getText()+"',`REPRESENTANTE_LEGAL`='"+representante.getText().toUpperCase()+"',`TEL_CEL_RL_EMPRESA`='"+telefonos.getText()+"',CORREO_INTERNO = '"+correo_interno.getText()+"', CORREO_CONTRATISTA_1 = '"+correo_1.getText()+"', CORREO_CONTRATISTA_2 = '"+correo_2.getText()+"', CORREO_CONTRATISTA_3 = '"+correo_3.getText()+"', ENABLE_INTERNO = "+bool_to_int(sel_int.isSelected())+", ENABLE_1 = "+bool_to_int(sel_1.isSelected())+", ENABLE_2 = "+bool_to_int(sel_2.isSelected())+", ENABLE_3 = "+bool_to_int(sel_3.isSelected())+",`TEL_CEL_EMPRESA`='"+tel_empresa.getText()+"',`DIR_EMPRESA`='"+dir_empresa.getText()+"',`ID_MUN_EMPRESA`="+id_mun+",`ID_TAM_EMPRESA`="+id_tam+",`REG_MER_EMPRESA`='"+reg_mercantil.getText().trim()+"',`F_REN_REG_MERC`='"+new SimpleDateFormat("yyyy-MM-dd").format(f_ren_reg_mercantil.getDate())+"' WHERE ID_EMPRESA = '"+cb_nit.getSelectedItem().toString()+"'");
+                                                                                                                            JOptionPane.showMessageDialog(this,"La empresa fue modificada correctamente","Información",JOptionPane.INFORMATION_MESSAGE);
+                                                                                                                            con.cerrar();
+                                                                                                                            this.dispose();
+                                                                                                                        }
+                                                                                                                    }
+                                                                                                                    con.cerrar();
+                                                                                                                } catch (SQLException | HeadlessException e) {
+                                                                                                                    con.cerrar();
+                                                                                                                    e.printStackTrace();
+                                                                                                                    JOptionPane.showMessageDialog(this,e,"Error",JOptionPane.ERROR_MESSAGE);
                                                                                                                 }
-                                                                                                                con.cerrar();
-                                                                                                            } catch (SQLException | HeadlessException e) {
-                                                                                                                con.cerrar();
-                                                                                                                e.printStackTrace();
-                                                                                                                JOptionPane.showMessageDialog(this,e,"Error",JOptionPane.ERROR_MESSAGE);
+                                                                                                            }else{
+                                                                                                                f_limit_seg_empresa.requestFocus();
+                                                                                                                JOptionPane.showMessageDialog(this,"Ingrese la fecha limite de seguridad social de la empresa","Error",JOptionPane.ERROR_MESSAGE);
                                                                                                             }
+                                                                                                            
                                                                                                         } else {
                                                                                                             f_ren_reg_mercantil.requestFocus();
                                                                                                             JOptionPane.showMessageDialog(this,"Ingrese la fecha de renovación del registro mercantil de la empresa","Error",JOptionPane.ERROR_MESSAGE);
@@ -1015,6 +1081,7 @@ public class Edd_Empresa extends javax.swing.JDialog {
     private javax.swing.JTextField correo_interno;
     private javax.swing.JTextField dir_empresa;
     private javax.swing.JButton edd_arl;
+    private com.toedter.components.JSpinField f_limit_seg_empresa;
     private com.toedter.calendar.JDateChooser f_ren_reg_mercantil;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton3;
@@ -1033,6 +1100,7 @@ public class Edd_Empresa extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
+    private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -1046,6 +1114,7 @@ public class Edd_Empresa extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
+    private javax.swing.JPanel jPanel8;
     private static javax.swing.JTextField nit;
     private static javax.swing.JTextField nombre_empresa;
     private javax.swing.JTextField reg_mercantil;
@@ -1081,7 +1150,7 @@ public void load_data(){
                 cb_ccf.setSelectedItem(r.getString("NOMBRE_CCF"));
                 cb_actividad.setSelectedItem(r.getString("NOMBRE_ACTIVIDAD"));
                 representante.setText(r.getString("REPRESENTANTE_LEGAL"));
-                telefonos.setText(r.getString("TELEFONOS"));
+                telefonos.setText(r.getString("TEL_CEL_EMPRESA"));
                 correo_interno.setText(r.getString("CORREO_INTERNO"));
                 correo_1.setText(r.getString("CORREO_CONTRATISTA_1"));
                 correo_2.setText(r.getString("CORREO_CONTRATISTA_2"));
@@ -1177,13 +1246,14 @@ private void load_data(String n){
             }else{
                 sel_3.setSelected(false);
             }
-            tel_empresa.setText(r.getString("TELEFONOS"));
+            tel_empresa.setText(r.getString("TEL_CEL_EMPRESA"));
             dir_empresa.setText(r.getString("DIR_EMPRESA"));
             cb_dep.setSelectedItem(r.getString("NOMBRE_DEP"));
             cb_mun.setSelectedItem(r.getString("NOMBRE_MUN"));
             cb_tamaño.setSelectedItem(r.getString("NOMBRE_TAMAÑO"));
             reg_mercantil.setText(r.getString("REG_MER_EMPRESA"));
             f_ren_reg_mercantil.setDate(new SimpleDateFormat("yyyy-MM-dd").parse(r.getString("F_REN_REG_MERC")));
+            f_limit_seg_empresa.setValue(r.getInt("F_LIM_SEG"));
         }
         con.cerrar();
     }catch(ParseException  | SQLException j){

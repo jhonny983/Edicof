@@ -46,6 +46,7 @@ public class TestARHI {
 
             System.out.println("Testing 2 - Send Http POST request");
             obj.sendPost();
+            
         } finally {
             obj.close();
         }
@@ -56,8 +57,9 @@ public class TestARHI {
     }
 
     private JsonArray sendGet() throws Exception {
+        
         JsonArray jsonArray=null;
-        HttpGet request = new HttpGet("http://190.84.50.115:8080/awebservicearhi/webresources/entidad.wsordentrabajo");
+        HttpGet request = new HttpGet("http://190.84.50.115:8080/awebservicearhi/webresources/entidad.wsrechumano");
         // add request headers
         request.addHeader("AUTHORIZATION", "F50B2000C84C66EA1707502AFB8B8A493D7EB5CA0B4DAB1045310141B3F3F5A1");
         //request.addHeader(HttpHeaders.USER_AGENT, "Googlebot");
@@ -74,9 +76,9 @@ public class TestARHI {
                     JsonParser jsonParser = new JsonParser();
                     jsonArray = jsonParser.parse(result).getAsJsonArray();
                     System.out.println("Result: "+jsonArray);
-//                    for (int i = 0; i < jsonArray.size(); i++){
-//                        System.out.println(jsonArray.get(i));
-//                    }
+                    for (int i = 0; i < jsonArray.size(); i++){
+                        System.out.println("json"+i+": "+jsonArray.get(i));
+                    }
                     
                 }
             }

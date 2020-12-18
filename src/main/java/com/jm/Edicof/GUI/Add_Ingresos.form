@@ -78,7 +78,7 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
                           <Component id="jPanel2" max="32767" attributes="0"/>
-                          <Component id="jPanel4" pref="163" max="32767" attributes="0"/>
+                          <Component id="jPanel4" pref="168" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" max="-2" attributes="0"/>
                       <Component id="jPanel1" max="32767" attributes="0"/>
@@ -581,6 +581,7 @@
                               <Component id="jButton3" alignment="2" max="32767" attributes="0"/>
                               <Component id="jButton2" alignment="2" max="32767" attributes="0"/>
                               <Component id="jButton6" alignment="2" max="32767" attributes="0"/>
+                              <Component id="sync_ARHI" alignment="2" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace pref="31" max="32767" attributes="0"/>
                       </Group>
@@ -597,7 +598,8 @@
                           <Component id="jButton2" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="jButton6" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="3" max="-2" attributes="0"/>
+                          <Component id="sync_ARHI" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -629,10 +631,11 @@
                 </Component>
                 <Component class="javax.swing.JCheckBox" name="view_user_local">
                   <Properties>
+                    <Property name="selected" type="boolean" value="true"/>
                     <Property name="text" type="java.lang.String" value="Ver preingresos usuario actual"/>
                   </Properties>
                   <Events>
-                    <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="view_user_localStateChanged"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="view_user_localActionPerformed"/>
                   </Events>
                 </Component>
                 <Component class="javax.swing.JButton" name="jButton3">
@@ -645,6 +648,12 @@
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton3ActionPerformed"/>
                   </Events>
+                </Component>
+                <Component class="javax.swing.JCheckBox" name="sync_ARHI">
+                  <Properties>
+                    <Property name="selected" type="boolean" value="true"/>
+                    <Property name="text" type="java.lang.String" value="Sincronizar con ARHI"/>
+                  </Properties>
                 </Component>
               </SubComponents>
             </Container>
@@ -697,7 +706,7 @@
                             <Column editable="true" title="EPS (Nombre)*" type="java.lang.Object"/>
                             <Column editable="true" title="AFP (Nombre)*" type="java.lang.Object"/>
                             <Column editable="false" title="ARL (Nombre)*" type="java.lang.Object"/>
-                            <Column editable="true" title="CCF (Nombre)*" type="java.lang.Object"/>
+                            <Column editable="false" title="CCF (Nombre)*" type="java.lang.Object"/>
                             <Column editable="false" title="Obra" type="java.lang.Object"/>
                             <Column editable="true" title="Observaciones" type="java.lang.Object"/>
                           </Table>

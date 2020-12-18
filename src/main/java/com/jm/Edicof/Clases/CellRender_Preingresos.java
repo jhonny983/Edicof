@@ -221,7 +221,7 @@ public class CellRender_Preingresos extends DefaultTableCellRenderer{
                                                 cell.setForeground(Color.white);
                                             }
                                         }else{
-                                            if (table.getColumnName(column).equals("Barrio")) {
+                                            if (table.getColumnName(column).equals("Barrio*")) {
                                                 if (check_barrio(value)) {
                                                     cell.setOpaque(true);
                                                     cell.setBackground(new Color(150,240,160));
@@ -332,7 +332,65 @@ public class CellRender_Preingresos extends DefaultTableCellRenderer{
                                                                                     cell.setForeground(Color.white);
                                                                                 }
                                                                             }else{
-
+                                                                                if (table.getColumnName(column).equals("F Examen Ingreso (DD-MM-YYYY)*")) {
+                                                                                    if (value!=null) {
+                                                                                        if (chech_char(value.toString().trim(),"'#$%&()=?¡¿/*+[]{};:<>,.")) {
+                                                                                            if (check_fecha(value.toString())) {
+                                                                                                cell.setOpaque(true);
+                                                                                                cell.setBackground(new Color(150,240,160));
+                                                                                                cell.setForeground(Color.black);
+                                                                                            }else{
+                                                                                                cell.setOpaque(true);
+                                                                                                cell.setBackground(Color.red);
+                                                                                                cell.setForeground(Color.white);
+                                                                                            }
+                                                                                        }else{
+                                                                                            cell.setOpaque(true);
+                                                                                            cell.setBackground(Color.red);
+                                                                                            cell.setForeground(Color.white);
+                                                                                        }
+                                                                                    }else{
+                                                                                        cell.setOpaque(true);
+                                                                                        cell.setBackground(Color.red);
+                                                                                        cell.setForeground(Color.white);
+                                                                                    }
+                                                                                }else{
+                                                                                    if (table.getColumnName(column).equals("F Consentimiento (DD-MM-YYYY)*")) {
+                                                                                        if (value!=null) {
+                                                                                            if (chech_char(value.toString().trim(),"'#$%&()=?¡¿/*+[]{};:<>,.")) {
+                                                                                                if (check_fecha(value.toString())) {
+                                                                                                    cell.setOpaque(true);
+                                                                                                    cell.setBackground(new Color(150,240,160));
+                                                                                                    cell.setForeground(Color.black);
+                                                                                                }else{
+                                                                                                    cell.setOpaque(true);
+                                                                                                    cell.setBackground(Color.red);
+                                                                                                    cell.setForeground(Color.white);
+                                                                                                }
+                                                                                            }else{
+                                                                                                cell.setOpaque(true);
+                                                                                                cell.setBackground(Color.red);
+                                                                                                cell.setForeground(Color.white);
+                                                                                            }
+                                                                                        }else{
+                                                                                            cell.setOpaque(true);
+                                                                                            cell.setBackground(Color.red);
+                                                                                            cell.setForeground(Color.white);
+                                                                                        }
+                                                                                    }else{
+                                                                                        if (table.getColumnName(column).equals("Exonerado FIC")) {
+                                                                                            if (check_field(value)) {
+                                                                                                cell.setOpaque(true);
+                                                                                                cell.setBackground(new Color(150,240,160));
+                                                                                                cell.setForeground(Color.black);
+                                                                                            }else{
+                                                                                                cell.setOpaque(true);
+                                                                                                cell.setBackground(Color.red);
+                                                                                                cell.setForeground(Color.white);
+                                                                                            }
+                                                                                        }
+                                                                                    }
+                                                                                }
                                                                             }
                                                                         }
                                                                     }
@@ -345,12 +403,6 @@ public class CellRender_Preingresos extends DefaultTableCellRenderer{
                                             }
                                         }
                                     }
-                                    
-                                    
-                                    
-                                    
-                                    
-                                    
                                 }
                             }
                         }

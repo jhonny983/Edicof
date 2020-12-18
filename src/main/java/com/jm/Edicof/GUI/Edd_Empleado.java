@@ -37,6 +37,7 @@ public class Edd_Empleado extends javax.swing.JDialog {
         ac_tip_ident();
         ac_tip_sangre();
         ac_genero();
+        tac_nacionalidad();
         InputMap map1 = cedula.getInputMap(cedula.WHEN_FOCUSED);
         map1.put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Event.CTRL_MASK), "null");
     }
@@ -49,6 +50,7 @@ public class Edd_Empleado extends javax.swing.JDialog {
         ac_tip_ident();
         ac_tip_sangre();
         ac_genero();
+        tac_nacionalidad();
         InputMap map1 = cedula.getInputMap(cedula.WHEN_FOCUSED);
         map1.put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Event.CTRL_MASK), "null");
     }
@@ -61,6 +63,7 @@ public class Edd_Empleado extends javax.swing.JDialog {
         ac_tip_ident();
         ac_tip_sangre();
         ac_genero();
+        tac_nacionalidad();
         cb_cedula.setSelectedItem(ced);
         cb_cedula.setEnabled(false);
         InputMap map1 = cedula.getInputMap(cedula.WHEN_FOCUSED);
@@ -108,6 +111,8 @@ public class Edd_Empleado extends javax.swing.JDialog {
         jLabel13 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
         fecha_exp = new com.toedter.calendar.JDateChooser();
+        jLabel15 = new javax.swing.JLabel();
+        cb_nacion = new javax.swing.JComboBox<>();
         jButton1 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
 
@@ -211,12 +216,14 @@ public class Edd_Empleado extends javax.swing.JDialog {
 
         jLabel14.setText("Fecha Expedicion");
 
+        jLabel15.setText("Nacionalidad");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(16, Short.MAX_VALUE)
+                .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2)
                     .addComponent(jLabel8)
@@ -224,17 +231,19 @@ public class Edd_Empleado extends javax.swing.JDialog {
                     .addComponent(jLabel3)
                     .addComponent(jLabel9)
                     .addComponent(jLabel11)
-                    .addComponent(jLabel13))
+                    .addComponent(jLabel13)
+                    .addComponent(jLabel15))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(cb_tip_sangre, 0, 175, Short.MAX_VALUE)
-                    .addComponent(cb_cedula, 0, 175, Short.MAX_VALUE)
-                    .addComponent(cb_tip_id, 0, 175, Short.MAX_VALUE)
-                    .addComponent(nombre_1, javax.swing.GroupLayout.DEFAULT_SIZE, 175, Short.MAX_VALUE)
-                    .addComponent(ape_1, javax.swing.GroupLayout.DEFAULT_SIZE, 175, Short.MAX_VALUE)
-                    .addComponent(cb_ciudad_nac, 0, 175, Short.MAX_VALUE)
-                    .addComponent(estatura, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(cb_nacion, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(cb_tip_sangre, javax.swing.GroupLayout.Alignment.LEADING, 0, 178, Short.MAX_VALUE)
+                    .addComponent(cb_cedula, javax.swing.GroupLayout.Alignment.LEADING, 0, 178, Short.MAX_VALUE)
+                    .addComponent(cb_tip_id, javax.swing.GroupLayout.Alignment.LEADING, 0, 178, Short.MAX_VALUE)
+                    .addComponent(nombre_1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 178, Short.MAX_VALUE)
+                    .addComponent(ape_1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 178, Short.MAX_VALUE)
+                    .addComponent(cb_ciudad_nac, javax.swing.GroupLayout.Alignment.LEADING, 0, 178, Short.MAX_VALUE)
+                    .addComponent(estatura, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(18, 18, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel6)
                     .addComponent(jLabel7)
@@ -244,72 +253,69 @@ public class Edd_Empleado extends javax.swing.JDialog {
                     .addComponent(jLabel12)
                     .addComponent(jLabel14))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(cb_ciudad_exp, 0, 180, Short.MAX_VALUE)
-                    .addComponent(nombre_2, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)
-                    .addComponent(ape_2, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)
-                    .addComponent(cedula, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)
-                    .addComponent(cb_genero, 0, 180, Short.MAX_VALUE)
-                    .addComponent(fecha_nac, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(cb_ciudad_exp, 0, 181, Short.MAX_VALUE)
+                    .addComponent(nombre_2, javax.swing.GroupLayout.DEFAULT_SIZE, 181, Short.MAX_VALUE)
+                    .addComponent(ape_2, javax.swing.GroupLayout.DEFAULT_SIZE, 181, Short.MAX_VALUE)
+                    .addComponent(cedula, javax.swing.GroupLayout.DEFAULT_SIZE, 181, Short.MAX_VALUE)
+                    .addComponent(cb_genero, 0, 181, Short.MAX_VALUE)
+                    .addComponent(fecha_nac, javax.swing.GroupLayout.DEFAULT_SIZE, 181, Short.MAX_VALUE)
                     .addComponent(fecha_exp, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(16, Short.MAX_VALUE))
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cedula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel6)
+                    .addComponent(cb_cedula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(cedula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel6)
-                            .addComponent(cb_cedula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jLabel8)
-                                .addComponent(cb_tip_id, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel7))
-                            .addComponent(cb_ciudad_exp, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(nombre_1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel4)
-                            .addComponent(nombre_2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel3)
-                            .addComponent(ape_1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel5)
-                            .addComponent(ape_2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel9)
-                            .addComponent(cb_tip_sangre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel10)
-                            .addComponent(cb_genero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jLabel11)
-                                .addComponent(cb_ciudad_nac, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel12))
-                            .addComponent(fecha_nac, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                            .addComponent(fecha_exp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel14))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(197, 197, 197)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(estatura, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addComponent(jLabel13))))
-                .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel8)
+                        .addComponent(cb_tip_id, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel7))
+                    .addComponent(cb_ciudad_exp, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(nombre_1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel4)
+                    .addComponent(nombre_2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(ape_1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5)
+                    .addComponent(ape_2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel9)
+                    .addComponent(cb_tip_sangre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel10)
+                    .addComponent(cb_genero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel11)
+                        .addComponent(cb_ciudad_nac, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel12))
+                    .addComponent(fecha_nac, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                    .addComponent(fecha_exp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel14)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(estatura, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel13)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel15)
+                    .addComponent(cb_nacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 13, Short.MAX_VALUE))
         );
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/accept_1.png"))); // NOI18N
@@ -349,7 +355,7 @@ public class Edd_Empleado extends javax.swing.JDialog {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
                     .addComponent(jButton3))
@@ -433,27 +439,39 @@ public class Edd_Empleado extends javax.swing.JDialog {
                                         if (fecha_nac.getDate()!=null) {
                                             if (fecha_exp.getDate()!=null) {
                                                 if (estatura.getValue()>0 && estatura.getValue()<=220) {
-                                                    Conexion con = new Conexion();
-                                                    con.conexion();
-                                                    ResultSet r;
-                                                    try {
-                                                        r = con.s.executeQuery ("SELECT * FROM `t_empleados` WHERE ID_EMP = "+cedula.getText()+" AND ID_EMP <>"+cb_cedula.getSelectedItem());
-                                                        if(r.next()){
-                                                            JOptionPane.showMessageDialog(this,"El empleado que desea ingresar ya existe","Error",JOptionPane.ERROR_MESSAGE);
-                                                        }else{
-                                                            int conf = JOptionPane.showConfirmDialog(this,"Esta seguro que desea continuar?","Confirmación",JOptionPane.OK_CANCEL_OPTION,JOptionPane.QUESTION_MESSAGE);
-                                                            if (conf == JOptionPane.YES_OPTION) {
-                                                                con.s.executeUpdate("UPDATE `t_empleados` SET `ID_EMP`="+cedula.getText()+",`NOMBRE_1_EMP`='"+nombre_1.getText().toUpperCase()+"',`NOMBRE_2_EMP`='"+nombre_2.getText().toUpperCase()+"',`APELLIDO_1_EMP`='"+ape_1.getText().toUpperCase()+"',`APELLIDO_2_EMP`='"+ape_2.getText().toUpperCase()+"',`ID_TIPO_IDENT`="+get_id_tip_ident(cb_tip_id.getSelectedItem())+",`ID_MUN_EXPEDICION`="+get_id_municipio(cb_ciudad_exp.getSelectedItem())+",`ID_TIPO_SANGRE`="+get_id_tip_sangre(cb_tip_sangre.getSelectedItem())+",`ID_TIPO_GENERO`="+get_id_genero(cb_genero.getSelectedItem())+",`ID_MUN_NACIMIENTO`="+get_id_municipio(cb_ciudad_nac.getSelectedItem())+",`FECHA_NAC`='"+new SimpleDateFormat("yyyy-MM-dd").format(fecha_nac.getDate())+"',`ESTATURA`= "+estatura.getValue()+",`FECHA_EXP`='"+new SimpleDateFormat("yyyy-MM-dd").format(fecha_exp.getDate())+"' WHERE ID_EMP="+cb_cedula.getSelectedItem());
-                                                                JOptionPane.showMessageDialog(this,"El empleado fue actualizado correctamente","Información",JOptionPane.INFORMATION_MESSAGE);
-                                                                con.cerrar();
-                                                                this.dispose();
+                                                    if (!cb_nacion.getSelectedItem().toString().equals("Seleccione..")) {
+                                                        Conexion con = new Conexion();
+                                                        con.conexion();
+                                                        ResultSet r;
+                                                        try {
+                                                            r = con.s.executeQuery ("SELECT * FROM `t_empleados` WHERE ID_EMP = "+cedula.getText()+" AND ID_EMP <>"+cb_cedula.getSelectedItem());
+                                                            if(r.next()){
+                                                                JOptionPane.showMessageDialog(this,"El empleado que desea ingresar ya existe","Error",JOptionPane.ERROR_MESSAGE);
+                                                            }else{
+                                                                int conf = JOptionPane.showConfirmDialog(this,"Esta seguro que desea continuar?","Confirmación",JOptionPane.OK_CANCEL_OPTION,JOptionPane.QUESTION_MESSAGE);
+                                                                if (conf == JOptionPane.YES_OPTION) {
+                                                                    int id_nacion=0;
+                                                                    //**************GET ID NACIONALIDAD
+                                                                    r = con.s.executeQuery ("SELECT *\n" +
+                                                                                            "FROM\n" +
+                                                                                            "    t_nacionalidad WHERE NOMBRE_NACION = '"+cb_nacion.getSelectedItem().toString()+"';");
+                                                                    if(r.next()){
+                                                                        id_nacion=r.getInt("ID_NACION");
+                                                                    }
+                                                                    con.s.executeUpdate("UPDATE `t_empleados` SET `ID_EMP`="+cedula.getText()+",`NOMBRE_1_EMP`='"+nombre_1.getText().toUpperCase()+"',`NOMBRE_2_EMP`='"+nombre_2.getText().toUpperCase()+"',`APELLIDO_1_EMP`='"+ape_1.getText().toUpperCase()+"',`APELLIDO_2_EMP`='"+ape_2.getText().toUpperCase()+"',`ID_TIPO_IDENT`="+get_id_tip_ident(cb_tip_id.getSelectedItem())+",`ID_MUN_EXPEDICION`="+get_id_municipio(cb_ciudad_exp.getSelectedItem())+",`ID_TIPO_SANGRE`="+get_id_tip_sangre(cb_tip_sangre.getSelectedItem())+",`ID_TIPO_GENERO`="+get_id_genero(cb_genero.getSelectedItem())+",`ID_MUN_NACIMIENTO`="+get_id_municipio(cb_ciudad_nac.getSelectedItem())+",`FECHA_NAC`='"+new SimpleDateFormat("yyyy-MM-dd").format(fecha_nac.getDate())+"',`ESTATURA`= "+estatura.getValue()+",`FECHA_EXP`='"+new SimpleDateFormat("yyyy-MM-dd").format(fecha_exp.getDate())+"',`ID_NACION`= "+id_nacion+" WHERE ID_EMP="+cb_cedula.getSelectedItem());
+                                                                    JOptionPane.showMessageDialog(this,"El empleado fue actualizado correctamente","Información",JOptionPane.INFORMATION_MESSAGE);
+                                                                    con.cerrar();
+                                                                    this.dispose();
+                                                                }
                                                             }
+                                                            con.cerrar();
+                                                        } catch (SQLException e) {
+                                                            con.cerrar();
+                                                            e.printStackTrace();
+                                                            JOptionPane.showMessageDialog(this,e,"Error",JOptionPane.ERROR_MESSAGE);
                                                         }
-                                                        con.cerrar();
-                                                    } catch (SQLException e) {
-                                                        con.cerrar();
-                                                        e.printStackTrace();
-                                                        JOptionPane.showMessageDialog(this,e,"Error",JOptionPane.ERROR_MESSAGE);
+                                                    }else {
+                                                        JOptionPane.showMessageDialog(this,"Verifique la nacionalidad del empleado","Error",JOptionPane.ERROR_MESSAGE);
                                                     }
                                                 } else {
                                                     JOptionPane.showMessageDialog(this,"Verifique la estatura del empleado","Error",JOptionPane.ERROR_MESSAGE);
@@ -566,6 +584,7 @@ public class Edd_Empleado extends javax.swing.JDialog {
     private javax.swing.JComboBox<String> cb_ciudad_exp;
     private javax.swing.JComboBox<String> cb_ciudad_nac;
     private javax.swing.JComboBox<String> cb_genero;
+    private javax.swing.JComboBox<String> cb_nacion;
     private javax.swing.JComboBox<String> cb_tip_id;
     private javax.swing.JComboBox<String> cb_tip_sangre;
     private static javax.swing.JTextField cedula;
@@ -582,6 +601,7 @@ public class Edd_Empleado extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -637,6 +657,8 @@ public void load_data(){
                                     "        ON (t_empleados.ID_TIPO_SANGRE = t_tipo_sangre.ID_TIPO)\n" +
                                     "    INNER JOIN t_genero \n" +
                                     "        ON (t_empleados.ID_TIPO_GENERO = t_genero.ID_GENERO)\n" +
+                                    "    INNER JOIN `t_nacionalidad` \n" +
+                                    "        ON (`t_empleados`.`ID_NACION` = `t_nacionalidad`.`ID_NACION`)"+
                                     "    where t_empleados.ID_EMP = "+cb_cedula.getSelectedItem());
             if (r.next()) {
                 cb_tip_id.setSelectedItem(r.getString("t_tipo_ident.NOMBRE_TIPO_IDENT"));
@@ -651,6 +673,8 @@ public void load_data(){
                 cb_ciudad_nac.setSelectedItem(r.getString("mun_nac.NOMBRE_MUN")+"-"+r.getString("dep_nac.NOMBRE_DEP"));
                 fecha_nac.setDate(new SimpleDateFormat("yyyy-MM-dd").parse(r.getString("t_empleados.FECHA_NAC")));
                 estatura.setValue(r.getInt("t_empleados.ESTATURA"));
+                cb_nacion.setSelectedItem(r.getString("t_nacionalidad.NOMBRE_NACION"));
+                fecha_exp.setDate(new SimpleDateFormat("yyyy-MM-dd").parse(r.getString("t_empleados.FECHA_EXP")));
             }
             con.cerrar();
         }catch(SQLException | ParseException j){
@@ -765,6 +789,27 @@ private void ac_genero(){
             JOptionPane.showMessageDialog(null,j,"Error",JOptionPane.ERROR_MESSAGE);
         }
     }
+public final void tac_nacionalidad(){
+    cb_nacion.removeAllItems();
+    cb_nacion.addItem("Seleccione..");
+    Conexion con = new Conexion();
+    con.conexion();
+    ResultSet r;
+    try{
+        r = con.s.executeQuery ("SELECT *\n" +
+                                "FROM\n" +
+                                "    `t_nacionalidad` ORDER BY NOMBRE_NACION ASC;");
+        while(r.next()){
+            String str=r.getString("NOMBRE_NACION");
+            cb_nacion.addItem(str);
+        }
+        con.cerrar();
+    }catch(SQLException j){
+        con.cerrar();
+        j.printStackTrace();
+        JOptionPane.showMessageDialog(null,j,"Error",JOptionPane.ERROR_MESSAGE);
+    }
+}
 public String get_id_municipio(Object municipio){
         String i = "";
         String str_mun="";

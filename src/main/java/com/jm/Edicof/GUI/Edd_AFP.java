@@ -59,6 +59,10 @@ public class Edd_AFP extends javax.swing.JDialog {
         nombre_afp = new javax.swing.JTextField();
         busc_afp = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
+        codigo_afp = new javax.swing.JTextField();
+        nuevo_codigo_afp = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
 
@@ -83,33 +87,69 @@ public class Edd_AFP extends javax.swing.JDialog {
 
         jLabel2.setText("Nombre");
 
+        codigo_afp.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        codigo_afp.setEnabled(false);
+        codigo_afp.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                codigo_afpKeyTyped(evt);
+            }
+        });
+
+        nuevo_codigo_afp.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        nuevo_codigo_afp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                nuevo_codigo_afpActionPerformed(evt);
+            }
+        });
+        nuevo_codigo_afp.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                nuevo_codigo_afpKeyTyped(evt);
+            }
+        });
+
+        jLabel3.setText("Codigo");
+
+        jLabel4.setText("Nuevo codigo");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(50, 50, 50)
+                .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1)
-                    .addComponent(jLabel2))
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel4))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(busc_afp)
-                    .addComponent(nombre_afp, javax.swing.GroupLayout.DEFAULT_SIZE, 347, Short.MAX_VALUE))
+                    .addComponent(nombre_afp)
+                    .addComponent(nuevo_codigo_afp, javax.swing.GroupLayout.PREFERRED_SIZE, 347, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(codigo_afp))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(20, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(busc_afp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(nombre_afp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1))
-                .addGap(26, 26, 26))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(codigo_afp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(nuevo_codigo_afp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4))
+                .addContainerGap())
         );
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/accept_1.png"))); // NOI18N
@@ -132,16 +172,16 @@ public class Edd_AFP extends javax.swing.JDialog {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(174, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton3)
                 .addGap(172, 172, 172))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -162,11 +202,11 @@ public class Edd_AFP extends javax.swing.JDialog {
         // TODO add your handling code here:
         char a=evt.getKeyChar();
         a = Character.toUpperCase(a);
-        if (a!=KeyEvent.VK_PERIOD & a!=KeyEvent.VK_MINUS & a!=KeyEvent.VK_SPACE) {
-            if(!(a>=KeyEvent.VK_A && a<=KeyEvent.VK_Z)& a!=209) {
-                evt.consume();
-            }
-        }
+//        if (a!=KeyEvent.VK_PERIOD & a!=KeyEvent.VK_MINUS & a!=KeyEvent.VK_SPACE) {
+//            if(!(a>=KeyEvent.VK_A && a<=KeyEvent.VK_Z)& a!=209) {
+//                evt.consume();
+//            }
+//        }
         if(nombre_afp.getText().length()>50){
             evt.consume();
         }
@@ -176,33 +216,42 @@ public class Edd_AFP extends javax.swing.JDialog {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         if (!busc_afp.getText().equals("")) {
-            if (!nombre_afp.getText().equals("")) {
-                Conexion con = new Conexion();
-                con.conexion();
-                ResultSet r;
-                try {
-                    r = con.s.executeQuery ("SELECT * FROM `t_afp` WHERE NOMBRE_AFP = '"+nombre_afp.getText().toUpperCase()+"'");
-                    if(r.next()){
-                        JOptionPane.showMessageDialog(this,"La AFP que intenta ingresar ya existe","Error",JOptionPane.ERROR_MESSAGE);
-                    }
-                    else{
-                        int conf = JOptionPane.showConfirmDialog(this,"Esta seguro que desea continuar?","Confirmación",JOptionPane.OK_CANCEL_OPTION,JOptionPane.QUESTION_MESSAGE);
-                        if (conf == JOptionPane.YES_OPTION) {
-                            con.s.executeUpdate("UPDATE `t_afp` SET `NOMBRE_AFP`='"+nombre_afp.getText().toUpperCase()+"' WHERE `NOMBRE_AFP`='"+busc_afp.getText().toUpperCase()+"'");
-                            JOptionPane.showMessageDialog(this,"La AFP fue ingresada correctamente","Información",JOptionPane.INFORMATION_MESSAGE);
-                            con.cerrar();
-                            this.dispose();
+            if (check_field (nombre_afp.getText())) {
+                if (check_field (nuevo_codigo_afp.getText())) {
+                    Conexion con = new Conexion();
+                    con.conexion();
+                    ResultSet r;
+                    try {
+                        r = con.s.executeQuery ("SELECT * FROM `t_afp` WHERE NOMBRE_AFP = '"+nombre_afp.getText().toUpperCase()+"'");
+                        if(r.next() & !busc_afp.getText().equals(nombre_afp.getText())){
+                            JOptionPane.showMessageDialog(this,"La AFP que intenta ingresar ya existe","Error",JOptionPane.ERROR_MESSAGE);
                         }
-
+                        else{
+                            r = con.s.executeQuery ("SELECT * FROM `t_afp` WHERE ID_AFP = '"+nuevo_codigo_afp.getText().toUpperCase().trim()+"'");
+                            if(r.next() & !codigo_afp.getText().equals(nuevo_codigo_afp.getText())){
+                                JOptionPane.showMessageDialog(this,"La AFP que intenta ingresar ya existe","Error",JOptionPane.ERROR_MESSAGE);
+                            }
+                            else{
+                                int conf = JOptionPane.showConfirmDialog(this,"Esta seguro que desea continuar?","Confirmación",JOptionPane.OK_CANCEL_OPTION,JOptionPane.QUESTION_MESSAGE);
+                                if (conf == JOptionPane.YES_OPTION) {
+                                    con.s.executeUpdate("UPDATE `t_afp` SET `ID_AFP`='"+nuevo_codigo_afp.getText().toUpperCase().trim()+"', `NOMBRE_AFP`='"+nombre_afp.getText().toUpperCase().trim()+"' WHERE `NOMBRE_AFP`='"+busc_afp.getText().toUpperCase()+"'");
+                                    JOptionPane.showMessageDialog(this,"La AFP fue ingresada correctamente","Información",JOptionPane.INFORMATION_MESSAGE);
+                                    con.cerrar();
+                                    this.dispose();
+                                }
+                            }
+                        }
+                        con.cerrar();
+                    } catch (SQLException | HeadlessException e) {
+                        con.cerrar();
+                        e.printStackTrace();
+                        JOptionPane.showMessageDialog(this,e,"Error",JOptionPane.ERROR_MESSAGE);
                     }
-                    con.cerrar();
-                } catch (SQLException | HeadlessException e) {
-                    con.cerrar();
-                    e.printStackTrace();
-                    JOptionPane.showMessageDialog(this,e,"Error",JOptionPane.ERROR_MESSAGE);
+                }else{
+                    JOptionPane.showMessageDialog(this,"Verifique que el nuevo codigo de la AFP no este vacio ni contenga caracteres especiales.","Error",JOptionPane.ERROR_MESSAGE);
                 }
             } else {
-                JOptionPane.showMessageDialog(this,"Digite el nuevo nombre de la AFP que desea modificar","Error",JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this,"Verifique que el nuevo nombre de la AFP no este vacio ni contenga caracteres especiales.","Error",JOptionPane.ERROR_MESSAGE);
             }
         } else {
             JOptionPane.showMessageDialog(this,"Digite el nombre de la AFP que desea modificar","Error",JOptionPane.ERROR_MESSAGE);
@@ -216,6 +265,18 @@ public class Edd_AFP extends javax.swing.JDialog {
         // TODO add your handling code here:
         this.dispose();
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void codigo_afpKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_codigo_afpKeyTyped
+        // TODO add your handling code here:
+    }//GEN-LAST:event_codigo_afpKeyTyped
+
+    private void nuevo_codigo_afpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nuevo_codigo_afpActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_nuevo_codigo_afpActionPerformed
+
+    private void nuevo_codigo_afpKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_nuevo_codigo_afpKeyTyped
+        // TODO add your handling code here:
+    }//GEN-LAST:event_nuevo_codigo_afpKeyTyped
 
     /**
      * @param args the command line arguments
@@ -277,13 +338,17 @@ public class Edd_AFP extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField busc_afp;
+    private static javax.swing.JTextField codigo_afp;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private static javax.swing.JTextField nombre_afp;
+    private static javax.swing.JTextField nuevo_codigo_afp;
     // End of variables declaration//GEN-END:variables
 public void ac_afp(){
     tac_afp.removeAllItems();
@@ -312,6 +377,8 @@ public void load_data(String afp){
             r = con.s.executeQuery ("SELECT * FROM `t_afp` WHERE NOMBRE_AFP = '"+afp+"'");
             if (r.next()) {
                 nombre_afp.setText(r.getString("NOMBRE_AFP"));
+                codigo_afp.setText(r.getString("ID_AFP"));
+                nuevo_codigo_afp.setText(codigo_afp.getText());
             }
             con.cerrar();
         }catch(SQLException j){
@@ -324,5 +391,31 @@ public void load_data(String afp){
         nombre_afp.setText("");
         
     }
+}
+public boolean check_field (Object field){
+boolean ret=false;
+    if (field!=null) {
+        if (!field.toString().trim().equals("")) {
+            if (chech_char(field.toString().trim(),"'$%&()=?¡¿/*+[]{};:<>,-")) {
+                if (!field.toString().equals("")) {
+                   ret=true;
+                }
+            } 
+        }
+    }
+return ret;
+}
+public boolean chech_char(String s, String c){
+    //boolean ret=false;
+    char []char_s=s.toCharArray();
+    char []char_c=c.toCharArray();  
+    for (int i = 0; i < char_s.length; i++) {
+        for (int j = 0; j < char_c.length; j++) {
+            if (char_s[i]==char_c[j]) {
+                return false;
+            }
+        }
+    }
+    return true;
 }
 }

@@ -41,10 +41,12 @@ public class Add_Empleado_Masivos extends javax.swing.JDialog {
     TextAutoCompleter tac_tip_ident_table = null;
     TextAutoCompleter tac_tip_sangre_table = null;
     TextAutoCompleter tac_genero_table = null;
+    TextAutoCompleter tac_nacion_table = null;
     JTextField tb_municipio_table = null;
     JTextField tb_tip_ident_table = null;
     JTextField tb_tip_sangre_table = null;
     JTextField tb_genero_table = null;
+    JTextField tb_nacion_table = null;
     //******************************/////////////
     String before_edit_cell = null;
     /**
@@ -67,16 +69,19 @@ public class Add_Empleado_Masivos extends javax.swing.JDialog {
         tb_tip_ident_table = new JTextField();
         tb_tip_sangre_table = new JTextField();
         tb_genero_table = new JTextField();
+        tb_nacion_table = new JTextField();
         
         tac_municipio_table = new TextAutoCompleter(tb_municipio_table);
         tac_tip_ident_table = new TextAutoCompleter(tb_tip_ident_table);
         tac_tip_sangre_table = new TextAutoCompleter(tb_tip_sangre_table);
         tac_genero_table = new TextAutoCompleter(tb_genero_table);
+        tac_nacion_table = new TextAutoCompleter(tb_nacion_table);
         
         tac_municipio();
         tac_tip_ident();
         tac_tip_sangre();
         tac_genero();
+        tac_nacionalidad();
         
         tac_municipio_table.setMode(0);
         tac_tip_ident_table.setMode(0);
@@ -85,10 +90,12 @@ public class Add_Empleado_Masivos extends javax.swing.JDialog {
         
         empleados.getColumnModel().getColumn(0).setCellEditor(new MyTableCellEditorDate(tb_tip_ident_table,true));
         empleados.getColumnModel().getColumn(2).setCellEditor(new MyTableCellEditorDate(tb_municipio_table,true));
-        empleados.getColumnModel().getColumn(7).setCellEditor(new MyTableCellEditorDate(tb_tip_sangre_table,true));
-        empleados.getColumnModel().getColumn(8).setCellEditor(new MyTableCellEditorDate(tb_genero_table,true));
-        empleados.getColumnModel().getColumn(9).setCellEditor(new MyTableCellEditorDate(tb_municipio_table,true));
-        empleados.getColumnModel().getColumn(10).setCellEditor(new MyTableCellEditorDate(true));
+        empleados.getColumnModel().getColumn(3).setCellEditor(new MyTableCellEditorDate(true));
+        empleados.getColumnModel().getColumn(8).setCellEditor(new MyTableCellEditorDate(tb_tip_sangre_table,true));
+        empleados.getColumnModel().getColumn(9).setCellEditor(new MyTableCellEditorDate(tb_genero_table,true));
+        empleados.getColumnModel().getColumn(10).setCellEditor(new MyTableCellEditorDate(tb_municipio_table,true));
+        empleados.getColumnModel().getColumn(11).setCellEditor(new MyTableCellEditorDate(true));
+        empleados.getColumnModel().getColumn(13).setCellEditor(new MyTableCellEditorDate(tb_nacion_table,true));
     }
     class MyTableCellEditorDate extends AbstractCellEditor implements TableCellEditor {
         JComponent component=null;
@@ -251,14 +258,13 @@ public class Add_Empleado_Masivos extends javax.swing.JDialog {
         new PegarExcel_Empleados_Masivo(empleados);
         empleados.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Tipo Ident*", "Id*", "Ciudad Expedicion Id*", "Fecha expedicion (DD-MM-AAAA)*", "Nombre 1*", "Nombre 2", "Apellido 1*", "Apellido 2", "Tipo de sangre*", "Género (M-F)*", "Ciudad nacimiento*", "Fecha nacimiento (DD-MM-AAAA)*", "Estatura (cm)*"
+                "Tipo Ident*", "Id*", "Ciudad Expedicion Id*", "Fecha expedicion (DD-MM-AAAA)*", "Nombre 1*", "Nombre 2", "Apellido 1*", "Apellido 2", "Tipo de sangre*", "Género (M-F)*", "Ciudad nacimiento*", "Fecha nacimiento (DD-MM-AAAA)*", "Estatura (cm)*", "Nacionalidad*"
             }
         ));
         empleados.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
-        empleados.setColumnSelectionAllowed(false);
         jScrollPane2.setViewportView(empleados);
         if (empleados.getColumnModel().getColumnCount() > 0) {
             empleados.getColumnModel().getColumn(0).setMinWidth(80);
@@ -300,6 +306,9 @@ public class Add_Empleado_Masivos extends javax.swing.JDialog {
             empleados.getColumnModel().getColumn(12).setMinWidth(100);
             empleados.getColumnModel().getColumn(12).setPreferredWidth(100);
             empleados.getColumnModel().getColumn(12).setMaxWidth(100);
+            empleados.getColumnModel().getColumn(13).setMinWidth(150);
+            empleados.getColumnModel().getColumn(13).setPreferredWidth(150);
+            empleados.getColumnModel().getColumn(13).setMaxWidth(150);
         }
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -541,6 +550,7 @@ public class Add_Empleado_Masivos extends javax.swing.JDialog {
         if(verify_data()){
             int conf = JOptionPane.showConfirmDialog(this,"La informacion de la tabla esta completa\nEsta seguro que desea continuar?","Confirmación",JOptionPane.OK_CANCEL_OPTION,JOptionPane.QUESTION_MESSAGE);
             if (conf == JOptionPane.YES_OPTION) {
+                int id_nacion=0;
                 modelo = (DefaultTableModel)empleados.getModel();
                 empleados.setModel(modelo);
                 Conexion con = new Conexion();
@@ -550,9 +560,9 @@ public class Add_Empleado_Masivos extends javax.swing.JDialog {
                     try {
                         if (!get_id_tip_ident(modelo.getValueAt(i, 0)).equals("")) {
                             if (!get_id_municipio(modelo.getValueAt(i, 2)).equals("")) {
-                                if (!get_id_tip_sangre(modelo.getValueAt(i, 7)).equals("")) {
-                                    if (!get_id_genero(modelo.getValueAt(i, 8)).equals("")) {
-                                        if (!get_id_municipio(modelo.getValueAt(i, 9)).equals("")) {
+                                if (!get_id_tip_sangre(modelo.getValueAt(i, 8)).equals("")) {
+                                    if (!get_id_genero(modelo.getValueAt(i, 9)).equals("")) {
+                                        if (!get_id_municipio(modelo.getValueAt(i, 10)).equals("")) {
                                             r = con.s.executeQuery ("SELECT * FROM `t_empleados` WHERE ID_EMP = "+modelo.getValueAt(i, 1).toString());
                                             if(r.next()){
                                                 JOptionPane.showMessageDialog(this,"El empleado que intenta ingresar ya existe","Error",JOptionPane.ERROR_MESSAGE);
@@ -572,7 +582,14 @@ public class Add_Empleado_Masivos extends javax.swing.JDialog {
                                                 }else{
                                                     ape2=modelo.getValueAt(i, 7).toString().trim().toUpperCase();
                                                 }
-                                                con.s.executeUpdate("INSERT INTO `t_empleados`(`ID_EMP`, `NOMBRE_1_EMP`, `NOMBRE_2_EMP`, `APELLIDO_1_EMP`, `APELLIDO_2_EMP`, `ID_TIPO_IDENT`, `ID_MUN_EXPEDICION`, `ID_TIPO_SANGRE`, `ID_TIPO_GENERO`, `ID_MUN_NACIMIENTO`, `FECHA_NAC`, `ESTATURA`, `FECHA_EXP`) VALUES ("+modelo.getValueAt(i, 1).toString().trim()+",'"+modelo.getValueAt(i, 4).toString().toUpperCase().trim()+"','"+nomb2+"','"+modelo.getValueAt(i, 6).toString().toUpperCase().trim()+"','"+ape2+"',"+get_id_tip_ident(modelo.getValueAt(i, 0))+","+get_id_municipio(modelo.getValueAt(i, 2))+","+get_id_tip_sangre(modelo.getValueAt(i, 8))+","+get_id_genero(modelo.getValueAt(i, 9))+","+get_id_municipio(modelo.getValueAt(i, 10))+",'"+new SimpleDateFormat("yyyy-MM-dd").format(new SimpleDateFormat("dd-MM-yyyy").parse(modelo.getValueAt(i, 11).toString()))+"',"+modelo.getValueAt(i, 12)+",'"+new SimpleDateFormat("yyyy-MM-dd").format(new SimpleDateFormat("dd-MM-yyyy").parse(modelo.getValueAt(i, 3).toString()))+"')");
+                                                //**************GET ID NACIONALIDAD
+                                                r = con.s.executeQuery ("SELECT *\n" +
+                                                                        "FROM\n" +
+                                                                        "    t_nacionalidad WHERE NOMBRE_NACION = '"+empleados.getValueAt(i, 13).toString()+"';");
+                                                if(r.next()){
+                                                    id_nacion=r.getInt("ID_NACION");
+                                                }
+                                                con.s.executeUpdate("INSERT INTO `t_empleados`(`ID_EMP`, `NOMBRE_1_EMP`, `NOMBRE_2_EMP`, `APELLIDO_1_EMP`, `APELLIDO_2_EMP`, `ID_TIPO_IDENT`, `ID_MUN_EXPEDICION`, `ID_TIPO_SANGRE`, `ID_TIPO_GENERO`, `ID_MUN_NACIMIENTO`, `FECHA_NAC`, `ESTATURA`, `FECHA_EXP`, `ID_NACION`) VALUES ("+modelo.getValueAt(i, 1).toString().trim()+",'"+modelo.getValueAt(i, 4).toString().toUpperCase().trim()+"','"+nomb2+"','"+modelo.getValueAt(i, 6).toString().toUpperCase().trim()+"','"+ape2+"',"+get_id_tip_ident(modelo.getValueAt(i, 0))+","+get_id_municipio(modelo.getValueAt(i, 2))+","+get_id_tip_sangre(modelo.getValueAt(i, 8))+","+get_id_genero(modelo.getValueAt(i, 9))+","+get_id_municipio(modelo.getValueAt(i, 10))+",'"+new SimpleDateFormat("yyyy-MM-dd").format(new SimpleDateFormat("dd-MM-yyyy").parse(modelo.getValueAt(i, 11).toString()))+"',"+modelo.getValueAt(i, 12)+",'"+new SimpleDateFormat("yyyy-MM-dd").format(new SimpleDateFormat("dd-MM-yyyy").parse(modelo.getValueAt(i, 3).toString()))+"',"+id_nacion+")");
                                                 modelo.removeRow(i);
                                                 i=i-1;
                                                 confirm = confirm & true;
@@ -687,9 +704,6 @@ public class Add_Empleado_Masivos extends javax.swing.JDialog {
     private javax.swing.JLabel n_registros;
     // End of variables declaration//GEN-END:variables
     public boolean verify_data(){
-//        Conexion con = new Conexion();
-//        con.conexion();
-//        ResultSet r;
         boolean ret=true;
         modelo = (DefaultTableModel)empleados.getModel(); 
         if (empleados.getRowCount()>0) {
@@ -707,7 +721,15 @@ public class Add_Empleado_Masivos extends javax.swing.JDialog {
                                                         if (check_municipio(modelo.getValueAt(i, 10))) {
                                                             if (check_fecha(modelo.getValueAt(i, 11))) {
                                                                 if (check_estat(modelo.getValueAt(i, 12))) {
-                                                                    ret=true&ret;
+                                                                    if (check_nacion(modelo.getValueAt(i, 13))) {
+                                                                        ret=true&ret;
+                                                                    }else {
+                                                                        empleados.changeSelection(i,13, false, false);
+                                                                        empleados.requestFocus();
+                                                                        JOptionPane.showMessageDialog(this,"Verifique la nacionalidad del empleado","Error",JOptionPane.ERROR_MESSAGE);
+                                                                        ret=false&ret;
+                                                                        break;
+                                                                    }
                                                                 } else {
                                                                     empleados.changeSelection(i,12, false, false);
                                                                     empleados.requestFocus();
@@ -839,6 +861,35 @@ public class Add_Empleado_Masivos extends javax.swing.JDialog {
         }
         return ret;  
     }
+    public boolean check_nacion(Object nac){
+    boolean ret=false;
+    if (nac!=null) {
+        if (check_char(nac.toString().trim(),"'#$%&()=?¡¿/*+[]{};:<>,.")) {
+            if (!nac.toString().trim().equals("")) {
+                Conexion con = new Conexion();
+                con.conexion();
+                ResultSet r;
+                try{
+                    r = con.s.executeQuery ("SELECT *\n" +
+                                            "FROM\n" +
+                                            "    t_nacionalidad\n" +
+                                            "WHERE NOMBRE_NACION = '"+nac.toString().trim()+"'");
+                    if(r.next()){
+                        ret=true;
+                    }
+                    con.cerrar();
+                }catch(SQLException j){
+                    con.cerrar();
+                    j.printStackTrace();
+                    return false;
+                    //JOptionPane.showMessageDialog(null,j,"Error",JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        }
+    }
+    
+    return ret;
+}
     public boolean check_char(Object s, String c){
     //boolean ret=false;
         if (s!=null) {
@@ -1124,6 +1175,26 @@ public class Add_Empleado_Masivos extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null,j,"Error",JOptionPane.ERROR_MESSAGE);
         }
     }
+    public final void tac_nacionalidad(){
+    tac_nacion_table.removeAllItems();
+    Conexion con = new Conexion();
+    con.conexion();
+    ResultSet r;
+    try{
+        r = con.s.executeQuery ("SELECT *\n" +
+                                "FROM\n" +
+                                "    `t_nacionalidad` ORDER BY NOMBRE_NACION ASC;");
+        while(r.next()){
+            String str=r.getString("NOMBRE_NACION");
+            tac_nacion_table.addItem(str);
+        }
+        con.cerrar();
+    }catch(SQLException j){
+        con.cerrar();
+        j.printStackTrace();
+        JOptionPane.showMessageDialog(null,j,"Error",JOptionPane.ERROR_MESSAGE);
+    }
+}
     public String get_id_municipio(Object municipio){
         String i = "";
         String str_mun="";

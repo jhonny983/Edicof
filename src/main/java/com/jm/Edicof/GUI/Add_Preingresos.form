@@ -663,13 +663,11 @@
                     <Component class="javax.swing.JTable" name="jTable1">
                       <Properties>
                         <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                          <Table columnCount="18" rowCount="1">
+                          <Table columnCount="19" rowCount="1">
                             <Column editable="true" title="Cedula*" type="java.lang.Object"/>
                             <Column editable="true" title="Empleador (Nombre)*" type="java.lang.Object"/>
                             <Column editable="true" title="F Ingreso (DD-MM-AAAA)*" type="java.lang.Object"/>
                             <Column editable="true" title="Salario*" type="java.lang.Object"/>
-                            <Column editable="true" title="F Nacimiento (DD-MM-AAAA)*" type="java.lang.Object"/>
-                            <Column editable="true" title="F Expedicion (DD-MM-AAAA)*" type="java.lang.Object"/>
                             <Column editable="true" title="Obra*" type="java.lang.Object"/>
                             <Column editable="true" title="Area Trabajo*" type="java.lang.Object"/>
                             <Column editable="true" title="Cargo*" type="java.lang.Object"/>
@@ -681,6 +679,9 @@
                             <Column editable="true" title="Acudiente" type="java.lang.Object"/>
                             <Column editable="true" title="Parentesco*" type="java.lang.Object"/>
                             <Column editable="true" title="Telefono Acudiente" type="java.lang.Object"/>
+                            <Column editable="true" title="F Examen Ingreso (DD-MM-YYYY)*" type="java.lang.Object"/>
+                            <Column editable="true" title="F Consentimiento (DD-MM-YYYY)*" type="java.lang.Object"/>
+                            <Column editable="true" title="Exonerado FIC" type="java.lang.Object"/>
                             <Column editable="true" title="Observaciones" type="java.lang.Object"/>
                           </Table>
                         </Property>
@@ -708,22 +709,12 @@
                               <Editor/>
                               <Renderer/>
                             </Column>
-                            <Column maxWidth="160" minWidth="160" prefWidth="160" resizable="true">
-                              <Title/>
-                              <Editor/>
-                              <Renderer/>
-                            </Column>
-                            <Column maxWidth="160" minWidth="160" prefWidth="160" resizable="true">
-                              <Title/>
-                              <Editor/>
-                              <Renderer/>
-                            </Column>
                             <Column maxWidth="200" minWidth="200" prefWidth="200" resizable="true">
                               <Title/>
                               <Editor/>
                               <Renderer/>
                             </Column>
-                            <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                            <Column maxWidth="160" minWidth="160" prefWidth="160" resizable="true">
                               <Title/>
                               <Editor/>
                               <Renderer/>
@@ -769,6 +760,21 @@
                               <Renderer/>
                             </Column>
                             <Column maxWidth="150" minWidth="150" prefWidth="150" resizable="true">
+                              <Title/>
+                              <Editor/>
+                              <Renderer/>
+                            </Column>
+                            <Column maxWidth="180" minWidth="180" prefWidth="180" resizable="true">
+                              <Title/>
+                              <Editor/>
+                              <Renderer/>
+                            </Column>
+                            <Column maxWidth="180" minWidth="180" prefWidth="180" resizable="true">
+                              <Title/>
+                              <Editor/>
+                              <Renderer/>
+                            </Column>
+                            <Column maxWidth="120" minWidth="120" prefWidth="120" resizable="true">
                               <Title/>
                               <Editor/>
                               <Renderer/>

@@ -67,6 +67,9 @@ public class Add_EPS extends javax.swing.JDialog {
         nombre_eps = new javax.swing.JTextField();
         codigo_eps = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
 
@@ -96,22 +99,37 @@ public class Add_EPS extends javax.swing.JDialog {
 
         jLabel2.setText("Codigo");
 
+        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 0, 0));
+        jLabel3.setText("Nota:");
+
+        jLabel4.setText("Al momento de ingresar el codigo de la EPS asegurese que este corresponda");
+
+        jLabel5.setText("al codigo nacional, esto es indispensable para la sincronización con ARHI.");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(49, 49, 49)
+                .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel1))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel2)
                         .addGap(18, 18, 18)
-                        .addComponent(codigo_eps, javax.swing.GroupLayout.PREFERRED_SIZE, 347, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(18, 18, 18)
-                        .addComponent(nombre_eps, javax.swing.GroupLayout.PREFERRED_SIZE, 347, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(55, Short.MAX_VALUE))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(codigo_eps, javax.swing.GroupLayout.PREFERRED_SIZE, 347, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(nombre_eps, javax.swing.GroupLayout.PREFERRED_SIZE, 347, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap(58, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 398, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap())))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -124,7 +142,13 @@ public class Add_EPS extends javax.swing.JDialog {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(codigo_eps, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
-                .addContainerGap(19, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel4))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel5)
+                .addContainerGap(22, Short.MAX_VALUE))
         );
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/accept_1.png"))); // NOI18N
@@ -190,8 +214,8 @@ public class Add_EPS extends javax.swing.JDialog {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        if (!nombre_eps.getText().equals("")) {
-            if (!codigo_eps.getText().equals("")) {
+        if (check_field (nombre_eps.getText())) {
+            if (check_field (codigo_eps.getText())) {
                 Conexion con = new Conexion();
                 con.conexion();
                 ResultSet r;
@@ -201,12 +225,17 @@ public class Add_EPS extends javax.swing.JDialog {
                         JOptionPane.showMessageDialog(this,"La EPS que intenta ingresar ya existe","Error",JOptionPane.ERROR_MESSAGE);
                     }
                     else{
-                        int conf = JOptionPane.showConfirmDialog(this,"Esta seguro que desea continuar?","Confirmación",JOptionPane.OK_CANCEL_OPTION,JOptionPane.QUESTION_MESSAGE);
-                        if (conf == JOptionPane.YES_OPTION) {
-                            con.s.executeUpdate("INSERT INTO `t_eps`(`ID_EPS`, `NOMBRE_EPS`) VALUES ('"+codigo_eps.getText().toUpperCase().trim()+"','"+nombre_eps.getText().toUpperCase().trim()+"')");
-                            JOptionPane.showMessageDialog(this,"La EPS fue ingresada correctamente","Información",JOptionPane.INFORMATION_MESSAGE);
-                            con.cerrar();
-                            this.dispose();
+                        r = con.s.executeQuery ("SELECT * FROM `t_eps` WHERE ID_EPS = '"+codigo_eps.getText().trim().toUpperCase()+"'");
+                        if(r.next()){
+                            JOptionPane.showMessageDialog(this,"La EPS que intenta ingresar ya existe","Error",JOptionPane.ERROR_MESSAGE);
+                        }else{
+                            int conf = JOptionPane.showConfirmDialog(this,"Esta seguro que desea continuar?","Confirmación",JOptionPane.OK_CANCEL_OPTION,JOptionPane.QUESTION_MESSAGE);
+                            if (conf == JOptionPane.YES_OPTION) {
+                                con.s.executeUpdate("INSERT INTO `t_eps`(`ID_EPS`, `NOMBRE_EPS`) VALUES ('"+codigo_eps.getText().toUpperCase().trim()+"','"+nombre_eps.getText().toUpperCase().trim()+"')");
+                                JOptionPane.showMessageDialog(this,"La EPS fue ingresada correctamente","Información",JOptionPane.INFORMATION_MESSAGE);
+                                con.cerrar();
+                                this.dispose();
+                            }
                         }
                     } 
                     con.cerrar();
@@ -216,10 +245,10 @@ public class Add_EPS extends javax.swing.JDialog {
                     JOptionPane.showMessageDialog(this,e,"Error",JOptionPane.ERROR_MESSAGE);
                 }
             }else{
-                JOptionPane.showMessageDialog(this,"Digite el codigo de la EPS","Error",JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this,"Verifique que el codigo de la EPS no este vacio ni contenga caracteres especiales.","Error",JOptionPane.ERROR_MESSAGE);
             }
         } else {
-            JOptionPane.showMessageDialog(this,"Digite el nombre de la EPS","Error",JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this,"Verifique que el nombre de la EPS no este vacio ni contenga caracteres especiales.","Error",JOptionPane.ERROR_MESSAGE);
         }
            
         
@@ -287,6 +316,9 @@ public class Add_EPS extends javax.swing.JDialog {
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private static javax.swing.JTextField nombre_eps;
     // End of variables declaration//GEN-END:variables
@@ -331,5 +363,30 @@ public void load_data(String eps){
         
     }
 }
-
+public boolean check_field (Object field){
+boolean ret=false;
+    if (field!=null) {
+        if (!field.toString().trim().equals("")) {
+            if (chech_char(field.toString().trim(),"'$%&()=?¡¿/*+[]{};:<>,-")) {
+                if (!field.toString().equals("")) {
+                   ret=true;
+                }
+            } 
+        }
+    }
+return ret;
+}
+public boolean chech_char(String s, String c){
+    //boolean ret=false;
+    char []char_s=s.toCharArray();
+    char []char_c=c.toCharArray();  
+    for (int i = 0; i < char_s.length; i++) {
+        for (int j = 0; j < char_c.length; j++) {
+            if (char_s[i]==char_c[j]) {
+                return false;
+            }
+        }
+    }
+    return true;
+}
 }
