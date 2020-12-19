@@ -551,8 +551,12 @@ public class GenerarReportes extends Thread{
                 par.put("ID_EMPRESA",id_empresa);
                 par.put("F_INICIAL",f_ini);
                 par.put("F_FINAL",f_fin);
-                par.put("SALARIO_MIN",salario_min);//HALF_COMPLETE
-                par.put("HALF_COMPLETE",FIC_HC);
+                par.put("SALARIO_MIN",salario_min);
+                par.put("HALF_COMPLETE",FIC_HC);//HALF_COMPLETE
+                par.put("HOST",Main.host);
+                par.put("DB",Main.bd);
+                par.put("USU",Main.usu);
+                par.put("CONT",Main.cont);
                 JasperPrint jprint = JasperFillManager.fillReport(rep,par,con.c);
                 if (formato.equals(".pdf")) {
                     Wait_rep.progreso_1.setText(id_empresa+"-"+r.getString("NOMBRE_EMPRESA")+"_.pdf");
@@ -799,7 +803,8 @@ public class GenerarReportes extends Thread{
                 nit=r1.getString("ID_EMPRESA");
             }
             ClassLoader cl= this.getClass().getClassLoader();
-            InputStream fis = (cl.getResourceAsStream("Reportes/Precalculo_seguridad_empresa_ciudad.jasper"));
+            InputStream fis = (cl.getResourceAsStream("Reportes/Precalculo_seguridad_ciudad.jasper"));
+            //InputStream fis = (cl.getResourceAsStream("Reportes/Precalculo_seguridad_empresa_ciudad.jasper"));
             JasperReport rep = (JasperReport) JRLoader.loadObject(fis);
             Map par = new HashMap();
             par.put("ID_EMPRESA",nit);
