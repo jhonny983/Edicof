@@ -76,17 +76,18 @@ public class Add_Retiros extends javax.swing.JDialog {
     JTable asist = new javax.swing.JTable();
     //////////////////////----------------------------
     int row_cedula=0;
-    int row_empleador = 1;
-    int row_f_ingreso = 2;
-    int row_f_retiro = 3;
-    int row_salario=4;
-    int row_eps=5;
-    int row_afp=6;
-    int row_arl=7;
-    int row_ccf=8;
-    int row_obra=9;
-    int row_obs=10;
-    int row_tipo=11;
+    int row_empleado=1;
+    int row_empleador = 2;
+    int row_f_ingreso = 3;
+    int row_f_retiro = 4;
+    int row_salario=5;
+    int row_eps=6;
+    int row_afp=7;
+    int row_arl=8;
+    int row_ccf=9;
+    int row_obra=10;
+    int row_obs=11;
+    int row_tipo=12;
     //static DefaultTableModel modelo = new DefaultTableModel();
     /**
      * Creates new form Add_Preingresos
@@ -802,14 +803,14 @@ public class Add_Retiros extends javax.swing.JDialog {
         new PegarExcel_retiros(jTable1);
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Cedula*", "Empleador (Nombre)", "F Ingreso (DD-MM-AAAA)", "F Retiro (DD-MM-AAAA)", "Salario", "EPS (Nombre)", "AFP (Nombre)", "ARL (Nombre)", "CCF (Nombre)", "Obra", "Observaciones*", "Tipo"
+                "Cedula*", "Empleado", "Empleador (Nombre)", "F Ingreso (DD-MM-AAAA)", "F Retiro (DD-MM-AAAA)", "Salario", "EPS (Nombre)", "AFP (Nombre)", "ARL (Nombre)", "CCF (Nombre)", "Obra", "Observaciones*", "Tipo"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                true, false, false, true, false, false, false, false, false, false, true, false
+                true, false, false, false, true, false, false, false, false, false, false, true, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -818,7 +819,6 @@ public class Add_Retiros extends javax.swing.JDialog {
         });
         jTable1.setToolTipText("qwerty");
         jTable1.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
-        jTable1.setColumnSelectionAllowed(false);
         jTable1.setComponentPopupMenu(jPopupMenu1);
         jTable1.getTableHeader().setReorderingAllowed(false);
         jTable1.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -837,18 +837,18 @@ public class Add_Retiros extends javax.swing.JDialog {
             jTable1.getColumnModel().getColumn(1).setMinWidth(250);
             jTable1.getColumnModel().getColumn(1).setPreferredWidth(250);
             jTable1.getColumnModel().getColumn(1).setMaxWidth(250);
-            jTable1.getColumnModel().getColumn(2).setMinWidth(150);
-            jTable1.getColumnModel().getColumn(2).setPreferredWidth(150);
-            jTable1.getColumnModel().getColumn(2).setMaxWidth(150);
+            jTable1.getColumnModel().getColumn(2).setMinWidth(250);
+            jTable1.getColumnModel().getColumn(2).setPreferredWidth(250);
+            jTable1.getColumnModel().getColumn(2).setMaxWidth(250);
             jTable1.getColumnModel().getColumn(3).setMinWidth(150);
             jTable1.getColumnModel().getColumn(3).setPreferredWidth(150);
             jTable1.getColumnModel().getColumn(3).setMaxWidth(150);
-            jTable1.getColumnModel().getColumn(4).setMinWidth(100);
-            jTable1.getColumnModel().getColumn(4).setPreferredWidth(100);
-            jTable1.getColumnModel().getColumn(4).setMaxWidth(100);
-            jTable1.getColumnModel().getColumn(5).setMinWidth(120);
-            jTable1.getColumnModel().getColumn(5).setPreferredWidth(120);
-            jTable1.getColumnModel().getColumn(5).setMaxWidth(120);
+            jTable1.getColumnModel().getColumn(4).setMinWidth(150);
+            jTable1.getColumnModel().getColumn(4).setPreferredWidth(150);
+            jTable1.getColumnModel().getColumn(4).setMaxWidth(150);
+            jTable1.getColumnModel().getColumn(5).setMinWidth(100);
+            jTable1.getColumnModel().getColumn(5).setPreferredWidth(100);
+            jTable1.getColumnModel().getColumn(5).setMaxWidth(100);
             jTable1.getColumnModel().getColumn(6).setMinWidth(120);
             jTable1.getColumnModel().getColumn(6).setPreferredWidth(120);
             jTable1.getColumnModel().getColumn(6).setMaxWidth(120);
@@ -858,15 +858,18 @@ public class Add_Retiros extends javax.swing.JDialog {
             jTable1.getColumnModel().getColumn(8).setMinWidth(120);
             jTable1.getColumnModel().getColumn(8).setPreferredWidth(120);
             jTable1.getColumnModel().getColumn(8).setMaxWidth(120);
-            jTable1.getColumnModel().getColumn(9).setMinWidth(200);
-            jTable1.getColumnModel().getColumn(9).setPreferredWidth(200);
-            jTable1.getColumnModel().getColumn(9).setMaxWidth(200);
-            jTable1.getColumnModel().getColumn(10).setMinWidth(250);
-            jTable1.getColumnModel().getColumn(10).setPreferredWidth(250);
-            jTable1.getColumnModel().getColumn(10).setMaxWidth(250);
-            jTable1.getColumnModel().getColumn(11).setMinWidth(150);
-            jTable1.getColumnModel().getColumn(11).setPreferredWidth(150);
-            jTable1.getColumnModel().getColumn(11).setMaxWidth(150);
+            jTable1.getColumnModel().getColumn(9).setMinWidth(120);
+            jTable1.getColumnModel().getColumn(9).setPreferredWidth(120);
+            jTable1.getColumnModel().getColumn(9).setMaxWidth(120);
+            jTable1.getColumnModel().getColumn(10).setMinWidth(200);
+            jTable1.getColumnModel().getColumn(10).setPreferredWidth(200);
+            jTable1.getColumnModel().getColumn(10).setMaxWidth(200);
+            jTable1.getColumnModel().getColumn(11).setMinWidth(250);
+            jTable1.getColumnModel().getColumn(11).setPreferredWidth(250);
+            jTable1.getColumnModel().getColumn(11).setMaxWidth(250);
+            jTable1.getColumnModel().getColumn(12).setMinWidth(150);
+            jTable1.getColumnModel().getColumn(12).setPreferredWidth(150);
+            jTable1.getColumnModel().getColumn(12).setMaxWidth(150);
         }
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -1615,6 +1618,7 @@ public void check_empleado(Object emp, TableModel model_1, int row){
                                                     + "ORDER BY FECHA_INGRESO DESC;");
                             if(r.next()){
                                 model_1.setValueAt(r.getString("NOMBRE_EMPRESA"),row,row_empleador);
+                                model_1.setValueAt(r.getString("APELLIDO_1_EMP")+" "+r.getString("APELLIDO_2_EMP")+" "+r.getString("NOMBRE_1_EMP")+" "+r.getString("NOMBRE_2_EMP"),row,row_empleado);
                                 model_1.setValueAt(new SimpleDateFormat("dd-MM-yyyy").format(new SimpleDateFormat("yyyy-MM-dd").parse(r.getString("FECHA_INGRESO"))),row,row_f_ingreso);
                                 model_1.setValueAt(new SimpleDateFormat("dd-MM-yyy").format(new SimpleDateFormat("yyyy-MM-dd").parse(r.getString("FECHA_RETIRO"))).replace("01-01-1900",""),jTable1.getRowCount()-1,row_f_retiro);
                                 model_1.setValueAt(r.getString("SALARIO_NOVEDAD"),row,row_salario);
@@ -1664,6 +1668,7 @@ public void check_empleado(Object emp, TableModel model_1, int row){
                                                     + "ORDER BY FECHA_INGRESO DESC;");
                         if(r.next()){
                             model_1.setValueAt(r.getString("NOMBRE_EMPRESA"),row,row_empleador);
+                            model_1.setValueAt(r.getString("APELLIDO_1_EMP")+" "+r.getString("APELLIDO_2_EMP")+" "+r.getString("NOMBRE_1_EMP")+" "+r.getString("NOMBRE_2_EMP"),row,row_empleado);
                             model_1.setValueAt(new SimpleDateFormat("dd-MM-yyyy").format(new SimpleDateFormat("yyyy-MM-dd").parse(r.getString("FECHA_INGRESO"))),row,row_f_ingreso);
                             model_1.setValueAt(new SimpleDateFormat("dd-MM-yyy").format(new SimpleDateFormat("yyyy-MM-dd").parse(r.getString("FECHA_RETIRO"))).replace("01-01-1900",""),jTable1.getRowCount()-1,row_f_retiro);
                             model_1.setValueAt(r.getString("SALARIO_NOVEDAD"),row,row_salario);
