@@ -297,7 +297,7 @@
             <Component class="javax.swing.JTable" name="info_soci_demo">
               <Properties>
                 <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                  <Table columnCount="24" rowCount="1">
+                  <Table columnCount="21" rowCount="1">
                     <Column editable="true" title="Id*" type="java.lang.Object"/>
                     <Column editable="true" title="Direccion*" type="java.lang.Object"/>
                     <Column editable="true" title="Tel/Cel*" type="java.lang.Object"/>
@@ -305,12 +305,9 @@
                     <Column editable="true" title="Barrio*" type="java.lang.Object"/>
                     <Column editable="true" title="Estrato*" type="java.lang.Object"/>
                     <Column editable="true" title="Tipo Vivienda*" type="java.lang.Object"/>
-                    <Column editable="true" title="Area Trabajo*" type="java.lang.Object"/>
-                    <Column editable="true" title="Cargo*" type="java.lang.Object"/>
                     <Column editable="true" title="Estado Civil*" type="java.lang.Object"/>
                     <Column editable="true" title="No Hijos*" type="java.lang.Object"/>
                     <Column editable="true" title="Nivel Academico*" type="java.lang.Object"/>
-                    <Column editable="true" title="Nacionalidad*" type="java.lang.Object"/>
                     <Column editable="true" title="Personas a Cargo*" type="java.lang.Object"/>
                     <Column editable="true" title="Personas en el Hogar*" type="java.lang.Object"/>
                     <Column editable="true" title="Aportantes Hogar*" type="java.lang.Object"/>
@@ -326,7 +323,6 @@
                 </Property>
                 <Property name="toolTipText" type="java.lang.String" value=""/>
                 <Property name="autoResizeMode" type="int" value="0"/>
-                <Property name="cellSelectionEnabled" type="boolean" value="true"/>
                 <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
                   <TableColumnModel selectionModel="0">
                     <Column maxWidth="90" minWidth="90" prefWidth="90" resizable="true">
@@ -364,16 +360,6 @@
                       <Editor/>
                       <Renderer/>
                     </Column>
-                    <Column maxWidth="160" minWidth="160" prefWidth="160" resizable="true">
-                      <Title/>
-                      <Editor/>
-                      <Renderer/>
-                    </Column>
-                    <Column maxWidth="250" minWidth="250" prefWidth="250" resizable="true">
-                      <Title/>
-                      <Editor/>
-                      <Renderer/>
-                    </Column>
                     <Column maxWidth="100" minWidth="100" prefWidth="100" resizable="true">
                       <Title/>
                       <Editor/>
@@ -385,11 +371,6 @@
                       <Renderer/>
                     </Column>
                     <Column maxWidth="150" minWidth="150" prefWidth="150" resizable="true">
-                      <Title/>
-                      <Editor/>
-                      <Renderer/>
-                    </Column>
-                    <Column maxWidth="100" minWidth="100" prefWidth="100" resizable="true">
                       <Title/>
                       <Editor/>
                       <Renderer/>

@@ -11,12 +11,16 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -483,26 +487,47 @@ public class Admin_Certificados extends javax.swing.JDialog {
         // TODO add your handling code here:
         if (f_exam_cert_alt.getDate()!=null) {
             if (f_cert.getDate()!=null) {
-                int conf = JOptionPane.showConfirmDialog(this,"Esta seguro que desea agregar la información del curso de altura?","Confirmación",JOptionPane.OK_CANCEL_OPTION,JOptionPane.QUESTION_MESSAGE);
-                if (conf == JOptionPane.YES_OPTION) {
-                        Conexion con = new Conexion();
-                        ResultSet r;
-                        con.conexion();
-                    try {
-                        r = con.s.executeQuery ("SELECT `FECHA_EXAM_CERT`, `FECHA_CERT`, `ID_EMP`, `SYNC_ARHI` FROM `t_cert_alturas` WHERE ID_EMP = "+cedula+" AND FECHA_CERT ='"+new SimpleDateFormat("yyyy-MM-dd").format(f_cert.getDate())+"'");
-                        if(r.next()){
-                            JOptionPane.showMessageDialog(null,"El certificado de alturas que intenta ingresar ya existe","Error",JOptionPane.ERROR_MESSAGE);
-                        }else{
-                            con.s.executeUpdate("INSERT INTO `t_cert_alturas`(`FECHA_EXAM_CERT`, `FECHA_CERT`, `ID_EMP`) VALUES ('"+new SimpleDateFormat("yyyy-MM-dd").format(f_exam_cert_alt.getDate())+"','"+new SimpleDateFormat("yyyy-MM-dd").format(f_cert.getDate())+"','"+cedula+"')");
-                            JOptionPane.showMessageDialog(this,"El certificado de alturas fue ingresado correctamente","Información",JOptionPane.INFORMATION_MESSAGE);
-                            load_cert_alt(cedula, table_cert_alt);
-                        }
-                        con.cerrar();
-                    } catch (SQLException ex) {
-                        ex.printStackTrace();
-                        con.cerrar();
-                        JOptionPane.showMessageDialog(null,ex,"Error",JOptionPane.ERROR_MESSAGE);
+                try {
+                    Calendar date_cert = Calendar.getInstance();
+                    date_cert.setTime(f_cert.getDate());
+                    date_cert.add(Calendar.YEAR, 1);
+                    Calendar date_today = Calendar.getInstance();
+                    date_today.setTime(new SimpleDateFormat("dd-MM-yyyy").parse(new SimpleDateFormat("dd-MM-yyyy").format(new Date())));
+                    if (date_cert.getTime().compareTo(date_today.getTime())>=0) {//COMPARA QUE LA FECHA DEL CERTIFICADO NO ESTE VENCIDO CON RESPECTO A LA FECHA ACTUAL
+//                        if (f_exam_cert_alt.getDate().compareTo(f_cert.getDate())<0) {//COMPARA QUE LA FECHA DEL EXAMEN NO SEA MAYOR A LA DEL CERTIFICADO
+                            if (f_cert.getDate().compareTo(new Date())<=0) {
+                                int conf = JOptionPane.showConfirmDialog(this,"Esta seguro que desea agregar la información del curso de altura?","Confirmación",JOptionPane.OK_CANCEL_OPTION,JOptionPane.QUESTION_MESSAGE);
+                                if (conf == JOptionPane.YES_OPTION) {
+                                    Conexion con = new Conexion();
+                                    ResultSet r;
+                                    con.conexion();
+                                    try {
+                                        r = con.s.executeQuery ("SELECT `FECHA_EXAM_CERT`, `FECHA_CERT`, `ID_EMP`, `SYNC_ARHI` FROM `t_cert_alturas` WHERE ID_EMP = "+cedula+" AND FECHA_CERT ='"+new SimpleDateFormat("yyyy-MM-dd").format(f_cert.getDate())+"'");
+                                        if(r.next()){
+                                            JOptionPane.showMessageDialog(null,"El certificado de alturas que intenta ingresar ya existe","Error",JOptionPane.ERROR_MESSAGE);
+                                        }else{
+                                            con.s.executeUpdate("INSERT INTO `t_cert_alturas`(`FECHA_EXAM_CERT`, `FECHA_CERT`, `ID_EMP`) VALUES ('"+new SimpleDateFormat("yyyy-MM-dd").format(f_exam_cert_alt.getDate())+"','"+new SimpleDateFormat("yyyy-MM-dd").format(f_cert.getDate())+"','"+cedula+"')");
+                                            JOptionPane.showMessageDialog(this,"El certificado de alturas fue ingresado correctamente","Información",JOptionPane.INFORMATION_MESSAGE);
+                                            load_cert_alt(cedula, table_cert_alt);
+                                        }
+                                        con.cerrar();
+                                    } catch (SQLException ex) {
+                                        ex.printStackTrace();
+                                        con.cerrar();
+                                        JOptionPane.showMessageDialog(null,ex,"Error",JOptionPane.ERROR_MESSAGE);
+                                    }
+                                }
+                            } else {
+                                JOptionPane.showMessageDialog(null,"La fecha del certificado no puede ser mayor que la fecha actual.","Error",JOptionPane.ERROR_MESSAGE);
+                            }
+//                        } else {
+//                            JOptionPane.showMessageDialog(null,"La fecha del examen medico no puede ser mayor que la fecha del certificado.","Error",JOptionPane.ERROR_MESSAGE);
+//                        }
+                    } else {
+                        JOptionPane.showMessageDialog(null,"La fecha del certificado ingresada esta vencida","Error",JOptionPane.ERROR_MESSAGE);
                     }
+                } catch (ParseException ex) { 
+                    ex.printStackTrace();
                 }
             } else {
                 JOptionPane.showMessageDialog(null,"Ingrese una fecha de certificado en alturas valida","Error",JOptionPane.ERROR_MESSAGE);
@@ -515,49 +540,20 @@ public class Admin_Certificados extends javax.swing.JDialog {
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
         if (f_prot.getDate()!=null) {
-            int conf = JOptionPane.showConfirmDialog(this,"Esta seguro que desea agregar la información del curso de protocolo?","Confirmación",JOptionPane.OK_CANCEL_OPTION,JOptionPane.QUESTION_MESSAGE);
-            if (conf == JOptionPane.YES_OPTION) {
-                    Conexion con = new Conexion();
-                    ResultSet r;
-                    con.conexion();
-                try {
-                    r = con.s.executeQuery ("SELECT * FROM `t_cap_prot` WHERE ID_EMP = "+cedula+" AND FECHA_CAP_PROT ='"+new SimpleDateFormat("yyyy-MM-dd").format(f_prot.getDate())+"'");
-                    if(r.next()){
-                        JOptionPane.showMessageDialog(null,"El curso de protocolo que intenta ingresar ya existe","Error",JOptionPane.ERROR_MESSAGE);
-                    }else{
-                        con.s.executeUpdate("INSERT INTO `t_cap_prot`(`FECHA_CAP_PROT`, `ID_EMP`) VALUES ('"+new SimpleDateFormat("yyyy-MM-dd").format(f_prot.getDate())+"','"+cedula+"')");
-                        JOptionPane.showMessageDialog(this,"La capacitacion de protocolo fue ingresada correctamente","Información",JOptionPane.INFORMATION_MESSAGE);
-                        load_curso_protocolo(cedula, table_protocol);
-                    }
-                    con.cerrar();
-                } catch (SQLException ex) {
-                    ex.printStackTrace();
-                    con.cerrar();
-                    JOptionPane.showMessageDialog(null,ex,"Error",JOptionPane.ERROR_MESSAGE);
-                }
-            }
-        } else {
-            JOptionPane.showMessageDialog(null,"Ingrese una fecha de capacitacion de protocolo valida","Error",JOptionPane.ERROR_MESSAGE);
-        }
-    }//GEN-LAST:event_jButton3ActionPerformed
-
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        // TODO add your handling code here:
-        if (f_riesgo.getDate()!=null) {
-            if (!cb_riesgo.getSelectedItem().equals("Seleccione..")) {
-                int conf = JOptionPane.showConfirmDialog(this,"Esta seguro que desea agregar la información de la encuesta de riesgo?","Confirmación",JOptionPane.OK_CANCEL_OPTION,JOptionPane.QUESTION_MESSAGE);
+            if (f_prot.getDate().compareTo(new Date())<0) {
+                int conf = JOptionPane.showConfirmDialog(this,"Esta seguro que desea agregar la información del curso de protocolo?","Confirmación",JOptionPane.OK_CANCEL_OPTION,JOptionPane.QUESTION_MESSAGE);
                 if (conf == JOptionPane.YES_OPTION) {
                         Conexion con = new Conexion();
                         ResultSet r;
                         con.conexion();
                     try {
-                        r = con.s.executeQuery ("SELECT * FROM `t_riesgo` WHERE ID_EMP = "+cedula+" AND FECHA_ENC ='"+new SimpleDateFormat("yyyy-MM-dd").format(f_riesgo.getDate())+"'");
+                        r = con.s.executeQuery ("SELECT * FROM `t_cap_prot` WHERE ID_EMP = "+cedula+" AND FECHA_CAP_PROT ='"+new SimpleDateFormat("yyyy-MM-dd").format(f_prot.getDate())+"'");
                         if(r.next()){
-                            JOptionPane.showMessageDialog(null,"La encuesta de riesgo que intenta ingresar ya existe","Error",JOptionPane.ERROR_MESSAGE);
+                            JOptionPane.showMessageDialog(null,"El curso de protocolo que intenta ingresar ya existe","Error",JOptionPane.ERROR_MESSAGE);
                         }else{
-                            con.s.executeUpdate("INSERT INTO `t_riesgo`(`FECHA_ENC`, `ID_EMP`, `ID_TIPO`) VALUES ('"+new SimpleDateFormat("yyyy-MM-dd").format(f_riesgo.getDate())+"','"+cedula+"', (SELECT ID_TIPO FROM t_tip_riesgo WHERE NOMBRE_TIPO = '"+cb_riesgo.getSelectedItem()+"'))");
+                            con.s.executeUpdate("INSERT INTO `t_cap_prot`(`FECHA_CAP_PROT`, `ID_EMP`) VALUES ('"+new SimpleDateFormat("yyyy-MM-dd").format(f_prot.getDate())+"','"+cedula+"')");
                             JOptionPane.showMessageDialog(this,"La capacitacion de protocolo fue ingresada correctamente","Información",JOptionPane.INFORMATION_MESSAGE);
-                            load_riesgo(cedula, table_riesgo);
+                            load_curso_protocolo(cedula, table_protocol);
                         }
                         con.cerrar();
                     } catch (SQLException ex) {
@@ -567,7 +563,44 @@ public class Admin_Certificados extends javax.swing.JDialog {
                     }
                 }
             } else {
-                JOptionPane.showMessageDialog(null,"Seleccione un tipo de riesgo valido","Error",JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null,"La fecha del curso no puede ser mayor a la fecha actual.","Error",JOptionPane.ERROR_MESSAGE);
+            }
+        } else {
+            JOptionPane.showMessageDialog(null,"Ingrese una fecha de capacitacion de protocolo valida","Error",JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
+        if (f_riesgo.getDate()!=null) {
+            if (f_riesgo.getDate().compareTo(new Date())<=0) {
+                if (!cb_riesgo.getSelectedItem().equals("Seleccione..")) {
+                    int conf = JOptionPane.showConfirmDialog(this,"Esta seguro que desea agregar la información de la encuesta de riesgo?","Confirmación",JOptionPane.OK_CANCEL_OPTION,JOptionPane.QUESTION_MESSAGE);
+                    if (conf == JOptionPane.YES_OPTION) {
+                            Conexion con = new Conexion();
+                            ResultSet r;
+                            con.conexion();
+                        try {
+                            r = con.s.executeQuery ("SELECT * FROM `t_riesgo` WHERE ID_EMP = "+cedula+" AND FECHA_ENC ='"+new SimpleDateFormat("yyyy-MM-dd").format(f_riesgo.getDate())+"'");
+                            if(r.next()){
+                                JOptionPane.showMessageDialog(null,"La encuesta de riesgo que intenta ingresar ya existe","Error",JOptionPane.ERROR_MESSAGE);
+                            }else{
+                                con.s.executeUpdate("INSERT INTO `t_riesgo`(`FECHA_ENC`, `ID_EMP`, `ID_TIPO`) VALUES ('"+new SimpleDateFormat("yyyy-MM-dd").format(f_riesgo.getDate())+"','"+cedula+"', (SELECT ID_TIPO FROM t_tip_riesgo WHERE NOMBRE_TIPO = '"+cb_riesgo.getSelectedItem()+"'))");
+                                JOptionPane.showMessageDialog(this,"La capacitacion de protocolo fue ingresada correctamente","Información",JOptionPane.INFORMATION_MESSAGE);
+                                load_riesgo(cedula, table_riesgo);
+                            }
+                            con.cerrar();
+                        } catch (SQLException ex) {
+                            ex.printStackTrace();
+                            con.cerrar();
+                            JOptionPane.showMessageDialog(null,ex,"Error",JOptionPane.ERROR_MESSAGE);
+                        }
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(null,"Seleccione un tipo de riesgo valido","Error",JOptionPane.ERROR_MESSAGE);
+                }
+            } else {
+                JOptionPane.showMessageDialog(null,"La fecha de la encuesta de riesgo debe ser menor o igual que la fecha actual","Error",JOptionPane.ERROR_MESSAGE);
             }
         } else {
             JOptionPane.showMessageDialog(null,"Ingrese una fecha de encuesta valida","Error",JOptionPane.ERROR_MESSAGE);

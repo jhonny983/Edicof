@@ -56,52 +56,51 @@ public class CellRender_Ingresos_Masivos_Empleados extends DefaultTableCellRende
                         cell.setForeground(Color.white);
                     }
                 } else {
-                    if (table.getColumnName(column).equals("Nombre 1*")) {
-                        if (check_field(value)) {
+                    if (table.getColumnName(column).equals("Fecha expedicion (DD-MM-AAAA)*")) {//Fecha expedicion (DD-MM-AAAA)*
+                        if (check_fecha(value)) {
                             cell.setOpaque(true);
                             cell.setBackground(new Color(150,240,160));
                             cell.setForeground(Color.black);
-                        }else{
+                        } else {
                             cell.setOpaque(true);
                             cell.setBackground(Color.red);
                             cell.setForeground(Color.white);
                         }
-                    }else{
-                        if (table.getColumnName(column).equals("Nombre 2")) {
-                            cell.setOpaque(true);
-                            cell.setBackground(new Color(150,240,160));
-                            cell.setForeground(Color.black);
-                        }else{
-                            if (table.getColumnName(column).equals("Apellido 1*")) {
-                                if (check_field(value)) {
-                                    cell.setOpaque(true);
-                                    cell.setBackground(new Color(150,240,160));
-                                    cell.setForeground(Color.black);
-                                }else{
-                                    cell.setOpaque(true);
-                                    cell.setBackground(Color.red);
-                                    cell.setForeground(Color.white);
-                                }
+                    } else {
+                         if (table.getColumnName(column).equals("Nombre 1*")) {
+                            if (check_field(value)) {
+                                cell.setOpaque(true);
+                                cell.setBackground(new Color(150,240,160));
+                                cell.setForeground(Color.black);
                             }else{
-                                if (table.getColumnName(column).equals("Apellido 2")) {
-                                    cell.setOpaque(true);
-                                    cell.setBackground(new Color(150,240,160));
-                                    cell.setForeground(Color.black);
+                                cell.setOpaque(true);
+                                cell.setBackground(Color.red);
+                                cell.setForeground(Color.white);
+                            }
+                        }else{
+                            if (table.getColumnName(column).equals("Nombre 2")) {
+                                cell.setOpaque(true);
+                                cell.setBackground(new Color(150,240,160));
+                                cell.setForeground(Color.black);
+                            }else{
+                                if (table.getColumnName(column).equals("Apellido 1*")) {
+                                    if (check_field(value)) {
+                                        cell.setOpaque(true);
+                                        cell.setBackground(new Color(150,240,160));
+                                        cell.setForeground(Color.black);
+                                    }else{
+                                        cell.setOpaque(true);
+                                        cell.setBackground(Color.red);
+                                        cell.setForeground(Color.white);
+                                    }
                                 }else{
-                                    if (table.getColumnName(column).equals("Tipo de sangre*")) {
-                                        if (check_tip_sangre(value)) {
-                                            cell.setOpaque(true);
-                                            cell.setBackground(new Color(150,240,160));
-                                            cell.setForeground(Color.black);
-                                        } else {
-                                            cell.setOpaque(true);
-                                            cell.setBackground(Color.red);
-                                            cell.setForeground(Color.white);
-                                        }
-                                        
-                                    } else {
-                                        if (table.getColumnName(column).equals("Género (M-F)*")) {
-                                            if (check_genero(value)) {
+                                    if (table.getColumnName(column).equals("Apellido 2")) {
+                                        cell.setOpaque(true);
+                                        cell.setBackground(new Color(150,240,160));
+                                        cell.setForeground(Color.black);
+                                    }else{
+                                        if (table.getColumnName(column).equals("Tipo de sangre*")) {
+                                            if (check_tip_sangre(value)) {
                                                 cell.setOpaque(true);
                                                 cell.setBackground(new Color(150,240,160));
                                                 cell.setForeground(Color.black);
@@ -110,9 +109,10 @@ public class CellRender_Ingresos_Masivos_Empleados extends DefaultTableCellRende
                                                 cell.setBackground(Color.red);
                                                 cell.setForeground(Color.white);
                                             }
-                                        } else {//Lugar nacimiento*
-                                            if (table.getColumnName(column).equals("Lugar nacimiento*")) {
-                                                if (check_municipio(value)) {
+
+                                        } else {
+                                            if (table.getColumnName(column).equals("Género (M-F)*")) {
+                                                if (check_genero(value)) {
                                                     cell.setOpaque(true);
                                                     cell.setBackground(new Color(150,240,160));
                                                     cell.setForeground(Color.black);
@@ -121,9 +121,9 @@ public class CellRender_Ingresos_Masivos_Empleados extends DefaultTableCellRende
                                                     cell.setBackground(Color.red);
                                                     cell.setForeground(Color.white);
                                                 }
-                                            } else {
-                                                if (table.getColumnName(column).equals("Fecha nacimiento (DD-MM-AAAA)*")) {//Fecha nacimiento (DD-MM-AAAA)*
-                                                    if (check_fecha(value)) {
+                                            } else {//Lugar nacimiento*
+                                                if (table.getColumnName(column).equals("Lugar nacimiento*")) {
+                                                    if (check_municipio(value)) {
                                                         cell.setOpaque(true);
                                                         cell.setBackground(new Color(150,240,160));
                                                         cell.setForeground(Color.black);
@@ -133,8 +133,8 @@ public class CellRender_Ingresos_Masivos_Empleados extends DefaultTableCellRende
                                                         cell.setForeground(Color.white);
                                                     }
                                                 } else {
-                                                    if (table.getColumnName(column).equals("Estatura (cm)*")){//Estatura (cm)*
-                                                        if (check_estat(value)) {
+                                                    if (table.getColumnName(column).equals("Fecha nacimiento (DD-MM-AAAA)*")) {//Fecha nacimiento (DD-MM-AAAA)*
+                                                        if (check_fecha(value)) {
                                                             cell.setOpaque(true);
                                                             cell.setBackground(new Color(150,240,160));
                                                             cell.setForeground(Color.black);
@@ -143,7 +143,19 @@ public class CellRender_Ingresos_Masivos_Empleados extends DefaultTableCellRende
                                                             cell.setBackground(Color.red);
                                                             cell.setForeground(Color.white);
                                                         }
-                                                    } 
+                                                    } else {
+                                                        if (table.getColumnName(column).equals("Estatura (cm)*")){//Estatura (cm)*
+                                                            if (check_estat(value)) {
+                                                                cell.setOpaque(true);
+                                                                cell.setBackground(new Color(150,240,160));
+                                                                cell.setForeground(Color.black);
+                                                            } else {
+                                                                cell.setOpaque(true);
+                                                                cell.setBackground(Color.red);
+                                                                cell.setForeground(Color.white);
+                                                            }
+                                                        } 
+                                                    }
                                                 }
                                             }
                                         }
@@ -152,7 +164,6 @@ public class CellRender_Ingresos_Masivos_Empleados extends DefaultTableCellRende
                             }
                         }
                     }
-                    
                 }
             }
         }

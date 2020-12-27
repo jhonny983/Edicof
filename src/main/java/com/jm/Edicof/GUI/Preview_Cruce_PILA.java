@@ -910,10 +910,10 @@ public void sys_no(JTable pila,int m, int y){
                                     "        ON (t_novedades.ID_EMPRESA = t_empresas.ID_EMPRESA)\n" +
                                     "    INNER JOIN t_empleados \n" +
                                     "        ON (t_novedades.ID_EMPLEADO = t_empleados.ID_EMP)\n" +
-                                    "    INNER JOIN t_arl \n" +
-                                    "        ON (t_empresas.ID_ARL = t_arl.ID_ARL)\n" +
-                                    "    INNER JOIN t_ccf \n" +
-                                    "        ON (t_empresas.ID_CCF = t_ccf.ID_CCF)\n" +
+//                                    "    INNER JOIN t_arl \n" +
+//                                    "        ON (t_empresas.ID_ARL = t_arl.ID_ARL)\n" +
+//                                    "    INNER JOIN t_ccf \n" +
+//                                    "        ON (t_empresas.ID_CCF = t_ccf.ID_CCF)\n" +
                                     "    INNER JOIN t_eps \n" +
                                     "        ON (t_novedades.ID_EPS = t_eps.ID_EPS)\n" +
                                     "    INNER JOIN t_afp \n" +
@@ -934,12 +934,12 @@ public void sys_no(JTable pila,int m, int y){
                     modelo_eps.setValueAt(pila.getValueAt(i,2).toString(),emp_eps_diff.getRowCount()-1,2);
                     modelo_eps.setValueAt(r.getString("NOMBRE_EPS"),emp_eps_diff.getRowCount()-1,3);
                 }
-                if (!r.getString("NOMBRE_ARL").equals(pila.getValueAt(i,3).toString())) {
+                if (!r.getString("ARL_NOV").equals(pila.getValueAt(i,3).toString())) {
                     modelo_arl.addRow(fila);
                     modelo_arl.setValueAt(Long.parseLong(r.getString("ID_EMPLEADO")),emp_arl_diff.getRowCount()-1,0);
                     modelo_arl.setValueAt(r.getString("APELLIDO_1_EMP")+" "+r.getString("APELLIDO_2_EMP")+" "+r.getString("NOMBRE_1_EMP")+" "+r.getString("NOMBRE_2_EMP"),emp_arl_diff.getRowCount()-1,1);
                     modelo_arl.setValueAt(pila.getValueAt(i,3).toString(),emp_arl_diff.getRowCount()-1,2);
-                    modelo_arl.setValueAt(r.getString("NOMBRE_ARL"),emp_arl_diff.getRowCount()-1,3);
+                    modelo_arl.setValueAt(r.getString("ARL_NOV"),emp_arl_diff.getRowCount()-1,3);
                 }
                 if (!r.getString("NOMBRE_AFP").equals(pila.getValueAt(i,4).toString())) {
                     modelo_afp.addRow(fila);
@@ -948,17 +948,18 @@ public void sys_no(JTable pila,int m, int y){
                     modelo_afp.setValueAt(pila.getValueAt(i,4).toString(),emp_afp_diff.getRowCount()-1,2);
                     modelo_afp.setValueAt(r.getString("NOMBRE_AFP"),emp_afp_diff.getRowCount()-1,3);
                 }
-                if (!r.getString("NOMBRE_CCF").equals(pila.getValueAt(i,5).toString())) {
+                if (!r.getString("CCF_NOV").equals(pila.getValueAt(i,5).toString())) {
                     modelo_ccf.addRow(fila);
                     modelo_ccf.setValueAt(Long.parseLong(r.getString("ID_EMPLEADO")),emp_afp_diff.getRowCount()-1,0);
                     modelo_ccf.setValueAt(r.getString("APELLIDO_1_EMP")+" "+r.getString("APELLIDO_2_EMP")+" "+r.getString("NOMBRE_1_EMP")+" "+r.getString("NOMBRE_2_EMP"),emp_afp_diff.getRowCount()-1,1);
                     modelo_ccf.setValueAt(pila.getValueAt(i,5).toString(),emp_afp_diff.getRowCount()-1,2);
-                    modelo_ccf.setValueAt(r.getString("NOMBRE_CCF"),emp_afp_diff.getRowCount()-1,3);
+                    modelo_ccf.setValueAt(r.getString("CCF_NOV"),emp_afp_diff.getRowCount()-1,3);
                 }
             }
         }catch(SQLException e){
             con.cerrar();
             e.printStackTrace();
+            
         }
     }
 }

@@ -32,11 +32,11 @@ boolean perm_mun=false;
         ac_mun(cb_dep.getSelectedItem().toString());
         ac_barrio(cb_mun.getSelectedItem().toString());
         ac_tip_vivienda();
-        ac_area();
-        ac_cargo();
+//        ac_area();
+//        ac_cargo();
         ac_estado();
         ac_niv_acad();
-        ac_nacionalidad();
+//        ac_nacionalidad();
         ac_parentesco();
         perm=true;
         perm_mun=true;
@@ -52,11 +52,11 @@ boolean perm_mun=false;
         ac_mun(cb_dep.getSelectedItem().toString());
         ac_barrio(cb_mun.getSelectedItem().toString());
         ac_tip_vivienda();
-        ac_area();
-        ac_cargo();
+//        ac_area();
+//        ac_cargo();
         ac_estado();
         ac_niv_acad();
-        ac_nacionalidad();
+//        ac_nacionalidad();
         ac_parentesco();
         perm=true;
         perm_mun=true;
@@ -83,8 +83,6 @@ boolean perm_mun=false;
         cb_num_pers_cargo = new javax.swing.JComboBox<>();
         jLabel14 = new javax.swing.JLabel();
         cb_niv = new javax.swing.JComboBox<>();
-        jLabel16 = new javax.swing.JLabel();
-        cb_nacion = new javax.swing.JComboBox<>();
         jLabel17 = new javax.swing.JLabel();
         cb_pers_hogar = new javax.swing.JComboBox<>();
         jLabel18 = new javax.swing.JLabel();
@@ -138,11 +136,6 @@ boolean perm_mun=false;
         cb_barrio = new javax.swing.JComboBox<>();
         jLabel11 = new javax.swing.JLabel();
         cb_dep = new javax.swing.JComboBox<>();
-        jPanel5 = new javax.swing.JPanel();
-        jLabel5 = new javax.swing.JLabel();
-        cb_area = new javax.swing.JComboBox<>();
-        jLabel19 = new javax.swing.JLabel();
-        cb_cargo = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Visualizar Información Socio Demografica");
@@ -168,10 +161,6 @@ boolean perm_mun=false;
 
         cb_niv.setEnabled(false);
 
-        jLabel16.setText("Nacionalidad");
-
-        cb_nacion.setEnabled(false);
-
         jLabel17.setText("Personas en el hogar");
 
         cb_pers_hogar.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione..", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10" }));
@@ -194,14 +183,12 @@ boolean perm_mun=false;
                     .addComponent(jLabel18)
                     .addComponent(jLabel17)
                     .addComponent(jLabel14)
-                    .addComponent(jLabel13)
-                    .addComponent(jLabel16))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel13))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 5, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(cb_num_hijos, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cb_est_civil, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cb_niv, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cb_nacion, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cb_num_pers_cargo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cb_pers_hogar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cb_pers_aport, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -222,10 +209,6 @@ boolean perm_mun=false;
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cb_niv, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel14))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cb_nacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel16))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cb_num_pers_cargo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -652,45 +635,6 @@ boolean perm_mun=false;
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder("Información Laboral"));
-
-        jLabel5.setText("Area de trabajo");
-
-        cb_area.setEnabled(false);
-
-        jLabel19.setText("Cargo");
-
-        cb_cargo.setEnabled(false);
-
-        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
-        jPanel5.setLayout(jPanel5Layout);
-        jPanel5Layout.setHorizontalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel5)
-                    .addComponent(jLabel19))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(cb_area, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cb_cargo, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(22, 22, 22))
-        );
-        jPanel5Layout.setVerticalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cb_area, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cb_cargo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel19))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -705,8 +649,7 @@ boolean perm_mun=false;
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jPanel9, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -729,8 +672,6 @@ boolean perm_mun=false;
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -746,7 +687,7 @@ boolean perm_mun=false;
                                 .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(17, 17, 17)
                 .addComponent(jButton1)
                 .addContainerGap())
         );
@@ -875,14 +816,11 @@ boolean perm_mun=false;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup Group_Tiempo_libre;
     private javax.swing.ButtonGroup Group_ahorro;
-    private javax.swing.JComboBox<String> cb_area;
     private javax.swing.JComboBox<String> cb_barrio;
-    private javax.swing.JComboBox<String> cb_cargo;
     private javax.swing.JComboBox<String> cb_dep;
     private javax.swing.JComboBox<String> cb_est_civil;
     private javax.swing.JComboBox<String> cb_estrato;
     private javax.swing.JComboBox<String> cb_mun;
-    private javax.swing.JComboBox<String> cb_nacion;
     private javax.swing.JComboBox<String> cb_niv;
     private javax.swing.JComboBox<String> cb_num_hijos;
     private javax.swing.JComboBox<String> cb_num_pers_cargo;
@@ -906,14 +844,11 @@ boolean perm_mun=false;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
-    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
@@ -922,7 +857,6 @@ boolean perm_mun=false;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
@@ -1052,50 +986,50 @@ public final void ac_estado(){
         JOptionPane.showMessageDialog(null,j,"Error",JOptionPane.ERROR_MESSAGE);
     }
 }
-public final void ac_area(){
-    cb_area.removeAllItems();
-    cb_area.addItem("Seleccione..");
-    Conexion con = new Conexion();
-    con.conexion();
-    ResultSet r;
-    try{
-        r = con.s.executeQuery ("SELECT *\n" +
-                                "FROM\n" +
-                                "    t_actividades\n" +
-                                "    ORDER BY NOMBRE_ACTIVIDAD ASC;");
-        while(r.next()){
-            String str=r.getString("NOMBRE_ACTIVIDAD");
-            cb_area.addItem(str);
-        }
-        con.cerrar();
-    }catch(SQLException j){
-        con.cerrar();
-        j.printStackTrace();
-        JOptionPane.showMessageDialog(null,j,"Error",JOptionPane.ERROR_MESSAGE);
-    }
-}
-public final void ac_cargo(){
-    cb_cargo.removeAllItems();
-    cb_cargo.addItem("Seleccione..");
-    Conexion con = new Conexion();
-    con.conexion();
-    ResultSet r;
-    try{
-        r = con.s.executeQuery ("SELECT *\n" +
-                                "FROM\n" +
-                                "    t_cargo\n" +
-                                "    ORDER BY NOMBRE_CARGO ASC;");
-        while(r.next()){
-            String str=r.getString("NOMBRE_CARGO");
-            cb_cargo.addItem(str);
-        }
-        con.cerrar();
-    }catch(SQLException j){
-        con.cerrar();
-        j.printStackTrace();
-        JOptionPane.showMessageDialog(null,j,"Error",JOptionPane.ERROR_MESSAGE);
-    }
-}
+//public final void ac_area(){
+//    cb_area.removeAllItems();
+//    cb_area.addItem("Seleccione..");
+//    Conexion con = new Conexion();
+//    con.conexion();
+//    ResultSet r;
+//    try{
+//        r = con.s.executeQuery ("SELECT *\n" +
+//                                "FROM\n" +
+//                                "    t_actividades\n" +
+//                                "    ORDER BY NOMBRE_ACTIVIDAD ASC;");
+//        while(r.next()){
+//            String str=r.getString("NOMBRE_ACTIVIDAD");
+//            cb_area.addItem(str);
+//        }
+//        con.cerrar();
+//    }catch(SQLException j){
+//        con.cerrar();
+//        j.printStackTrace();
+//        JOptionPane.showMessageDialog(null,j,"Error",JOptionPane.ERROR_MESSAGE);
+//    }
+//}
+//public final void ac_cargo(){
+//    cb_cargo.removeAllItems();
+//    cb_cargo.addItem("Seleccione..");
+//    Conexion con = new Conexion();
+//    con.conexion();
+//    ResultSet r;
+//    try{
+//        r = con.s.executeQuery ("SELECT *\n" +
+//                                "FROM\n" +
+//                                "    t_cargo\n" +
+//                                "    ORDER BY NOMBRE_CARGO ASC;");
+//        while(r.next()){
+//            String str=r.getString("NOMBRE_CARGO");
+//            cb_cargo.addItem(str);
+//        }
+//        con.cerrar();
+//    }catch(SQLException j){
+//        con.cerrar();
+//        j.printStackTrace();
+//        JOptionPane.showMessageDialog(null,j,"Error",JOptionPane.ERROR_MESSAGE);
+//    }
+//}
 public final void ac_niv_acad(){
     cb_niv.removeAllItems();
     cb_niv.addItem("Seleccione..");
@@ -1142,29 +1076,29 @@ public final void ac_tip_vivienda(){
         JOptionPane.showMessageDialog(null,j,"Error",JOptionPane.ERROR_MESSAGE);
     }
 }
-public final void ac_nacionalidad(){
-    cb_nacion.removeAllItems();
-    cb_nacion.addItem("Seleccione..");
-    Conexion con = new Conexion();
-    con.conexion();
-    ResultSet r;
-    try{
-        r = con.s.executeQuery ("SELECT *\n" +
-                                "FROM\n" +
-                                "    t_nacionalidad\n" +
-                                "ORDER BY NOMBRE_NACION ASC;");
-        while(r.next()){
-            String str=r.getString("NOMBRE_NACION");
-            cb_nacion.addItem(str);
-            
-        }
-        con.cerrar();
-    }catch(SQLException j){
-        con.cerrar();
-        j.printStackTrace();
-        JOptionPane.showMessageDialog(null,j,"Error",JOptionPane.ERROR_MESSAGE);
-    }
-}
+//public final void ac_nacionalidad(){
+//    cb_nacion.removeAllItems();
+//    cb_nacion.addItem("Seleccione..");
+//    Conexion con = new Conexion();
+//    con.conexion();
+//    ResultSet r;
+//    try{
+//        r = con.s.executeQuery ("SELECT *\n" +
+//                                "FROM\n" +
+//                                "    t_nacionalidad\n" +
+//                                "ORDER BY NOMBRE_NACION ASC;");
+//        while(r.next()){
+//            String str=r.getString("NOMBRE_NACION");
+//            cb_nacion.addItem(str);
+//            
+//        }
+//        con.cerrar();
+//    }catch(SQLException j){
+//        con.cerrar();
+//        j.printStackTrace();
+//        JOptionPane.showMessageDialog(null,j,"Error",JOptionPane.ERROR_MESSAGE);
+//    }
+//}
 public final void ac_parentesco(){
     cb_parentesco.removeAllItems();
     cb_parentesco.addItem("Seleccione..");
@@ -1259,10 +1193,6 @@ public void load_info(String ced){
                                 "    `t_info_sociodemografica`\n" +
                                 "    INNER JOIN `t_estado_civil` \n" +
                                 "        ON (`t_info_sociodemografica`.`ID_ESTADO_CIVIL_EMP` = `t_estado_civil`.`ID_ESTADO`)\n" +
-                                "    INNER JOIN `t_cargo` \n" +
-                                "        ON (`t_info_sociodemografica`.`ID_CARGO` = `t_cargo`.`ID_CARGO`)\n" +
-                                "    INNER JOIN `t_actividades` \n" +
-                                "        ON (`t_info_sociodemografica`.`ID_AREA_TRABAJO_EMP` = `t_actividades`.`ID_ACTIVIDAD`)\n" +
                                 "    INNER JOIN `t_parentesco` \n" +
                                 "        ON (`t_info_sociodemografica`.`ID_PAR_ACU_EMP` = `t_parentesco`.`ID_PAR`)\n" +
                                 "    INNER JOIN `t_barrio` \n" +
@@ -1275,8 +1205,8 @@ public void load_info(String ced){
                                 "        ON (`t_info_sociodemografica`.`ID_NIV_ACAD_EMP` = `t_nivel_academico`.`ID_NIVEL`)\n" +
                                 "    INNER JOIN `t_tipo_vivienda` \n" +
                                 "        ON (`t_info_sociodemografica`.`ID_TIP_VIV_EMP` = `t_tipo_vivienda`.`ID_TIPO_VIVIENDA`)\n" +
-                                "    INNER JOIN `t_nacionalidad` \n" +
-                                "        ON (`t_info_sociodemografica`.`ID_NACION_EMP` = `t_nacionalidad`.`ID_NACION`)\n" +
+//                                "    INNER JOIN `t_nacionalidad` \n" +
+//                                "        ON (`t_info_sociodemografica`.`ID_NACION_EMP` = `t_nacionalidad`.`ID_NACION`)\n" +
                                 "       WHERE ID_EMP = "+ced+";");
         if(r.next()){
             direccion.setText(r.getString("DIRECCION_EMP"));
@@ -1286,12 +1216,9 @@ public void load_info(String ced){
             cb_barrio.setSelectedItem(r.getString("NOMBRE_BARRIO"));
             cb_estrato.setSelectedItem(r.getString("ESTRATO_EMP"));
             cb_vivienda.setSelectedItem(r.getString("NOMBRE_TIPO_VIVIENDA"));
-            cb_area.setSelectedItem(r.getString("NOMBRE_ACTIVIDAD"));
-            cb_cargo.setSelectedItem(r.getString("NOMBRE_CARGO"));
             cb_est_civil.setSelectedItem(r.getString("NOMBRE_ESTADO"));
             cb_num_hijos.setSelectedItem(r.getString("NUM_HIJOS_EMP"));
             cb_niv.setSelectedItem(r.getString("NOMBRE_NIVEL"));
-            cb_nacion.setSelectedItem(r.getString("NOMBRE_NACION"));
             cb_num_pers_cargo.setSelectedItem(r.getString("PER_CARGO_EMP"));
             cb_pers_hogar.setSelectedItem(r.getString("PERS_HOGAR_EMP"));
             cb_pers_aport.setSelectedItem(r.getString("PERS_AP_HOGAR_EMP"));

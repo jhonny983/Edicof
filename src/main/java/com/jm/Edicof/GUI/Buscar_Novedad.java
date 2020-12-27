@@ -53,16 +53,33 @@ public class Buscar_Novedad extends javax.swing.JDialog {
                                                                                 "CCF", 
                                                                                 "Tipo", 
                                                                                 "F Registro", 
-                                                                                "F nacimiento", 
-                                                                                "F expedición", 
-                                                                                "Direccion", 
-                                                                                "Barrio", 
-                                                                                "Telefono",
+//                                                                                "F nacimiento", 
+//                                                                                "F expedición", 
+//                                                                                "Direccion", 
+//                                                                                "Barrio", 
+//                                                                                "Telefono",
                                                                                 "Municipio", 
                                                                                 "Observaciones"});
-     /**
+    //////////////////////----------------------------
+    int row_cedula=0;
+    int row_empleado = 1;
+    int row_nit = 2;
+    int row_empleador = 3;
+    int row_f_ingreso = 4;
+    int row_f_retiro = 5;
+    int row_salario=6;
+    int row_obra=7;
+    int row_eps=8;
+    int row_afp=9;
+    int row_arl=10;
+    int row_ccf=11;
+    int row_tipo=12;
+    int row_f_registro=13;
+    int row_mun=14; 
+    int row_obs=15;
+    /**
      * Creates new form Editar_Novedad
-  
+     * 
      */
     public Buscar_Novedad(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -117,10 +134,10 @@ public class Buscar_Novedad extends javax.swing.JDialog {
         novedades.getColumnModel().getColumn(13).setCellRenderer(tcr);
         novedades.getColumnModel().getColumn(14).setCellRenderer(tcr);
         novedades.getColumnModel().getColumn(15).setCellRenderer(tcr);
-        novedades.getColumnModel().getColumn(16).setCellRenderer(tcr);
-        novedades.getColumnModel().getColumn(17).setCellRenderer(tcr);
-        novedades.getColumnModel().getColumn(18).setCellRenderer(tcr);
-        novedades.getColumnModel().getColumn(19).setCellRenderer(tcr);
+//        novedades.getColumnModel().getColumn(16).setCellRenderer(tcr);
+//        novedades.getColumnModel().getColumn(17).setCellRenderer(tcr);
+//        novedades.getColumnModel().getColumn(18).setCellRenderer(tcr);
+//        novedades.getColumnModel().getColumn(19).setCellRenderer(tcr);
         while(novedades.getRowCount()!=0){
             modelo.removeRow(novedades.getRowCount()-1);
         }
@@ -477,12 +494,8 @@ public class Buscar_Novedad extends javax.swing.JDialog {
             novedades.getColumnModel().getColumn(12).setPreferredWidth(100);
             novedades.getColumnModel().getColumn(13).setPreferredWidth(80);
             novedades.getColumnModel().getColumn(14).setPreferredWidth(80);
-            novedades.getColumnModel().getColumn(15).setPreferredWidth(80);
-            novedades.getColumnModel().getColumn(16).setPreferredWidth(160);
-            novedades.getColumnModel().getColumn(17).setPreferredWidth(150);
-            novedades.getColumnModel().getColumn(18).setPreferredWidth(150);
-            novedades.getColumnModel().getColumn(19).setPreferredWidth(200);
-            novedades.getColumnModel().getColumn(20).setPreferredWidth(1000);
+            novedades.getColumnModel().getColumn(15).setPreferredWidth(1000);
+
         }
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -616,27 +629,27 @@ public class Buscar_Novedad extends javax.swing.JDialog {
             r = con.s.executeQuery (query(cb_empleados, t_empleador, tf_municipio, tf_obra, tf_eps, tf_afp, tf_arl, tf_ccf, f_inicio, f_final, tipo_nov));
             while (r.next()) {     
                 modelo.addRow(fila);
-                modelo.setValueAt(Long.parseLong(r.getString("ID_EMPLEADO")),novedades.getRowCount()-1,0);
-                modelo.setValueAt(r.getString("APELLIDO_1_EMP")+" "+r.getString("APELLIDO_2_EMP")+" "+r.getString("NOMBRE_1_EMP")+" "+r.getString("NOMBRE_2_EMP"),novedades.getRowCount()-1,1);
-                modelo.setValueAt(r.getString("ID_EMPRESA"),novedades.getRowCount()-1,2);
-                modelo.setValueAt(r.getString("NOMBRE_EMPRESA"),novedades.getRowCount()-1,3);
-                modelo.setValueAt(new SimpleDateFormat("yyyy-MM-dd").parse(r.getString("FECHA_INGRESO")),novedades.getRowCount()-1,4);
-                modelo.setValueAt(new SimpleDateFormat("yyyy-MM-dd").parse(r.getString("FECHA_RETIRO")),novedades.getRowCount()-1,5);
-                modelo.setValueAt(String.format ("%.0f", Float.parseFloat(r.getString("SALARIO_NOVEDAD"))),novedades.getRowCount()-1,6);
-                modelo.setValueAt(r.getString("NOMBRE_OBRA"),novedades.getRowCount()-1,7);
-                modelo.setValueAt(r.getString("NOMBRE_EPS"),novedades.getRowCount()-1,8);
-                modelo.setValueAt(r.getString("NOMBRE_AFP"),novedades.getRowCount()-1,9);
-                modelo.setValueAt(r.getString("ARL_NOV"),novedades.getRowCount()-1,10);
-                modelo.setValueAt(r.getString("CCF_NOV"),novedades.getRowCount()-1,11);
-                modelo.setValueAt(r.getString("NOMBRE_TIPO"),novedades.getRowCount()-1,12);
-                modelo.setValueAt(new SimpleDateFormat("yyyy-MM-dd").parse(r.getString("F_REGISTRO")),novedades.getRowCount()-1,13);//F_EXP_NOV
-                modelo.setValueAt(new SimpleDateFormat("yyyy-MM-dd").parse(r.getString("F_NAC_NOV")),novedades.getRowCount()-1,14);
-                modelo.setValueAt(new SimpleDateFormat("yyyy-MM-dd").parse(r.getString("F_EXP_NOV")),novedades.getRowCount()-1,15);
-                modelo.setValueAt(r.getString("DIR_EMP_NOV"),novedades.getRowCount()-1,16);
-                modelo.setValueAt(r.getString("BARRIO_NOV"),novedades.getRowCount()-1,17);
-                modelo.setValueAt(r.getString("TEL_NOV"),novedades.getRowCount()-1,18);
-                modelo.setValueAt(r.getString("NOMBRE_MUN")+"-"+r.getString("NOMBRE_DEP"),novedades.getRowCount()-1,19);
-                modelo.setValueAt(r.getString("OBS_NOV"),novedades.getRowCount()-1,20);
+                modelo.setValueAt(Long.parseLong(r.getString("ID_EMPLEADO")),novedades.getRowCount()-1,row_cedula);
+                modelo.setValueAt(r.getString("APELLIDO_1_EMP")+" "+r.getString("APELLIDO_2_EMP")+" "+r.getString("NOMBRE_1_EMP")+" "+r.getString("NOMBRE_2_EMP"),novedades.getRowCount()-1,row_empleado);
+                modelo.setValueAt(r.getString("ID_EMPRESA"),novedades.getRowCount()-1,row_nit);
+                modelo.setValueAt(r.getString("NOMBRE_EMPRESA"),novedades.getRowCount()-1,row_empleador);
+                modelo.setValueAt(new SimpleDateFormat("yyyy-MM-dd").parse(r.getString("FECHA_INGRESO")),novedades.getRowCount()-1,row_f_ingreso);
+                modelo.setValueAt(new SimpleDateFormat("yyyy-MM-dd").parse(r.getString("FECHA_RETIRO")),novedades.getRowCount()-1,row_f_retiro);
+                modelo.setValueAt(String.format ("%.0f", Float.parseFloat(r.getString("SALARIO_NOVEDAD"))),novedades.getRowCount()-1,row_salario);
+                modelo.setValueAt(r.getString("NOMBRE_OBRA"),novedades.getRowCount()-1,row_obra);
+                modelo.setValueAt(r.getString("NOMBRE_EPS"),novedades.getRowCount()-1,row_eps);
+                modelo.setValueAt(r.getString("NOMBRE_AFP"),novedades.getRowCount()-1,row_afp);
+                modelo.setValueAt(r.getString("ARL_NOV"),novedades.getRowCount()-1,row_arl);
+                modelo.setValueAt(r.getString("CCF_NOV"),novedades.getRowCount()-1,row_ccf);
+                modelo.setValueAt(r.getString("NOMBRE_TIPO"),novedades.getRowCount()-1,row_tipo);
+                modelo.setValueAt(new SimpleDateFormat("yyyy-MM-dd").parse(r.getString("F_REGISTRO")),novedades.getRowCount()-1,row_f_registro);//F_EXP_NOV
+//                modelo.setValueAt(new SimpleDateFormat("yyyy-MM-dd").parse(r.getString("F_NAC_NOV")),novedades.getRowCount()-1,14);
+//                modelo.setValueAt(new SimpleDateFormat("yyyy-MM-dd").parse(r.getString("F_EXP_NOV")),novedades.getRowCount()-1,15);
+//                modelo.setValueAt(r.getString("DIR_EMP_NOV"),novedades.getRowCount()-1,16);
+//                modelo.setValueAt(r.getString("BARRIO_NOV"),novedades.getRowCount()-1,17);
+//                modelo.setValueAt(r.getString("TEL_NOV"),novedades.getRowCount()-1,18);
+                modelo.setValueAt(r.getString("NOMBRE_MUN")+"-"+r.getString("NOMBRE_DEP"),novedades.getRowCount()-1,row_mun);
+                modelo.setValueAt(r.getString("OBS_NOV"),novedades.getRowCount()-1,row_obs);
             }
             n_novedades.setText(String.valueOf(novedades.getRowCount()));
             if (novedades.getRowCount()>0) {
@@ -662,11 +675,17 @@ public class Buscar_Novedad extends javax.swing.JDialog {
         // TODO add your handling code here:
         if (novedades.getSelectedRow()!=-1) {
             if (Main.rol.getText().equals("ADMINISTRADOR") | Main.rol.getText().equals("MASTER")) {
-                String aux = novedades.getValueAt(novedades.getSelectedRow(),5).toString();
+                String aux = novedades.getValueAt(novedades.getSelectedRow(),row_f_retiro).toString();
                 if (aux.equals("")) {
                     aux = "01-01-1900";
                 }
-                Edd_Novedad ed_nov = new Edd_Novedad(this,true,novedades.getValueAt(novedades.getSelectedRow(),0).toString(),novedades.getValueAt(novedades.getSelectedRow(),2).toString(),novedades.getValueAt(novedades.getSelectedRow(),4),novedades.getValueAt(novedades.getSelectedRow(),5),novedades.getValueAt(novedades.getSelectedRow(),12).toString(), true);
+                Edd_Novedad ed_nov = new Edd_Novedad(this, true,
+                        novedades.getValueAt(novedades.getSelectedRow(),row_cedula).toString(),
+                        novedades.getValueAt(novedades.getSelectedRow(),row_nit).toString(),
+                        novedades.getValueAt(novedades.getSelectedRow(),row_f_ingreso),
+                        novedades.getValueAt(novedades.getSelectedRow(),row_f_retiro),
+                        novedades.getValueAt(novedades.getSelectedRow(),row_tipo).toString(),
+                        true);
                 ed_nov.setVisible(true);
                 cb_empleados.setSelectedItem("Seleccione..");
                 tipo_nov.setSelectedItem("Seleccione..");
@@ -676,11 +695,17 @@ public class Buscar_Novedad extends javax.swing.JDialog {
                 clear_novedades();
             }else{
                 JOptionPane.showMessageDialog(null,"Solo tiene permisos para modificar las observaciones de la novedad seleccionada.","Información",JOptionPane.INFORMATION_MESSAGE);
-                String aux = novedades.getValueAt(novedades.getSelectedRow(),5).toString();
+                String aux = novedades.getValueAt(novedades.getSelectedRow(),row_f_retiro).toString();
                 if (aux.equals("")) {
                     aux = "01-01-1900";
                 }
-                Edd_Novedad ed_nov = new Edd_Novedad(this,true,novedades.getValueAt(novedades.getSelectedRow(),0).toString(),novedades.getValueAt(novedades.getSelectedRow(),2).toString(),novedades.getValueAt(novedades.getSelectedRow(),4),novedades.getValueAt(novedades.getSelectedRow(),5),novedades.getValueAt(novedades.getSelectedRow(),12).toString(), false);
+                Edd_Novedad ed_nov = new Edd_Novedad(this,true,
+                        novedades.getValueAt(novedades.getSelectedRow(),row_cedula).toString(),
+                        novedades.getValueAt(novedades.getSelectedRow(),row_nit).toString(),
+                        novedades.getValueAt(novedades.getSelectedRow(),row_f_ingreso),
+                        novedades.getValueAt(novedades.getSelectedRow(),row_f_retiro),
+                        novedades.getValueAt(novedades.getSelectedRow(),row_tipo).toString(),
+                        false);
                 ed_nov.setVisible(true);
                 cb_empleados.setSelectedItem("Seleccione..");
                 tipo_nov.setSelectedItem("Seleccione..");
@@ -726,16 +751,21 @@ public class Buscar_Novedad extends javax.swing.JDialog {
         String aux ="";
         if (novedades.getSelectedRow()!=-1) {
             if (Main.rol.getText().equals("ADMINISTRADOR") | Main.rol.getText().equals("MASTER")) {
-                int conf = JOptionPane.showConfirmDialog(this,"Esta seguro que desea eliminar la Novedad?\n Cedula: "+modelo.getValueAt(novedades.getSelectedRow(),0).toString()+"\nEmpresa: "+modelo.getValueAt(novedades.getSelectedRow(),3).toString()+"\nFecha de Ingreso: "+new SimpleDateFormat("dd-MM-yyyy").format(modelo.getValueAt(novedades.getSelectedRow(),4))+"\nFecha de Retiro: "+new SimpleDateFormat("dd-MM-yyyy").format(modelo.getValueAt(novedades.getSelectedRow(),5)).replace("01-01-1900","")+"\nTipo de Novedad: "+modelo.getValueAt(novedades.getSelectedRow(),12).toString(),"Confirmación",JOptionPane.OK_CANCEL_OPTION,JOptionPane.QUESTION_MESSAGE);
+                int conf = JOptionPane.showConfirmDialog(this,"Esta seguro que desea eliminar la Novedad?\n Cedula: "+modelo.getValueAt(novedades.getSelectedRow(),row_cedula).toString()+"\nEmpresa: "+modelo.getValueAt(novedades.getSelectedRow(),row_empleador).toString()+"\nFecha de Ingreso: "+new SimpleDateFormat("dd-MM-yyyy").format(modelo.getValueAt(novedades.getSelectedRow(),row_f_ingreso))+"\nFecha de Retiro: "+new SimpleDateFormat("dd-MM-yyyy").format(modelo.getValueAt(novedades.getSelectedRow(),row_f_retiro)).replace("01-01-1900","")+"\nTipo de Novedad: "+modelo.getValueAt(novedades.getSelectedRow(),row_tipo).toString(),"Confirmación",JOptionPane.OK_CANCEL_OPTION,JOptionPane.QUESTION_MESSAGE);
                 if (conf == JOptionPane.YES_OPTION) {
                     Conexion con = new Conexion();
                     con.conexion();
                     ResultSet r;
                     try {
-                        r = con.s.executeQuery ("SELECT * FROM t_tipo_novedad WHERE NOMBRE_TIPO ='"+modelo.getValueAt(novedades.getSelectedRow(),12).toString()+"'");
+                        r = con.s.executeQuery ("SELECT * FROM t_tipo_novedad WHERE NOMBRE_TIPO ='"+modelo.getValueAt(novedades.getSelectedRow(),row_tipo).toString()+"'");
                         if (r.next()) {
                            aux=r.getString("ID_TIPO");//con.s.executeUpdate
-                           con.s.executeUpdate("DELETE FROM T_NOVEDADES WHERE ID_EMPLEADO="+modelo.getValueAt(novedades.getSelectedRow(),0).toString()+" AND ID_EMPRESA='"+modelo.getValueAt(novedades.getSelectedRow(),2).toString()+"' AND FECHA_INGRESO='"+new SimpleDateFormat("yyyy-MM-dd").format(modelo.getValueAt(novedades.getSelectedRow(),4))+"' AND FECHA_RETIRO='"+new SimpleDateFormat("yyyy-MM-dd").format(modelo.getValueAt(novedades.getSelectedRow(),5))+"' AND ID_TIPO="+aux);
+                           con.s.executeUpdate("DELETE FROM T_NOVEDADES "
+                                   + "WHERE ID_EMPLEADO="+modelo.getValueAt(novedades.getSelectedRow(),row_cedula).toString()+" "
+                                   + "AND ID_EMPRESA='"+modelo.getValueAt(novedades.getSelectedRow(),row_nit).toString()+"' "
+                                   + "AND FECHA_INGRESO='"+new SimpleDateFormat("yyyy-MM-dd").format(modelo.getValueAt(novedades.getSelectedRow(),row_f_ingreso))+"' "
+                                   + "AND FECHA_RETIRO='"+new SimpleDateFormat("yyyy-MM-dd").format(modelo.getValueAt(novedades.getSelectedRow(),row_f_retiro))+"' "
+                                   + "AND ID_TIPO="+aux);
                            JOptionPane.showMessageDialog(this,"La Novedad ha sido eliminada","Confirmación",JOptionPane.INFORMATION_MESSAGE);
                            clear_novedades();
                         }
@@ -766,12 +796,17 @@ public class Buscar_Novedad extends javax.swing.JDialog {
         // TODO add your handling code here:
         if (novedades.getSelectedRow()!=-1) {
             if (Main.rol.getText().equals("ADMINISTRADOR") | Main.rol.getText().equals("MASTER")) {
-                String aux = novedades.getValueAt(novedades.getSelectedRow(),5).toString();
+                String aux = novedades.getValueAt(novedades.getSelectedRow(),row_f_retiro).toString();
                 if (aux.equals("")) {
                     aux = "01-01-1900";
                 }
                 //System.out.println(novedades.getValueAt(novedades.getSelectedRow(),0).toString()+"\n"+novedades.getValueAt(novedades.getSelectedRow(),2).toString()+"\n"+novedades.getValueAt(novedades.getSelectedRow(),4)+"\n"+novedades.getValueAt(novedades.getSelectedRow(),5)+"\n"+novedades.getValueAt(novedades.getSelectedRow(),12).toString());
-                View_Registro reg_nov = new View_Registro(this,true,novedades.getValueAt(novedades.getSelectedRow(),0).toString(),novedades.getValueAt(novedades.getSelectedRow(),2).toString(),novedades.getValueAt(novedades.getSelectedRow(),4),novedades.getValueAt(novedades.getSelectedRow(),5),novedades.getValueAt(novedades.getSelectedRow(),12).toString());
+                View_Registro reg_nov = new View_Registro(this,true,
+                        novedades.getValueAt(novedades.getSelectedRow(),row_cedula).toString(),
+                        novedades.getValueAt(novedades.getSelectedRow(),row_nit).toString(),
+                        novedades.getValueAt(novedades.getSelectedRow(),row_f_ingreso),
+                        novedades.getValueAt(novedades.getSelectedRow(),row_f_retiro),
+                        novedades.getValueAt(novedades.getSelectedRow(),row_tipo).toString());
                 reg_nov.setLocationRelativeTo(this);
                 reg_nov.setVisible(true);
             }
@@ -1103,6 +1138,7 @@ public void load_data(String afp){
     }
 }
 public String query (javax.swing.JComboBox cedula, javax.swing.JTextField empleador, javax.swing.JTextField municipio, javax.swing.JTextField obra, javax.swing.JTextField eps, javax.swing.JTextField afp, javax.swing.JTextField arl, javax.swing.JTextField ccf, com.toedter.calendar.JDateChooser f_ini, com.toedter.calendar.JDateChooser f_fin, javax.swing.JComboBox tipo ){
+    String ret = "";
     String str_cedula = "";
     String str_empleador = "";
     String str_municipio= "";
@@ -1124,14 +1160,12 @@ public String query (javax.swing.JComboBox cedula, javax.swing.JTextField emplea
                         "    ON (t_novedades.ID_EPS = t_eps.ID_EPS)\n" +
                         "  INNER JOIN t_afp\n" +
                         "    ON (t_novedades.ID_AFP = t_afp.ID_AFP)\n" +
-                        "  INNER JOIN t_parentesco\n" +
-                        "    ON (t_novedades.ID_PAR_ACU_NOV = t_parentesco.ID_PAR)\n" +
                         "  INNER JOIN t_obra\n" +
                         "    ON (t_novedades.ID_OBRA = t_obra.ID_OBRA)\n" +
-                        "  INNER JOIN t_municipios \n" +
-                        "    ON (t_novedades.ID_MUN_NOV = t_municipios.ID_MUN)"+   //"    ON (t_obra.ID_MUN_OBRA = t_municipios.ID_MUN)"+   
                         "  INNER JOIN t_tipo_novedad\n" +
                         "    ON (t_novedades.ID_TIPO = t_tipo_novedad.ID_TIPO)\n" +
+                        "  INNER JOIN t_municipios\n" +
+                        "    ON (t_obra.ID_MUN_OBRA = t_municipios.ID_MUN)\n" +
                         "  INNER JOIN t_departamentos\n" +
                         "    ON (t_municipios.ID_DEP = t_departamentos.ID_DEP)\n";
     if (!cedula.getSelectedItem().equals("Seleccione..") ) {
@@ -1166,12 +1200,12 @@ public String query (javax.swing.JComboBox cedula, javax.swing.JTextField emplea
         str_afp =" ";
     }
     if (!arl.getText().equals("") & !arl.getText().equals(" ")) {
-        str_arl = "t_arl.NOMBRE_ARL='"+arl.getText()+"'";
+        str_arl = "t_novedades.ARL_NOV='"+arl.getText()+"'";
     }else{
         str_arl =" ";
     }
     if (!ccf.getText().equals("") & !ccf.getText().equals(" ")) {
-        str_ccf = "t_ccf.NOMBRE_CCF='"+ccf.getText()+"'";
+        str_ccf = "t_novedades.CCF_NOV='"+ccf.getText()+"'";
     }else{
         str_ccf =" ";
     }
@@ -1210,38 +1244,38 @@ public String query (javax.swing.JComboBox cedula, javax.swing.JTextField emplea
         }
     } 
 //    if (!str_cedula.equals(" ") | !str_empleador.equals(" ") | !str_municipio.equals(" ") | !str_obra.equals(" ") | !str_eps.equals(" ") | !str_afp.equals(" ") | !str_arl.equals(" ") | !str_ccf.equals(" ") | !str_tipo.equals(" ") | !str_date.equals(" ")) {
-        if(!str_cedula.equals(" ") & !str_empleador.equals(" ")){
-            str_empleador = " AND "+str_empleador;
-        }
-        if ((!str_cedula.equals(" ") | !str_empleador.equals(" "))& !str_municipio.equals(" ")) {
-            str_municipio = " AND "+str_municipio;
-        }
-        if ((!str_cedula.equals(" ") | !str_empleador.equals(" ") | !str_municipio.equals(" "))& !str_obra.equals(" ")) {
-            str_obra = " AND "+str_obra;
-        }
-        if ((!str_cedula.equals(" ") | !str_empleador.equals(" ") | !str_municipio.equals(" ") | !str_obra.equals(" "))& !str_eps.equals(" ")) {
-            str_eps = " AND "+str_eps;
-        }
-        if ((!str_cedula.equals(" ") | !str_empleador.equals(" ") | !str_municipio.equals(" ") | !str_obra.equals(" ") | !str_eps.equals(" "))& !str_afp.equals(" ")) {
-            str_afp = " AND "+str_afp;
-        }
-        if ((!str_cedula.equals(" ") | !str_empleador.equals(" ") | !str_municipio.equals(" ") | !str_obra.equals(" ") | !str_eps.equals(" ") | !str_afp.equals(" "))& !str_arl.equals(" ")) {
-            str_arl = " AND "+str_arl;
-        }
-        if ((!str_cedula.equals(" ") | !str_empleador.equals(" ") | !str_municipio.equals(" ") | !str_obra.equals(" ") | !str_eps.equals(" ") | !str_afp.equals(" ") | !str_arl.equals(" "))& !str_ccf.equals(" ")) {
-            str_ccf = " AND "+str_ccf;
-        }
-        if ((!str_cedula.equals(" ") | !str_empleador.equals(" ") | !str_municipio.equals(" ") | !str_obra.equals(" ") | !str_eps.equals(" ") | !str_afp.equals(" ") | !str_arl.equals(" ") | !str_ccf.equals(" "))& !str_tipo.equals(" ")) {
-            str_tipo = " AND "+str_tipo;
-        }
-        if ((!str_cedula.equals(" ") | !str_empleador.equals(" ") | !str_municipio.equals(" ") | !str_obra.equals(" ") | !str_eps.equals(" ") | !str_afp.equals(" ") | !str_arl.equals(" ") | !str_ccf.equals(" ") | !str_tipo.equals(" "))& !str_date.equals(" ")) {
-            str_date = " AND "+str_date;
-        }
-        if (!str_cedula.equals(" ") | !str_empleador.equals(" ") | !str_municipio.equals(" ") | !str_obra.equals(" ") | !str_eps.equals(" ") | !str_afp.equals(" ") | !str_arl.equals(" ") | !str_ccf.equals(" ") | !str_tipo.equals(" ") | !str_date.equals(" ")) {
-            str_query = str_query + " WHERE " + str_cedula + str_empleador + str_municipio + str_obra + str_eps + str_afp + str_arl + str_ccf + str_tipo + str_date;
-        }else{
-            str_query = str_query + " ORDER BY F_REGISTRO DESC";
-        }
+    if(!str_cedula.equals(" ") & !str_empleador.equals(" ")){
+        str_empleador = " AND "+str_empleador;
+    }
+    if ((!str_cedula.equals(" ") | !str_empleador.equals(" "))& !str_municipio.equals(" ")) {
+        str_municipio = " AND "+str_municipio;
+    }
+    if ((!str_cedula.equals(" ") | !str_empleador.equals(" ") | !str_municipio.equals(" "))& !str_obra.equals(" ")) {
+        str_obra = " AND "+str_obra;
+    }
+    if ((!str_cedula.equals(" ") | !str_empleador.equals(" ") | !str_municipio.equals(" ") | !str_obra.equals(" "))& !str_eps.equals(" ")) {
+        str_eps = " AND "+str_eps;
+    }
+    if ((!str_cedula.equals(" ") | !str_empleador.equals(" ") | !str_municipio.equals(" ") | !str_obra.equals(" ") | !str_eps.equals(" "))& !str_afp.equals(" ")) {
+        str_afp = " AND "+str_afp;
+    }
+    if ((!str_cedula.equals(" ") | !str_empleador.equals(" ") | !str_municipio.equals(" ") | !str_obra.equals(" ") | !str_eps.equals(" ") | !str_afp.equals(" "))& !str_arl.equals(" ")) {
+        str_arl = " AND "+str_arl;
+    }
+    if ((!str_cedula.equals(" ") | !str_empleador.equals(" ") | !str_municipio.equals(" ") | !str_obra.equals(" ") | !str_eps.equals(" ") | !str_afp.equals(" ") | !str_arl.equals(" "))& !str_ccf.equals(" ")) {
+        str_ccf = " AND "+str_ccf;
+    }
+    if ((!str_cedula.equals(" ") | !str_empleador.equals(" ") | !str_municipio.equals(" ") | !str_obra.equals(" ") | !str_eps.equals(" ") | !str_afp.equals(" ") | !str_arl.equals(" ") | !str_ccf.equals(" "))& !str_tipo.equals(" ")) {
+        str_tipo = " AND "+str_tipo;
+    }
+    if ((!str_cedula.equals(" ") | !str_empleador.equals(" ") | !str_municipio.equals(" ") | !str_obra.equals(" ") | !str_eps.equals(" ") | !str_afp.equals(" ") | !str_arl.equals(" ") | !str_ccf.equals(" ") | !str_tipo.equals(" "))& !str_date.equals(" ")) {
+        str_date = " AND "+str_date;
+    }
+    if (!str_cedula.equals(" ") | !str_empleador.equals(" ") | !str_municipio.equals(" ") | !str_obra.equals(" ") | !str_eps.equals(" ") | !str_afp.equals(" ") | !str_arl.equals(" ") | !str_ccf.equals(" ") | !str_tipo.equals(" ") | !str_date.equals(" ")) {
+        str_query = str_query + " WHERE " + str_cedula + str_empleador + str_municipio + str_obra + str_eps + str_afp + str_arl + str_ccf + str_tipo + str_date;
+    }else{
+        str_query = str_query + " ORDER BY F_REGISTRO DESC";
+    }
         
         
     

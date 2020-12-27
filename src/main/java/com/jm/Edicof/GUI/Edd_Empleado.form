@@ -56,9 +56,9 @@
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
               <Component id="jPanel1" max="32767" attributes="0"/>
-              <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jButton1" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jButton3" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -82,7 +82,7 @@
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" attributes="0">
-                  <EmptySpace pref="16" max="32767" attributes="0"/>
+                  <EmptySpace min="-2" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="jLabel2" alignment="0" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel8" alignment="0" min="-2" max="-2" attributes="0"/>
@@ -91,18 +91,20 @@
                       <Component id="jLabel9" alignment="0" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel11" alignment="0" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel13" alignment="0" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Component id="cb_tip_sangre" pref="175" max="32767" attributes="0"/>
-                      <Component id="cb_cedula" alignment="0" pref="175" max="32767" attributes="0"/>
-                      <Component id="cb_tip_id" alignment="0" pref="175" max="32767" attributes="0"/>
-                      <Component id="nombre_1" alignment="0" pref="175" max="32767" attributes="1"/>
-                      <Component id="ape_1" alignment="0" pref="175" max="32767" attributes="1"/>
-                      <Component id="cb_ciudad_nac" pref="175" max="32767" attributes="0"/>
-                      <Component id="estatura" alignment="0" max="32767" attributes="0"/>
+                      <Component id="jLabel15" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="1" attributes="0">
+                      <Component id="cb_nacion" max="32767" attributes="0"/>
+                      <Component id="cb_tip_sangre" alignment="0" pref="178" max="32767" attributes="0"/>
+                      <Component id="cb_cedula" alignment="0" pref="178" max="32767" attributes="0"/>
+                      <Component id="cb_tip_id" alignment="0" pref="178" max="32767" attributes="0"/>
+                      <Component id="nombre_1" alignment="0" pref="178" max="32767" attributes="1"/>
+                      <Component id="ape_1" alignment="0" pref="178" max="32767" attributes="1"/>
+                      <Component id="cb_ciudad_nac" alignment="0" pref="178" max="32767" attributes="0"/>
+                      <Component id="estatura" alignment="0" max="32767" attributes="0"/>
+                  </Group>
+                  <EmptySpace type="separate" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="jLabel6" alignment="0" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel7" alignment="0" min="-2" max="-2" attributes="0"/>
@@ -110,17 +112,19 @@
                       <Component id="jLabel5" alignment="0" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel10" alignment="0" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel12" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="jLabel14" alignment="0" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="cb_ciudad_exp" alignment="1" min="-2" pref="180" max="-2" attributes="0"/>
-                      <Component id="nombre_2" alignment="1" min="-2" pref="180" max="-2" attributes="0"/>
-                      <Component id="ape_2" alignment="1" min="-2" pref="180" max="-2" attributes="0"/>
-                      <Component id="cedula" min="-2" pref="180" max="-2" attributes="1"/>
-                      <Component id="cb_genero" min="-2" pref="180" max="-2" attributes="0"/>
-                      <Component id="fecha_nac" min="-2" pref="180" max="-2" attributes="0"/>
+                      <Component id="cb_ciudad_exp" alignment="0" pref="181" max="32767" attributes="0"/>
+                      <Component id="nombre_2" alignment="0" pref="181" max="32767" attributes="0"/>
+                      <Component id="ape_2" alignment="0" pref="181" max="32767" attributes="0"/>
+                      <Component id="cedula" pref="181" max="32767" attributes="1"/>
+                      <Component id="cb_genero" pref="181" max="32767" attributes="0"/>
+                      <Component id="fecha_nac" pref="181" max="32767" attributes="0"/>
+                      <Component id="fecha_exp" max="32767" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="16" max="32767" attributes="0"/>
+                  <EmptySpace min="-2" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -173,12 +177,21 @@
                       </Group>
                       <Component id="fecha_nac" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jLabel13" min="-2" max="-2" attributes="0"/>
-                      <Component id="estatura" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="2" attributes="0">
+                      <Component id="fecha_exp" alignment="2" min="-2" max="-2" attributes="0"/>
+                      <Component id="jLabel14" alignment="2" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" alignment="2" groupAlignment="0" attributes="0">
+                          <Component id="estatura" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabel13" min="-2" max="-2" attributes="0"/>
+                      </Group>
                   </Group>
-                  <EmptySpace max="32767" attributes="0"/>
+                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="jLabel15" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="cb_nacion" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace min="0" pref="13" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -269,6 +282,7 @@
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
               <StringArray count="0"/>
             </Property>
+            <Property name="enabled" type="boolean" value="false"/>
           </Properties>
           <Events>
             <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="cb_cedulaItemStateChanged"/>
@@ -378,6 +392,28 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Estatura (cm)"/>
           </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="jLabel14">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Fecha Expedicion"/>
+          </Properties>
+        </Component>
+        <Component class="com.toedter.calendar.JDateChooser" name="fecha_exp">
+        </Component>
+        <Component class="javax.swing.JLabel" name="jLabel15">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Nacionalidad"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JComboBox" name="cb_nacion">
+          <Properties>
+            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+              <StringArray count="0"/>
+            </Property>
+          </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+          </AuxValues>
         </Component>
       </SubComponents>
     </Container>

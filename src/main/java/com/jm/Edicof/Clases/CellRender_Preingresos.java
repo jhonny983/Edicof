@@ -199,8 +199,8 @@ public class CellRender_Preingresos extends DefaultTableCellRenderer{
                                         cell.setForeground(Color.white);
                                     }
                                 }else{
-                                    if (table.getColumnName(column).equals("Barrio")) {
-                                        if (check_barrio(value)) {
+                                    if (table.getColumnName(column).equals("Area Trabajo*")) {
+                                        if (check_tip_area(value)) {
                                             cell.setOpaque(true);
                                             cell.setBackground(new Color(150,240,160));
                                             cell.setForeground(Color.black);
@@ -210,31 +210,19 @@ public class CellRender_Preingresos extends DefaultTableCellRenderer{
                                             cell.setForeground(Color.white);
                                         }
                                     }else{
-                                        if (table.getColumnName(column).equals("Municipio*")) {
-                                            if (value!=null) {
-                                                if (chech_char(value.toString().trim(),"'#$%&()=?¡¿/*+[]{};:<>,.")) {
-                                                    if (check_municipio(value.toString())) {
-                                                        cell.setOpaque(true);
-                                                        cell.setBackground(new Color(150,240,160));
-                                                        cell.setForeground(Color.black);
-                                                    }else{
-                                                        cell.setOpaque(true);
-                                                        cell.setBackground(Color.red);
-                                                        cell.setForeground(Color.white);
-                                                    }
-                                                }else{
-                                                    cell.setOpaque(true);
-                                                    cell.setBackground(Color.red);
-                                                    cell.setForeground(Color.white);
-                                                }
+                                        if (table.getColumnName(column).equals("Cargo*")) {
+                                            if (check_cargo(value)) {
+                                                cell.setOpaque(true);
+                                                cell.setBackground(new Color(150,240,160));
+                                                cell.setForeground(Color.black);
                                             }else{
                                                 cell.setOpaque(true);
                                                 cell.setBackground(Color.red);
                                                 cell.setForeground(Color.white);
                                             }
                                         }else{
-                                            if (table.getColumnName(column).equals("Parentesco*")) {
-                                                if (check_parentesco(value)) {
+                                            if (table.getColumnName(column).equals("Barrio*")) {
+                                                if (check_barrio(value)) {
                                                     cell.setOpaque(true);
                                                     cell.setBackground(new Color(150,240,160));
                                                     cell.setForeground(Color.black);
@@ -244,30 +232,10 @@ public class CellRender_Preingresos extends DefaultTableCellRenderer{
                                                     cell.setForeground(Color.white);
                                                 }
                                             }else{
-                                                if (table.getColumnName(column).equals("Direccion")) {
-                                                    if (check_field_dir(value)) {
-                                                        cell.setOpaque(true);
-                                                        cell.setBackground(new Color(150,240,160));
-                                                        cell.setForeground(Color.black);
-                                                    }else{
-                                                        cell.setOpaque(true);
-                                                        cell.setBackground(Color.red);
-                                                        cell.setForeground(Color.white);
-                                                    }
-                                                }else{
-                                                    if (table.getColumnName(column).equals("Telefono")) {
-                                                        if (check_field(value)) {
-                                                            cell.setOpaque(true);
-                                                            cell.setBackground(new Color(150,240,160));
-                                                            cell.setForeground(Color.black);
-                                                        }else{
-                                                            cell.setOpaque(true);
-                                                            cell.setBackground(Color.red);
-                                                            cell.setForeground(Color.white);
-                                                        }
-                                                    }else{
-                                                        if (table.getColumnName(column).equals("Correo")) {
-                                                            if (check_field_mail(value)) {
+                                                if (table.getColumnName(column).equals("Municipio*")) {
+                                                    if (value!=null) {
+                                                        if (chech_char(value.toString().trim(),"'#$%&()=?¡¿/*+[]{};:<>,.")) {
+                                                            if (check_municipio(value.toString())) {
                                                                 cell.setOpaque(true);
                                                                 cell.setBackground(new Color(150,240,160));
                                                                 cell.setForeground(Color.black);
@@ -277,7 +245,39 @@ public class CellRender_Preingresos extends DefaultTableCellRenderer{
                                                                 cell.setForeground(Color.white);
                                                             }
                                                         }else{
-                                                            if (table.getColumnName(column).equals("Acudiente")) {
+                                                            cell.setOpaque(true);
+                                                            cell.setBackground(Color.red);
+                                                            cell.setForeground(Color.white);
+                                                        }
+                                                    }else{
+                                                        cell.setOpaque(true);
+                                                        cell.setBackground(Color.red);
+                                                        cell.setForeground(Color.white);
+                                                    }
+                                                }else{
+                                                    if (table.getColumnName(column).equals("Parentesco*")) {
+                                                        if (check_parentesco(value)) {
+                                                            cell.setOpaque(true);
+                                                            cell.setBackground(new Color(150,240,160));
+                                                            cell.setForeground(Color.black);
+                                                        }else{
+                                                            cell.setOpaque(true);
+                                                            cell.setBackground(Color.red);
+                                                            cell.setForeground(Color.white);
+                                                        }
+                                                    }else{
+                                                        if (table.getColumnName(column).equals("Direccion")) {
+                                                            if (check_field_dir(value)) {
+                                                                cell.setOpaque(true);
+                                                                cell.setBackground(new Color(150,240,160));
+                                                                cell.setForeground(Color.black);
+                                                            }else{
+                                                                cell.setOpaque(true);
+                                                                cell.setBackground(Color.red);
+                                                                cell.setForeground(Color.white);
+                                                            }
+                                                        }else{
+                                                            if (table.getColumnName(column).equals("Telefono")) {
                                                                 if (check_field(value)) {
                                                                     cell.setOpaque(true);
                                                                     cell.setBackground(new Color(150,240,160));
@@ -288,8 +288,8 @@ public class CellRender_Preingresos extends DefaultTableCellRenderer{
                                                                     cell.setForeground(Color.white);
                                                                 }
                                                             }else{
-                                                                if (table.getColumnName(column).equals("Telefono Acudiente")) {
-                                                                    if (check_field(value)) {
+                                                                if (table.getColumnName(column).equals("Correo")) {
+                                                                    if (check_field_mail(value)) {
                                                                         cell.setOpaque(true);
                                                                         cell.setBackground(new Color(150,240,160));
                                                                         cell.setForeground(Color.black);
@@ -299,7 +299,7 @@ public class CellRender_Preingresos extends DefaultTableCellRenderer{
                                                                         cell.setForeground(Color.white);
                                                                     }
                                                                 }else{
-                                                                    if (table.getColumnName(column).equals("Observaciones")) {
+                                                                    if (table.getColumnName(column).equals("Acudiente")) {
                                                                         if (check_field(value)) {
                                                                             cell.setOpaque(true);
                                                                             cell.setBackground(new Color(150,240,160));
@@ -310,13 +310,95 @@ public class CellRender_Preingresos extends DefaultTableCellRenderer{
                                                                             cell.setForeground(Color.white);
                                                                         }
                                                                     }else{
-
+                                                                        if (table.getColumnName(column).equals("Telefono Acudiente")) {
+                                                                            if (check_field(value)) {
+                                                                                cell.setOpaque(true);
+                                                                                cell.setBackground(new Color(150,240,160));
+                                                                                cell.setForeground(Color.black);
+                                                                            }else{
+                                                                                cell.setOpaque(true);
+                                                                                cell.setBackground(Color.red);
+                                                                                cell.setForeground(Color.white);
+                                                                            }
+                                                                        }else{
+                                                                            if (table.getColumnName(column).equals("Observaciones")) {
+                                                                                if (check_field(value)) {
+                                                                                    cell.setOpaque(true);
+                                                                                    cell.setBackground(new Color(150,240,160));
+                                                                                    cell.setForeground(Color.black);
+                                                                                }else{
+                                                                                    cell.setOpaque(true);
+                                                                                    cell.setBackground(Color.red);
+                                                                                    cell.setForeground(Color.white);
+                                                                                }
+                                                                            }else{
+                                                                                if (table.getColumnName(column).equals("F Examen Ingreso (DD-MM-YYYY)*")) {
+                                                                                    if (value!=null) {
+                                                                                        if (chech_char(value.toString().trim(),"'#$%&()=?¡¿/*+[]{};:<>,.")) {
+                                                                                            if (check_fecha(value.toString())) {
+                                                                                                cell.setOpaque(true);
+                                                                                                cell.setBackground(new Color(150,240,160));
+                                                                                                cell.setForeground(Color.black);
+                                                                                            }else{
+                                                                                                cell.setOpaque(true);
+                                                                                                cell.setBackground(Color.red);
+                                                                                                cell.setForeground(Color.white);
+                                                                                            }
+                                                                                        }else{
+                                                                                            cell.setOpaque(true);
+                                                                                            cell.setBackground(Color.red);
+                                                                                            cell.setForeground(Color.white);
+                                                                                        }
+                                                                                    }else{
+                                                                                        cell.setOpaque(true);
+                                                                                        cell.setBackground(Color.red);
+                                                                                        cell.setForeground(Color.white);
+                                                                                    }
+                                                                                }else{
+                                                                                    if (table.getColumnName(column).equals("F Consentimiento (DD-MM-YYYY)*")) {
+                                                                                        if (value!=null) {
+                                                                                            if (chech_char(value.toString().trim(),"'#$%&()=?¡¿/*+[]{};:<>,.")) {
+                                                                                                if (check_fecha(value.toString())) {
+                                                                                                    cell.setOpaque(true);
+                                                                                                    cell.setBackground(new Color(150,240,160));
+                                                                                                    cell.setForeground(Color.black);
+                                                                                                }else{
+                                                                                                    cell.setOpaque(true);
+                                                                                                    cell.setBackground(Color.red);
+                                                                                                    cell.setForeground(Color.white);
+                                                                                                }
+                                                                                            }else{
+                                                                                                cell.setOpaque(true);
+                                                                                                cell.setBackground(Color.red);
+                                                                                                cell.setForeground(Color.white);
+                                                                                            }
+                                                                                        }else{
+                                                                                            cell.setOpaque(true);
+                                                                                            cell.setBackground(Color.red);
+                                                                                            cell.setForeground(Color.white);
+                                                                                        }
+                                                                                    }else{
+                                                                                        if (table.getColumnName(column).equals("Exonerado FIC")) {
+                                                                                            if (check_field(value)) {
+                                                                                                cell.setOpaque(true);
+                                                                                                cell.setBackground(new Color(150,240,160));
+                                                                                                cell.setForeground(Color.black);
+                                                                                            }else{
+                                                                                                cell.setOpaque(true);
+                                                                                                cell.setBackground(Color.red);
+                                                                                                cell.setForeground(Color.white);
+                                                                                            }
+                                                                                        }
+                                                                                    }
+                                                                                }
+                                                                            }
+                                                                        }
                                                                     }
                                                                 }
                                                             }
+
                                                         }
                                                     }
-                                                    
                                                 }
                                             }
                                         }
@@ -505,12 +587,94 @@ public boolean check_obra(Object obra){
     
     return ret;
 }
-public boolean check_barrio(Object field){
+public boolean check_tip_area(Object area){
     boolean ret=false;
-    if (field!=null) {
-        if (chech_char(field.toString().trim(),"'$%&()=?¡¿/*+[]{};:<>,")) {
-            if (!field.toString().equals("")) {
-               ret=true;
+    if (area!=null) {
+        if (chech_char(area.toString().trim(),"'#$%&()=?¡¿/*+[]{};:<>,.")) {
+            if (!area.toString().trim().equals("")) {
+                Conexion con = new Conexion();
+                con.conexion();
+                ResultSet r;
+                try{
+                    r = con.s.executeQuery ("SELECT *\n" +
+                                            "FROM\n" +
+                                            "    t_actividades\n" +
+                                            "WHERE NOMBRE_ACTIVIDAD = '"+area.toString().trim()+"'");
+                    if(r.next()){
+                        ret=true;
+                    }
+                    con.cerrar();
+                }catch(SQLException j){
+                    con.cerrar();
+                    j.printStackTrace();
+                    return false;
+                    //JOptionPane.showMessageDialog(null,j,"Error",JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        }
+    }
+    
+    return ret;
+}
+public boolean check_cargo(Object cargo){
+    boolean ret=false;
+    if (cargo!=null) {
+        if (chech_char(cargo.toString().trim(),"'#$%&()=?¡¿/*+[]{};:<>,.")) {
+            if (!cargo.toString().trim().equals("")) {
+                Conexion con = new Conexion();
+                con.conexion();
+                ResultSet r;
+                try{
+                    r = con.s.executeQuery ("SELECT *\n" +
+                                            "FROM\n" +
+                                            "    t_cargo\n" +
+                                            "WHERE NOMBRE_CARGO = '"+cargo.toString().trim()+"'");
+                    if(r.next()){
+                        ret=true;
+                    }
+                    con.cerrar();
+                }catch(SQLException j){
+                    con.cerrar();
+                    j.printStackTrace();
+                    return false;
+                    //JOptionPane.showMessageDialog(null,j,"Error",JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        }
+    }
+    
+    return ret;
+}
+public boolean check_barrio(Object barrio){
+    boolean ret=false;
+    if (barrio!=null) {
+        if (chech_char(barrio.toString().trim(),"'$%&()=?¡¿/*+[]{};:<>,")) {
+            if (!barrio.toString().equals("") & count_char(barrio.toString().trim(),'-')==1) {
+                String str_barrio="";
+                String str_mun="";
+                StringTokenizer tokens=new StringTokenizer(barrio.toString().trim(), "-");
+                while(tokens.hasMoreTokens()){
+                    str_barrio=tokens.nextToken().trim();
+                    str_mun=tokens.nextToken().trim();
+                }
+                Conexion con = new Conexion();
+                con.conexion();
+                ResultSet r;
+                try{
+                    r = con.s.executeQuery ("SELECT *\n" +
+                                            "FROM\n" +
+                                            "    `t_barrio`\n" +
+                                            "    INNER JOIN `t_municipios` \n" +
+                                            "        ON (`t_barrio`.`ID_MUN_BARRIO` = `t_municipios`.`ID_MUN`) WHERE NOMBRE_BARRIO='"+str_barrio+"' AND NOMBRE_MUN='"+str_mun+"'");
+                    if(r.next()){
+                        ret=true;
+                    }
+                    con.cerrar();
+                }catch(SQLException j){
+                    con.cerrar();
+                    j.printStackTrace();
+                    JOptionPane.showMessageDialog(null,j,"Error",JOptionPane.ERROR_MESSAGE);
+                }
             }
         }
     }

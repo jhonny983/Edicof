@@ -18,6 +18,7 @@ import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.StringTokenizer;
 import javax.swing.InputMap;
@@ -55,8 +56,8 @@ Boolean block=true;
         initComponents();
         //////////////////////////////------------------------------------------------------------
         this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/group_gear.png")));
-        screenSize = Main.getsize();
-        this.setSize(screenSize.width, screenSize.height-10);
+//        screenSize = Main.getsize();
+//        this.setSize(screenSize.width, screenSize.height-10);
         this.setLocationRelativeTo(null);
         //////////////////////////////------------------------------------------------------------
         this.ced_edit=empl;
@@ -86,9 +87,11 @@ Boolean block=true;
         ac_arl();
         ac_afp();
         ac_ccf();
-        ac_mun();
-        ac_par();
+//        ac_mun();
+//        ac_par();
         ac_obra();
+        ac_area();
+        ac_cargo();
         sel_campos(ced_edit,nit_edit,f_ing_edit,f_ret_edit,tip_edit);
         if (!en) {
             tipo_nov.setEnabled(false);
@@ -104,16 +107,16 @@ Boolean block=true;
             cb_eps.setEnabled(false);
             cb_ccf.setEnabled(false);
             cb_obra.setEnabled(false);
-            f_nac.setEnabled(false);
-            f_exp.setEnabled(false);
-            dir_emp.setEnabled(false);
-            tel_emp.setEnabled(false);
-            barrio.setEnabled(false);
-            cb_mun.setEnabled(false);
+//            f_nac.setEnabled(false);
+//            f_exp.setEnabled(false);
+//            dir_emp.setEnabled(false);
+//            tel_emp.setEnabled(false);
+//            barrio.setEnabled(false);
+//            cb_mun.setEnabled(false);
             mail_emp.setEnabled(false);
-            acud.setEnabled(false);
-            cb_par.setEnabled(false);
-            tel_acud.setEnabled(false);
+//            acud.setEnabled(false);
+//            cb_par.setEnabled(false);
+//            tel_acud.setEnabled(false);
             obs.setEnabled(true);
         }
         init();
@@ -155,8 +158,6 @@ Boolean block=true;
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jScrollPane3 = new javax.swing.JScrollPane();
-        jPanel4 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         jLabel22 = new javax.swing.JLabel();
         f_ing_nov = new com.toedter.calendar.JDateChooser();
@@ -186,50 +187,40 @@ Boolean block=true;
         jLabel6 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
-        f_nac = new com.toedter.calendar.JDateChooser();
-        jLabel12 = new javax.swing.JLabel();
-        f_exp = new com.toedter.calendar.JDateChooser();
-        jLabel13 = new javax.swing.JLabel();
-        dir_emp = new javax.swing.JTextField();
-        jLabel14 = new javax.swing.JLabel();
-        jLabel16 = new javax.swing.JLabel();
-        tel_emp = new javax.swing.JTextField();
         jLabel17 = new javax.swing.JLabel();
         mail_emp = new javax.swing.JTextField();
-        jLabel18 = new javax.swing.JLabel();
-        acud = new javax.swing.JTextField();
-        jLabel19 = new javax.swing.JLabel();
-        jLabel20 = new javax.swing.JLabel();
-        tel_acud = new javax.swing.JTextField();
         jLabel21 = new javax.swing.JLabel();
         add_eps = new javax.swing.JButton();
         add_ccf = new javax.swing.JButton();
         add_afp = new javax.swing.JButton();
         add_arl = new javax.swing.JButton();
-        add_mun = new javax.swing.JButton();
-        add_par = new javax.swing.JButton();
-        jLabel10 = new javax.swing.JLabel();
         cb_arl = new javax.swing.JComboBox<>();
         cb_eps = new javax.swing.JComboBox<>();
         cb_afp = new javax.swing.JComboBox<>();
         cb_ccf = new javax.swing.JComboBox<>();
-        cb_mun = new javax.swing.JComboBox<>();
-        cb_par = new javax.swing.JComboBox<>();
         cb_obra = new javax.swing.JComboBox<>();
         add_barrio1 = new javax.swing.JButton();
         jLabel24 = new javax.swing.JLabel();
-        barrio = new javax.swing.JTextField();
+        cb_area = new javax.swing.JComboBox<>();
+        jLabel25 = new javax.swing.JLabel();
+        jLabel26 = new javax.swing.JLabel();
+        cb_cargo = new javax.swing.JComboBox<>();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         obs = new javax.swing.JTextArea();
         jButton4 = new javax.swing.JButton();
         jButton14 = new javax.swing.JButton();
+        jPanel4 = new javax.swing.JPanel();
+        jLabel27 = new javax.swing.JLabel();
+        f_ex_ing = new com.toedter.calendar.JDateChooser();
+        jLabel28 = new javax.swing.JLabel();
+        f_cons = new com.toedter.calendar.JDateChooser();
+        jLabel29 = new javax.swing.JLabel();
+        cb_exon = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Editar Novedad");
-
-        jPanel4.setAutoscrolls(true);
+        setResizable(false);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Datos Novedad"));
 
@@ -252,7 +243,7 @@ Boolean block=true;
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(59, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel23)
                 .addGap(38, 38, 38)
                 .addComponent(tipo_nov, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -264,7 +255,7 @@ Boolean block=true;
                 .addComponent(jLabel15)
                 .addGap(46, 46, 46)
                 .addComponent(f_ret_nov, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(59, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -316,7 +307,7 @@ Boolean block=true;
         jPanel6Layout.setHorizontalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6Layout.createSequentialGroup()
-                .addContainerGap(94, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(Busc_nit, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -328,7 +319,7 @@ Boolean block=true;
                 .addComponent(nom_empl, javax.swing.GroupLayout.PREFERRED_SIZE, 392, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(edit_empresa, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(95, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -388,7 +379,7 @@ Boolean block=true;
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(47, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(Busc_cedula, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -404,7 +395,7 @@ Boolean block=true;
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(ap_emp, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(47, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -449,40 +440,6 @@ Boolean block=true;
 
         jLabel9.setText("ARL");
 
-        jLabel11.setText("Fecha Nacimiento");
-
-        jLabel12.setText("Fecha Expedición");
-
-        jLabel13.setText("Dirección");
-
-        dir_emp.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        dir_emp.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                dir_empFocusLost(evt);
-            }
-        });
-        dir_emp.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                dir_empMouseClicked(evt);
-            }
-        });
-
-        jLabel14.setText("Barrio");
-
-        jLabel16.setText("Telefono empleado");
-
-        tel_emp.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        tel_emp.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                tel_empFocusLost(evt);
-            }
-        });
-        tel_emp.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tel_empMouseClicked(evt);
-            }
-        });
-
         jLabel17.setText("Correo");
 
         mail_emp.setHorizontalAlignment(javax.swing.JTextField.CENTER);
@@ -494,36 +451,6 @@ Boolean block=true;
         mail_emp.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 mail_empMouseClicked(evt);
-            }
-        });
-
-        jLabel18.setText("Acudiente");
-
-        acud.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        acud.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                acudFocusLost(evt);
-            }
-        });
-        acud.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                acudMouseClicked(evt);
-            }
-        });
-
-        jLabel19.setText("Parentesco");
-
-        jLabel20.setText("Telefono acudiente");
-
-        tel_acud.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        tel_acud.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                tel_acudFocusLost(evt);
-            }
-        });
-        tel_acud.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tel_acudMouseClicked(evt);
             }
         });
 
@@ -557,22 +484,6 @@ Boolean block=true;
             }
         });
 
-        add_mun.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cards_bind_address.png"))); // NOI18N
-        add_mun.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                add_munActionPerformed(evt);
-            }
-        });
-
-        add_par.setIcon(new javax.swing.ImageIcon(getClass().getResource("/user_add.png"))); // NOI18N
-        add_par.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                add_parActionPerformed(evt);
-            }
-        });
-
-        jLabel10.setText("Municipio");
-
         AutoCompletion.enable(cb_arl);
         cb_arl.setEditable(true);
 
@@ -584,12 +495,6 @@ Boolean block=true;
 
         AutoCompletion.enable(cb_ccf);
         cb_ccf.setEditable(true);
-
-        AutoCompletion.enable(cb_mun);
-        cb_mun.setEditable(true);
-
-        AutoCompletion.enable(cb_par);
-        cb_par.setEditable(true);
 
         AutoCompletion.enable(cb_obra);
         cb_obra.setEditable(true);
@@ -603,110 +508,66 @@ Boolean block=true;
 
         jLabel24.setText("Obra");
 
-        barrio.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jLabel25.setText("Area");
+
+        jLabel26.setText("Cargo");
 
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
         jPanel7Layout.setHorizontalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel7Layout.createSequentialGroup()
-                .addContainerGap(45, Short.MAX_VALUE)
+                .addGap(22, 22, 22)
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel6)
+                    .addComponent(jLabel17)
+                    .addComponent(jLabel1))
+                .addGap(24, 24, 24)
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(mail_emp, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(salario)
                         .addGroup(jPanel7Layout.createSequentialGroup()
-                            .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
-                                    .addComponent(jLabel16)
-                                    .addGap(18, 18, 18))
-                                .addGroup(jPanel7Layout.createSequentialGroup()
-                                    .addComponent(jLabel11)
-                                    .addGap(25, 25, 25)))
-                            .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(jPanel7Layout.createSequentialGroup()
-                                    .addComponent(f_nac, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(jLabel12))
-                                .addGroup(jPanel7Layout.createSequentialGroup()
-                                    .addComponent(tel_emp, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(jLabel14)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(barrio, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGap(18, 18, 18)
-                            .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(jPanel7Layout.createSequentialGroup()
-                                    .addComponent(jLabel13)
-                                    .addGap(21, 21, 21)
-                                    .addComponent(dir_emp, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addComponent(jLabel10)))
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
-                            .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addGroup(jPanel7Layout.createSequentialGroup()
-                                    .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jLabel1)
-                                        .addComponent(jLabel6))
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(salario)
-                                        .addComponent(cb_eps, 0, 162, Short.MAX_VALUE))
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(add_eps, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(18, 18, 18)
-                                    .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jLabel8)
-                                        .addComponent(jLabel21))
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(cb_afp, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(cb_ccf, 0, 168, Short.MAX_VALUE))
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
-                                            .addComponent(add_afp, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addGap(18, 18, 18)
-                                            .addComponent(jLabel9)
-                                            .addGap(18, 18, 18))
-                                        .addGroup(jPanel7Layout.createSequentialGroup()
-                                            .addComponent(add_ccf, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addGap(18, 18, 18)
-                                            .addComponent(jLabel24)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
-                                    .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                        .addComponent(cb_obra, 0, 167, Short.MAX_VALUE)
-                                        .addComponent(cb_arl, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
-                                .addGroup(jPanel7Layout.createSequentialGroup()
-                                    .addGap(0, 0, Short.MAX_VALUE)
-                                    .addComponent(f_exp, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(228, 228, 228)))
-                            .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(add_arl, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(add_barrio1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(cb_eps, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(add_eps, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
+                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel8)
+                            .addComponent(jLabel21))
+                        .addGap(12, 12, 12))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
+                        .addComponent(jLabel25)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel7Layout.createSequentialGroup()
                         .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(jPanel7Layout.createSequentialGroup()
-                                .addComponent(jLabel20)
-                                .addGap(22, 22, 22)
-                                .addComponent(tel_acud))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
-                                .addComponent(jLabel17)
-                                .addGap(18, 18, 18)
-                                .addComponent(mail_emp, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel18)
-                        .addGap(26, 26, 26)
-                        .addComponent(acud, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel19)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(cb_par, 0, 136, Short.MAX_VALUE)
-                            .addComponent(cb_mun, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(10, 10, 10)
+                            .addComponent(cb_afp, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cb_ccf, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(add_mun, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(add_par, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(45, Short.MAX_VALUE))
+                            .addComponent(add_afp, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(add_ccf, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(cb_area, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel24, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel26, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(jPanel7Layout.createSequentialGroup()
+                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(cb_obra, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cb_arl, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(add_arl, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(add_barrio1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(cb_cargo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -716,64 +577,38 @@ Boolean block=true;
                     .addComponent(jLabel1)
                     .addComponent(salario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel8)
+                    .addComponent(cb_afp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(add_afp)
                     .addComponent(jLabel9)
-                    .addComponent(add_arl)
-                    .addComponent(cb_afp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cb_arl, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(14, 14, 14)
+                    .addComponent(cb_arl, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(add_arl))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                     .addComponent(jLabel6)
+                    .addComponent(cb_eps, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(add_eps, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel21)
-                    .addComponent(add_ccf)
-                    .addComponent(cb_eps, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cb_ccf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(add_barrio1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(add_ccf)
+                    .addComponent(jLabel24)
                     .addComponent(cb_obra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel24))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                    .addComponent(jLabel11)
-                    .addComponent(f_nac, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel12)
-                    .addComponent(f_exp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel13)
-                    .addComponent(dir_emp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                    .addComponent(jLabel16)
-                    .addComponent(tel_emp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel14)
-                    .addComponent(jLabel10)
-                    .addComponent(add_mun, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cb_mun, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(barrio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(add_barrio1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                     .addComponent(jLabel17)
                     .addComponent(mail_emp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel18)
-                    .addComponent(acud, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel19)
-                    .addComponent(add_par, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cb_par, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(46, 46, 46))
-            .addGroup(jPanel7Layout.createSequentialGroup()
-                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel7Layout.createSequentialGroup()
-                        .addGap(203, 203, 203)
-                        .addComponent(jLabel20))
-                    .addGroup(jPanel7Layout.createSequentialGroup()
-                        .addGap(200, 200, 200)
-                        .addComponent(tel_acud, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(17, 17, 17))
+                    .addComponent(cb_area, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cb_cargo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel25)
+                    .addComponent(jLabel26))
+                .addContainerGap())
         );
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Observaciones"));
 
         obs.setColumns(20);
         obs.setRows(5);
+        obs.setText("kjhflksadhfñlsdhfñlksjdhfksjdhfksjdhfskjdhflksjdhfksljdhflksjdhflksjdhfksljdhfksjdhfksjdhfñksjdhfksn.,smznvc,zxmcnvxlkcjvhñlksjdfñlksjdhfñksjdhfsñkjdfhñksjdhfñlksjfdhlskjfdhlskjfdhslkjhf");
         obs.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 obsFocusLost(evt);
@@ -792,14 +627,14 @@ Boolean block=true;
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 813, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 817, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 74, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 153, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -819,30 +654,77 @@ Boolean block=true;
             }
         });
 
+        jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
+
+        jLabel27.setText("Fecha examen de ingreso");
+
+        jLabel28.setText("Fecha  de consentimiento");
+
+        jLabel29.setText("Exonerado FIC");
+
+        cb_exon.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione..", "SI", "NO" }));
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton14)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton4)
+                .addComponent(jLabel27)
+                .addGap(18, 18, 18)
+                .addComponent(f_ex_ing, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel28)
+                .addGap(18, 18, 18)
+                .addComponent(f_cons, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(32, 32, 32)
+                .addComponent(jLabel29)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(cb_exon, 0, 152, Short.MAX_VALUE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(17, 17, 17)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                    .addComponent(cb_exon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel29)
+                    .addComponent(jLabel27)
+                    .addComponent(jLabel28)
+                    .addComponent(f_cons, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(f_ex_ing, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(17, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(14, 14, 14)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jButton14)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton4)
+                        .addGap(307, 307, 307))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jPanel7, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addGap(14, 14, 14))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(12, 12, 12)
                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -850,26 +732,15 @@ Boolean block=true;
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(1, 1, 1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(2, 2, 2)
                 .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton14)
                     .addComponent(jButton4))
-                .addContainerGap())
-        );
-
-        jScrollPane3.setViewportView(jPanel4);
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 1047, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane3)
+                .addGap(12, 12, 12))
         );
 
         pack();
@@ -878,18 +749,29 @@ Boolean block=true;
     private void jButton14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton14ActionPerformed
         // TODO add your handling code here:
         int id_tip=0;
-        int id_eps=0;
-        int id_afp=0;
+        String id_eps="";
+        String id_afp="";
         int id_arl=0;
         int id_ccf=0;
         int id_obra=0;
         int id_barrio=0;
+        int id_area=0;
+        int id_cargo=0;
         String id_municipio="";
         int id_par_acud=0;
         String arl = "";
         String ccf = "";
         if (tipo_nov.getSelectedItem().toString().equals("INGRESO") | tipo_nov.getSelectedItem().toString().equals("BLOQUEADO") | tipo_nov.getSelectedItem().toString().equals("EXTERNO")) {
             if (f_ing_nov.getDate()!=null) {
+                Calendar date_in = Calendar.getInstance();
+                date_in.setTime(f_ing_nov.getDate());
+                Calendar date_today = Calendar.getInstance();
+                try {
+                    date_today.setTime(new SimpleDateFormat("dd-MM-yyyy").parse(new SimpleDateFormat("dd-MM-yyyy").format(new Date())));
+                }catch(ParseException e){
+                    e.printStackTrace();
+                }
+//                if(date_in.getTime().compareTo(date_today.getTime())>=0){
                 if (!Busc_nit.getText().equals("")) {
                     if (!nom_empl.getText().equals("")) {
                         if (!Busc_cedula.getText().equals("")) {
@@ -900,137 +782,159 @@ Boolean block=true;
                                             if (!cb_arl.getSelectedItem().equals("Seleccione..")) {
                                                 if (!cb_eps.getSelectedItem().equals("Seleccione..")) {
                                                     if (!cb_ccf.getSelectedItem().equals("Seleccione..")) {
-                                                        if (!dir_emp.getText().equals("")) {
-                                                            if (!tel_emp.getText().equals("")) {
-                                                                if (!barrio.getText().equals("")) {
-                                                                    if (!cb_mun.getSelectedItem().equals("Seleccione..")) {
-                                                                        if (check_field_mail(mail_emp.getText())) {
-                                                                            if (!acud.getText().equals("")) {
-                                                                                if (!cb_par.getSelectedItem().equals("Seleccione..")) {
-                                                                                    if (!tel_acud.getText().equals("")) {
-                                                                                        Conexion con = new Conexion();
-                                                                                        con.conexion();
-                                                                                        ResultSet r;
-                                                                                        try {
-                                                                                            r = con.s.executeQuery ("SELECT * FROM `t_eps` WHERE (NOMBRE_EPS ='"+cb_eps.getSelectedItem().toString()+"');");
-                                                                                            if(r.next()){
-                                                                                                id_eps=r.getInt("ID_EPS");    
-                                                                                            }
-                                                                                            r = con.s.executeQuery ("SELECT * FROM `t_afp` WHERE (NOMBRE_AFP ='"+cb_afp.getSelectedItem().toString()+"');");
-                                                                                            if(r.next()){
-                                                                                                id_afp=r.getInt("ID_AFP");    
-                                                                                            }
-                                                                                            r = con.s.executeQuery ("SELECT * FROM `t_arl` WHERE (NOMBRE_ARL ='"+cb_arl.getSelectedItem().toString()+"');");
-                                                                                            if(r.next()){
-                                                                                                id_arl=r.getInt("ID_ARL");    
-                                                                                            }
-                                                                                            r = con.s.executeQuery ("SELECT * FROM `t_ccf` WHERE (NOMBRE_CCF ='"+cb_ccf.getSelectedItem().toString()+"');");
-                                                                                            if(r.next()){
-                                                                                                id_ccf=r.getInt("ID_CCF");    
-                                                                                            }
-                                                                                            r = con.s.executeQuery ("SELECT * FROM `t_obra` WHERE (NOMBRE_OBRA ='"+cb_obra.getSelectedItem().toString()+"');");
-                                                                                            if(r.next()){
-                                                                                                id_obra=r.getInt("ID_OBRA");    
-                                                                                            }
-                                                                                            id_municipio = get_id_municipio(cb_mun.getSelectedItem());
-                                                                                            r = con.s.executeQuery ("SELECT * FROM `t_parentesco` WHERE (NOMBRE_PAR ='"+cb_par.getSelectedItem().toString()+"');");
-                                                                                            if(r.next()){
-                                                                                                id_par_acud=r.getInt("ID_PAR");    
-                                                                                            }
-                                                                                            r = con.s.executeQuery ("SELECT * FROM t_tipo_novedad WHERE NOMBRE_TIPO ='"+tipo_nov.getSelectedItem().toString()+"'");
-                                                                                            if (r.next()) {
-                                                                                                id_tip=r.getInt("ID_TIPO");
-                                                                                            }
-                                                                                            String aux_f_nac = "";
-                                                                                            String aux_f_exp = "";
-                                                                                            if (f_nac.getDate()==null) {
-                                                                                                aux_f_nac = "1900-01-01";
-                                                                                            }else{
-                                                                                                aux_f_nac = new SimpleDateFormat("yyyy-MM-dd").format(f_nac.getDate());
-                                                                                            }
-                                                                                            if (f_exp.getDate()==null) {
-                                                                                                aux_f_exp = "1900-01-01";
-                                                                                            }else{
-                                                                                                aux_f_exp = new SimpleDateFormat("yyyy-MM-dd").format(f_exp.getDate());
-                                                                                            }
-                                                                                            int conf = JOptionPane.showConfirmDialog(this,"Esta seguro que desea continuar?","Confirmación",JOptionPane.OK_CANCEL_OPTION,JOptionPane.QUESTION_MESSAGE);
-                                                                                            if (conf == JOptionPane.YES_OPTION) {
-                                                                                                con.s.executeUpdate("UPDATE `t_novedades` SET `ID_EMPLEADO`="+Busc_cedula.getText()+",`ID_EMPRESA`='"+Busc_nit.getText()+"',`FECHA_INGRESO`='"+new SimpleDateFormat("yyyy-MM-dd").format(f_ing_nov.getDate())+"',`FECHA_RETIRO`='1900-01-01',`SALARIO_NOVEDAD`="+salario.getText()+",`ID_EPS`="+id_eps+",`ID_AFP`="+id_afp+",`ARL_NOV`='"+cb_arl.getSelectedItem()+"',`CCF_NOV`='"+cb_ccf.getSelectedItem()+"',`F_NAC_NOV`='"+aux_f_nac+"',`F_EXP_NOV`='"+aux_f_exp+"',`DIR_EMP_NOV`='"+dir_emp.getText()+"',`BARRIO_NOV`='"+barrio.getText()+"',`ID_MUN_NOV`="+id_municipio+",`TEL_NOV`='"+tel_emp.getText()+"',`MAIL_NOV`='"+mail_emp.getText()+"',`ACUD_NOV`='"+acud.getText()+"',`ID_PAR_ACU_NOV`="+id_par_acud+",`TEL_ACUD_NOV`='"+tel_acud.getText()+"',`OBS_NOV`='"+obs.getText().toUpperCase()+"',`ID_OBRA`="+id_obra+",`ID_TIPO`="+id_tip+", `F_REGISTRO`='"+new SimpleDateFormat("yyyy-MM-dd").format(new Date())+"' WHERE ID_EMPLEADO="+ced_edit+" AND ID_EMPRESA='"+nit_edit+"' AND FECHA_INGRESO='"+new SimpleDateFormat("yyyy-MM-dd").format(f_ing_edit)+"' AND FECHA_RETIRO='"+new SimpleDateFormat("yyyy-MM-dd").format(f_ret_edit)+"' AND ID_TIPO="+id_tip_edit);
-                                                                                                if (id_tip_edit!= id_tip & id_tip==1) {
-                                                                                                    con.s.executeUpdate("INSERT INTO `t_registro` (ID_EMPLEADO,ID_EMPRESA,F_INGRESO,F_RETIRO,ID_TIPO, REGISTRO, F_REGISTRO, FECHA, ID_USUARIO) VALUES ("+Busc_cedula.getText()+",'"+Busc_nit.getText()+"','"+new SimpleDateFormat("yyyy-MM-dd").format(f_ing_nov.getDate())+"','1900-01-01',"+id_tip+",'MODIFICADO A INGRESO','"+new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date())+"','"+new SimpleDateFormat("yyyy-MM-dd").format(f_ing_nov.getDate())+"','"+Main.id_usuario+"')");
-                                                                                                }else if (id_tip_edit!= id_tip & id_tip==4){
-                                                                                                    con.s.executeUpdate("INSERT INTO `t_registro` (ID_EMPLEADO,ID_EMPRESA,F_INGRESO,F_RETIRO,ID_TIPO, REGISTRO, F_REGISTRO, FECHA, ID_USUARIO) VALUES ("+Busc_cedula.getText()+",'"+Busc_nit.getText()+"','"+new SimpleDateFormat("yyyy-MM-dd").format(f_ing_nov.getDate())+"','1900-01-01',"+id_tip+",'MODIFICADO A BLOQUEADO','"+new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date())+"','"+new SimpleDateFormat("yyyy-MM-dd").format(f_ing_nov.getDate())+"','"+Main.id_usuario+"')");
-                                                                                                }else if (id_tip_edit!= id_tip & id_tip==5){
-                                                                                                    con.s.executeUpdate("INSERT INTO `t_registro` (ID_EMPLEADO,ID_EMPRESA,F_INGRESO,F_RETIRO,ID_TIPO, REGISTRO, F_REGISTRO, FECHA, ID_USUARIO) VALUES ("+Busc_cedula.getText()+",'"+Busc_nit.getText()+"','"+new SimpleDateFormat("yyyy-MM-dd").format(f_ing_nov.getDate())+"','1900-01-01',"+id_tip+",'MODIFICADO A EXTERNO','"+new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date())+"','"+new SimpleDateFormat("yyyy-MM-dd").format(f_ing_nov.getDate())+"','"+Main.id_usuario+"')");
-                                                                                                }
-                                                                                                if (f_ing_edit.compareTo(f_ing_nov.getDate())!=0) {
-                                                                                                    con.s.executeUpdate("INSERT INTO `t_registro` (ID_EMPLEADO,ID_EMPRESA,F_INGRESO,F_RETIRO,ID_TIPO, REGISTRO, F_REGISTRO, FECHA, ID_USUARIO) VALUES ("+Busc_cedula.getText()+",'"+Busc_nit.getText()+"','"+new SimpleDateFormat("yyyy-MM-dd").format(f_ing_nov.getDate())+"','1900-01-01',"+id_tip+",'MODIFICA FECHA INGRESO','"+new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date())+"','"+new SimpleDateFormat("yyyy-MM-dd").format(f_ing_nov.getDate())+"','"+Main.id_usuario+"')");
-                                                                                                }
-                                                                                                if (!nit_edit.equals(Busc_nit.getText())) {
-                                                                                                    con.s.executeUpdate("INSERT INTO `t_registro` (ID_EMPLEADO,ID_EMPRESA,F_INGRESO,F_RETIRO,ID_TIPO, REGISTRO, F_REGISTRO, FECHA, ID_USUARIO) VALUES ("+Busc_cedula.getText()+",'"+Busc_nit.getText()+"','"+new SimpleDateFormat("yyyy-MM-dd").format(f_ing_nov.getDate())+"','1900-01-01',"+id_tip+",'MODIFICA NIT EMPRESA DE "+nit_edit+" A "+Busc_nit.getText()+"','"+new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date())+"','"+new SimpleDateFormat("yyyy-MM-dd").format(new Date())+"','"+Main.id_usuario+"')");
-                                                                                                }
-                                                                                                if (!ced_edit.equals(Busc_cedula.getText())) {
-                                                                                                    con.s.executeUpdate("INSERT INTO `t_registro` (ID_EMPLEADO,ID_EMPRESA,F_INGRESO,F_RETIRO,ID_TIPO, REGISTRO, F_REGISTRO, FECHA, ID_USUARIO) VALUES ("+Busc_cedula.getText()+",'"+Busc_nit.getText()+"','"+new SimpleDateFormat("yyyy-MM-dd").format(f_ing_nov.getDate())+"','1900-01-01',"+id_tip+",'MODIFICA EMPLEADO DE "+ced_edit+" A "+Busc_cedula.getText()+"','"+new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date())+"','"+new SimpleDateFormat("yyyy-MM-dd").format(new Date())+"','"+Main.id_usuario+"')");
-                                                                                                }
-                                                                                                if (salario_edit!=Float.parseFloat(salario.getText())) {
-                                                                                                    con.s.executeUpdate("INSERT INTO `t_registro` (ID_EMPLEADO,ID_EMPRESA,F_INGRESO,F_RETIRO,ID_TIPO, REGISTRO, F_REGISTRO, FECHA, ID_USUARIO) VALUES ("+Busc_cedula.getText()+",'"+Busc_nit.getText()+"','"+new SimpleDateFormat("yyyy-MM-dd").format(f_ing_nov.getDate())+"','1900-01-01',"+id_tip+",'MODIFICA SALARIO DE "+salario_edit+" A "+salario.getText()+"','"+new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date())+"','"+new SimpleDateFormat("yyyy-MM-dd").format(new Date())+"','"+Main.id_usuario+"')");
-                                                                                                }
-                                                                                                if (!afp_edit.equals(cb_afp.getSelectedItem().toString())) {
-                                                                                                    con.s.executeUpdate("INSERT INTO `t_registro` (ID_EMPLEADO,ID_EMPRESA,F_INGRESO,F_RETIRO,ID_TIPO, REGISTRO, F_REGISTRO, FECHA, ID_USUARIO) VALUES ("+Busc_cedula.getText()+",'"+Busc_nit.getText()+"','"+new SimpleDateFormat("yyyy-MM-dd").format(f_ing_nov.getDate())+"','1900-01-01',"+id_tip+",'MODIFICA AFP DE "+afp_edit+" A "+cb_afp.getSelectedItem().toString()+"','"+new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date())+"','"+new SimpleDateFormat("yyyy-MM-dd").format(new Date())+"','"+Main.id_usuario+"')");
-                                                                                                }
-                                                                                                if (!arl_edit.equals(cb_arl.getSelectedItem().toString())) {
-                                                                                                    con.s.executeUpdate("INSERT INTO `t_registro` (ID_EMPLEADO,ID_EMPRESA,F_INGRESO,F_RETIRO,ID_TIPO, REGISTRO, F_REGISTRO, FECHA, ID_USUARIO) VALUES ("+Busc_cedula.getText()+",'"+Busc_nit.getText()+"','"+new SimpleDateFormat("yyyy-MM-dd").format(f_ing_nov.getDate())+"','1900-01-01',"+id_tip+",'MODIFICA ARL DE "+arl_edit+" A "+cb_arl.getSelectedItem().toString()+"','"+new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date())+"','"+new SimpleDateFormat("yyyy-MM-dd").format(new Date())+"','"+Main.id_usuario+"')");
-                                                                                                }
-                                                                                                if (!eps_edit.equals(cb_eps.getSelectedItem().toString())) {
-                                                                                                    con.s.executeUpdate("INSERT INTO `t_registro` (ID_EMPLEADO,ID_EMPRESA,F_INGRESO,F_RETIRO,ID_TIPO, REGISTRO, F_REGISTRO, FECHA, ID_USUARIO) VALUES ("+Busc_cedula.getText()+",'"+Busc_nit.getText()+"','"+new SimpleDateFormat("yyyy-MM-dd").format(f_ing_nov.getDate())+"','1900-01-01',"+id_tip+",'MODIFICA EPS DE "+eps_edit+" A "+cb_eps.getSelectedItem().toString()+"','"+new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date())+"','"+new SimpleDateFormat("yyyy-MM-dd").format(new Date())+"','"+Main.id_usuario+"')");
-                                                                                                }
-                                                                                                if (!ccf_edit.equals(cb_ccf.getSelectedItem().toString())) {
-                                                                                                    con.s.executeUpdate("INSERT INTO `t_registro` (ID_EMPLEADO,ID_EMPRESA,F_INGRESO,F_RETIRO,ID_TIPO, REGISTRO, F_REGISTRO, FECHA, ID_USUARIO) VALUES ("+Busc_cedula.getText()+",'"+Busc_nit.getText()+"','"+new SimpleDateFormat("yyyy-MM-dd").format(f_ing_nov.getDate())+"','1900-01-01',"+id_tip+",'MODIFICA CCF DE "+ccf_edit+" A "+cb_ccf.getSelectedItem().toString()+"','"+new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date())+"','"+new SimpleDateFormat("yyyy-MM-dd").format(new Date())+"','"+Main.id_usuario+"')");
-                                                                                                }
-                                                                                                if (!obra_edit.equals(cb_obra.getSelectedItem().toString())) {
-                                                                                                    con.s.executeUpdate("INSERT INTO `t_registro` (ID_EMPLEADO,ID_EMPRESA,F_INGRESO,F_RETIRO,ID_TIPO, REGISTRO, F_REGISTRO, FECHA, ID_USUARIO) VALUES ("+Busc_cedula.getText()+",'"+Busc_nit.getText()+"','"+new SimpleDateFormat("yyyy-MM-dd").format(f_ing_nov.getDate())+"','1900-01-01',"+id_tip+",'MODIFICA OBRA DE "+obra_edit+" A "+cb_obra.getSelectedItem().toString()+"','"+new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date())+"','"+new SimpleDateFormat("yyyy-MM-dd").format(new Date())+"','"+Main.id_usuario+"')");
-                                                                                                }
-                                                                                                if (!obs_edit.equals(obs.getText())) {
-                                                                                                    con.s.executeUpdate("INSERT INTO `t_registro` (ID_EMPLEADO,ID_EMPRESA,F_INGRESO,F_RETIRO,ID_TIPO, REGISTRO, F_REGISTRO, FECHA, ID_USUARIO) VALUES ("+Busc_cedula.getText()+",'"+Busc_nit.getText()+"','"+new SimpleDateFormat("yyyy-MM-dd").format(f_ing_nov.getDate())+"','1900-01-01',"+id_tip+",'MODIFICA OBSERVACION A "+obs.getText()+"','"+new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date())+"','"+new SimpleDateFormat("yyyy-MM-dd").format(new Date())+"','"+Main.id_usuario+"')");
-                                                                                                }
-                                                                                                JOptionPane.showMessageDialog(this,"Novedad editada correctamente.","Información",JOptionPane.INFORMATION_MESSAGE);
-                                                                                                clear_all();
-                                                                                                Busc_cedula.requestFocus();
-                                                                                                con.cerrar();
-                                                                                                this.dispose();
-                                                                                            } else {
-                                                                                                Busc_cedula.requestFocus();
-                                                                                            }
-                                                                                            con.cerrar();
-                                                                                        } catch (SQLException e) {
-                                                                                            con.cerrar();
-                                                                                            e.printStackTrace();
-                                                                                            JOptionPane.showMessageDialog(this,e,"Error",JOptionPane.ERROR_MESSAGE);
+                                                        if (check_field_mail(mail_emp.getText())) {
+                                                            if (!cb_area.getSelectedItem().equals("Seleccione..")) {
+                                                                if (!cb_cargo.getSelectedItem().equals("Seleccione..")) {
+                                                                    if (f_ex_ing.getDate()!=null) {
+                                                                        Calendar date_examen = Calendar.getInstance();
+                                                                        date_examen.setTime(f_ex_ing.getDate());
+                                                                        date_in.add(Calendar.MONTH, -6);
+                                                                        if (date_examen.getTime().compareTo(date_in.getTime())>=0) {
+                                                                            if (!cb_exon.getSelectedItem().equals("Seleccione..")) {
+                                                                                if (f_cons.getDate()!=null) {
+                                                                                    Conexion con = new Conexion();
+                                                                                    con.conexion();
+                                                                                    ResultSet r;
+                                                                                    try {
+                                                                                        r = con.s.executeQuery ("SELECT * FROM `t_eps` WHERE (NOMBRE_EPS ='"+cb_eps.getSelectedItem().toString()+"');");
+                                                                                        if(r.next()){
+                                                                                            id_eps=r.getString("ID_EPS");    
                                                                                         }
-                                                                                    } else {
-                                                                                        JOptionPane.showMessageDialog(this,"Ingrese el telefono del acudiente del empleado.","Error",JOptionPane.ERROR_MESSAGE);
+                                                                                        r = con.s.executeQuery ("SELECT * FROM `t_afp` WHERE (NOMBRE_AFP ='"+cb_afp.getSelectedItem().toString()+"');");
+                                                                                        if(r.next()){
+                                                                                            id_afp=r.getString("ID_AFP");    
+                                                                                        }
+//                                                                                        r = con.s.executeQuery ("SELECT * FROM `t_arl` WHERE (NOMBRE_ARL ='"+cb_arl.getSelectedItem().toString()+"');");
+//                                                                                        if(r.next()){
+//                                                                                            id_arl=r.getInt("ID_ARL");    
+//                                                                                        }
+//                                                                                        r = con.s.executeQuery ("SELECT * FROM `t_ccf` WHERE (NOMBRE_CCF ='"+cb_ccf.getSelectedItem().toString()+"');");
+//                                                                                        if(r.next()){
+//                                                                                            id_ccf=r.getInt("ID_CCF");    
+//                                                                                        }
+                                                                                        r = con.s.executeQuery ("SELECT * FROM `t_obra` WHERE (NOMBRE_OBRA ='"+cb_obra.getSelectedItem().toString()+"');");
+                                                                                        if(r.next()){
+                                                                                            id_obra=r.getInt("ID_OBRA");    
+                                                                                        }
+                                                                                        r = con.s.executeQuery ("SELECT * FROM t_tipo_novedad WHERE NOMBRE_TIPO ='"+tipo_nov.getSelectedItem().toString()+"'");
+                                                                                        if (r.next()) {
+                                                                                            id_tip=r.getInt("ID_TIPO");
+                                                                                        }
+                                                                                        //**************GET ID AREA
+                                                                                        r = con.s.executeQuery ("SELECT *\n" +
+                                                                                                                "FROM\n" +
+                                                                                                                "    t_actividades WHERE NOMBRE_ACTIVIDAD = '"+cb_area.getSelectedItem()+"';");
+                                                                                        if(r.next()){
+                                                                                            id_area=r.getInt("ID_ACTIVIDAD");
+                                                                                        }
+                                                                                        //**************GET ID CARGO
+                                                                                        r = con.s.executeQuery ("SELECT *\n" +
+                                                                                                                "FROM\n" +
+                                                                                                                "    t_cargo WHERE NOMBRE_CARGO = '"+cb_cargo.getSelectedItem()+"';");
+                                                                                        if(r.next()){
+                                                                                            id_cargo=r.getInt("ID_CARGO");
+                                                                                        }
+                                                                                        int conf = JOptionPane.showConfirmDialog(this,"Esta seguro que desea continuar?","Confirmación",JOptionPane.OK_CANCEL_OPTION,JOptionPane.QUESTION_MESSAGE);
+                                                                                        if (conf == JOptionPane.YES_OPTION) {
+                                                                                            con.s.executeUpdate("UPDATE `e_occidente`.`t_novedades`\n" +
+                                                                                                                "SET `ID_EMPLEADO` = "+Busc_cedula.getText()+",\n" +
+                                                                                                                "  `ID_EMPRESA` = '"+Busc_nit.getText()+"',\n" +
+                                                                                                                "  `FECHA_INGRESO` = '"+new SimpleDateFormat("yyyy-MM-dd").format(f_ing_nov.getDate())+"',\n" +
+                                                                                                                "  `FECHA_RETIRO` = '1900-01-01',\n" +
+                                                                                                                "  `SALARIO_NOVEDAD` = "+salario.getText()+",\n" +
+                                                                                                                "  `ID_EPS` = '"+id_eps+"',\n" +
+                                                                                                                "  `ID_AFP` = '"+id_afp+"',\n" +
+                                                                                                                "  `ARL_NOV` = '"+cb_arl.getSelectedItem()+"',\n" +
+                                                                                                                "  `CCF_NOV` = '"+cb_ccf.getSelectedItem()+"',\n" +
+                                                                                                                "  `OBS_NOV` = '"+obs.getText().toUpperCase()+"',\n" +
+                                                                                                                "  `ID_OBRA` = "+id_obra+",\n" +
+                                                                                                                "  `ID_TIPO` = "+id_tip+",\n" +
+                                                                                                                "  `F_REGISTRO` = '"+new SimpleDateFormat("yyyy-MM-dd").format(new Date())+"',\n" +
+                                                                                                                "  `ID_CARGO` = "+id_cargo+",\n" +
+                                                                                                                "  `ID_AREA_TRABAJO` = "+id_area+",\n" +
+                                                                                                                "  `F_EXAMEN_INGRESO` = '"+new SimpleDateFormat("yyyy-MM-dd").format(f_ex_ing.getDate())+"',\n" +
+                                                                                                                "  `F_CONSENTIMIENTO` = '"+new SimpleDateFormat("yyyy-MM-dd").format(f_cons.getDate())+"',\n" +
+                                                                                                                "  `EXON_FIC` = '"+cb_exon.getSelectedItem()+"',\n" +
+                                                                                                                "  `MAIL_NOV` = '"+mail_emp.getText()+"'\n" +
+                                                                                                                "WHERE `ID_EMPLEADO` = "+ced_edit+"\n" +
+                                                                                                                "    AND `ID_EMPRESA` = '"+nit_edit+"'\n" +
+                                                                                                                "    AND `FECHA_INGRESO` = '"+new SimpleDateFormat("yyyy-MM-dd").format(f_ing_edit)+"'\n" +
+                                                                                                                "    AND `ID_TIPO` = "+id_tip_edit+"\n" +
+                                                                                                                "    AND `FECHA_RETIRO` = '"+new SimpleDateFormat("yyyy-MM-dd").format(f_ret_edit)+"';");
+                                                                                            if (id_tip_edit!= id_tip & id_tip==1) {
+                                                                                                con.s.executeUpdate("INSERT INTO `t_registro` (ID_EMPLEADO,ID_EMPRESA,F_INGRESO,F_RETIRO,ID_TIPO, REGISTRO, F_REGISTRO, FECHA, ID_USUARIO) VALUES ("+Busc_cedula.getText()+",'"+Busc_nit.getText()+"','"+new SimpleDateFormat("yyyy-MM-dd").format(f_ing_nov.getDate())+"','1900-01-01',"+id_tip+",'MODIFICADO A INGRESO','"+new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date())+"','"+new SimpleDateFormat("yyyy-MM-dd").format(f_ing_nov.getDate())+"','"+Main.id_usuario+"')");
+                                                                                            }else if (id_tip_edit!= id_tip & id_tip==4){
+                                                                                                con.s.executeUpdate("INSERT INTO `t_registro` (ID_EMPLEADO,ID_EMPRESA,F_INGRESO,F_RETIRO,ID_TIPO, REGISTRO, F_REGISTRO, FECHA, ID_USUARIO) VALUES ("+Busc_cedula.getText()+",'"+Busc_nit.getText()+"','"+new SimpleDateFormat("yyyy-MM-dd").format(f_ing_nov.getDate())+"','1900-01-01',"+id_tip+",'MODIFICADO A BLOQUEADO','"+new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date())+"','"+new SimpleDateFormat("yyyy-MM-dd").format(f_ing_nov.getDate())+"','"+Main.id_usuario+"')");
+                                                                                            }else if (id_tip_edit!= id_tip & id_tip==5){
+                                                                                                con.s.executeUpdate("INSERT INTO `t_registro` (ID_EMPLEADO,ID_EMPRESA,F_INGRESO,F_RETIRO,ID_TIPO, REGISTRO, F_REGISTRO, FECHA, ID_USUARIO) VALUES ("+Busc_cedula.getText()+",'"+Busc_nit.getText()+"','"+new SimpleDateFormat("yyyy-MM-dd").format(f_ing_nov.getDate())+"','1900-01-01',"+id_tip+",'MODIFICADO A EXTERNO','"+new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date())+"','"+new SimpleDateFormat("yyyy-MM-dd").format(f_ing_nov.getDate())+"','"+Main.id_usuario+"')");
+                                                                                            }
+                                                                                            if (f_ing_edit.compareTo(f_ing_nov.getDate())!=0) {
+                                                                                                con.s.executeUpdate("INSERT INTO `t_registro` (ID_EMPLEADO,ID_EMPRESA,F_INGRESO,F_RETIRO,ID_TIPO, REGISTRO, F_REGISTRO, FECHA, ID_USUARIO) VALUES ("+Busc_cedula.getText()+",'"+Busc_nit.getText()+"','"+new SimpleDateFormat("yyyy-MM-dd").format(f_ing_nov.getDate())+"','1900-01-01',"+id_tip+",'MODIFICA FECHA INGRESO','"+new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date())+"','"+new SimpleDateFormat("yyyy-MM-dd").format(f_ing_nov.getDate())+"','"+Main.id_usuario+"')");
+                                                                                            }
+                                                                                            if (!nit_edit.equals(Busc_nit.getText())) {
+                                                                                                con.s.executeUpdate("INSERT INTO `t_registro` (ID_EMPLEADO,ID_EMPRESA,F_INGRESO,F_RETIRO,ID_TIPO, REGISTRO, F_REGISTRO, FECHA, ID_USUARIO) VALUES ("+Busc_cedula.getText()+",'"+Busc_nit.getText()+"','"+new SimpleDateFormat("yyyy-MM-dd").format(f_ing_nov.getDate())+"','1900-01-01',"+id_tip+",'MODIFICA NIT EMPRESA DE "+nit_edit+" A "+Busc_nit.getText()+"','"+new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date())+"','"+new SimpleDateFormat("yyyy-MM-dd").format(new Date())+"','"+Main.id_usuario+"')");
+                                                                                            }
+                                                                                            if (!ced_edit.equals(Busc_cedula.getText())) {
+                                                                                                con.s.executeUpdate("INSERT INTO `t_registro` (ID_EMPLEADO,ID_EMPRESA,F_INGRESO,F_RETIRO,ID_TIPO, REGISTRO, F_REGISTRO, FECHA, ID_USUARIO) VALUES ("+Busc_cedula.getText()+",'"+Busc_nit.getText()+"','"+new SimpleDateFormat("yyyy-MM-dd").format(f_ing_nov.getDate())+"','1900-01-01',"+id_tip+",'MODIFICA EMPLEADO DE "+ced_edit+" A "+Busc_cedula.getText()+"','"+new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date())+"','"+new SimpleDateFormat("yyyy-MM-dd").format(new Date())+"','"+Main.id_usuario+"')");
+                                                                                            }
+                                                                                            if (salario_edit!=Float.parseFloat(salario.getText())) {
+                                                                                                con.s.executeUpdate("INSERT INTO `t_registro` (ID_EMPLEADO,ID_EMPRESA,F_INGRESO,F_RETIRO,ID_TIPO, REGISTRO, F_REGISTRO, FECHA, ID_USUARIO) VALUES ("+Busc_cedula.getText()+",'"+Busc_nit.getText()+"','"+new SimpleDateFormat("yyyy-MM-dd").format(f_ing_nov.getDate())+"','1900-01-01',"+id_tip+",'MODIFICA SALARIO DE "+salario_edit+" A "+salario.getText()+"','"+new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date())+"','"+new SimpleDateFormat("yyyy-MM-dd").format(new Date())+"','"+Main.id_usuario+"')");
+                                                                                            }
+                                                                                            if (!afp_edit.equals(cb_afp.getSelectedItem().toString())) {
+                                                                                                con.s.executeUpdate("INSERT INTO `t_registro` (ID_EMPLEADO,ID_EMPRESA,F_INGRESO,F_RETIRO,ID_TIPO, REGISTRO, F_REGISTRO, FECHA, ID_USUARIO) VALUES ("+Busc_cedula.getText()+",'"+Busc_nit.getText()+"','"+new SimpleDateFormat("yyyy-MM-dd").format(f_ing_nov.getDate())+"','1900-01-01',"+id_tip+",'MODIFICA AFP DE "+afp_edit+" A "+cb_afp.getSelectedItem().toString()+"','"+new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date())+"','"+new SimpleDateFormat("yyyy-MM-dd").format(new Date())+"','"+Main.id_usuario+"')");
+                                                                                            }
+                                                                                            if (!arl_edit.equals(cb_arl.getSelectedItem().toString())) {
+                                                                                                con.s.executeUpdate("INSERT INTO `t_registro` (ID_EMPLEADO,ID_EMPRESA,F_INGRESO,F_RETIRO,ID_TIPO, REGISTRO, F_REGISTRO, FECHA, ID_USUARIO) VALUES ("+Busc_cedula.getText()+",'"+Busc_nit.getText()+"','"+new SimpleDateFormat("yyyy-MM-dd").format(f_ing_nov.getDate())+"','1900-01-01',"+id_tip+",'MODIFICA ARL DE "+arl_edit+" A "+cb_arl.getSelectedItem().toString()+"','"+new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date())+"','"+new SimpleDateFormat("yyyy-MM-dd").format(new Date())+"','"+Main.id_usuario+"')");
+                                                                                            }
+                                                                                            if (!eps_edit.equals(cb_eps.getSelectedItem().toString())) {
+                                                                                                con.s.executeUpdate("INSERT INTO `t_registro` (ID_EMPLEADO,ID_EMPRESA,F_INGRESO,F_RETIRO,ID_TIPO, REGISTRO, F_REGISTRO, FECHA, ID_USUARIO) VALUES ("+Busc_cedula.getText()+",'"+Busc_nit.getText()+"','"+new SimpleDateFormat("yyyy-MM-dd").format(f_ing_nov.getDate())+"','1900-01-01',"+id_tip+",'MODIFICA EPS DE "+eps_edit+" A "+cb_eps.getSelectedItem().toString()+"','"+new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date())+"','"+new SimpleDateFormat("yyyy-MM-dd").format(new Date())+"','"+Main.id_usuario+"')");
+                                                                                            }
+                                                                                            if (!ccf_edit.equals(cb_ccf.getSelectedItem().toString())) {
+                                                                                                con.s.executeUpdate("INSERT INTO `t_registro` (ID_EMPLEADO,ID_EMPRESA,F_INGRESO,F_RETIRO,ID_TIPO, REGISTRO, F_REGISTRO, FECHA, ID_USUARIO) VALUES ("+Busc_cedula.getText()+",'"+Busc_nit.getText()+"','"+new SimpleDateFormat("yyyy-MM-dd").format(f_ing_nov.getDate())+"','1900-01-01',"+id_tip+",'MODIFICA CCF DE "+ccf_edit+" A "+cb_ccf.getSelectedItem().toString()+"','"+new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date())+"','"+new SimpleDateFormat("yyyy-MM-dd").format(new Date())+"','"+Main.id_usuario+"')");
+                                                                                            }
+                                                                                            if (!obra_edit.equals(cb_obra.getSelectedItem().toString())) {
+                                                                                                con.s.executeUpdate("INSERT INTO `t_registro` (ID_EMPLEADO,ID_EMPRESA,F_INGRESO,F_RETIRO,ID_TIPO, REGISTRO, F_REGISTRO, FECHA, ID_USUARIO) VALUES ("+Busc_cedula.getText()+",'"+Busc_nit.getText()+"','"+new SimpleDateFormat("yyyy-MM-dd").format(f_ing_nov.getDate())+"','1900-01-01',"+id_tip+",'MODIFICA OBRA DE "+obra_edit+" A "+cb_obra.getSelectedItem().toString()+"','"+new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date())+"','"+new SimpleDateFormat("yyyy-MM-dd").format(new Date())+"','"+Main.id_usuario+"')");
+                                                                                            }
+                                                                                            if (!obs_edit.equals(obs.getText())) {
+                                                                                                con.s.executeUpdate("INSERT INTO `t_registro` (ID_EMPLEADO,ID_EMPRESA,F_INGRESO,F_RETIRO,ID_TIPO, REGISTRO, F_REGISTRO, FECHA, ID_USUARIO) VALUES ("+Busc_cedula.getText()+",'"+Busc_nit.getText()+"','"+new SimpleDateFormat("yyyy-MM-dd").format(f_ing_nov.getDate())+"','1900-01-01',"+id_tip+",'MODIFICA OBSERVACION A "+obs.getText()+"','"+new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date())+"','"+new SimpleDateFormat("yyyy-MM-dd").format(new Date())+"','"+Main.id_usuario+"')");
+                                                                                            }
+                                                                                            JOptionPane.showMessageDialog(this,"Novedad editada correctamente.","Información",JOptionPane.INFORMATION_MESSAGE);
+                                                                                            clear_all();
+                                                                                            Busc_cedula.requestFocus();
+                                                                                            con.cerrar();
+                                                                                            this.dispose();
+                                                                                        } else {
+                                                                                            Busc_cedula.requestFocus();
+                                                                                        }
+                                                                                        con.cerrar();
+                                                                                    } catch (SQLException e) {
+                                                                                        con.cerrar();
+                                                                                        e.printStackTrace();
+                                                                                        JOptionPane.showMessageDialog(this,e,"Error",JOptionPane.ERROR_MESSAGE);
                                                                                     }
-                                                                                } else {
-                                                                                    JOptionPane.showMessageDialog(this,"Ingrese el parentesco del acudiente del empleado.","Error",JOptionPane.ERROR_MESSAGE);
+                                                                                }else{
+                                                                                    JOptionPane.showMessageDialog(this,"Seleccione la fecha de consentimiento del empleado","Error",JOptionPane.ERROR_MESSAGE);
                                                                                 }
                                                                             } else {
-                                                                                JOptionPane.showMessageDialog(this,"Ingrese el acudiente del empleado.","Error",JOptionPane.ERROR_MESSAGE);
+                                                                                JOptionPane.showMessageDialog(this,"Seleccione la exoneracion del FIC del empleado","Error",JOptionPane.ERROR_MESSAGE);
                                                                             }
-                                                                        } else {
-                                                                            JOptionPane.showMessageDialog(this,"Ingrese un email valido para el empleado.","Error",JOptionPane.ERROR_MESSAGE);
+                                                                        }else {
+                                                                            f_ex_ing.requestFocus();
+                                                                            JOptionPane.showMessageDialog(this,"Verifique que la Fecha de Examen medico tenga vigencia de un mes con respecto a la fecha de ingreso","Error",JOptionPane.ERROR_MESSAGE);
                                                                         }
-                                                                    } else {
-                                                                        JOptionPane.showMessageDialog(this,"Ingrese el municipio del empleado.","Error",JOptionPane.ERROR_MESSAGE);
+                                                                    }else {
+                                                                        JOptionPane.showMessageDialog(this,"Ingrese la fecha de examen de ingreso.","Error",JOptionPane.ERROR_MESSAGE);
                                                                     }
-                                                                } else {
-                                                                    JOptionPane.showMessageDialog(this,"Ingrese el barrio del empleado.","Error",JOptionPane.ERROR_MESSAGE);
+                                                                }else {
+                                                                    JOptionPane.showMessageDialog(this,"Seleccione el cargo del empleado","Error",JOptionPane.ERROR_MESSAGE);
                                                                 }
-                                                            } else {
-                                                                JOptionPane.showMessageDialog(this,"Ingrese el telefono del empleado.","Error",JOptionPane.ERROR_MESSAGE);
+                                                            }else{
+                                                                JOptionPane.showMessageDialog(this,"Seleccione el area de trabajo del empleado","Error",JOptionPane.ERROR_MESSAGE);
                                                             }
                                                         } else {
-                                                            JOptionPane.showMessageDialog(this,"Ingrese la dirección del empleado.","Error",JOptionPane.ERROR_MESSAGE);
+                                                            JOptionPane.showMessageDialog(this,"Ingrese un email valido para el empleado.","Error",JOptionPane.ERROR_MESSAGE);
                                                         }
+
                                                     } else {
                                                         JOptionPane.showMessageDialog(this,"Ingrese ls CCF del empleado.","Error",JOptionPane.ERROR_MESSAGE);
                                                     }
@@ -1060,17 +964,23 @@ Boolean block=true;
                     } else {
                         JOptionPane.showMessageDialog(this,"Ingrese el nombre del empleador.","Error",JOptionPane.ERROR_MESSAGE);
                     }
-
                 } else {
                     JOptionPane.showMessageDialog(this,"Ingrese el NIT del empleador.","Error",JOptionPane.ERROR_MESSAGE);
                 }
-
             } else {
                 JOptionPane.showMessageDialog(this,"Ingrese la fecha de ingreso.","Error",JOptionPane.ERROR_MESSAGE);
             }
         }
         if (tipo_nov.getSelectedItem().toString().contains("RETIRO")) {
-            if (f_ing_nov.getDate()!=null) {    
+            if (f_ing_nov.getDate()!=null) {   
+                Calendar date_in = Calendar.getInstance();
+                date_in.setTime(f_ing_nov.getDate());
+                Calendar date_today = Calendar.getInstance();
+                try {
+                    date_today.setTime(new SimpleDateFormat("dd-MM-yyyy").parse(new SimpleDateFormat("dd-MM-yyyy").format(new Date())));
+                }catch(ParseException e){
+                    e.printStackTrace();
+                }
                 if (f_ret_nov.getDate()!=null) {
                     if (!Busc_nit.getText().equals("")) {
                         if (!nom_empl.getText().equals("")) {
@@ -1082,142 +992,164 @@ Boolean block=true;
                                                 if (!cb_arl.getSelectedItem().equals("Seleccione..")) {
                                                     if (!cb_eps.getSelectedItem().equals("Seleccione..")) {
                                                         if (!cb_ccf.getSelectedItem().equals("Seleccione..")) {
-                                                            if (!dir_emp.getText().equals("")) {
-                                                                if (!tel_emp.getText().equals("")) {
-                                                                    if (!barrio.getText().equals("")) {
-                                                                        if (!cb_mun.getSelectedItem().equals("Seleccione..")) {
-                                                                            if (check_field_mail(mail_emp.getText())) {
-                                                                                if (!acud.getText().equals("")) {
-                                                                                    if (!cb_par.getSelectedItem().equals("Seleccione..")) {
-                                                                                        if (!tel_acud.getText().equals("")) {
-                                                                                            if (f_ret_nov.getDate().compareTo(f_ing_nov.getDate())>=0 & f_ret_nov.getDate().compareTo(new Date())<0) {
-                                                                                                Conexion con = new Conexion();
-                                                                                                con.conexion();
-                                                                                                ResultSet r;
-                                                                                                try {
-                                                                                                    r = con.s.executeQuery ("SELECT * FROM `t_eps` WHERE (NOMBRE_EPS ='"+cb_eps.getSelectedItem().toString()+"');");
-                                                                                                    if(r.next()){
-                                                                                                        id_eps=r.getInt("ID_EPS");    
-                                                                                                    }
-                                                                                                    r = con.s.executeQuery ("SELECT * FROM `t_afp` WHERE (NOMBRE_AFP ='"+cb_afp.getSelectedItem().toString()+"');");
-                                                                                                    if(r.next()){
-                                                                                                        id_afp=r.getInt("ID_AFP");    
-                                                                                                    }
-                                                                                                    r = con.s.executeQuery ("SELECT * FROM `t_arl` WHERE (NOMBRE_ARL ='"+cb_arl.getSelectedItem().toString()+"');");
-                                                                                                    if(r.next()){
-                                                                                                        id_arl=r.getInt("ID_ARL");    
-                                                                                                    }
-                                                                                                    r = con.s.executeQuery ("SELECT * FROM `t_ccf` WHERE (NOMBRE_CCF ='"+cb_ccf.getSelectedItem().toString()+"');");
-                                                                                                    if(r.next()){
-                                                                                                        id_ccf=r.getInt("ID_CCF");    
-                                                                                                    }
-                                                                                                    r = con.s.executeQuery ("SELECT * FROM `t_obra` WHERE (NOMBRE_OBRA ='"+cb_obra.getSelectedItem().toString()+"');");
-                                                                                                    if(r.next()){
-                                                                                                        id_obra=r.getInt("ID_OBRA");    
-                                                                                                    }
-                                                                                                    id_municipio = get_id_municipio(cb_mun.getSelectedItem());
-                                                                                                    r = con.s.executeQuery ("SELECT * FROM `t_parentesco` WHERE (NOMBRE_PAR ='"+cb_par.getSelectedItem().toString()+"');");
-                                                                                                    if(r.next()){
-                                                                                                        id_par_acud=r.getInt("ID_PAR");    
-                                                                                                    }
-                                                                                                    r = con.s.executeQuery ("SELECT * FROM t_tipo_novedad WHERE NOMBRE_TIPO ='"+tipo_nov.getSelectedItem().toString()+"'");
-                                                                                                    if (r.next()) {
-                                                                                                        id_tip=r.getInt("ID_TIPO");
-                                                                                                    }
-                                                                                                    String aux_f_nac = "";
-                                                                                                    String aux_f_exp = "";
-                                                                                                    if (f_nac.getDate()==null) {
-                                                                                                        aux_f_nac = "1900-01-01";
-                                                                                                    }else{
-                                                                                                        aux_f_nac = new SimpleDateFormat("yyyy-MM-dd").format(f_nac.getDate());
-                                                                                                    }
-                                                                                                    if (f_exp.getDate()==null) {
-                                                                                                        aux_f_exp = "1900-01-01";
-                                                                                                    }else{
-                                                                                                        aux_f_exp = new SimpleDateFormat("yyyy-MM-dd").format(f_exp.getDate());
-                                                                                                    }
-                                                                                                    int conf = JOptionPane.showConfirmDialog(this,"Esta seguro que desea continuar?","Confirmación",JOptionPane.OK_CANCEL_OPTION,JOptionPane.QUESTION_MESSAGE);
-                                                                                                    if (conf == JOptionPane.YES_OPTION) {
-                                                                                                        con.s.executeUpdate("UPDATE `t_novedades` SET `ID_EMPLEADO`="+Busc_cedula.getText()+",`ID_EMPRESA`='"+Busc_nit.getText()+"',`FECHA_INGRESO`='"+new SimpleDateFormat("yyyy-MM-dd").format(f_ing_nov.getDate())+"',`FECHA_RETIRO`='"+new SimpleDateFormat("yyyy-MM-dd").format(f_ret_nov.getDate())+"',`SALARIO_NOVEDAD`="+salario.getText()+",`ID_EPS`="+id_eps+",`ID_AFP`="+id_afp+",`ARL_NOV`='"+cb_arl.getSelectedItem()+"',`CCF_NOV`='"+cb_ccf.getSelectedItem()+"',`F_NAC_NOV`='"+aux_f_nac+"',`F_EXP_NOV`='"+aux_f_exp+"',`DIR_EMP_NOV`='"+dir_emp.getText()+"',`BARRIO_NOV`='"+barrio.getText()+"',`ID_MUN_NOV`="+id_municipio+",`TEL_NOV`='"+tel_emp.getText()+"',`MAIL_NOV`='"+mail_emp.getText()+"',`ACUD_NOV`='"+acud.getText()+"',`ID_PAR_ACU_NOV`="+id_par_acud+",`TEL_ACUD_NOV`='"+tel_acud.getText()+"',`OBS_NOV`='"+obs.getText().toUpperCase()+"',`ID_OBRA`="+id_obra+",`ID_TIPO`="+id_tip+", `F_REGISTRO`='"+new SimpleDateFormat("yyyy-MM-dd").format(new Date())+"' WHERE ID_EMPLEADO="+ced_edit+" AND ID_EMPRESA='"+nit_edit+"' AND FECHA_INGRESO='"+new SimpleDateFormat("yyyy-MM-dd").format(f_ing_edit)+"'AND FECHA_RETIRO='"+new SimpleDateFormat("yyyy-MM-dd").format(f_ret_edit)+"' AND ID_TIPO="+id_tip_edit);
-                                                                                                        if (id_tip_edit!=id_tip & id_tip==2) {
-                                                                                                            con.s.executeUpdate("INSERT INTO `t_registro` (ID_EMPLEADO,ID_EMPRESA,F_INGRESO,F_RETIRO,ID_TIPO, REGISTRO, F_REGISTRO, FECHA, ID_USUARIO) VALUES ("+Busc_cedula.getText()+",'"+Busc_nit.getText()+"','"+new SimpleDateFormat("yyyy-MM-dd").format(f_ing_nov.getDate())+"','"+new SimpleDateFormat("yyyy-MM-dd").format(f_ret_nov.getDate())+"',"+id_tip+",'MODIFICADO A RETIRO','"+new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date())+"','"+new SimpleDateFormat("yyyy-MM-dd").format(f_ret_nov.getDate())+"','"+Main.id_usuario+"')");
-                                                                                                        }else if (id_tip_edit!=id_tip & id_tip==6) {
-                                                                                                            con.s.executeUpdate("INSERT INTO `t_registro` (ID_EMPLEADO,ID_EMPRESA,F_INGRESO,F_RETIRO,ID_TIPO, REGISTRO, F_REGISTRO, FECHA, ID_USUARIO) VALUES ("+Busc_cedula.getText()+",'"+Busc_nit.getText()+"','"+new SimpleDateFormat("yyyy-MM-dd").format(f_ing_nov.getDate())+"','"+new SimpleDateFormat("yyyy-MM-dd").format(f_ret_nov.getDate())+"',"+id_tip+",'MODIFICADO A RETIRO BLOQUEADO','"+new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date())+"','"+new SimpleDateFormat("yyyy-MM-dd").format(f_ret_nov.getDate())+"','"+Main.id_usuario+"')");
-                                                                                                        }else if (id_tip_edit!=id_tip & id_tip==7) {
-                                                                                                            con.s.executeUpdate("INSERT INTO `t_registro` (ID_EMPLEADO,ID_EMPRESA,F_INGRESO,F_RETIRO,ID_TIPO, REGISTRO, F_REGISTRO, FECHA, ID_USUARIO) VALUES ("+Busc_cedula.getText()+",'"+Busc_nit.getText()+"','"+new SimpleDateFormat("yyyy-MM-dd").format(f_ing_nov.getDate())+"','"+new SimpleDateFormat("yyyy-MM-dd").format(f_ret_nov.getDate())+"',"+id_tip+",'MODIFICADO A RETIRO EXTERNO','"+new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date())+"','"+new SimpleDateFormat("yyyy-MM-dd").format(f_ret_nov.getDate())+"','"+Main.id_usuario+"')");
-                                                                                                        }
-                                                                                                        if (f_ing_edit.compareTo(f_ing_nov.getDate())!=0) {
-                                                                                                            con.s.executeUpdate("INSERT INTO `t_registro` (ID_EMPLEADO,ID_EMPRESA,F_INGRESO,F_RETIRO,ID_TIPO, REGISTRO, F_REGISTRO, FECHA, ID_USUARIO) VALUES ("+Busc_cedula.getText()+",'"+Busc_nit.getText()+"','"+new SimpleDateFormat("yyyy-MM-dd").format(f_ing_nov.getDate())+"','1900-01-01',"+id_tip+",'MODIFICA FECHA INGRESO','"+new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date())+"','"+new SimpleDateFormat("yyyy-MM-dd").format(f_ing_nov.getDate())+"','"+Main.id_usuario+"')");
-                                                                                                        }
-                                                                                                        if (f_ret_edit.compareTo(f_ret_nov.getDate())!=0) {
-                                                                                                            con.s.executeUpdate("INSERT INTO `t_registro` (ID_EMPLEADO,ID_EMPRESA,F_INGRESO,F_RETIRO,ID_TIPO, REGISTRO, F_REGISTRO, FECHA, ID_USUARIO) VALUES ("+Busc_cedula.getText()+",'"+Busc_nit.getText()+"','"+new SimpleDateFormat("yyyy-MM-dd").format(f_ing_nov.getDate())+"','"+new SimpleDateFormat("yyyy-MM-dd").format(f_ret_nov.getDate())+"',"+id_tip+",'MODIFICA FECHA RETIRO','"+new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date())+"','"+new SimpleDateFormat("yyyy-MM-dd").format(f_ret_nov.getDate())+"','"+Main.id_usuario+"')");
-                                                                                                        }
-                                                                                                        if (!nit_edit.equals(Busc_nit.getText())) {
-                                                                                                            con.s.executeUpdate("INSERT INTO `t_registro` (ID_EMPLEADO,ID_EMPRESA,F_INGRESO,F_RETIRO,ID_TIPO, REGISTRO, F_REGISTRO, FECHA, ID_USUARIO) VALUES ("+Busc_cedula.getText()+",'"+Busc_nit.getText()+"','"+new SimpleDateFormat("yyyy-MM-dd").format(f_ing_nov.getDate())+"','"+new SimpleDateFormat("yyyy-MM-dd").format(f_ret_nov.getDate())+"',"+id_tip+",'MODIFICA NIT EMPRESA DE "+nit_edit+" A "+Busc_nit.getText()+"','"+new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date())+"','"+new SimpleDateFormat("yyyy-MM-dd").format(new Date())+"','"+Main.id_usuario+"')");
-                                                                                                        }
-                                                                                                        if (!ced_edit.equals(Busc_cedula.getText())) {
-                                                                                                            con.s.executeUpdate("INSERT INTO `t_registro` (ID_EMPLEADO,ID_EMPRESA,F_INGRESO,F_RETIRO,ID_TIPO, REGISTRO, F_REGISTRO, FECHA, ID_USUARIO) VALUES ("+Busc_cedula.getText()+",'"+Busc_nit.getText()+"','"+new SimpleDateFormat("yyyy-MM-dd").format(f_ing_nov.getDate())+"','"+new SimpleDateFormat("yyyy-MM-dd").format(f_ret_nov.getDate())+"',"+id_tip+",'MODIFICA EMPLEADO DE "+ced_edit+" A "+Busc_cedula.getText()+"','"+new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date())+"','"+new SimpleDateFormat("yyyy-MM-dd").format(new Date())+"','"+Main.id_usuario+"')");
-                                                                                                        }
-                                                                                                        if (salario_edit!=Float.parseFloat(salario.getText())) {
-                                                                                                            con.s.executeUpdate("INSERT INTO `t_registro` (ID_EMPLEADO,ID_EMPRESA,F_INGRESO,F_RETIRO,ID_TIPO, REGISTRO, F_REGISTRO, FECHA, ID_USUARIO) VALUES ("+Busc_cedula.getText()+",'"+Busc_nit.getText()+"','"+new SimpleDateFormat("yyyy-MM-dd").format(f_ing_nov.getDate())+"','"+new SimpleDateFormat("yyyy-MM-dd").format(f_ret_nov.getDate())+"',"+id_tip+",'MODIFICA SALARIO DE "+salario_edit+" A "+salario.getText()+"','"+new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date())+"','"+new SimpleDateFormat("yyyy-MM-dd").format(new Date())+"','"+Main.id_usuario+"')");
-                                                                                                        }
-                                                                                                        if (!afp_edit.equals(cb_afp.getSelectedItem().toString())) {
-                                                                                                            con.s.executeUpdate("INSERT INTO `t_registro` (ID_EMPLEADO,ID_EMPRESA,F_INGRESO,F_RETIRO,ID_TIPO, REGISTRO, F_REGISTRO, FECHA, ID_USUARIO) VALUES ("+Busc_cedula.getText()+",'"+Busc_nit.getText()+"','"+new SimpleDateFormat("yyyy-MM-dd").format(f_ing_nov.getDate())+"','"+new SimpleDateFormat("yyyy-MM-dd").format(f_ret_nov.getDate())+"',"+id_tip+",'MODIFICA AFP DE "+afp_edit+" A "+cb_afp.getSelectedItem().toString()+"','"+new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date())+"','"+new SimpleDateFormat("yyyy-MM-dd").format(new Date())+"','"+Main.id_usuario+"')");
-                                                                                                        }
-                                                                                                        if (!arl_edit.equals(cb_arl.getSelectedItem().toString())) {
-                                                                                                            con.s.executeUpdate("INSERT INTO `t_registro` (ID_EMPLEADO,ID_EMPRESA,F_INGRESO,F_RETIRO,ID_TIPO, REGISTRO, F_REGISTRO, FECHA, ID_USUARIO) VALUES ("+Busc_cedula.getText()+",'"+Busc_nit.getText()+"','"+new SimpleDateFormat("yyyy-MM-dd").format(f_ing_nov.getDate())+"','"+new SimpleDateFormat("yyyy-MM-dd").format(f_ret_nov.getDate())+"',"+id_tip+",'MODIFICA ARL DE "+arl_edit+" A "+cb_arl.getSelectedItem().toString()+"','"+new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date())+"','"+new SimpleDateFormat("yyyy-MM-dd").format(new Date())+"','"+Main.id_usuario+"')");
-                                                                                                        }
-                                                                                                        if (!eps_edit.equals(cb_eps.getSelectedItem().toString())) {
-                                                                                                            con.s.executeUpdate("INSERT INTO `t_registro` (ID_EMPLEADO,ID_EMPRESA,F_INGRESO,F_RETIRO,ID_TIPO, REGISTRO, F_REGISTRO, FECHA, ID_USUARIO) VALUES ("+Busc_cedula.getText()+",'"+Busc_nit.getText()+"','"+new SimpleDateFormat("yyyy-MM-dd").format(f_ing_nov.getDate())+"','"+new SimpleDateFormat("yyyy-MM-dd").format(f_ret_nov.getDate())+"',"+id_tip+",'MODIFICA EPS DE "+eps_edit+" A "+cb_eps.getSelectedItem().toString()+"','"+new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date())+"','"+new SimpleDateFormat("yyyy-MM-dd").format(new Date())+"','"+Main.id_usuario+"')");
-                                                                                                        }
-                                                                                                        if (!ccf_edit.equals(cb_ccf.getSelectedItem().toString())) {
-                                                                                                            con.s.executeUpdate("INSERT INTO `t_registro` (ID_EMPLEADO,ID_EMPRESA,F_INGRESO,F_RETIRO,ID_TIPO, REGISTRO, F_REGISTRO, FECHA, ID_USUARIO) VALUES ("+Busc_cedula.getText()+",'"+Busc_nit.getText()+"','"+new SimpleDateFormat("yyyy-MM-dd").format(f_ing_nov.getDate())+"','"+new SimpleDateFormat("yyyy-MM-dd").format(f_ret_nov.getDate())+"',"+id_tip+",'MODIFICA CCF DE "+ccf_edit+" A "+cb_ccf.getSelectedItem().toString()+"','"+new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date())+"','"+new SimpleDateFormat("yyyy-MM-dd").format(new Date())+"','"+Main.id_usuario+"')");
-                                                                                                        }
-                                                                                                        if (!obra_edit.equals(cb_obra.getSelectedItem().toString())) {
-                                                                                                            con.s.executeUpdate("INSERT INTO `t_registro` (ID_EMPLEADO,ID_EMPRESA,F_INGRESO,F_RETIRO,ID_TIPO, REGISTRO, F_REGISTRO, FECHA, ID_USUARIO) VALUES ("+Busc_cedula.getText()+",'"+Busc_nit.getText()+"','"+new SimpleDateFormat("yyyy-MM-dd").format(f_ing_nov.getDate())+"','"+new SimpleDateFormat("yyyy-MM-dd").format(f_ret_nov.getDate())+"',"+id_tip+",'MODIFICA OBRA DE "+obra_edit+" A "+cb_obra.getSelectedItem().toString()+"','"+new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date())+"','"+new SimpleDateFormat("yyyy-MM-dd").format(new Date())+"','"+Main.id_usuario+"')");
-                                                                                                        }
-                                                                                                        if (!obs_edit.equals(obs.getText())) {
-                                                                                                            con.s.executeUpdate("INSERT INTO `t_registro` (ID_EMPLEADO,ID_EMPRESA,F_INGRESO,F_RETIRO,ID_TIPO, REGISTRO, F_REGISTRO, FECHA, ID_USUARIO) VALUES ("+Busc_cedula.getText()+",'"+Busc_nit.getText()+"','"+new SimpleDateFormat("yyyy-MM-dd").format(f_ing_nov.getDate())+"','"+new SimpleDateFormat("yyyy-MM-dd").format(f_ret_nov.getDate())+"',"+id_tip+",'MODIFICA OBSERVACION A "+obs.getText()+"','"+new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date())+"','"+new SimpleDateFormat("yyyy-MM-dd").format(new Date())+"','"+Main.id_usuario+"')");
-                                                                                                        }
-                                                                                                        JOptionPane.showMessageDialog(this,"Novedad de retiro insertada correctamente.","Información",JOptionPane.INFORMATION_MESSAGE);
-                                                                                                        clear_all();
-                                                                                                        Busc_cedula.requestFocus();
-                                                                                                        con.cerrar();
-                                                                                                        this.dispose();
-                                                                                                    } else {
-                                                                                                        Busc_cedula.requestFocus();
-                                                                                                    }
-                                                                                                    con.cerrar();
-                                                                                                } catch (SQLException e) {
-                                                                                                    e.printStackTrace();
-                                                                                                    JOptionPane.showMessageDialog(this,e,"Error",JOptionPane.ERROR_MESSAGE);
+                                                            if (check_field_mail(mail_emp.getText())) {
+                                                                if (!cb_area.getSelectedItem().equals("Seleccione..")) {
+                                                                    if (!cb_cargo.getSelectedItem().equals("Seleccione..")) {
+                                                                        if (f_ret_nov.getDate().compareTo(f_ing_nov.getDate())>=0 & f_ret_nov.getDate().compareTo(new Date())<0) {
+                                                                            if (f_ex_ing.getDate()!=null) {
+                                                                                Calendar date_examen = Calendar.getInstance();
+                                                                                date_examen.setTime(f_ex_ing.getDate());
+                                                                                date_in.add(Calendar.MONTH, -6);
+                                                                                if (date_examen.getTime().compareTo(date_in.getTime())>=0) {
+                                                                                    if (!cb_exon.getSelectedItem().equals("Seleccione..")) {
+                                                                                        if (f_cons.getDate()!=null) {
+                                                                                            Conexion con = new Conexion();
+                                                                                            con.conexion();
+                                                                                            ResultSet r;
+                                                                                            try {
+                                                                                                r = con.s.executeQuery ("SELECT * FROM `t_eps` WHERE (NOMBRE_EPS ='"+cb_eps.getSelectedItem().toString()+"');");
+                                                                                                if(r.next()){
+                                                                                                    id_eps=r.getString("ID_EPS");    
                                                                                                 }
-                                                                                            } else {
-                                                                                                JOptionPane.showMessageDialog(this,"Ingrese una fecha de Retiro valida.","Error",JOptionPane.ERROR_MESSAGE);
+                                                                                                r = con.s.executeQuery ("SELECT * FROM `t_afp` WHERE (NOMBRE_AFP ='"+cb_afp.getSelectedItem().toString()+"');");
+                                                                                                if(r.next()){
+                                                                                                    id_afp=r.getString("ID_AFP");    
+                                                                                                }
+//                                                                                                r = con.s.executeQuery ("SELECT * FROM `t_arl` WHERE (NOMBRE_ARL ='"+cb_arl.getSelectedItem().toString()+"');");
+//                                                                                                if(r.next()){
+//                                                                                                    id_arl=r.getInt("ID_ARL");    
+//                                                                                                }
+//                                                                                                r = con.s.executeQuery ("SELECT * FROM `t_ccf` WHERE (NOMBRE_CCF ='"+cb_ccf.getSelectedItem().toString()+"');");
+//                                                                                                if(r.next()){
+//                                                                                                    id_ccf=r.getInt("ID_CCF");    
+//                                                                                                }
+                                                                                                r = con.s.executeQuery ("SELECT * FROM `t_obra` WHERE (NOMBRE_OBRA ='"+cb_obra.getSelectedItem().toString()+"');");
+                                                                                                if(r.next()){
+                                                                                                    id_obra=r.getInt("ID_OBRA");    
+                                                                                                }
+                                                                                                r = con.s.executeQuery ("SELECT * FROM t_tipo_novedad WHERE NOMBRE_TIPO ='"+tipo_nov.getSelectedItem().toString()+"'");
+                                                                                                if (r.next()) {
+                                                                                                    id_tip=r.getInt("ID_TIPO");
+                                                                                                }
+                                                                                                //**************GET ID AREA
+                                                                                                r = con.s.executeQuery ("SELECT *\n" +
+                                                                                                                        "FROM\n" +
+                                                                                                                        "    t_actividades WHERE NOMBRE_ACTIVIDAD = '"+cb_area.getSelectedItem()+"';");
+                                                                                                if(r.next()){
+                                                                                                    id_area=r.getInt("ID_ACTIVIDAD");
+                                                                                                }
+                                                                                                //**************GET ID CARGO
+                                                                                                r = con.s.executeQuery ("SELECT *\n" +
+                                                                                                                        "FROM\n" +
+                                                                                                                        "    t_cargo WHERE NOMBRE_CARGO = '"+cb_cargo.getSelectedItem()+"';");
+                                                                                                if(r.next()){
+                                                                                                    id_cargo=r.getInt("ID_CARGO");
+                                                                                                }
+                                                                                                int conf = JOptionPane.showConfirmDialog(this,"Esta seguro que desea continuar?","Confirmación",JOptionPane.OK_CANCEL_OPTION,JOptionPane.QUESTION_MESSAGE);
+                                                                                                if (conf == JOptionPane.YES_OPTION) {
+                                                                                                    con.s.executeUpdate("UPDATE `e_occidente`.`t_novedades`\n" +
+                                                                                                                        "SET `ID_EMPLEADO` = "+Busc_cedula.getText()+",\n" +
+                                                                                                                        "  `ID_EMPRESA` = '"+Busc_nit.getText()+"',\n" +
+                                                                                                                        "  `FECHA_INGRESO` = '"+new SimpleDateFormat("yyyy-MM-dd").format(f_ing_nov.getDate())+"',\n" +
+                                                                                                                        "  `FECHA_RETIRO` = '"+new SimpleDateFormat("yyyy-MM-dd").format(f_ret_nov.getDate())+"',\n" +
+                                                                                                                        "  `SALARIO_NOVEDAD` = "+salario.getText()+",\n" +
+                                                                                                                        "  `ID_EPS` = '"+id_eps+"',\n" +
+                                                                                                                        "  `ID_AFP` = '"+id_afp+"',\n" +
+                                                                                                                        "  `ARL_NOV` = '"+cb_arl.getSelectedItem()+"',\n" +
+                                                                                                                        "  `CCF_NOV` = '"+cb_ccf.getSelectedItem()+"',\n" +
+                                                                                                                        "  `OBS_NOV` = '"+obs.getText().toUpperCase()+"',\n" +
+                                                                                                                        "  `ID_OBRA` = "+id_obra+",\n" +
+                                                                                                                        "  `ID_TIPO` = "+id_tip+",\n" +
+                                                                                                                        "  `F_REGISTRO` = '"+new SimpleDateFormat("yyyy-MM-dd").format(new Date())+"',\n" +
+                                                                                                                        "  `ID_CARGO` = "+id_cargo+",\n" +
+                                                                                                                        "  `ID_AREA_TRABAJO` = "+id_area+",\n" +
+                                                                                                                        "  `F_EXAMEN_INGRESO` = '"+new SimpleDateFormat("yyyy-MM-dd").format(f_ex_ing.getDate())+"',\n" +
+                                                                                                                        "  `F_CONSENTIMIENTO` = '"+new SimpleDateFormat("yyyy-MM-dd").format(f_cons.getDate())+"',\n" +
+                                                                                                                        "  `EXON_FIC` = '"+cb_exon.getSelectedItem()+"',\n" +
+                                                                                                                        "  `MAIL_NOV` = '"+mail_emp.getText()+"'\n" +
+                                                                                                                        "WHERE `ID_EMPLEADO` = "+ced_edit+"\n" +
+                                                                                                                        "    AND `ID_EMPRESA` = '"+nit_edit+"'\n" +
+                                                                                                                        "    AND `FECHA_INGRESO` = '"+new SimpleDateFormat("yyyy-MM-dd").format(f_ing_edit)+"'\n" +
+                                                                                                                        "    AND `ID_TIPO` = "+id_tip_edit+"\n" +
+                                                                                                                        "    AND `FECHA_RETIRO` = '"+new SimpleDateFormat("yyyy-MM-dd").format(f_ret_edit)+"';");
+                                                                                                    if (id_tip_edit!=id_tip & id_tip==2) {
+                                                                                                        con.s.executeUpdate("INSERT INTO `t_registro` (ID_EMPLEADO,ID_EMPRESA,F_INGRESO,F_RETIRO,ID_TIPO, REGISTRO, F_REGISTRO, FECHA, ID_USUARIO) VALUES ("+Busc_cedula.getText()+",'"+Busc_nit.getText()+"','"+new SimpleDateFormat("yyyy-MM-dd").format(f_ing_nov.getDate())+"','"+new SimpleDateFormat("yyyy-MM-dd").format(f_ret_nov.getDate())+"',"+id_tip+",'MODIFICADO A RETIRO','"+new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date())+"','"+new SimpleDateFormat("yyyy-MM-dd").format(f_ret_nov.getDate())+"','"+Main.id_usuario+"')");
+                                                                                                    }else if (id_tip_edit!=id_tip & id_tip==6) {
+                                                                                                        con.s.executeUpdate("INSERT INTO `t_registro` (ID_EMPLEADO,ID_EMPRESA,F_INGRESO,F_RETIRO,ID_TIPO, REGISTRO, F_REGISTRO, FECHA, ID_USUARIO) VALUES ("+Busc_cedula.getText()+",'"+Busc_nit.getText()+"','"+new SimpleDateFormat("yyyy-MM-dd").format(f_ing_nov.getDate())+"','"+new SimpleDateFormat("yyyy-MM-dd").format(f_ret_nov.getDate())+"',"+id_tip+",'MODIFICADO A RETIRO BLOQUEADO','"+new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date())+"','"+new SimpleDateFormat("yyyy-MM-dd").format(f_ret_nov.getDate())+"','"+Main.id_usuario+"')");
+                                                                                                    }else if (id_tip_edit!=id_tip & id_tip==7) {
+                                                                                                        con.s.executeUpdate("INSERT INTO `t_registro` (ID_EMPLEADO,ID_EMPRESA,F_INGRESO,F_RETIRO,ID_TIPO, REGISTRO, F_REGISTRO, FECHA, ID_USUARIO) VALUES ("+Busc_cedula.getText()+",'"+Busc_nit.getText()+"','"+new SimpleDateFormat("yyyy-MM-dd").format(f_ing_nov.getDate())+"','"+new SimpleDateFormat("yyyy-MM-dd").format(f_ret_nov.getDate())+"',"+id_tip+",'MODIFICADO A RETIRO EXTERNO','"+new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date())+"','"+new SimpleDateFormat("yyyy-MM-dd").format(f_ret_nov.getDate())+"','"+Main.id_usuario+"')");
+                                                                                                    }
+                                                                                                    if (f_ing_edit.compareTo(f_ing_nov.getDate())!=0) {
+                                                                                                        con.s.executeUpdate("INSERT INTO `t_registro` (ID_EMPLEADO,ID_EMPRESA,F_INGRESO,F_RETIRO,ID_TIPO, REGISTRO, F_REGISTRO, FECHA, ID_USUARIO) VALUES ("+Busc_cedula.getText()+",'"+Busc_nit.getText()+"','"+new SimpleDateFormat("yyyy-MM-dd").format(f_ing_nov.getDate())+"','1900-01-01',"+id_tip+",'MODIFICA FECHA INGRESO','"+new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date())+"','"+new SimpleDateFormat("yyyy-MM-dd").format(f_ing_nov.getDate())+"','"+Main.id_usuario+"')");
+                                                                                                    }
+                                                                                                    if (f_ret_edit.compareTo(f_ret_nov.getDate())!=0) {
+                                                                                                        con.s.executeUpdate("INSERT INTO `t_registro` (ID_EMPLEADO,ID_EMPRESA,F_INGRESO,F_RETIRO,ID_TIPO, REGISTRO, F_REGISTRO, FECHA, ID_USUARIO) VALUES ("+Busc_cedula.getText()+",'"+Busc_nit.getText()+"','"+new SimpleDateFormat("yyyy-MM-dd").format(f_ing_nov.getDate())+"','"+new SimpleDateFormat("yyyy-MM-dd").format(f_ret_nov.getDate())+"',"+id_tip+",'MODIFICA FECHA RETIRO','"+new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date())+"','"+new SimpleDateFormat("yyyy-MM-dd").format(f_ret_nov.getDate())+"','"+Main.id_usuario+"')");
+                                                                                                    }
+                                                                                                    if (!nit_edit.equals(Busc_nit.getText())) {
+                                                                                                        con.s.executeUpdate("INSERT INTO `t_registro` (ID_EMPLEADO,ID_EMPRESA,F_INGRESO,F_RETIRO,ID_TIPO, REGISTRO, F_REGISTRO, FECHA, ID_USUARIO) VALUES ("+Busc_cedula.getText()+",'"+Busc_nit.getText()+"','"+new SimpleDateFormat("yyyy-MM-dd").format(f_ing_nov.getDate())+"','"+new SimpleDateFormat("yyyy-MM-dd").format(f_ret_nov.getDate())+"',"+id_tip+",'MODIFICA NIT EMPRESA DE "+nit_edit+" A "+Busc_nit.getText()+"','"+new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date())+"','"+new SimpleDateFormat("yyyy-MM-dd").format(new Date())+"','"+Main.id_usuario+"')");
+                                                                                                    }
+                                                                                                    if (!ced_edit.equals(Busc_cedula.getText())) {
+                                                                                                        con.s.executeUpdate("INSERT INTO `t_registro` (ID_EMPLEADO,ID_EMPRESA,F_INGRESO,F_RETIRO,ID_TIPO, REGISTRO, F_REGISTRO, FECHA, ID_USUARIO) VALUES ("+Busc_cedula.getText()+",'"+Busc_nit.getText()+"','"+new SimpleDateFormat("yyyy-MM-dd").format(f_ing_nov.getDate())+"','"+new SimpleDateFormat("yyyy-MM-dd").format(f_ret_nov.getDate())+"',"+id_tip+",'MODIFICA EMPLEADO DE "+ced_edit+" A "+Busc_cedula.getText()+"','"+new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date())+"','"+new SimpleDateFormat("yyyy-MM-dd").format(new Date())+"','"+Main.id_usuario+"')");
+                                                                                                    }
+                                                                                                    if (salario_edit!=Float.parseFloat(salario.getText())) {
+                                                                                                        con.s.executeUpdate("INSERT INTO `t_registro` (ID_EMPLEADO,ID_EMPRESA,F_INGRESO,F_RETIRO,ID_TIPO, REGISTRO, F_REGISTRO, FECHA, ID_USUARIO) VALUES ("+Busc_cedula.getText()+",'"+Busc_nit.getText()+"','"+new SimpleDateFormat("yyyy-MM-dd").format(f_ing_nov.getDate())+"','"+new SimpleDateFormat("yyyy-MM-dd").format(f_ret_nov.getDate())+"',"+id_tip+",'MODIFICA SALARIO DE "+salario_edit+" A "+salario.getText()+"','"+new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date())+"','"+new SimpleDateFormat("yyyy-MM-dd").format(new Date())+"','"+Main.id_usuario+"')");
+                                                                                                    }
+                                                                                                    if (!afp_edit.equals(cb_afp.getSelectedItem().toString())) {
+                                                                                                        con.s.executeUpdate("INSERT INTO `t_registro` (ID_EMPLEADO,ID_EMPRESA,F_INGRESO,F_RETIRO,ID_TIPO, REGISTRO, F_REGISTRO, FECHA, ID_USUARIO) VALUES ("+Busc_cedula.getText()+",'"+Busc_nit.getText()+"','"+new SimpleDateFormat("yyyy-MM-dd").format(f_ing_nov.getDate())+"','"+new SimpleDateFormat("yyyy-MM-dd").format(f_ret_nov.getDate())+"',"+id_tip+",'MODIFICA AFP DE "+afp_edit+" A "+cb_afp.getSelectedItem().toString()+"','"+new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date())+"','"+new SimpleDateFormat("yyyy-MM-dd").format(new Date())+"','"+Main.id_usuario+"')");
+                                                                                                    }
+                                                                                                    if (!arl_edit.equals(cb_arl.getSelectedItem().toString())) {
+                                                                                                        con.s.executeUpdate("INSERT INTO `t_registro` (ID_EMPLEADO,ID_EMPRESA,F_INGRESO,F_RETIRO,ID_TIPO, REGISTRO, F_REGISTRO, FECHA, ID_USUARIO) VALUES ("+Busc_cedula.getText()+",'"+Busc_nit.getText()+"','"+new SimpleDateFormat("yyyy-MM-dd").format(f_ing_nov.getDate())+"','"+new SimpleDateFormat("yyyy-MM-dd").format(f_ret_nov.getDate())+"',"+id_tip+",'MODIFICA ARL DE "+arl_edit+" A "+cb_arl.getSelectedItem().toString()+"','"+new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date())+"','"+new SimpleDateFormat("yyyy-MM-dd").format(new Date())+"','"+Main.id_usuario+"')");
+                                                                                                    }
+                                                                                                    if (!eps_edit.equals(cb_eps.getSelectedItem().toString())) {
+                                                                                                        con.s.executeUpdate("INSERT INTO `t_registro` (ID_EMPLEADO,ID_EMPRESA,F_INGRESO,F_RETIRO,ID_TIPO, REGISTRO, F_REGISTRO, FECHA, ID_USUARIO) VALUES ("+Busc_cedula.getText()+",'"+Busc_nit.getText()+"','"+new SimpleDateFormat("yyyy-MM-dd").format(f_ing_nov.getDate())+"','"+new SimpleDateFormat("yyyy-MM-dd").format(f_ret_nov.getDate())+"',"+id_tip+",'MODIFICA EPS DE "+eps_edit+" A "+cb_eps.getSelectedItem().toString()+"','"+new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date())+"','"+new SimpleDateFormat("yyyy-MM-dd").format(new Date())+"','"+Main.id_usuario+"')");
+                                                                                                    }
+                                                                                                    if (!ccf_edit.equals(cb_ccf.getSelectedItem().toString())) {
+                                                                                                        con.s.executeUpdate("INSERT INTO `t_registro` (ID_EMPLEADO,ID_EMPRESA,F_INGRESO,F_RETIRO,ID_TIPO, REGISTRO, F_REGISTRO, FECHA, ID_USUARIO) VALUES ("+Busc_cedula.getText()+",'"+Busc_nit.getText()+"','"+new SimpleDateFormat("yyyy-MM-dd").format(f_ing_nov.getDate())+"','"+new SimpleDateFormat("yyyy-MM-dd").format(f_ret_nov.getDate())+"',"+id_tip+",'MODIFICA CCF DE "+ccf_edit+" A "+cb_ccf.getSelectedItem().toString()+"','"+new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date())+"','"+new SimpleDateFormat("yyyy-MM-dd").format(new Date())+"','"+Main.id_usuario+"')");
+                                                                                                    }
+                                                                                                    if (!obra_edit.equals(cb_obra.getSelectedItem().toString())) {
+                                                                                                        con.s.executeUpdate("INSERT INTO `t_registro` (ID_EMPLEADO,ID_EMPRESA,F_INGRESO,F_RETIRO,ID_TIPO, REGISTRO, F_REGISTRO, FECHA, ID_USUARIO) VALUES ("+Busc_cedula.getText()+",'"+Busc_nit.getText()+"','"+new SimpleDateFormat("yyyy-MM-dd").format(f_ing_nov.getDate())+"','"+new SimpleDateFormat("yyyy-MM-dd").format(f_ret_nov.getDate())+"',"+id_tip+",'MODIFICA OBRA DE "+obra_edit+" A "+cb_obra.getSelectedItem().toString()+"','"+new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date())+"','"+new SimpleDateFormat("yyyy-MM-dd").format(new Date())+"','"+Main.id_usuario+"')");
+                                                                                                    }
+                                                                                                    if (!obs_edit.equals(obs.getText())) {
+                                                                                                        con.s.executeUpdate("INSERT INTO `t_registro` (ID_EMPLEADO,ID_EMPRESA,F_INGRESO,F_RETIRO,ID_TIPO, REGISTRO, F_REGISTRO, FECHA, ID_USUARIO) VALUES ("+Busc_cedula.getText()+",'"+Busc_nit.getText()+"','"+new SimpleDateFormat("yyyy-MM-dd").format(f_ing_nov.getDate())+"','"+new SimpleDateFormat("yyyy-MM-dd").format(f_ret_nov.getDate())+"',"+id_tip+",'MODIFICA OBSERVACION A "+obs.getText()+"','"+new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date())+"','"+new SimpleDateFormat("yyyy-MM-dd").format(new Date())+"','"+Main.id_usuario+"')");
+                                                                                                    }
+                                                                                                    JOptionPane.showMessageDialog(this,"Novedad de retiro insertada correctamente.","Información",JOptionPane.INFORMATION_MESSAGE);
+                                                                                                    clear_all();
+                                                                                                    Busc_cedula.requestFocus();
+                                                                                                    con.cerrar();
+                                                                                                    this.dispose();
+                                                                                                } else {
+                                                                                                    Busc_cedula.requestFocus();
+                                                                                                }
+                                                                                                con.cerrar();
+                                                                                            } catch (SQLException e) {
+                                                                                                e.printStackTrace();
+                                                                                                JOptionPane.showMessageDialog(this,e,"Error",JOptionPane.ERROR_MESSAGE);
                                                                                             }
-                                                                                        } else {
-                                                                                            JOptionPane.showMessageDialog(this,"Ingrese el telefono del acudiente del empleado.","Error",JOptionPane.ERROR_MESSAGE);
+                                                                                        }else{
+                                                                                            JOptionPane.showMessageDialog(this,"Seleccione la fecha de consentimiento del empleado","Error",JOptionPane.ERROR_MESSAGE);
                                                                                         }
                                                                                     } else {
-                                                                                        JOptionPane.showMessageDialog(this,"Ingrese el parentesco del acudiente del empleado.","Error",JOptionPane.ERROR_MESSAGE);
+                                                                                        JOptionPane.showMessageDialog(this,"Seleccione la exoneracion del FIC del empleado","Error",JOptionPane.ERROR_MESSAGE);
                                                                                     }
-                                                                                } else {
-                                                                                    JOptionPane.showMessageDialog(this,"Ingrese el acudiente del empleado.","Error",JOptionPane.ERROR_MESSAGE);
+                                                                                }else {
+                                                                                    f_ex_ing.requestFocus();
+                                                                                    JOptionPane.showMessageDialog(this,"Verifique que la Fecha de Examen medico tenga vigencia de un mes con respecto a la fecha de ingreso","Error",JOptionPane.ERROR_MESSAGE);
                                                                                 }
-                                                                            } else {
-                                                                                JOptionPane.showMessageDialog(this,"Ingrese un email valido para el empleado.","Error",JOptionPane.ERROR_MESSAGE);
+                                                                            }else {
+                                                                                f_ex_ing.requestFocus();
+                                                                                JOptionPane.showMessageDialog(this,"Ingrese una fecha de Retiro de examen de ingreso valida.","Error",JOptionPane.ERROR_MESSAGE);
                                                                             }
                                                                         } else {
-                                                                            JOptionPane.showMessageDialog(this,"Ingrese el municipio del empleado.","Error",JOptionPane.ERROR_MESSAGE);
+                                                                            JOptionPane.showMessageDialog(this,"Ingrese una fecha de Retiro valida.","Error",JOptionPane.ERROR_MESSAGE);
                                                                         }
-                                                                    } else {
-                                                                        JOptionPane.showMessageDialog(this,"Ingrese el barrio del empleado.","Error",JOptionPane.ERROR_MESSAGE);
+                                                                    }else {
+                                                                        JOptionPane.showMessageDialog(this,"Seleccione el cargo del empleado","Error",JOptionPane.ERROR_MESSAGE);
                                                                     }
-                                                                } else {
-                                                                    JOptionPane.showMessageDialog(this,"Ingrese el telefono del empleado.","Error",JOptionPane.ERROR_MESSAGE);
+                                                                }else{
+                                                                    JOptionPane.showMessageDialog(this,"Seleccione el area de trabajo del empleado","Error",JOptionPane.ERROR_MESSAGE);
                                                                 }
                                                             } else {
-                                                                JOptionPane.showMessageDialog(this,"Ingrese la dirección del empleado.","Error",JOptionPane.ERROR_MESSAGE);
+                                                                JOptionPane.showMessageDialog(this,"Ingrese un email valido para el empleado.","Error",JOptionPane.ERROR_MESSAGE);
                                                             }
                                                         } else {
                                                             JOptionPane.showMessageDialog(this,"Ingrese ls CCF del empleado.","Error",JOptionPane.ERROR_MESSAGE);
@@ -1237,18 +1169,15 @@ Boolean block=true;
                                     } else {
                                         JOptionPane.showMessageDialog(this,"Ingrese la cedula del empleado.","Error",JOptionPane.ERROR_MESSAGE);
                                     }
-
                                 } else {
                                     JOptionPane.showMessageDialog(this,"Ingrese la cedula del empleado.","Error",JOptionPane.ERROR_MESSAGE);
                                 }
                             } else {
                                 JOptionPane.showMessageDialog(this,"Ingrese la cedula del empleado.","Error",JOptionPane.ERROR_MESSAGE);
                             }
-
                         } else {
                             JOptionPane.showMessageDialog(this,"Ingrese el nombre del empleador.","Error",JOptionPane.ERROR_MESSAGE);
                         }
-
                     } else {
                         JOptionPane.showMessageDialog(this,"Ingrese el NIT del empleador.","Error",JOptionPane.ERROR_MESSAGE);
                     }
@@ -1261,6 +1190,14 @@ Boolean block=true;
         }
         if (tipo_nov.getSelectedItem().toString().equals("PRE INGRESO")) {
             if (f_ing_nov.getDate()!=null) {
+                Calendar date_in = Calendar.getInstance();
+                date_in.setTime(f_ing_nov.getDate());
+                Calendar date_today = Calendar.getInstance();
+                try {
+                    date_today.setTime(new SimpleDateFormat("dd-MM-yyyy").parse(new SimpleDateFormat("dd-MM-yyyy").format(new Date())));
+                }catch(ParseException e){
+                    e.printStackTrace();
+                }
                 if (!Busc_nit.getText().equals("")) {
                     if (!nom_empl.getText().equals("")) {
                         if (!Busc_cedula.getText().equals("")) {
@@ -1271,126 +1208,175 @@ Boolean block=true;
                                             if (!cb_arl.getSelectedItem().equals("Seleccione..")) {
                                                 if (!cb_eps.getSelectedItem().equals("Seleccione..")) {
                                                     if (!cb_ccf.getSelectedItem().equals("Seleccione..")) {
-                                                        if (!dir_emp.getText().equals("")) {
-                                                            if (!tel_emp.getText().equals("")) {
-                                                                if (!barrio.getText().equals("")) {
-                                                                    if (!cb_mun.getSelectedItem().equals("Seleccione..")) {
-                                                                        if (check_field_mail(mail_emp.getText())) {
-                                                                            if (!acud.getText().equals("")) {
-                                                                                if (!cb_par.getSelectedItem().equals("Seleccione..")) {
-                                                                                    if (!tel_acud.getText().equals("")) {
-                                                                                        Conexion con = new Conexion();
-                                                                                        con.conexion();
-                                                                                        ResultSet r;
-                                                                                        try {
-                                                                                            r = con.s.executeQuery ("SELECT *\n" +
-                                                                                                                    "FROM\n" +
-                                                                                                                    "    t_empresas\n" +
-                                                                                                                    "    INNER JOIN t_arl \n" +
-                                                                                                                    "        ON (t_empresas.ID_ARL = t_arl.ID_ARL)\n" +
-                                                                                                                    "    INNER JOIN t_ccf \n" +
-                                                                                                                    "        ON (t_empresas.ID_CCF = t_ccf.ID_CCF)"
-                                                                                                    + "WHERE NOMBRE_EMPRESA = '"+nom_empl.getText()+"'");
-                                                                                            if (r.next()) {
-                                                                                                arl = r.getString("NOMBRE_ARL");
-                                                                                                ccf = r.getString("NOMBRE_CCF");
+                                                        if (check_field_mail(mail_emp.getText())) {
+                                                            if (!cb_area.getSelectedItem().equals("Seleccione..")) {
+                                                                if (!cb_cargo.getSelectedItem().equals("Seleccione..")) {
+                                                                    if (f_ex_ing.getDate()!=null) {
+                                                                        Calendar date_examen = Calendar.getInstance();
+                                                                        date_examen.setTime(f_ex_ing.getDate());
+                                                                        date_in.add(Calendar.MONTH, -6);
+                                                                        if (date_examen.getTime().compareTo(date_in.getTime())>=0) {
+                                                                            if (!cb_exon.getSelectedItem().equals("Seleccione..")) {
+                                                                                if (f_cons.getDate()!=null) {
+                                                                                    Conexion con = new Conexion();
+                                                                                    con.conexion();
+                                                                                    ResultSet r;
+                                                                                    try {
+                                                                                        r = con.s.executeQuery ("SELECT *\n" +
+                                                                                                                "FROM\n" +
+                                                                                                                "    t_empresas\n" +
+                                                                                                                "    INNER JOIN t_arl \n" +
+                                                                                                                "        ON (t_empresas.ID_ARL = t_arl.ID_ARL)\n" +
+                                                                                                                "    INNER JOIN t_ccf \n" +
+                                                                                                                "        ON (t_empresas.ID_CCF = t_ccf.ID_CCF)"
+                                                                                                + "WHERE NOMBRE_EMPRESA = '"+nom_empl.getText()+"'");
+                                                                                        if (r.next()) {
+                                                                                            arl = r.getString("NOMBRE_ARL");
+                                                                                            ccf = r.getString("NOMBRE_CCF");
+                                                                                        }
+                                                                                        r = con.s.executeQuery ("SELECT * FROM `t_obra` WHERE (NOMBRE_OBRA ='"+cb_obra.getSelectedItem().toString()+"');");
+                                                                                        if(r.next()){
+                                                                                            id_obra=r.getInt("ID_OBRA");    
+                                                                                        }
+                                                                                        //**************GET ID AREA
+                                                                                        r = con.s.executeQuery ("SELECT *\n" +
+                                                                                                                "FROM\n" +
+                                                                                                                "    t_actividades WHERE NOMBRE_ACTIVIDAD = '"+cb_area.getSelectedItem()+"';");
+                                                                                        if(r.next()){
+                                                                                            id_area=r.getInt("ID_ACTIVIDAD");
+                                                                                        }
+                                                                                        //**************GET ID CARGO
+                                                                                        r = con.s.executeQuery ("SELECT *\n" +
+                                                                                                                "FROM\n" +
+                                                                                                                "    t_cargo WHERE NOMBRE_CARGO = '"+cb_cargo.getSelectedItem()+"';");
+                                                                                        if(r.next()){
+                                                                                            id_cargo=r.getInt("ID_CARGO");
+                                                                                        }
+                                                                                        int conf = JOptionPane.showConfirmDialog(this,"Esta seguro que desea continuar?","Confirmación",JOptionPane.OK_CANCEL_OPTION,JOptionPane.QUESTION_MESSAGE);
+                                                                                        if (conf == JOptionPane.YES_OPTION) {
+                                                                                            con.s.executeUpdate("UPDATE `e_occidente`.`t_novedades`\n" +
+                                                                                                                "SET `ID_EMPLEADO` = "+Busc_cedula.getText()+",\n" +
+                                                                                                                "  `ID_EMPRESA` = '"+Busc_nit.getText()+"',\n" +
+                                                                                                                "  `FECHA_INGRESO` = '"+new SimpleDateFormat("yyyy-MM-dd").format(f_ing_nov.getDate())+"',\n" +
+                                                                                                                "  `FECHA_RETIRO` = '1900-01-01',\n" +
+                                                                                                                "  `SALARIO_NOVEDAD` = "+salario.getText()+",\n" +
+                                                                                                                "  `ID_EPS` = 1,\n" +
+                                                                                                                "  `ID_AFP` = 1,\n" +
+                                                                                                                "  `ARL_NOV` = '"+arl+"',\n" +
+                                                                                                                "  `CCF_NOV` = '"+ccf+"',\n" +
+                                                                                                                "  `OBS_NOV` = '"+obs.getText().toUpperCase()+"',\n" +
+                                                                                                                "  `ID_OBRA` = "+id_obra+",\n" +
+                                                                                                                "  `ID_TIPO` = 3,\n" +
+                                                                                                                "  `F_REGISTRO` = '"+new SimpleDateFormat("yyyy-MM-dd").format(new Date())+"',\n" +
+                                                                                                                "  `ID_CARGO` = "+id_cargo+",\n" +
+                                                                                                                "  `ID_AREA_TRABAJO` = "+id_area+",\n" +
+                                                                                                                "  `F_EXAMEN_INGRESO` = '"+new SimpleDateFormat("yyyy-MM-dd").format(f_ex_ing.getDate())+"',\n" +
+                                                                                                                "  `F_CONSENTIMIENTO` = '"+new SimpleDateFormat("yyyy-MM-dd").format(f_cons.getDate())+"',\n" +
+                                                                                                                "  `EXON_FIC` = '"+cb_exon.getSelectedItem()+"',\n" +
+                                                                                                                "  `MAIL_NOV` = '"+mail_emp.getText()+"'\n" +
+                                                                                                                "WHERE `ID_EMPLEADO` = "+ced_edit+"\n" +
+                                                                                                                "    AND `ID_EMPRESA` = '"+nit_edit+"'\n" +
+                                                                                                                "    AND `FECHA_INGRESO` = '"+new SimpleDateFormat("yyyy-MM-dd").format(f_ing_edit)+"'\n" +
+                                                                                                                "    AND `ID_TIPO` = "+id_tip_edit+"\n" +
+                                                                                                                "    AND `FECHA_RETIRO` = '"+new SimpleDateFormat("yyyy-MM-dd").format(f_ret_edit)+"';");
+//                                                                                            con.s.executeUpdate("UPDATE `t_novedades` "
+//                                                                                                    + "SET `ID_EMPLEADO`="+Busc_cedula.getText()+","
+//                                                                                                    + "`ID_EMPRESA`='"+Busc_nit.getText()+"',"
+//                                                                                                    + "`FECHA_INGRESO`='"+new SimpleDateFormat("yyyy-MM-dd").format(f_ing_nov.getDate())+"',"
+//                                                                                                    + "`FECHA_RETIRO`='1900-01-01',"
+//                                                                                                    + "`SALARIO_NOVEDAD`="+salario.getText()+","
+//                                                                                                    + "`ID_EPS`=1,"
+//                                                                                                    + "`ID_AFP`=1,"
+//                                                                                                    + "`ARL_NOV`='"+arl+"',"
+//                                                                                                    + "`CCF_NOV`="+cb_ccf.getSelectedItem()+","
+//                                                                                                    + "`F_NAC_NOV`='"+aux_f_nac+"',"
+//                                                                                                    + "`F_EXP_NOV`='"+aux_f_exp+"',"
+//                                                                                                    + "`DIR_EMP_NOV`='"+dir_emp.getText()+"',"
+//                                                                                                    + "`BARRIO_NOV`='"+barrio.getText()+"',"
+//                                                                                                    + "`ID_MUN_NOV`="+id_municipio+","
+//                                                                                                    + "`TEL_NOV`='"+tel_emp.getText()+"',"
+//                                                                                                    + "`MAIL_NOV`='"+mail_emp.getText()+"',"
+//                                                                                                    + "`ACUD_NOV`='"+acud.getText()+"',"
+//                                                                                                    + "`ID_PAR_ACU_NOV`="+id_par_acud+","
+//                                                                                                    + "`TEL_ACUD_NOV`='"+tel_acud.getText()+"',"
+//                                                                                                    + "`OBS_NOV`='"+obs.getText().toUpperCase()+"',"
+//                                                                                                    + "`ID_OBRA`="+id_obra+","
+//                                                                                                    + "`ID_TIPO`=3, "
+//                                                                                                    + "`F_REGISTRO`='"+new SimpleDateFormat("yyyy-MM-dd").format(new Date())+"', "
+//                                                                                                    + "ID_CARGO = "+id_cargo+", "
+//                                                                                                    + "ID_AREA_TRABAJO = "+id_area+" "
+//                                                                                                    + "WHERE ID_EMPLEADO="+ced_edit+" "
+//                                                                                                    + "AND ID_EMPRESA='"+nit_edit+"' "
+//                                                                                                    + "AND FECHA_INGRESO='"+new SimpleDateFormat("yyyy-MM-dd").format(f_ing_edit)+"' "
+//                                                                                                    + "AND FECHA_RETIRO='"+new SimpleDateFormat("yyyy-MM-dd").format(f_ret_edit)+"' "
+//                                                                                                    + "AND ID_TIPO="+id_tip_edit);
+                                                                                            if (id_tip_edit!=2) {
+                                                                                                con.s.executeUpdate("INSERT INTO `t_registro` (ID_EMPLEADO,ID_EMPRESA,F_INGRESO,F_RETIRO,ID_TIPO, REGISTRO, F_REGISTRO, FECHA, ID_USUARIO) VALUES ("+Busc_cedula.getText()+",'"+Busc_nit.getText()+"','"+new SimpleDateFormat("yyyy-MM-dd").format(f_ing_nov.getDate())+"','1900-01-01',3,'MODIFICADO A PRE-INGRESO','"+new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date())+"','"+new SimpleDateFormat("yyyy-MM-dd").format(f_ing_nov.getDate())+"','"+Main.id_usuario+"')");
                                                                                             }
-                                                                                            r = con.s.executeQuery ("SELECT * FROM `t_obra` WHERE (NOMBRE_OBRA ='"+cb_obra.getSelectedItem().toString()+"');");
-                                                                                            if(r.next()){
-                                                                                                id_obra=r.getInt("ID_OBRA");    
+                                                                                            if (f_ing_edit.compareTo(f_ing_nov.getDate())!=0) {
+                                                                                                con.s.executeUpdate("INSERT INTO `t_registro` (ID_EMPLEADO,ID_EMPRESA,F_INGRESO,F_RETIRO,ID_TIPO, REGISTRO, F_REGISTRO, FECHA, ID_USUARIO) VALUES ("+Busc_cedula.getText()+",'"+Busc_nit.getText()+"','"+new SimpleDateFormat("yyyy-MM-dd").format(f_ing_nov.getDate())+"','1900-01-01',3,'MODIFICA FECHA INGRESO','"+new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date())+"','"+new SimpleDateFormat("yyyy-MM-dd").format(f_ing_nov.getDate())+"','"+Main.id_usuario+"')");
                                                                                             }
-                                                                                            id_municipio = get_id_municipio(cb_mun.getSelectedItem());
-                                                                                            r = con.s.executeQuery ("SELECT * FROM `t_parentesco` WHERE (NOMBRE_PAR ='"+cb_par.getSelectedItem().toString()+"');");
-                                                                                            if(r.next()){
-                                                                                                id_par_acud=r.getInt("ID_PAR");    
+                                                                                            if (!nit_edit.equals(Busc_nit.getText())) {
+                                                                                                con.s.executeUpdate("INSERT INTO `t_registro` (ID_EMPLEADO,ID_EMPRESA,F_INGRESO,F_RETIRO,ID_TIPO, REGISTRO, F_REGISTRO, FECHA, ID_USUARIO) VALUES ("+Busc_cedula.getText()+",'"+Busc_nit.getText()+"','"+new SimpleDateFormat("yyyy-MM-dd").format(f_ing_nov.getDate())+"','1900-01-01',3,'MODIFICA NIT EMPRESA DE "+nit_edit+" A "+Busc_nit.getText()+"','"+new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date())+"','"+new SimpleDateFormat("yyyy-MM-dd").format(new Date())+"','"+Main.id_usuario+"')");
                                                                                             }
-                                                                                            String aux_f_nac = "";
-                                                                                            String aux_f_exp = "";
-                                                                                            if (f_nac.getDate()==null) {
-                                                                                                aux_f_nac = "1900-01-01";
-                                                                                            }else{
-                                                                                                aux_f_nac = new SimpleDateFormat("yyyy-MM-dd").format(f_nac.getDate());
+                                                                                            if (!ced_edit.equals(Busc_cedula.getText())) {
+                                                                                                con.s.executeUpdate("INSERT INTO `t_registro` (ID_EMPLEADO,ID_EMPRESA,F_INGRESO,F_RETIRO,ID_TIPO, REGISTRO, F_REGISTRO, FECHA, ID_USUARIO) VALUES ("+Busc_cedula.getText()+",'"+Busc_nit.getText()+"','"+new SimpleDateFormat("yyyy-MM-dd").format(f_ing_nov.getDate())+"','1900-01-01',3,'MODIFICA EMPLEADO DE "+ced_edit+" A "+Busc_cedula.getText()+"','"+new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date())+"','"+new SimpleDateFormat("yyyy-MM-dd").format(new Date())+"','"+Main.id_usuario+"')");
                                                                                             }
-                                                                                            if (f_exp.getDate()==null) {
-                                                                                                aux_f_exp = "1900-01-01";
-                                                                                            }else{
-                                                                                                aux_f_exp = new SimpleDateFormat("yyyy-MM-dd").format(f_exp.getDate());
+                                                                                            if (salario_edit!=Float.parseFloat(salario.getText())) {
+                                                                                                con.s.executeUpdate("INSERT INTO `t_registro` (ID_EMPLEADO,ID_EMPRESA,F_INGRESO,F_RETIRO,ID_TIPO, REGISTRO, F_REGISTRO, FECHA, ID_USUARIO) VALUES ("+Busc_cedula.getText()+",'"+Busc_nit.getText()+"','"+new SimpleDateFormat("yyyy-MM-dd").format(f_ing_nov.getDate())+"','1900-01-01',3,'MODIFICA SALARIO DE "+salario_edit+" A "+salario.getText()+"','"+new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date())+"','"+new SimpleDateFormat("yyyy-MM-dd").format(new Date())+"','"+Main.id_usuario+"')");
                                                                                             }
-                                                                                            int conf = JOptionPane.showConfirmDialog(this,"Esta seguro que desea continuar?","Confirmación",JOptionPane.OK_CANCEL_OPTION,JOptionPane.QUESTION_MESSAGE);
-                                                                                            if (conf == JOptionPane.YES_OPTION) {
-                                                                                                con.s.executeUpdate("UPDATE `t_novedades` SET `ID_EMPLEADO`="+Busc_cedula.getText()+",`ID_EMPRESA`='"+Busc_nit.getText()+"',`FECHA_INGRESO`='"+new SimpleDateFormat("yyyy-MM-dd").format(f_ing_nov.getDate())+"',`FECHA_RETIRO`='1900-01-01',`SALARIO_NOVEDAD`="+salario.getText()+",`ID_EPS`=1,`ID_AFP`=1,`ARL_NOV`='"+arl+"',`CCF_NOV`="+cb_ccf.getSelectedItem()+",`F_NAC_NOV`='"+aux_f_nac+"',`F_EXP_NOV`='"+aux_f_exp+"',`DIR_EMP_NOV`='"+dir_emp.getText()+"',`BARRIO_NOV`='"+barrio.getText()+"',`ID_MUN_NOV`="+id_municipio+",`TEL_NOV`='"+tel_emp.getText()+"',`MAIL_NOV`='"+mail_emp.getText()+"',`ACUD_NOV`='"+acud.getText()+"',`ID_PAR_ACU_NOV`="+id_par_acud+",`TEL_ACUD_NOV`='"+tel_acud.getText()+"',`OBS_NOV`='"+obs.getText().toUpperCase()+"',`ID_OBRA`="+id_obra+",`ID_TIPO`=3, `F_REGISTRO`='"+new SimpleDateFormat("yyyy-MM-dd").format(new Date())+"' WHERE ID_EMPLEADO="+ced_edit+" AND ID_EMPRESA='"+nit_edit+"' AND FECHA_INGRESO='"+new SimpleDateFormat("yyyy-MM-dd").format(f_ing_edit)+"' AND FECHA_RETIRO='"+new SimpleDateFormat("yyyy-MM-dd").format(f_ret_edit)+"' AND ID_TIPO="+id_tip_edit);
-                                                                                                if (id_tip_edit!=2) {
-                                                                                                    con.s.executeUpdate("INSERT INTO `t_registro` (ID_EMPLEADO,ID_EMPRESA,F_INGRESO,F_RETIRO,ID_TIPO, REGISTRO, F_REGISTRO, FECHA, ID_USUARIO) VALUES ("+Busc_cedula.getText()+",'"+Busc_nit.getText()+"','"+new SimpleDateFormat("yyyy-MM-dd").format(f_ing_nov.getDate())+"','1900-01-01',3,'MODIFICADO A PRE-INGRESO','"+new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date())+"','"+new SimpleDateFormat("yyyy-MM-dd").format(f_ing_nov.getDate())+"','"+Main.id_usuario+"')");
-                                                                                                }
-                                                                                                if (f_ing_edit.compareTo(f_ing_nov.getDate())!=0) {
-                                                                                                    con.s.executeUpdate("INSERT INTO `t_registro` (ID_EMPLEADO,ID_EMPRESA,F_INGRESO,F_RETIRO,ID_TIPO, REGISTRO, F_REGISTRO, FECHA, ID_USUARIO) VALUES ("+Busc_cedula.getText()+",'"+Busc_nit.getText()+"','"+new SimpleDateFormat("yyyy-MM-dd").format(f_ing_nov.getDate())+"','1900-01-01',3,'MODIFICA FECHA INGRESO','"+new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date())+"','"+new SimpleDateFormat("yyyy-MM-dd").format(f_ing_nov.getDate())+"','"+Main.id_usuario+"')");
-                                                                                                }
-                                                                                                if (!nit_edit.equals(Busc_nit.getText())) {
-                                                                                                    con.s.executeUpdate("INSERT INTO `t_registro` (ID_EMPLEADO,ID_EMPRESA,F_INGRESO,F_RETIRO,ID_TIPO, REGISTRO, F_REGISTRO, FECHA, ID_USUARIO) VALUES ("+Busc_cedula.getText()+",'"+Busc_nit.getText()+"','"+new SimpleDateFormat("yyyy-MM-dd").format(f_ing_nov.getDate())+"','1900-01-01',3,'MODIFICA NIT EMPRESA DE "+nit_edit+" A "+Busc_nit.getText()+"','"+new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date())+"','"+new SimpleDateFormat("yyyy-MM-dd").format(new Date())+"','"+Main.id_usuario+"')");
-                                                                                                }
-                                                                                                if (!ced_edit.equals(Busc_cedula.getText())) {
-                                                                                                    con.s.executeUpdate("INSERT INTO `t_registro` (ID_EMPLEADO,ID_EMPRESA,F_INGRESO,F_RETIRO,ID_TIPO, REGISTRO, F_REGISTRO, FECHA, ID_USUARIO) VALUES ("+Busc_cedula.getText()+",'"+Busc_nit.getText()+"','"+new SimpleDateFormat("yyyy-MM-dd").format(f_ing_nov.getDate())+"','1900-01-01',3,'MODIFICA EMPLEADO DE "+ced_edit+" A "+Busc_cedula.getText()+"','"+new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date())+"','"+new SimpleDateFormat("yyyy-MM-dd").format(new Date())+"','"+Main.id_usuario+"')");
-                                                                                                }
-                                                                                                if (salario_edit!=Float.parseFloat(salario.getText())) {
-                                                                                                    con.s.executeUpdate("INSERT INTO `t_registro` (ID_EMPLEADO,ID_EMPRESA,F_INGRESO,F_RETIRO,ID_TIPO, REGISTRO, F_REGISTRO, FECHA, ID_USUARIO) VALUES ("+Busc_cedula.getText()+",'"+Busc_nit.getText()+"','"+new SimpleDateFormat("yyyy-MM-dd").format(f_ing_nov.getDate())+"','1900-01-01',3,'MODIFICA SALARIO DE "+salario_edit+" A "+salario.getText()+"','"+new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date())+"','"+new SimpleDateFormat("yyyy-MM-dd").format(new Date())+"','"+Main.id_usuario+"')");
-                                                                                                }
-                                                                                                if (!afp_edit.equals(cb_afp.getSelectedItem().toString())) {
-                                                                                                    con.s.executeUpdate("INSERT INTO `t_registro` (ID_EMPLEADO,ID_EMPRESA,F_INGRESO,F_RETIRO,ID_TIPO, REGISTRO, F_REGISTRO, FECHA, ID_USUARIO) VALUES ("+Busc_cedula.getText()+",'"+Busc_nit.getText()+"','"+new SimpleDateFormat("yyyy-MM-dd").format(f_ing_nov.getDate())+"','1900-01-01',3,'MODIFICA AFP DE "+afp_edit+" A "+cb_afp.getSelectedItem().toString()+"','"+new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date())+"','"+new SimpleDateFormat("yyyy-MM-dd").format(new Date())+"','"+Main.id_usuario+"')");
-                                                                                                }
-                                                                                                if (!arl_edit.equals(cb_arl.getSelectedItem().toString())) {
-                                                                                                    con.s.executeUpdate("INSERT INTO `t_registro` (ID_EMPLEADO,ID_EMPRESA,F_INGRESO,F_RETIRO,ID_TIPO, REGISTRO, F_REGISTRO, FECHA, ID_USUARIO) VALUES ("+Busc_cedula.getText()+",'"+Busc_nit.getText()+"','"+new SimpleDateFormat("yyyy-MM-dd").format(f_ing_nov.getDate())+"','1900-01-01',3,'MODIFICA ARL DE "+arl_edit+" A "+cb_arl.getSelectedItem().toString()+"','"+new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date())+"','"+new SimpleDateFormat("yyyy-MM-dd").format(new Date())+"','"+Main.id_usuario+"')");
-                                                                                                }
-                                                                                                if (!eps_edit.equals(cb_eps.getSelectedItem().toString())) {
-                                                                                                    con.s.executeUpdate("INSERT INTO `t_registro` (ID_EMPLEADO,ID_EMPRESA,F_INGRESO,F_RETIRO,ID_TIPO, REGISTRO, F_REGISTRO, FECHA, ID_USUARIO) VALUES ("+Busc_cedula.getText()+",'"+Busc_nit.getText()+"','"+new SimpleDateFormat("yyyy-MM-dd").format(f_ing_nov.getDate())+"','1900-01-01',3,'MODIFICA EPS DE "+eps_edit+" A "+cb_eps.getSelectedItem().toString()+"','"+new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date())+"','"+new SimpleDateFormat("yyyy-MM-dd").format(new Date())+"','"+Main.id_usuario+"')");
-                                                                                                }
-                                                                                                if (!ccf_edit.equals(cb_ccf.getSelectedItem().toString())) {
-                                                                                                    con.s.executeUpdate("INSERT INTO `t_registro` (ID_EMPLEADO,ID_EMPRESA,F_INGRESO,F_RETIRO,ID_TIPO, REGISTRO, F_REGISTRO, FECHA, ID_USUARIO) VALUES ("+Busc_cedula.getText()+",'"+Busc_nit.getText()+"','"+new SimpleDateFormat("yyyy-MM-dd").format(f_ing_nov.getDate())+"','1900-01-01',3,'MODIFICA CCF DE "+ccf_edit+" A "+cb_ccf.getSelectedItem().toString()+"','"+new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date())+"','"+new SimpleDateFormat("yyyy-MM-dd").format(new Date())+"','"+Main.id_usuario+"')");
-                                                                                                }
-                                                                                                if (!obra_edit.equals(cb_obra.getSelectedItem().toString())) {
-                                                                                                    con.s.executeUpdate("INSERT INTO `t_registro` (ID_EMPLEADO,ID_EMPRESA,F_INGRESO,F_RETIRO,ID_TIPO, REGISTRO, F_REGISTRO, FECHA, ID_USUARIO) VALUES ("+Busc_cedula.getText()+",'"+Busc_nit.getText()+"','"+new SimpleDateFormat("yyyy-MM-dd").format(f_ing_nov.getDate())+"','1900-01-01',3,'MODIFICA OBRA DE "+obra_edit+" A "+cb_obra.getSelectedItem().toString()+"','"+new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date())+"','"+new SimpleDateFormat("yyyy-MM-dd").format(new Date())+"','"+Main.id_usuario+"')");
-                                                                                                }
-                                                                                                if (!obs_edit.equals(obs.getText())) {
-                                                                                                    con.s.executeUpdate("INSERT INTO `t_registro` (ID_EMPLEADO,ID_EMPRESA,F_INGRESO,F_RETIRO,ID_TIPO, REGISTRO, F_REGISTRO, FECHA, ID_USUARIO) VALUES ("+Busc_cedula.getText()+",'"+Busc_nit.getText()+"','"+new SimpleDateFormat("yyyy-MM-dd").format(f_ing_nov.getDate())+"','1900-01-01',3,'MODIFICA OBSERVACION A "+obs.getText()+"','"+new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date())+"','"+new SimpleDateFormat("yyyy-MM-dd").format(new Date())+"','"+Main.id_usuario+"')");
-                                                                                                }
-                                                                                                JOptionPane.showMessageDialog(this,"Novedad de pre-ingreso editada correctamente.","Información",JOptionPane.INFORMATION_MESSAGE);
-                                                                                                clear_all();
-                                                                                                Busc_cedula.requestFocus();
-                                                                                                con.cerrar();
-                                                                                                this.dispose();
-                                                                                            } else {
-                                                                                                Busc_cedula.requestFocus();
+                                                                                            if (!afp_edit.equals(cb_afp.getSelectedItem().toString())) {
+                                                                                                con.s.executeUpdate("INSERT INTO `t_registro` (ID_EMPLEADO,ID_EMPRESA,F_INGRESO,F_RETIRO,ID_TIPO, REGISTRO, F_REGISTRO, FECHA, ID_USUARIO) VALUES ("+Busc_cedula.getText()+",'"+Busc_nit.getText()+"','"+new SimpleDateFormat("yyyy-MM-dd").format(f_ing_nov.getDate())+"','1900-01-01',3,'MODIFICA AFP DE "+afp_edit+" A "+cb_afp.getSelectedItem().toString()+"','"+new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date())+"','"+new SimpleDateFormat("yyyy-MM-dd").format(new Date())+"','"+Main.id_usuario+"')");
                                                                                             }
+                                                                                            if (!arl_edit.equals(cb_arl.getSelectedItem().toString())) {
+                                                                                                con.s.executeUpdate("INSERT INTO `t_registro` (ID_EMPLEADO,ID_EMPRESA,F_INGRESO,F_RETIRO,ID_TIPO, REGISTRO, F_REGISTRO, FECHA, ID_USUARIO) VALUES ("+Busc_cedula.getText()+",'"+Busc_nit.getText()+"','"+new SimpleDateFormat("yyyy-MM-dd").format(f_ing_nov.getDate())+"','1900-01-01',3,'MODIFICA ARL DE "+arl_edit+" A "+cb_arl.getSelectedItem().toString()+"','"+new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date())+"','"+new SimpleDateFormat("yyyy-MM-dd").format(new Date())+"','"+Main.id_usuario+"')");
+                                                                                            }
+                                                                                            if (!eps_edit.equals(cb_eps.getSelectedItem().toString())) {
+                                                                                                con.s.executeUpdate("INSERT INTO `t_registro` (ID_EMPLEADO,ID_EMPRESA,F_INGRESO,F_RETIRO,ID_TIPO, REGISTRO, F_REGISTRO, FECHA, ID_USUARIO) VALUES ("+Busc_cedula.getText()+",'"+Busc_nit.getText()+"','"+new SimpleDateFormat("yyyy-MM-dd").format(f_ing_nov.getDate())+"','1900-01-01',3,'MODIFICA EPS DE "+eps_edit+" A "+cb_eps.getSelectedItem().toString()+"','"+new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date())+"','"+new SimpleDateFormat("yyyy-MM-dd").format(new Date())+"','"+Main.id_usuario+"')");
+                                                                                            }
+                                                                                            if (!ccf_edit.equals(cb_ccf.getSelectedItem().toString())) {
+                                                                                                con.s.executeUpdate("INSERT INTO `t_registro` (ID_EMPLEADO,ID_EMPRESA,F_INGRESO,F_RETIRO,ID_TIPO, REGISTRO, F_REGISTRO, FECHA, ID_USUARIO) VALUES ("+Busc_cedula.getText()+",'"+Busc_nit.getText()+"','"+new SimpleDateFormat("yyyy-MM-dd").format(f_ing_nov.getDate())+"','1900-01-01',3,'MODIFICA CCF DE "+ccf_edit+" A "+cb_ccf.getSelectedItem().toString()+"','"+new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date())+"','"+new SimpleDateFormat("yyyy-MM-dd").format(new Date())+"','"+Main.id_usuario+"')");
+                                                                                            }
+                                                                                            if (!obra_edit.equals(cb_obra.getSelectedItem().toString())) {
+                                                                                                con.s.executeUpdate("INSERT INTO `t_registro` (ID_EMPLEADO,ID_EMPRESA,F_INGRESO,F_RETIRO,ID_TIPO, REGISTRO, F_REGISTRO, FECHA, ID_USUARIO) VALUES ("+Busc_cedula.getText()+",'"+Busc_nit.getText()+"','"+new SimpleDateFormat("yyyy-MM-dd").format(f_ing_nov.getDate())+"','1900-01-01',3,'MODIFICA OBRA DE "+obra_edit+" A "+cb_obra.getSelectedItem().toString()+"','"+new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date())+"','"+new SimpleDateFormat("yyyy-MM-dd").format(new Date())+"','"+Main.id_usuario+"')");
+                                                                                            }
+                                                                                            if (!obs_edit.equals(obs.getText())) {
+                                                                                                con.s.executeUpdate("INSERT INTO `t_registro` (ID_EMPLEADO,ID_EMPRESA,F_INGRESO,F_RETIRO,ID_TIPO, REGISTRO, F_REGISTRO, FECHA, ID_USUARIO) VALUES ("+Busc_cedula.getText()+",'"+Busc_nit.getText()+"','"+new SimpleDateFormat("yyyy-MM-dd").format(f_ing_nov.getDate())+"','1900-01-01',3,'MODIFICA OBSERVACION A "+obs.getText()+"','"+new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date())+"','"+new SimpleDateFormat("yyyy-MM-dd").format(new Date())+"','"+Main.id_usuario+"')");
+                                                                                            }
+                                                                                            JOptionPane.showMessageDialog(this,"Novedad de pre-ingreso editada correctamente.","Información",JOptionPane.INFORMATION_MESSAGE);
+                                                                                            clear_all();
+                                                                                            Busc_cedula.requestFocus();
                                                                                             con.cerrar();
-                                                                                        } catch (SQLException e) {
-                                                                                            con.cerrar();
-                                                                                            e.printStackTrace();
-                                                                                            JOptionPane.showMessageDialog(this,e,"Error",JOptionPane.ERROR_MESSAGE);
-                                                                                        } 
-                                                                                    } else {
-                                                                                        JOptionPane.showMessageDialog(this,"Ingrese el telefono del acudiente del empleado.","Error",JOptionPane.ERROR_MESSAGE);
+                                                                                            this.dispose();
+                                                                                        } else {
+                                                                                            Busc_cedula.requestFocus();
+                                                                                        }
+                                                                                        con.cerrar();
+                                                                                    } catch (SQLException e) {
+                                                                                        con.cerrar();
+                                                                                        e.printStackTrace();
+                                                                                        JOptionPane.showMessageDialog(this,e,"Error",JOptionPane.ERROR_MESSAGE);
                                                                                     }
-                                                                                } else {
-                                                                                    JOptionPane.showMessageDialog(this,"Ingrese el parentesco del acudiente del empleado.","Error",JOptionPane.ERROR_MESSAGE);
+                                                                                }else{
+                                                                                    JOptionPane.showMessageDialog(this,"Seleccione la fecha de consentimiento del empleado","Error",JOptionPane.ERROR_MESSAGE);
                                                                                 }
                                                                             } else {
-                                                                                JOptionPane.showMessageDialog(this,"Ingrese el acudiente del empleado.","Error",JOptionPane.ERROR_MESSAGE);
+                                                                                JOptionPane.showMessageDialog(this,"Seleccione la exoneracion del FIC del empleado","Error",JOptionPane.ERROR_MESSAGE);
                                                                             }
-                                                                        } else {
-                                                                            JOptionPane.showMessageDialog(this,"Ingrese un email valido para el empleado.","Error",JOptionPane.ERROR_MESSAGE);
+                                                                        }else {
+                                                                            f_ex_ing.requestFocus();
+                                                                            JOptionPane.showMessageDialog(this,"Verifique que la Fecha de Examen medico tenga vigencia de un mes con respecto a la fecha de ingreso","Error",JOptionPane.ERROR_MESSAGE);
                                                                         }
-                                                                    } else {
-                                                                        JOptionPane.showMessageDialog(this,"Ingrese el municipio del empleado.","Error",JOptionPane.ERROR_MESSAGE);
                                                                     }
-                                                                } else {
-                                                                    JOptionPane.showMessageDialog(this,"Ingrese el barrio del empleado.","Error",JOptionPane.ERROR_MESSAGE);
+                                                                }else {
+                                                                    JOptionPane.showMessageDialog(this,"Seleccione el cargo del empleado","Error",JOptionPane.ERROR_MESSAGE);
                                                                 }
-                                                            } else {
-                                                                JOptionPane.showMessageDialog(this,"Ingrese el telefono del empleado.","Error",JOptionPane.ERROR_MESSAGE);
+                                                            }else{
+                                                                JOptionPane.showMessageDialog(this,"Seleccione el area de trabajo del empleado","Error",JOptionPane.ERROR_MESSAGE);
                                                             }
                                                         } else {
-                                                            JOptionPane.showMessageDialog(this,"Ingrese la dirección del empleado.","Error",JOptionPane.ERROR_MESSAGE);
+                                                            JOptionPane.showMessageDialog(this,"Ingrese un email valido para el empleado.","Error",JOptionPane.ERROR_MESSAGE);
                                                         }
-
                                                     } else {
                                                         JOptionPane.showMessageDialog(this,"Ingrese ls CCF del empleado.","Error",JOptionPane.ERROR_MESSAGE);
                                                     }
@@ -1409,22 +1395,18 @@ Boolean block=true;
                                 } else {
                                     JOptionPane.showMessageDialog(this,"Ingrese la cedula del empleado.","Error",JOptionPane.ERROR_MESSAGE);
                                 }
-
                             } else {
                                 JOptionPane.showMessageDialog(this,"Ingrese la cedula del empleado.","Error",JOptionPane.ERROR_MESSAGE);
                             }
                         } else {
                             JOptionPane.showMessageDialog(this,"Ingrese la cedula del empleado.","Error",JOptionPane.ERROR_MESSAGE);
                         }
-
                     } else {
                         JOptionPane.showMessageDialog(this,"Ingrese el nombre del empleador.","Error",JOptionPane.ERROR_MESSAGE);
                     }
-
                 } else {
                     JOptionPane.showMessageDialog(this,"Ingrese el NIT del empleador.","Error",JOptionPane.ERROR_MESSAGE);
                 }
-
             } else {
                 JOptionPane.showMessageDialog(this,"Ingrese la fecha de ingreso.","Error",JOptionPane.ERROR_MESSAGE);
             }
@@ -1453,54 +1435,12 @@ Boolean block=true;
         add_obra.setVisible(true);
     }//GEN-LAST:event_add_barrio1ActionPerformed
 
-    private void add_parActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_add_parActionPerformed
-        // TODO add your handling code here:
-        Add_Parentesco add_par = new Add_Parentesco(this, true);
-        add_par.setLocationRelativeTo(this);
-        add_par.setVisible(true);
-    }//GEN-LAST:event_add_parActionPerformed
-
-    private void add_munActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_add_munActionPerformed
-        // TODO add your handling code here:
-        Add_Municipio add_mun = new Add_Municipio(this, true);
-        add_mun.setLocationRelativeTo(this);
-        add_mun.setVisible(true);
-    }//GEN-LAST:event_add_munActionPerformed
-
     private void add_epsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_add_epsActionPerformed
         // TODO add your handling code here:
         Add_EPS add_eps = new Add_EPS(this, true);
         add_eps.setLocationRelativeTo(this);
         add_eps.setVisible(true);
     }//GEN-LAST:event_add_epsActionPerformed
-
-    private void tel_acudMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tel_acudMouseClicked
-        // TODO add your handling code here:
-        if (evt.getClickCount() == 2 & block) {
-            tel_acud.setEditable(true);
-        }
-    }//GEN-LAST:event_tel_acudMouseClicked
-
-    private void tel_acudFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tel_acudFocusLost
-        // TODO add your handling code here:
-        if (!tel_acud.getText().equals("")) {
-            tel_acud.setEditable(false);
-        }
-    }//GEN-LAST:event_tel_acudFocusLost
-
-    private void acudMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_acudMouseClicked
-        // TODO add your handling code here:
-        if (evt.getClickCount() == 2 & block) {
-            acud.setEditable(true);
-        }
-    }//GEN-LAST:event_acudMouseClicked
-
-    private void acudFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_acudFocusLost
-        // TODO add your handling code here:
-        if (!acud.getText().equals("")) {
-            acud.setEditable(false);
-        }
-    }//GEN-LAST:event_acudFocusLost
 
     private void mail_empMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mail_empMouseClicked
         // TODO add your handling code here:
@@ -1515,34 +1455,6 @@ Boolean block=true;
             mail_emp.setEditable(false);
         }
     }//GEN-LAST:event_mail_empFocusLost
-
-    private void tel_empMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tel_empMouseClicked
-        // TODO add your handling code here:
-        if (evt.getClickCount() == 2 & block) {
-            tel_emp.setEditable(true);
-        }
-    }//GEN-LAST:event_tel_empMouseClicked
-
-    private void tel_empFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tel_empFocusLost
-        // TODO add your handling code here:
-        if (!tel_emp.getText().equals("")) {
-            tel_emp.setEditable(false);
-        }
-    }//GEN-LAST:event_tel_empFocusLost
-
-    private void dir_empMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_dir_empMouseClicked
-        // TODO add your handling code here:
-        if (evt.getClickCount() == 2 & block) {
-            dir_emp.setEditable(true);
-        }
-    }//GEN-LAST:event_dir_empMouseClicked
-
-    private void dir_empFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_dir_empFocusLost
-        // TODO add your handling code here:
-        if (!dir_emp.getText().equals("")) {
-            dir_emp.setEditable(false);
-        }
-    }//GEN-LAST:event_dir_empFocusLost
 
     private void salarioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_salarioKeyTyped
         // TODO add your handling code here:
@@ -1723,7 +1635,6 @@ Boolean block=true;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField Busc_cedula;
     private javax.swing.JTextField Busc_nit;
-    private javax.swing.JTextField acud;
     private javax.swing.JButton add_afp;
     private javax.swing.JButton add_arl;
     private javax.swing.JButton add_barrio1;
@@ -1731,43 +1642,36 @@ Boolean block=true;
     private javax.swing.JButton add_emp;
     private javax.swing.JButton add_empresa;
     private javax.swing.JButton add_eps;
-    private javax.swing.JButton add_mun;
-    private javax.swing.JButton add_par;
     private javax.swing.JTextField ap_emp;
-    private javax.swing.JTextField barrio;
     private javax.swing.JComboBox<String> cb_afp;
+    private javax.swing.JComboBox<String> cb_area;
     private javax.swing.JComboBox<String> cb_arl;
+    private javax.swing.JComboBox<String> cb_cargo;
     private javax.swing.JComboBox<String> cb_ccf;
     private javax.swing.JComboBox<String> cb_eps;
-    private javax.swing.JComboBox<String> cb_mun;
+    private javax.swing.JComboBox<String> cb_exon;
     private javax.swing.JComboBox<String> cb_obra;
-    private javax.swing.JComboBox<String> cb_par;
-    private javax.swing.JTextField dir_emp;
     private javax.swing.JButton edit_emp;
     private javax.swing.JButton edit_empresa;
-    private com.toedter.calendar.JDateChooser f_exp;
+    private com.toedter.calendar.JDateChooser f_cons;
+    private com.toedter.calendar.JDateChooser f_ex_ing;
     private com.toedter.calendar.JDateChooser f_ing_nov;
-    private com.toedter.calendar.JDateChooser f_nac;
     private com.toedter.calendar.JDateChooser f_ret_nov;
     private javax.swing.JButton jButton14;
     private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
-    private javax.swing.JLabel jLabel18;
-    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel24;
+    private javax.swing.JLabel jLabel25;
+    private javax.swing.JLabel jLabel26;
+    private javax.swing.JLabel jLabel27;
+    private javax.swing.JLabel jLabel28;
+    private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -1782,14 +1686,11 @@ Boolean block=true;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTextField mail_emp;
     private javax.swing.JTextField nom_empl;
     private javax.swing.JTextField nomb_emp;
     private javax.swing.JTextArea obs;
     private javax.swing.JTextField salario;
-    private javax.swing.JTextField tel_acud;
-    private javax.swing.JTextField tel_emp;
     private static javax.swing.JComboBox<String> tipo_nov;
     // End of variables declaration//GEN-END:variables
 public void update_cb_tipo_nov(){
@@ -1922,48 +1823,48 @@ public void ac_arl(){
 
 }
 
-public void ac_mun(){
-    cb_mun.removeAllItems();
-    cb_mun.addItem("Seleccione..");
-    Conexion con = new Conexion();
-    con.conexion();
-    ResultSet r;
-    try{
-        r = con.s.executeQuery ("SELECT *\n" +
-                                "FROM\n" +
-                                "    t_municipios\n" +
-                                "    INNER JOIN t_departamentos \n" +
-                                "        ON (t_municipios.ID_DEP = t_departamentos.ID_DEP) ORDER BY NOMBRE_MUN ASC;");
-        while(r.next()){
-            String str=r.getString("NOMBRE_MUN")+"-"+r.getString("NOMBRE_DEP");
-            cb_mun.addItem(str);
-        }
-        con.cerrar();
-    }catch(SQLException j){
-        con.cerrar();
-        JOptionPane.showMessageDialog(null,j,"Error",JOptionPane.ERROR_MESSAGE);
-    }
-
-}
-public void ac_par(){
-    cb_par.removeAllItems();
-    cb_par.addItem("Seleccione..");
-    Conexion con = new Conexion();
-    con.conexion();
-    ResultSet r;
-    try{
-        r = con.s.executeQuery ("SELECT * FROM T_PARENTESCO ORDER BY NOMBRE_PAR ASC;");
-        while(r.next()){
-            String str=r.getString("NOMBRE_PAR");
-            cb_par.addItem(str);
-        }
-        con.cerrar();
-    }catch(SQLException j){
-        con.cerrar();
-        JOptionPane.showMessageDialog(null,j,"Error",JOptionPane.ERROR_MESSAGE);
-    }
-
-}
+//public void ac_mun(){
+//    cb_mun.removeAllItems();
+//    cb_mun.addItem("Seleccione..");
+//    Conexion con = new Conexion();
+//    con.conexion();
+//    ResultSet r;
+//    try{
+//        r = con.s.executeQuery ("SELECT *\n" +
+//                                "FROM\n" +
+//                                "    t_municipios\n" +
+//                                "    INNER JOIN t_departamentos \n" +
+//                                "        ON (t_municipios.ID_DEP = t_departamentos.ID_DEP) ORDER BY NOMBRE_MUN ASC;");
+//        while(r.next()){
+//            String str=r.getString("NOMBRE_MUN")+"-"+r.getString("NOMBRE_DEP");
+//            cb_mun.addItem(str);
+//        }
+//        con.cerrar();
+//    }catch(SQLException j){
+//        con.cerrar();
+//        JOptionPane.showMessageDialog(null,j,"Error",JOptionPane.ERROR_MESSAGE);
+//    }
+//
+//}
+//public void ac_par(){
+//    cb_par.removeAllItems();
+//    cb_par.addItem("Seleccione..");
+//    Conexion con = new Conexion();
+//    con.conexion();
+//    ResultSet r;
+//    try{
+//        r = con.s.executeQuery ("SELECT * FROM T_PARENTESCO ORDER BY NOMBRE_PAR ASC;");
+//        while(r.next()){
+//            String str=r.getString("NOMBRE_PAR");
+//            cb_par.addItem(str);
+//        }
+//        con.cerrar();
+//    }catch(SQLException j){
+//        con.cerrar();
+//        JOptionPane.showMessageDialog(null,j,"Error",JOptionPane.ERROR_MESSAGE);
+//    }
+//
+//}
 public void ac_obra(){
     cb_obra.removeAllItems();
     cb_obra.addItem("Seleccione..");
@@ -1982,6 +1883,48 @@ public void ac_obra(){
         JOptionPane.showMessageDialog(null,j,"Error",JOptionPane.ERROR_MESSAGE);
     }
 
+}
+public final void ac_area(){
+    cb_area.removeAllItems();
+    cb_area.addItem("Seleccione..");
+    Conexion con = new Conexion();
+    con.conexion();
+    ResultSet r;
+    try{
+        r = con.s.executeQuery ("SELECT *\n" +
+                                "FROM\n" +
+                                "    t_actividades\n" +
+                                "    ORDER BY NOMBRE_ACTIVIDAD ASC;");
+        while(r.next()){
+            String str=r.getString("NOMBRE_ACTIVIDAD");
+            cb_area.addItem(str);
+        }
+        con.cerrar();
+    }catch(SQLException j){
+        con.cerrar();
+        JOptionPane.showMessageDialog(null,j,"Error",JOptionPane.ERROR_MESSAGE);
+    }
+}
+public final void ac_cargo(){
+    cb_cargo.removeAllItems();
+    cb_cargo.addItem("Seleccione..");
+    Conexion con = new Conexion();
+    con.conexion();
+    ResultSet r;
+    try{
+        r = con.s.executeQuery ("SELECT *\n" +
+                                "FROM\n" +
+                                "    t_cargo\n" +
+                                "    ORDER BY NOMBRE_CARGO ASC;");
+        while(r.next()){
+            String str=r.getString("NOMBRE_CARGO");
+            cb_cargo.addItem(str);
+        }
+        con.cerrar();
+    }catch(SQLException j){
+        con.cerrar();
+        JOptionPane.showMessageDialog(null,j,"Error",JOptionPane.ERROR_MESSAGE);
+    }
 }
 public Boolean call_info_emp(String c){
     Info_Empleador info=new Info_Empleador(this,true,c);
@@ -2003,16 +1946,10 @@ public void clear_all (){
     cb_eps.setSelectedItem("Seleccione..");
     cb_ccf.setSelectedItem("Seleccione..");
     cb_obra.setSelectedItem("Seleccione..");
-    f_nac.setDate(null);
-    f_exp.setDate(null);
-    dir_emp.setText("");
-    tel_emp.setText("");
-    barrio.setText("");
-    cb_mun.setSelectedItem("Seleccione..");
+    f_ex_ing.setDate(null);
+    f_cons.setDate(null);
+    cb_exon.setSelectedItem("Seleccione..");
     mail_emp.setText("");
-    acud.setText("");
-    cb_par.setSelectedItem("Seleccione..");
-    tel_acud.setText("");
     obs.setText("");
 
 
@@ -2050,24 +1987,16 @@ public void enable_ingreso(){
     cb_obra.setEnabled(true);
     add_afp.setEnabled(true);
     add_arl.setEnabled(true);
-    barrio.setEnabled(true);
     add_ccf.setEnabled(true);
     add_emp.setEnabled(true);
     add_empresa.setEnabled(true);
     add_eps.setEnabled(true);
-    add_mun.setEnabled(true);
-    add_par.setEnabled(true);
     edit_emp.setEnabled(true);
     edit_empresa.setEnabled(true);
-    f_nac.setEnabled(true);
-    f_exp.setEnabled(true);
-    dir_emp.setEditable(true);
-    tel_emp.setEditable(true);
-    cb_mun.setEnabled(true);
+//    f_ex_ing.setEnabled(true);
+//    f_cons.setEnabled(true);
+//    cb_exon.setEnabled(true);
     mail_emp.setEditable(true);
-    acud.setEditable(true);
-    cb_par.setEnabled(true);
-    tel_acud.setEditable(true);
     obs.setEditable(true);
     Busc_cedula.requestFocus();
 
@@ -2085,24 +2014,13 @@ public void disable_ingreso(){
     cb_obra.setEnabled(false);
     add_afp.setEnabled(false);
     add_arl.setEnabled(false);
-    barrio.setEnabled(false);
     add_ccf.setEnabled(false);
     add_emp.setEnabled(false);
     add_empresa.setEnabled(false);
     add_eps.setEnabled(false);
-    add_mun.setEnabled(false);
-    add_par.setEnabled(false);
     edit_emp.setEnabled(false);
     edit_empresa.setEnabled(false);
-    f_nac.setEnabled(false);
-    f_exp.setEnabled(false);
-    dir_emp.setEditable(false);
-    tel_emp.setEditable(false);
-    cb_mun.setEnabled(false);
     mail_emp.setEditable(false);
-    acud.setEditable(false);
-    cb_par.setEnabled(false);
-    tel_acud.setEditable(false);
     obs.setEditable(false);
     Busc_cedula.requestFocus();
 
@@ -2166,16 +2084,14 @@ private void sel_campos(String ced, String nit, Date f_ingreso, Date f_retiro, S
             "    ON (t_novedades.ID_EPS = t_eps.ID_EPS)\n" +
             "  INNER JOIN t_afp\n" +
             "    ON (t_novedades.ID_AFP = t_afp.ID_AFP)\n" +
-            "  INNER JOIN t_parentesco\n" +
-            "    ON (t_novedades.ID_PAR_ACU_NOV = t_parentesco.ID_PAR)\n" +
             "  INNER JOIN t_obra\n" +
             "    ON (t_novedades.ID_OBRA = t_obra.ID_OBRA)\n" +
-            "  INNER JOIN t_municipios \n" +
-            "    ON (t_novedades.ID_MUN_NOV = t_municipios.ID_MUN)"+    
             "  INNER JOIN t_tipo_novedad\n" +
             "    ON (t_novedades.ID_TIPO = t_tipo_novedad.ID_TIPO)\n" +
-            "  INNER JOIN t_departamentos\n" +
-            "    ON (t_municipios.ID_DEP = t_departamentos.ID_DEP)\n"
+            "  INNER JOIN `t_actividades` \n" +
+            "    ON (`t_novedades`.`ID_AREA_TRABAJO` = `t_actividades`.`ID_ACTIVIDAD`)\n" +
+            "  INNER JOIN `t_cargo` \n" +
+            "    ON (`t_novedades`.`ID_CARGO` = `t_cargo`.`ID_CARGO`)"
             + "WHERE (ID_EMP = "+Long.parseLong(ced)+"\n"
             + "       AND t_novedades.ID_EMPRESA = '"+nit+"' AND t_novedades.FECHA_INGRESO = '"+new SimpleDateFormat("yyyy-MM-dd").format(f_ingreso)+"' AND t_novedades.FECHA_RETIRO = '"+new SimpleDateFormat("yyyy-MM-dd").format(f_retiro)+"' AND t_novedades.ID_TIPO = "+id_tipo+")\n"
             + "ORDER BY FECHA_INGRESO DESC;");
@@ -2186,18 +2102,6 @@ private void sel_campos(String ced, String nit, Date f_ingreso, Date f_retiro, S
                 f_ret_nov.setDate(null);
             } else {
                 f_ret_nov.setDate(new SimpleDateFormat("yyyy-MM-dd").parse(r.getString("FECHA_RETIRO")));
-            }
-            
-            if (r.getString("F_NAC_NOV").equals("1900-01-01")) {
-                f_nac.setDate(null);
-            } else {
-                f_nac.setDate(new SimpleDateFormat("yyyy-MM-dd").parse(r.getString("F_NAC_NOV")));
-            }
-            
-            if (r.getString("F_EXP_NOV").equals("1900-01-01")) {
-                f_exp.setDate(null);
-            } else {
-                f_exp.setDate(new SimpleDateFormat("yyyy-MM-dd").parse(r.getString("F_EXP_NOV")));
             }
             Busc_nit.setText(r.getString("ID_EMPRESA"));
             nom_empl.setText(r.getString("NOMBRE_EMPRESA"));
@@ -2215,16 +2119,21 @@ private void sel_campos(String ced, String nit, Date f_ingreso, Date f_retiro, S
             this.obra_edit=cb_obra.getSelectedItem().toString();
 //            f_nac.setDate(new SimpleDateFormat("yyyy-MM-dd").parse(r.getString("F_NAC_NOV")));
 //            f_exp.setDate(new SimpleDateFormat("yyyy-MM-dd").parse(r.getString("F_EXP_NOV")));
-            dir_emp.setText(r.getString("DIR_EMP_NOV"));
-            tel_emp.setText(r.getString("TEL_NOV"));
-            barrio.setText(r.getString("BARRIO_NOV"));
-            cb_mun.setSelectedItem(r.getString("NOMBRE_MUN")+"-"+r.getString("NOMBRE_DEP"));
+//            dir_emp.setText(r.getString("DIR_EMP_NOV"));
+//            tel_emp.setText(r.getString("TEL_NOV"));
+//            barrio.setText(r.getString("BARRIO_NOV"));
+//            cb_mun.setSelectedItem(r.getString("NOMBRE_MUN")+"-"+r.getString("NOMBRE_DEP"));
             mail_emp.setText(r.getString("MAIL_NOV"));
-            acud.setText(r.getString("ACUD_NOV"));
-            cb_par.setSelectedItem(r.getString("NOMBRE_PAR"));
-            tel_acud.setText(r.getString("TEL_ACUD_NOV"));
+//            acud.setText(r.getString("ACUD_NOV"));
+//            cb_par.setSelectedItem(r.getString("NOMBRE_PAR"));
+//            tel_acud.setText(r.getString("TEL_ACUD_NOV"));
             obs.setText(r.getString("OBS_NOV"));
             this.obs_edit=obs.getText();
+            cb_area.setSelectedItem(r.getString("NOMBRE_ACTIVIDAD"));
+            cb_cargo.setSelectedItem(r.getString("NOMBRE_CARGO"));
+            f_ex_ing.setDate(new SimpleDateFormat("yyyy-MM-dd").parse(r.getString("F_EXAMEN_INGRESO")));
+            f_cons.setDate(new SimpleDateFormat("yyyy-MM-dd").parse(r.getString("F_CONSENTIMIENTO")));
+            cb_exon.setSelectedItem(r.getString("EXON_FIC"));
             Busc_cedula.requestFocus();
         }
         con.cerrar();

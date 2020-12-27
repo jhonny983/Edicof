@@ -73,6 +73,18 @@ public class Add_Ingresos extends javax.swing.JDialog {
     JTextField tb_ccf_table = null;
     //////////////////////----------------------------
     String before_edit_cell = null;
+    //////////////////////----------------------------
+    int row_cedula=0;
+    int row_empleado = 1;
+    int row_empleador = 2;
+    int row_f_ingreso = 3;
+    int row_salario=4;
+    int row_eps=5;
+    int row_afp=6;
+    int row_arl=7;
+    int row_ccf=8;
+    int row_obra=9;
+    int row_obs=10;
     /**
      * Creates new form Add_Preingresos
      */
@@ -359,6 +371,7 @@ class MyTableCellEditorDate extends AbstractCellEditor implements TableCellEdito
         jButton6 = new javax.swing.JButton();
         view_user_local = new javax.swing.JCheckBox();
         jButton3 = new javax.swing.JButton();
+        sync_ARHI = new javax.swing.JCheckBox();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
@@ -715,10 +728,11 @@ class MyTableCellEditorDate extends AbstractCellEditor implements TableCellEdito
             }
         });
 
+        view_user_local.setSelected(true);
         view_user_local.setText("Ver preingresos usuario actual");
-        view_user_local.addChangeListener(new javax.swing.event.ChangeListener() {
-            public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                view_user_localStateChanged(evt);
+        view_user_local.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                view_user_localActionPerformed(evt);
             }
         });
 
@@ -730,6 +744,9 @@ class MyTableCellEditorDate extends AbstractCellEditor implements TableCellEdito
             }
         });
 
+        sync_ARHI.setSelected(true);
+        sync_ARHI.setText("Sincronizar con ARHI");
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
@@ -740,7 +757,8 @@ class MyTableCellEditorDate extends AbstractCellEditor implements TableCellEdito
                     .addComponent(view_user_local)
                     .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jButton6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(sync_ARHI))
                 .addContainerGap(31, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
@@ -754,7 +772,8 @@ class MyTableCellEditorDate extends AbstractCellEditor implements TableCellEdito
                 .addComponent(jButton2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton6)
-                .addContainerGap())
+                .addGap(3, 3, 3)
+                .addComponent(sync_ARHI))
         );
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Información de pre-ingresos"));
@@ -769,7 +788,7 @@ class MyTableCellEditorDate extends AbstractCellEditor implements TableCellEdito
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, true, true, false, true, false, true
+                false, false, false, false, false, true, true, false, false, false, true
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -872,7 +891,7 @@ class MyTableCellEditorDate extends AbstractCellEditor implements TableCellEdito
                 .addContainerGap()
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, 163, Short.MAX_VALUE))
+                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, 168, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
@@ -1090,18 +1109,46 @@ class MyTableCellEditorDate extends AbstractCellEditor implements TableCellEdito
                 ResultSet r;
                 for (int i = 0; i < jTable1.getRowCount(); i++) {
                     try {
-                        if (!get_id_empleador(modelo.getValueAt(i, 2)).equals("")) {
-                            r = con.s.executeQuery ("SELECT * FROM `t_novedades` WHERE (ID_EMPLEADO ="+modelo.getValueAt(i, 0)+" AND ID_EMPRESA='"+get_id_empleador(modelo.getValueAt(i, 2))+"' AND FECHA_INGRESO='"+new SimpleDateFormat("yyyy-MM-dd").format(new SimpleDateFormat("dd-MM-yyyy").parse(modelo.getValueAt(i, 3).toString()))+"' AND FECHA_RETIRO='1900-01-01' AND ID_TIPO IN(1));");
+                        if (!get_id_empleador(modelo.getValueAt(i, row_empleador)).equals("")) {
+                            r = con.s.executeQuery ("SELECT * FROM `t_novedades` WHERE (ID_EMPLEADO ="+modelo.getValueAt(i, row_cedula)+" AND ID_EMPRESA='"+get_id_empleador(modelo.getValueAt(i, row_empleador))+"' AND FECHA_INGRESO='"+new SimpleDateFormat("yyyy-MM-dd").format(new SimpleDateFormat("dd-MM-yyyy").parse(modelo.getValueAt(i, row_f_ingreso).toString()))+"' AND FECHA_RETIRO='1900-01-01' AND ID_TIPO IN(1));");
                             if(r.next()){
                                 JOptionPane.showMessageDialog(this,"Esta novedad de ingreso ya existe.","Error",JOptionPane.ERROR_MESSAGE);
                                 confirm = false;
-                                jTable1.changeSelection(i,0, false, false);
+                                jTable1.changeSelection(i,row_empleado, false, false);
                                 jTable1.requestFocus();
                                 break;
                             }else{
-                                //System.out.println("UPDATE `t_novedades` SET `ID_EPS`="+get_id_eps(modelo.getValueAt(i, 5))+",`ID_AFP`="+get_id_afp(modelo.getValueAt(i, 6))+",`ID_ARL`="+get_id_arl(modelo.getValueAt(i, 7))+",`ID_CCF`="+get_id_ccf(modelo.getValueAt(i, 8))+",`OBS_NOV`='"+modelo.getValueAt(i, 10).toString().toUpperCase()+"',`ID_TIPO`=1 WHERE ID_EMPLEADO="+modelo.getValueAt(i, 0)+" AND ID_EMPRESA='"+get_id_empleador(modelo.getValueAt(i, 2))+"' AND FECHA_INGRESO='"+new SimpleDateFormat("yyyy-MM-dd").format(new SimpleDateFormat("dd-MM-yyyy").parse(modelo.getValueAt(i, 3).toString()))+"' AND FECHA_RETIRO='1900-01-01' AND ID_TIPO=3");
-                                con.s.executeUpdate("UPDATE `t_novedades` SET `ID_EPS`="+get_id_eps(modelo.getValueAt(i, 5))+",`ID_AFP`="+get_id_afp(modelo.getValueAt(i, 6))+",`ARL_NOV`='"+modelo.getValueAt(i, 7)+"',`CCF_NOV`='"+modelo.getValueAt(i, 8)+"',`OBS_NOV`='INGRESO>"+Main.login.getText()+">"+new SimpleDateFormat("dd-MM-yyyy").format(new Date())+">"+modelo.getValueAt(i, 3).toString()+","+modelo.getValueAt(i, 10).toString().toUpperCase()+"',`ID_TIPO`=1 WHERE ID_EMPLEADO="+modelo.getValueAt(i, 0)+" AND ID_EMPRESA='"+get_id_empleador(modelo.getValueAt(i, 2))+"' AND FECHA_INGRESO='"+new SimpleDateFormat("yyyy-MM-dd").format(new SimpleDateFormat("dd-MM-yyyy").parse(modelo.getValueAt(i, 3).toString()))+"' AND FECHA_RETIRO='1900-01-01' AND ID_TIPO=3");
-                                con.s.executeUpdate("INSERT INTO `t_registro` (ID_EMPLEADO,ID_EMPRESA,F_INGRESO,F_RETIRO,ID_TIPO, REGISTRO, F_REGISTRO, FECHA, ID_USUARIO) VALUES ("+modelo.getValueAt(i, 0)+",'"+get_id_empleador(modelo.getValueAt(i, 2))+"','"+new SimpleDateFormat("yyyy-MM-dd").format(new SimpleDateFormat("dd-MM-yyyy").parse(modelo.getValueAt(i, 3).toString()))+"','1900-01-01',1,'INGRESO','"+new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date())+"','"+new SimpleDateFormat("yyyy-MM-dd").format(new SimpleDateFormat("dd-MM-yyyy").parse(modelo.getValueAt(i, 3).toString()))+"','"+Main.id_usuario+"')");
+                                con.s.executeUpdate("UPDATE `t_novedades`"
+                                        + "SET `ID_EPS`='"+get_id_eps(modelo.getValueAt(i, row_eps))+"',"
+                                        + "`ID_AFP`='"+get_id_afp(modelo.getValueAt(i, row_afp))+"',"
+                                        + "`ARL_NOV`='"+modelo.getValueAt(i, row_arl)+"',"
+                                        + "`CCF_NOV`='"+modelo.getValueAt(i, row_ccf)+"',"
+                                        + "`OBS_NOV`='INGRESO>USR:"+Main.login.getText()+">FR:"+new SimpleDateFormat("dd-MM-yyyy").format(new Date())+">FI:"+modelo.getValueAt(i, 3).toString()+","+modelo.getValueAt(i, 10).toString().toUpperCase()+"',"
+                                        + "`ID_TIPO`=1"
+                                        + " WHERE ID_EMPLEADO="+modelo.getValueAt(i, row_cedula)+""
+                                        + " AND ID_EMPRESA='"+get_id_empleador(modelo.getValueAt(i, row_empleador))+"'"
+                                        + " AND FECHA_INGRESO='"+new SimpleDateFormat("yyyy-MM-dd").format(new SimpleDateFormat("dd-MM-yyyy").parse(modelo.getValueAt(i, row_f_ingreso).toString()))+"'"
+                                        + " AND FECHA_RETIRO='1900-01-01'"
+                                        + " AND ID_TIPO=3");
+                                con.s.executeUpdate("INSERT INTO `t_registro`"
+                                        + " (ID_EMPLEADO,"
+                                        + "ID_EMPRESA,"
+                                        + "F_INGRESO,"
+                                        + "F_RETIRO,"
+                                        + "ID_TIPO,"
+                                        + "REGISTRO,"
+                                        + "F_REGISTRO,"
+                                        + "FECHA,"
+                                        + "ID_USUARIO)"
+                                        + "VALUES ("+modelo.getValueAt(i, row_cedula)+","
+                                        + "'"+get_id_empleador(modelo.getValueAt(i, row_empleador))+"',"
+                                        + "'"+new SimpleDateFormat("yyyy-MM-dd").format(new SimpleDateFormat("dd-MM-yyyy").parse(modelo.getValueAt(i, row_f_ingreso).toString()))+"',"
+                                        + "'1900-01-01',"
+                                        + "1,"
+                                        + "'INGRESO',"
+                                        + "'"+new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date())+"',"
+                                        + "'"+new SimpleDateFormat("yyyy-MM-dd").format(new SimpleDateFormat("dd-MM-yyyy").parse(modelo.getValueAt(i, row_f_ingreso).toString()))+"',"
+                                        + "'"+Main.id_usuario+"')");
                                 modelo.removeRow(i);
                                 i=i-1;
                                 confirm = true;
@@ -1157,23 +1204,6 @@ class MyTableCellEditorDate extends AbstractCellEditor implements TableCellEdito
         add_ccf.setVisible(true);
     }//GEN-LAST:event_add_ccfActionPerformed
 
-    private void view_user_localStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_view_user_localStateChanged
-        // TODO add your handling code here:
-        modelo = (DefaultTableModel) jTable1.getModel();
-        if (jTable1.getRowCount()>0) {
-            int j = jTable1.getRowCount();
-            for (int i = 0; i < j; i++) {
-                modelo.removeRow(jTable1.getRowCount()-1);
-                jTable1.setModel(modelo);
-            }
-        }
-        if (view_user_local.isSelected()) {
-            load_user_preingresos(Main.login.getText());
-        }else{
-            load_all_preingresos();
-        }
-    }//GEN-LAST:event_view_user_localStateChanged
-
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
         modelo = (DefaultTableModel) jTable1.getModel();
@@ -1190,6 +1220,23 @@ class MyTableCellEditorDate extends AbstractCellEditor implements TableCellEdito
             load_all_preingresos();
         }
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void view_user_localActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_view_user_localActionPerformed
+        // TODO add your handling code here:
+        modelo = (DefaultTableModel) jTable1.getModel();
+        if (jTable1.getRowCount()>0) {
+            int j = jTable1.getRowCount();
+            for (int i = 0; i < j; i++) {
+                modelo.removeRow(jTable1.getRowCount()-1);
+                jTable1.setModel(modelo);
+            }
+        }
+        if (view_user_local.isSelected()) {
+            load_user_preingresos(Main.login.getText());
+        }else{
+            load_all_preingresos();
+        }
+    }//GEN-LAST:event_view_user_localActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1274,6 +1321,7 @@ class MyTableCellEditorDate extends AbstractCellEditor implements TableCellEdito
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
+    private javax.swing.JCheckBox sync_ARHI;
     private javax.swing.JTextField t_afp;
     private javax.swing.JTextField t_arl;
     private javax.swing.JTextField t_ccf;
@@ -1285,95 +1333,6 @@ class MyTableCellEditorDate extends AbstractCellEditor implements TableCellEdito
     private javax.swing.JTextField t_parentesco;
     private javax.swing.JCheckBox view_user_local;
     // End of variables declaration//GEN-END:variables
-public void check_empleado(){
-    ArrayList<String> ret_nov = new ArrayList<String>();
-    if (true) { //& !jTable1.isEditing()
-        modelo = (DefaultTableModel)jTable1.getModel();
-        if (check_cedula(modelo.getValueAt(jTable1.getSelectedRow(),jTable1.getSelectedColumn()))) {
-            Conexion con = new Conexion();
-            con.conexion();
-            ResultSet r;
-            ResultSet r1;
-            ResultSet r2;
-            try {
-                r = con.s.executeQuery ("SELECT COUNT(ID_EMPLEADO) FROM t_novedades WHERE ID_EMPLEADO = "+modelo.getValueAt(jTable1.getSelectedRow(),jTable1.getSelectedColumn()).toString().trim()+" AND ID_TIPO IN (1,3)");
-                if (r.next()) {
-                    if (r.getInt("COUNT(ID_EMPLEADO)")>0) {
-                        JOptionPane.showMessageDialog(this,"El empleado actualmente esta activo con varios empleadores.","Información",JOptionPane.INFORMATION_MESSAGE);
-                        ret_nov=call_sel_emp(modelo.getValueAt(jTable1.getSelectedRow(),jTable1.getSelectedColumn()).toString().trim(),"1,3,4,5");
-                        if (!ret_nov.isEmpty()) {
-                            r = con.s.executeQuery ("SELECT\n"
-                                                    + "*\n"
-                                                    + "FROM t_novedades\n"
-                                                    + "  INNER JOIN t_empleados\n"
-                                                    + "    ON (t_novedades.ID_EMPLEADO = t_empleados.ID_EMP)\n"
-                                                    + "  INNER JOIN t_empresas\n"
-                                                    + "    ON (t_novedades.ID_EMPRESA = t_empresas.ID_EMPRESA)\n"
-                                                    + "  INNER JOIN t_eps\n"
-                                                    + "    ON (t_novedades.ID_EPS = t_eps.ID_EPS)\n"
-                                                    + "  INNER JOIN t_afp\n"
-                                                    + "    ON (t_novedades.ID_AFP = t_afp.ID_AFP)\n"
-                                                    + "  INNER JOIN t_municipios\n"
-                                                    + "    ON (t_novedades.ID_MUN_NOV = t_municipios.ID_MUN)\n"
-                                                    + "  INNER JOIN t_parentesco\n"
-                                                    + "    ON (t_novedades.ID_PAR_ACU_NOV = t_parentesco.ID_PAR)\n"
-                                                    + "  INNER JOIN t_obra\n"
-                                                    + "    ON (t_novedades.ID_OBRA = t_obra.ID_OBRA)\n"
-                                                    + "  INNER JOIN t_tipo_novedad\n"
-                                                    + "    ON (t_novedades.ID_TIPO = t_tipo_novedad.ID_TIPO)\n"
-                                                    + "WHERE (t_novedades.ID_EMPLEADO = "+ret_nov.get(0)+" AND t_novedades.ID_EMPRESA = '"+ret_nov.get(1)+"' AND t_novedades.FECHA_INGRESO = '"+ret_nov.get(2)+"' AND t_novedades.FECHA_RETIRO = '"+ret_nov.get(3)+"' AND t_novedades.ID_TIPO = "+ret_nov.get(4)+")\n"
-                                                    + "ORDER BY FECHA_INGRESO DESC;");
-                            if(r.next()){
-                                modelo.setValueAt(r.getString("NOMBRE_EMPRESA"),jTable1.getSelectedRow(),1);
-                                modelo.setValueAt(new SimpleDateFormat("dd-MM-yyyy").format(new SimpleDateFormat("yyyy-MM-dd").parse(r.getString("FECHA_INGRESO"))),jTable1.getSelectedRow(),2);
-                                modelo.setValueAt(r.getString("SALARIO_NOVEDAD"),jTable1.getSelectedRow(),3);
-                                modelo.setValueAt(new SimpleDateFormat("dd-MM-yyyy").format(new SimpleDateFormat("yyyy-MM-dd").parse(r.getString("F_NAC_NOV"))),jTable1.getSelectedRow(),4);
-                                modelo.setValueAt(new SimpleDateFormat("dd-MM-yyyy").format(new SimpleDateFormat("yyyy-MM-dd").parse(r.getString("F_EXP_NOV"))),jTable1.getSelectedRow(),5);
-                                int id_obra = r.getInt("ID_OBRA");
-                                modelo.setValueAt(r.getString("DIR_EMP_NOV"),jTable1.getSelectedRow(),7);
-                                modelo.setValueAt(r.getString("BARRIO_NOV"),jTable1.getSelectedRow(),8);
-                                int id_mun = r.getInt("ID_MUN_NOV");
-                                modelo.setValueAt(r.getString("TEL_NOV"),jTable1.getSelectedRow(),10);
-                                modelo.setValueAt(r.getString("MAIL_NOV"),jTable1.getSelectedRow(),11);
-                                modelo.setValueAt(r.getString("ACUD_NOV"),jTable1.getSelectedRow(),12);
-                                modelo.setValueAt(r.getString("NOMBRE_PAR"),jTable1.getSelectedRow(),13);
-                                modelo.setValueAt(r.getString("TEL_ACUD_NOV"),jTable1.getSelectedRow(),14);
-                                modelo.setValueAt(r.getString("OBS_NOV"),jTable1.getSelectedRow(),15);
-                                r1 = con.s.executeQuery ("SELECT *\n" +
-                                                        "FROM\n" +
-                                                        "    t_obra\n" +
-                                                        "    INNER JOIN t_municipios \n" +
-                                                        "        ON (t_obra.ID_MUN_OBRA = t_municipios.ID_MUN)\n" +
-                                                        "    INNER JOIN t_departamentos \n" +
-                                                        "        ON (t_municipios.ID_DEP = t_departamentos.ID_DEP) WHERE ID_OBRA ="+id_obra);
-                                if (r1.next()) {
-                                    modelo.setValueAt(r1.getString("NOMBRE_OBRA")+"-"+r1.getString("NOMBRE_MUN")+"-"+r1.getString("NOMBRE_DEP"),jTable1.getSelectedRow(),6);
-                                }
-
-                                r2 = con.s.executeQuery ("SELECT *\n" +
-                                                            "FROM\n" +
-                                                            "    t_municipios\n" +
-                                                            "    INNER JOIN t_departamentos \n" +
-                                                            "        ON (t_municipios.ID_DEP = t_departamentos.ID_DEP) WHERE ID_MUN ="+id_mun);
-                                if (r2.next()) {
-                                    modelo.setValueAt(r2.getString("NOMBRE_MUN")+"-"+r2.getString("NOMBRE_DEP"),jTable1.getSelectedRow(),9);
-                                }
-
-                            }
-                        }
-                    }
-                }
-                con.cerrar();
-            } catch (SQLException | HeadlessException | ParseException e) {
-                con.cerrar();
-                e.printStackTrace();
-            }
-
-        }
-        //JOptionPane.showMessageDialog(null,"asd","Error",JOptionPane.ERROR_MESSAGE);
-    }
-}
-
 public  ArrayList call_sel_emp(String c, String t){
 Sel_Empleador sel=new Sel_Empleador(this,true,c,t);
 sel.setLocationRelativeTo(this);
@@ -1629,31 +1588,25 @@ public void load_all_preingresos(){
                                 + "    ON (t_novedades.ID_EPS = t_eps.ID_EPS)\n"
                                 + "  INNER JOIN t_afp\n"
                                 + "    ON (t_novedades.ID_AFP = t_afp.ID_AFP)\n"
-                                + "  INNER JOIN t_municipios\n"
-                                + "    ON (t_novedades.ID_MUN_NOV = t_municipios.ID_MUN)\n"
-                                + "  INNER JOIN t_parentesco\n"
-                                + "    ON (t_novedades.ID_PAR_ACU_NOV = t_parentesco.ID_PAR)\n"
                                 + "  INNER JOIN t_obra\n"
                                 + "    ON (t_novedades.ID_OBRA = t_obra.ID_OBRA)\n"
-                                + "  INNER JOIN t_tipo_novedad\n"
-                                + "    ON (t_novedades.ID_TIPO = t_tipo_novedad.ID_TIPO)\n"
                                 + "WHERE (t_novedades.ID_TIPO = 3)\n"
                                 + "ORDER BY ID_EMPLEADO ASC;");
         while(r.next()){
             modelo.addRow(fila);
             jTable1.setModel(modelo);
-            modelo.setValueAt(r.getString("ID_EMPLEADO"),jTable1.getRowCount()-1,0);
-            modelo.setValueAt(r.getString("NOMBRE_1_EMP")+" "+r.getString("NOMBRE_2_EMP")+" "+r.getString("APELLIDO_1_EMP")+" "+r.getString("APELLIDO_2_EMP"),jTable1.getRowCount()-1,1);
-            modelo.setValueAt(r.getString("NOMBRE_EMPRESA"),jTable1.getRowCount()-1,2);
-            modelo.setValueAt(new SimpleDateFormat("dd-MM-yyy").format(new SimpleDateFormat("yyyy-MM-dd").parse(r.getString("FECHA_INGRESO"))),jTable1.getRowCount()-1,3);
-            modelo.setValueAt(r.getString("SALARIO_NOVEDAD"),jTable1.getRowCount()-1,4);
-            modelo.setValueAt(r.getString("NOMBRE_EPS"),jTable1.getRowCount()-1,5);
-            modelo.setValueAt(r.getString("NOMBRE_AFP"),jTable1.getRowCount()-1,6);
-            modelo.setValueAt(r.getString("ARL_NOV"),jTable1.getRowCount()-1,7);
-            modelo.setValueAt(r.getString("CCF_NOV"),jTable1.getRowCount()-1,8);
-            modelo.setValueAt(r.getString("OBS_NOV"),jTable1.getRowCount()-1,10);
+            modelo.setValueAt(r.getString("ID_EMPLEADO"),jTable1.getRowCount()-1,row_cedula);
+            modelo.setValueAt(r.getString("NOMBRE_1_EMP")+" "+r.getString("NOMBRE_2_EMP")+" "+r.getString("APELLIDO_1_EMP")+" "+r.getString("APELLIDO_2_EMP"),jTable1.getRowCount()-1,row_empleado);
+            modelo.setValueAt(r.getString("NOMBRE_EMPRESA"),jTable1.getRowCount()-1,row_empleador);
+            modelo.setValueAt(new SimpleDateFormat("dd-MM-yyy").format(new SimpleDateFormat("yyyy-MM-dd").parse(r.getString("FECHA_INGRESO"))),jTable1.getRowCount()-1,row_f_ingreso);
+            modelo.setValueAt(r.getString("SALARIO_NOVEDAD"),jTable1.getRowCount()-1,row_salario);
+            modelo.setValueAt(r.getString("NOMBRE_EPS"),jTable1.getRowCount()-1,row_eps);
+            modelo.setValueAt(r.getString("NOMBRE_AFP"),jTable1.getRowCount()-1,row_afp);
+            modelo.setValueAt(r.getString("ARL_NOV"),jTable1.getRowCount()-1,row_arl);
+            modelo.setValueAt(r.getString("CCF_NOV"),jTable1.getRowCount()-1,row_ccf);
+            modelo.setValueAt(r.getString("OBS_NOV"),jTable1.getRowCount()-1,row_obs);
             String id_obra=r.getString("ID_OBRA");
-            modelo.setValueAt(load_obra(id_obra),jTable1.getRowCount()-1,9);
+            modelo.setValueAt(load_obra(id_obra),jTable1.getRowCount()-1,row_obra);
         }
         con.cerrar();
     }catch(SQLException | ParseException j){
@@ -1680,32 +1633,26 @@ public void load_user_preingresos(String user){
                                 + "    ON (t_novedades.ID_EPS = t_eps.ID_EPS)\n"
                                 + "  INNER JOIN t_afp\n"
                                 + "    ON (t_novedades.ID_AFP = t_afp.ID_AFP)\n"
-                                + "  INNER JOIN t_municipios\n"
-                                + "    ON (t_novedades.ID_MUN_NOV = t_municipios.ID_MUN)\n"
-                                + "  INNER JOIN t_parentesco\n"
-                                + "    ON (t_novedades.ID_PAR_ACU_NOV = t_parentesco.ID_PAR)\n"
                                 + "  INNER JOIN t_obra\n"
                                 + "    ON (t_novedades.ID_OBRA = t_obra.ID_OBRA)\n"
-                                + "  INNER JOIN t_tipo_novedad\n"
-                                + "    ON (t_novedades.ID_TIPO = t_tipo_novedad.ID_TIPO)\n"
                                 + "WHERE (t_novedades.ID_TIPO = 3)\n"
-                                + "AND t_novedades.OBS_NOV LIKE '%PREINGRESO>"+user+"%'"
+                                + "AND t_novedades.OBS_NOV LIKE '%PREINGRESO>USR:"+user+"%'"
                                 + "ORDER BY FECHA_INGRESO DESC;");
         while(r.next()){
             modelo.addRow(fila);
             jTable1.setModel(modelo);
-            modelo.setValueAt(r.getString("ID_EMPLEADO"),jTable1.getRowCount()-1,0);
-            modelo.setValueAt(r.getString("NOMBRE_1_EMP")+" "+r.getString("NOMBRE_2_EMP")+" "+r.getString("APELLIDO_1_EMP")+" "+r.getString("APELLIDO_2_EMP"),jTable1.getRowCount()-1,1);
-            modelo.setValueAt(r.getString("NOMBRE_EMPRESA"),jTable1.getRowCount()-1,2);
-            modelo.setValueAt(new SimpleDateFormat("dd-MM-yyy").format(new SimpleDateFormat("yyyy-MM-dd").parse(r.getString("FECHA_INGRESO"))),jTable1.getRowCount()-1,3);
-            modelo.setValueAt(r.getString("SALARIO_NOVEDAD"),jTable1.getRowCount()-1,4);
-            modelo.setValueAt(r.getString("NOMBRE_EPS"),jTable1.getRowCount()-1,5);
-            modelo.setValueAt(r.getString("NOMBRE_AFP"),jTable1.getRowCount()-1,6);
-            modelo.setValueAt(r.getString("ARL_NOV"),jTable1.getRowCount()-1,7);
-            modelo.setValueAt(r.getString("CCF_NOV"),jTable1.getRowCount()-1,8);
-            modelo.setValueAt(r.getString("OBS_NOV"),jTable1.getRowCount()-1,10);
+            modelo.setValueAt(r.getString("ID_EMPLEADO"),jTable1.getRowCount()-1,row_cedula);
+            modelo.setValueAt(r.getString("NOMBRE_1_EMP")+" "+r.getString("NOMBRE_2_EMP")+" "+r.getString("APELLIDO_1_EMP")+" "+r.getString("APELLIDO_2_EMP"),jTable1.getRowCount()-1,row_empleado);
+            modelo.setValueAt(r.getString("NOMBRE_EMPRESA"),jTable1.getRowCount()-1,row_empleador);
+            modelo.setValueAt(new SimpleDateFormat("dd-MM-yyy").format(new SimpleDateFormat("yyyy-MM-dd").parse(r.getString("FECHA_INGRESO"))),jTable1.getRowCount()-1,row_f_ingreso);
+            modelo.setValueAt(r.getString("SALARIO_NOVEDAD"),jTable1.getRowCount()-1,row_salario);
+            modelo.setValueAt(r.getString("NOMBRE_EPS"),jTable1.getRowCount()-1,row_eps);
+            modelo.setValueAt(r.getString("NOMBRE_AFP"),jTable1.getRowCount()-1,row_afp);
+            modelo.setValueAt(r.getString("ARL_NOV"),jTable1.getRowCount()-1,row_arl);
+            modelo.setValueAt(r.getString("CCF_NOV"),jTable1.getRowCount()-1,row_ccf);
+            modelo.setValueAt(r.getString("OBS_NOV"),jTable1.getRowCount()-1,row_obs);
             String id_obra=r.getString("ID_OBRA");
-            modelo.setValueAt(load_obra(id_obra),jTable1.getRowCount()-1,9);
+            modelo.setValueAt(load_obra(id_obra),jTable1.getRowCount()-1,row_obra);
         }
         con.cerrar();
     }catch(SQLException | ParseException j){
@@ -2157,13 +2104,12 @@ public boolean check_ccf(Object ccf){
 public boolean check_field (Object field){
 boolean ret=false;
     if (field!=null) {
-        if (chech_char(field.toString().trim(),"'$%&()=*+[]{}")) {
+        if (chech_char(field.toString().trim(),"'$%&()=*+[]{}/")) {
             if (!field.toString().equals("")) {
                ret=true;
             }
         }
     }
-
 return ret;
 }
 public boolean check_field_dir (Object field){
@@ -2211,86 +2157,95 @@ return true;
 
 }
 public boolean verify_data(){
-    boolean ret=false;
+    boolean ret=true;
     modelo = (DefaultTableModel)jTable1.getModel(); 
     if (jTable1.getRowCount()>0) {
         for (int i = 0; i < jTable1.getRowCount(); i++) {
-            if (modelo.getValueAt(i, 5)==null) {
-                modelo.setValueAt("NO ASIGNADA", i, 5);
+            if (modelo.getValueAt(i, row_eps)==null) {
+                modelo.setValueAt("NO ASIGNADA", i, row_eps);
             }else{
-                if (modelo.getValueAt(i, 5).toString().equals("")){
-                    modelo.setValueAt("NO ASIGNADA", i, 5);
+                if (modelo.getValueAt(i, row_eps).toString().equals("")){
+                    modelo.setValueAt("NO ASIGNADA", i, row_eps);
                 }
             }
-            if (modelo.getValueAt(i, 6)==null) {
-                modelo.setValueAt("NO ASIGNADA", i, 6);
+            if (modelo.getValueAt(i, row_afp)==null) {
+                modelo.setValueAt("NO ASIGNADA", i, row_afp);
             }else{
-                if (modelo.getValueAt(i, 6).toString().equals("")){
-                    modelo.setValueAt("NO ASIGNADA", i, 6);
+                if (modelo.getValueAt(i, row_afp).toString().equals("")){
+                    modelo.setValueAt("NO ASIGNADA", i, row_afp);
                 }
             }
-            if (modelo.getValueAt(i, 7)==null) {
-                modelo.setValueAt("NO ASIGNADA", i, 7);
+            if (modelo.getValueAt(i, row_arl)==null) {
+                modelo.setValueAt("NO ASIGNADA", i, row_arl);
             }else{
-                if (modelo.getValueAt(i, 7).toString().equals("")){
-                    modelo.setValueAt("NO ASIGNADA", i, 7);
+                if (modelo.getValueAt(i, row_arl).toString().equals("")){
+                    modelo.setValueAt("NO ASIGNADA", i, row_arl);
                 }
             }
-            if (modelo.getValueAt(i, 8)==null) {
-                modelo.setValueAt("NO ASIGNADA", i, 8);
+            if (modelo.getValueAt(i, row_ccf)==null) {
+                modelo.setValueAt("NO ASIGNADA", i, row_ccf);
             }else{
-                if (modelo.getValueAt(i, 8).toString().equals("")){
-                    modelo.setValueAt("NO ASIGNADA", i, 8);
+                if (modelo.getValueAt(i, row_ccf).toString().equals("")){
+                    modelo.setValueAt("NO ASIGNADA", i, row_ccf);
                 }
             }
-            if (modelo.getValueAt(i, 10)==null) {
-                modelo.setValueAt("Sin observaciones", i, 10);
+            if (modelo.getValueAt(i, row_obs)==null) {
+                modelo.setValueAt("Sin observaciones", i, row_obs);
             }else{
-                if (modelo.getValueAt(i, 10).toString().equals("")){
-                    modelo.setValueAt("Sin observaciones", i, 10);
+                if (modelo.getValueAt(i, row_obs).toString().equals("")){
+                    modelo.setValueAt("Sin observaciones", i, row_obs);
                 }
             }
         }
         for (int i = 0; i < jTable1.getRowCount(); i++) {
-            if (check_eps(modelo.getValueAt(i, 5))) {
-                if (check_afp(modelo.getValueAt(i, 6))) {
-                    if (check_arl(modelo.getValueAt(i, 7))) {
-                        if (check_ccf(modelo.getValueAt(i, 8))) {
-                            if (check_field(modelo.getValueAt(i, 10))) {//observaciones
-                                ret=true;
+            if (check_eps(modelo.getValueAt(i, row_eps))) {
+                if (check_afp(modelo.getValueAt(i, row_afp))) {
+                    if (check_arl(modelo.getValueAt(i, row_arl))) {
+                        if (check_ccf(modelo.getValueAt(i, row_ccf))) {
+                            if (check_field(modelo.getValueAt(i, row_obs))) {//observaciones
+//                                if (!sync_ARHI.isSelected()|search_info(modelo.getValueAt(i, 0).toString())) {//verifica que el empleado tenga info sociodemografica
+//                                    
+//                                } else {
+//                                    jTable1.changeSelection(i,0, false, false);
+//                                    jTable1.requestFocus();
+//                                    JOptionPane.showMessageDialog(this,"Para ingresar los datos a ARHI es necesario que\neste empleado cuente con información sociodemográfica ingresada","Error",JOptionPane.ERROR_MESSAGE);
+//                                    ret=false&ret;
+//                                    break;
+//                                }
+                                ret=true&ret;
                             } else {
-                                jTable1.changeSelection(i,14, false, false);
+                                jTable1.changeSelection(i,row_obs, false, false);
                                 jTable1.requestFocus();
-                                JOptionPane.showMessageDialog(this,"Verifique las observaciones del Acudiente del empleado","Error",JOptionPane.ERROR_MESSAGE);
-                                ret=false;
+                                JOptionPane.showMessageDialog(this,"Verifique las observaciones del empleado","Error",JOptionPane.ERROR_MESSAGE);
+                                ret=false&ret;
                                 break;
                             }
                         } else {
-                            jTable1.changeSelection(i,8, false, false);
+                            jTable1.changeSelection(i,row_ccf, false, false);
                             jTable1.requestFocus();
-                            JOptionPane.showMessageDialog(this,"Verifique lsa CCF del Acudiente del empleado","Error",JOptionPane.ERROR_MESSAGE);
-                            ret=false;
+                            JOptionPane.showMessageDialog(this,"Verifique la CCF del empleado","Error",JOptionPane.ERROR_MESSAGE);
+                            ret=false&ret;
                             break;
                         }
                     } else {
-                        jTable1.changeSelection(i,7, false, false);
+                        jTable1.changeSelection(i,row_arl, false, false);
                         jTable1.requestFocus();
                         JOptionPane.showMessageDialog(this,"Verifique la ARL del empleado","Error",JOptionPane.ERROR_MESSAGE);
-                        ret=false;
+                        ret=false&ret;
                         break;
                     }
                 } else {
-                    jTable1.changeSelection(i,6, false, false);
+                    jTable1.changeSelection(i,row_afp, false, false);
                     jTable1.requestFocus();
                     JOptionPane.showMessageDialog(this,"Verifique la AFP del empleado","Error",JOptionPane.ERROR_MESSAGE);
-                    ret=false;
+                    ret=false&ret;
                     break;
                 }
             } else {
-                jTable1.changeSelection(i,5, false, false);
+                jTable1.changeSelection(i,row_eps, false, false);
                 jTable1.requestFocus();
                 JOptionPane.showMessageDialog(this,"Verifique la EPS del empleado","Error",JOptionPane.ERROR_MESSAGE);
-                ret=false;
+                ret=false&ret;
                 break;
             }
         }
@@ -2506,7 +2461,20 @@ public String get_id_ccf(Object ccf){
     }
     return i;
 }
-
+public boolean search_info(String ced){
+    Conexion con = new Conexion();
+    con.conexion();
+    ResultSet r;
+    boolean ret=false;
+    try{    r = con.s.executeQuery ("SELECT * FROM t_info_sociodemografica WHERE ID_EMP = "+ced);
+            ret = r.next();
+            con.cerrar();
+    }catch(SQLException j){
+        con.cerrar();
+        JOptionPane.showMessageDialog(null,j,"Error",JOptionPane.ERROR_MESSAGE);
+    }
+    return ret;
+}
 
 public static String getStackTrace(Exception e) {
         StringWriter sWriter = new StringWriter();

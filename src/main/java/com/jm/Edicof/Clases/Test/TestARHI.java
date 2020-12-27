@@ -5,6 +5,10 @@
  */
 package com.jm.Edicof.Clases.Test;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import org.apache.http.Header;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpHeaders;
@@ -21,6 +25,7 @@ import org.apache.http.util.EntityUtils;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
 
 
 /**
@@ -41,6 +46,7 @@ public class TestARHI {
 
             System.out.println("Testing 2 - Send Http POST request");
             obj.sendPost();
+            
         } finally {
             obj.close();
         }
@@ -50,31 +56,36 @@ public class TestARHI {
         httpClient.close();
     }
 
-    private void sendGet() throws Exception {
-
-        HttpGet request = new HttpGet("https://www.google.com/search?q=mkyong");
-
+    private JsonArray sendGet() throws Exception {
+        
+        JsonArray jsonArray=null;
+        HttpGet request = new HttpGet("http://190.84.50.115:8080/awebservicearhi/webresources/entidad.wsrechumano");
         // add request headers
-        request.addHeader("custom-key", "mkyong");
-        request.addHeader(HttpHeaders.USER_AGENT, "Googlebot");
-
+        request.addHeader("AUTHORIZATION", "F50B2000C84C66EA1707502AFB8B8A493D7EB5CA0B4DAB1045310141B3F3F5A1");
+        //request.addHeader(HttpHeaders.USER_AGENT, "Googlebot");
         try (CloseableHttpResponse response = httpClient.execute(request)) {
-
             // Get HttpResponse Status
-            System.out.println(response.getStatusLine().toString());
-
-            HttpEntity entity = response.getEntity();
-            Header headers = entity.getContentType();
-            System.out.println(headers);
-
-            if (entity != null) {
-                // return it as a String
-                String result = EntityUtils.toString(entity);
-                System.out.println(result);
+            System.out.println("Status: "+response.getStatusLine().getStatusCode());
+            if (response.getStatusLine().getStatusCode()==200) {
+                HttpEntity entity = response.getEntity();
+//            Header headers = entity.getContentType();
+//            System.out.println("Headers: "+headers);
+                if (entity != null) {
+                    // return it as a String
+                    String result = EntityUtils.toString(entity);
+                    JsonParser jsonParser = new JsonParser();
+                    jsonArray = jsonParser.parse(result).getAsJsonArray();
+                    System.out.println("Result: "+jsonArray);
+                    for (int i = 0; i < jsonArray.size(); i++){
+                        System.out.println("json"+i+": "+jsonArray.get(i));
+                    }
+                    
+                }
             }
+            
 
         }
-
+        return jsonArray;
     }
 
     private void sendPost() throws Exception {

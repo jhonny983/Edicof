@@ -678,8 +678,9 @@
                     <Component class="javax.swing.JTable" name="jTable1">
                       <Properties>
                         <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                          <Table columnCount="22" rowCount="1">
+                          <Table columnCount="13" rowCount="1">
                             <Column editable="true" title="Cedula*" type="java.lang.Object"/>
+                            <Column editable="false" title="Empleado" type="java.lang.Object"/>
                             <Column editable="false" title="Empleador (Nombre)" type="java.lang.Object"/>
                             <Column editable="false" title="F Ingreso (DD-MM-AAAA)" type="java.lang.Object"/>
                             <Column editable="true" title="F Retiro (DD-MM-AAAA)" type="java.lang.Object"/>
@@ -688,17 +689,7 @@
                             <Column editable="false" title="AFP (Nombre)" type="java.lang.Object"/>
                             <Column editable="false" title="ARL (Nombre)" type="java.lang.Object"/>
                             <Column editable="false" title="CCF (Nombre)" type="java.lang.Object"/>
-                            <Column editable="false" title="F Nacimiento (DD-MM-AAAA)" type="java.lang.Object"/>
-                            <Column editable="false" title="F Expedicion (DD-MM-AAAA)" type="java.lang.Object"/>
                             <Column editable="false" title="Obra" type="java.lang.Object"/>
-                            <Column editable="false" title="Direccion" type="java.lang.Object"/>
-                            <Column editable="false" title="Barrio" type="java.lang.Object"/>
-                            <Column editable="false" title="Municipio" type="java.lang.Object"/>
-                            <Column editable="false" title="Telefono" type="java.lang.Object"/>
-                            <Column editable="false" title="Correo" type="java.lang.Object"/>
-                            <Column editable="false" title="Acudiente" type="java.lang.Object"/>
-                            <Column editable="false" title="Parentesco" type="java.lang.Object"/>
-                            <Column editable="false" title="Telefono Acudiente" type="java.lang.Object"/>
                             <Column editable="true" title="Observaciones*" type="java.lang.Object"/>
                             <Column editable="false" title="Tipo" type="java.lang.Object"/>
                           </Table>
@@ -708,6 +699,11 @@
                         <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
                           <TableColumnModel selectionModel="0">
                             <Column maxWidth="80" minWidth="80" prefWidth="80" resizable="true">
+                              <Title/>
+                              <Editor/>
+                              <Renderer/>
+                            </Column>
+                            <Column maxWidth="250" minWidth="250" prefWidth="250" resizable="true">
                               <Title/>
                               <Editor/>
                               <Renderer/>
@@ -752,57 +748,7 @@
                               <Editor/>
                               <Renderer/>
                             </Column>
-                            <Column maxWidth="160" minWidth="160" prefWidth="160" resizable="true">
-                              <Title/>
-                              <Editor/>
-                              <Renderer/>
-                            </Column>
-                            <Column maxWidth="160" minWidth="160" prefWidth="160" resizable="true">
-                              <Title/>
-                              <Editor/>
-                              <Renderer/>
-                            </Column>
                             <Column maxWidth="200" minWidth="200" prefWidth="200" resizable="true">
-                              <Title/>
-                              <Editor/>
-                              <Renderer/>
-                            </Column>
-                            <Column maxWidth="150" minWidth="150" prefWidth="150" resizable="true">
-                              <Title/>
-                              <Editor/>
-                              <Renderer/>
-                            </Column>
-                            <Column maxWidth="150" minWidth="150" prefWidth="150" resizable="true">
-                              <Title/>
-                              <Editor/>
-                              <Renderer/>
-                            </Column>
-                            <Column maxWidth="150" minWidth="150" prefWidth="150" resizable="true">
-                              <Title/>
-                              <Editor/>
-                              <Renderer/>
-                            </Column>
-                            <Column maxWidth="80" minWidth="80" prefWidth="80" resizable="true">
-                              <Title/>
-                              <Editor/>
-                              <Renderer/>
-                            </Column>
-                            <Column maxWidth="150" minWidth="150" prefWidth="150" resizable="true">
-                              <Title/>
-                              <Editor/>
-                              <Renderer/>
-                            </Column>
-                            <Column maxWidth="150" minWidth="150" prefWidth="150" resizable="true">
-                              <Title/>
-                              <Editor/>
-                              <Renderer/>
-                            </Column>
-                            <Column maxWidth="80" minWidth="80" prefWidth="80" resizable="true">
-                              <Title/>
-                              <Editor/>
-                              <Renderer/>
-                            </Column>
-                            <Column maxWidth="150" minWidth="150" prefWidth="150" resizable="true">
                               <Title/>
                               <Editor/>
                               <Renderer/>

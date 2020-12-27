@@ -124,7 +124,7 @@ public class Edd_EPS extends javax.swing.JDialog {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(50, 50, 50)
+                .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1)
                     .addComponent(jLabel2)
@@ -137,7 +137,7 @@ public class Edd_EPS extends javax.swing.JDialog {
                         .addComponent(codigo_eps)
                         .addComponent(busc_eps)
                         .addComponent(nombre_eps, javax.swing.GroupLayout.DEFAULT_SIZE, 347, Short.MAX_VALUE)))
-                .addContainerGap(67, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -211,11 +211,11 @@ public class Edd_EPS extends javax.swing.JDialog {
         // TODO add your handling code here:
         char a=evt.getKeyChar();
         a = Character.toUpperCase(a);
-        if (a!=KeyEvent.VK_PERIOD & a!=KeyEvent.VK_MINUS & a!=KeyEvent.VK_SPACE) {
-            if(!(a>=KeyEvent.VK_A && a<=KeyEvent.VK_Z)& a!=209) {
-                evt.consume();
-            }
-        }
+//        if (a!=KeyEvent.VK_PERIOD & a!=KeyEvent.VK_MINUS & a!=KeyEvent.VK_SPACE) {
+//            if(!(a>=KeyEvent.VK_A && a<=KeyEvent.VK_Z)& a!=209) {
+//                evt.consume();
+//            }
+//        }
         if(nombre_eps.getText().length()>50){
             evt.consume();
         }
@@ -225,24 +225,30 @@ public class Edd_EPS extends javax.swing.JDialog {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         if (!busc_eps.getText().equals("")) {
-            if (!nombre_eps.getText().equals("")) {
-                if (!nuevo_codigo_eps.getText().equals("")) {
+            if (check_field (nombre_eps.getText())) {
+                if (check_field (nuevo_codigo_eps.getText())) {
                     Conexion con = new Conexion();
                     con.conexion();
                     ResultSet r;
                     try {
                         r = con.s.executeQuery ("SELECT * FROM `t_eps` WHERE NOMBRE_EPS = '"+nombre_eps.getText().toUpperCase()+"'");
-                        if(r.next()){
+                        if(r.next() & !busc_eps.getText().equals(nombre_eps.getText())){
                             JOptionPane.showMessageDialog(this,"La EPS que intenta ingresar ya existe","Error",JOptionPane.ERROR_MESSAGE);
                         }
                         else{
-                            int conf = JOptionPane.showConfirmDialog(this,"Esta seguro que desea continuar?","Confirmación",JOptionPane.OK_CANCEL_OPTION,JOptionPane.QUESTION_MESSAGE);
-                            if (conf == JOptionPane.YES_OPTION) {
-                                con.s.executeUpdate("UPDATE `t_eps` SET `NOMBRE_EPS`='"+nombre_eps.getText().toUpperCase()+"', `CODIGO_EPS`= "+nuevo_codigo_eps.getText().toUpperCase()+" WHERE `NOMBRE_EPS`='"+busc_eps.getText().toUpperCase()+"'");
-                                JOptionPane.showMessageDialog(this,"La EPS fue ingresada correctamente","Información",JOptionPane.INFORMATION_MESSAGE);
-                                con.cerrar();
-                                this.dispose();
+                            r = con.s.executeQuery ("SELECT * FROM `t_eps` WHERE ID_EPS = '"+nuevo_codigo_eps.getText().trim().toUpperCase()+"'");
+                            if(r.next() & !codigo_eps.getText().equals(nuevo_codigo_eps.getText())){
+                                JOptionPane.showMessageDialog(this,"La EPS que intenta ingresar ya existe","Error",JOptionPane.ERROR_MESSAGE);
+                            }else{
+                                int conf = JOptionPane.showConfirmDialog(this,"Esta seguro que desea continuar?","Confirmación",JOptionPane.OK_CANCEL_OPTION,JOptionPane.QUESTION_MESSAGE);
+                                if (conf == JOptionPane.YES_OPTION) {
+                                    con.s.executeUpdate("UPDATE `t_eps` SET `NOMBRE_EPS`='"+nombre_eps.getText().toUpperCase()+"', `ID_EPS`= '"+nuevo_codigo_eps.getText().toUpperCase()+"' WHERE `NOMBRE_EPS`='"+busc_eps.getText().toUpperCase()+"'");
+                                    JOptionPane.showMessageDialog(this,"La EPS fue ingresada correctamente","Información",JOptionPane.INFORMATION_MESSAGE);
+                                    con.cerrar();
+                                    this.dispose();
+                                }
                             }
+                            
                         }
                         con.cerrar();
                     } catch (SQLException | HeadlessException e) {
@@ -251,10 +257,10 @@ public class Edd_EPS extends javax.swing.JDialog {
                         JOptionPane.showMessageDialog(this,e,"Error",JOptionPane.ERROR_MESSAGE);
                     }
                 }else{
-                    JOptionPane.showMessageDialog(this,"Digite el nuevo codigo de la EPS que desea modificar","Error",JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(this,"Verifique que el nuevo codigo de la EPS no este vacio ni contenga caracteres especiales.","Error",JOptionPane.ERROR_MESSAGE);
                 }
             } else {
-                JOptionPane.showMessageDialog(this,"Digite el nuevo nombre de la EPS que desea modificar","Error",JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this,"Verifique que el nuevo nombre de la EPS no este vacio ni contenga caracteres especiales.","Error",JOptionPane.ERROR_MESSAGE);
             }
         } else {
             JOptionPane.showMessageDialog(this,"Digite el nombre de la EPS que desea modificar","Error",JOptionPane.ERROR_MESSAGE);
@@ -372,7 +378,7 @@ public void load_data(String eps){
             r = con.s.executeQuery ("SELECT * FROM `t_eps` WHERE NOMBRE_EPS = '"+eps+"'");
             if (r.next()) {
                 nombre_eps.setText(r.getString("NOMBRE_EPS"));
-                codigo_eps.setText(r.getString("CODIGO_EPS"));
+                codigo_eps.setText(r.getString("ID_EPS"));
                 nuevo_codigo_eps.setText(codigo_eps.getText());
             }
             con.cerrar();
@@ -386,5 +392,31 @@ public void load_data(String eps){
         nombre_eps.setText("");
         
     }
+}
+public boolean check_field (Object field){
+boolean ret=false;
+    if (field!=null) {
+        if (!field.toString().trim().equals("")) {
+            if (chech_char(field.toString().trim(),"'$%&()=?¡¿/*+[]{};:<>,-")) {
+                if (!field.toString().equals("")) {
+                   ret=true;
+                }
+            } 
+        }
+    }
+return ret;
+}
+public boolean chech_char(String s, String c){
+    //boolean ret=false;
+    char []char_s=s.toCharArray();
+    char []char_c=c.toCharArray();  
+    for (int i = 0; i < char_s.length; i++) {
+        for (int j = 0; j < char_c.length; j++) {
+            if (char_s[i]==char_c[j]) {
+                return false;
+            }
+        }
+    }
+    return true;
 }
 }

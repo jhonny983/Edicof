@@ -21,21 +21,9 @@
      t_novedades.`FECHA_INGRESO` AS t_novedades_FECHA_INGRESO,
      t_novedades.`FECHA_RETIRO` AS t_novedades_FECHA_RETIRO,
      t_novedades.`SALARIO_NOVEDAD` AS t_novedades_SALARIO_NOVEDAD,
-     t_novedades.`ID_EPS` AS t_novedades_ID_EPS,
-     t_novedades.`ID_AFP` AS t_novedades_ID_AFP,
-     t_novedades.`ARL_NOV` AS t_novedades_ARL_NOV,
-     t_novedades.`CCF_NOV` AS t_novedades_CCF_NOV,
-     t_novedades.`F_NAC_NOV` AS t_novedades_F_NAC_NOV,
-     t_novedades.`F_EXP_NOV` AS t_novedades_F_EXP_NOV,
-     t_novedades.`DIR_EMP_NOV` AS t_novedades_DIR_EMP_NOV,
-     t_novedades.`BARRIO_NOV` AS t_novedades_BARRIO_NOV,
-     t_novedades.`ID_MUN_NOV` AS t_novedades_ID_MUN_NOV,
-     t_novedades.`TEL_NOV` AS t_novedades_TEL_NOV,
+     t_empleados.`FECHA_NAC` AS t_novedades_F_NAC_NOV,
+     t_info_sociodemografica.`TEL_CEL_EMP` AS t_novedades_TEL_NOV,
      t_novedades.`MAIL_NOV` AS t_novedades_MAIL_NOV,
-     t_novedades.`ACUD_NOV` AS t_novedades_ACUD_NOV,
-     t_novedades.`ID_PAR_ACU_NOV` AS t_novedades_ID_PAR_ACU_NOV,
-     t_novedades.`TEL_ACUD_NOV` AS t_novedades_TEL_ACUD_NOV,
-     t_novedades.`OBS_NOV` AS t_novedades_OBS_NOV,
      t_novedades.`ID_OBRA` AS t_novedades_ID_OBRA,
      t_novedades.`ID_TIPO` AS t_novedades_ID_TIPO,
      t_obra.`NOMBRE_OBRA` AS t_obra_NOMBRE_OBRA,
@@ -52,6 +40,8 @@
      t_obra.`ID_MUN_OBRA` AS t_obra_ID_MUN_OBRA
 FROM
 t_novedades
+INNER JOIN  t_info_sociodemografica 
+	ON (t_info_sociodemografica.ID_EMP = t_novedades.ID_EMPLEADO)
 INNER JOIN t_obra 
 	ON (t_novedades.ID_OBRA = t_obra.ID_OBRA)
 INNER JOIN t_municipios 
@@ -76,21 +66,9 @@ ORDER BY
 	<field name="t_novedades_FECHA_INGRESO" class="java.sql.Date"/>
 	<field name="t_novedades_FECHA_RETIRO" class="java.sql.Date"/>
 	<field name="t_novedades_SALARIO_NOVEDAD" class="java.lang.Float"/>
-	<field name="t_novedades_ID_EPS" class="java.lang.Integer"/>
-	<field name="t_novedades_ID_AFP" class="java.lang.Integer"/>
-	<field name="t_novedades_ARL_NOV" class="java.lang.String"/>
-	<field name="t_novedades_CCF_NOV" class="java.lang.String"/>
 	<field name="t_novedades_F_NAC_NOV" class="java.sql.Date"/>
-	<field name="t_novedades_F_EXP_NOV" class="java.sql.Date"/>
-	<field name="t_novedades_DIR_EMP_NOV" class="java.lang.String"/>
-	<field name="t_novedades_BARRIO_NOV" class="java.lang.String"/>
-	<field name="t_novedades_ID_MUN_NOV" class="java.lang.Integer"/>
 	<field name="t_novedades_TEL_NOV" class="java.lang.String"/>
 	<field name="t_novedades_MAIL_NOV" class="java.lang.String"/>
-	<field name="t_novedades_ACUD_NOV" class="java.lang.String"/>
-	<field name="t_novedades_ID_PAR_ACU_NOV" class="java.lang.Integer"/>
-	<field name="t_novedades_TEL_ACUD_NOV" class="java.lang.String"/>
-	<field name="t_novedades_OBS_NOV" class="java.lang.String"/>
 	<field name="t_novedades_ID_OBRA" class="java.lang.Integer"/>
 	<field name="t_novedades_ID_TIPO" class="java.lang.Integer"/>
 	<field name="t_obra_NOMBRE_OBRA" class="java.lang.String"/>

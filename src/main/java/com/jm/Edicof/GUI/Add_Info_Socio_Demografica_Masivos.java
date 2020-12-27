@@ -128,13 +128,13 @@ public class Add_Info_Socio_Demografica_Masivos extends javax.swing.JDialog {
         info_soci_demo.getColumnModel().getColumn(3).setCellEditor(new MyTableCellEditorDate(tb_mun_table,true));
         info_soci_demo.getColumnModel().getColumn(4).setCellEditor(new MyTableCellEditorDate(tb_barrio_table,true));
         info_soci_demo.getColumnModel().getColumn(6).setCellEditor(new MyTableCellEditorDate(tb_tip_viv_table,true));
-        info_soci_demo.getColumnModel().getColumn(7).setCellEditor(new MyTableCellEditorDate(tb_area_trabajo_table,true));
-        info_soci_demo.getColumnModel().getColumn(8).setCellEditor(new MyTableCellEditorDate(tb_cargo_table,true));
-        info_soci_demo.getColumnModel().getColumn(9).setCellEditor(new MyTableCellEditorDate(tb_est_civil_table,true));
-        info_soci_demo.getColumnModel().getColumn(11).setCellEditor(new MyTableCellEditorDate(tb_niv_academico_table,true));
-        info_soci_demo.getColumnModel().getColumn(12).setCellEditor(new MyTableCellEditorDate(tb_nacionalidad_table,true));
-        info_soci_demo.getColumnModel().getColumn(18).setCellEditor(new MyTableCellEditorDate(tb_parentesco_table,true));
-        info_soci_demo.getColumnModel().getColumn(22).setCellEditor(new MyTableCellEditorDate(tb_ahorro_table,true));
+//        info_soci_demo.getColumnModel().getColumn(7).setCellEditor(new MyTableCellEditorDate(tb_area_trabajo_table,true));
+//        info_soci_demo.getColumnModel().getColumn(8).setCellEditor(new MyTableCellEditorDate(tb_cargo_table,true));
+        info_soci_demo.getColumnModel().getColumn(7).setCellEditor(new MyTableCellEditorDate(tb_est_civil_table,true));
+        info_soci_demo.getColumnModel().getColumn(9).setCellEditor(new MyTableCellEditorDate(tb_niv_academico_table,true));
+        //info_soci_demo.getColumnModel().getColumn(12).setCellEditor(new MyTableCellEditorDate(tb_nacionalidad_table,true));
+        info_soci_demo.getColumnModel().getColumn(15).setCellEditor(new MyTableCellEditorDate(tb_parentesco_table,true));
+        info_soci_demo.getColumnModel().getColumn(20).setCellEditor(new MyTableCellEditorDate(tb_ahorro_table,true));
         perm_tabla=true;
         
     }
@@ -423,15 +423,14 @@ class MyTableCellEditorDate extends AbstractCellEditor implements TableCellEdito
         new PegarExcel(info_soci_demo);
         info_soci_demo.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Id*", "Direccion*", "Tel/Cel*", "Municipio Residencia*", "Barrio*", "Estrato*", "Tipo Vivienda*", "Area Trabajo*", "Cargo*", "Estado Civil*", "No Hijos*", "Nivel Academico*", "Nacionalidad*", "Personas a Cargo*", "Personas en el Hogar*", "Aportantes Hogar*", "Nombre Acudiente*", "Tel/Cel Acudiente*", "Parentesco Acudiente*", "Productos Financieros*", "Tiempo Libre*", "Servicios Publicos*", "Ahorro*", "Fuente Ahorro*"
+                "Id*", "Direccion*", "Tel/Cel*", "Municipio Residencia*", "Barrio*", "Estrato*", "Tipo Vivienda*", "Estado Civil*", "No Hijos*", "Nivel Academico*", "Personas a Cargo*", "Personas en el Hogar*", "Aportantes Hogar*", "Nombre Acudiente*", "Tel/Cel Acudiente*", "Parentesco Acudiente*", "Productos Financieros*", "Tiempo Libre*", "Servicios Publicos*", "Ahorro*", "Fuente Ahorro*"
             }
         ));
         info_soci_demo.setToolTipText("");
         info_soci_demo.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
-        info_soci_demo.setCellSelectionEnabled(true);
         info_soci_demo.setComponentPopupMenu(jPopupMenu1);
         info_soci_demo.getTableHeader().setReorderingAllowed(false);
         info_soci_demo.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -465,27 +464,27 @@ class MyTableCellEditorDate extends AbstractCellEditor implements TableCellEdito
             info_soci_demo.getColumnModel().getColumn(6).setMinWidth(150);
             info_soci_demo.getColumnModel().getColumn(6).setPreferredWidth(150);
             info_soci_demo.getColumnModel().getColumn(6).setMaxWidth(150);
-            info_soci_demo.getColumnModel().getColumn(7).setMinWidth(160);
-            info_soci_demo.getColumnModel().getColumn(7).setPreferredWidth(160);
-            info_soci_demo.getColumnModel().getColumn(7).setMaxWidth(160);
-            info_soci_demo.getColumnModel().getColumn(8).setMinWidth(250);
-            info_soci_demo.getColumnModel().getColumn(8).setPreferredWidth(250);
-            info_soci_demo.getColumnModel().getColumn(8).setMaxWidth(250);
-            info_soci_demo.getColumnModel().getColumn(9).setMinWidth(100);
-            info_soci_demo.getColumnModel().getColumn(9).setPreferredWidth(100);
-            info_soci_demo.getColumnModel().getColumn(9).setMaxWidth(100);
-            info_soci_demo.getColumnModel().getColumn(10).setMinWidth(100);
-            info_soci_demo.getColumnModel().getColumn(10).setPreferredWidth(100);
-            info_soci_demo.getColumnModel().getColumn(10).setMaxWidth(100);
+            info_soci_demo.getColumnModel().getColumn(7).setMinWidth(100);
+            info_soci_demo.getColumnModel().getColumn(7).setPreferredWidth(100);
+            info_soci_demo.getColumnModel().getColumn(7).setMaxWidth(100);
+            info_soci_demo.getColumnModel().getColumn(8).setMinWidth(100);
+            info_soci_demo.getColumnModel().getColumn(8).setPreferredWidth(100);
+            info_soci_demo.getColumnModel().getColumn(8).setMaxWidth(100);
+            info_soci_demo.getColumnModel().getColumn(9).setMinWidth(150);
+            info_soci_demo.getColumnModel().getColumn(9).setPreferredWidth(150);
+            info_soci_demo.getColumnModel().getColumn(9).setMaxWidth(150);
+            info_soci_demo.getColumnModel().getColumn(10).setMinWidth(150);
+            info_soci_demo.getColumnModel().getColumn(10).setPreferredWidth(150);
+            info_soci_demo.getColumnModel().getColumn(10).setMaxWidth(150);
             info_soci_demo.getColumnModel().getColumn(11).setMinWidth(150);
             info_soci_demo.getColumnModel().getColumn(11).setPreferredWidth(150);
             info_soci_demo.getColumnModel().getColumn(11).setMaxWidth(150);
-            info_soci_demo.getColumnModel().getColumn(12).setMinWidth(100);
-            info_soci_demo.getColumnModel().getColumn(12).setPreferredWidth(100);
-            info_soci_demo.getColumnModel().getColumn(12).setMaxWidth(100);
-            info_soci_demo.getColumnModel().getColumn(13).setMinWidth(150);
-            info_soci_demo.getColumnModel().getColumn(13).setPreferredWidth(150);
-            info_soci_demo.getColumnModel().getColumn(13).setMaxWidth(150);
+            info_soci_demo.getColumnModel().getColumn(12).setMinWidth(150);
+            info_soci_demo.getColumnModel().getColumn(12).setPreferredWidth(150);
+            info_soci_demo.getColumnModel().getColumn(12).setMaxWidth(150);
+            info_soci_demo.getColumnModel().getColumn(13).setMinWidth(250);
+            info_soci_demo.getColumnModel().getColumn(13).setPreferredWidth(250);
+            info_soci_demo.getColumnModel().getColumn(13).setMaxWidth(250);
             info_soci_demo.getColumnModel().getColumn(14).setMinWidth(150);
             info_soci_demo.getColumnModel().getColumn(14).setPreferredWidth(150);
             info_soci_demo.getColumnModel().getColumn(14).setMaxWidth(150);
@@ -495,27 +494,18 @@ class MyTableCellEditorDate extends AbstractCellEditor implements TableCellEdito
             info_soci_demo.getColumnModel().getColumn(16).setMinWidth(250);
             info_soci_demo.getColumnModel().getColumn(16).setPreferredWidth(250);
             info_soci_demo.getColumnModel().getColumn(16).setMaxWidth(250);
-            info_soci_demo.getColumnModel().getColumn(17).setMinWidth(150);
-            info_soci_demo.getColumnModel().getColumn(17).setPreferredWidth(150);
-            info_soci_demo.getColumnModel().getColumn(17).setMaxWidth(150);
-            info_soci_demo.getColumnModel().getColumn(18).setMinWidth(150);
-            info_soci_demo.getColumnModel().getColumn(18).setPreferredWidth(150);
-            info_soci_demo.getColumnModel().getColumn(18).setMaxWidth(150);
-            info_soci_demo.getColumnModel().getColumn(19).setMinWidth(250);
-            info_soci_demo.getColumnModel().getColumn(19).setPreferredWidth(250);
-            info_soci_demo.getColumnModel().getColumn(19).setMaxWidth(250);
-            info_soci_demo.getColumnModel().getColumn(20).setMinWidth(200);
-            info_soci_demo.getColumnModel().getColumn(20).setPreferredWidth(200);
-            info_soci_demo.getColumnModel().getColumn(20).setMaxWidth(200);
-            info_soci_demo.getColumnModel().getColumn(21).setMinWidth(250);
-            info_soci_demo.getColumnModel().getColumn(21).setPreferredWidth(250);
-            info_soci_demo.getColumnModel().getColumn(21).setMaxWidth(250);
-            info_soci_demo.getColumnModel().getColumn(22).setMinWidth(60);
-            info_soci_demo.getColumnModel().getColumn(22).setPreferredWidth(60);
-            info_soci_demo.getColumnModel().getColumn(22).setMaxWidth(60);
-            info_soci_demo.getColumnModel().getColumn(23).setMinWidth(300);
-            info_soci_demo.getColumnModel().getColumn(23).setPreferredWidth(300);
-            info_soci_demo.getColumnModel().getColumn(23).setMaxWidth(300);
+            info_soci_demo.getColumnModel().getColumn(17).setMinWidth(200);
+            info_soci_demo.getColumnModel().getColumn(17).setPreferredWidth(200);
+            info_soci_demo.getColumnModel().getColumn(17).setMaxWidth(200);
+            info_soci_demo.getColumnModel().getColumn(18).setMinWidth(250);
+            info_soci_demo.getColumnModel().getColumn(18).setPreferredWidth(250);
+            info_soci_demo.getColumnModel().getColumn(18).setMaxWidth(250);
+            info_soci_demo.getColumnModel().getColumn(19).setMinWidth(60);
+            info_soci_demo.getColumnModel().getColumn(19).setPreferredWidth(60);
+            info_soci_demo.getColumnModel().getColumn(19).setMaxWidth(60);
+            info_soci_demo.getColumnModel().getColumn(20).setMinWidth(300);
+            info_soci_demo.getColumnModel().getColumn(20).setPreferredWidth(300);
+            info_soci_demo.getColumnModel().getColumn(20).setMaxWidth(300);
         }
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -748,58 +738,91 @@ class MyTableCellEditorDate extends AbstractCellEditor implements TableCellEdito
                         if(r.next()){
                             id_tip_vivienda=r.getInt("ID_TIPO_VIVIENDA");
                         }
-                        //**************GET ID AREA
-                        r = con.s.executeQuery ("SELECT *\n" +
-                                                "FROM\n" +
-                                                "    t_actividades WHERE NOMBRE_ACTIVIDAD = '"+info_soci_demo.getValueAt(i, 7).toString()+"';");
-                        if(r.next()){
-                            id_area=r.getInt("ID_ACTIVIDAD");
-                        }
-                        //**************GET ID CARGO
-                        r = con.s.executeQuery ("SELECT *\n" +
-                                                "FROM\n" +
-                                                "    t_cargo WHERE NOMBRE_CARGO = '"+info_soci_demo.getValueAt(i, 8).toString()+"';");
-                        if(r.next()){
-                            id_cargo=r.getInt("ID_CARGO");
-                        }
+//                        //**************GET ID AREA
+//                        r = con.s.executeQuery ("SELECT *\n" +
+//                                                "FROM\n" +
+//                                                "    t_actividades WHERE NOMBRE_ACTIVIDAD = '"+info_soci_demo.getValueAt(i, 7).toString()+"';");
+//                        if(r.next()){
+//                            id_area=r.getInt("ID_ACTIVIDAD");
+//                        }
+//                        //**************GET ID CARGO
+//                        r = con.s.executeQuery ("SELECT *\n" +
+//                                                "FROM\n" +
+//                                                "    t_cargo WHERE NOMBRE_CARGO = '"+info_soci_demo.getValueAt(i, 8).toString()+"';");
+//                        if(r.next()){
+//                            id_cargo=r.getInt("ID_CARGO");
+//                        }
                         //**************GET ID ESTADO CIVIL
                         r = con.s.executeQuery ("SELECT *\n" +
                                                 "FROM\n" +
-                                                "    t_estado_civil WHERE NOMBRE_ESTADO = '"+info_soci_demo.getValueAt(i, 9).toString()+"';");
+                                                "    t_estado_civil WHERE NOMBRE_ESTADO = '"+info_soci_demo.getValueAt(i, 7).toString()+"';");
                         if(r.next()){
                             id_est_civil=r.getInt("ID_ESTADO");
                         }
                         //**************GET ID NIVEL ACADEMICO
                         r = con.s.executeQuery ("SELECT *\n" +
                                                 "FROM\n" +
-                                                "    t_nivel_academico WHERE NOMBRE_NIVEL = '"+info_soci_demo.getValueAt(i, 11).toString()+"';");
+                                                "    t_nivel_academico WHERE NOMBRE_NIVEL = '"+info_soci_demo.getValueAt(i, 9).toString()+"';");
                         if(r.next()){
                             id_niv_acad=r.getInt("ID_NIVEL");
                         }
-                        //**************GET ID NACIONALIDAD
-                        r = con.s.executeQuery ("SELECT *\n" +
-                                                "FROM\n" +
-                                                "    t_nacionalidad WHERE NOMBRE_NACION = '"+info_soci_demo.getValueAt(i, 12).toString()+"';");
-                        if(r.next()){
-                            id_nacion=r.getInt("ID_NACION");
-                        }
+//                        //**************GET ID NACIONALIDAD
+//                        r = con.s.executeQuery ("SELECT *\n" +
+//                                                "FROM\n" +
+//                                                "    t_nacionalidad WHERE NOMBRE_NACION = '"+info_soci_demo.getValueAt(i, 12).toString()+"';");
+//                        if(r.next()){
+//                            id_nacion=r.getInt("ID_NACION");
+//                        }
                         //**************GET ID PARENTESCO
                         r = con.s.executeQuery ("SELECT *\n" +
                                                 "FROM\n" +
-                                                "    t_parentesco WHERE NOMBRE_PAR = '"+info_soci_demo.getValueAt(i, 18).toString()+"';");
+                                                "    t_parentesco WHERE NOMBRE_PAR = '"+info_soci_demo.getValueAt(i, 15).toString()+"';");
                         if(r.next()){
                             id_par=r.getInt("ID_PAR");
                         }
                         //**************QUERY PRODUCTOS FINANCIEROS
-                        set_prod_financieros(info_soci_demo.getValueAt(i, 0), info_soci_demo.getValueAt(i, 19));
+                        set_prod_financieros(info_soci_demo.getValueAt(i, 0), info_soci_demo.getValueAt(i, 16));
                         //**************QUERY TIEMPO LIBRE
-                        set_tiemp_lib(info_soci_demo.getValueAt(i, 0), info_soci_demo.getValueAt(i, 20));
+                        set_tiemp_lib(info_soci_demo.getValueAt(i, 0), info_soci_demo.getValueAt(i, 17));
                         //**************QUERY SERVICIOS PUBLICOS
-                        set_serv_pub(info_soci_demo.getValueAt(i, 0), info_soci_demo.getValueAt(i, 21));
+                        set_serv_pub(info_soci_demo.getValueAt(i, 0), info_soci_demo.getValueAt(i, 18));
                         //**************QUERY FUENTES AHORROS
-                        set_fte_ahorro(info_soci_demo.getValueAt(i, 0), info_soci_demo.getValueAt(i, 23));
-                        con.s.executeUpdate("INSERT INTO `t_info_sociodemografica`(`ID_EMP`, `DIRECCION_EMP`, `TEL_CEL_EMP`, `ID_ESTADO_CIVIL_EMP`, `NUM_HIJOS_EMP`, `ID_CARGO`, `ID_AREA_TRABAJO_EMP`, `NOMBRE_ACUDIENTE_EMP`, `TEL_CEL_ACU_EMP`, `ID_PAR_ACU_EMP`, `ID_BARRIO`, `ID_MUN_RES_EMP`, `ESTRATO_EMP`, `PER_CARGO_EMP`, `ID_NIV_ACAD_EMP`, `ID_TIP_VIV_EMP`, `ID_NACION_EMP`, `PERS_HOGAR_EMP`, `PERS_AP_HOGAR_EMP`, `AHORRO_EMP`) "
-                                + "VALUES ("+info_soci_demo.getValueAt(i, 0).toString()+",'"+info_soci_demo.getValueAt(i, 1).toString().toUpperCase()+"','"+info_soci_demo.getValueAt(i, 2).toString().toUpperCase()+"',"+id_est_civil+","+info_soci_demo.getValueAt(i, 10).toString()+","+id_cargo+","+id_area+",'"+info_soci_demo.getValueAt(i, 16).toString().toUpperCase()+"','"+info_soci_demo.getValueAt(i, 17).toString()+"',"+id_par+","+id_barrio+","+id_mun_res+","+info_soci_demo.getValueAt(i, 5).toString()+","+info_soci_demo.getValueAt(i, 13).toString()+","+id_niv_acad+","+id_tip_vivienda+","+id_nacion+","+info_soci_demo.getValueAt(i, 14).toString()+","+info_soci_demo.getValueAt(i, 15).toString()+",'"+info_soci_demo.getValueAt(i, 22).toString()+"')");
+                        set_fte_ahorro(info_soci_demo.getValueAt(i, 0), info_soci_demo.getValueAt(i, 20));
+                        con.s.executeUpdate("INSERT INTO `t_info_sociodemografica`("
+                                + "`ID_EMP`, "
+                                + "`DIRECCION_EMP`, "
+                                + "`TEL_CEL_EMP`, "
+                                + "`ID_ESTADO_CIVIL_EMP`, "
+                                + "`NUM_HIJOS_EMP`, "
+                                + "`NOMBRE_ACUDIENTE_EMP`, "
+                                + "`TEL_CEL_ACU_EMP`, "
+                                + "`ID_PAR_ACU_EMP`, "
+                                + "`ID_BARRIO`, "
+                                + "`ID_MUN_RES_EMP`, "
+                                + "`ESTRATO_EMP`, "
+                                + "`PER_CARGO_EMP`, "
+                                + "`ID_NIV_ACAD_EMP`, "
+                                + "`ID_TIP_VIV_EMP`, "
+                                + "`PERS_HOGAR_EMP`, "
+                                + "`PERS_AP_HOGAR_EMP`, "
+                                + "`AHORRO_EMP`) "
+                                + "VALUES ("+info_soci_demo.getValueAt(i, 0).toString()+","
+                                + "'"+info_soci_demo.getValueAt(i, 1).toString().toUpperCase()+"',"
+                                + "'"+info_soci_demo.getValueAt(i, 2).toString().toUpperCase()+"',"
+                                + ""+id_est_civil+","
+                                + ""+info_soci_demo.getValueAt(i, 8).toString()+","
+                                + "'"+info_soci_demo.getValueAt(i, 13).toString().toUpperCase()+"',"
+                                + "'"+info_soci_demo.getValueAt(i, 14).toString()+"',"
+                                + ""+id_par+","
+                                + ""+id_barrio+","
+                                + ""+id_mun_res+","
+                                + ""+info_soci_demo.getValueAt(i, 5).toString()+","
+                                + ""+info_soci_demo.getValueAt(i, 10).toString()+","
+                                + ""+id_niv_acad+","
+                                + ""+id_tip_vivienda+","
+                                + ""+info_soci_demo.getValueAt(i, 11).toString()+","
+                                + ""+info_soci_demo.getValueAt(i, 12).toString()+","
+                                + "'"+info_soci_demo.getValueAt(i, 19).toString()+"')");
                         JOptionPane.showMessageDialog(null,"La información ha sido almacenada correctamente","Confirmación",JOptionPane.INFORMATION_MESSAGE);
                         con.cerrar();
                         this.dispose();
@@ -922,95 +945,6 @@ class MyTableCellEditorDate extends AbstractCellEditor implements TableCellEdito
     private javax.swing.JPopupMenu jPopupMenu1;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
-public void check_empleado(){
-    ArrayList<String> ret_nov = new ArrayList<String>();
-    if (true) { //& !jTable1.isEditing()
-        modelo = (DefaultTableModel)info_soci_demo.getModel();
-        if (check_cedula(modelo.getValueAt(info_soci_demo.getSelectedRow(),info_soci_demo.getSelectedColumn()))) {
-            Conexion con = new Conexion();
-            con.conexion();
-            ResultSet r;
-            ResultSet r1;
-            ResultSet r2;
-            try {
-                r = con.s.executeQuery ("SELECT COUNT(ID_EMPLEADO) FROM t_novedades WHERE ID_EMPLEADO = "+modelo.getValueAt(info_soci_demo.getSelectedRow(),info_soci_demo.getSelectedColumn()).toString().trim()+" AND ID_TIPO IN (1,3)");
-                if (r.next()) {
-                    if (r.getInt("COUNT(ID_EMPLEADO)")>0) {
-                        JOptionPane.showMessageDialog(this,"El empleado actualmente esta activo con 1 o varios empleadores.","Información",JOptionPane.INFORMATION_MESSAGE);
-                        ret_nov=call_sel_emp(modelo.getValueAt(info_soci_demo.getSelectedRow(),info_soci_demo.getSelectedColumn()).toString().trim(),"1,3,4,5");
-                        if (!ret_nov.isEmpty()) {
-                            r = con.s.executeQuery ("SELECT\n"
-                                                    + "*\n"
-                                                    + "FROM t_novedades\n"
-                                                    + "  INNER JOIN t_empleados\n"
-                                                    + "    ON (t_novedades.ID_EMPLEADO = t_empleados.ID_EMP)\n"
-                                                    + "  INNER JOIN t_empresas\n"
-                                                    + "    ON (t_novedades.ID_EMPRESA = t_empresas.ID_EMPRESA)\n"
-                                                    + "  INNER JOIN t_eps\n"
-                                                    + "    ON (t_novedades.ID_EPS = t_eps.ID_EPS)\n"
-                                                    + "  INNER JOIN t_afp\n"
-                                                    + "    ON (t_novedades.ID_AFP = t_afp.ID_AFP)\n"
-                                                    + "  INNER JOIN t_municipios\n"
-                                                    + "    ON (t_novedades.ID_MUN_NOV = t_municipios.ID_MUN)\n"
-                                                    + "  INNER JOIN t_parentesco\n"
-                                                    + "    ON (t_novedades.ID_PAR_ACU_NOV = t_parentesco.ID_PAR)\n"
-                                                    + "  INNER JOIN t_obra\n"
-                                                    + "    ON (t_novedades.ID_OBRA = t_obra.ID_OBRA)\n"
-                                                    + "  INNER JOIN t_tipo_novedad\n"
-                                                    + "    ON (t_novedades.ID_TIPO = t_tipo_novedad.ID_TIPO)\n"
-                                                    + "WHERE (t_novedades.ID_EMPLEADO = "+ret_nov.get(0)+" AND t_novedades.ID_EMPRESA = '"+ret_nov.get(1)+"' AND t_novedades.FECHA_INGRESO = '"+ret_nov.get(2)+"' AND t_novedades.FECHA_RETIRO = '"+ret_nov.get(3)+"' AND t_novedades.ID_TIPO = "+ret_nov.get(4)+")\n"
-                                                    + "ORDER BY FECHA_INGRESO DESC;");
-                            if(r.next()){
-                                modelo.setValueAt(r.getString("NOMBRE_EMPRESA"),info_soci_demo.getSelectedRow(),1);
-                                //modelo.setValueAt(new SimpleDateFormat("dd-MM-yyyy").format(new SimpleDateFormat("yyyy-MM-dd").parse(r.getString("FECHA_INGRESO"))),jTable1.getSelectedRow(),2);
-                                //date_table.setDate(new SimpleDateFormat("dd-MM-yyyy").parse(modelo.getValueAt(jTable1.getSelectedRow(),2).toString()));
-                                modelo.setValueAt(r.getString("SALARIO_NOVEDAD"),info_soci_demo.getSelectedRow(),3);
-                                modelo.setValueAt(new SimpleDateFormat("dd-MM-yyyy").format(new SimpleDateFormat("yyyy-MM-dd").parse(r.getString("F_NAC_NOV"))),info_soci_demo.getSelectedRow(),4);
-                                modelo.setValueAt(new SimpleDateFormat("dd-MM-yyyy").format(new SimpleDateFormat("yyyy-MM-dd").parse(r.getString("F_EXP_NOV"))),info_soci_demo.getSelectedRow(),5);
-                                int id_obra = r.getInt("ID_OBRA");
-                                modelo.setValueAt(r.getString("DIR_EMP_NOV"),info_soci_demo.getSelectedRow(),7);
-                                modelo.setValueAt(r.getString("BARRIO_NOV"),info_soci_demo.getSelectedRow(),8);
-                                int id_mun = r.getInt("ID_MUN_NOV");
-                                modelo.setValueAt(r.getString("TEL_NOV"),info_soci_demo.getSelectedRow(),10);
-                                modelo.setValueAt(r.getString("MAIL_NOV"),info_soci_demo.getSelectedRow(),11);
-                                modelo.setValueAt(r.getString("ACUD_NOV"),info_soci_demo.getSelectedRow(),12);
-                                modelo.setValueAt(r.getString("NOMBRE_PAR"),info_soci_demo.getSelectedRow(),13);
-                                modelo.setValueAt(r.getString("TEL_ACUD_NOV"),info_soci_demo.getSelectedRow(),14);
-                                modelo.setValueAt(r.getString("OBS_NOV"),info_soci_demo.getSelectedRow(),15);
-                                r1 = con.s.executeQuery ("SELECT *\n" +
-                                                        "FROM\n" +
-                                                        "    t_obra\n" +
-                                                        "    INNER JOIN t_municipios \n" +
-                                                        "        ON (t_obra.ID_MUN_OBRA = t_municipios.ID_MUN)\n" +
-                                                        "    INNER JOIN t_departamentos \n" +
-                                                        "        ON (t_municipios.ID_DEP = t_departamentos.ID_DEP) WHERE ID_OBRA ="+id_obra);
-                                if (r1.next()) {
-                                    modelo.setValueAt(r1.getString("NOMBRE_OBRA")+"-"+r1.getString("NOMBRE_MUN")+"-"+r1.getString("NOMBRE_DEP"),info_soci_demo.getSelectedRow(),6);
-                                }
-
-                                r2 = con.s.executeQuery ("SELECT *\n" +
-                                                            "FROM\n" +
-                                                            "    t_municipios\n" +
-                                                            "    INNER JOIN t_departamentos \n" +
-                                                            "        ON (t_municipios.ID_DEP = t_departamentos.ID_DEP) WHERE ID_MUN ="+id_mun);
-                                if (r2.next()) {
-                                    modelo.setValueAt(r2.getString("NOMBRE_MUN")+"-"+r2.getString("NOMBRE_DEP"),info_soci_demo.getSelectedRow(),9);
-                                }
-
-                            }
-                        }
-                    }
-                }
-            con.cerrar();
-            } catch (SQLException | HeadlessException | ParseException e) {
-                con.cerrar();
-                e.printStackTrace();
-            }
-
-        }
-        //JOptionPane.showMessageDialog(null,"asd","Error",JOptionPane.ERROR_MESSAGE);
-    }
-}
 public  ArrayList call_sel_emp(String c, String t){
     Sel_Empleador sel=new Sel_Empleador(this,true,c,t);
     sel.setLocationRelativeTo(this);
@@ -2492,23 +2426,23 @@ public boolean verify_data(){
                             if (check_barrio(info_soci_demo.getValueAt(i, 4), info_soci_demo.getValueAt(i, 3))) {
                                 if (check_estrato(info_soci_demo.getValueAt(i, 5))) {//ESTRATO
                                     if (check_tip_vivienda(info_soci_demo.getValueAt(i, 6))) {
-                                        if (check_tip_area(info_soci_demo.getValueAt(i, 7))) {
-                                            if (check_cargo(info_soci_demo.getValueAt(i, 8))) {
-                                                if (check_estado_civil(info_soci_demo.getValueAt(i, 9))) {
-                                                    if (check_integer(info_soci_demo.getValueAt(i, 10))) {//NUMERO HIJOS
-                                                        if (check_niv_acad(info_soci_demo.getValueAt(i, 11))) {
-                                                            if (check_nacion(info_soci_demo.getValueAt(i, 12))) {
-                                                                if (check_integer(info_soci_demo.getValueAt(i, 13))) {//PERSONAS A CARGO
-                                                                    if (check_integer(info_soci_demo.getValueAt(i, 14))) {//PERSONAS EN EL HOGAR
-                                                                        if (check_integer(info_soci_demo.getValueAt(i, 15))) {//PERSONAS APORTAN
-                                                                            if (check_field(info_soci_demo.getValueAt(i, 16))) {//NOMBRE ACUDIENTE
-                                                                                if (check_tel_field(info_soci_demo.getValueAt(i, 17))) {//TEL_CEL ACUDIENTE
-                                                                                    if (check_parentesco(info_soci_demo.getValueAt(i, 18))) {
-                                                                                        if (check_prod_fin(info_soci_demo.getValueAt(i, 19))) {
-                                                                                            if (check_tiempo_libre(info_soci_demo.getValueAt(i, 20))) {
-                                                                                                if (check_serv_public(info_soci_demo.getValueAt(i, 21))) {
-                                                                                                    if (check_field_ahorro(info_soci_demo.getValueAt(i, 22))) {
-                                                                                                        if (check_fte_ahorro(info_soci_demo.getValueAt(i, 23))) {
+//                                        if (check_tip_area(info_soci_demo.getValueAt(i, 7))) {
+//                                            if (check_cargo(info_soci_demo.getValueAt(i, 8))) {
+                                                if (check_estado_civil(info_soci_demo.getValueAt(i, 7))) {
+                                                    if (check_integer(info_soci_demo.getValueAt(i, 8))) {//NUMERO HIJOS
+                                                        if (check_niv_acad(info_soci_demo.getValueAt(i, 9))) {
+//                                                            if (check_nacion(info_soci_demo.getValueAt(i, 12))) {
+                                                                if (check_integer(info_soci_demo.getValueAt(i, 10))) {//PERSONAS A CARGO
+                                                                    if (check_integer(info_soci_demo.getValueAt(i, 11))) {//PERSONAS EN EL HOGAR
+                                                                        if (check_integer(info_soci_demo.getValueAt(i, 12))) {//PERSONAS APORTAN
+                                                                            if (check_field(info_soci_demo.getValueAt(i, 13))) {//NOMBRE ACUDIENTE
+                                                                                if (check_tel_field(info_soci_demo.getValueAt(i, 14))) {//TEL_CEL ACUDIENTE
+                                                                                    if (check_parentesco(info_soci_demo.getValueAt(i, 15))) {
+                                                                                        if (check_prod_fin(info_soci_demo.getValueAt(i, 16))) {
+                                                                                            if (check_tiempo_libre(info_soci_demo.getValueAt(i, 17))) {
+                                                                                                if (check_serv_public(info_soci_demo.getValueAt(i, 18))) {
+                                                                                                    if (check_field_ahorro(info_soci_demo.getValueAt(i, 19))) {
+                                                                                                        if (check_fte_ahorro(info_soci_demo.getValueAt(i, 20))) {
                                                                                                             ret=true;
                                                                                                         } else {
                                                                                                             info_soci_demo.changeSelection(i,23, false, false);
@@ -2592,13 +2526,13 @@ public boolean verify_data(){
                                                                     break;
                                                                 }
 
-                                                            } else {
-                                                                info_soci_demo.changeSelection(i,12, false, false);
-                                                                info_soci_demo.requestFocus();
-                                                                JOptionPane.showMessageDialog(this,"Verifique que la nacionalidad del empleado sea correcto","Error",JOptionPane.ERROR_MESSAGE);
-                                                                ret=false&ret;
-                                                                break;
-                                                            }
+//                                                            } else {
+//                                                                info_soci_demo.changeSelection(i,12, false, false);
+//                                                                info_soci_demo.requestFocus();
+//                                                                JOptionPane.showMessageDialog(this,"Verifique que la nacionalidad del empleado sea correcto","Error",JOptionPane.ERROR_MESSAGE);
+//                                                                ret=false&ret;
+//                                                                break;
+//                                                            }
 
                                                         } else {
                                                             info_soci_demo.changeSelection(i,11, false, false);
@@ -2624,21 +2558,21 @@ public boolean verify_data(){
                                                     break;
                                                 }
 
-                                            } else {
-                                                info_soci_demo.changeSelection(i,8, false, false);
-                                                info_soci_demo.requestFocus();
-                                                JOptionPane.showMessageDialog(this,"Verifique que el cargo del empleado sea correcto","Error",JOptionPane.ERROR_MESSAGE);
-                                                ret=false&ret;
-                                                break;
-                                            }
-
-                                        } else {
-                                            info_soci_demo.changeSelection(i,7, false, false);
-                                            info_soci_demo.requestFocus();
-                                            JOptionPane.showMessageDialog(this,"Verifique que el area de trabajo del empleado sea correcto","Error",JOptionPane.ERROR_MESSAGE);
-                                            ret=false&ret;
-                                            break;
-                                        }
+//                                            } else {
+//                                                info_soci_demo.changeSelection(i,8, false, false);
+//                                                info_soci_demo.requestFocus();
+//                                                JOptionPane.showMessageDialog(this,"Verifique que el cargo del empleado sea correcto","Error",JOptionPane.ERROR_MESSAGE);
+//                                                ret=false&ret;
+//                                                break;
+//                                            }
+//
+//                                        } else {
+//                                            info_soci_demo.changeSelection(i,7, false, false);
+//                                            info_soci_demo.requestFocus();
+//                                            JOptionPane.showMessageDialog(this,"Verifique que el area de trabajo del empleado sea correcto","Error",JOptionPane.ERROR_MESSAGE);
+//                                            ret=false&ret;
+//                                            break;
+//                                        }
 
                                     } else {
                                         info_soci_demo.changeSelection(i,6, false, false);
