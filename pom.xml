@@ -122,13 +122,15 @@
             <id>dist</id>
             <build>
                 <plugins>
-                   <plugin>
+                    <plugin>
                         <artifactId>maven-assembly-plugin</artifactId>
                         <executions>
                             <execution>
+                                <id>make-assembly</id> <!-- this is used for inheritance merges -->
+                                <phase>package</phase>
                                 <goals>
                                      <goal>single</goal>
-                                 </goals>
+                                </goals>
                              </execution>
                          </executions>
                           <configuration>
@@ -142,91 +144,12 @@
                               </descriptorRefs>
                          </configuration>
                     </plugin>
-                    <plugin>
-                        <groupId>com.akathist.maven.plugins.launch4j</groupId>
-                        <artifactId>launch4j-maven-plugin</artifactId>
-                        <version>1.7.16</version>
-                        <executions>
-                            <execution>
-                                <id>l4j-clui</id>
-                                <goals>
-                                    <goal>launch4j</goal>
-                                </goals>
-                                <configuration>
-                                    <tasks>
-                                        <echo>Hello world!</echo>
-                                    </tasks>
-                                    <headerType>gui</headerType>
-                                    <dontWrapJar>false</dontWrapJar>
-                                    <outfile>${project.basedir}/target/${project.name}.exe</outfile>
-                                    <jar>${project.basedir}/target/${project.name}-${project.version}-jar-with-dependencies.jar</jar>
-                                    <errTitle></errTitle>
-                                    <icon>${project.basedir}/src/main/resources/group_gear.ico</icon>
-                                    <classPath>
-                                        <mainClass>com.jm.Edicof.GUI.Main</mainClass>
-                                        <addDependencies>true</addDependencies>
-                                        <preCp>anything</preCp>
-                                    </classPath>
-                                    <jre>
-                                        <minVersion>1.0.0</minVersion>
-                                        <opts>
-                                            <opt>-Djava.endorsed.dirs=./endorsed</opt>
-                                        </opts>
-                                    </jre>
-                                    <splash>
-                                        <file>${project.basedir}/src/main/resources/WALLPAPPER_EDO2_RED.bmp</file>
-                                        <waitForWindow>true</waitForWindow>
-                                        <timeout>60</timeout>
-                                        <timeoutErr>true</timeoutErr>
-                                    </splash>
-                                    <versionInfo>
-                                        <fileVersion>${project.version}</fileVersion>
-                                        <txtFileVersion>${project.version}</txtFileVersion>
-                                        <fileDescription>${project.name}</fileDescription>
-                                        <copyright>MIT</copyright>
-                                        <productVersion>${project.version}</productVersion>
-                                        <txtProductVersion>${project.version}</txtProductVersion>
-                                        <productName>${project.name}</productName>
-                                        <originalFilename>${exeFileName}.exe</originalFilename>
-                                        <internalName>${project.name}</internalName>
-                                    </versionInfo>
-                                </configuration>
-                            </execution>
-                        </executions>
-                    </plugin>
-                    <plugin>
-                        <groupId>org.codehaus.mojo</groupId>
-                        <artifactId>exec-maven-plugin</artifactId>
-                        <version>1.2.1</version>
-                        <executions>
-                            <execution>
-                                <id>build-api</id>
-                                <phase>install</phase>
-                                <goals>
-                                    <goal>exec</goal>
-                                </goals>
-                            </execution>
-                        </executions>
-                        <configuration>
-                            <classpathScope></classpathScope>
-                            <executable>ISCC.exe</executable>
-                            <!-- optional -->
-                            <workingDirectory></workingDirectory>
-                            <arguments>
-                                <argument>/f${project.name}_Updater_${project.version}</argument><!-- Overrides OutputBaseFilename -->
-                                <argument>/O${project.basedir}/target</argument> <!-- Output files to specified path -->
-                                <argument>${project.basedir}/Updater.iss</argument>
-                            </arguments>
-                        </configuration>
-                    </plugin>
                 </plugins>
             </build>
         </profile>    
     </profiles>
     <build>
-            <plugins>
-               
-            </plugins>
-        </build>
+
+    </build>
     <description>538fc30856a58d888c141affab1178dff677e1cb</description>
 </project>

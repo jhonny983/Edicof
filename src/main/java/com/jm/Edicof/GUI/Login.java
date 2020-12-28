@@ -78,12 +78,10 @@ public class Login extends javax.swing.JDialog {
         jLabel1.setText("Usuario");
 
         usuario.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        usuario.setText("jmera");
 
         jLabel2.setText("Contraseña");
 
         cont.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        cont.setText("123456");
         cont.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 contKeyTyped(evt);
