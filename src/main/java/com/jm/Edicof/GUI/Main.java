@@ -34,6 +34,8 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import org.apache.maven.model.Model;
+import org.apache.maven.model.io.xpp3.MavenXpp3Reader;
 import org.apache.poi.ss.usermodel.DateUtil;
 import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
@@ -74,15 +76,26 @@ static boolean mainperm = false;
 public static Programacion tarea=null ;
 public static Dimension size =null;
 public int version;
-public static String ver_str="3.0.4.6";
+//public static String ver_str="";
+public static String ver_str="3.0.4.7";
 public String url_info_update = "https://onedrive.live.com/download?cid=51049062522CB054&resid=51049062522CB054%21219574&authkey=AP_5XduLgOsOxQg";//Ruta del archivo que contiene la informacion de la ultima version del software
 //public String url_permission = "https://www.dropbox.com/s/c9bbt0blodjnrrs/PERMISOS.txt?dl=1";//Ruta del archivo que contiene la informacion de la ultima version del software
 public static ArrayList conection_list = new ArrayList();
+Model model;
     /**
      * Creates new form Main
      */
 
     public Main() {
+//        try{
+//            MavenXpp3Reader reader = new MavenXpp3Reader();
+//            model = reader.read(new FileReader("pom.xml"));
+//        }catch(Exception e){
+//            e.printStackTrace();
+//        }
+//        ver_str = getClass().getPackage().getImplementationVersion();
+//        System.out.println("VERS: "+ver_str);
+//        //ver_str = model.getVersion();
         version = Integer.parseInt(ver_str.replace(".",""));
         if (check_update(url_info_update)) {
             int conf = JOptionPane.showConfirmDialog(this,"Hay una nueva version del software disponible\n Desea actualizar?","Confirmación",JOptionPane.OK_CANCEL_OPTION,JOptionPane.QUESTION_MESSAGE);

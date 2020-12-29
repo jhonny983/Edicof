@@ -35,7 +35,7 @@
             </packagings>
             <goals>
                 <goal>install</goal>
-                <goal>assembly:single</goal>
+                
             </goals>
         </action>
     </actions>

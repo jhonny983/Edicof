@@ -835,7 +835,7 @@ Boolean block=true;
                                                                                         }
                                                                                         int conf = JOptionPane.showConfirmDialog(this,"Esta seguro que desea continuar?","Confirmación",JOptionPane.OK_CANCEL_OPTION,JOptionPane.QUESTION_MESSAGE);
                                                                                         if (conf == JOptionPane.YES_OPTION) {
-                                                                                            con.s.executeUpdate("UPDATE `e_occidente`.`t_novedades`\n" +
+                                                                                            con.s.executeUpdate("UPDATE `t_novedades`\n" +
                                                                                                                 "SET `ID_EMPLEADO` = "+Busc_cedula.getText()+",\n" +
                                                                                                                 "  `ID_EMPRESA` = '"+Busc_nit.getText()+"',\n" +
                                                                                                                 "  `FECHA_INGRESO` = '"+new SimpleDateFormat("yyyy-MM-dd").format(f_ing_nov.getDate())+"',\n" +
@@ -1046,7 +1046,7 @@ Boolean block=true;
                                                                                                 }
                                                                                                 int conf = JOptionPane.showConfirmDialog(this,"Esta seguro que desea continuar?","Confirmación",JOptionPane.OK_CANCEL_OPTION,JOptionPane.QUESTION_MESSAGE);
                                                                                                 if (conf == JOptionPane.YES_OPTION) {
-                                                                                                    con.s.executeUpdate("UPDATE `e_occidente`.`t_novedades`\n" +
+                                                                                                    con.s.executeUpdate("UPDATE `t_novedades`\n" +
                                                                                                                         "SET `ID_EMPLEADO` = "+Busc_cedula.getText()+",\n" +
                                                                                                                         "  `ID_EMPRESA` = '"+Busc_nit.getText()+"',\n" +
                                                                                                                         "  `FECHA_INGRESO` = '"+new SimpleDateFormat("yyyy-MM-dd").format(f_ing_nov.getDate())+"',\n" +
@@ -1253,7 +1253,7 @@ Boolean block=true;
                                                                                         }
                                                                                         int conf = JOptionPane.showConfirmDialog(this,"Esta seguro que desea continuar?","Confirmación",JOptionPane.OK_CANCEL_OPTION,JOptionPane.QUESTION_MESSAGE);
                                                                                         if (conf == JOptionPane.YES_OPTION) {
-                                                                                            con.s.executeUpdate("UPDATE `e_occidente`.`t_novedades`\n" +
+                                                                                            con.s.executeUpdate("UPDATE `t_novedades`\n" +
                                                                                                                 "SET `ID_EMPLEADO` = "+Busc_cedula.getText()+",\n" +
                                                                                                                 "  `ID_EMPRESA` = '"+Busc_nit.getText()+"',\n" +
                                                                                                                 "  `FECHA_INGRESO` = '"+new SimpleDateFormat("yyyy-MM-dd").format(f_ing_nov.getDate())+"',\n" +
