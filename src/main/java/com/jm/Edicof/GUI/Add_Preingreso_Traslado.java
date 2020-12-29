@@ -91,8 +91,9 @@ public class Add_Preingreso_Traslado extends javax.swing.JDialog {
     int row_tel_acu=14;
     int row_f_examen_ing=15;
     int row_f_consent=16;
-    int row_exon=17;
-    int row_obs=18;
+    int row_f_prot=17;
+    int row_exon=18;
+    int row_obs=19;
     //static DefaultTableModel modelo = new DefaultTableModel();
     /**
      * Creates new form Add_Preingresos
@@ -808,10 +809,10 @@ class MyTableCellEditorDate extends AbstractCellEditor implements TableCellEdito
         new PegarExcel(jTable1);
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Cedula*", "Empleador (Nombre)*", "F Ingreso (DD-MM-AAAA)*", "Salario*", "Obra*", "Area Trabajo*", "Cargo*", "Direccion", "Barrio*", "Municipio*", "Telefono", "Correo", "Acudiente", "Parentesco*", "Telefono Acudiente", "F Examen Ingreso (DD-MM-YYYY)*", "F Consentimiento (DD-MM-YYYY)*", "Exonerado FIC", "Observaciones"
+                "Cedula*", "Empleador (Nombre)*", "F Ingreso (DD-MM-AAAA)*", "Salario*", "Obra*", "Area Trabajo*", "Cargo*", "Direccion", "Barrio*", "Municipio*", "Telefono", "Correo", "Acudiente", "Parentesco*", "Telefono Acudiente", "F Examen Ingreso (DD-MM-YYYY)*", "F Consentimiento (DD-MM-YYYY)*", "F Protocolo (DD-MM-YYYY)*", "Exonerado FIC", "Observaciones"
             }
         ));
         jTable1.setToolTipText("");
@@ -867,9 +868,15 @@ class MyTableCellEditorDate extends AbstractCellEditor implements TableCellEdito
             jTable1.getColumnModel().getColumn(14).setMinWidth(150);
             jTable1.getColumnModel().getColumn(14).setPreferredWidth(150);
             jTable1.getColumnModel().getColumn(14).setMaxWidth(150);
-            jTable1.getColumnModel().getColumn(18).setMinWidth(150);
-            jTable1.getColumnModel().getColumn(18).setPreferredWidth(150);
-            jTable1.getColumnModel().getColumn(18).setMaxWidth(150);
+            jTable1.getColumnModel().getColumn(16).setMinWidth(180);
+            jTable1.getColumnModel().getColumn(16).setPreferredWidth(180);
+            jTable1.getColumnModel().getColumn(16).setMaxWidth(180);
+            jTable1.getColumnModel().getColumn(17).setMinWidth(180);
+            jTable1.getColumnModel().getColumn(17).setPreferredWidth(180);
+            jTable1.getColumnModel().getColumn(17).setMaxWidth(180);
+            jTable1.getColumnModel().getColumn(19).setMinWidth(150);
+            jTable1.getColumnModel().getColumn(19).setPreferredWidth(150);
+            jTable1.getColumnModel().getColumn(19).setMaxWidth(150);
         }
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -1290,6 +1297,11 @@ class MyTableCellEditorDate extends AbstractCellEditor implements TableCellEdito
                                                                         "    t_cargo WHERE NOMBRE_CARGO = '"+jTable1.getValueAt(i, row_cargo).toString()+"';");
                                                 if(r.next()){
                                                     id_cargo=r.getInt("ID_CARGO");
+                                                }
+                                                if (!check_protocolo(jTable1.getValueAt(i, row_cedula).toString())) {
+                                                    con.s.executeUpdate("UPDATE `t_cap_prot`\n" +
+                                                                        "SET `FECHA_CAP_PROT` = '"+new SimpleDateFormat("yyyy-MM-dd").format(new SimpleDateFormat("dd-MM-yyyy").parse(modelo.getValueAt(i, row_f_prot).toString()))+"'\n" +
+                                                                        "WHERE `ID_EMP` = "+jTable1.getValueAt(i, row_cedula).toString()+";");
                                                 }
                                                 con.s.executeUpdate("UPDATE `t_info_sociodemografica`\n" +
                                                                     "SET `DIRECCION_EMP` = '"+modelo.getValueAt(i, row_direccion)+"',\n" +
@@ -2385,14 +2397,14 @@ public boolean verify_data(){
                                                                                                 if (check_fecha(modelo.getValueAt(i, row_f_examen_ing))) {
                                                                                                     Calendar date_examen = Calendar.getInstance();
                                                                                                     date_examen.setTime(new SimpleDateFormat("dd-MM-yyyy").parse(modelo.getValueAt(i, row_f_examen_ing).toString()));
-                                                                                                    date_in.add(Calendar.MONTH, -6);
+                                                                                                    date_in.add(Calendar.MONTH, -12);
                                                                                                     System.out.println("F_examen: "+date_examen.getTime());
                                                                                                     System.out.println("F_vigencia: "+date_in.getTime());
                                                                                                     if (date_examen.getTime().compareTo(date_in.getTime())>=0) {
                                                                                                         if (check_fecha(modelo.getValueAt(i, row_f_consent))) {
                                                                                                             if (check_active(modelo.getValueAt(i, row_cedula).toString(), modelo.getValueAt(i, row_empleador).toString())) {
                                                                                                                 if (check_vetado(modelo.getValueAt(i, row_cedula).toString())) {
-                                                                                                                    if (check_protocolo(modelo.getValueAt(i, row_cedula).toString())) {
+                                                                                                                    if (check_protocolo(modelo.getValueAt(i, row_cedula).toString()) | check_fecha(modelo.getValueAt(i, row_f_prot))) {
                                                                                                                         if (check_exon(modelo.getValueAt(i, row_exon).toString())) {
                                                                                                                             if (check_info(modelo.getValueAt(i, row_cedula).toString())) {
                                                                                                                                 ret=true&ret;
@@ -2442,7 +2454,7 @@ public boolean verify_data(){
                                                                                                     }else {
                                                                                                         jTable1.changeSelection(i,row_f_examen_ing, false, false);
                                                                                                         jTable1.requestFocus();
-                                                                                                        JOptionPane.showMessageDialog(this,"Verifique que la Fecha de Examen medico tenga vigencia de un mes con respecto a la fecha de ingreso","Error",JOptionPane.ERROR_MESSAGE);
+                                                                                                        JOptionPane.showMessageDialog(this,"Verifique que la Fecha de Examen medico tenga vigencia de un año con respecto a la fecha de ingreso","Error",JOptionPane.ERROR_MESSAGE);
                                                                                                         ret=false&ret;
                                                                                                         break;
                                                                                                     }

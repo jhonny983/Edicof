@@ -74,7 +74,7 @@ static boolean mainperm = false;
 public static Programacion tarea=null ;
 public static Dimension size =null;
 public int version;
-public static String ver_str="3.0.4.4";
+public static String ver_str="3.0.4.6";
 public String url_info_update = "https://onedrive.live.com/download?cid=51049062522CB054&resid=51049062522CB054%21219574&authkey=AP_5XduLgOsOxQg";//Ruta del archivo que contiene la informacion de la ultima version del software
 //public String url_permission = "https://www.dropbox.com/s/c9bbt0blodjnrrs/PERMISOS.txt?dl=1";//Ruta del archivo que contiene la informacion de la ultima version del software
 public static ArrayList conection_list = new ArrayList();
@@ -297,6 +297,8 @@ public static ArrayList conection_list = new ArrayList();
         jMenuItem48 = new javax.swing.JMenuItem();
         jMenuItem49 = new javax.swing.JMenuItem();
         jMenuItem43 = new javax.swing.JMenuItem();
+        jMenu29 = new javax.swing.JMenu();
+        jMenuItem73 = new javax.swing.JMenuItem();
         jMenu17 = new javax.swing.JMenu();
         jMenuItem38 = new javax.swing.JMenuItem();
         jMenuItem39 = new javax.swing.JMenuItem();
@@ -1386,6 +1388,19 @@ public static ArrayList conection_list = new ArrayList();
         jMenu16.add(jMenuItem43);
 
         jm_informacion.add(jMenu16);
+
+        jMenu29.setText("Barrios");
+
+        jMenuItem73.setIcon(new javax.swing.ImageIcon(getClass().getResource("/add.png"))); // NOI18N
+        jMenuItem73.setText("Agregar");
+        jMenuItem73.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem73ActionPerformed(evt);
+            }
+        });
+        jMenu29.add(jMenuItem73);
+
+        jm_informacion.add(jMenu29);
 
         jMenu17.setText("Municipios");
 
@@ -2710,6 +2725,13 @@ public static ArrayList conection_list = new ArrayList();
         add_tr.setVisible(true);
     }//GEN-LAST:event_jMenuItem16ActionPerformed1
 
+    private void jMenuItem73ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem73ActionPerformed
+        // TODO add your handling code here:
+        Add_Barrio add_br = new Add_Barrio(this,false);
+        add_br.setLocationRelativeTo(this);
+        add_br.setVisible(true);
+    }//GEN-LAST:event_jMenuItem73ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -2799,6 +2821,7 @@ public static ArrayList conection_list = new ArrayList();
     private javax.swing.JMenu jMenu26;
     private javax.swing.JMenu jMenu27;
     private javax.swing.JMenu jMenu28;
+    private javax.swing.JMenu jMenu29;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenu jMenu5;
@@ -2877,6 +2900,7 @@ public static ArrayList conection_list = new ArrayList();
     private javax.swing.JMenuItem jMenuItem70;
     private javax.swing.JMenuItem jMenuItem71;
     private javax.swing.JMenuItem jMenuItem72;
+    private javax.swing.JMenuItem jMenuItem73;
     private javax.swing.JMenuItem jMenuItem8;
     private javax.swing.JMenuItem jMenuItem9;
     private javax.swing.JPanel jPanel1;

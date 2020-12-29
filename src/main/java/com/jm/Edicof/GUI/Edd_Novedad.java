@@ -608,7 +608,6 @@ Boolean block=true;
 
         obs.setColumns(20);
         obs.setRows(5);
-        obs.setText("kjhflksadhfñlsdhfñlksjdhfksjdhfksjdhfskjdhflksjdhfksljdhflksjdhflksjdhfksljdhfksjdhfksjdhfñksjdhfksn.,smznvc,zxmcnvxlkcjvhñlksjdfñlksjdhfñksjdhfsñkjdfhñksjdhfñlksjfdhlskjfdhlskjfdhslkjhf");
         obs.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 obsFocusLost(evt);
@@ -788,7 +787,7 @@ Boolean block=true;
                                                                     if (f_ex_ing.getDate()!=null) {
                                                                         Calendar date_examen = Calendar.getInstance();
                                                                         date_examen.setTime(f_ex_ing.getDate());
-                                                                        date_in.add(Calendar.MONTH, -6);
+                                                                        date_in.add(Calendar.MONTH, -12);
                                                                         if (date_examen.getTime().compareTo(date_in.getTime())>=0) {
                                                                             if (!cb_exon.getSelectedItem().equals("Seleccione..")) {
                                                                                 if (f_cons.getDate()!=null) {
@@ -920,7 +919,7 @@ Boolean block=true;
                                                                             }
                                                                         }else {
                                                                             f_ex_ing.requestFocus();
-                                                                            JOptionPane.showMessageDialog(this,"Verifique que la Fecha de Examen medico tenga vigencia de un mes con respecto a la fecha de ingreso","Error",JOptionPane.ERROR_MESSAGE);
+                                                                            JOptionPane.showMessageDialog(this,"Verifique que la Fecha de Examen medico tenga vigencia de un año con respecto a la fecha de ingreso","Error",JOptionPane.ERROR_MESSAGE);
                                                                         }
                                                                     }else {
                                                                         JOptionPane.showMessageDialog(this,"Ingrese la fecha de examen de ingreso.","Error",JOptionPane.ERROR_MESSAGE);

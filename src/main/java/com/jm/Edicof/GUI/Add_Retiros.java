@@ -2397,12 +2397,12 @@ public boolean verify_data(){
                     modelo.setValueAt("Sin observaciones", i, row_obs);
                 }
             }
-            if (check_cedula(modelo.getValueAt(i, 0))) {
-                if (check_empleador(modelo.getValueAt(i, 1))){
-                    if (check_fecha(modelo.getValueAt(i, 2))){
+            if (check_cedula(modelo.getValueAt(i, row_cedula))) {
+                if (check_empleador(modelo.getValueAt(i, row_empleador))){
+                    if (check_fecha(modelo.getValueAt(i, row_f_ingreso))){
                         try {
-                            if (check_fecha(modelo.getValueAt(i, 3))) {
-                                r = con.s.executeQuery ("SELECT * FROM `t_novedades` WHERE (ID_EMPLEADO ="+modelo.getValueAt(i, 0)+" AND ID_EMPRESA='"+get_id_empleador(modelo.getValueAt(i, 1))+"' AND FECHA_INGRESO='"+new SimpleDateFormat("yyyy-MM-dd").format(new SimpleDateFormat("dd-MM-yyyy").parse(modelo.getValueAt(i, 2).toString()))+"' AND FECHA_RETIRO='1900-01-01' AND ID_TIPO=2);");
+                            if (check_fecha(modelo.getValueAt(i, row_f_retiro))) {
+                                r = con.s.executeQuery ("SELECT * FROM `t_novedades` WHERE (ID_EMPLEADO ="+modelo.getValueAt(i, row_cedula)+" AND ID_EMPRESA='"+get_id_empleador(modelo.getValueAt(i, row_empleador))+"' AND FECHA_INGRESO='"+new SimpleDateFormat("yyyy-MM-dd").format(new SimpleDateFormat("dd-MM-yyyy").parse(modelo.getValueAt(i, row_f_ingreso).toString()))+"' AND FECHA_RETIRO='1900-01-01' AND ID_TIPO=2);");
                                 if(!r.next()){
                                     Calendar date_today = Calendar.getInstance();
                                     date_today.setTime(new Date());
@@ -2411,13 +2411,13 @@ public boolean verify_data(){
                                     date_today.set(Calendar.SECOND,0);
                                     date_today.set(Calendar.MILLISECOND,0);
                                     Calendar date_out = Calendar.getInstance();
-                                    date_out.setTime(new SimpleDateFormat("dd-MM-yyyy").parse(modelo.getValueAt(i, 3).toString()));
+                                    date_out.setTime(new SimpleDateFormat("dd-MM-yyyy").parse(modelo.getValueAt(i, row_f_retiro).toString()));
                                     date_out.set(Calendar.HOUR_OF_DAY,0);
                                     date_out.set(Calendar.MINUTE,0);
                                     date_out.set(Calendar.SECOND,0);
                                     date_out.set(Calendar.MILLISECOND,0);
                                     Calendar date_in = Calendar.getInstance();
-                                    date_in.setTime(new SimpleDateFormat("dd-MM-yyyy").parse(modelo.getValueAt(i, 2).toString()));
+                                    date_in.setTime(new SimpleDateFormat("dd-MM-yyyy").parse(modelo.getValueAt(i, row_f_ingreso).toString()));
                                     date_in.set(Calendar.HOUR_OF_DAY,0);
                                     date_in.set(Calendar.MINUTE,0);
                                     date_in.set(Calendar.SECOND,0);
@@ -2451,7 +2451,7 @@ public boolean verify_data(){
                                             if (date_out.getTime().compareTo(date_out_low.getTime())>=0 & date_today.getTime().compareTo(date_4.getTime())<=0) {
                                                 ret=true&ret;
                                             }else{
-                                                jTable1.changeSelection(i,3, false, false);
+                                                jTable1.changeSelection(i,row_f_retiro, false, false);
                                                 jTable1.requestFocus();
                                                 JOptionPane.showMessageDialog(this,"Verifique que la fecha de Retiro sea mayor o igual al utimo dia del mes pasado y solo puede ser registrada los 4 primeros dias del mes corriente","Error",JOptionPane.ERROR_MESSAGE);
                                                 ret=false&ret;
@@ -2477,7 +2477,7 @@ public boolean verify_data(){
                                                         ret=true&ret;
                                                         //break;
                                                     }else{
-                                                        jTable1.changeSelection(i,3, false, false);
+                                                        jTable1.changeSelection(i,row_f_retiro, false, false);
                                                         jTable1.requestFocus();
                                                         JOptionPane.showMessageDialog(this,"Verifique que la fecha de Retiro sea menor o igual al primer dia del mes siguiente","Error",JOptionPane.ERROR_MESSAGE);
                                                         ret=false&ret;
@@ -2487,7 +2487,7 @@ public boolean verify_data(){
                                             }
                                         }
                                     }else{
-                                        jTable1.changeSelection(i,3, false, false);
+                                        jTable1.changeSelection(i,row_f_retiro, false, false);
                                         jTable1.requestFocus();
                                         JOptionPane.showMessageDialog(this,"Verifique que la fecha de Retiro sea mayor o igual a la fecha de Ingreso","Error",JOptionPane.ERROR_MESSAGE);
                                         ret=false&ret;
@@ -2495,14 +2495,14 @@ public boolean verify_data(){
                                     }
                                 }
                                 else{
-                                    jTable1.changeSelection(i,0, false, false);
+                                    jTable1.changeSelection(i,row_cedula, false, false);
                                     jTable1.requestFocus();
                                     JOptionPane.showMessageDialog(this,"Esta novedad de Retiro que intenta ingresar ya existe.","Error",JOptionPane.ERROR_MESSAGE);
                                     ret=false&ret;
                                     break;
                                 }
                             }else{
-                                jTable1.changeSelection(i,3, false, false);
+                                jTable1.changeSelection(i,row_f_retiro, false, false);
                                 jTable1.requestFocus();
                                 JOptionPane.showMessageDialog(this,"Verifique la fecha de Retiro del empleado","Error",JOptionPane.ERROR_MESSAGE);
                                 ret=false&ret;
@@ -2516,21 +2516,21 @@ public boolean verify_data(){
                             break;
                         } 
                     } else {
-                        jTable1.changeSelection(i,2, false, false);
+                        jTable1.changeSelection(i,row_f_ingreso, false, false);
                         jTable1.requestFocus();
                         JOptionPane.showMessageDialog(this,"Verifique la Fecha de Ingreso del empleado..","Error",JOptionPane.ERROR_MESSAGE);
                         ret=false&ret;
                         break;
                     }
                 } else {
-                    jTable1.changeSelection(i,1, false, false);
+                    jTable1.changeSelection(i,row_empleador, false, false);
                     jTable1.requestFocus();
                     JOptionPane.showMessageDialog(this,"Verifique el nombre de la Empresa del empleado","Error",JOptionPane.ERROR_MESSAGE);
                     ret=false&ret;
                     break;
                 }
             } else {
-                jTable1.changeSelection(i,0, false, false);
+                jTable1.changeSelection(i,row_cedula, false, false);
                 jTable1.requestFocus();
                 JOptionPane.showMessageDialog(this,"Verifique la Cedula del empleado","Error",JOptionPane.ERROR_MESSAGE);
                 ret=false&ret;

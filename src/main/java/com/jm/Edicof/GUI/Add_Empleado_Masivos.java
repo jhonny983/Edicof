@@ -796,7 +796,7 @@ public class Add_Empleado_Masivos extends javax.swing.JDialog {
                             }else {
                                 empleados.changeSelection(i,3, false, false);
                                 empleados.requestFocus();
-                                JOptionPane.showMessageDialog(this,"Verifique la fecha de nacimiento del empleado","Error",JOptionPane.ERROR_MESSAGE);
+                                JOptionPane.showMessageDialog(this,"Verifique la fecha de expedicion del empleado","Error",JOptionPane.ERROR_MESSAGE);
                                 ret=false&ret;
                                 break;
                             }

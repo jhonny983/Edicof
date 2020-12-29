@@ -724,7 +724,6 @@
               <Properties>
                 <Property name="columns" type="int" value="20"/>
                 <Property name="rows" type="int" value="5"/>
-                <Property name="text" type="java.lang.String" value="kjhflksadhf&#xf1;lsdhf&#xf1;lksjdhfksjdhfksjdhfskjdhflksjdhfksljdhflksjdhflksjdhfksljdhfksjdhfksjdhf&#xf1;ksjdhfksn.,smznvc,zxmcnvxlkcjvh&#xf1;lksjdf&#xf1;lksjdhf&#xf1;ksjdhfs&#xf1;kjdfh&#xf1;ksjdhf&#xf1;lksjfdhlskjfdhlskjfdhslkjhf"/>
               </Properties>
               <Events>
                 <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="obsFocusLost"/>
