@@ -9,7 +9,8 @@ import com.jm.Edicof.GUI.Main;
 import java.sql.* ;
 import javax.swing.*;
 public class Conexion {
-    public String dbUrl = "jdbc:mysql://"+Main.host+":3306/"+Main.bd;
+    public String dbUrl = "jdbc:mysql://"+Main.host+":3306/"+Main.bd+"?useTimezone=true&serverTimezone=UTC";
+    //public String dbUrl = "jdbc:mysql://"+Main.host+":3306/"+Main.bd;
     public String usuario = Main.usu;//"root";
     public String contrasena = Main.cont;//"root";
     static public Connection c;
@@ -19,13 +20,15 @@ public class Conexion {
         
     }
     public Conexion(String ip, String db, String usu, String cont) {
-        this.dbUrl="jdbc:mysql://"+ip+":3306/"+db;
+        this.dbUrl="jdbc:mysql://"+ip+":3306/"+db+"?useTimezone=true&serverTimezone=UTC";
+        //this.dbUrl="jdbc:mysql://"+ip+":3306/"+db;
         this.usuario = usu;
         this.contrasena = cont;
     }
     public boolean first_conexion(){
         try {
-            Class.forName ("com.mysql.jdbc.Driver");
+            Class.forName ("com.mysql.cj.jdbc.Driver");
+            //Class.forName ("com.mysql.jdbc.Driver");
             c = DriverManager.getConnection(dbUrl, usuario, contrasena);
             s = c.createStatement() ;
             p=true;
@@ -37,9 +40,10 @@ public class Conexion {
     }
     public boolean test(String h, String d, String u, String c){
         boolean t = false;
-        String url = "jdbc:mysql://"+h+":3306/"+d; 
+        String url = "jdbc:mysql://"+h+":3306/"+d+"?useTimezone=true&serverTimezone=UTC"; 
         try {
-            Class.forName ("com.mysql.jdbc.Driver");
+            Class.forName ("com.mysql.cj.jdbc.Driver");
+            //Class.forName ("com.mysql.jdbc.Driver");
             this.c = DriverManager.getConnection(url, u, c);
             this.s = this.c.createStatement() ;
             t=true;
@@ -52,7 +56,8 @@ public class Conexion {
     }
     public boolean conexion(){
         try {
-            Class.forName ("com.mysql.jdbc.Driver");
+            Class.forName ("com.mysql.cj.jdbc.Driver");
+            //Class.forName ("com.mysql.jdbc.Driver");
             c = DriverManager.getConnection(dbUrl, usuario, contrasena);
             s = c.createStatement() ;
             p=true;
