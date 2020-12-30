@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Cruce_Tesoreria" pageWidth="612" pageHeight="792" columnWidth="572" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isIgnorePagination="true" uuid="a3e15edc-a4ee-4dc2-9523-227ca1795bf6">
 	<property name="ireport.zoom" value="3.7974983358324153"/>
-	<property name="ireport.x" value="995"/>
+	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
 	<parameter name="ID_PREC" class="java.lang.Integer">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
@@ -65,13 +65,28 @@ WHERE t_cruce_tesoreria.ID_CRUCE_PREC = $P{ID_PREC} ORDER BY t_det_cruce_tesorer
 	<field name="OBS" class="java.lang.String">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
+	<field name="ID_TIPO_NIT" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
 	<field name="NOMBRE_EMPRESA" class="java.lang.String">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
-	<field name="ID_ARL" class="java.lang.Integer">
+	<field name="ID_ARL" class="java.lang.String">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
-	<field name="ID_CCF" class="java.lang.Integer">
+	<field name="ID_CCF" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="ID_ACTIVIDAD" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="ID_REP_EMPRESA" class="java.lang.Long">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="REPRESENTANTE_LEGAL" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="TEL_CEL_RL_EMPRESA" class="java.lang.String">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<field name="CORREO_INTERNO" class="java.lang.String">
@@ -98,13 +113,28 @@ WHERE t_cruce_tesoreria.ID_CRUCE_PREC = $P{ID_PREC} ORDER BY t_det_cruce_tesorer
 	<field name="ENABLE_3" class="java.lang.Integer">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
-	<field name="REPRESENTANTE_LEGAL" class="java.lang.String">
+	<field name="TEL_CEL_EMPRESA" class="java.lang.String">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
-	<field name="TELEFONOS" class="java.lang.String">
+	<field name="DIR_EMPRESA" class="java.lang.String">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
-	<field name="ID_ACTIVIDAD" class="java.lang.Integer">
+	<field name="ID_MUN_EMPRESA" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="ID_TAM_EMPRESA" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="REG_MER_EMPRESA" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="F_REN_REG_MERC" class="java.sql.Date">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="F_LIM_SEG" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="ESTADO_EMPRESA" class="java.lang.Integer">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<field name="F_INICIAL" class="java.sql.Date">

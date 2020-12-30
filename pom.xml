@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.jm</groupId>
     <artifactId>Edicof</artifactId>
-    <version>3.0.4.7</version>
+    <version>3.0.4.9</version>
     <packaging>jar</packaging>
     <dependencies>
         <dependency>
@@ -68,7 +68,7 @@
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
-            <version>8.0.16</version> <!-- <version>5.1.40</version> -->
+            <version>5.1.40</version> <!-- <version>5.1.40</version> 8.0.16 -->
         </dependency>
         <!-- https://mvnrepository.com/artifact/commons-io/commons-io -->
         <dependency>
