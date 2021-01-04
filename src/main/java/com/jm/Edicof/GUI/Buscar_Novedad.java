@@ -749,22 +749,23 @@ public class Buscar_Novedad extends javax.swing.JDialog {
     private void delete_novedadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_delete_novedadActionPerformed
         // TODO add your handling code here:
         String aux ="";
+        
         if (novedades.getSelectedRow()!=-1) {
             if (Main.rol.getText().equals("ADMINISTRADOR") | Main.rol.getText().equals("MASTER")) {
-                int conf = JOptionPane.showConfirmDialog(this,"Esta seguro que desea eliminar la Novedad?\n Cedula: "+modelo.getValueAt(novedades.getSelectedRow(),row_cedula).toString()+"\nEmpresa: "+modelo.getValueAt(novedades.getSelectedRow(),row_empleador).toString()+"\nFecha de Ingreso: "+new SimpleDateFormat("dd-MM-yyyy").format(modelo.getValueAt(novedades.getSelectedRow(),row_f_ingreso))+"\nFecha de Retiro: "+new SimpleDateFormat("dd-MM-yyyy").format(modelo.getValueAt(novedades.getSelectedRow(),row_f_retiro)).replace("01-01-1900","")+"\nTipo de Novedad: "+modelo.getValueAt(novedades.getSelectedRow(),row_tipo).toString(),"Confirmación",JOptionPane.OK_CANCEL_OPTION,JOptionPane.QUESTION_MESSAGE);
+                int conf = JOptionPane.showConfirmDialog(this,"Esta seguro que desea eliminar la Novedad?\n Cedula: "+novedades.getValueAt(novedades.getSelectedRow(),row_cedula).toString()+"\nEmpresa: "+novedades.getValueAt(novedades.getSelectedRow(),row_empleador).toString()+"\nFecha de Ingreso: "+new SimpleDateFormat("dd-MM-yyyy").format(novedades.getValueAt(novedades.getSelectedRow(),row_f_ingreso))+"\nFecha de Retiro: "+new SimpleDateFormat("dd-MM-yyyy").format(novedades.getValueAt(novedades.getSelectedRow(),row_f_retiro)).replace("01-01-1900","")+"\nTipo de Novedad: "+novedades.getValueAt(novedades.getSelectedRow(),row_tipo).toString(),"Confirmación",JOptionPane.OK_CANCEL_OPTION,JOptionPane.QUESTION_MESSAGE);
                 if (conf == JOptionPane.YES_OPTION) {
                     Conexion con = new Conexion();
                     con.conexion();
                     ResultSet r;
                     try {
-                        r = con.s.executeQuery ("SELECT * FROM t_tipo_novedad WHERE NOMBRE_TIPO ='"+modelo.getValueAt(novedades.getSelectedRow(),row_tipo).toString()+"'");
+                        r = con.s.executeQuery ("SELECT * FROM t_tipo_novedad WHERE NOMBRE_TIPO ='"+novedades.getValueAt(novedades.getSelectedRow(),row_tipo).toString()+"'");
                         if (r.next()) {
                            aux=r.getString("ID_TIPO");//con.s.executeUpdate
                            con.s.executeUpdate("DELETE FROM T_NOVEDADES "
                                    + "WHERE ID_EMPLEADO="+modelo.getValueAt(novedades.getSelectedRow(),row_cedula).toString()+" "
                                    + "AND ID_EMPRESA='"+modelo.getValueAt(novedades.getSelectedRow(),row_nit).toString()+"' "
-                                   + "AND FECHA_INGRESO='"+new SimpleDateFormat("yyyy-MM-dd").format(modelo.getValueAt(novedades.getSelectedRow(),row_f_ingreso))+"' "
-                                   + "AND FECHA_RETIRO='"+new SimpleDateFormat("yyyy-MM-dd").format(modelo.getValueAt(novedades.getSelectedRow(),row_f_retiro))+"' "
+                                   + "AND FECHA_INGRESO='"+new SimpleDateFormat("yyyy-MM-dd").format(novedades.getValueAt(novedades.getSelectedRow(),row_f_ingreso))+"' "
+                                   + "AND FECHA_RETIRO='"+new SimpleDateFormat("yyyy-MM-dd").format(novedades.getValueAt(novedades.getSelectedRow(),row_f_retiro))+"' "
                                    + "AND ID_TIPO="+aux);
                            JOptionPane.showMessageDialog(this,"La Novedad ha sido eliminada","Confirmación",JOptionPane.INFORMATION_MESSAGE);
                            clear_novedades();
