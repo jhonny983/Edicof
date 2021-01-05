@@ -762,8 +762,8 @@ public class Buscar_Novedad extends javax.swing.JDialog {
                         if (r.next()) {
                            aux=r.getString("ID_TIPO");//con.s.executeUpdate
                            con.s.executeUpdate("DELETE FROM T_NOVEDADES "
-                                   + "WHERE ID_EMPLEADO="+modelo.getValueAt(novedades.getSelectedRow(),row_cedula).toString()+" "
-                                   + "AND ID_EMPRESA='"+modelo.getValueAt(novedades.getSelectedRow(),row_nit).toString()+"' "
+                                   + "WHERE ID_EMPLEADO="+novedades.getValueAt(novedades.getSelectedRow(),row_cedula).toString()+" "
+                                   + "AND ID_EMPRESA='"+novedades.getValueAt(novedades.getSelectedRow(),row_nit).toString()+"' "
                                    + "AND FECHA_INGRESO='"+new SimpleDateFormat("yyyy-MM-dd").format(novedades.getValueAt(novedades.getSelectedRow(),row_f_ingreso))+"' "
                                    + "AND FECHA_RETIRO='"+new SimpleDateFormat("yyyy-MM-dd").format(novedades.getValueAt(novedades.getSelectedRow(),row_f_retiro))+"' "
                                    + "AND ID_TIPO="+aux);
