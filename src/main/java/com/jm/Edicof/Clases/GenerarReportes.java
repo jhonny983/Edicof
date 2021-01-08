@@ -70,6 +70,7 @@ public class GenerarReportes extends Thread{
     Struct_no_asistencias_empresas s_n_a_e;
     Struct_Cruce_Precalculo s_c_p;
     Struct_Cruce_Tesoreria s_c_t;
+    Struct_FIC s_f;
     public GenerarReportes(Object o) {
         this.rep=o;
     }
@@ -173,6 +174,11 @@ public class GenerarReportes extends Thread{
                                                                                             System.out.println("Personal Activo Externo Semanal");
                                                                                             s_p_a_s_e = (Struct_personal_activo_semanal_externo)rep;
                                                                                             personal_activo_semanal_externo(s_p_a_s_e.path, s_p_a_s_e.formato, s_p_a_s_e.fecha);
+                                                                                        }else{
+                                                                                            if (rep instanceof Struct_FIC) {
+                                                                                                s_f = (Struct_FIC) rep;
+                                                                                                fic(s_f.path, s_f.formato, s_f.fechaini, s_f.fechafin,s_f.empresa, s_f.FIC_HC, s_f.all);
+                                                                                            }
                                                                                         }
                                                                                     }
                                                                                 }
@@ -1948,7 +1954,221 @@ public class GenerarReportes extends Thread{
             con.cerrar();
         }
     }
+    public void fic (String path, String formato, String fechaini, String fechafin,String empresa, int FIC_HC, boolean all){
+        System.out.println("Path: "+path);
+        //path = "C:\\Users\\Johnnatan\\Documents\\Precalculo_FIC.pdf";
+        if (all) {//PARAMETRO QUE DETERMINA LA CREACION DE LOS REPORTES DE FIC DE TODAS LAS EMPRESAS
+            System.out.println("FIC");
+            Wait_rep.btn_aceptar.setEnabled(false);
+            s_f.dialog.setCursor(new Cursor(Cursor.WAIT_CURSOR)); 
+            Wait_rep.mensaje.setText("Generando reportes de FIC");
+            path=path+"\\Precaulo_FIC_"+fechaini+"_A_"+fechafin;
+            File folder = new File(path);
+            folder.mkdirs();
+            float salario_min=0;
+            Conexion con = new Conexion();
+            con.conexion();
+            try {
+                ResultSet r;
+                r = con.s.executeQuery("SELECT*\n" +
+                                        "FROM\n" +
+                                        "    t_parametros\n" +
+                                        "WHERE	\n" +
+                                        "    NOMBRE_PAR='SALARIO_MINIMO'");
+                if (r.next()) {
+                    salario_min=new Float(r.getString("VALOR_PAR"));
+                }
+                r = con.s.executeQuery ("SELECT t_novedades.ID_EMPRESA, NOMBRE_EMPRESA\n" +
+                                        "FROM\n" +
+                                        "t_novedades\n" +
+                                        "INNER JOIN t_obra \n" +
+                                        "	ON (t_novedades.ID_OBRA = t_obra.ID_OBRA)\n" +
+                                        "INNER JOIN t_municipios \n" +
+                                        "	ON (t_obra.ID_MUN_OBRA = t_municipios.ID_MUN)\n" +
+                                        "INNER JOIN t_grupo_empresa \n" +
+                                        "	ON (t_obra.ID_GRUPO = t_grupo_empresa.ID_GRUPO)\n" +
+                                        "INNER JOIN t_departamentos \n" +
+                                        "	ON (t_municipios.ID_DEP = t_departamentos.ID_DEP)\n" +
+                                        "INNER JOIN t_afp \n" +
+                                        "	ON (t_novedades.ID_AFP = t_afp.ID_AFP)\n" +
+                                        "INNER JOIN t_eps \n" +
+                                        "	ON (t_novedades.ID_EPS = t_eps.ID_EPS)\n" +
+                                        "INNER JOIN t_empresas \n" +
+                                        "	ON (t_novedades.ID_EMPRESA = t_empresas.ID_EMPRESA)\n" +
+                                        "INNER JOIN t_empleados \n" +
+                                        "	ON (t_novedades.ID_EMPLEADO = t_empleados.ID_EMP)\n" +
+                                        "INNER JOIN t_tipo_novedad \n" +
+                                        "	ON (t_novedades.ID_TIPO = t_tipo_novedad.ID_TIPO)\n" +
+                                        "WHERE\n" +
+                                        "t_novedades.ID_TIPO IN (1,2,4,6)\n" +
+                                        "AND ((t_novedades.`FECHA_INGRESO` <= '"+fechafin+"' AND t_novedades.`FECHA_RETIRO` = '1900-01-01')\n" +
+                                        "	OR ( t_novedades.`FECHA_INGRESO` <= '"+fechafin+"' AND t_novedades.`FECHA_RETIRO` >= '"+fechaini+"'))\n" +
+                                        "GROUP BY t_novedades.ID_EMPRESA");
+                Wait_rep.bar.setMaximum(getRowCount(r)+1);
+                while (r.next()) {
+                    String id_empresa = r.getString("ID_EMPRESA");
+                    Date f_ini = new SimpleDateFormat("yyyy-MM-dd").parse(fechaini);
+                    Date f_fin = new SimpleDateFormat("yyyy-MM-dd").parse(fechafin);
+                    ClassLoader cl= this.getClass().getClassLoader();
+                    InputStream fis = (cl.getResourceAsStream("Reportes/FIC.jasper"));
+                    JasperReport rep = (JasperReport) JRLoader.loadObject(fis);
+                    Map par = new HashMap();
+                    //System.out.println("nit: "+);
+                    par.put("ID_EMPRESA",id_empresa);
+                    par.put("F_INICIAL",f_ini);
+                    par.put("F_FINAL",f_fin);
+                    par.put("SALARIO_MIN",salario_min);
+                    par.put("HALF_COMPLETE",FIC_HC);//HALF_COMPLETE
+                    par.put("HOST",Main.host);
+                    par.put("DB",Main.bd);
+                    par.put("USU",Main.usu);
+                    par.put("CONT",Main.cont);
+                    JasperPrint jprint = JasperFillManager.fillReport(rep,par,con.c);
+                    if (formato.equals(".pdf")) {
+                        Wait_rep.progreso_1.setText(id_empresa+"-"+r.getString("NOMBRE_EMPRESA")+"_.pdf");
+                        JasperExportManager.exportReportToPdfFile(jprint,path+"\\"+id_empresa+"-"+r.getString("NOMBRE_EMPRESA")+"_.pdf");
+                    }
+                    if (formato.equals(".xls")) {
+                        Wait_rep.progreso_1.setText(id_empresa+"-"+r.getString("NOMBRE_EMPRESA")+"_.xlsx");
+                        JRXlsxExporter exporterXLS = new JRXlsxExporter();
+                        Map<String, String> dateFormats = new HashMap<String, String>();
+                        dateFormats.put("EEEEE, MMM d, yyyy", "ddd, mmm d, yyyy");
+                        SimpleXlsxReportConfiguration repConfig = new SimpleXlsxReportConfiguration();
+                        exporterXLS.setExporterInput(new SimpleExporterInput(jprint));
+                        exporterXLS.setExporterOutput(new SimpleOutputStreamExporterOutput(path+"\\"+id_empresa+"-"+r.getString("NOMBRE_EMPRESA")+"_.xlsx"));       
+                        repConfig.setWrapText(Boolean.TRUE);//
+                        repConfig.setOnePagePerSheet(Boolean.FALSE);
+                        repConfig.setDetectCellType(Boolean.TRUE);
+                        repConfig.setWhitePageBackground(Boolean.TRUE);
+                        repConfig.setRemoveEmptySpaceBetweenRows(Boolean.TRUE);
+                        repConfig.setRemoveEmptySpaceBetweenColumns(Boolean.TRUE);
+                        repConfig.setFormatPatternsMap(dateFormats);
+                        repConfig.setCollapseRowSpan(Boolean.TRUE);//
+                        exporterXLS.setConfiguration(repConfig);
+                        exporterXLS.exportReport();
+                    }
+                    Wait_rep.bar.setValue(r.getRow());
+                }
+                //////--------------------------REPORTE FIC CONSOLIDADO--------------------------///////
+                ClassLoader cl1= this.getClass().getClassLoader();
+                InputStream fis1 = (cl1.getResourceAsStream("Reportes/Descuentos_FIC.jasper"));
+                JasperReport rep1 = (JasperReport) JRLoader.loadObject(fis1);
+                Map par1 = new HashMap();
+                par1.put("F_INICIAL",new SimpleDateFormat("yyyy-MM-dd").parse(fechaini));
+                par1.put("F_FINAL",new SimpleDateFormat("yyyy-MM-dd").parse(fechafin));
+                par1.put("SALARIO_MIN",salario_min);
+                par1.put("host",Main.host);
+                par1.put("db",Main.bd);
+                par1.put("usu",Main.usu);
+                par1.put("cont",Main.cont);
+                par1.put("HALF_COMPLETE",FIC_HC);
+                JasperPrint jprint1 = JasperFillManager.fillReport(rep1,par1,con.c);
+                if (formato.equals(".pdf")) {
+                    Wait_rep.progreso_1.setText("CONSOLIDADO_FIC.pdf");
+                    JasperExportManager.exportReportToPdfFile(jprint1,path+"\\CONSOLIDADO_FIC.pdf");
+                }
+                if (formato.equals(".xls")) {
+                    Wait_rep.progreso_1.setText("CONSOLIDADO_FIC.xls");
+                    JRXlsxExporter exporterXLS = new JRXlsxExporter();
+                    Map<String, String> dateFormats = new HashMap<String, String>();
+                    dateFormats.put("EEEEE, MMM d, yyyy", "ddd, mmm d, yyyy");
+                    SimpleXlsxReportConfiguration repConfig = new SimpleXlsxReportConfiguration();
+                    exporterXLS.setExporterInput(new SimpleExporterInput(jprint1));
+                    exporterXLS.setExporterOutput(new SimpleOutputStreamExporterOutput(path+"\\CONSOLIDADO_FIC.xlsx"));       
+                    repConfig.setWrapText(Boolean.TRUE);//
+                    repConfig.setOnePagePerSheet(Boolean.FALSE);
+                    repConfig.setDetectCellType(Boolean.TRUE);
+                    repConfig.setWhitePageBackground(Boolean.TRUE);
+                    repConfig.setRemoveEmptySpaceBetweenRows(Boolean.TRUE);
+                    repConfig.setRemoveEmptySpaceBetweenColumns(Boolean.TRUE);
+                    repConfig.setFormatPatternsMap(dateFormats);
+                    repConfig.setCollapseRowSpan(Boolean.TRUE);//
+                    exporterXLS.setConfiguration(repConfig);
+                    exporterXLS.exportReport();
+                }
+                con.cerrar();
+                Wait_rep.bar.setValue(Wait_rep.bar.getMaximum());
+                Toolkit.getDefaultToolkit().beep();
+                JOptionPane.showMessageDialog(null,"Los reportes se han generado correctamente","Información",JOptionPane.INFORMATION_MESSAGE);
+                s_f.dialog.dispose();
+            } catch (JRException | ParseException | SQLException e) {
+                con.cerrar();
+                e.printStackTrace();
+                JOptionPane.showMessageDialog(null,e,"Error",JOptionPane.ERROR_MESSAGE);
+            }
+        } else {//REPORTE DE FIC INDIVIDUAL POR EMPRESA
+            Wait_rep.btn_aceptar.setEnabled(false);
+            s_f.dialog.setCursor(new Cursor(Cursor.WAIT_CURSOR));
+            Wait_rep.mensaje.setText("Generando reportes de FIC");
+            Wait_rep.bar.setMaximum(1);
+            float salario_min=0;
+            Conexion con = new Conexion();
+            con.conexion();
+            try {
+                ResultSet r;
+                r = con.s.executeQuery("SELECT*\n" +
+                                        "FROM\n" +
+                                        "    t_parametros\n" +
+                                        "WHERE	\n" +
+                                        "    NOMBRE_PAR='SALARIO_MINIMO'");
+                if (r.next()) {
+                    salario_min=new Float(r.getString("VALOR_PAR"));
+                }
+                //String id_empresa = r.getString("ID_EMPRESA");
+                Date f_ini = new SimpleDateFormat("yyyy-MM-dd").parse(fechaini);
+                Date f_fin = new SimpleDateFormat("yyyy-MM-dd").parse(fechafin);
+                ClassLoader cl= this.getClass().getClassLoader();
+                InputStream fis = (cl.getResourceAsStream("Reportes/FIC.jasper"));
+                JasperReport rep = (JasperReport) JRLoader.loadObject(fis);
+                Map par = new HashMap();
+                par.put("ID_EMPRESA",empresa);
+                par.put("F_INICIAL",f_ini);
+                par.put("F_FINAL",f_fin);
+                par.put("SALARIO_MIN",salario_min);
+                par.put("HALF_COMPLETE",FIC_HC);//HALF_COMPLETE
+                par.put("HOST",Main.host);
+                par.put("DB",Main.bd);
+                par.put("USU",Main.usu);
+                par.put("CONT",Main.cont);
+                JasperPrint jprint = JasperFillManager.fillReport(rep,par,con.c);
+                Wait_rep.progreso_1.setText(s_f.empresa);
+                Wait_rep.bar.setValue(1);
+                if (formato.equals(".pdf")) {
+                    System.out.println("Formato PDF");
+                    JasperExportManager.exportReportToPdfFile(jprint,path);
+                }
+                if (formato.equals(".xls")) {
+                    JRXlsxExporter exporterXLS = new JRXlsxExporter();
+                    Map<String, String> dateFormats = new HashMap<String, String>();
+                    dateFormats.put("EEEEE, MMM d, yyyy", "ddd, mmm d, yyyy");
+                    SimpleXlsxReportConfiguration repConfig = new SimpleXlsxReportConfiguration();
+                    exporterXLS.setExporterInput(new SimpleExporterInput(jprint));
+                    exporterXLS.setExporterOutput(new SimpleOutputStreamExporterOutput(path));       
+                    repConfig.setWrapText(Boolean.TRUE);//
+                    repConfig.setOnePagePerSheet(Boolean.FALSE);
+                    repConfig.setDetectCellType(Boolean.TRUE);
+                    repConfig.setWhitePageBackground(Boolean.TRUE);
+                    repConfig.setRemoveEmptySpaceBetweenRows(Boolean.TRUE);
+                    repConfig.setRemoveEmptySpaceBetweenColumns(Boolean.TRUE);
+                    repConfig.setFormatPatternsMap(dateFormats);
+                    repConfig.setCollapseRowSpan(Boolean.TRUE);//
+                    exporterXLS.setConfiguration(repConfig);
+                    exporterXLS.exportReport();
+
+                }
+                con.cerrar();
+                Toolkit.getDefaultToolkit().beep();
+                JOptionPane.showMessageDialog(null,"El reporte se ha generado correctamente","Información",JOptionPane.INFORMATION_MESSAGE);
+                s_f.dialog.dispose();
+            } catch (SQLException | NumberFormatException | JRException | ParseException e) {
+                con.cerrar();
+                e.printStackTrace();
+                JOptionPane.showMessageDialog(null,e,"Error",JOptionPane.ERROR_MESSAGE);
+            }
+        }
+            
     
+    }
     public InputStream exportXls(JasperPrint jprint) throws JRException, IOException {
         InputStream inputStream = null;
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();

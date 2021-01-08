@@ -712,6 +712,11 @@ class MyTableCellEditorDate extends AbstractCellEditor implements TableCellEdito
         boolean confirm = false;
         if(verify_data()){
             if (JOptionPane.showConfirmDialog(this, "La informacion esta completa\nEsta seguro que desea almacenar la información?", "Confirmación", JOptionPane.YES_NO_OPTION)==JOptionPane.YES_OPTION) {
+                modelo = (DefaultTableModel) info_soci_demo.getModel();
+                info_soci_demo.setModel(modelo);
+                Conexion con = new Conexion();
+                con.conexion();
+                ResultSet r;
                 for (int i = 0; i < info_soci_demo.getRowCount(); i++) {
                     int id_mun_res=0;
                     int id_barrio=0;
@@ -722,9 +727,7 @@ class MyTableCellEditorDate extends AbstractCellEditor implements TableCellEdito
                     int id_niv_acad=0;
                     int id_nacion=0;
                     int id_par=0;
-                    Conexion con = new Conexion();
-                    con.conexion();
-                    ResultSet r;
+                    
                     try{
                         //**************GET ID MUNICIPIO RESIDENCIA
                         id_mun_res=Integer.parseInt(get_id_municipio(info_soci_demo.getValueAt(i, 3)));
@@ -823,22 +826,28 @@ class MyTableCellEditorDate extends AbstractCellEditor implements TableCellEdito
                                 + ""+info_soci_demo.getValueAt(i, 11).toString()+","
                                 + ""+info_soci_demo.getValueAt(i, 12).toString()+","
                                 + "'"+info_soci_demo.getValueAt(i, 19).toString()+"')");
-                        JOptionPane.showMessageDialog(null,"La información ha sido almacenada correctamente","Confirmación",JOptionPane.INFORMATION_MESSAGE);
-                        con.cerrar();
-                        this.dispose();
+                        modelo.removeRow(i);
+                        i=i-1;
+                        confirm = confirm & true;
+                        
+                        
+                        
+                        //JOptionPane.showMessageDialog(null,"La información ha sido almacenada correctamente","Confirmación",JOptionPane.INFORMATION_MESSAGE);
+                        //con.cerrar();
+                        
                     }catch(SQLException j){
                         con.cerrar();
                         j.printStackTrace();
                         JOptionPane.showMessageDialog(null,j,"Error",JOptionPane.ERROR_MESSAGE);
+                        confirm=false;
+                        break;
                     }
                 }
-                
-                
-                
-                
-                    
+                con.cerrar();
+                if (confirm) {
+                    JOptionPane.showMessageDialog(this,"La información ha sido ingresada correctamente","Informacion",JOptionPane.INFORMATION_MESSAGE);
+                }
             }
-
         }
     }//GEN-LAST:event_jButton6ActionPerformed
 
