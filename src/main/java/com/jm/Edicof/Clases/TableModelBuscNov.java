@@ -16,7 +16,7 @@ public class TableModelBuscNov extends DefaultTableModel{
         super(rowData, columnNames);
     }
     boolean[] canEdit = new boolean [] {
-        false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false
+        false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false,false
     };
     Class[] types = new Class [] {
         Long.class,
@@ -39,13 +39,15 @@ public class TableModelBuscNov extends DefaultTableModel{
         java.lang.Object.class,
         java.lang.Object.class,
         java.lang.Object.class,
+        java.lang.Object.class,
         java.lang.Object.class
     };
     
     @Override
     public Class getColumnClass(int col) {
-        return getValueAt(0, col).getClass();        
-//return types[col];
+        System.out.println("Columna: "+col);
+        //return getValueAt(0, col).getClass();        
+        return types[col];
     }
     @Override
     public boolean isCellEditable(int rowIndex, int columnIndex) {

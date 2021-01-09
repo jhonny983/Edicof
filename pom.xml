@@ -219,7 +219,7 @@
                         </executions>
                         <configuration>
                             <classpathScope></classpathScope>
-                            <executable>ISCC.exe</executable>
+                            <executable>C:\Program Files (x86)\Inno Setup 5\ISCC.exe</executable>
                             <!-- optional -->
                             <workingDirectory></workingDirectory>
                             <arguments>

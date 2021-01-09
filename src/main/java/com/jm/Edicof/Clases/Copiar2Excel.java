@@ -128,16 +128,18 @@ public void copyaction(){
         }
     for (int i = 0; i < rows; i++) {
         for (int j = 0; j < cols; j++) {
-            if (j==20) {
+            if (j==21) {
                 sbf.append(jTable1.getValueAt(rowsselected[i], colsselected[j]).toString().replace("\n", " - "));
-            }else if(j==4 | j==5 | j==13 ){
+            }else if(j==4 | j==5 | j==13 | j==14 | j==15 ){
                 if (new SimpleDateFormat("yyyy-MM-dd").format(jTable1.getValueAt(rowsselected[i], colsselected[j])).equals("1900-01-01")) {
                     sbf.append("");
                 }else{
                     sbf.append(new SimpleDateFormat("yyyy-MM-dd").format(jTable1.getValueAt(rowsselected[i], colsselected[j])));
                 }
-            }else{
+            }else if (jTable1.getValueAt(rowsselected[i], colsselected[j])!=null){
                 sbf.append(jTable1.getValueAt(rowsselected[i], colsselected[j]));
+            }else{
+                sbf.append("");
             }
             if (j < numcols - 1) {
                 sbf.append('\t');

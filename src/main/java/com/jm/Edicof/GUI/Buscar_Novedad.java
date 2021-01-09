@@ -53,12 +53,13 @@ public class Buscar_Novedad extends javax.swing.JDialog {
                                                                                 "CCF", 
                                                                                 "Tipo", 
                                                                                 "F Registro", 
-//                                                                                "F nacimiento", 
-//                                                                                "F expedición", 
-//                                                                                "Direccion", 
-//                                                                                "Barrio", 
-//                                                                                "Telefono",
-                                                                                "Municipio", 
+                                                                                "F nacimiento", 
+                                                                                "F expedición", 
+                                                                                "Direccion", 
+                                                                                "Barrio", 
+                                                                                "Municipio Residencia",
+                                                                                "Telefono",
+                                                                                "Municipio Obra", 
                                                                                 "Observaciones"});
     //////////////////////----------------------------
     int row_cedula=0;
@@ -75,8 +76,14 @@ public class Buscar_Novedad extends javax.swing.JDialog {
     int row_ccf=11;
     int row_tipo=12;
     int row_f_registro=13;
-    int row_mun=14; 
-    int row_obs=15;
+    int row_f_nac = 14;
+    int row_f_exp = 15;
+    int row_dir = 16;
+    int row_barrio = 17;
+    int row_mun_res = 18;
+    int row_telefono = 19;
+    int row_mun=20; 
+    int row_obs=21;
     /**
      * Creates new form Editar_Novedad
      * 
@@ -134,10 +141,12 @@ public class Buscar_Novedad extends javax.swing.JDialog {
         novedades.getColumnModel().getColumn(13).setCellRenderer(tcr);
         novedades.getColumnModel().getColumn(14).setCellRenderer(tcr);
         novedades.getColumnModel().getColumn(15).setCellRenderer(tcr);
-//        novedades.getColumnModel().getColumn(16).setCellRenderer(tcr);
-//        novedades.getColumnModel().getColumn(17).setCellRenderer(tcr);
-//        novedades.getColumnModel().getColumn(18).setCellRenderer(tcr);
-//        novedades.getColumnModel().getColumn(19).setCellRenderer(tcr);
+        novedades.getColumnModel().getColumn(16).setCellRenderer(tcr);
+        novedades.getColumnModel().getColumn(17).setCellRenderer(tcr);
+        novedades.getColumnModel().getColumn(18).setCellRenderer(tcr);
+        novedades.getColumnModel().getColumn(19).setCellRenderer(tcr);
+        novedades.getColumnModel().getColumn(20).setCellRenderer(tcr);
+        novedades.getColumnModel().getColumn(21).setCellRenderer(tcr);
         while(novedades.getRowCount()!=0){
             modelo.removeRow(novedades.getRowCount()-1);
         }
@@ -367,61 +376,51 @@ public class Buscar_Novedad extends javax.swing.JDialog {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap(18, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1)
                             .addComponent(jLabel9)
                             .addComponent(jLabel10))
-                        .addGap(24, 24, 24)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(cb_empleados, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(jLabel2)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(t_empleador, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(jLabel7))
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(tf_municipio, javax.swing.GroupLayout.PREFERRED_SIZE, 418, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(jLabel8)))
-                                .addGap(18, 18, 18)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(tf_eps, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(tf_afp, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(428, 428, 428)
-                                .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(tf_arl, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(27, 27, 27)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(cb_empleados, 0, 1, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(t_empleador, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(tf_municipio, javax.swing.GroupLayout.PREFERRED_SIZE, 438, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(tf_obra, javax.swing.GroupLayout.PREFERRED_SIZE, 438, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(tf_obra, javax.swing.GroupLayout.PREFERRED_SIZE, 418, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(f_inicio, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jLabel4)
-                                .addGap(16, 16, 16)
-                                .addComponent(f_final, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jLabel5)
-                                .addGap(18, 18, 18)
-                                .addComponent(tipo_nov, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jLabel12)
-                                .addGap(18, 18, 18)
-                                .addComponent(tf_ccf, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                        .addComponent(f_inicio, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel4)
+                        .addGap(16, 16, 16)
+                        .addComponent(f_final, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel5)
+                        .addGap(18, 18, 18)
+                        .addComponent(tipo_nov, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
+                    .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel11, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel12, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(tf_arl, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tf_eps, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tf_afp, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tf_ccf, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -445,11 +444,12 @@ public class Buscar_Novedad extends javax.swing.JDialog {
                         .addComponent(tf_municipio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(tf_afp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel10)
-                    .addComponent(jLabel11)
-                    .addComponent(tf_obra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tf_arl, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel10)
+                        .addComponent(jLabel11)
+                        .addComponent(tf_obra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(tf_arl, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -480,9 +480,9 @@ public class Buscar_Novedad extends javax.swing.JDialog {
         jScrollPane1.setViewportView(novedades);
         if (novedades.getColumnModel().getColumnCount() > 0) {
             novedades.getColumnModel().getColumn(0).setPreferredWidth(80);
-            novedades.getColumnModel().getColumn(1).setPreferredWidth(200);
+            novedades.getColumnModel().getColumn(1).setPreferredWidth(250);
             novedades.getColumnModel().getColumn(2).setPreferredWidth(80);
-            novedades.getColumnModel().getColumn(3).setPreferredWidth(200);
+            novedades.getColumnModel().getColumn(3).setPreferredWidth(250);
             novedades.getColumnModel().getColumn(4).setPreferredWidth(80);
             novedades.getColumnModel().getColumn(5).setPreferredWidth(80);
             novedades.getColumnModel().getColumn(6).setPreferredWidth(100);
@@ -492,9 +492,15 @@ public class Buscar_Novedad extends javax.swing.JDialog {
             novedades.getColumnModel().getColumn(10).setPreferredWidth(160);
             novedades.getColumnModel().getColumn(11).setPreferredWidth(160);
             novedades.getColumnModel().getColumn(12).setPreferredWidth(100);
-            novedades.getColumnModel().getColumn(13).setPreferredWidth(80);
-            novedades.getColumnModel().getColumn(14).setPreferredWidth(80);
-            novedades.getColumnModel().getColumn(15).setPreferredWidth(1000);
+            novedades.getColumnModel().getColumn(13).setPreferredWidth(120);
+            novedades.getColumnModel().getColumn(14).setPreferredWidth(120);
+            novedades.getColumnModel().getColumn(15).setPreferredWidth(120);
+            novedades.getColumnModel().getColumn(16).setPreferredWidth(160);
+            novedades.getColumnModel().getColumn(17).setPreferredWidth(80);
+            novedades.getColumnModel().getColumn(18).setPreferredWidth(150);
+            novedades.getColumnModel().getColumn(19).setPreferredWidth(80);
+            novedades.getColumnModel().getColumn(20).setPreferredWidth(150);
+            novedades.getColumnModel().getColumn(21).setPreferredWidth(1000);
 
         }
 
@@ -623,13 +629,16 @@ public class Buscar_Novedad extends javax.swing.JDialog {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         clear_novedades();
         Conexion con = new Conexion();
+        Conexion con1 = new Conexion();
         con.conexion();
-        ResultSet r;
+        con1.conexion();
+        ResultSet r, r1;
         try {
             r = con.s.executeQuery (query(cb_empleados, t_empleador, tf_municipio, tf_obra, tf_eps, tf_afp, tf_arl, tf_ccf, f_inicio, f_final, tipo_nov));
             while (r.next()) {     
+                long cedula = Long.parseLong(r.getString("ID_EMPLEADO"));
                 modelo.addRow(fila);
-                modelo.setValueAt(Long.parseLong(r.getString("ID_EMPLEADO")),novedades.getRowCount()-1,row_cedula);
+                modelo.setValueAt(cedula,novedades.getRowCount()-1,row_cedula);
                 modelo.setValueAt(r.getString("APELLIDO_1_EMP")+" "+r.getString("APELLIDO_2_EMP")+" "+r.getString("NOMBRE_1_EMP")+" "+r.getString("NOMBRE_2_EMP"),novedades.getRowCount()-1,row_empleado);
                 modelo.setValueAt(r.getString("ID_EMPRESA"),novedades.getRowCount()-1,row_nit);
                 modelo.setValueAt(r.getString("NOMBRE_EMPRESA"),novedades.getRowCount()-1,row_empleador);
@@ -643,8 +652,31 @@ public class Buscar_Novedad extends javax.swing.JDialog {
                 modelo.setValueAt(r.getString("CCF_NOV"),novedades.getRowCount()-1,row_ccf);
                 modelo.setValueAt(r.getString("NOMBRE_TIPO"),novedades.getRowCount()-1,row_tipo);
                 modelo.setValueAt(new SimpleDateFormat("yyyy-MM-dd").parse(r.getString("F_REGISTRO")),novedades.getRowCount()-1,row_f_registro);//F_EXP_NOV
+                r1 = con1.s.executeQuery (  "SELECT *\n" +
+                                            "FROM `t_empleados`\n" +
+                                            "WHERE ID_EMP = "+cedula+";");
+                if (r1.next()) {
+                    modelo.setValueAt(new SimpleDateFormat("yyyy-MM-dd").parse(r1.getString("FECHA_NAC")),novedades.getRowCount()-1,row_f_nac);
+                    modelo.setValueAt(new SimpleDateFormat("yyyy-MM-dd").parse(r1.getString("FECHA_EXP")),novedades.getRowCount()-1,row_f_exp);
+                }
+                r1 = con1.s.executeQuery (  "SELECT *\n" +
+                                            "FROM\n" +
+                                            "    `t_info_sociodemografica`\n" +
+                                            "    INNER JOIN `t_barrio` \n" +
+                                            "        ON (`t_info_sociodemografica`.`ID_BARRIO` = `t_barrio`.`ID_BARRIO`)\n" +
+                                            "    INNER JOIN `t_municipios` \n" +
+                                            "        ON (`t_info_sociodemografica`.`ID_MUN_RES_EMP` = `t_municipios`.`ID_MUN`)\n" +
+                                            "WHERE ID_EMP = "+cedula+";");
+                if (r1.next()) {
+                    modelo.setValueAt(r1.getString("DIRECCION_EMP"),novedades.getRowCount()-1,row_dir);
+                    modelo.setValueAt(r1.getString("NOMBRE_BARRIO"),novedades.getRowCount()-1,row_barrio);
+                    modelo.setValueAt(r1.getString("NOMBRE_MUN")+"-"+r.getString("NOMBRE_DEP"),novedades.getRowCount()-1,row_mun_res);
+                    modelo.setValueAt(r1.getString("TEL_CEL_EMP"),novedades.getRowCount()-1,row_telefono);
+                    
+                }
 //                modelo.setValueAt(new SimpleDateFormat("yyyy-MM-dd").parse(r.getString("F_NAC_NOV")),novedades.getRowCount()-1,14);
 //                modelo.setValueAt(new SimpleDateFormat("yyyy-MM-dd").parse(r.getString("F_EXP_NOV")),novedades.getRowCount()-1,15);
+//                modelo.setValueAt(r.getString("DIR_EMP_NOV"),novedades.getRowCount()-1,16);
 //                modelo.setValueAt(r.getString("DIR_EMP_NOV"),novedades.getRowCount()-1,16);
 //                modelo.setValueAt(r.getString("BARRIO_NOV"),novedades.getRowCount()-1,17);
 //                modelo.setValueAt(r.getString("TEL_NOV"),novedades.getRowCount()-1,18);
