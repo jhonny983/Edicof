@@ -46,6 +46,7 @@ public class Buscar_Novedad extends javax.swing.JDialog {
                                                                                 "F Ingreso", 
                                                                                 "F Retiro", 
                                                                                 "Salario", 
+                                                                                "Excluido",
                                                                                 "Obra", 
                                                                                 "EPS", 
                                                                                 "AFP", 
@@ -69,21 +70,22 @@ public class Buscar_Novedad extends javax.swing.JDialog {
     int row_f_ingreso = 4;
     int row_f_retiro = 5;
     int row_salario=6;
-    int row_obra=7;
-    int row_eps=8;
-    int row_afp=9;
-    int row_arl=10;
-    int row_ccf=11;
-    int row_tipo=12;
-    int row_f_registro=13;
-    int row_f_nac = 14;
-    int row_f_exp = 15;
-    int row_dir = 16;
-    int row_barrio = 17;
-    int row_mun_res = 18;
-    int row_telefono = 19;
-    int row_mun=20; 
-    int row_obs=21;
+    int row_fic=7;
+    int row_obra=8;
+    int row_eps=9;
+    int row_afp=10;
+    int row_arl=11;
+    int row_ccf=12;
+    int row_tipo=13;
+    int row_f_registro=14;
+    int row_f_nac = 15;
+    int row_f_exp = 16;
+    int row_dir = 17;
+    int row_barrio = 18;
+    int row_mun_res = 19;
+    int row_telefono = 20;
+    int row_mun=21; 
+    int row_obs=22;
     /**
      * Creates new form Editar_Novedad
      * 
@@ -257,6 +259,8 @@ public class Buscar_Novedad extends javax.swing.JDialog {
         tf_afp = new javax.swing.JTextField();
         tf_arl = new javax.swing.JTextField();
         tf_ccf = new javax.swing.JTextField();
+        jLabel13 = new javax.swing.JLabel();
+        tipo_fic = new javax.swing.JComboBox<>();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         novedades = new javax.swing.JTable();
@@ -371,52 +375,67 @@ public class Buscar_Novedad extends javax.swing.JDialog {
 
         tf_ccf.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 
+        jLabel13.setText("Excluido FIC");
+
+        tipo_fic.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione..", "SI", "NO" }));
+        tipo_fic.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                tipo_ficItemStateChanged(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap(18, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel9)
-                            .addComponent(jLabel10))
-                        .addGap(27, 27, 27)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addComponent(cb_empleados, 0, 1, Short.MAX_VALUE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel2)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel1)
+                                    .addComponent(jLabel9)
+                                    .addComponent(jLabel10))
+                                .addGap(27, 27, 27)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                        .addComponent(cb_empleados, 0, 1, Short.MAX_VALUE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jLabel2)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(t_empleador, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(tf_municipio, javax.swing.GroupLayout.PREFERRED_SIZE, 438, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(tf_obra, javax.swing.GroupLayout.PREFERRED_SIZE, 438, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel3)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(t_empleador, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(tf_municipio, javax.swing.GroupLayout.PREFERRED_SIZE, 438, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(tf_obra, javax.swing.GroupLayout.PREFERRED_SIZE, 438, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel3)
+                                .addComponent(f_inicio, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jLabel4)
+                                .addGap(16, 16, 16)
+                                .addComponent(f_final, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jLabel5)
+                                .addGap(18, 18, 18)
+                                .addComponent(tipo_nov, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(f_inicio, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel4)
-                        .addGap(16, 16, 16)
-                        .addComponent(f_final, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel5)
-                        .addGap(18, 18, 18)
-                        .addComponent(tipo_nov, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel11, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel12, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel7)
+                            .addComponent(jLabel8)
+                            .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel12)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel13)
+                        .addGap(12, 12, 12)))
+                .addGap(22, 22, 22)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(tf_arl, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(tf_eps, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(tf_afp, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tf_ccf, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(tf_ccf)
+                    .addComponent(tipo_fic, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -450,7 +469,7 @@ public class Buscar_Novedad extends javax.swing.JDialog {
                         .addComponent(jLabel11)
                         .addComponent(tf_obra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(tf_arl, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel12)
@@ -462,6 +481,10 @@ public class Buscar_Novedad extends javax.swing.JDialog {
                         .addComponent(tipo_nov, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel4)
                         .addComponent(jLabel5)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel13)
+                    .addComponent(tipo_fic, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -486,21 +509,22 @@ public class Buscar_Novedad extends javax.swing.JDialog {
             novedades.getColumnModel().getColumn(4).setPreferredWidth(80);
             novedades.getColumnModel().getColumn(5).setPreferredWidth(80);
             novedades.getColumnModel().getColumn(6).setPreferredWidth(100);
-            novedades.getColumnModel().getColumn(7).setPreferredWidth(160);
+            novedades.getColumnModel().getColumn(7).setPreferredWidth(100);
             novedades.getColumnModel().getColumn(8).setPreferredWidth(160);
             novedades.getColumnModel().getColumn(9).setPreferredWidth(160);
             novedades.getColumnModel().getColumn(10).setPreferredWidth(160);
             novedades.getColumnModel().getColumn(11).setPreferredWidth(160);
-            novedades.getColumnModel().getColumn(12).setPreferredWidth(100);
-            novedades.getColumnModel().getColumn(13).setPreferredWidth(120);
+            novedades.getColumnModel().getColumn(12).setPreferredWidth(160);
+            novedades.getColumnModel().getColumn(13).setPreferredWidth(100);
             novedades.getColumnModel().getColumn(14).setPreferredWidth(120);
             novedades.getColumnModel().getColumn(15).setPreferredWidth(120);
-            novedades.getColumnModel().getColumn(16).setPreferredWidth(160);
-            novedades.getColumnModel().getColumn(17).setPreferredWidth(80);
-            novedades.getColumnModel().getColumn(18).setPreferredWidth(150);
-            novedades.getColumnModel().getColumn(19).setPreferredWidth(80);
-            novedades.getColumnModel().getColumn(20).setPreferredWidth(150);
-            novedades.getColumnModel().getColumn(21).setPreferredWidth(1000);
+            novedades.getColumnModel().getColumn(16).setPreferredWidth(120);
+            novedades.getColumnModel().getColumn(17).setPreferredWidth(160);
+            novedades.getColumnModel().getColumn(18).setPreferredWidth(80);
+            novedades.getColumnModel().getColumn(19).setPreferredWidth(150);
+            novedades.getColumnModel().getColumn(20).setPreferredWidth(80);
+            novedades.getColumnModel().getColumn(21).setPreferredWidth(150);
+            novedades.getColumnModel().getColumn(22).setPreferredWidth(1000);
 
         }
 
@@ -517,7 +541,7 @@ public class Buscar_Novedad extends javax.swing.JDialog {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 221, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 220, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -552,23 +576,20 @@ public class Buscar_Novedad extends javax.swing.JDialog {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btn_copy)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                    .addComponent(btn_copy)
+                    .addComponent(n_novedades, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel6))
                 .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(n_novedades, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap(17, Short.MAX_VALUE)
+                .addContainerGap(56, Short.MAX_VALUE)
                 .addComponent(jLabel6)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(n_novedades)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 50, Short.MAX_VALUE)
                 .addComponent(btn_copy)
                 .addGap(23, 23, 23))
         );
@@ -634,7 +655,8 @@ public class Buscar_Novedad extends javax.swing.JDialog {
         con1.conexion();
         ResultSet r, r1;
         try {
-            r = con.s.executeQuery (query(cb_empleados, t_empleador, tf_municipio, tf_obra, tf_eps, tf_afp, tf_arl, tf_ccf, f_inicio, f_final, tipo_nov));
+            //System.out.println("SQL: "+query(cb_empleados, t_empleador, tf_municipio, tf_obra, tf_eps, tf_afp, tf_arl, tf_ccf, f_inicio, f_final, tipo_nov, tipo_fic));
+            r = con.s.executeQuery (query(cb_empleados, t_empleador, tf_municipio, tf_obra, tf_eps, tf_afp, tf_arl, tf_ccf, f_inicio, f_final, tipo_nov, tipo_fic));
             while (r.next()) {     
                 long cedula = Long.parseLong(r.getString("ID_EMPLEADO"));
                 modelo.addRow(fila);
@@ -645,6 +667,7 @@ public class Buscar_Novedad extends javax.swing.JDialog {
                 modelo.setValueAt(new SimpleDateFormat("yyyy-MM-dd").parse(r.getString("FECHA_INGRESO")),novedades.getRowCount()-1,row_f_ingreso);
                 modelo.setValueAt(new SimpleDateFormat("yyyy-MM-dd").parse(r.getString("FECHA_RETIRO")),novedades.getRowCount()-1,row_f_retiro);
                 modelo.setValueAt(String.format ("%.0f", Float.parseFloat(r.getString("SALARIO_NOVEDAD"))),novedades.getRowCount()-1,row_salario);
+                modelo.setValueAt(r.getString("EXON_FIC"),novedades.getRowCount()-1,row_fic);
                 modelo.setValueAt(r.getString("NOMBRE_OBRA"),novedades.getRowCount()-1,row_obra);
                 modelo.setValueAt(r.getString("NOMBRE_EPS"),novedades.getRowCount()-1,row_eps);
                 modelo.setValueAt(r.getString("NOMBRE_AFP"),novedades.getRowCount()-1,row_afp);
@@ -858,6 +881,14 @@ public class Buscar_Novedad extends javax.swing.JDialog {
 
     }//GEN-LAST:event_btn_copyActionPerformed
 
+    private void tipo_ficItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_tipo_ficItemStateChanged
+        // TODO add your handling code here:
+        while(novedades.getRowCount()!=0){
+            modelo.removeRow(novedades.getRowCount()-1);
+        }
+        n_novedades.setText(String.valueOf(novedades.getRowCount()));
+    }//GEN-LAST:event_tipo_ficItemStateChanged
+
     /**
      * @param args the command line arguments
      */
@@ -921,6 +952,7 @@ public class Buscar_Novedad extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -944,6 +976,7 @@ public class Buscar_Novedad extends javax.swing.JDialog {
     private javax.swing.JTextField tf_eps;
     private javax.swing.JTextField tf_municipio;
     private javax.swing.JTextField tf_obra;
+    private javax.swing.JComboBox<String> tipo_fic;
     private javax.swing.JComboBox<String> tipo_nov;
     // End of variables declaration//GEN-END:variables
 public void ac_cedula(){
@@ -1170,7 +1203,7 @@ public void load_data(String afp){
         
     }
 }
-public String query (javax.swing.JComboBox cedula, javax.swing.JTextField empleador, javax.swing.JTextField municipio, javax.swing.JTextField obra, javax.swing.JTextField eps, javax.swing.JTextField afp, javax.swing.JTextField arl, javax.swing.JTextField ccf, com.toedter.calendar.JDateChooser f_ini, com.toedter.calendar.JDateChooser f_fin, javax.swing.JComboBox tipo ){
+public String query (javax.swing.JComboBox cedula, javax.swing.JTextField empleador, javax.swing.JTextField municipio, javax.swing.JTextField obra, javax.swing.JTextField eps, javax.swing.JTextField afp, javax.swing.JTextField arl, javax.swing.JTextField ccf, com.toedter.calendar.JDateChooser f_ini, com.toedter.calendar.JDateChooser f_fin, javax.swing.JComboBox tipo, javax.swing.JComboBox fic ){
     String ret = "";
     String str_cedula = "";
     String str_empleador = "";
@@ -1182,6 +1215,7 @@ public String query (javax.swing.JComboBox cedula, javax.swing.JTextField emplea
     String str_ccf= "";
     String str_tipo="";
     String str_date= "";
+    String str_fic = "";
     String str_query = "SELECT\n" +
                         "  *\n" +
                         "  FROM t_novedades\n" +
@@ -1247,6 +1281,11 @@ public String query (javax.swing.JComboBox cedula, javax.swing.JTextField emplea
     }else{
         str_tipo =" ";
     }
+    if (!fic.getSelectedItem().equals("Seleccione..") ) {
+        str_fic = "t_novedades.EXON_FIC ='"+fic.getSelectedItem()+"'";
+    }else{
+        str_fic = " ";
+    }
     if (f_inicio.getDate()==null & f_final.getDate()==null) {
         str_date = " ";
     }else{
@@ -1301,11 +1340,14 @@ public String query (javax.swing.JComboBox cedula, javax.swing.JTextField emplea
     if ((!str_cedula.equals(" ") | !str_empleador.equals(" ") | !str_municipio.equals(" ") | !str_obra.equals(" ") | !str_eps.equals(" ") | !str_afp.equals(" ") | !str_arl.equals(" ") | !str_ccf.equals(" "))& !str_tipo.equals(" ")) {
         str_tipo = " AND "+str_tipo;
     }
-    if ((!str_cedula.equals(" ") | !str_empleador.equals(" ") | !str_municipio.equals(" ") | !str_obra.equals(" ") | !str_eps.equals(" ") | !str_afp.equals(" ") | !str_arl.equals(" ") | !str_ccf.equals(" ") | !str_tipo.equals(" "))& !str_date.equals(" ")) {
+    if ((!str_cedula.equals(" ") | !str_empleador.equals(" ") | !str_municipio.equals(" ") | !str_obra.equals(" ") | !str_eps.equals(" ") | !str_afp.equals(" ") | !str_arl.equals(" ") | !str_ccf.equals(" ") | !str_tipo.equals(" "))& !str_fic.equals(" ") ) {
+        str_fic = " AND "+str_fic;
+    }
+    if ((!str_cedula.equals(" ") | !str_empleador.equals(" ") | !str_municipio.equals(" ") | !str_obra.equals(" ") | !str_eps.equals(" ") | !str_afp.equals(" ") | !str_arl.equals(" ") | !str_ccf.equals(" ") | !str_tipo.equals(" ") | !str_fic.equals(" "))& !str_date.equals(" ")) {
         str_date = " AND "+str_date;
     }
-    if (!str_cedula.equals(" ") | !str_empleador.equals(" ") | !str_municipio.equals(" ") | !str_obra.equals(" ") | !str_eps.equals(" ") | !str_afp.equals(" ") | !str_arl.equals(" ") | !str_ccf.equals(" ") | !str_tipo.equals(" ") | !str_date.equals(" ")) {
-        str_query = str_query + " WHERE " + str_cedula + str_empleador + str_municipio + str_obra + str_eps + str_afp + str_arl + str_ccf + str_tipo + str_date;
+    if (!str_cedula.equals(" ") | !str_empleador.equals(" ") | !str_municipio.equals(" ") | !str_obra.equals(" ") | !str_eps.equals(" ") | !str_afp.equals(" ") | !str_arl.equals(" ") | !str_ccf.equals(" ") | !str_tipo.equals(" ") | !str_fic.equals(" ") | !str_date.equals(" ")) {
+        str_query = str_query + " WHERE " + str_cedula + str_empleador + str_municipio + str_obra + str_eps + str_afp + str_arl + str_ccf + str_tipo + str_fic + str_date;
     }else{
         str_query = str_query + " ORDER BY F_REGISTRO DESC";
     }

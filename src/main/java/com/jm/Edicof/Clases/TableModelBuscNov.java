@@ -16,7 +16,7 @@ public class TableModelBuscNov extends DefaultTableModel{
         super(rowData, columnNames);
     }
     boolean[] canEdit = new boolean [] {
-        false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false,false
+        false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false,false
     };
     Class[] types = new Class [] {
         Long.class,
@@ -26,6 +26,7 @@ public class TableModelBuscNov extends DefaultTableModel{
         java.util.Date.class,
         java.util.Date.class,
         Integer.class,
+        java.lang.Object.class,
         java.lang.Object.class,
         java.lang.Object.class,
         java.lang.Object.class,

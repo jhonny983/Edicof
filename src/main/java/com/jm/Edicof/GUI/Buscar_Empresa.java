@@ -12,6 +12,8 @@ import java.awt.Toolkit;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
+import javax.swing.SwingConstants;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -29,6 +31,22 @@ Object [] fila = new Object[11];
     /**
      * Creates new form Buscar_Empresa
      */
+int col_nit = 0;
+int col_nombre = 1;
+int col_sub = 2;
+int col_arl = 3;
+int col_ccf = 4;
+int col_mail_int = 5;
+int col_enable_mail_int = 6;
+int col_mail_cont_1 = 7;
+int col_enable_mail_cont_1 = 8;
+int col_mail_cont_2 = 9;
+int col_enable_mail_cont_2 = 10;
+int col_mail_cont_3 = 11;
+int col_enable_mail_cont_3 = 12;
+int col_rl = 13;
+int col_tel = 14;
+int col_act = 15;
     public Buscar_Empresa(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
@@ -46,6 +64,13 @@ Object [] fila = new Object[11];
         tac_ccf.setMode(0);
         tac_actividad.setMode(0);
         clear_empresas();
+        //*********************************
+        DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
+        tcr.setHorizontalAlignment(SwingConstants.CENTER);
+        for (int i = 0; i < empresas.getColumnCount(); i++) {
+            empresas.getColumnModel().getColumn(i).setCellRenderer(tcr);
+        }
+        
     }
     public void init(){
         tac_empleador = new TextAutoCompleter(t_empleador);
@@ -66,8 +91,8 @@ Object [] fila = new Object[11];
         jPopupMenu1 = new javax.swing.JPopupMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenuItem1 = new javax.swing.JMenuItem();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jPanel1 = new javax.swing.JPanel();
+        jMenu1 = new javax.swing.JMenu();
+        jMenuItem3 = new javax.swing.JMenuItem();
         jPanel2 = new javax.swing.JPanel();
         cb_nit = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
@@ -106,6 +131,18 @@ Object [] fila = new Object[11];
             }
         });
         jPopupMenu1.add(jMenuItem1);
+
+        jMenu1.setText("Subcontratista");
+
+        jMenuItem3.setText("Administrar");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem3);
+
+        jPopupMenu1.add(jMenu1);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Buscar empresa");
@@ -166,28 +203,29 @@ Object [] fila = new Object[11];
                 .addGap(14, 14, 14)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(cb_nit, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jLabel2)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(t_empleador, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(t_empleador))
                             .addComponent(tf_obra, javax.swing.GroupLayout.PREFERRED_SIZE, 418, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                                .addComponent(jLabel12)
-                                .addGap(18, 18, 18)
-                                .addComponent(tf_ccf, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                                .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(tf_arl, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(17, 17, 17)))
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(tf_ccf)
+                            .addComponent(tf_arl, javax.swing.GroupLayout.DEFAULT_SIZE, 139, Short.MAX_VALUE))
                         .addGap(10, 10, 10)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton1)
-                            .addComponent(jButton2)))
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addComponent(actividad, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(19, Short.MAX_VALUE))
         );
@@ -220,16 +258,17 @@ Object [] fila = new Object[11];
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Resultados de la busqueda"));
         jPanel3.setPreferredSize(new java.awt.Dimension(484, 267));
 
+        empresas.setAutoCreateRowSorter(true);
         empresas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Nit", "Nombre Empresa", "ARL", "CCF", "Correo Interno", "Habilitar Interno", "Correo Contratista 1", "Habilitar Correo 1", "Correo Contratista 2", "Habilitar Correo 2", "Correo Contratista 3", "Habilitar Correo 3", "Representante Legal", "Telefonos", "Actividad"
+                "Nit", "Nombre Empresa", "Subcontratista", "ARL", "CCF", "Correo Interno", "Habilitar Interno", "Correo Contratista 1", "Habilitar Correo 1", "Correo Contratista 2", "Habilitar Correo 2", "Correo Contratista 3", "Habilitar Correo 3", "Representante Legal", "Telefonos", "Actividad"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false, false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -240,51 +279,54 @@ Object [] fila = new Object[11];
         empresas.setComponentPopupMenu(jPopupMenu1);
         jScrollPane2.setViewportView(empresas);
         if (empresas.getColumnModel().getColumnCount() > 0) {
-            empresas.getColumnModel().getColumn(0).setMinWidth(80);
-            empresas.getColumnModel().getColumn(0).setPreferredWidth(80);
-            empresas.getColumnModel().getColumn(0).setMaxWidth(80);
-            empresas.getColumnModel().getColumn(1).setMinWidth(250);
-            empresas.getColumnModel().getColumn(1).setPreferredWidth(250);
-            empresas.getColumnModel().getColumn(1).setMaxWidth(250);
-            empresas.getColumnModel().getColumn(2).setMinWidth(150);
-            empresas.getColumnModel().getColumn(2).setPreferredWidth(150);
-            empresas.getColumnModel().getColumn(2).setMaxWidth(150);
+            empresas.getColumnModel().getColumn(0).setMinWidth(120);
+            empresas.getColumnModel().getColumn(0).setPreferredWidth(120);
+            empresas.getColumnModel().getColumn(0).setMaxWidth(120);
+            empresas.getColumnModel().getColumn(1).setMinWidth(450);
+            empresas.getColumnModel().getColumn(1).setPreferredWidth(450);
+            empresas.getColumnModel().getColumn(1).setMaxWidth(450);
+            empresas.getColumnModel().getColumn(2).setMinWidth(120);
+            empresas.getColumnModel().getColumn(2).setPreferredWidth(120);
+            empresas.getColumnModel().getColumn(2).setMaxWidth(120);
             empresas.getColumnModel().getColumn(3).setMinWidth(150);
             empresas.getColumnModel().getColumn(3).setPreferredWidth(150);
             empresas.getColumnModel().getColumn(3).setMaxWidth(150);
-            empresas.getColumnModel().getColumn(4).setMinWidth(250);
-            empresas.getColumnModel().getColumn(4).setPreferredWidth(250);
-            empresas.getColumnModel().getColumn(4).setMaxWidth(250);
-            empresas.getColumnModel().getColumn(5).setMinWidth(80);
-            empresas.getColumnModel().getColumn(5).setPreferredWidth(80);
-            empresas.getColumnModel().getColumn(5).setMaxWidth(80);
-            empresas.getColumnModel().getColumn(6).setMinWidth(250);
-            empresas.getColumnModel().getColumn(6).setPreferredWidth(250);
-            empresas.getColumnModel().getColumn(6).setMaxWidth(250);
-            empresas.getColumnModel().getColumn(7).setMinWidth(80);
-            empresas.getColumnModel().getColumn(7).setPreferredWidth(80);
-            empresas.getColumnModel().getColumn(7).setMaxWidth(80);
-            empresas.getColumnModel().getColumn(8).setMinWidth(250);
-            empresas.getColumnModel().getColumn(8).setPreferredWidth(250);
-            empresas.getColumnModel().getColumn(8).setMaxWidth(250);
-            empresas.getColumnModel().getColumn(9).setMinWidth(80);
-            empresas.getColumnModel().getColumn(9).setPreferredWidth(80);
-            empresas.getColumnModel().getColumn(9).setMaxWidth(80);
-            empresas.getColumnModel().getColumn(10).setMinWidth(250);
-            empresas.getColumnModel().getColumn(10).setPreferredWidth(250);
-            empresas.getColumnModel().getColumn(10).setMaxWidth(250);
-            empresas.getColumnModel().getColumn(11).setMinWidth(80);
-            empresas.getColumnModel().getColumn(11).setPreferredWidth(80);
-            empresas.getColumnModel().getColumn(11).setMaxWidth(80);
-            empresas.getColumnModel().getColumn(12).setMinWidth(250);
-            empresas.getColumnModel().getColumn(12).setPreferredWidth(250);
-            empresas.getColumnModel().getColumn(12).setMaxWidth(250);
-            empresas.getColumnModel().getColumn(13).setMinWidth(150);
-            empresas.getColumnModel().getColumn(13).setPreferredWidth(150);
-            empresas.getColumnModel().getColumn(13).setMaxWidth(150);
+            empresas.getColumnModel().getColumn(4).setMinWidth(150);
+            empresas.getColumnModel().getColumn(4).setPreferredWidth(150);
+            empresas.getColumnModel().getColumn(4).setMaxWidth(150);
+            empresas.getColumnModel().getColumn(5).setMinWidth(250);
+            empresas.getColumnModel().getColumn(5).setPreferredWidth(250);
+            empresas.getColumnModel().getColumn(5).setMaxWidth(250);
+            empresas.getColumnModel().getColumn(6).setMinWidth(80);
+            empresas.getColumnModel().getColumn(6).setPreferredWidth(80);
+            empresas.getColumnModel().getColumn(6).setMaxWidth(80);
+            empresas.getColumnModel().getColumn(7).setMinWidth(250);
+            empresas.getColumnModel().getColumn(7).setPreferredWidth(250);
+            empresas.getColumnModel().getColumn(7).setMaxWidth(250);
+            empresas.getColumnModel().getColumn(8).setMinWidth(80);
+            empresas.getColumnModel().getColumn(8).setPreferredWidth(80);
+            empresas.getColumnModel().getColumn(8).setMaxWidth(80);
+            empresas.getColumnModel().getColumn(9).setMinWidth(250);
+            empresas.getColumnModel().getColumn(9).setPreferredWidth(250);
+            empresas.getColumnModel().getColumn(9).setMaxWidth(250);
+            empresas.getColumnModel().getColumn(10).setMinWidth(80);
+            empresas.getColumnModel().getColumn(10).setPreferredWidth(80);
+            empresas.getColumnModel().getColumn(10).setMaxWidth(80);
+            empresas.getColumnModel().getColumn(11).setMinWidth(250);
+            empresas.getColumnModel().getColumn(11).setPreferredWidth(250);
+            empresas.getColumnModel().getColumn(11).setMaxWidth(250);
+            empresas.getColumnModel().getColumn(12).setMinWidth(80);
+            empresas.getColumnModel().getColumn(12).setPreferredWidth(80);
+            empresas.getColumnModel().getColumn(12).setMaxWidth(80);
+            empresas.getColumnModel().getColumn(13).setMinWidth(250);
+            empresas.getColumnModel().getColumn(13).setPreferredWidth(250);
+            empresas.getColumnModel().getColumn(13).setMaxWidth(250);
             empresas.getColumnModel().getColumn(14).setMinWidth(150);
             empresas.getColumnModel().getColumn(14).setPreferredWidth(150);
             empresas.getColumnModel().getColumn(14).setMaxWidth(150);
+            empresas.getColumnModel().getColumn(15).setMinWidth(150);
+            empresas.getColumnModel().getColumn(15).setPreferredWidth(150);
+            empresas.getColumnModel().getColumn(15).setMaxWidth(150);
         }
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -300,7 +342,7 @@ Object [] fila = new Object[11];
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 436, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 430, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -333,45 +375,30 @@ Object [] fila = new Object[11];
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 969, Short.MAX_VALUE))
-                .addContainerGap())
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 481, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-
-        jScrollPane1.setViewportView(jPanel1);
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(13, 13, 13)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 1083, Short.MAX_VALUE))
+                .addGap(13, 13, 13))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 648, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(7, 7, 7)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 481, Short.MAX_VALUE)
+                .addGap(8, 8, 8))
         );
 
         pack();
@@ -380,7 +407,6 @@ Object [] fila = new Object[11];
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         clear_empresas();
-        //System.out.println(query(cb_nit, t_empleador, tf_obra, tf_arl, tf_ccf,actividad));
         Conexion con = new Conexion();
         con.conexion();
         ResultSet r;
@@ -388,38 +414,44 @@ Object [] fila = new Object[11];
             r = con.s.executeQuery (query(cb_nit, t_empleador, tf_obra, tf_arl, tf_ccf,actividad));
             while (r.next()) {
                 modelo.addRow(fila);
+                String nit = r.getString("ID_EMPRESA");
                 //novedades.setModel(modelo);
-                modelo.setValueAt(r.getString("ID_EMPRESA"),empresas.getRowCount()-1,0);
-                modelo.setValueAt(r.getString("NOMBRE_EMPRESA"),empresas.getRowCount()-1,1);
-                modelo.setValueAt(r.getString("NOMBRE_ARL"),empresas.getRowCount()-1,2);
-                modelo.setValueAt(r.getString("NOMBRE_CCF"),empresas.getRowCount()-1,3);
-                modelo.setValueAt(r.getString("CORREO_INTERNO"),empresas.getRowCount()-1,4);
+                modelo.setValueAt(nit,empresas.getRowCount()-1,col_nit);
+                modelo.setValueAt(r.getString("NOMBRE_EMPRESA"),empresas.getRowCount()-1,col_nombre);
+                modelo.setValueAt(r.getString("NOMBRE_ARL"),empresas.getRowCount()-1,col_arl);
+                modelo.setValueAt(r.getString("NOMBRE_CCF"),empresas.getRowCount()-1,col_ccf);
+                modelo.setValueAt(r.getString("CORREO_INTERNO"),empresas.getRowCount()-1,col_mail_int);
                 if (r.getInt("ENABLE_INTERNO")==1) {
-                    modelo.setValueAt("SI",empresas.getRowCount()-1,5);
+                    modelo.setValueAt("SI",empresas.getRowCount()-1,col_enable_mail_int);
                 }else{
-                    modelo.setValueAt("NO",empresas.getRowCount()-1,5);
+                    modelo.setValueAt("NO",empresas.getRowCount()-1,col_enable_mail_int);
                 } 
-                modelo.setValueAt(r.getString("CORREO_CONTRATISTA_1"),empresas.getRowCount()-1,6);
+                modelo.setValueAt(r.getString("CORREO_CONTRATISTA_1"),empresas.getRowCount()-1,col_mail_cont_1);
                 if (r.getInt("ENABLE_1")==1) {
-                    modelo.setValueAt("SI",empresas.getRowCount()-1,7);
+                    modelo.setValueAt("SI",empresas.getRowCount()-1,col_enable_mail_cont_1);
                 }else{
-                    modelo.setValueAt("NO",empresas.getRowCount()-1,7);
+                    modelo.setValueAt("NO",empresas.getRowCount()-1,col_enable_mail_cont_1);
                 }
-                modelo.setValueAt(r.getString("CORREO_CONTRATISTA_2"),empresas.getRowCount()-1,8);
+                modelo.setValueAt(r.getString("CORREO_CONTRATISTA_2"),empresas.getRowCount()-1,col_mail_cont_2);
                 if (r.getInt("ENABLE_2")==1) {
-                    modelo.setValueAt("SI",empresas.getRowCount()-1,9);
+                    modelo.setValueAt("SI",empresas.getRowCount()-1,col_enable_mail_cont_2);
                 }else{
-                    modelo.setValueAt("NO",empresas.getRowCount()-1,9);
+                    modelo.setValueAt("NO",empresas.getRowCount()-1,col_enable_mail_cont_2);
                 }
-                modelo.setValueAt(r.getString("CORREO_CONTRATISTA_3"),empresas.getRowCount()-1,10);
+                modelo.setValueAt(r.getString("CORREO_CONTRATISTA_3"),empresas.getRowCount()-1,col_mail_cont_3);
                 if (r.getInt("ENABLE_3")==1) {
-                    modelo.setValueAt("SI",empresas.getRowCount()-1,11);
+                    modelo.setValueAt("SI",empresas.getRowCount()-1,col_enable_mail_cont_3);
                 }else{
-                    modelo.setValueAt("NO",empresas.getRowCount()-1,11);
+                    modelo.setValueAt("NO",empresas.getRowCount()-1,col_enable_mail_cont_3);
                 }
-                modelo.setValueAt(r.getString("REPRESENTANTE_LEGAL"),empresas.getRowCount()-1,12);
-                modelo.setValueAt(r.getString("TEL_CEL_EMPRESA"),empresas.getRowCount()-1,13);
-                modelo.setValueAt(r.getString("NOMBRE_ACTIVIDAD"),empresas.getRowCount()-1,14);
+                modelo.setValueAt(r.getString("REPRESENTANTE_LEGAL"),empresas.getRowCount()-1,col_rl);
+                modelo.setValueAt(r.getString("TEL_CEL_EMPRESA"),empresas.getRowCount()-1,col_tel);
+                modelo.setValueAt(r.getString("NOMBRE_ACTIVIDAD"),empresas.getRowCount()-1,col_act);
+                if (get_subcontratista(nit)) {
+                    modelo.setValueAt("SI",empresas.getRowCount()-1,col_sub);
+                } else {
+                    modelo.setValueAt("NO",empresas.getRowCount()-1,col_sub);
+                }
             }
             n_empresas.setText(String.valueOf(empresas.getRowCount()));
             con.cerrar();
@@ -446,7 +478,7 @@ Object [] fila = new Object[11];
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         // TODO add your handling code here:
         if (empresas.getSelectedRow()!=-1) {
-            Edd_Empresa edd_empresa = new Edd_Empresa(this, true, empresas.getValueAt(empresas.getSelectedRow(),0).toString());
+            Edd_Empresa edd_empresa = new Edd_Empresa(this, true, empresas.getValueAt(empresas.getSelectedRow(),col_nit).toString());
             edd_empresa.setLocationRelativeTo(this);
             edd_empresa.setVisible(true);
             jButton1ActionPerformed(evt);   
@@ -459,7 +491,7 @@ Object [] fila = new Object[11];
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
         // TODO add your handling code here:
         if (empresas.getSelectedRow()!=-1) {
-            View_Empresa view_empresa = new View_Empresa(this, true, empresas.getValueAt(empresas.getSelectedRow(),0).toString());
+            View_Empresa view_empresa = new View_Empresa(this, true, empresas.getValueAt(empresas.getSelectedRow(),col_nit).toString());
             view_empresa.setLocationRelativeTo(this);
             view_empresa.setVisible(true);
             
@@ -467,6 +499,19 @@ Object [] fila = new Object[11];
             JOptionPane.showMessageDialog(null,"Debe seleccionar un registro para visualizarlo","Error",JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_jMenuItem2ActionPerformed
+
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+        // TODO add your handling code here:
+        if (empresas.getSelectedRow()!=-1) {
+            Admin_Subcontratistas admin_sub = new Admin_Subcontratistas(this, true, empresas.getValueAt(empresas.getSelectedRow(),col_nit).toString());
+            admin_sub.setLocationRelativeTo(this);
+            admin_sub.setVisible(true);
+            clear_empresas();
+            jButton1ActionPerformed(evt);
+        } else {
+            JOptionPane.showMessageDialog(null,"Debe seleccionar un registro para visualizarlo","Error",JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -524,14 +569,14 @@ Object [] fila = new Object[11];
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JPanel jPanel1;
+    private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPopupMenu jPopupMenu1;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel n_empresas;
     private javax.swing.JTextField t_empleador;
@@ -724,5 +769,21 @@ public String query (javax.swing.JComboBox nit, javax.swing.JTextField empleador
         
     
 return str_query;
+}
+public boolean get_subcontratista(String n){
+    boolean ret=false;
+    Conexion con = new Conexion();
+    con.conexion();
+    ResultSet r;
+    try{
+        r = con.s.executeQuery ("SELECT *\n" +
+                                "FROM `t_rel_subcontratista` WHERE ID_SUBCONTR = '"+n+"';");
+        ret=r.next();
+        con.cerrar();
+    }catch(SQLException j){
+        con.cerrar();
+        JOptionPane.showMessageDialog(null,j,"Error",JOptionPane.ERROR_MESSAGE);
+    }
+    return ret;
 }
 }

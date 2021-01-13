@@ -282,6 +282,7 @@ Object [] fila = new Object[5];
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Resultados de la busqueda"));
 
+        empleados.setAutoCreateRowSorter(true);
         empleados.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 

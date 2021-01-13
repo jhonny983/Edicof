@@ -123,55 +123,64 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" alignment="0" attributes="0">
+              <Group type="102" attributes="0">
                   <EmptySpace pref="18" max="32767" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="103" groupAlignment="1" attributes="0">
                       <Group type="102" alignment="1" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-                              <Component id="jLabel9" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="jLabel10" alignment="0" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
                               <Group type="102" alignment="1" attributes="0">
-                                  <Component id="cb_empleados" pref="0" max="32767" attributes="0"/>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                  <Component id="t_empleador" min="-2" pref="249" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jLabel9" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jLabel10" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                      <Group type="102" alignment="1" attributes="0">
+                                          <Component id="cb_empleados" pref="0" max="32767" attributes="0"/>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                          <Component id="t_empleador" min="-2" pref="249" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Component id="tf_municipio" alignment="0" min="-2" pref="438" max="-2" attributes="0"/>
+                                      <Component id="tf_obra" min="-2" pref="438" max="-2" attributes="0"/>
+                                  </Group>
                               </Group>
-                              <Component id="tf_municipio" alignment="0" min="-2" pref="438" max="-2" attributes="0"/>
-                              <Component id="tf_obra" min="-2" pref="438" max="-2" attributes="0"/>
+                              <Group type="102" alignment="1" attributes="0">
+                                  <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                  <Component id="f_inicio" min="-2" pref="89" max="-2" attributes="0"/>
+                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                  <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
+                                  <Component id="f_final" min="-2" pref="89" max="-2" attributes="0"/>
+                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                  <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+                                  <Component id="tipo_nov" min="-2" pref="112" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="jLabel7" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="jLabel8" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="jLabel11" alignment="0" min="-2" pref="40" max="-2" attributes="0"/>
+                              <Component id="jLabel12" alignment="0" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <Group type="102" alignment="1" attributes="0">
-                          <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Component id="f_inicio" min="-2" pref="89" max="-2" attributes="0"/>
-                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
-                          <Component id="f_final" min="-2" pref="89" max="-2" attributes="0"/>
-                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
-                          <Component id="tipo_nov" min="-2" pref="112" max="-2" attributes="0"/>
+                          <Component id="jLabel13" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
                       </Group>
                   </Group>
-                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jLabel7" alignment="1" min="-2" max="-2" attributes="0"/>
-                      <Component id="jLabel8" alignment="1" min="-2" max="-2" attributes="0"/>
-                      <Component id="jLabel11" alignment="1" min="-2" pref="24" max="-2" attributes="0"/>
-                      <Component id="jLabel12" alignment="1" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
+                  <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
                       <Component id="tf_arl" min="-2" pref="139" max="-2" attributes="0"/>
                       <Component id="tf_eps" min="-2" pref="140" max="-2" attributes="0"/>
                       <Component id="tf_afp" min="-2" pref="140" max="-2" attributes="0"/>
-                      <Component id="tf_ccf" alignment="1" min="-2" pref="138" max="-2" attributes="0"/>
+                      <Component id="tf_ccf" alignment="0" max="32767" attributes="0"/>
+                      <Component id="tipo_fic" alignment="0" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
@@ -214,7 +223,7 @@
                       </Group>
                       <Component id="tf_arl" alignment="1" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="1" attributes="0">
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel12" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -228,6 +237,11 @@
                           <Component id="jLabel4" alignment="2" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel5" alignment="2" min="-2" max="-2" attributes="0"/>
                       </Group>
+                  </Group>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="jLabel13" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="tipo_fic" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
@@ -378,6 +392,28 @@
             <Property name="horizontalAlignment" type="int" value="0"/>
           </Properties>
         </Component>
+        <Component class="javax.swing.JLabel" name="jLabel13">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Excluido FIC"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JComboBox" name="tipo_fic">
+          <Properties>
+            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+              <StringArray count="3">
+                <StringItem index="0" value="Seleccione.."/>
+                <StringItem index="1" value="SI"/>
+                <StringItem index="2" value="NO"/>
+              </StringArray>
+            </Property>
+          </Properties>
+          <Events>
+            <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="tipo_ficItemStateChanged"/>
+          </Events>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+          </AuxValues>
+        </Component>
       </SubComponents>
     </Container>
     <Container class="javax.swing.JPanel" name="jPanel2">
@@ -403,7 +439,7 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" max="-2" attributes="0"/>
-                  <Component id="jScrollPane1" pref="221" max="32767" attributes="0"/>
+                  <Component id="jScrollPane1" pref="220" max="32767" attributes="0"/>
                   <EmptySpace min="-2" max="-2" attributes="0"/>
               </Group>
           </Group>
@@ -424,7 +460,7 @@
                   <Connection code="modelo" type="code"/>
                 </Property>
                 <Property name="autoResizeMode" type="int" value="0"/>
-                <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor" postCode="if (novedades.getColumnModel().getColumnCount() &gt; 0) {&#xa;    novedades.getColumnModel().getColumn(0).setPreferredWidth(80);&#xa;    novedades.getColumnModel().getColumn(1).setPreferredWidth(250);&#xa;    novedades.getColumnModel().getColumn(2).setPreferredWidth(80);&#xa;    novedades.getColumnModel().getColumn(3).setPreferredWidth(250);&#xa;    novedades.getColumnModel().getColumn(4).setPreferredWidth(80);&#xa;    novedades.getColumnModel().getColumn(5).setPreferredWidth(80);&#xa;    novedades.getColumnModel().getColumn(6).setPreferredWidth(100);&#xa;    novedades.getColumnModel().getColumn(7).setPreferredWidth(160);&#xa;    novedades.getColumnModel().getColumn(8).setPreferredWidth(160);&#xa;    novedades.getColumnModel().getColumn(9).setPreferredWidth(160);&#xa;    novedades.getColumnModel().getColumn(10).setPreferredWidth(160);&#xa;    novedades.getColumnModel().getColumn(11).setPreferredWidth(160);&#xa;    novedades.getColumnModel().getColumn(12).setPreferredWidth(100);&#xa;    novedades.getColumnModel().getColumn(13).setPreferredWidth(120);&#xa;    novedades.getColumnModel().getColumn(14).setPreferredWidth(120);&#xa;    novedades.getColumnModel().getColumn(15).setPreferredWidth(120);&#xa;    novedades.getColumnModel().getColumn(16).setPreferredWidth(160);&#xa;    novedades.getColumnModel().getColumn(17).setPreferredWidth(80);&#xa;    novedades.getColumnModel().getColumn(18).setPreferredWidth(150);&#xa;    novedades.getColumnModel().getColumn(19).setPreferredWidth(80);&#xa;    novedades.getColumnModel().getColumn(20).setPreferredWidth(150);&#xa;    novedades.getColumnModel().getColumn(21).setPreferredWidth(1000);&#xa;&#xa;}">
+                <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor" postCode="if (novedades.getColumnModel().getColumnCount() &gt; 0) {&#xa;    novedades.getColumnModel().getColumn(0).setPreferredWidth(80);&#xa;    novedades.getColumnModel().getColumn(1).setPreferredWidth(250);&#xa;    novedades.getColumnModel().getColumn(2).setPreferredWidth(80);&#xa;    novedades.getColumnModel().getColumn(3).setPreferredWidth(250);&#xa;    novedades.getColumnModel().getColumn(4).setPreferredWidth(80);&#xa;    novedades.getColumnModel().getColumn(5).setPreferredWidth(80);&#xa;    novedades.getColumnModel().getColumn(6).setPreferredWidth(100);&#xa;    novedades.getColumnModel().getColumn(7).setPreferredWidth(100);&#xa;    novedades.getColumnModel().getColumn(8).setPreferredWidth(160);&#xa;    novedades.getColumnModel().getColumn(9).setPreferredWidth(160);&#xa;    novedades.getColumnModel().getColumn(10).setPreferredWidth(160);&#xa;    novedades.getColumnModel().getColumn(11).setPreferredWidth(160);&#xa;    novedades.getColumnModel().getColumn(12).setPreferredWidth(160);&#xa;    novedades.getColumnModel().getColumn(13).setPreferredWidth(100);&#xa;    novedades.getColumnModel().getColumn(14).setPreferredWidth(120);&#xa;    novedades.getColumnModel().getColumn(15).setPreferredWidth(120);&#xa;    novedades.getColumnModel().getColumn(16).setPreferredWidth(120);&#xa;    novedades.getColumnModel().getColumn(17).setPreferredWidth(160);&#xa;    novedades.getColumnModel().getColumn(18).setPreferredWidth(80);&#xa;    novedades.getColumnModel().getColumn(19).setPreferredWidth(150);&#xa;    novedades.getColumnModel().getColumn(20).setPreferredWidth(80);&#xa;    novedades.getColumnModel().getColumn(21).setPreferredWidth(150);&#xa;    novedades.getColumnModel().getColumn(22).setPreferredWidth(1000);&#xa;&#xa;}">
                   <TableColumnModel selectionModel="0"/>
                 </Property>
                 <Property name="componentPopupMenu" type="javax.swing.JPopupMenu" editor="org.netbeans.modules.form.ComponentChooserEditor">
@@ -468,29 +504,25 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace max="32767" attributes="0"/>
-                  <Component id="btn_copy" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-              </Group>
               <Group type="102" attributes="0">
                   <EmptySpace max="32767" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jLabel6" alignment="1" min="-2" max="-2" attributes="0"/>
-                      <Component id="n_novedades" alignment="1" min="-2" pref="48" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="2" attributes="0">
+                      <Component id="btn_copy" alignment="2" min="-2" max="-2" attributes="0"/>
+                      <Component id="n_novedades" alignment="2" min="-2" pref="48" max="-2" attributes="0"/>
+                      <Component id="jLabel6" alignment="2" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace max="32767" attributes="0"/>
+                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace pref="17" max="32767" attributes="0"/>
+                  <EmptySpace pref="56" max="32767" attributes="0"/>
                   <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="n_novedades" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="34" max="32767" attributes="0"/>
+                  <EmptySpace pref="50" max="32767" attributes="0"/>
                   <Component id="btn_copy" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
               </Group>

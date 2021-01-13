@@ -28,7 +28,7 @@ Name: "spanish"; MessagesFile: "compiler:Languages\Spanish.isl"
 
 [Files]
 ;Source: "C:\Users\Johnnatan\MIS DISEÑOS\EDICOF\CONTROL DE VERSIONES\2.0.4.6\EDICOF\dist\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
-Source: "C:\Users\JHONN\OneDrive\My_Designs\EDICOF\CONTROL DE VERSIONES\Maven\Test\Edicof\target\Edicof.exe"; DestDir: "{app}"; Flags: ignoreversion
+Source: "C:\Users\JHONN\OneDrive\My_Designs\EDICOF\CONTROL DE VERSIONES\Maven\Edicof\target\Edicof.exe"; DestDir: "{app}"; Flags: ignoreversion
 ;Source: "D:\OneDrive\My_Designs\EDICOF\CONTROL DE VERSIONES\Maven\Edicof\target\Edicof-3.0.1.1-jar-with-dependencies.jar"; DestDir: "{app}"; Flags: ignoreversion
 ;Source: "D:\OneDrive\MIS DISEÑOS\EDICOF\CONTROL DE VERSIONES\Maven\INSTALADOR\Test.bat"; DestDir: "{app}"; Flags: ignoreversion
 Source: "C:\Users\JHONN\OneDrive\My_Designs\EDICOF\CONTROL DE VERSIONES\Edicof_Update_Downloader\dist\Edicof_Update_Downloader.jar"; DestDir: "{app}"; Flags: ignoreversion;

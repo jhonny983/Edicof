@@ -35,7 +35,6 @@ import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import org.apache.maven.model.Model;
-import org.apache.maven.model.io.xpp3.MavenXpp3Reader;
 import org.apache.poi.ss.usermodel.DateUtil;
 import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
@@ -77,7 +76,7 @@ public static Programacion tarea=null ;
 public static Dimension size =null;
 public int version;
 //public static String ver_str="";
-public static String ver_str="3.0.5.1";
+public static String ver_str="3.0.5.2";
 public String url_info_update = "https://onedrive.live.com/download?cid=51049062522CB054&resid=51049062522CB054%21219574&authkey=AP_5XduLgOsOxQg";//Ruta del archivo que contiene la informacion de la ultima version del software
 //public String url_permission = "https://www.dropbox.com/s/c9bbt0blodjnrrs/PERMISOS.txt?dl=1";//Ruta del archivo que contiene la informacion de la ultima version del software
 public static ArrayList conection_list = new ArrayList();
@@ -310,6 +309,7 @@ Model model;
         jMenuItem48 = new javax.swing.JMenuItem();
         jMenuItem49 = new javax.swing.JMenuItem();
         jMenuItem43 = new javax.swing.JMenuItem();
+        jMenuItem75 = new javax.swing.JMenuItem();
         jMenu29 = new javax.swing.JMenu();
         jMenuItem73 = new javax.swing.JMenuItem();
         jMenu17 = new javax.swing.JMenu();
@@ -478,7 +478,7 @@ Model model;
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(login, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -1401,9 +1401,16 @@ Model model;
         });
         jMenu16.add(jMenuItem43);
 
+        jMenuItem75.setIcon(new javax.swing.ImageIcon(getClass().getResource("/group_link.png"))); // NOI18N
+        jMenuItem75.setText("Subcontratistas");
+        jMenu16.add(jMenuItem75);
+
         jm_informacion.add(jMenu16);
 
         jMenu29.setText("Barrios");
+
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, jm_informacion, org.jdesktop.beansbinding.ELProperty.create("${enabled}"), jMenu29, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
+        bindingGroup.addBinding(binding);
 
         jMenuItem73.setIcon(new javax.swing.ImageIcon(getClass().getResource("/add.png"))); // NOI18N
         jMenuItem73.setText("Agregar");
@@ -1620,6 +1627,10 @@ Model model;
         jm_reportes.add(jMenu12);
 
         jMenuItem74.setText("FIC");
+
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, jm_reportes, org.jdesktop.beansbinding.ELProperty.create("${enabled}"), jMenuItem74, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
+        bindingGroup.addBinding(binding);
+
         jMenuItem74.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem74ActionPerformed(evt);
@@ -2931,6 +2942,7 @@ Model model;
     private javax.swing.JMenuItem jMenuItem72;
     private javax.swing.JMenuItem jMenuItem73;
     private javax.swing.JMenuItem jMenuItem74;
+    private javax.swing.JMenuItem jMenuItem75;
     private javax.swing.JMenuItem jMenuItem8;
     private javax.swing.JMenuItem jMenuItem9;
     private javax.swing.JPanel jPanel1;
