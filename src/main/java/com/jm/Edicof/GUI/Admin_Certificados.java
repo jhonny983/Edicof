@@ -500,7 +500,7 @@ public class Admin_Certificados extends javax.swing.JDialog {
                                     ResultSet r;
                                     con.conexion();
                                     try {
-                                        r = con.s.executeQuery ("SELECT `FECHA_EXAM_CERT`, `FECHA_CERT`, `ID_EMP`, `SYNC_ARHI` FROM `t_cert_alturas` WHERE ID_EMP = "+cedula+" AND FECHA_CERT ='"+new SimpleDateFormat("yyyy-MM-dd").format(f_cert.getDate())+"'");
+                                        r = con.s.executeQuery ("SELECT `FECHA_EXAM_CERT`, `FECHA_CERT`, `ID_EMP` FROM `t_cert_alturas` WHERE ID_EMP = "+cedula+" AND FECHA_CERT ='"+new SimpleDateFormat("yyyy-MM-dd").format(f_cert.getDate())+"'");
                                         if(r.next()){
                                             JOptionPane.showMessageDialog(null,"El certificado de alturas que intenta ingresar ya existe","Error",JOptionPane.ERROR_MESSAGE);
                                         }else{

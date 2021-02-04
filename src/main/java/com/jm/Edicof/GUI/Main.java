@@ -76,7 +76,7 @@ public static Programacion tarea=null ;
 public static Dimension size =null;
 public int version;
 //public static String ver_str="";
-public static String ver_str="3.0.5.2";
+public static String ver_str="3.0.5.4";
 public String url_info_update = "https://onedrive.live.com/download?cid=51049062522CB054&resid=51049062522CB054%21219574&authkey=AP_5XduLgOsOxQg";//Ruta del archivo que contiene la informacion de la ultima version del software
 //public String url_permission = "https://www.dropbox.com/s/c9bbt0blodjnrrs/PERMISOS.txt?dl=1";//Ruta del archivo que contiene la informacion de la ultima version del software
 public static ArrayList conection_list = new ArrayList();
