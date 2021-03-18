@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="PrecalculoSeguridadCiudad" pageWidth="612" pageHeight="792" columnWidth="602" leftMargin="5" rightMargin="5" topMargin="20" bottomMargin="20" scriptletClass="com.jm.ScriptletsJasper.ScriptletsPrecalculo" uuid="cf43ecd0-0690-4a98-9ec7-c6b6666d372b">
-	<property name="ireport.zoom" value="1.8150000000000008"/>
-	<property name="ireport.x" value="21"/>
-	<property name="ireport.y" value="0"/>
+	<property name="ireport.zoom" value="4.0"/>
+	<property name="ireport.x" value="1226"/>
+	<property name="ireport.y" value="255"/>
 	<import value="com.jm.ScriptletsJasper.ScriptletsPrecalculo"/>
 	<parameter name="ID_EMPRESA" class="java.lang.String">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
@@ -143,6 +143,9 @@ ORDER BY
 	</variable>
 	<variable name="Exon_FIC" class="java.lang.Integer">
 		<variableExpression><![CDATA[$P{REPORT_SCRIPTLET}.calc_exon_FIC( $P{F_INICIAL}, $P{F_FINAL}, $P{ID_EMPRESA}, $P{HOST},$P{DB} ,$P{USU}, $P{CONT} )]]></variableExpression>
+	</variable>
+	<variable name="NO_FIC" class="java.lang.Integer">
+		<variableExpression><![CDATA[$P{REPORT_SCRIPTLET}.calc_NO_FIC( $P{F_INICIAL}, $P{F_FINAL}, $P{ID_EMPRESA}, $P{HOST},$P{DB} ,$P{USU}, $P{CONT} )]]></variableExpression>
 	</variable>
 	<group name="Group_by_nom_obra">
 		<groupExpression><![CDATA[$F{t_obra_NOMBRE_OBRA}]]></groupExpression>
@@ -690,7 +693,7 @@ ORDER BY
 					<font fontName="SansSerif" size="5" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
 					<paragraph lineSpacing="Single"/>
 				</textElement>
-				<textFieldExpression><![CDATA[new BigDecimal((((float)$P{SALARIO_MIN}/(float)40))/(float)$P{HALF_COMPLETE}).setScale(0, java.math.RoundingMode.HALF_UP).floatValue()*($V{t_novedades_ID_EMPLEADO_1}-$V{Exon_FIC})]]></textFieldExpression>
+				<textFieldExpression><![CDATA[new BigDecimal((((float)$P{SALARIO_MIN}/(float)40))/(float)$P{HALF_COMPLETE}).setScale(0, java.math.RoundingMode.HALF_UP).floatValue()*($V{t_novedades_ID_EMPLEADO_1}-$V{Exon_FIC}-$V{NO_FIC})]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement mode="Transparent" x="322" y="10" width="35" height="10" forecolor="#000000" backcolor="#FFFFFF" uuid="0505d02e-e687-4bc6-9548-ed9e07bbbf66"/>
@@ -746,7 +749,7 @@ ORDER BY
 					<font fontName="SansSerif" size="5" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
 					<paragraph lineSpacing="Single"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$V{t_novedades_ID_EMPLEADO_1}-$V{Exon_FIC}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[($V{t_novedades_ID_EMPLEADO_1}-$V{Exon_FIC}-$V{NO_FIC})]]></textFieldExpression>
 			</textField>
 		</band>
 	</summary>

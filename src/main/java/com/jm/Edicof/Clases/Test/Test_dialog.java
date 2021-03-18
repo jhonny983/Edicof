@@ -22,6 +22,9 @@ import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.engine.util.JRLoader;
 import net.sf.jasperreports.view.JasperViewer;
 import com.jm.Edicof.Clases.Test.TestARHI;
+import java.sql.ResultSet;
+import com.jm.Edicof.Encriptar.Encriptar;
+import com.jm.Edicof.GUI.Main;
 
 /**
  *
@@ -52,6 +55,7 @@ public class Test_dialog extends javax.swing.JDialog {
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -76,24 +80,34 @@ public class Test_dialog extends javax.swing.JDialog {
             }
         });
 
+        jButton4.setText("Actualizar Contrasenas usuarios");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(157, 157, 157)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(173, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(144, Short.MAX_VALUE))
+                    .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton4))
+                .addContainerGap(170, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jButton1)
-                .addGap(118, 118, 118)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton4)
+                .addGap(89, 89, 89)
                 .addComponent(jButton2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton3)
@@ -154,6 +168,31 @@ public class Test_dialog extends javax.swing.JDialog {
         
     }//GEN-LAST:event_jButton3ActionPerformed
 
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
+        Conexion con = new Conexion("127.0.0.1","e_occidente_web","root","jhonny3029735");
+        Conexion con2 = new Conexion("127.0.0.1","e_occidente_web","root","jhonny3029735");
+        con.conexion();
+        con2.conexion();
+        ResultSet r;
+        try {    
+            r = con.s.executeQuery ("SELECT *" +
+                                    "FROM `e_occidente_web`.`t_usuarios`");
+            while(r.next()){
+                String id = r.getString("ID_USUARIO");
+                String cont = r.getString("CONT_USUARIO");
+                //System.out.println("UPDATE T_USUARIOS SET CONT_USUARIO='"+Encriptar.getMD5(Encriptar.Desencriptar(r.getString("CONT_USUARIO")))+"' WHERE ID_USUARIO = "+r.getString("ID_USUARIO"));
+                con2.s.executeUpdate("UPDATE T_USUARIOS SET CONT_USUARIO='"+Encriptar.getMD5(Encriptar.Desencriptar(cont))+"' WHERE ID_USUARIO = "+id);
+            }
+            con.cerrar();
+            con2.cerrar();
+        } catch (Exception ex) {
+            con.cerrar();
+            con2.cerrar();
+            ex.printStackTrace();
+        }
+    }//GEN-LAST:event_jButton4ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -200,5 +239,6 @@ public class Test_dialog extends javax.swing.JDialog {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
     // End of variables declaration//GEN-END:variables
 }

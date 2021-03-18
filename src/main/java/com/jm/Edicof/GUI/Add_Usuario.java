@@ -330,7 +330,7 @@ public class Add_Usuario extends javax.swing.JDialog {
                                         r = con.s.executeQuery ("SELECT * FROM T_ROLES WHERE NOMBRE_ROL='"+tipo.getSelectedItem()+"'");
                                         if(r.next())
                                             Id_tipo=r.getString("ID_ROL");
-                                            con.s.executeUpdate("INSERT INTO T_USUARIOS (ID_USUARIO, NOMBRE_USUARIO, NOMBRE_2_USUARIO, APELLIDO_USUARIO, APELLIDO_2_USUARIO, USUARIO_USUARIO, CONT_USUARIO, ID_ROL) VALUES ("+cedula.getText().trim()+",'"+nombre_1.getText().toUpperCase().trim()+"','"+nombre_2.getText().toUpperCase().trim()+"','"+ape_1.getText().toUpperCase().trim()+"','"+ape_2.getText().toUpperCase().trim()+"','"+login.getText().toUpperCase().trim()+"','jTwS3BprRkA=',"+Id_tipo+")");
+                                            con.s.executeUpdate("INSERT INTO T_USUARIOS (ID_USUARIO, NOMBRE_USUARIO, NOMBRE_2_USUARIO, APELLIDO_USUARIO, APELLIDO_2_USUARIO, USUARIO_USUARIO, CONT_USUARIO, ID_ROL) VALUES ("+cedula.getText().trim()+",'"+nombre_1.getText().toUpperCase().trim()+"','"+nombre_2.getText().toUpperCase().trim()+"','"+ape_1.getText().toUpperCase().trim()+"','"+ape_2.getText().toUpperCase().trim()+"','"+login.getText().toUpperCase().trim()+"','e10adc3949ba59abbe56e057f20f883e',"+Id_tipo+")");
                                             JOptionPane.showMessageDialog(this,"El usuario fue ingresado correctamente","Información",JOptionPane.INFORMATION_MESSAGE);
                                             con.cerrar();
                                             this.dispose();

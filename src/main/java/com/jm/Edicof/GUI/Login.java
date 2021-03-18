@@ -249,7 +249,8 @@ void inicio_sesion(){
             String c = new String (cont.getPassword());
             r=con.s.executeQuery("SELECT t_usuarios.*, t_roles.* FROM t_usuarios INNER JOIN t_roles ON (t_usuarios.ID_ROL = t_roles.ID_ROL) WHERE (t_usuarios.USUARIO_USUARIO = '"+usuario.getText().toUpperCase()+"')");
             if(r.next()){
-                if(Encriptar.Desencriptar(r.getString("CONT_USUARIO")).equals(c)){
+                //if(Encriptar.Desencriptar(r.getString("CONT_USUARIO")).equals(c)){
+                if(Encriptar.getMD5(c).equals(r.getString("CONT_USUARIO"))){
                     JOptionPane.showMessageDialog(this,"Bienvenido: "+r.getString("NOMBRE_USUARIO")+" "+r.getString("APELLIDO_USUARIO"),"Confirmación",JOptionPane.INFORMATION_MESSAGE);
                     Main.login.setText(r.getString("USUARIO_USUARIO"));
                     Main.rol.setText(r.getString("NOMBRE_ROL"));

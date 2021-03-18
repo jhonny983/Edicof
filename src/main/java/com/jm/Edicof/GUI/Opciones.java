@@ -26,6 +26,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintWriter;
+import java.sql.ResultSet;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -192,6 +193,9 @@ String [] host;
         jButton5 = new javax.swing.JButton();
         jLabel13 = new javax.swing.JLabel();
         tipo_estacion = new javax.swing.JComboBox<>();
+        jButton6 = new javax.swing.JButton();
+        jLabel14 = new javax.swing.JLabel();
+        db = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
 
@@ -647,19 +651,33 @@ String [] host;
         binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, jp_advance, org.jdesktop.beansbinding.ELProperty.create("${enabled}"), tipo_estacion, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
         bindingGroup.addBinding(binding);
 
+        jButton6.setText("Actualizar");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
+
+        jLabel14.setText("Actualizar Password");
+
+        db.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+
         javax.swing.GroupLayout jp_advanceLayout = new javax.swing.GroupLayout(jp_advance);
         jp_advance.setLayout(jp_advanceLayout);
         jp_advanceLayout.setHorizontalGroup(
             jp_advanceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jp_advanceLayout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jp_advanceLayout.createSequentialGroup()
                 .addGap(45, 45, 45)
                 .addGroup(jp_advanceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel12)
-                    .addComponent(jLabel13))
+                    .addComponent(jLabel13)
+                    .addComponent(jLabel14))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
                 .addGroup(jp_advanceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jButton6)
                     .addComponent(tipo_estacion, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, 104, Short.MAX_VALUE)
+                    .addComponent(db))
                 .addGap(56, 56, 56))
         );
         jp_advanceLayout.setVerticalGroup(
@@ -673,7 +691,13 @@ String [] host;
                 .addGroup(jp_advanceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel12)
                     .addComponent(jButton5))
-                .addContainerGap(125, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addGroup(jp_advanceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton6)
+                    .addComponent(jLabel14))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(db, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(58, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Avanzado", jp_advance);
@@ -1015,6 +1039,34 @@ private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton5ActionPerformed
 
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        // TODO add your handling code here:
+        if (!db.getText().equals("")) {
+            Conexion con = new Conexion("127.0.0.1",db.getText(),"root","jhonny3029735");
+            Conexion con2 = new Conexion("127.0.0.1",db.getText(),"root","jhonny3029735");
+            con.conexion();
+            con2.conexion();
+            ResultSet r;
+            try {    
+                r = con.s.executeQuery ("SELECT *" +
+                                        "FROM `t_usuarios`");
+                while(r.next()){
+                    String id = r.getString("ID_USUARIO");
+                    String cont = r.getString("CONT_USUARIO");
+                    con2.s.executeUpdate("UPDATE T_USUARIOS SET CONT_USUARIO='"+Encriptar.getMD5(Encriptar.Desencriptar(cont))+"' WHERE ID_USUARIO = "+id);
+                }
+                con.cerrar();
+                con2.cerrar();
+            } catch (Exception ex) {
+                con.cerrar();
+                con2.cerrar();
+                ex.printStackTrace();
+            }
+        } else {
+            JOptionPane.showMessageDialog(this,"El usuario actual no posee los privilegios para realizar esta transaccion","Error",JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_jButton6ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1068,6 +1120,7 @@ private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
     private javax.swing.JButton brow3;
     private javax.swing.JButton brow4;
     private javax.swing.JPasswordField cont;
+    private javax.swing.JTextField db;
     private javax.swing.JCheckBox en_task;
     private javax.swing.JCheckBox enable_prog;
     private javax.swing.JComboBox<String> hh_prog;
@@ -1080,11 +1133,13 @@ private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButton6;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

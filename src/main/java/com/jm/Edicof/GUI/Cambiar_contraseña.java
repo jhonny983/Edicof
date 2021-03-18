@@ -239,7 +239,7 @@ private void Ver_contKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Ve
 private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
     String cont_nueva;
     String ver_cont;
-        String p = null;
+    String p = null;
     if(!Cont_actual.getPassword().equals("")){
         Conexion con = new Conexion();
         con.conexion();
@@ -247,21 +247,24 @@ private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
         try{
             r = con.s.executeQuery ("SELECT * FROM t_usuarios WHERE ID_USUARIO="+Main.id_usuario);
             if(r.next()){
-                p=Encriptar.Desencriptar(r.getString("CONT_USUARIO"));
+                //p=Encriptar.Desencriptar(r.getString("CONT_USUARIO"));
+                p=r.getString("CONT_USUARIO");
             }
             con.cerrar();
         }catch(Exception j){
             con.cerrar();
             JOptionPane.showMessageDialog(null,j, "Error",JOptionPane.ERROR_MESSAGE);
         }
-        if(p.equals(new String(Cont_actual.getPassword()))){
+        //if(p.equals(new String(Cont_actual.getPassword()))){
+        if(p.equals(Encriptar.getMD5(new String(Cont_actual.getPassword())))){
             if(!new String(Con_nueva.getPassword()).equals("") && !new String(Ver_cont.getPassword()).equals("")){
                     cont_nueva = new String(Con_nueva.getPassword());
                     ver_cont = new String(Ver_cont.getPassword());
                     if(ver_cont.equals(cont_nueva)){
                         con.conexion();
                         try{
-                            con.s.executeUpdate("UPDATE T_USUARIOS SET CONT_USUARIO='"+Encriptar.Encriptar(ver_cont)+"' WHERE ID_USUARIO="+Main.id_usuario);
+                            //con.s.executeUpdate("UPDATE T_USUARIOS SET CONT_USUARIO='"+Encriptar.Encriptar(ver_cont)+"' WHERE ID_USUARIO="+Main.id_usuario);
+                            con.s.executeUpdate("UPDATE T_USUARIOS SET CONT_USUARIO='"+Encriptar.getMD5(ver_cont)+"' WHERE ID_USUARIO="+Main.id_usuario);
                             con.cerrar();
                         }catch(Exception j){
                             con.cerrar();

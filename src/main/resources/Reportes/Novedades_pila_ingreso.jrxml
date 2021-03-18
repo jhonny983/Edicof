@@ -50,13 +50,14 @@ FROM
         ON (t_obra.ID_MUN_OBRA = t_municipios.ID_MUN)
     INNER JOIN t_registro 
         ON (t_registro.ID_EMPLEADO = t_novedades.ID_EMPLEADO) AND (t_registro.ID_EMPRESA = t_novedades.ID_EMPRESA) AND (t_registro.F_INGRESO = t_novedades.FECHA_INGRESO) AND (t_registro.ID_TIPO = t_novedades.ID_TIPO) AND (t_registro.F_RETIRO = t_novedades.FECHA_RETIRO)
-    WHERE t_registro.F_INGRESO < $P{F_INICIAL}
+    WHERE t_registro.F_INGRESO < $P{F_INICIAL} 
+    AND t_novedades.ID_TIPO IN (1,2,4,6)
     AND t_novedades.ID_EMPRESA = $P{ID_EMPRESA}
     AND t_registro.REGISTRO = 'PREINGRESO_TRASLADO'
-    AND t_registro.FECHA BETWEEN $P{F_INICIAL} AND $P{F_FINAL}
-    ORDER BY 
-	FECHA_RETIRO ASC,
-	FECHA_INGRESO ASC]]>
+    AND t_registro.F_REGISTRO BETWEEN $P{F_INICIAL} AND $P{F_FINAL}
+ORDER BY 
+    FECHA_RETIRO ASC,
+    FECHA_INGRESO ASC]]>
 	</queryString>
 	<field name="ID_EMPLEADO" class="java.lang.Long">
 		<fieldDescription><![CDATA[]]></fieldDescription>

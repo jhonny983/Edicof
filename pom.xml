@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.jm</groupId>
     <artifactId>Edicof</artifactId>
-    <version>3.0.5.4</version>
+    <version>3.0.5.6</version>
     <packaging>jar</packaging>
     <dependencies>
         <dependency>
@@ -22,7 +22,7 @@
         <dependency>
             <groupId>com.jm</groupId>
             <artifactId>ScriptletsJasper</artifactId>
-            <version>7.0</version>
+            <version>8.0</version>
         </dependency>
         <!-- https://mvnrepository.com/artifact/net.sf.jasperreports/jasperreports -->
         <dependency>
@@ -251,5 +251,4 @@
             </plugin>
         </plugins>
     </build>
-    <description>538fc30856a58d888c141affab1178dff677e1cb</description>
 </project>

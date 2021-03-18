@@ -167,17 +167,18 @@ public class Add_Preingreso_Traslado extends javax.swing.JDialog {
         InputMap map2 = jTable1.getInputMap(jTable1.WHEN_FOCUSED);
         map2.put(KeyStroke.getKeyStroke(KeyEvent.VK_C, Event.CTRL_MASK), "null");
         /////////////////-----------------------------------------
-        jTable1.getColumnModel().getColumn(0).setCellEditor(new MyTableCellEditorDate(tb_cedula_table,true));
-        jTable1.getColumnModel().getColumn(1).setCellEditor(new MyTableCellEditorDate(tb_empleador_table,true));
-        jTable1.getColumnModel().getColumn(2).setCellEditor(new MyTableCellEditorDate(true));
-        jTable1.getColumnModel().getColumn(4).setCellEditor(new MyTableCellEditorDate(true));
-        jTable1.getColumnModel().getColumn(5).setCellEditor(new MyTableCellEditorDate(true));
-        jTable1.getColumnModel().getColumn(6).setCellEditor(new MyTableCellEditorDate(tb_obra_table,true));
-        jTable1.getColumnModel().getColumn(7).setCellEditor(new MyTableCellEditorDate(tb_area_trabajo_table,true));
-        jTable1.getColumnModel().getColumn(8).setCellEditor(new MyTableCellEditorDate(tb_cargo_table,true));
-        jTable1.getColumnModel().getColumn(10).setCellEditor(new MyTableCellEditorDate(tb_barrio_table,true));
-        jTable1.getColumnModel().getColumn(11).setCellEditor(new MyTableCellEditorDate(tb_municipio_table,true));
-        jTable1.getColumnModel().getColumn(15).setCellEditor(new MyTableCellEditorDate(tb_parentesco_table,true));
+        jTable1.getColumnModel().getColumn(row_cedula).setCellEditor(new MyTableCellEditorDate(tb_cedula_table,true));
+        jTable1.getColumnModel().getColumn(row_empleador).setCellEditor(new MyTableCellEditorDate(tb_empleador_table,true));
+        jTable1.getColumnModel().getColumn(row_f_ingreso).setCellEditor(new MyTableCellEditorDate(true));
+        jTable1.getColumnModel().getColumn(row_f_consent).setCellEditor(new MyTableCellEditorDate(true));
+        jTable1.getColumnModel().getColumn(row_f_examen_ing).setCellEditor(new MyTableCellEditorDate(true));
+        jTable1.getColumnModel().getColumn(row_f_prot).setCellEditor(new MyTableCellEditorDate(true));
+        jTable1.getColumnModel().getColumn(row_obra).setCellEditor(new MyTableCellEditorDate(tb_obra_table,true));
+        jTable1.getColumnModel().getColumn(row_area).setCellEditor(new MyTableCellEditorDate(tb_area_trabajo_table,true));
+        jTable1.getColumnModel().getColumn(row_cargo).setCellEditor(new MyTableCellEditorDate(tb_cargo_table,true));
+        jTable1.getColumnModel().getColumn(row_barrio).setCellEditor(new MyTableCellEditorDate(tb_barrio_table,true));
+        jTable1.getColumnModel().getColumn(row_municipio).setCellEditor(new MyTableCellEditorDate(tb_municipio_table,true));
+        jTable1.getColumnModel().getColumn(row_par).setCellEditor(new MyTableCellEditorDate(tb_parentesco_table,true));
         perm_tabla=true;
         
     }
@@ -2407,7 +2408,16 @@ public boolean verify_data(){
                                                                                                                     if (check_protocolo(modelo.getValueAt(i, row_cedula).toString()) | check_fecha(modelo.getValueAt(i, row_f_prot))) {
                                                                                                                         if (check_exon(modelo.getValueAt(i, row_exon).toString())) {
                                                                                                                             if (check_info(modelo.getValueAt(i, row_cedula).toString())) {
-                                                                                                                                ret=true&ret;
+                                                                                                                                if (check_block_emp(get_id_empleador(modelo.getValueAt(i, row_empleador)))) {
+                                                                                                                                    ret=true&ret;
+                                                                                                                                } else {
+                                                                                                                                    jTable1.changeSelection(i,row_empleador, false, false);
+                                                                                                                                    jTable1.requestFocus();
+                                                                                                                                    JOptionPane.showMessageDialog(this,"El empleador se encuentra bloqueado por seguridad social","Error",JOptionPane.ERROR_MESSAGE);
+                                                                                                                                    ret=false&ret;
+                                                                                                                                    break;
+                                                                                                                                }
+                                                                                                                                //ret=true&ret;
                                                                                                                             } else {
                                                                                                                                 jTable1.changeSelection(i,row_cedula, false, false);
                                                                                                                                 jTable1.requestFocus();
@@ -2980,4 +2990,25 @@ public boolean check_info(Object ced){
     }
     return ret;
 }
+public boolean check_block_emp (Object field){
+    boolean ret=false;
+    if (field!=null) {
+        Conexion con = new Conexion();
+        con.conexion();
+        ResultSet r;
+        try{
+            r = con.s.executeQuery ("SELECT * FROM t_empresas WHERE ID_EMPRESA='"+field+"'");
+            if(r.next()){
+                ret = r.getInt("ESTADO_EMPRESA")==1;
+            }
+            con.cerrar();
+        }catch(SQLException j){
+            con.cerrar();
+            j.printStackTrace();
+        }
+    }
+    return ret;
+
+    
+    }
 }

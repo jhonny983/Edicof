@@ -14,6 +14,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import javax.swing.InputMap;
 import javax.swing.JOptionPane;
 import javax.swing.KeyStroke;
@@ -25,6 +26,7 @@ import javax.swing.KeyStroke;
 public class Edd_Empresa extends javax.swing.JDialog {
     boolean perm=false;
     boolean perm_mun=false;
+    boolean bloqueado_before = false;
     /**
      * Creates new form Edd_Empresa1
      */
@@ -48,6 +50,7 @@ public class Edd_Empresa extends javax.swing.JDialog {
             load_data(n);
             cb_nit.setEnabled(false);
         }
+        
     }
     public Edd_Empresa(javax.swing.JDialog parent, boolean modal, String n) {
         super(parent, modal);
@@ -69,6 +72,7 @@ public class Edd_Empresa extends javax.swing.JDialog {
             load_data(n);
             cb_nit.setEnabled(false);
         }
+        
     }
 
     /**
@@ -80,6 +84,7 @@ public class Edd_Empresa extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         nombre_empresa = new javax.swing.JTextField();
@@ -142,6 +147,7 @@ public class Edd_Empresa extends javax.swing.JDialog {
         jPanel8 = new javax.swing.JPanel();
         jLabel23 = new javax.swing.JLabel();
         f_limit_seg_empresa = new com.toedter.components.JSpinField();
+        bloqueado = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Editar Empresa");
@@ -333,7 +339,7 @@ public class Edd_Empresa extends javax.swing.JDialog {
             }
         });
 
-        jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder("Datos adicionales"));
+        jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder("Datos Representante Legal"));
 
         jLabel8.setText("Representante legal");
 
@@ -362,7 +368,7 @@ public class Edd_Empresa extends javax.swing.JDialog {
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap()
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel8)
                     .addComponent(jLabel10)
@@ -373,7 +379,7 @@ public class Edd_Empresa extends javax.swing.JDialog {
                     .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(telefonos)
                         .addComponent(representante, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -418,7 +424,7 @@ public class Edd_Empresa extends javax.swing.JDialog {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap(26, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel4)
                     .addComponent(jLabel5)
@@ -439,7 +445,7 @@ public class Edd_Empresa extends javax.swing.JDialog {
                         .addComponent(sel_2)
                         .addComponent(sel_3))
                     .addComponent(sel_int))
-                .addContainerGap(26, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -557,11 +563,11 @@ public class Edd_Empresa extends javax.swing.JDialog {
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addContainerGap(20, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cb_tamaño, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel18))
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel6.setBorder(javax.swing.BorderFactory.createTitledBorder("Informacion Registro Mercantil"));
@@ -603,29 +609,39 @@ public class Edd_Empresa extends javax.swing.JDialog {
 
         jPanel8.setBorder(javax.swing.BorderFactory.createTitledBorder("Seguridad Social"));
 
-        jLabel23.setText("Fecha limite");
+        jLabel23.setText("Fecha habil limite");
 
         f_limit_seg_empresa.setMaximum(30);
         f_limit_seg_empresa.setMinimum(1);
+
+        bloqueado.setText("Bloqueado");
+        bloqueado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bloqueadoActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
         jPanel8.setLayout(jPanel8Layout);
         jPanel8Layout.setHorizontalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel8Layout.createSequentialGroup()
-                .addGap(24, 24, 24)
+                .addContainerGap(45, Short.MAX_VALUE)
                 .addComponent(jLabel23)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addComponent(f_limit_seg_empresa, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(26, 26, 26)
+                .addComponent(bloqueado)
+                .addContainerGap(62, Short.MAX_VALUE))
         );
         jPanel8Layout.setVerticalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel8Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                    .addComponent(jLabel23)
                     .addComponent(f_limit_seg_empresa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel23))
+                    .addComponent(bloqueado))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -646,7 +662,7 @@ public class Edd_Empresa extends javax.swing.JDialog {
                             .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jPanel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(379, 379, 379)
                         .addComponent(jButton1)
@@ -668,12 +684,11 @@ public class Edd_Empresa extends javax.swing.JDialog {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addComponent(jPanel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
@@ -770,6 +785,7 @@ public class Edd_Empresa extends javax.swing.JDialog {
                                                                                                                             int id_act = 0;
                                                                                                                             int id_mun =0;
                                                                                                                             int id_tam=0;
+                                                                                                                            int block = 0;
                                                                                                                             r = con.s.executeQuery ("SELECT ID_TIPO_NIT FROM `t_tipo_nit` WHERE NOMBRE_TIPO_NIT ='"+cb_tip_nit.getSelectedItem().toString()+"';");
                                                                                                                             if(r.next()){
                                                                                                                                 id_tip_nit=r.getInt("ID_TIPO_NIT");    
@@ -794,6 +810,16 @@ public class Edd_Empresa extends javax.swing.JDialog {
                                                                                                                             if(r.next()){
                                                                                                                                 id_tam=r.getInt("ID_TAMAÑO");
                                                                                                                             }
+//                                                                                                                            r = con.s.executeQuery ("SELECT * FROM `t_usuarios` WHERE ELECT ID_TAMAÑO FROM t_tamaño_empresa WHERE NOMBRE_TAMAÑO = '"+cb_tamaño.getSelectedItem()+"';");
+//                                                                                                                            if(r.next()){
+//                                                                                                                                id_tam=r.getInt("ID_TAMAÑO");
+//                                                                                                                            }
+                                                                                                                            if (bloqueado.isSelected()) {
+                                                                                                                                block=0;
+                                                                                                                            } else {
+                                                                                                                                block=1;
+                                                                                                                            }
+                                                                                                                            
                                                                                                                             con.s.executeUpdate("update `t_empresas`\n" +
                                                                                                                                                 "set `ID_TIPO_NIT` = "+id_tip_nit+",\n" +
                                                                                                                                                 "  `ID_EMPRESA` = '"+nit.getText()+"',\n" +
@@ -818,9 +844,40 @@ public class Edd_Empresa extends javax.swing.JDialog {
                                                                                                                                                 "  `ID_TAM_EMPRESA` = "+id_tam+",\n" +
                                                                                                                                                 "  `REG_MER_EMPRESA` = '"+reg_mercantil.getText().trim()+"',\n" +
                                                                                                                                                 "  `F_REN_REG_MERC` = '"+new SimpleDateFormat("yyyy-MM-dd").format(f_ren_reg_mercantil.getDate())+"',\n" +
-                                                                                                                                                "  `F_LIM_SEG` = '"+f_limit_seg_empresa.getValue()+"'\n" +
+                                                                                                                                                "  `F_LIM_SEG` = '"+f_limit_seg_empresa.getValue()+"',\n" +
+                                                                                                                                                "  `ESTADO_EMPRESA` = "+block+"\n" +
                                                                                                                                                 "   WHERE `ID_EMPRESA` = '"+cb_nit.getSelectedItem().toString()+"';");
                                                                                                                             //con.s.executeUpdate("UPDATE `t_empresas` SET `ID_TIPO_NIT`="+id_tip_nit+",`ID_EMPRESA`='"+nit.getText()+"',`NOMBRE_EMPRESA`='"+nombre_empresa.getText()+"',`ID_ARL`='"+id_arl+"',`ID_CCF`='"+id_ccf+"',`ID_ACTIVIDAD`="+id_act+",`ID_REP_EMPRESA`='"+tb_id_rl.getText()+"',`REPRESENTANTE_LEGAL`='"+representante.getText().toUpperCase()+"',`TEL_CEL_RL_EMPRESA`='"+telefonos.getText()+"',CORREO_INTERNO = '"+correo_interno.getText()+"', CORREO_CONTRATISTA_1 = '"+correo_1.getText()+"', CORREO_CONTRATISTA_2 = '"+correo_2.getText()+"', CORREO_CONTRATISTA_3 = '"+correo_3.getText()+"', ENABLE_INTERNO = "+bool_to_int(sel_int.isSelected())+", ENABLE_1 = "+bool_to_int(sel_1.isSelected())+", ENABLE_2 = "+bool_to_int(sel_2.isSelected())+", ENABLE_3 = "+bool_to_int(sel_3.isSelected())+",`TEL_CEL_EMPRESA`='"+tel_empresa.getText()+"',`DIR_EMPRESA`='"+dir_empresa.getText()+"',`ID_MUN_EMPRESA`="+id_mun+",`ID_TAM_EMPRESA`="+id_tam+",`REG_MER_EMPRESA`='"+reg_mercantil.getText().trim()+"',`F_REN_REG_MERC`='"+new SimpleDateFormat("yyyy-MM-dd").format(f_ren_reg_mercantil.getDate())+"' WHERE ID_EMPRESA = '"+cb_nit.getSelectedItem().toString()+"'");
+                                                                                                                            if (bloqueado.isSelected()) {
+                                                                                                                                if (bloqueado_before!=bloqueado.isSelected()&bloqueado.isSelected()) {
+                                                                                                                                    con.s.executeUpdate("INSERT INTO `t_reg_block_empresas`\n" +
+                                                                                                                                                        "            (`ID_EMPRESA`,\n" +
+                                                                                                                                                        "             `REGISTRO`,\n" +
+                                                                                                                                                        "             `FECHA_REGISTRO`,\n" +
+                                                                                                                                                        "             `ID_USUARIO`,\n" +
+                                                                                                                                                        "             `COMENTARIO`)\n" +
+                                                                                                                                                        "VALUES ('"+cb_nit.getSelectedItem()+"',\n" +
+                                                                                                                                                        "        'BLOQUEO SEGURIDAD SOCIAL',\n" +
+                                                                                                                                                        "        '"+new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date())+"',\n" +
+                                                                                                                                                        "        "+Main.id_usuario+",\n" +
+                                                                                                                                                        "        'BLOQUEADO MANUALMENTE POR EL USUARIO "+Main.login.getText()+"')");
+                                                                                                                                } 
+                                                                                                                            } else {
+                                                                                                                                if (bloqueado_before!=bloqueado.isSelected()&bloqueado.isSelected()) {
+                                                                                                                                    con.s.executeUpdate("INSERT INTO `t_reg_block_empresas`\n" +
+                                                                                                                                                        "            (`ID_EMPRESA`,\n" +
+                                                                                                                                                        "             `REGISTRO`,\n" +
+                                                                                                                                                        "             `FECHA_REGISTRO`,\n" +
+                                                                                                                                                        "             `ID_USUARIO`,\n" +
+                                                                                                                                                        "             `COMENTARIO`)\n" +
+                                                                                                                                                        "VALUES ('"+cb_nit.getSelectedItem()+"',\n" +
+                                                                                                                                                        "        'BLOQUEO SEGURIDAD SOCIAL',\n" +
+                                                                                                                                                        "        '"+new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date())+"',\n" +
+                                                                                                                                                        "        "+Main.id_usuario+",\n" +
+                                                                                                                                                        "        'DESBLOQUEADO MANUALMENTE POR EL USUARIO "+Main.login.getText()+"')");
+                                                                                                                                } 
+                                                                                                                            }
+                                                                                                                                
                                                                                                                             JOptionPane.showMessageDialog(this,"La empresa fue modificada correctamente","Información",JOptionPane.INFORMATION_MESSAGE);
                                                                                                                             con.cerrar();
                                                                                                                             this.dispose();
@@ -1013,6 +1070,10 @@ public class Edd_Empresa extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_tb_id_rlKeyTyped
 
+    private void bloqueadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bloqueadoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_bloqueadoActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1067,6 +1128,8 @@ public class Edd_Empresa extends javax.swing.JDialog {
     private javax.swing.JButton add_arl;
     private javax.swing.JButton add_ccf;
     private javax.swing.JButton add_ccf1;
+    private javax.swing.JCheckBox bloqueado;
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JComboBox<String> cb_actividad;
     private javax.swing.JComboBox<String> cb_arl;
     private javax.swing.JComboBox<String> cb_ccf;
@@ -1254,6 +1317,13 @@ private void load_data(String n){
             reg_mercantil.setText(r.getString("REG_MER_EMPRESA"));
             f_ren_reg_mercantil.setDate(new SimpleDateFormat("yyyy-MM-dd").parse(r.getString("F_REN_REG_MERC")));
             f_limit_seg_empresa.setValue(r.getInt("F_LIM_SEG"));
+            if (r.getInt("ESTADO_EMPRESA")==1) {
+                bloqueado.setSelected(false);
+                bloqueado_before=false;
+            } else {
+                bloqueado.setSelected(true);
+                bloqueado_before=true;
+            }
         }
         con.cerrar();
     }catch(ParseException  | SQLException j){

@@ -746,6 +746,7 @@ class MyTableCellEditorDate extends AbstractCellEditor implements TableCellEdito
 
         sync_ARHI.setSelected(true);
         sync_ARHI.setText("Sincronizar con ARHI");
+        sync_ARHI.setEnabled(false);
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -2212,7 +2213,17 @@ public boolean verify_data(){
 //                                    ret=false&ret;
 //                                    break;
 //                                }
-                                ret=true&ret;
+
+                                
+                                if (check_block_emp(get_id_empleador(modelo.getValueAt(i, row_empleador)))) {
+                                    ret=true&ret;
+                                } else {
+                                    jTable1.changeSelection(i,row_empleador, false, false);
+                                    jTable1.requestFocus();
+                                    JOptionPane.showMessageDialog(this,"El empleador se encuentra bloqueado por seguridad social","Error",JOptionPane.ERROR_MESSAGE);
+                                    ret=false&ret;
+                                    break;
+                                }
                             } else {
                                 jTable1.changeSelection(i,row_obs, false, false);
                                 jTable1.requestFocus();
@@ -2482,5 +2493,26 @@ public static String getStackTrace(Exception e) {
         e.printStackTrace(pWriter);
         return sWriter.toString();
     }
+public boolean check_block_emp (Object field){
+    boolean ret=false;
+    if (field!=null) {
+        Conexion con = new Conexion();
+        con.conexion();
+        ResultSet r;
+        try{
+            r = con.s.executeQuery ("SELECT * FROM t_empresas WHERE ID_EMPRESA='"+field+"'");
+            if(r.next()){
+                ret = r.getInt("ESTADO_EMPRESA")==1;
+            }
+            con.cerrar();
+        }catch(SQLException j){
+            con.cerrar();
+            j.printStackTrace();
+        }
+    }
+    return ret;
 
+    
+    }
 }
+

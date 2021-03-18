@@ -139,7 +139,7 @@ public class Restaurar_usuario extends javax.swing.JDialog {
             try {
                 int conf = JOptionPane.showConfirmDialog(this,"Esta seguro que desea continuar?","Confirmación",JOptionPane.OK_CANCEL_OPTION,JOptionPane.QUESTION_MESSAGE);
                 if (conf == JOptionPane.YES_OPTION) {
-                    con.s.executeUpdate("UPDATE `t_usuarios` SET `CONT_USUARIO`='jTwS3BprRkA=' WHERE USUARIO_USUARIO='"+cb_login.getSelectedItem()+"'");
+                    con.s.executeUpdate("UPDATE `t_usuarios` SET `CONT_USUARIO`='e10adc3949ba59abbe56e057f20f883e' WHERE USUARIO_USUARIO='"+cb_login.getSelectedItem()+"'");
                     JOptionPane.showMessageDialog(this,"El usuario fue restablecido correctamente","Información",JOptionPane.INFORMATION_MESSAGE);
                     con.cerrar();
                     this.dispose();
