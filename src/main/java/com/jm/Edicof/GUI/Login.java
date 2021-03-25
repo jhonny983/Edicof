@@ -258,9 +258,8 @@ void inicio_sesion(){
                     Main.mainperm=true;
                     con.cerrar();
                     dispose();
-                }
-                else{
-                    JOptionPane.showMessageDialog(null,"Error en la validacion\nPor favor verifique que su usuario sea correctos", "Error",JOptionPane.ERROR_MESSAGE);
+                }else{
+                    JOptionPane.showMessageDialog(null,"Error en la validacion\nPor favor verifique que su contraseña sea correcta", "Error",JOptionPane.ERROR_MESSAGE);
                     usuario.setText("");
                     cont.setText("");
                     conteo++;
@@ -274,8 +273,7 @@ void inicio_sesion(){
                     con.cerrar();
                 }
                 con.cerrar();
-            }
-            else{
+            }else{
                 con.cerrar();
                 JOptionPane.showMessageDialog(null,"Error en la validacion\nPor favor verifique que su usuario sea correctos", "Error",JOptionPane.ERROR_MESSAGE);
                 usuario.setText("");
