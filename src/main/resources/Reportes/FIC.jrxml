@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="PrecalculoFIC" pageWidth="612" pageHeight="792" columnWidth="602" leftMargin="5" rightMargin="5" topMargin="20" bottomMargin="20" scriptletClass="com.jm.ScriptletsJasper.ScriptletsPrecalculo" uuid="cf43ecd0-0690-4a98-9ec7-c6b6666d372b">
-	<property name="ireport.zoom" value="2.657341500000001"/>
-	<property name="ireport.x" value="13"/>
+	<property name="ireport.zoom" value="2.1961500000000007"/>
+	<property name="ireport.x" value="413"/>
 	<property name="ireport.y" value="0"/>
 	<import value="com.jm.ScriptletsJasper.ScriptletsPrecalculo"/>
 	<parameter name="ID_EMPRESA" class="java.lang.String">
@@ -130,17 +130,20 @@ ORDER BY
 		<variableExpression><![CDATA[$P{REPORT_SCRIPTLET}.calc_exon_FIC( $P{F_INICIAL}, $P{F_FINAL}, $P{ID_EMPRESA}, $P{HOST},$P{DB} ,$P{USU}, $P{CONT} )]]></variableExpression>
 	</variable>
 	<variable name="SubtotalDep" class="java.lang.Float" resetType="Group" resetGroup="GROUP_DEP" calculation="Sum">
-		<variableExpression><![CDATA[$P{REPORT_SCRIPTLET}.FIC_EMP( $P{F_INICIAL}, $P{F_FINAL},$F{t_novedades_ID_EMPRESA}, $F{t_novedades_ID_EMPLEADO}, $P{SALARIO_MIN}, $P{HOST}, $P{DB}, $P{USU}, $P{CONT}, $P{HALF_COMPLETE} )]]></variableExpression>
+		<variableExpression><![CDATA[$P{REPORT_SCRIPTLET}.FIC_EMPLEADO( $P{F_INICIAL}, $P{F_FINAL},$F{t_novedades_ID_EMPRESA}, $F{t_novedades_ID_EMPLEADO}, $P{SALARIO_MIN}, $P{HOST}, $P{DB}, $P{USU}, $P{CONT}, $P{HALF_COMPLETE} )]]></variableExpression>
 	</variable>
-	<variable name="Total_FIC" class="java.lang.Float" calculation="Sum">
-		<variableExpression><![CDATA[$P{REPORT_SCRIPTLET}.FIC_EMP( $P{F_INICIAL}, $P{F_FINAL},$F{t_novedades_ID_EMPRESA}, $F{t_novedades_ID_EMPLEADO}, $P{SALARIO_MIN}, $P{HOST}, $P{DB}, $P{USU}, $P{CONT}, $P{HALF_COMPLETE} )]]></variableExpression>
+	<variable name="Total_FIC" class="java.lang.Float">
+		<variableExpression><![CDATA[$P{REPORT_SCRIPTLET}.FIC( $P{F_INICIAL}, $P{F_FINAL},$F{t_novedades_ID_EMPRESA},$P{SALARIO_MIN}, $P{HOST}, $P{DB}, $P{USU}, $P{CONT}, $P{HALF_COMPLETE} )]]></variableExpression>
+	</variable>
+	<variable name="Depurados_FIC" class="java.lang.Integer">
+		<variableExpression><![CDATA[$P{REPORT_SCRIPTLET}.calc_NO_FIC( $P{F_INICIAL}, $P{F_FINAL}, $P{ID_EMPRESA}, $P{HOST},$P{DB} ,$P{USU}, $P{CONT} )]]></variableExpression>
 	</variable>
 	<group name="GROUP_DEP">
 		<groupExpression><![CDATA[$F{NOMBRE_DEP}]]></groupExpression>
 		<groupFooter>
 			<band height="10">
 				<textField>
-					<reportElement mode="Transparent" x="220" y="0" width="282" height="10" forecolor="#000000" backcolor="#FFFFFF" uuid="bfd8810d-0eff-43c5-a536-dd62212a17fe"/>
+					<reportElement mode="Transparent" x="220" y="0" width="182" height="10" forecolor="#000000" backcolor="#FFFFFF" uuid="bfd8810d-0eff-43c5-a536-dd62212a17fe"/>
 					<box>
 						<topPen lineWidth="0.5"/>
 					</box>
@@ -151,7 +154,7 @@ ORDER BY
 					<textFieldExpression><![CDATA["SUBTOTAL => "+$F{NOMBRE_DEP}+"=>"]]></textFieldExpression>
 				</textField>
 				<textField pattern="$ #,##0" isBlankWhenNull="false">
-					<reportElement mode="Transparent" x="502" y="0" width="100" height="10" forecolor="#000000" backcolor="#FFFFFF" uuid="8cbaa738-6592-4f91-9d59-ceb68d11ee2c"/>
+					<reportElement mode="Transparent" x="402" y="0" width="100" height="10" forecolor="#000000" backcolor="#FFFFFF" uuid="8cbaa738-6592-4f91-9d59-ceb68d11ee2c"/>
 					<box>
 						<topPen lineWidth="0.5"/>
 					</box>
@@ -168,7 +171,7 @@ ORDER BY
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="86" splitType="Stretch">
+		<band height="96" splitType="Stretch">
 			<staticText>
 				<reportElement x="91" y="50" width="34" height="11" uuid="3c903558-bf0a-4c68-ab9c-0fb67222c47e"/>
 				<textElement textAlignment="Right">
@@ -346,6 +349,27 @@ ORDER BY
 				</textElement>
 				<textFieldExpression><![CDATA[$V{Exon_FIC}]]></textFieldExpression>
 			</textField>
+			<textField evaluationTime="Report" pattern="" isBlankWhenNull="false">
+				<reportElement mode="Transparent" x="357" y="83" width="50" height="11" forecolor="#000000" backcolor="#FFFFFF" uuid="d38a5b3e-b694-42ad-9e87-67a96f37a628"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="SansSerif" size="8" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{Depurados_FIC}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="238" y="83" width="119" height="11" uuid="de1edcec-b91c-4c9e-9819-597774f619a2"/>
+				<textElement textAlignment="Right">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Total empleados Depurados: ]]></text>
+			</staticText>
 		</band>
 	</title>
 	<columnHeader>
@@ -462,7 +486,7 @@ ORDER BY
 					<font fontName="SansSerif" size="5" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
 					<paragraph lineSpacing="Single"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$P{REPORT_SCRIPTLET}.FIC_EMP( $P{F_INICIAL}, $P{F_FINAL},$F{t_novedades_ID_EMPRESA}, $F{t_novedades_ID_EMPLEADO}, $P{SALARIO_MIN}, $P{HOST}, $P{DB}, $P{USU}, $P{CONT}, $P{HALF_COMPLETE} )]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$P{REPORT_SCRIPTLET}.FIC_EMPLEADO( $P{F_INICIAL}, $P{F_FINAL},$F{t_novedades_ID_EMPRESA}, $F{t_novedades_ID_EMPLEADO}, $P{SALARIO_MIN}, $P{HOST}, $P{DB}, $P{USU}, $P{CONT}, $P{HALF_COMPLETE} )]]></textFieldExpression>
 			</textField>
 			<textField pattern="$ #,##0" isBlankWhenNull="true">
 				<reportElement mode="Transparent" x="502" y="0" width="100" height="10" forecolor="#000000" backcolor="#FFFFFF" uuid="10347631-18e6-4328-b903-666ae8e993ef"/>

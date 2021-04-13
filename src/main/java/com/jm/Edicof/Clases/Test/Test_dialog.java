@@ -21,10 +21,8 @@ import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.engine.util.JRLoader;
 import net.sf.jasperreports.view.JasperViewer;
-import com.jm.Edicof.Clases.Test.TestARHI;
 import java.sql.ResultSet;
 import com.jm.Edicof.Encriptar.Encriptar;
-import com.jm.Edicof.GUI.Main;
 
 /**
  *
@@ -38,9 +36,11 @@ public class Test_dialog extends javax.swing.JDialog {
     public Test_dialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        BigDecimal bd = new BigDecimal("1250");
-        bd = bd.setScale(-2, RoundingMode.HALF_UP);
-        System.out.println(bd.doubleValue());
+        BigDecimal bd = new BigDecimal((908526/(float)40));
+        System.out.println("FIC > "+bd);
+        bd = bd.setScale(2, RoundingMode.HALF_UP);
+        System.out.println("FIC R > "+bd.floatValue());
+        System.out.println(bd.floatValue()*(float)5);
     }
 
     /**

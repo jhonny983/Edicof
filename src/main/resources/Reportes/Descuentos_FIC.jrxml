@@ -320,7 +320,7 @@ ORDER BY NOMBRE_DEP ASC]]>
 	<summary>
 		<band height="20" splitType="Stretch">
 			<crosstab>
-				<reportElement x="39" y="0" width="614" height="20" uuid="3793e96d-404b-4bcf-a82f-6a204cf77a76"/>
+				<reportElement x="0" y="0" width="782" height="20" uuid="3793e96d-404b-4bcf-a82f-6a204cf77a76"/>
 				<crosstabHeaderCell>
 					<cellContents>
 						<staticText>
@@ -332,13 +332,13 @@ ORDER BY NOMBRE_DEP ASC]]>
 								<rightPen lineWidth="0.5"/>
 							</box>
 							<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
-								<font fontName="Arial" size="5" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+								<font fontName="Arial" size="6" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
 								<paragraph lineSpacing="Single"/>
 							</textElement>
 							<text><![CDATA[CONTRATISTAS (RAZON SOCIAL)]]></text>
 						</staticText>
 						<staticText>
-							<reportElement style="Crosstab Data Text" mode="Opaque" x="161" y="0" width="48" height="10" forecolor="#000000" backcolor="#999999" uuid="001ca9c8-740d-4fc5-be71-5071994e8c5a"/>
+							<reportElement style="Crosstab Data Text" mode="Opaque" x="161" y="0" width="50" height="10" forecolor="#000000" backcolor="#999999" uuid="001ca9c8-740d-4fc5-be71-5071994e8c5a"/>
 							<box leftPadding="0">
 								<pen lineWidth="0.5"/>
 								<topPen lineWidth="0.5"/>
@@ -347,10 +347,70 @@ ORDER BY NOMBRE_DEP ASC]]>
 								<rightPen lineWidth="0.5" lineStyle="Solid"/>
 							</box>
 							<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
-								<font fontName="Arial" size="5" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+								<font fontName="Arial" size="6" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
 								<paragraph lineSpacing="Single"/>
 							</textElement>
 							<text><![CDATA[NIT]]></text>
+						</staticText>
+						<staticText>
+							<reportElement style="Crosstab Data Text" mode="Opaque" x="211" y="0" width="50" height="10" forecolor="#000000" backcolor="#999999" uuid="f2dcf9c0-8f44-4c9c-8c41-6b62264448c1"/>
+							<box>
+								<pen lineWidth="0.5"/>
+								<topPen lineWidth="0.5"/>
+								<leftPen lineWidth="0.5"/>
+								<bottomPen lineWidth="0.5"/>
+								<rightPen lineWidth="0.5"/>
+							</box>
+							<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+								<font fontName="Arial" size="6" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+								<paragraph lineSpacing="Single"/>
+							</textElement>
+							<text><![CDATA[EMPLEADOS]]></text>
+						</staticText>
+						<staticText>
+							<reportElement style="Crosstab Data Text" mode="Opaque" x="261" y="0" width="50" height="10" forecolor="#000000" backcolor="#999999" uuid="ea2a1468-9cde-47c0-b3cb-0124467c3efa"/>
+							<box>
+								<pen lineWidth="0.5"/>
+								<topPen lineWidth="0.5"/>
+								<leftPen lineWidth="0.5"/>
+								<bottomPen lineWidth="0.5"/>
+								<rightPen lineWidth="0.5"/>
+							</box>
+							<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+								<font fontName="Arial" size="6" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+								<paragraph lineSpacing="Single"/>
+							</textElement>
+							<text><![CDATA[DEPURADOS]]></text>
+						</staticText>
+						<staticText>
+							<reportElement style="Crosstab Data Text" mode="Opaque" x="311" y="0" width="50" height="10" forecolor="#000000" backcolor="#999999" uuid="7cccfa29-70d9-4532-87b7-e124f78801f6"/>
+							<box>
+								<pen lineWidth="0.5"/>
+								<topPen lineWidth="0.5"/>
+								<leftPen lineWidth="0.5"/>
+								<bottomPen lineWidth="0.5"/>
+								<rightPen lineWidth="0.5"/>
+							</box>
+							<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+								<font fontName="Arial" size="6" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+								<paragraph lineSpacing="Single"/>
+							</textElement>
+							<text><![CDATA[EXCENTOS]]></text>
+						</staticText>
+						<staticText>
+							<reportElement style="Crosstab Data Text" mode="Opaque" x="361" y="0" width="50" height="10" forecolor="#000000" backcolor="#999999" uuid="f72cf310-a72a-4c3d-9d43-68b107b8251b"/>
+							<box>
+								<pen lineWidth="0.5"/>
+								<topPen lineWidth="0.5"/>
+								<leftPen lineWidth="0.5"/>
+								<bottomPen lineWidth="0.5"/>
+								<rightPen lineWidth="0.5"/>
+							</box>
+							<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+								<font fontName="Arial" size="6" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+								<paragraph lineSpacing="Single"/>
+							</textElement>
+							<text><![CDATA[NETO]]></text>
 						</staticText>
 					</cellContents>
 				</crosstabHeaderCell>
@@ -376,7 +436,7 @@ ORDER BY NOMBRE_DEP ASC]]>
 						<cellContents/>
 					</crosstabTotalRowHeader>
 				</rowGroup>
-				<rowGroup name="ID_EMPRESA" width="48">
+				<rowGroup name="ID_EMPRESA" width="250">
 					<bucket class="java.lang.String">
 						<bucketExpression><![CDATA[$F{ID_EMPRESA}]]></bucketExpression>
 					</bucket>
@@ -386,11 +446,39 @@ ORDER BY NOMBRE_DEP ASC]]>
 								<pen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
 							</box>
 							<textField isBlankWhenNull="false">
-								<reportElement style="Crosstab Data Text" x="0" y="0" width="48" height="10" uuid="e17107dd-3c0a-4183-88c5-d2f89a0a783b"/>
+								<reportElement style="Crosstab Data Text" x="0" y="0" width="50" height="10" uuid="e17107dd-3c0a-4183-88c5-d2f89a0a783b"/>
 								<textElement verticalAlignment="Middle">
-									<font size="5"/>
+									<font size="6"/>
 								</textElement>
 								<textFieldExpression><![CDATA[$V{ID_EMPRESA}]]></textFieldExpression>
+							</textField>
+							<textField>
+								<reportElement style="Crosstab Data Text" x="50" y="0" width="50" height="10" uuid="ce7d7e8f-da45-4e4a-895b-fd46482dde82"/>
+								<textElement>
+									<font size="6"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$V{ID_EMPLEADOMeasure}]]></textFieldExpression>
+							</textField>
+							<textField>
+								<reportElement style="Crosstab Data Text" x="100" y="0" width="50" height="10" uuid="6e92b0da-c269-4e98-8836-bf5a9d290a11"/>
+								<textElement>
+									<font size="6"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$V{TOT_DEPURADOS}]]></textFieldExpression>
+							</textField>
+							<textField>
+								<reportElement style="Crosstab Data Text" x="150" y="0" width="50" height="10" uuid="89ebeedb-6901-48c1-bb34-64b89b6cf746"/>
+								<textElement>
+									<font size="6"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$V{TOT_EXCENTOS}]]></textFieldExpression>
+							</textField>
+							<textField>
+								<reportElement style="Crosstab Data Text" x="200" y="0" width="50" height="10" uuid="fa0b6623-5aaa-4196-a5a0-787e216b5281"/>
+								<textElement>
+									<font size="6"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$V{ID_EMPLEADOMeasure}-($V{TOT_DEPURADOS}+$V{TOT_EXCENTOS})]]></textFieldExpression>
 							</textField>
 						</cellContents>
 					</crosstabRowHeader>
@@ -444,6 +532,12 @@ ORDER BY NOMBRE_DEP ASC]]>
 				<measure name="FIC_DEP" class="java.lang.Float">
 					<measureExpression><![CDATA[$P{REPORT_SCRIPTLET}.FIC_DEP( $P{F_INICIAL}, $P{F_FINAL}, $F{ID_EMPRESA},$F{NOMBRE_DEP},$P{SALARIO_MIN}, $P{host}, $P{db}, $P{usu}, $P{cont}, $P{HALF_COMPLETE})]]></measureExpression>
 				</measure>
+				<measure name="TOT_DEPURADOS" class="java.lang.Integer">
+					<measureExpression><![CDATA[$P{REPORT_SCRIPTLET}.calc_NO_FIC( $P{F_INICIAL}, $P{F_FINAL}, $F{ID_EMPRESA}, $P{host}, $P{db}, $P{usu}, $P{cont} )]]></measureExpression>
+				</measure>
+				<measure name="TOT_EXCENTOS" class="java.lang.Integer">
+					<measureExpression><![CDATA[$P{REPORT_SCRIPTLET}.calc_exon_FIC( $P{F_INICIAL}, $P{F_FINAL}, $F{ID_EMPRESA}, $P{host}, $P{db}, $P{usu}, $P{cont} )]]></measureExpression>
+				</measure>
 				<crosstabCell width="71" height="10">
 					<cellContents>
 						<box>
@@ -471,7 +565,7 @@ ORDER BY NOMBRE_DEP ASC]]>
 						<box>
 							<pen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
 						</box>
-						<textField pattern="$ #,##0">
+						<textField pattern="#,##0.00">
 							<reportElement style="Crosstab Data Text" x="0" y="0" width="70" height="10" uuid="69397367-849e-4d79-8e7d-375674f17866"/>
 							<box>
 								<topPen lineWidth="0.5"/>

@@ -357,6 +357,8 @@ Model model;
         jMenuItem71 = new javax.swing.JMenuItem();
         jMenuItem66 = new javax.swing.JMenuItem();
         jMenuItem67 = new javax.swing.JMenuItem();
+        jMenu30 = new javax.swing.JMenu();
+        jMenuItem76 = new javax.swing.JMenuItem();
         jm_pqr = new javax.swing.JMenu();
         jMenuItem62 = new javax.swing.JMenuItem();
         jMenuItem63 = new javax.swing.JMenuItem();
@@ -1891,6 +1893,18 @@ Model model;
         });
         jMenu14.add(jMenuItem67);
 
+        jMenu30.setText("Seguridad Social");
+
+        jMenuItem76.setText("Generar Cruce");
+        jMenuItem76.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem76ActionPerformed(evt);
+            }
+        });
+        jMenu30.add(jMenuItem76);
+
+        jMenu14.add(jMenu30);
+
         jm_reportes.add(jMenu14);
 
         jMenuBar1.add(jm_reportes);
@@ -2772,6 +2786,10 @@ Model model;
         rep_fic.setVisible(true);
     }//GEN-LAST:event_jMenuItem74ActionPerformed
 
+    private void jMenuItem76ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem76ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem76ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -2863,6 +2881,7 @@ Model model;
     private javax.swing.JMenu jMenu28;
     private javax.swing.JMenu jMenu29;
     private javax.swing.JMenu jMenu3;
+    private javax.swing.JMenu jMenu30;
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenu jMenu5;
     private javax.swing.JMenu jMenu6;
@@ -2943,6 +2962,7 @@ Model model;
     private javax.swing.JMenuItem jMenuItem73;
     private javax.swing.JMenuItem jMenuItem74;
     private javax.swing.JMenuItem jMenuItem75;
+    private javax.swing.JMenuItem jMenuItem76;
     private javax.swing.JMenuItem jMenuItem8;
     private javax.swing.JMenuItem jMenuItem9;
     private javax.swing.JPanel jPanel1;
