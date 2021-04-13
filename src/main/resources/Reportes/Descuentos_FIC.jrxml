@@ -320,7 +320,7 @@ ORDER BY NOMBRE_DEP ASC]]>
 	<summary>
 		<band height="20" splitType="Stretch">
 			<crosstab>
-				<reportElement x="0" y="0" width="782" height="20" uuid="3793e96d-404b-4bcf-a82f-6a204cf77a76"/>
+				<reportElement x="39" y="0" width="743" height="20" uuid="3793e96d-404b-4bcf-a82f-6a204cf77a76"/>
 				<crosstabHeaderCell>
 					<cellContents>
 						<staticText>
@@ -447,6 +447,13 @@ ORDER BY NOMBRE_DEP ASC]]>
 							</box>
 							<textField isBlankWhenNull="false">
 								<reportElement style="Crosstab Data Text" x="0" y="0" width="50" height="10" uuid="e17107dd-3c0a-4183-88c5-d2f89a0a783b"/>
+								<box>
+									<pen lineWidth="0.5"/>
+									<topPen lineWidth="0.5"/>
+									<leftPen lineWidth="0.5"/>
+									<bottomPen lineWidth="0.5"/>
+									<rightPen lineWidth="0.5"/>
+								</box>
 								<textElement verticalAlignment="Middle">
 									<font size="6"/>
 								</textElement>
@@ -454,6 +461,13 @@ ORDER BY NOMBRE_DEP ASC]]>
 							</textField>
 							<textField>
 								<reportElement style="Crosstab Data Text" x="50" y="0" width="50" height="10" uuid="ce7d7e8f-da45-4e4a-895b-fd46482dde82"/>
+								<box>
+									<pen lineWidth="0.5"/>
+									<topPen lineWidth="0.5"/>
+									<leftPen lineWidth="0.5"/>
+									<bottomPen lineWidth="0.5"/>
+									<rightPen lineWidth="0.5"/>
+								</box>
 								<textElement>
 									<font size="6"/>
 								</textElement>
@@ -461,6 +475,13 @@ ORDER BY NOMBRE_DEP ASC]]>
 							</textField>
 							<textField>
 								<reportElement style="Crosstab Data Text" x="100" y="0" width="50" height="10" uuid="6e92b0da-c269-4e98-8836-bf5a9d290a11"/>
+								<box>
+									<pen lineWidth="0.5"/>
+									<topPen lineWidth="0.5"/>
+									<leftPen lineWidth="0.5"/>
+									<bottomPen lineWidth="0.5"/>
+									<rightPen lineWidth="0.5"/>
+								</box>
 								<textElement>
 									<font size="6"/>
 								</textElement>
@@ -468,6 +489,13 @@ ORDER BY NOMBRE_DEP ASC]]>
 							</textField>
 							<textField>
 								<reportElement style="Crosstab Data Text" x="150" y="0" width="50" height="10" uuid="89ebeedb-6901-48c1-bb34-64b89b6cf746"/>
+								<box>
+									<pen lineWidth="0.5"/>
+									<topPen lineWidth="0.5"/>
+									<leftPen lineWidth="0.5"/>
+									<bottomPen lineWidth="0.5"/>
+									<rightPen lineWidth="0.5"/>
+								</box>
 								<textElement>
 									<font size="6"/>
 								</textElement>
@@ -475,6 +503,13 @@ ORDER BY NOMBRE_DEP ASC]]>
 							</textField>
 							<textField>
 								<reportElement style="Crosstab Data Text" x="200" y="0" width="50" height="10" uuid="fa0b6623-5aaa-4196-a5a0-787e216b5281"/>
+								<box>
+									<pen lineWidth="0.5"/>
+									<topPen lineWidth="0.5"/>
+									<leftPen lineWidth="0.5"/>
+									<bottomPen lineWidth="0.5"/>
+									<rightPen lineWidth="0.5"/>
+								</box>
 								<textElement>
 									<font size="6"/>
 								</textElement>
@@ -497,6 +532,13 @@ ORDER BY NOMBRE_DEP ASC]]>
 							</box>
 							<textField>
 								<reportElement style="Crosstab Data Text" mode="Opaque" x="0" y="0" width="71" height="10" backcolor="#999999" uuid="45782166-c081-48a6-8536-f58f22988132"/>
+								<box>
+									<pen lineWidth="0.5"/>
+									<topPen lineWidth="0.5"/>
+									<leftPen lineWidth="0.5"/>
+									<bottomPen lineWidth="0.5"/>
+									<rightPen lineWidth="0.5"/>
+								</box>
 								<textElement verticalAlignment="Middle">
 									<font size="5"/>
 								</textElement>
@@ -530,7 +572,7 @@ ORDER BY NOMBRE_DEP ASC]]>
 					<measureExpression><![CDATA[$P{REPORT_SCRIPTLET}.FIC( $P{F_INICIAL}, $P{F_FINAL}, $F{ID_EMPRESA},$P{SALARIO_MIN}, $P{host}, $P{db}, $P{usu}, $P{cont}, $P{HALF_COMPLETE})]]></measureExpression>
 				</measure>
 				<measure name="FIC_DEP" class="java.lang.Float">
-					<measureExpression><![CDATA[$P{REPORT_SCRIPTLET}.FIC_DEP( $P{F_INICIAL}, $P{F_FINAL}, $F{ID_EMPRESA},$F{NOMBRE_DEP},$P{SALARIO_MIN}, $P{host}, $P{db}, $P{usu}, $P{cont}, $P{HALF_COMPLETE})]]></measureExpression>
+					<measureExpression><![CDATA[$P{REPORT_SCRIPTLET}.FIC_DEPARTAMENTO( $P{F_INICIAL}, $P{F_FINAL}, $F{ID_EMPRESA},$F{NOMBRE_DEP},$P{SALARIO_MIN}, $P{host}, $P{db}, $P{usu}, $P{cont}, $P{HALF_COMPLETE})]]></measureExpression>
 				</measure>
 				<measure name="TOT_DEPURADOS" class="java.lang.Integer">
 					<measureExpression><![CDATA[$P{REPORT_SCRIPTLET}.calc_NO_FIC( $P{F_INICIAL}, $P{F_FINAL}, $F{ID_EMPRESA}, $P{host}, $P{db}, $P{usu}, $P{cont} )]]></measureExpression>
@@ -543,8 +585,15 @@ ORDER BY NOMBRE_DEP ASC]]>
 						<box>
 							<pen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
 						</box>
-						<textField pattern="$ #,##0" isBlankWhenNull="false">
+						<textField pattern="#,##0" isBlankWhenNull="false">
 							<reportElement style="Crosstab Data Text" mode="Transparent" x="0" y="0" width="71" height="10" forecolor="#000000" backcolor="#FFFFFF" uuid="7a06ef51-d6d4-4782-b73f-0146fc3f3d5a"/>
+							<box>
+								<pen lineWidth="0.5"/>
+								<topPen lineWidth="0.5"/>
+								<leftPen lineWidth="0.5"/>
+								<bottomPen lineWidth="0.5"/>
+								<rightPen lineWidth="0.5"/>
+							</box>
 							<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
 								<font fontName="SansSerif" size="5" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
 								<paragraph lineSpacing="Single"/>
@@ -561,11 +610,11 @@ ORDER BY NOMBRE_DEP ASC]]>
 					</cellContents>
 				</crosstabCell>
 				<crosstabCell width="70" height="10" columnTotalGroup="NOMBRE_DEP">
-					<cellContents backcolor="#005FB3" mode="Opaque">
+					<cellContents backcolor="#5CB2FF" mode="Opaque">
 						<box>
 							<pen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
 						</box>
-						<textField pattern="#,##0.00">
+						<textField pattern="#,##0">
 							<reportElement style="Crosstab Data Text" x="0" y="0" width="70" height="10" uuid="69397367-849e-4d79-8e7d-375674f17866"/>
 							<box>
 								<topPen lineWidth="0.5"/>
