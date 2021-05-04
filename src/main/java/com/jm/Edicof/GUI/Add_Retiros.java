@@ -415,6 +415,7 @@ public class Add_Retiros extends javax.swing.JDialog {
         jButton2 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
         cr_ret_asist = new javax.swing.JCheckBox();
+        an_rest_f_retiro = new javax.swing.JCheckBox();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
@@ -690,7 +691,7 @@ public class Add_Retiros extends javax.swing.JDialog {
                     .addComponent(add_barrio3, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(add_barrio5, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(add_par1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(12, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Herramientas"));
@@ -771,6 +772,13 @@ public class Add_Retiros extends javax.swing.JDialog {
 
         cr_ret_asist.setText("Cruzar retiros con asistencias");
 
+        an_rest_f_retiro.setText("Anular restriccion fecha retiro");
+        an_rest_f_retiro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                an_rest_f_retiroActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
@@ -782,20 +790,24 @@ public class Add_Retiros extends javax.swing.JDialog {
                     .addComponent(jButton6))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(28, 28, 28)
-                .addComponent(cr_ret_asist)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(40, Short.MAX_VALUE)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(an_rest_f_retiro)
+                    .addComponent(cr_ret_asist))
+                .addContainerGap(7, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(24, 24, 24)
+                .addGap(12, 12, 12)
                 .addComponent(jButton2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton6)
                 .addGap(18, 18, 18)
                 .addComponent(cr_ret_asist)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(an_rest_f_retiro)
+                .addContainerGap())
         );
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Información de pre-ingresos"));
@@ -878,14 +890,14 @@ public class Add_Retiros extends javax.swing.JDialog {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1143, Short.MAX_VALUE)
+                .addComponent(jScrollPane1)
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 199, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 211, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -905,11 +917,11 @@ public class Add_Retiros extends javax.swing.JDialog {
                 .addContainerGap()
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, 226, Short.MAX_VALUE))
+                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
@@ -923,8 +935,8 @@ public class Add_Retiros extends javax.swing.JDialog {
                 .addContainerGap()
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 164, Short.MAX_VALUE)
-                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, 164, Short.MAX_VALUE))
+                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 167, Short.MAX_VALUE)
+                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, 167, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
@@ -1486,6 +1498,13 @@ public class Add_Retiros extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_jTable1KeyReleased
 
+    private void an_rest_f_retiroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_an_rest_f_retiroActionPerformed
+        // TODO add your handling code here:
+        if(!(Main.rol.getText().equalsIgnoreCase("ADMINISTRADOR") | Main.rol.getText().equalsIgnoreCase("MASTER"))){
+            an_rest_f_retiro.setSelected(false);
+        }
+    }//GEN-LAST:event_an_rest_f_retiroActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1541,6 +1560,7 @@ public class Add_Retiros extends javax.swing.JDialog {
     private javax.swing.JButton add_par;
     private javax.swing.JButton add_par1;
     private javax.swing.JMenuItem add_row;
+    private javax.swing.JCheckBox an_rest_f_retiro;
     private javax.swing.JComboBox<String> bsc_cedula;
     private javax.swing.JComboBox<String> bsc_empleador;
     private javax.swing.JCheckBox cr_ret_asist;
@@ -2448,7 +2468,7 @@ public boolean verify_data(){
                                             date_4.set(Calendar.MINUTE,0);
                                             date_4.set(Calendar.SECOND,0);
                                             date_4.set(Calendar.MILLISECOND,0);
-                                            if (date_out.getTime().compareTo(date_out_low.getTime())>=0 & date_today.getTime().compareTo(date_4.getTime())<=0) {
+                                            if ((date_out.getTime().compareTo(date_out_low.getTime())>=0 || an_rest_f_retiro.isSelected())& date_today.getTime().compareTo(date_4.getTime())<=0) {
                                                 ret=true&ret;
                                             }else{
                                                 jTable1.changeSelection(i,row_f_retiro, false, false);
