@@ -54,7 +54,7 @@ public class CellRender_Cruce_Arl extends DefaultTableCellRenderer{
                 cell.setForeground(Color.white);
             }
         }else{
-            if (table.getColumnName(column).equals("F Ingreso (DD/MM/AAAA)")) {
+            if (table.getColumnName(column).equals("F Ingreso (DD-MM-AAAA)")) {
                 if (value!=null) {
                     if(!value.toString().equals("")){
                         if (chech_char(value.toString().trim(),"'#$%&()=?¡¿*+[]{};:<>")) {
@@ -246,12 +246,12 @@ public boolean check_fecha(Object fecha){
     boolean ret=false;
     if (fecha!=null) {
         if (chech_char(fecha.toString().trim(),"'#$%&()=?¡¿*+[]{};:<>,.")) {
-            if (!fecha.toString().trim().equals("") & count_char(fecha.toString().trim(),'/')==2 & (fecha.toString().length()==10 | fecha.toString().length()==9)) {
+            if (!fecha.toString().trim().equals("") & count_char(fecha.toString().trim(),'-')==2 & (fecha.toString().length()==10 | fecha.toString().length()==9)) {
                 int str_año=0;
                 int str_mes=0;
                 int str_dia=0;
                 try {
-                    StringTokenizer tokens=new StringTokenizer(fecha.toString().trim(),"/");
+                    StringTokenizer tokens=new StringTokenizer(fecha.toString().trim(),"-");
                     while(tokens.hasMoreTokens()){
                         str_dia=Integer.parseInt(tokens.nextToken().trim());
                         str_mes=Integer.parseInt(tokens.nextToken().trim());

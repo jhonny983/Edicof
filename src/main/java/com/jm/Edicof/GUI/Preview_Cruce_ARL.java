@@ -480,7 +480,8 @@ Float tasa;
                             cell.setCellValue(emp_no_arl.getValueAt(i, j).toString());
                         }
                         if (j==2) {
-                            cell.setCellValue(new SimpleDateFormat("dd-mm-yyyy").parse(emp_no_arl.getValueAt(i, j).toString()));
+                            System.out.println(emp_no_arl.getValueAt(i, j).toString());
+                            cell.setCellValue(new SimpleDateFormat("dd-MM-yyyy").parse(emp_no_arl.getValueAt(i, j).toString()));
                             cellStyle = workbook.createCellStyle();
                             createHelper = workbook.getCreationHelper();
                             cellStyle.setDataFormat(
@@ -525,7 +526,7 @@ Float tasa;
                             cell.setCellValue(emp_tarifa_dif.getValueAt(i, j).toString());
                         }
                         if (j==2) {
-                          cell.setCellValue(new SimpleDateFormat("dd-mm-yyyy").parse(emp_tarifa_dif.getValueAt(i, j).toString()));
+                          cell.setCellValue(new SimpleDateFormat("dd-MM-yyyy").parse(emp_tarifa_dif.getValueAt(i, j).toString()));
                             cellStyle = workbook.createCellStyle();
                             createHelper = workbook.getCreationHelper();
                             cellStyle.setDataFormat(
@@ -572,7 +573,7 @@ Float tasa;
                             cell.setCellValue(emp_f_ingreso_dif.getValueAt(i, j).toString());
                         }
                         if (j==2) {
-                          cell.setCellValue(new SimpleDateFormat("dd/mm/yyyy").parse(emp_f_ingreso_dif.getValueAt(i, j).toString()));
+                          cell.setCellValue(new SimpleDateFormat("dd-MM-yyyy").parse(emp_f_ingreso_dif.getValueAt(i, j).toString()));
                             cellStyle = workbook.createCellStyle();
                             createHelper = workbook.getCreationHelper();
                             cellStyle.setDataFormat(
@@ -580,7 +581,7 @@ Float tasa;
                             cell.setCellStyle(cellStyle);//dddd, d "de" mmmm "de" yyyy
                         }
                         if (j==3) {
-                          cell.setCellValue(new SimpleDateFormat("dd/mm/yyyy").parse(emp_f_ingreso_dif.getValueAt(i, j).toString()));
+                          cell.setCellValue(new SimpleDateFormat("dd-MM-yyyy").parse(emp_f_ingreso_dif.getValueAt(i, j).toString()));
                             cellStyle = workbook.createCellStyle();
                             createHelper = workbook.getCreationHelper();
                             cellStyle.setDataFormat(
@@ -837,7 +838,7 @@ public void sys_arl_fecha_dif(){
                         modelo.setValueAt(Long.parseLong(r.getString("ID_EMPLEADO")),emp_f_ingreso_dif.getRowCount()-1,0);
                         modelo.setValueAt(r.getString("APELLIDO_1_EMP")+" "+r.getString("APELLIDO_2_EMP")+" "+r.getString("NOMBRE_1_EMP")+" "+r.getString("NOMBRE_2_EMP"),emp_f_ingreso_dif.getRowCount()-1,1);
                         modelo.setValueAt(tabla_arl.getValueAt(i, 2).toString().trim(),emp_f_ingreso_dif.getRowCount()-1,2);
-                        modelo.setValueAt(new SimpleDateFormat("dd/MM/yyyy").format(new SimpleDateFormat("yyyy-MM-dd").parse(r.getString("FECHA_INGRESO"))),emp_f_ingreso_dif.getRowCount()-1,3);
+                        modelo.setValueAt(new SimpleDateFormat("dd-MM-yyyy").format(new SimpleDateFormat("yyyy-MM-dd").parse(r.getString("FECHA_INGRESO"))),emp_f_ingreso_dif.getRowCount()-1,3);
                         modelo.setValueAt(tabla_arl.getValueAt(i, 3).toString().trim(),emp_f_ingreso_dif.getRowCount()-1,4);
                     }
                 }
@@ -880,12 +881,12 @@ public Date get_fecha(Object fecha){
     Date ret=null;
     if (fecha!=null) {
         if (chech_char(fecha.toString().trim(),"'#$%&()=?¡¿*+[]{};:<>,.")) {
-            if (!fecha.toString().trim().equals("") & count_char(fecha.toString().trim(),'/')==2) {
+            if (!fecha.toString().trim().equals("") & count_char(fecha.toString().trim(),'-')==2) {
                 int str_año=0;
                 int str_mes=0;
                 int str_dia=0;
                 try {
-                    StringTokenizer tokens=new StringTokenizer(fecha.toString().trim(),"/");
+                    StringTokenizer tokens=new StringTokenizer(fecha.toString().trim(),"-");
                     while(tokens.hasMoreTokens()){
                         str_dia=Integer.parseInt(tokens.nextToken().trim());
                         str_mes=Integer.parseInt(tokens.nextToken().trim());

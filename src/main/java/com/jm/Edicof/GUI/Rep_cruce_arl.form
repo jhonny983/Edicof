@@ -150,7 +150,7 @@
                   <Table columnCount="4" rowCount="1">
                     <Column editable="true" title="Cedula" type="java.lang.Object"/>
                     <Column editable="true" title="Nombre" type="java.lang.Object"/>
-                    <Column editable="true" title="F Ingreso (DD/MM/AAAA)" type="java.lang.Object"/>
+                    <Column editable="true" title="F Ingreso (DD-MM-AAAA)" type="java.lang.Object"/>
                     <Column editable="true" title="Tasa (%)" type="java.lang.Object"/>
                   </Table>
                 </Property>
