@@ -24,7 +24,7 @@ public class CellRender_Ingresos_Masivos_Empleados extends DefaultTableCellRende
     public Component getTableCellRendererComponent(JTable table, Object value,boolean isSelected,boolean hasFocus,int row,int column){
         JLabel cell = (JLabel) super.getTableCellRendererComponent (table, value, isSelected, hasFocus, row, column);
         if (table.getColumnName(column).equals("Tipo Ident*")) {
-            if (check_tip_ident(value)) {
+            if (Validations.check_tip_ident(value)) {
                 cell.setOpaque(true);
                 cell.setBackground(new Color(150,240,160));
                 cell.setForeground(Color.black);
@@ -35,7 +35,7 @@ public class CellRender_Ingresos_Masivos_Empleados extends DefaultTableCellRende
             }
         } else {
             if (table.getColumnName(column).equals("Id*")) {
-                if (check_cedula(value)) {
+                if (Validations.check_cedula(value)) {
                     cell.setOpaque(true);
                     cell.setBackground(new Color(150,240,160));
                     cell.setForeground(Color.black);
@@ -46,7 +46,7 @@ public class CellRender_Ingresos_Masivos_Empleados extends DefaultTableCellRende
                 }
             }else{
                 if (table.getColumnName(column).equals("Ciudad Expedicion Id*")) {
-                    if (check_municipio(value)) {
+                    if (Validations.check_municipio(value)) {
                         cell.setOpaque(true);
                         cell.setBackground(new Color(150,240,160));
                         cell.setForeground(Color.black);
@@ -57,7 +57,7 @@ public class CellRender_Ingresos_Masivos_Empleados extends DefaultTableCellRende
                     }
                 } else {
                     if (table.getColumnName(column).equals("Fecha expedicion (DD-MM-AAAA)*")) {//Fecha expedicion (DD-MM-AAAA)*
-                        if (check_fecha(value)) {
+                        if (Validations.check_fecha(value)) {
                             cell.setOpaque(true);
                             cell.setBackground(new Color(150,240,160));
                             cell.setForeground(Color.black);
@@ -68,7 +68,7 @@ public class CellRender_Ingresos_Masivos_Empleados extends DefaultTableCellRende
                         }
                     } else {
                          if (table.getColumnName(column).equals("Nombre 1*")) {
-                            if (check_field(value)) {
+                            if (Validations.check_field(value)) {
                                 cell.setOpaque(true);
                                 cell.setBackground(new Color(150,240,160));
                                 cell.setForeground(Color.black);
@@ -84,7 +84,7 @@ public class CellRender_Ingresos_Masivos_Empleados extends DefaultTableCellRende
                                 cell.setForeground(Color.black);
                             }else{
                                 if (table.getColumnName(column).equals("Apellido 1*")) {
-                                    if (check_field(value)) {
+                                    if (Validations.check_field(value)) {
                                         cell.setOpaque(true);
                                         cell.setBackground(new Color(150,240,160));
                                         cell.setForeground(Color.black);
@@ -100,7 +100,7 @@ public class CellRender_Ingresos_Masivos_Empleados extends DefaultTableCellRende
                                         cell.setForeground(Color.black);
                                     }else{
                                         if (table.getColumnName(column).equals("Tipo de sangre*")) {
-                                            if (check_tip_sangre(value)) {
+                                            if (Validations.check_tip_sangre(value)) {
                                                 cell.setOpaque(true);
                                                 cell.setBackground(new Color(150,240,160));
                                                 cell.setForeground(Color.black);
@@ -112,7 +112,7 @@ public class CellRender_Ingresos_Masivos_Empleados extends DefaultTableCellRende
 
                                         } else {
                                             if (table.getColumnName(column).equals("Género (M-F)*")) {
-                                                if (check_genero(value)) {
+                                                if (Validations.check_genero(value)) {
                                                     cell.setOpaque(true);
                                                     cell.setBackground(new Color(150,240,160));
                                                     cell.setForeground(Color.black);
@@ -123,7 +123,7 @@ public class CellRender_Ingresos_Masivos_Empleados extends DefaultTableCellRende
                                                 }
                                             } else {//Lugar nacimiento*
                                                 if (table.getColumnName(column).equals("Lugar nacimiento*")) {
-                                                    if (check_municipio(value)) {
+                                                    if (Validations.check_municipio(value)) {
                                                         cell.setOpaque(true);
                                                         cell.setBackground(new Color(150,240,160));
                                                         cell.setForeground(Color.black);
@@ -134,7 +134,7 @@ public class CellRender_Ingresos_Masivos_Empleados extends DefaultTableCellRende
                                                     }
                                                 } else {
                                                     if (table.getColumnName(column).equals("Fecha nacimiento (DD-MM-AAAA)*")) {//Fecha nacimiento (DD-MM-AAAA)*
-                                                        if (check_fecha(value)) {
+                                                        if (Validations.check_fecha(value)) {
                                                             cell.setOpaque(true);
                                                             cell.setBackground(new Color(150,240,160));
                                                             cell.setForeground(Color.black);
@@ -145,7 +145,7 @@ public class CellRender_Ingresos_Masivos_Empleados extends DefaultTableCellRende
                                                         }
                                                     } else {
                                                         if (table.getColumnName(column).equals("Estatura (cm)*")){//Estatura (cm)*
-                                                            if (check_estat(value)) {
+                                                            if (Validations.check_estat(value)) {
                                                                 cell.setOpaque(true);
                                                                 cell.setBackground(new Color(150,240,160));
                                                                 cell.setForeground(Color.black);
@@ -174,6 +174,7 @@ public class CellRender_Ingresos_Masivos_Empleados extends DefaultTableCellRende
         }
     return this;
    }
+    /*
 public boolean check_cedula(Object ced){
     boolean ret=false;
     if (ced!=null) {
@@ -395,5 +396,5 @@ public boolean check_municipio(Object municipio){
         }
     }
     return ret;
-    }
+    }*/
 }

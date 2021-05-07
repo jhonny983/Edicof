@@ -27,9 +27,9 @@ public class CellRender_vetados extends DefaultTableCellRenderer{
         if (table.getColumnName(column).equals("ID Empleado")) {
             if (value!=null) {
                 if(!value.toString().equals("")){
-                    if (chech_char(value.toString().trim(),"'#$%&()=?¡¿/*+[]{};:<>,.")) {
-                        if (comprobarLong(value.toString().trim())) {
-                            if (check_cedula(value.toString())) {
+                    if (Validations.check_char(value.toString().trim(),"'#$%&()=?¡¿/*+[]{};:<>,.")) {
+                        if (Validations.comprobarLong(value.toString().trim())) {
+                            if (Validations.check_cedula(value.toString())) {
                                 cell.setOpaque(true);
                                 cell.setBackground(new Color(150,240,160));
                                 cell.setForeground(Color.black);
@@ -56,7 +56,7 @@ public class CellRender_vetados extends DefaultTableCellRenderer{
             }
         }else{
             if (table.getColumnName(column).equals("Nombre empleado")) {
-                if (check_empleado(value)) {
+                if (Validations.check_field(value)) {
                     cell.setOpaque(true);
                     cell.setBackground(new Color(150,240,160));
                     cell.setForeground(Color.black);
@@ -67,7 +67,7 @@ public class CellRender_vetados extends DefaultTableCellRenderer{
                 }
             }else{
                 if (table.getColumnName(column).equals("Fecha")) {
-                    if (check_fecha(value)) {
+                    if (Validations.check_fecha(value)) {
                         cell.setOpaque(true);
                         cell.setBackground(new Color(150,240,160));
                         cell.setForeground(Color.black);
@@ -78,7 +78,7 @@ public class CellRender_vetados extends DefaultTableCellRenderer{
                     }
                 }else{
                     if (table.getColumnName(column).equals("Motivo")) {
-                        if (check_field(value)) {
+                        if (Validations.check_field(value)) {
                             cell.setOpaque(true);
                             cell.setBackground(new Color(150,240,160));
                             cell.setForeground(Color.black);
@@ -101,6 +101,7 @@ public class CellRender_vetados extends DefaultTableCellRenderer{
         }
     return this;
    }
+    /*
 public boolean check_cedula(Object ced){
     boolean ret=false;
     if (ced!=null) {
@@ -434,5 +435,5 @@ try{
 }
 return true;
 
-}
+}*/
 }

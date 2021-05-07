@@ -27,9 +27,9 @@ public class CellRender_Preingresos_Traslados extends DefaultTableCellRenderer{
         if (table.getColumnName(column).equals("Cedula*")) {
             if (value!=null) {
                 if(!value.toString().equals("")){
-                    if (chech_char(value.toString().trim(),"'#$%&()=?¡¿/*+[]{};:<>,.")) {
-                        if (comprobarLong(value.toString().trim())) {
-                            if (check_cedula(value.toString())) {
+                    if (Validations.check_char(value.toString().trim(),"'#$%&()=?¡¿/*+[]{};:<>,.")) {
+                        if (Validations.comprobarLong(value.toString().trim())) {
+                            if (Validations.check_cedula(value.toString())) {
                                 cell.setOpaque(true);
                                 cell.setBackground(new Color(150,240,160));
                                 cell.setForeground(Color.black);
@@ -57,8 +57,8 @@ public class CellRender_Preingresos_Traslados extends DefaultTableCellRenderer{
         }else{
             if (table.getColumnName(column).equals("Empleador (Nombre)*")) {
                 if (value!=null) {
-                    if (chech_char(value.toString().trim(),"'#$%&()=?¡¿/*+[]{};:<>,")) {
-                        if (check_empleador(value.toString())) {
+                    if (Validations.check_char(value.toString().trim(),"'#$%&()=?¡¿/*+[]{};:<>,")) {
+                        if (Validations.check_empleador(value.toString())) {
                             cell.setOpaque(true);
                             cell.setBackground(new Color(150,240,160));
                             cell.setForeground(Color.black);
@@ -80,8 +80,8 @@ public class CellRender_Preingresos_Traslados extends DefaultTableCellRenderer{
             }else{
                 if (table.getColumnName(column).equals("F Ingreso (DD-MM-AAAA)*")) {
                     if (value!=null) {
-                        if (chech_char(value.toString().trim(),"'#$%&()=?¡¿/*+[]{};:<>,.")) {
-                            if (check_fecha(value.toString())) {
+                        if (Validations.check_char(value.toString().trim(),"'#$%&()=?¡¿/*+[]{};:<>,.")) {
+                            if (Validations.check_fecha(value.toString())) {
                                 cell.setOpaque(true);
                                 cell.setBackground(new Color(150,240,160));
                                 cell.setForeground(Color.black);
@@ -103,9 +103,9 @@ public class CellRender_Preingresos_Traslados extends DefaultTableCellRenderer{
                 }else{
                     if (table.getColumnName(column).equals("Salario*")) {
                         if (value!=null) {
-                            if (chech_char(value.toString().trim(),"'#$%&()=?¡¿/*+[]{};:<>,.")) {
+                            if (Validations.check_char(value.toString().trim(),"'#$%&()=?¡¿/*+[]{};:<>,.")) {
                                 if (!value.toString().equals("")) {
-                                    if ( comprobarFloat(value.toString())) {
+                                    if ( Validations.comprobarFloat(value.toString())) {
                                         cell.setOpaque(true);
                                         cell.setBackground(new Color(150,240,160));
                                         cell.setForeground(Color.black);
@@ -132,8 +132,8 @@ public class CellRender_Preingresos_Traslados extends DefaultTableCellRenderer{
                     }else{
                         if (table.getColumnName(column).equals("F Nacimiento (DD-MM-AAAA)*")) {
                             if (value!=null) {
-                                if (chech_char(value.toString().trim(),"'#$%&()=?¡¿/*+[]{};:<>,.")) {
-                                    if (check_fecha(value.toString())) {
+                                if (Validations.check_char(value.toString().trim(),"'#$%&()=?¡¿/*+[]{};:<>,.")) {
+                                    if (Validations.check_fecha(value.toString())) {
                                         cell.setOpaque(true);
                                         cell.setBackground(new Color(150,240,160));
                                         cell.setForeground(Color.black);
@@ -155,8 +155,8 @@ public class CellRender_Preingresos_Traslados extends DefaultTableCellRenderer{
                         }else{
                             if (table.getColumnName(column).equals("F Expedicion (DD-MM-AAAA)*")) {
                                 if (value!=null) {
-                                    if (chech_char(value.toString().trim(),"'#$%&()=?¡¿/*+[]{};:<>,.")) {
-                                        if (check_fecha(value.toString())) {
+                                    if (Validations.check_char(value.toString().trim(),"'#$%&()=?¡¿/*+[]{};:<>,.")) {
+                                        if (Validations.check_fecha(value.toString())) {
                                             cell.setOpaque(true);
                                             cell.setBackground(new Color(150,240,160));
                                             cell.setForeground(Color.black);
@@ -178,8 +178,8 @@ public class CellRender_Preingresos_Traslados extends DefaultTableCellRenderer{
                             }else{
                                 if (table.getColumnName(column).equals("Obra*")) {
                                     if (value!=null) {
-                                        if (chech_char(value.toString().trim(),"'#$%&()=?¡¿/*+[]{};:<>,.")) {
-                                            if (check_obra(value.toString())) {
+                                        if (Validations.check_char(value.toString().trim(),"'#$%&()=?¡¿/*+[]{};:<>,.")) {
+                                            if (Validations.check_obra(value.toString())) {
                                                 cell.setOpaque(true);
                                                 cell.setBackground(new Color(150,240,160));
                                                 cell.setForeground(Color.black);
@@ -200,7 +200,7 @@ public class CellRender_Preingresos_Traslados extends DefaultTableCellRenderer{
                                     }
                                 }else{
                                     if (table.getColumnName(column).equals("Area Trabajo*")) {
-                                        if (check_tip_area(value)) {
+                                        if (Validations.check_tip_area(value)) {
                                             cell.setOpaque(true);
                                             cell.setBackground(new Color(150,240,160));
                                             cell.setForeground(Color.black);
@@ -211,7 +211,7 @@ public class CellRender_Preingresos_Traslados extends DefaultTableCellRenderer{
                                         }
                                     }else{
                                         if (table.getColumnName(column).equals("Cargo*")) {
-                                            if (check_cargo(value)) {
+                                            if (Validations.check_cargo(value)) {
                                                 cell.setOpaque(true);
                                                 cell.setBackground(new Color(150,240,160));
                                                 cell.setForeground(Color.black);
@@ -222,7 +222,7 @@ public class CellRender_Preingresos_Traslados extends DefaultTableCellRenderer{
                                             }
                                         }else{
                                             if (table.getColumnName(column).equals("Barrio*")) {
-                                                if (check_barrio(value)) {
+                                                if (Validations.check_barrio(value)) {
                                                     cell.setOpaque(true);
                                                     cell.setBackground(new Color(150,240,160));
                                                     cell.setForeground(Color.black);
@@ -234,8 +234,8 @@ public class CellRender_Preingresos_Traslados extends DefaultTableCellRenderer{
                                             }else{
                                                 if (table.getColumnName(column).equals("Municipio*")) {
                                                     if (value!=null) {
-                                                        if (chech_char(value.toString().trim(),"'#$%&()=?¡¿/*+[]{};:<>,.")) {
-                                                            if (check_municipio(value.toString())) {
+                                                        if (Validations.check_char(value.toString().trim(),"'#$%&()=?¡¿/*+[]{};:<>,.")) {
+                                                            if (Validations.check_municipio(value.toString())) {
                                                                 cell.setOpaque(true);
                                                                 cell.setBackground(new Color(150,240,160));
                                                                 cell.setForeground(Color.black);
@@ -256,7 +256,7 @@ public class CellRender_Preingresos_Traslados extends DefaultTableCellRenderer{
                                                     }
                                                 }else{
                                                     if (table.getColumnName(column).equals("Parentesco*")) {
-                                                        if (check_parentesco(value)) {
+                                                        if (Validations.check_parentesco(value)) {
                                                             cell.setOpaque(true);
                                                             cell.setBackground(new Color(150,240,160));
                                                             cell.setForeground(Color.black);
@@ -267,7 +267,7 @@ public class CellRender_Preingresos_Traslados extends DefaultTableCellRenderer{
                                                         }
                                                     }else{
                                                         if (table.getColumnName(column).equals("Direccion")) {
-                                                            if (check_field_dir(value)) {
+                                                            if (Validations.check_field_dir(value)) {
                                                                 cell.setOpaque(true);
                                                                 cell.setBackground(new Color(150,240,160));
                                                                 cell.setForeground(Color.black);
@@ -278,7 +278,7 @@ public class CellRender_Preingresos_Traslados extends DefaultTableCellRenderer{
                                                             }
                                                         }else{
                                                             if (table.getColumnName(column).equals("Telefono")) {
-                                                                if (check_field(value)) {
+                                                                if (Validations.check_field(value)) {
                                                                     cell.setOpaque(true);
                                                                     cell.setBackground(new Color(150,240,160));
                                                                     cell.setForeground(Color.black);
@@ -289,7 +289,7 @@ public class CellRender_Preingresos_Traslados extends DefaultTableCellRenderer{
                                                                 }
                                                             }else{
                                                                 if (table.getColumnName(column).equals("Correo")) {
-                                                                    if (check_field_mail(value)) {
+                                                                    if (Validations.check_field_mail(value)) {
                                                                         cell.setOpaque(true);
                                                                         cell.setBackground(new Color(150,240,160));
                                                                         cell.setForeground(Color.black);
@@ -300,7 +300,7 @@ public class CellRender_Preingresos_Traslados extends DefaultTableCellRenderer{
                                                                     }
                                                                 }else{
                                                                     if (table.getColumnName(column).equals("Acudiente")) {
-                                                                        if (check_field(value)) {
+                                                                        if (Validations.check_field(value)) {
                                                                             cell.setOpaque(true);
                                                                             cell.setBackground(new Color(150,240,160));
                                                                             cell.setForeground(Color.black);
@@ -311,7 +311,7 @@ public class CellRender_Preingresos_Traslados extends DefaultTableCellRenderer{
                                                                         }
                                                                     }else{
                                                                         if (table.getColumnName(column).equals("Telefono Acudiente")) {
-                                                                            if (check_field(value)) {
+                                                                            if (Validations.check_field(value)) {
                                                                                 cell.setOpaque(true);
                                                                                 cell.setBackground(new Color(150,240,160));
                                                                                 cell.setForeground(Color.black);
@@ -322,7 +322,7 @@ public class CellRender_Preingresos_Traslados extends DefaultTableCellRenderer{
                                                                             }
                                                                         }else{
                                                                             if (table.getColumnName(column).equals("Observaciones")) {
-                                                                                if (check_field(value)) {
+                                                                                if (Validations.check_field(value)) {
                                                                                     cell.setOpaque(true);
                                                                                     cell.setBackground(new Color(150,240,160));
                                                                                     cell.setForeground(Color.black);
@@ -359,6 +359,7 @@ public class CellRender_Preingresos_Traslados extends DefaultTableCellRenderer{
         }
     return this;
    }
+    /*
 public boolean check_cedula(Object ced){
     boolean ret=false;
     if (ced!=null) {
@@ -737,5 +738,5 @@ try{
 }
 return true;
 
-}
+}*/
 }

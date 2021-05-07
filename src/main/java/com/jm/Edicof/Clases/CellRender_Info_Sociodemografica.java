@@ -25,7 +25,7 @@ public class CellRender_Info_Sociodemografica extends DefaultTableCellRenderer{
         JLabel cell = (JLabel) super.getTableCellRendererComponent (table, value, isSelected, hasFocus, row, column);
         
         if (table.getColumnName(column).equals("Id*")) {
-            if (check_cedula(value)) {
+            if (Validations.check_cedula(value)) {
                 cell.setOpaque(true);
                 cell.setBackground(new Color(150,240,160));
                 cell.setForeground(Color.black);
@@ -36,7 +36,7 @@ public class CellRender_Info_Sociodemografica extends DefaultTableCellRenderer{
             }
         }else{
             if (table.getColumnName(column).equals("Direccion*")) {
-                if (check_field_dir(value)) {
+                if (Validations.check_field_dir(value)) {
                     cell.setOpaque(true);
                     cell.setBackground(new Color(150,240,160));
                     cell.setForeground(Color.black);
@@ -47,7 +47,7 @@ public class CellRender_Info_Sociodemografica extends DefaultTableCellRenderer{
                 }
             }else{
                 if (table.getColumnName(column).equals("Tel/Cel*")) {
-                    if (check_tel_field(value)) {
+                    if (Validations.check_tel_field(value)) {
                         cell.setOpaque(true);
                         cell.setBackground(new Color(150,240,160));
                         cell.setForeground(Color.black);
@@ -58,7 +58,7 @@ public class CellRender_Info_Sociodemografica extends DefaultTableCellRenderer{
                     }
                 }else{
                     if (table.getColumnName(column).equals("Municipio Residencia*")) {
-                        if ( check_municipio(value)) {
+                        if ( Validations.check_municipio(value)) {
                             cell.setOpaque(true);
                             cell.setBackground(new Color(150,240,160));
                             cell.setForeground(Color.black);
@@ -69,7 +69,7 @@ public class CellRender_Info_Sociodemografica extends DefaultTableCellRenderer{
                         }
                     }else{
                         if (table.getColumnName(column).equals("Barrio*")) {
-                            if (check_barrio(value)) {
+                            if (Validations.check_barrio_info(value)) {
                                 cell.setOpaque(true);
                                 cell.setBackground(new Color(150,240,160));
                                 cell.setForeground(Color.black);
@@ -80,7 +80,7 @@ public class CellRender_Info_Sociodemografica extends DefaultTableCellRenderer{
                             }
                         }else{
                             if (table.getColumnName(column).equals("Estrato*")) {
-                                if (check_estrato(value)) {
+                                if (Validations.check_estrato(value)) {
                                     cell.setOpaque(true);
                                     cell.setBackground(new Color(150,240,160));
                                     cell.setForeground(Color.black);
@@ -91,7 +91,7 @@ public class CellRender_Info_Sociodemografica extends DefaultTableCellRenderer{
                                 }
                             }else{
                                 if (table.getColumnName(column).equals("Tipo Vivienda*")) {
-                                    if (check_tip_vivienda(value)) {
+                                    if (Validations.check_tip_vivienda(value)) {
                                         cell.setOpaque(true);
                                         cell.setBackground(new Color(150,240,160));
                                         cell.setForeground(Color.black);
@@ -102,7 +102,7 @@ public class CellRender_Info_Sociodemografica extends DefaultTableCellRenderer{
                                     }
                                 }else{
                                     if (table.getColumnName(column).equals("Area Trabajo*")) {
-                                        if (check_tip_area(value)) {
+                                        if (Validations.check_tip_area(value)) {
                                             cell.setOpaque(true);
                                             cell.setBackground(new Color(150,240,160));
                                             cell.setForeground(Color.black);
@@ -113,7 +113,7 @@ public class CellRender_Info_Sociodemografica extends DefaultTableCellRenderer{
                                         }
                                     }else{
                                         if (table.getColumnName(column).equals("Cargo*")) {
-                                            if (check_cargo(value)) {
+                                            if (Validations.check_cargo(value)) {
                                                 cell.setOpaque(true);
                                                 cell.setBackground(new Color(150,240,160));
                                                 cell.setForeground(Color.black);
@@ -124,7 +124,7 @@ public class CellRender_Info_Sociodemografica extends DefaultTableCellRenderer{
                                             }
                                         }else{
                                             if (table.getColumnName(column).equals("Estado Civil*")) {
-                                                if (check_estado_civil(value)) {
+                                                if (Validations.check_estado_civil(value)) {
                                                     cell.setOpaque(true);
                                                     cell.setBackground(new Color(150,240,160));
                                                     cell.setForeground(Color.black);
@@ -135,7 +135,7 @@ public class CellRender_Info_Sociodemografica extends DefaultTableCellRenderer{
                                                 }
                                             }else{
                                                 if (table.getColumnName(column).equals("No Hijos*")) {
-                                                    if (check_integer(value)) {
+                                                    if (Validations.check_integer(value)) {
                                                         cell.setOpaque(true);
                                                         cell.setBackground(new Color(150,240,160));
                                                         cell.setForeground(Color.black);
@@ -146,7 +146,7 @@ public class CellRender_Info_Sociodemografica extends DefaultTableCellRenderer{
                                                     }
                                                 }else{
                                                     if (table.getColumnName(column).equals("Nivel Academico*")) {
-                                                        if (check_niv_acad(value)) {
+                                                        if (Validations.check_niv_acad(value)) {
                                                             cell.setOpaque(true);
                                                             cell.setBackground(new Color(150,240,160));
                                                             cell.setForeground(Color.black);
@@ -157,7 +157,7 @@ public class CellRender_Info_Sociodemografica extends DefaultTableCellRenderer{
                                                         }
                                                     }else{
                                                         if (table.getColumnName(column).equals("Nacionalidad*")) {
-                                                            if (check_nacion(value)) {
+                                                            if (Validations.check_nacion(value)) {
                                                                 cell.setOpaque(true);
                                                                 cell.setBackground(new Color(150,240,160));
                                                                 cell.setForeground(Color.black);
@@ -168,7 +168,7 @@ public class CellRender_Info_Sociodemografica extends DefaultTableCellRenderer{
                                                             }
                                                         }else{
                                                             if (table.getColumnName(column).equals("Personas a Cargo*")) {
-                                                                if (check_integer(value)) {
+                                                                if (Validations.check_integer(value)) {
                                                                     cell.setOpaque(true);
                                                                     cell.setBackground(new Color(150,240,160));
                                                                     cell.setForeground(Color.black);
@@ -179,7 +179,7 @@ public class CellRender_Info_Sociodemografica extends DefaultTableCellRenderer{
                                                                 }
                                                             }else{
                                                                 if (table.getColumnName(column).equals("Personas en el Hogar*")) {
-                                                                    if (check_integer(value)) {
+                                                                    if (Validations.check_integer(value)) {
                                                                         cell.setOpaque(true);
                                                                         cell.setBackground(new Color(150,240,160));
                                                                         cell.setForeground(Color.black);
@@ -190,7 +190,7 @@ public class CellRender_Info_Sociodemografica extends DefaultTableCellRenderer{
                                                                     }
                                                                 }else{
                                                                     if (table.getColumnName(column).equals("Aportantes Hogar*")) {
-                                                                        if (check_integer(value)) {
+                                                                        if (Validations.check_integer(value)) {
                                                                             cell.setOpaque(true);
                                                                             cell.setBackground(new Color(150,240,160));
                                                                             cell.setForeground(Color.black);
@@ -201,7 +201,7 @@ public class CellRender_Info_Sociodemografica extends DefaultTableCellRenderer{
                                                                         }
                                                                     }else{
                                                                         if (table.getColumnName(column).equals("Nombre Acudiente*")) {
-                                                                            if (check_field(value)) {
+                                                                            if (Validations.check_field(value)) {
                                                                                 cell.setOpaque(true);
                                                                                 cell.setBackground(new Color(150,240,160));
                                                                                 cell.setForeground(Color.black);
@@ -212,7 +212,7 @@ public class CellRender_Info_Sociodemografica extends DefaultTableCellRenderer{
                                                                             }
                                                                         }else{
                                                                             if (table.getColumnName(column).equals("Tel/Cel Acudiente*")) {
-                                                                                if (check_tel_field(value)) {
+                                                                                if (Validations.check_tel_field(value)) {
                                                                                     cell.setOpaque(true);
                                                                                     cell.setBackground(new Color(150,240,160));
                                                                                     cell.setForeground(Color.black);
@@ -223,7 +223,7 @@ public class CellRender_Info_Sociodemografica extends DefaultTableCellRenderer{
                                                                                 }
                                                                             }else{
                                                                                 if (table.getColumnName(column).equals("Parentesco Acudiente*")) {
-                                                                                    if (check_parentesco(value)) {
+                                                                                    if (Validations.check_parentesco(value)) {
                                                                                         cell.setOpaque(true);
                                                                                         cell.setBackground(new Color(150,240,160));
                                                                                         cell.setForeground(Color.black);
@@ -234,7 +234,7 @@ public class CellRender_Info_Sociodemografica extends DefaultTableCellRenderer{
                                                                                     }
                                                                                 }else{
                                                                                     if (table.getColumnName(column).equals("Productos Financieros*")) {
-                                                                                        if (check_prod_fin(value)) {
+                                                                                        if (Validations.check_prod_fin(value)) {
                                                                                             cell.setOpaque(true);
                                                                                             cell.setBackground(new Color(150,240,160));
                                                                                             cell.setForeground(Color.black);
@@ -245,7 +245,7 @@ public class CellRender_Info_Sociodemografica extends DefaultTableCellRenderer{
                                                                                         }
                                                                                     }else{
                                                                                         if (table.getColumnName(column).equals("Tiempo Libre*")) {
-                                                                                            if (check_tiempo_libre(value)) {
+                                                                                            if (Validations.check_tiempo_libre(value)) {
                                                                                                 cell.setOpaque(true);
                                                                                                 cell.setBackground(new Color(150,240,160));
                                                                                                 cell.setForeground(Color.black);
@@ -256,7 +256,7 @@ public class CellRender_Info_Sociodemografica extends DefaultTableCellRenderer{
                                                                                             }
                                                                                         }else{
                                                                                             if (table.getColumnName(column).equals("Servicios Publicos*")) {
-                                                                                                if (check_serv_public(value)) {
+                                                                                                if (Validations.check_serv_public(value)) {
                                                                                                     cell.setOpaque(true);
                                                                                                     cell.setBackground(new Color(150,240,160));
                                                                                                     cell.setForeground(Color.black);
@@ -267,7 +267,7 @@ public class CellRender_Info_Sociodemografica extends DefaultTableCellRenderer{
                                                                                                 }
                                                                                             }else{
                                                                                                 if (table.getColumnName(column).equals("Ahorro*")) {
-                                                                                                    if (check_field_ahorro(value)) {
+                                                                                                    if (Validations.check_field_ahorro(value)) {
                                                                                                         cell.setOpaque(true);
                                                                                                         cell.setBackground(new Color(150,240,160));
                                                                                                         cell.setForeground(Color.black);
@@ -278,7 +278,7 @@ public class CellRender_Info_Sociodemografica extends DefaultTableCellRenderer{
                                                                                                     }
                                                                                                 }else{
                                                                                                     if (table.getColumnName(column).equals("Fuente Ahorro*")) {
-                                                                                                        if (check_fte_ahorro(value)) {
+                                                                                                        if (Validations.check_fte_ahorro(value)) {
                                                                                                             cell.setOpaque(true);
                                                                                                             cell.setBackground(new Color(150,240,160));
                                                                                                             cell.setForeground(Color.black);
@@ -320,6 +320,7 @@ public class CellRender_Info_Sociodemografica extends DefaultTableCellRenderer{
         }
     return this;
    }
+/*    
 public boolean check_cedula(Object ced){
     boolean ret=false;
     if (ced!=null) {
@@ -1125,5 +1126,5 @@ try{
 }
 return true;
 
-}
+}*/
 }

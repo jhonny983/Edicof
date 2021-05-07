@@ -7,8 +7,8 @@ package com.jm.Edicof.Clases;
 
 import java.awt.Color;
 import java.awt.Component;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.text.NumberFormat;
+import java.util.Locale;
 import javax.swing.JLabel;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
@@ -18,50 +18,68 @@ import javax.swing.table.DefaultTableCellRenderer;
  * @author ADMIN
  */
 public class CellRender_Cruce_Tesoreria extends DefaultTableCellRenderer{
+    Locale locale = new Locale("es","CO"); 
+    
+    NumberFormat nf = NumberFormat.getCurrencyInstance(locale);
+    @Override
+        public void setValue(Object value)
+	{
+            try{
+                if (value != null ){
+                    if (value instanceof Float) {
+                        value = nf.format(value);
+                    }
+                }
+            }catch(IllegalArgumentException e) {
+                e.printStackTrace();
+            }
+            super.setValue(value);
+	}
     @Override
     public Component getTableCellRendererComponent(JTable table, Object value,boolean isSelected,boolean hasFocus,int row,int column){
         JLabel cell = (JLabel) super.getTableCellRendererComponent (table, value, isSelected, hasFocus, row, column);
-        cell.setOpaque(true);
-        cell.setBackground(Color.red);
-        cell.setForeground(Color.white);
-        if (table.getColumnName(column).equals("FIC Aplicado")) {
-            cell.setOpaque(true);
-            cell.setBackground(Color.red);
-            cell.setForeground(Color.white);
-            if (value!=null) {
-                if(!value.toString().equals("")){
-                    if (chech_char(value.toString().trim(),"'#$%&()=?¡¿/*+[]{};:<>")) {
-                        if (comprobarFloat(value.toString().trim())) {
-                            cell.setOpaque(true);
-                            cell.setBackground(new Color(150,240,160));
-                            cell.setForeground(Color.black);
+            if (table.getModel().isCellEditable(row,column)) {
+                cell.setOpaque(true);
+                cell.setBackground(new Color(150,240,160));
+                cell.setForeground(Color.black);
+            }else{
+                cell.setOpaque(true);
+                cell.setBackground(new Color(192,192,192));
+                cell.setForeground(Color.black);
+            }
+            if (table.getColumnName(column).equals("FIC Aplicado") | table.getColumnName(column).equals("Total Aplicado")) {
+                if (value!=null) {
+                    if(!value.toString().equals("")){
+                        if (Validations.check_char(value.toString().trim(),"'#$%&()=?¡¿/*+[]{};:<>")) {
+                            if (Validations.comprobarFloat(value.toString().trim())) {
+                                cell.setOpaque(true);
+                                cell.setBackground(new Color(150,240,160));
+                                cell.setForeground(Color.black);
+                            }else{
+                                cell.setOpaque(true);
+                                cell.setBackground(Color.red);
+                                cell.setForeground(Color.white);
+                            }
                         }else{
                             cell.setOpaque(true);
                             cell.setBackground(Color.red);
                             cell.setForeground(Color.white);
                         }
-                    }else{
-                        cell.setOpaque(true);
-                        cell.setBackground(Color.red);
-                        cell.setForeground(Color.white);
                     }
+                }else{
+                    cell.setOpaque(true);
+                    cell.setBackground(Color.red);
+                    cell.setForeground(Color.white);
                 }
-            }else{
-                cell.setOpaque(true);
-                cell.setBackground(Color.red);
-                cell.setForeground(Color.white);
             }
-        }
-        if (hasFocus & isSelected) {
-//            cell.setOpaque(true);
-//            cell.setBackground(new Color(0,128,255));
-//            cell.setForeground(Color.black);
-            cell.setOpaque(true);
-            cell.setBackground(Color.red);
-            cell.setForeground(Color.white);
-        }
+            if (isSelected) {
+                cell.setOpaque(true);
+                cell.setBackground(new Color(0,128,255));
+                cell.setForeground(Color.black);
+            }
     return this;
    }
+ /*
 public boolean check_cedula(Object ced){
     boolean ret=false;
     if (ced!=null) {
@@ -135,4 +153,5 @@ try{
 return true;
 
 }
+*/
 }

@@ -25,7 +25,7 @@ public class CellRender_Retiros extends DefaultTableCellRenderer{
         JLabel cell = (JLabel) super.getTableCellRendererComponent (table, value, isSelected, hasFocus, row, column);
         
         if (table.getColumnName(column).equals("Cedula*")) {
-            if (check_cedula(value)) {
+            if (Validations.check_cedula(value)) {
                 cell.setOpaque(true);
                 cell.setBackground(new Color(150,240,160));
                 cell.setForeground(Color.black);
@@ -36,7 +36,7 @@ public class CellRender_Retiros extends DefaultTableCellRenderer{
             }
         }else{
             if (table.getColumnName(column).equals("Empleador (Nombre)")) {
-                if (check_empleador(value)) {
+                if (Validations.check_empleador(value)) {
                     cell.setOpaque(true);
                     cell.setBackground(new Color(150,240,160));
                     cell.setForeground(Color.black);
@@ -47,7 +47,7 @@ public class CellRender_Retiros extends DefaultTableCellRenderer{
                 }
             }else{
                 if (table.getColumnName(column).equals("F Ingreso (DD-MM-AAAA)")) {
-                    if (check_fecha(value)) {
+                    if (Validations.check_fecha(value)) {
                         cell.setOpaque(true);
                         cell.setBackground(new Color(150,240,160));
                         cell.setForeground(Color.black);
@@ -58,7 +58,7 @@ public class CellRender_Retiros extends DefaultTableCellRenderer{
                     }
                 }else{
                     if (table.getColumnName(column).equals("F Retiro (DD-MM-AAAA)")) {
-                        if (check_fecha(value)) {
+                        if (Validations.check_fecha(value)) {
                             cell.setOpaque(true);
                             cell.setBackground(new Color(150,240,160));
                             cell.setForeground(Color.black);
@@ -69,7 +69,7 @@ public class CellRender_Retiros extends DefaultTableCellRenderer{
                         }
                     }else{
                         if (table.getColumnName(column).equals("EPS (Nombre)")) {
-                            if (check_eps(value)) {
+                            if (Validations.check_eps(value)) {
                                 cell.setOpaque(true);
                                 cell.setBackground(new Color(150,240,160));
                                 cell.setForeground(Color.black);
@@ -80,7 +80,7 @@ public class CellRender_Retiros extends DefaultTableCellRenderer{
                             }
                         }else{
                             if (table.getColumnName(column).equals("AFP (Nombre)")) {
-                                if (check_afp(value)) {
+                                if (Validations.check_afp(value)) {
                                     cell.setOpaque(true);
                                     cell.setBackground(new Color(150,240,160));
                                     cell.setForeground(Color.black);
@@ -91,7 +91,7 @@ public class CellRender_Retiros extends DefaultTableCellRenderer{
                                 }
                             }else{
                                 if (table.getColumnName(column).equals("ARL (Nombre)")) {
-                                    if (check_arl(value)) {
+                                    if (Validations.check_arl(value)) {
                                         cell.setOpaque(true);
                                         cell.setBackground(new Color(150,240,160));
                                         cell.setForeground(Color.black);
@@ -102,7 +102,7 @@ public class CellRender_Retiros extends DefaultTableCellRenderer{
                                     }
                                 }else{
                                     if (table.getColumnName(column).equals("CCF (Nombre)")) {
-                                        if (check_ccf(value)) {
+                                        if (Validations.check_ccf(value)) {
                                             cell.setOpaque(true);
                                             cell.setBackground(new Color(150,240,160));
                                             cell.setForeground(Color.black);
@@ -113,7 +113,7 @@ public class CellRender_Retiros extends DefaultTableCellRenderer{
                                         }
                                     }else{
                                         if (table.getColumnName(column).equals("Salario")) {
-                                            if ( check_salario(value)) {
+                                            if (Validations.check_salario(value)) {
                                                 cell.setOpaque(true);
                                                 cell.setBackground(new Color(150,240,160));
                                                 cell.setForeground(Color.black);
@@ -124,7 +124,7 @@ public class CellRender_Retiros extends DefaultTableCellRenderer{
                                             }
                                         }else{
                                             if (table.getColumnName(column).equals("F Nacimiento (DD-MM-AAAA)")) {
-                                                if (check_fecha(value)) {
+                                                if (Validations.check_fecha(value)) {
                                                     cell.setOpaque(true);
                                                     cell.setBackground(new Color(150,240,160));
                                                     cell.setForeground(Color.black);
@@ -135,7 +135,7 @@ public class CellRender_Retiros extends DefaultTableCellRenderer{
                                                 }
                                             }else{
                                                 if (table.getColumnName(column).equals("F Expedicion (DD-MM-AAAA)")) {
-                                                    if (check_fecha(value)) {
+                                                    if (Validations.check_fecha(value)) {
                                                         cell.setOpaque(true);
                                                         cell.setBackground(new Color(150,240,160));
                                                         cell.setForeground(Color.black);
@@ -146,7 +146,7 @@ public class CellRender_Retiros extends DefaultTableCellRenderer{
                                                     }
                                                 }else{
                                                     if (table.getColumnName(column).equals("Obra")) {
-                                                        if (check_obra(value)) {
+                                                        if (Validations.check_obra(value)) {
                                                             cell.setOpaque(true);
                                                             cell.setBackground(new Color(150,240,160));
                                                             cell.setForeground(Color.black);
@@ -157,7 +157,7 @@ public class CellRender_Retiros extends DefaultTableCellRenderer{
                                                         }
                                                     }else{
                                                         if (table.getColumnName(column).equals("Barrio")) {
-                                                            if (check_field(value)) {
+                                                            if (Validations.check_field(value)) {
                                                                 cell.setOpaque(true);
                                                                 cell.setBackground(new Color(150,240,160));
                                                                 cell.setForeground(Color.black);
@@ -168,7 +168,7 @@ public class CellRender_Retiros extends DefaultTableCellRenderer{
                                                             }
                                                         }else{
                                                             if (table.getColumnName(column).equals("Municipio")) {
-                                                                if (check_municipio(value)) {
+                                                                if (Validations.check_municipio(value)) {
                                                                     cell.setOpaque(true);
                                                                     cell.setBackground(new Color(150,240,160));
                                                                     cell.setForeground(Color.black);
@@ -179,7 +179,7 @@ public class CellRender_Retiros extends DefaultTableCellRenderer{
                                                                 }
                                                             }else{
                                                                 if (table.getColumnName(column).equals("Parentesco")) {
-                                                                    if (check_parentesco(value)) {
+                                                                    if (Validations.check_parentesco(value)) {
                                                                         cell.setOpaque(true);
                                                                         cell.setBackground(new Color(150,240,160));
                                                                         cell.setForeground(Color.black);
@@ -190,7 +190,7 @@ public class CellRender_Retiros extends DefaultTableCellRenderer{
                                                                     }
                                                                 }else{
                                                                     if (table.getColumnName(column).equals("Direccion")) {
-                                                                        if (check_field_dir(value)) {
+                                                                        if (Validations.check_field_dir(value)) {
                                                                             cell.setOpaque(true);
                                                                             cell.setBackground(new Color(150,240,160));
                                                                             cell.setForeground(Color.black);
@@ -201,7 +201,7 @@ public class CellRender_Retiros extends DefaultTableCellRenderer{
                                                                         }
                                                                     }else{
                                                                         if (table.getColumnName(column).equals("Telefono")) {
-                                                                            if (check_field(value)) {
+                                                                            if (Validations.check_field(value)) {
                                                                                 cell.setOpaque(true);
                                                                                 cell.setBackground(new Color(150,240,160));
                                                                                 cell.setForeground(Color.black);
@@ -212,7 +212,7 @@ public class CellRender_Retiros extends DefaultTableCellRenderer{
                                                                             }
                                                                         }else{
                                                                             if (table.getColumnName(column).equals("Correo")) {
-                                                                                if (check_field_mail(value)) {
+                                                                                if (Validations.check_field_mail(value)) {
                                                                                     cell.setOpaque(true);
                                                                                     cell.setBackground(new Color(150,240,160));
                                                                                     cell.setForeground(Color.black);
@@ -223,7 +223,7 @@ public class CellRender_Retiros extends DefaultTableCellRenderer{
                                                                                 }
                                                                             }else{
                                                                                 if (table.getColumnName(column).equals("Acudiente")) {
-                                                                                    if (check_field(value)) {
+                                                                                    if (Validations.check_field(value)) {
                                                                                         cell.setOpaque(true);
                                                                                         cell.setBackground(new Color(150,240,160));
                                                                                         cell.setForeground(Color.black);
@@ -234,7 +234,7 @@ public class CellRender_Retiros extends DefaultTableCellRenderer{
                                                                                     }
                                                                                 }else{
                                                                                     if (table.getColumnName(column).equals("Tipo")) {
-                                                                                        if (check_field(value)) {
+                                                                                        if (Validations.check_field(value)) {
                                                                                             cell.setOpaque(true);
                                                                                             cell.setBackground(new Color(150,240,160));
                                                                                             cell.setForeground(Color.black);
@@ -245,7 +245,7 @@ public class CellRender_Retiros extends DefaultTableCellRenderer{
                                                                                         }
                                                                                     }else{
                                                                                         if (table.getColumnName(column).equals("Observaciones*")) {
-                                                                                            if (check_field(value)) {
+                                                                                            if (Validations.check_field(value)) {
                                                                                                 cell.setOpaque(true);
                                                                                                 cell.setBackground(new Color(150,240,160));
                                                                                                 cell.setForeground(Color.black);
@@ -291,6 +291,7 @@ public class CellRender_Retiros extends DefaultTableCellRenderer{
         }
     return this;
    }
+    /*
 public boolean check_cedula(Object ced){
     boolean ret=false;
     if (ced!=null) {
@@ -710,5 +711,5 @@ try{
 }
 return true;
 
-}
+}*/
 }

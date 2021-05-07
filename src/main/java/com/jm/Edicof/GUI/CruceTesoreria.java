@@ -6,6 +6,7 @@
 package com.jm.Edicof.GUI;
 
 
+import com.jm.Edicof.Clases.CellRender_Cruce_Tesoreria;
 import com.jm.Edicof.Clases.Conexion;
 import com.jm.Edicof.Clases.Copiar2Excel_CruceTesoreria;
 import com.jm.Edicof.Clases.Struct_Cruce_Precalculo;
@@ -47,11 +48,12 @@ public class CruceTesoreria extends javax.swing.JDialog {
     public CruceTesoreria(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        
+        cruce_tesor.setDefaultRenderer (Object.class, new CellRender_Cruce_Tesoreria());
         modelo_prec_def=(DefaultTableModel) cruce_precs.getModel();
         modelo_cruce_prec=(DefaultTableModel) cruce_tesor.getModel();
         load_cruce_prec();
-        DefaultTableCellRenderer tcr = new FormatRenderer();
+        //DefaultTableCellRenderer tcr = new FormatRenderer();
+        DefaultTableCellRenderer tcr = (DefaultTableCellRenderer)cruce_tesor.getDefaultRenderer(Object.class);
         tcr.setHorizontalAlignment(SwingConstants.CENTER);
         cruce_tesor.getColumnModel().getColumn(0).setCellRenderer(tcr);
         cruce_tesor.getColumnModel().getColumn(1).setCellRenderer(tcr);
@@ -94,6 +96,7 @@ public class CruceTesoreria extends javax.swing.JDialog {
             }
     });
     }
+    /*
     public class FormatRenderer extends DefaultTableCellRenderer{
         Locale locale = new Locale("es","CO"); 
         NumberFormat nf = NumberFormat.getCurrencyInstance(locale);
@@ -159,6 +162,7 @@ public class CruceTesoreria extends javax.swing.JDialog {
         return this;
        }
     }
+    */
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

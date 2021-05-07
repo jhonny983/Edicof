@@ -7,6 +7,7 @@ package com.jm.Edicof.Clases;
 
 import java.awt.Color;
 import java.awt.Component;
+import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Calendar;
@@ -15,6 +16,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
+//import com.jm.Edicof.Clases.Validations;
 
 /**
  *
@@ -27,9 +29,9 @@ public class CellRender_Asistencias extends DefaultTableCellRenderer{
         if (table.getColumnName(column).equals("ID Empleado")) {
             if (value!=null) {
                 if(!value.toString().equals("")){
-                    if (chech_char(value.toString().trim(),"'#$%&()=?¡¿/*+[]{};:<>,.")) {
-                        if (comprobarLong(value.toString().trim())) {
-                            if (check_cedula(value.toString())) {
+                    if (Validations.check_char(value.toString().trim(),"'#$%&()=?¡¿/*+[]{};:<>,.")) {
+                        if (Validations.comprobarLong(value.toString().trim())) {
+                            if (Validations.check_cedula(value.toString())) {
                                 cell.setOpaque(true);
                                 cell.setBackground(new Color(150,240,160));
                                 cell.setForeground(Color.black);
@@ -57,8 +59,8 @@ public class CellRender_Asistencias extends DefaultTableCellRenderer{
         }else{
             if (table.getColumnName(column).equals("Nombre de empresa")) {
                 if (value!=null) {
-                    if (chech_char(value.toString().trim(),"'#$%&()=?¡¿/*+[]{};:<>,")) {
-                        if (check_empleador(value.toString())) {
+                    if (Validations.check_char(value.toString().trim(),"'#$%&()=?¡¿/*+[]{};:<>,")) {
+                        if (Validations.check_empleador(value.toString())) {
                             cell.setOpaque(true);
                             cell.setBackground(new Color(150,240,160));
                             cell.setForeground(Color.black);
@@ -80,8 +82,8 @@ public class CellRender_Asistencias extends DefaultTableCellRenderer{
             }else{
                 if (table.getColumnName(column).equals("Nit")) {
                     if (value!=null) {
-                        if (chech_char(value.toString().trim(),"'#$%&()=?¡¿/*+[]{};:<>,")) {
-                            if (check_nit(value.toString())) {
+                        if (Validations.check_char(value.toString().trim(),"'#$%&()=?¡¿/*+[]{};:<>,")) {
+                            if (Validations.check_nit(value.toString())) {
                                 cell.setOpaque(true);
                                 cell.setBackground(new Color(150,240,160));
                                 cell.setForeground(Color.black);
@@ -125,15 +127,16 @@ public class CellRender_Asistencias extends DefaultTableCellRenderer{
         }
     return this;
    }
+    /*
 public boolean check_cedula(Object ced){
     boolean ret=false;
     if (ced!=null) {
         if (chech_char(ced.toString().trim(),"'#$%&()=?¡¿/*+[]{};:<>,.")) {
             if (comprobarLong(ced.toString().trim())) {
                 if(!ced.toString().equals("")){
-                    Conexion con = new Conexion();
-                    con.conexion();
-                    ResultSet r;
+                    Conexion con = new Conexion();//1.REEMPLAZAR Conexion con = new Conexion(); POR Conexion condb = new Conexion();
+                    con.conexion();//2.REEMPLAZAR con.conexion(); POR Connection con = condb.conexion();
+                    ResultSet r=null;
                     try{
                         r = con.s.executeQuery ("SELECT * FROM T_EMPLEADOS WHERE ID_EMP="+ced.toString().trim());
                         if(r.next()){
@@ -144,6 +147,10 @@ public boolean check_cedula(Object ced){
                         con.cerrar();
                         j.printStackTrace();
                         return false;
+                    }finally{
+                        if (r!=null) {
+                            
+                        }
                     }
                 }
             }
@@ -448,4 +455,5 @@ try{
 return true;
 
 }
+*/
 }

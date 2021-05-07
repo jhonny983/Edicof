@@ -28,8 +28,8 @@ public class CellRender_Cruce_Pila extends DefaultTableCellRenderer{
         if (table.getColumnName(column).equals("Cedula")) {
             if (value!=null) {
                 if(!value.toString().equals("")){
-                    if (chech_char(value.toString().trim(),"'#$%&()=?¡¿/*+[]{};:<>,.")) {
-                        if (comprobarLong(value.toString().trim())) {
+                    if (Validations.check_char(value.toString().trim(),"'#$%&()=?¡¿/*+[]{};:<>,.")) {
+                        if (Validations.comprobarLong(value.toString().trim())) {
                             cell.setOpaque(true);
                             cell.setBackground(new Color(150,240,160));
                             cell.setForeground(Color.black);
@@ -57,8 +57,8 @@ public class CellRender_Cruce_Pila extends DefaultTableCellRenderer{
             if (table.getColumnName(column).equals("NIT")) {
                 if (value!=null) {
                     if(!value.toString().equals("")){
-                        if (chech_char(value.toString().trim(),"'#$%&()=?¡¿*+[]{};:<>")) {
-                            if (check_nit(value.toString().trim())) {
+                        if (Validations.check_char(value.toString().trim(),"'#$%&()=?¡¿*+[]{};:<>")) {
+                            if (Validations.check_nit(value.toString().trim())) {
                                 cell.setOpaque(true);
                                 cell.setBackground(new Color(150,240,160));
                                 cell.setForeground(Color.black);
@@ -85,8 +85,8 @@ public class CellRender_Cruce_Pila extends DefaultTableCellRenderer{
             }else{
                 if (table.getColumnName(column).equals("EPS")) {
                     if (value!=null) {
-                        if (chech_char(value.toString().trim(),"'#$%&()=?¡¿/*+[]{};:<>")) {
-                            if (check_eps(value.toString())) {
+                        if (Validations.check_char(value.toString().trim(),"'#$%&()=?¡¿/*+[]{};:<>")) {
+                            if (Validations.check_eps(value.toString())) {
                                 cell.setOpaque(true);
                                 cell.setBackground(new Color(150,240,160));
                                 cell.setForeground(Color.black);
@@ -108,8 +108,8 @@ public class CellRender_Cruce_Pila extends DefaultTableCellRenderer{
                 }else{
                     if (table.getColumnName(column).equals("ARL")) {
                         if (value!=null) {
-                            if (chech_char(value.toString().trim(),"'#$%&()=?¡¿/*+[]{};:<>")) {
-                                if (check_arl(value.toString()) | value.toString().trim().equals("")) {
+                            if (Validations.check_char(value.toString().trim(),"'#$%&()=?¡¿/*+[]{};:<>")) {
+                                if (Validations.check_arl(value.toString()) | value.toString().trim().equals("")) {
                                     cell.setOpaque(true);
                                     cell.setBackground(new Color(150,240,160));
                                     cell.setForeground(Color.black);
@@ -131,8 +131,8 @@ public class CellRender_Cruce_Pila extends DefaultTableCellRenderer{
                     }else{
                         if (table.getColumnName(column).equals("AFP")) {
                             if (value!=null) {
-                                if (chech_char(value.toString().trim(),"'#$%&()=?¡¿/*+[]{};:<>")) {
-                                    if (check_afp(value.toString()) | value.toString().trim().equals("")) {
+                                if (Validations.check_char(value.toString().trim(),"'#$%&()=?¡¿/*+[]{};:<>")) {
+                                    if (Validations.check_afp(value.toString()) | value.toString().trim().equals("")) {
                                         cell.setOpaque(true);
                                         cell.setBackground(new Color(150,240,160));
                                         cell.setForeground(Color.black);
@@ -154,8 +154,8 @@ public class CellRender_Cruce_Pila extends DefaultTableCellRenderer{
                         }else{
                             if (table.getColumnName(column).equals("CCF")) {
                                 if (value!=null) {
-                                    if (chech_char(value.toString().trim(),"'#$%&()=?¡¿/*+[]{};:<>")) {
-                                        if (check_ccf(value.toString()) | value.toString().trim().equals("")) {
+                                    if (Validations.check_char(value.toString().trim(),"'#$%&()=?¡¿/*+[]{};:<>")) {
+                                        if (Validations.check_ccf(value.toString()) | value.toString().trim().equals("")) {
                                             cell.setOpaque(true);
                                             cell.setBackground(new Color(150,240,160));
                                             cell.setForeground(Color.black);
@@ -192,7 +192,7 @@ public class CellRender_Cruce_Pila extends DefaultTableCellRenderer{
 //        super.setHorizontalAlignment(SwingConstants.CENTER);
 //    }
     
-    
+    /*
     public boolean check_cedula(Object ced){
     boolean ret=false;
     if (ced!=null) {
@@ -626,4 +626,5 @@ public class CellRender_Cruce_Pila extends DefaultTableCellRenderer{
     return true;
 
     }
+    */
 }
