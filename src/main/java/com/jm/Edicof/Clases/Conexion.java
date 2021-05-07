@@ -10,10 +10,10 @@ import java.sql.* ;
 import javax.swing.*;
 public class Conexion {
     //public String dbUrl = "jdbc:mysql://"+Main.host+":3306/"+Main.bd+"?useTimezone=true&serverTimezone=UTC";
-    public String dbUrl = "jdbc:mysql://"+Main.host+":3306/"+Main.bd;
-    public String usuario = Main.usu;//"root";
-    public String contrasena = Main.cont;//"root";
-    static public Connection c;
+    private String dbUrl = "jdbc:mysql://"+Main.host+":3306/"+Main.bd;
+    private String usuario = Main.usu;//"root";
+    private String contrasena = Main.cont;//"root";
+    public Connection c;
     public Statement s;
     boolean p=false;
     public Conexion() {
