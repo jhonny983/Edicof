@@ -55,6 +55,8 @@ Object [] fila = new Object[6];
         t_info_pila.getColumnModel().getColumn(3).setCellRenderer(tcr);
         t_info_pila.getColumnModel().getColumn(4).setCellRenderer(tcr);
         t_info_pila.getColumnModel().getColumn(5).setCellRenderer(tcr);
+        //************************************************
+        mes.setMonth(get_mounth());
     }
     
     /**
@@ -791,5 +793,9 @@ public boolean check_empleado(String ced, String nit, int mes, int año){
         }
     }
     return ret;
+}
+public int get_mounth(){
+    Calendar ahoraCal = Calendar.getInstance();
+    return ahoraCal.get(Calendar.MONTH);
 }
 }
