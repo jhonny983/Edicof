@@ -28,8 +28,8 @@ public class CellRender_Cruce_Arl extends DefaultTableCellRenderer{
         if (table.getColumnName(column).equals("Cedula")) {
             if (value!=null) {
                 if(!value.toString().equals("")){
-                    if (chech_char(value.toString().trim(),"'#$%&()=?¡¿/*+[]{};:<>,.")) {
-                        if (comprobarLong(value.toString().trim())) {
+                    if (Validations.check_char(value.toString().trim(),"'#$%&()=?¡¿/*+[]{};:<>,.")) {
+                        if (Validations.comprobarLong(value.toString().trim())) {
                             cell.setOpaque(true);
                             cell.setBackground(new Color(150,240,160));
                             cell.setForeground(Color.black);
@@ -57,8 +57,8 @@ public class CellRender_Cruce_Arl extends DefaultTableCellRenderer{
             if (table.getColumnName(column).equals("F Ingreso (DD-MM-AAAA)")) {
                 if (value!=null) {
                     if(!value.toString().equals("")){
-                        if (chech_char(value.toString().trim(),"'#$%&()=?¡¿*+[]{};:<>")) {
-                            if (check_fecha(value.toString())) {
+                        if (Validations.check_char(value.toString().trim(),"'#$%&()=?¡¿*+[]{};:<>")) {
+                            if (Validations.check_fecha(value.toString())) {
                                 cell.setOpaque(true);
                                 cell.setBackground(new Color(150,240,160));
                                 cell.setForeground(Color.black);
@@ -85,8 +85,8 @@ public class CellRender_Cruce_Arl extends DefaultTableCellRenderer{
             }else{
                 if (table.getColumnName(column).equals("Tasa (%)")) {
                     if (value!=null) {
-                        if (chech_char(value.toString().trim(),"'#$%&()=?¡¿/*+[]{};:<>")) {
-                            if (comprobarFloat(value.toString())) {
+                        if (Validations.check_char(value.toString().trim(),"'#$%&()=?¡¿/*+[]{};:<>")) {
+                            if (Validations.comprobarFloat(value.toString().replace(',', '.'))) {
                                 cell.setOpaque(true);
                                 cell.setBackground(new Color(150,240,160));
                                 cell.setForeground(Color.black);
@@ -138,7 +138,7 @@ public class CellRender_Cruce_Arl extends DefaultTableCellRenderer{
 //        super.setHorizontalAlignment(SwingConstants.CENTER);
 //    }
     
-    
+    /*
     public boolean check_cedula(Object ced){
     boolean ret=false;
     if (ced!=null) {
@@ -461,5 +461,5 @@ try{
 }
 return true;
 
-}
+}*/
 }

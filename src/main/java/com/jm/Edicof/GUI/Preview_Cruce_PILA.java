@@ -563,6 +563,7 @@ int mes,año=0;
         if (conf == JOptionPane.YES_OPTION) {
             Conexion con = new Conexion();
             con.conexion();
+            PreparedStatement ps = null;
             try {
 //                FileInputStream fis;
 //                fis = new FileInputStream(path);
@@ -756,7 +757,7 @@ int mes,año=0;
                 Blob blob=new SerialBlob(xls);
                 Calendar ahoraCal = Calendar.getInstance();
                 
-                PreparedStatement ps = con.c.prepareStatement("INSERT INTO `t_cruce_pila`(`CRUCE`, `VIGENCIA_CRUCE`, `FECHA_CRUCE`) VALUES (?,?,?)");
+                ps = con.c.prepareStatement("INSERT INTO `t_cruce_pila`(`CRUCE`, `VIGENCIA_CRUCE`, `FECHA_CRUCE`) VALUES (?,?,?)");
                 ps.setBlob(1, blob);
                 ps.setString(2, get_fecha_fin(this.mes, this.año));
                 ps.setObject(3, new java.sql.Timestamp(ahoraCal.getTimeInMillis()));
@@ -773,7 +774,17 @@ int mes,año=0;
                 e.printStackTrace();
                 JOptionPane.showMessageDialog(this,e,"Error",JOptionPane.ERROR_MESSAGE);
                 con.cerrar();
-            }
+            }finally{
+                    if (ps!=null) {
+                        try {
+                            ps.close();
+                        } catch (SQLException ex) {
+                            ex.printStackTrace();
+                        }
+                        ps=null;
+                    }
+                    con.cerrar();
+                }
             if (term) {
                 JOptionPane.showMessageDialog(this,"El Cruce fue almacenado correctamente","Información",JOptionPane.INFORMATION_MESSAGE);
                 this.dispose();
@@ -901,7 +912,7 @@ public void sys_no(JTable pila,int m, int y){
     for (int i = 0; i < pila.getRowCount(); i++) {//SE RECORRE TODA LA INFORMACION DE LA PILA INGRESADA EN LA TABLA        
         Conexion con = new Conexion();
         con.conexion();
-        ResultSet r;
+        ResultSet r=null;
         try{
             r = con.s.executeQuery ("SELECT *\n" +
                                     "FROM\n" +
@@ -956,10 +967,20 @@ public void sys_no(JTable pila,int m, int y){
                     modelo_ccf.setValueAt(r.getString("CCF_NOV"),emp_afp_diff.getRowCount()-1,3);
                 }
             }
+            con.cerrar();
         }catch(SQLException e){
             con.cerrar();
             e.printStackTrace();
-            
+        }finally{
+            if (r!=null) {
+                try {
+                    r.close();
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                }
+                r=null;
+            }
+            con.cerrar();
         }
     }
 }
