@@ -784,14 +784,11 @@ public class Add_Retiros extends javax.swing.JDialog {
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton6))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap(40, Short.MAX_VALUE)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton6))
                     .addComponent(an_rest_f_retiro)
                     .addComponent(cr_ret_asist))
                 .addContainerGap(7, Short.MAX_VALUE))
@@ -799,11 +796,11 @@ public class Add_Retiros extends javax.swing.JDialog {
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(12, 12, 12)
+                .addContainerGap()
                 .addComponent(jButton2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton6)
-                .addGap(18, 18, 18)
+                .addGap(19, 19, 19)
                 .addComponent(cr_ret_asist)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(an_rest_f_retiro)
@@ -2468,7 +2465,7 @@ public boolean verify_data(){
                                             date_4.set(Calendar.MINUTE,0);
                                             date_4.set(Calendar.SECOND,0);
                                             date_4.set(Calendar.MILLISECOND,0);
-                                            if ((date_out.getTime().compareTo(date_out_low.getTime())>=0 || an_rest_f_retiro.isSelected())& date_today.getTime().compareTo(date_4.getTime())<=0) {
+                                            if ((date_out.getTime().compareTo(date_out_low.getTime())>=0& date_today.getTime().compareTo(date_4.getTime())<=0) || an_rest_f_retiro.isSelected()) {
                                                 ret=true&ret;
                                             }else{
                                                 jTable1.changeSelection(i,row_f_retiro, false, false);

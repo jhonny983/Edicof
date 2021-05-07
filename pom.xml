@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.jm</groupId>
     <artifactId>Edicof</artifactId>
-    <version>3.0.5.8</version>
+    <version>3.0.5.9</version>
     <packaging>jar</packaging>
     <dependencies>
         <dependency>
