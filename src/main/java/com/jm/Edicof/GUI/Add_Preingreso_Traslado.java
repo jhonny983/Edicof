@@ -9,6 +9,8 @@ import com.jm.Edicof.Clases.AutoCompletion;
 import com.jm.Edicof.Clases.CellRender_Preingresos_Traslados;
 import com.jm.Edicof.Clases.Conexion;
 import com.jm.Edicof.Clases.PegarExcel;
+import com.jm.Edicof.Clases.Validations;
+import com.jm.Edicof.Clases.GetInfo;
 import com.mxrck.autocompleter.AutoCompleterCallback;
 import com.mxrck.autocompleter.TextAutoCompleter;
 import java.awt.Component;
@@ -1258,12 +1260,12 @@ class MyTableCellEditorDate extends AbstractCellEditor implements TableCellEdito
                 ResultSet r,r1;
                 for (int i = 0; i < jTable1.getRowCount(); i++) {
                     try {
-                        if (!get_id_empleador(modelo.getValueAt(i, row_empleador)).equals("")) {
-                            if (!get_id_obra(modelo.getValueAt(i, row_obra)).equals("")) {
-                                if (!get_id_barrio(modelo.getValueAt(i, row_barrio)).equals("")) {
-                                    if (!get_id_municipio(modelo.getValueAt(i, row_municipio)).equals("")) {
-                                        if (!get_id_parentesco(modelo.getValueAt(i, row_par)).equals("")) {
-                                            r = con.s.executeQuery ("SELECT * FROM `t_novedades` WHERE (ID_EMPLEADO ="+modelo.getValueAt(i, row_cedula)+" AND ID_EMPRESA='"+get_id_empleador(modelo.getValueAt(i, row_empleador))+"' AND FECHA_INGRESO='"+new SimpleDateFormat("yyyy-MM-dd").format(new SimpleDateFormat("dd-MM-yyyy").parse(modelo.getValueAt(i, row_f_ingreso).toString()))+"' AND FECHA_RETIRO='1900-01-01' AND ID_TIPO IN(3));");
+                        if (!GetInfo.get_id_empleador(modelo.getValueAt(i, row_empleador)).equals("")) {
+                            if (!GetInfo.get_id_obra(modelo.getValueAt(i, row_obra)).equals("")) {
+                                if (!GetInfo.get_id_barrio(modelo.getValueAt(i, row_barrio)).equals("")) {
+                                    if (!GetInfo.get_id_municipio(modelo.getValueAt(i, row_municipio)).equals("")) {
+                                        if (!GetInfo.get_id_parentesco(modelo.getValueAt(i, row_par)).equals("")) {
+                                            r = con.s.executeQuery ("SELECT * FROM `t_novedades` WHERE (ID_EMPLEADO ="+modelo.getValueAt(i, row_cedula)+" AND ID_EMPRESA='"+GetInfo.get_id_empleador(modelo.getValueAt(i, row_empleador))+"' AND FECHA_INGRESO='"+new SimpleDateFormat("yyyy-MM-dd").format(new SimpleDateFormat("dd-MM-yyyy").parse(modelo.getValueAt(i, row_f_ingreso).toString()))+"' AND FECHA_RETIRO='1900-01-01' AND ID_TIPO IN(3));");
                                             if(r.next()){
                                                 JOptionPane.showMessageDialog(this,"Esta novedad de pre-ingreso ya existe.","Error",JOptionPane.ERROR_MESSAGE);
                                                 confirm = false;
@@ -1299,18 +1301,18 @@ class MyTableCellEditorDate extends AbstractCellEditor implements TableCellEdito
                                                 if(r.next()){
                                                     id_cargo=r.getInt("ID_CARGO");
                                                 }
-                                                if (!check_protocolo(jTable1.getValueAt(i, row_cedula).toString())) {
+                                                if (!Validations.check_protocolo(jTable1.getValueAt(i, row_cedula).toString())) {
                                                     con.s.executeUpdate("UPDATE `t_cap_prot`\n" +
                                                                         "SET `FECHA_CAP_PROT` = '"+new SimpleDateFormat("yyyy-MM-dd").format(new SimpleDateFormat("dd-MM-yyyy").parse(modelo.getValueAt(i, row_f_prot).toString()))+"'\n" +
                                                                         "WHERE `ID_EMP` = "+jTable1.getValueAt(i, row_cedula).toString()+";");
                                                 }
                                                 con.s.executeUpdate("UPDATE `t_info_sociodemografica`\n" +
                                                                     "SET `DIRECCION_EMP` = '"+modelo.getValueAt(i, row_direccion)+"',\n" +
-                                                                    "  `ID_BARRIO` = "+get_id_barrio(modelo.getValueAt(i, row_barrio))+",\n" +
-                                                                    "  `ID_MUN_RES_EMP` = "+get_id_municipio(modelo.getValueAt(i, row_municipio))+",\n" +
+                                                                    "  `ID_BARRIO` = "+GetInfo.get_id_barrio(modelo.getValueAt(i, row_barrio))+",\n" +
+                                                                    "  `ID_MUN_RES_EMP` = "+GetInfo.get_id_municipio(modelo.getValueAt(i, row_municipio))+",\n" +
                                                                     "  `TEL_CEL_EMP` = '"+modelo.getValueAt(i, row_telefono)+"',\n" +
                                                                     "  `NOMBRE_ACUDIENTE_EMP` = '"+modelo.getValueAt(i, row_acud)+"',\n" +
-                                                                    "  `ID_PAR_ACU_EMP` = "+get_id_parentesco(modelo.getValueAt(i, row_par))+",\n" +
+                                                                    "  `ID_PAR_ACU_EMP` = "+GetInfo.get_id_parentesco(modelo.getValueAt(i, row_par))+",\n" +
                                                                     "  `TEL_CEL_ACU_EMP` = '"+modelo.getValueAt(i, row_tel_acu)+"'\n" +
                                                                     "   WHERE `ID_EMP` = "+modelo.getValueAt(i, row_cedula)+";");
                                                 con.s.executeUpdate("insert into `t_novedades`\n" +
@@ -1334,7 +1336,7 @@ class MyTableCellEditorDate extends AbstractCellEditor implements TableCellEdito
                                                                     "             `EXON_FIC`,\n" +
                                                                     "             `MAIL_NOV`)\n" +
                                                                     "values ('"+modelo.getValueAt(i, row_cedula)+"',\n" +
-                                                                    "        '"+get_id_empleador(modelo.getValueAt(i, row_empleador))+"',\n" +
+                                                                    "        '"+GetInfo.get_id_empleador(modelo.getValueAt(i, row_empleador))+"',\n" +
                                                                     "        '"+new SimpleDateFormat("yyyy-MM-dd").format(new SimpleDateFormat("dd-MM-yyyy").parse(modelo.getValueAt(i, row_f_ingreso).toString()))+"',\n" +
                                                                     "        '1900-01-01',\n" +
                                                                     "        '"+modelo.getValueAt(i, row_salario)+"',\n" +
@@ -1343,7 +1345,7 @@ class MyTableCellEditorDate extends AbstractCellEditor implements TableCellEdito
                                                                     "        '"+arl+"',\n" +
                                                                     "        '"+ccf+"',\n" +
                                                                     "        'PREINGRESO_TRASLADO>USR:"+Main.login.getText()+">FR:"+new SimpleDateFormat("dd-MM-yyyy").format(new Date())+">FI:"+modelo.getValueAt(i, row_f_ingreso).toString()+","+modelo.getValueAt(i, row_obs).toString().toUpperCase()+"',\n" +
-                                                                    "        '"+get_id_obra(modelo.getValueAt(i, row_obra))+"',\n" +
+                                                                    "        '"+GetInfo.get_id_obra(modelo.getValueAt(i, row_obra))+"',\n" +
                                                                     "        '3',\n" +
                                                                     "        '"+new SimpleDateFormat("yyyy-MM-dd").format(new Date())+"',\n" +
                                                                     "        '"+id_cargo+"',\n" +
@@ -1364,7 +1366,7 @@ class MyTableCellEditorDate extends AbstractCellEditor implements TableCellEdito
                                                         + "FECHA,"
                                                         + "ID_USUARIO)"
                                                         + "VALUES ("+modelo.getValueAt(i, row_cedula)+","
-                                                        + "'"+get_id_empleador(modelo.getValueAt(i, row_empleador))+"',"
+                                                        + "'"+GetInfo.get_id_empleador(modelo.getValueAt(i, row_empleador))+"',"
                                                         + "'"+new SimpleDateFormat("yyyy-MM-dd").format(new SimpleDateFormat("dd-MM-yyyy").parse(modelo.getValueAt(i, row_f_ingreso).toString()))+"',"
                                                         + "'1900-01-01',"
                                                         + "3,"
@@ -1530,12 +1532,12 @@ public void check_empleado(){
     ArrayList<String> ret_nov = new ArrayList<String>();
     if (true) { //& !jTable1.isEditing()
         modelo = (DefaultTableModel)jTable1.getModel();
-        if (check_cedula(modelo.getValueAt(jTable1.getSelectedRow(),jTable1.getSelectedColumn()))) {
+        if (Validations.check_cedula(modelo.getValueAt(jTable1.getSelectedRow(),jTable1.getSelectedColumn()))) {
             Conexion con = new Conexion();
             con.conexion();
-            ResultSet r;
-            ResultSet r1;
-            ResultSet r2;
+            ResultSet r=null;
+            ResultSet r1=null;
+            ResultSet r2=null;
             try {
                 r = con.s.executeQuery ("SELECT COUNT(ID_EMPLEADO) FROM t_novedades WHERE ID_EMPLEADO = "+modelo.getValueAt(jTable1.getSelectedRow(),jTable1.getSelectedColumn()).toString().trim()+" AND ID_TIPO IN (1,3,4,5)");
                 if (r.next()) {
@@ -1600,6 +1602,32 @@ public void check_empleado(){
             } catch (SQLException | HeadlessException | ParseException e) {
                 con.cerrar();
                 e.printStackTrace();
+            }finally{
+                if (r!=null) {
+                    try {
+                        r.close();
+                    } catch (SQLException ex) {
+                        ex.printStackTrace();
+                    }
+                    r=null;
+                }
+                if (r1!=null) {
+                    try {
+                        r1.close();
+                    } catch (SQLException ex) {
+                        ex.printStackTrace();
+                    }
+                    r1=null;
+                }
+                if (r2!=null) {
+                    try {
+                        r2.close();
+                    } catch (SQLException ex) {
+                        ex.printStackTrace();
+                    }
+                    r2=null;
+                }
+                con.cerrar();
             }
 
         }
@@ -1626,7 +1654,7 @@ bsc_cedula.removeAllItems();
 bsc_cedula.addItem("Seleccione..");
 Conexion con = new Conexion();
 con.conexion();
-ResultSet r;
+ResultSet r=null;
 try{
     r = con.s.executeQuery ("SELECT * FROM T_EMPLEADOS ORDER BY ID_EMP ASC;");
     while(r.next()){
@@ -1641,6 +1669,16 @@ try{
     con.cerrar();
     j.printStackTrace();
     JOptionPane.showMessageDialog(null,j,"Error",JOptionPane.ERROR_MESSAGE);
+}finally{
+    if (r!=null) {
+        try {
+            r.close();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        r=null;
+    }
+    con.cerrar();
 }
 }
 public void cb_empleador(){
@@ -1656,7 +1694,7 @@ public void cb_empleador(){
     bsc_empleador.addItem("Seleccione..");
     Conexion con = new Conexion();
     con.conexion();
-    ResultSet r;
+    ResultSet r=null;
     try{
         r = con.s.executeQuery ("SELECT * FROM T_EMPRESAS ORDER BY ID_EMPRESA ASC;");
         while(r.next()){
@@ -1671,7 +1709,17 @@ public void cb_empleador(){
         con.cerrar();
         j.printStackTrace();
         JOptionPane.showMessageDialog(null,j,"Error",JOptionPane.ERROR_MESSAGE);
+    }finally{
+    if (r!=null) {
+        try {
+            r.close();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        r=null;
     }
+    con.cerrar();
+}
 }
 public void tac_empleador(){
     tac_empleador_table.removeAllItems();
@@ -1679,7 +1727,7 @@ public void tac_empleador(){
     tac_empleador.addItem("Seleccione..");
     Conexion con = new Conexion();
     con.conexion();
-    ResultSet r;
+    ResultSet r=null;
     try{
         r = con.s.executeQuery ("SELECT * FROM T_EMPRESAS ORDER BY NOMBRE_EMPRESA ASC;");
         while(r.next()){
@@ -1692,13 +1740,23 @@ public void tac_empleador(){
         con.cerrar();
         j.printStackTrace();
         JOptionPane.showMessageDialog(null,j,"Error",JOptionPane.ERROR_MESSAGE);
+    }finally{
+    if (r!=null) {
+        try {
+            r.close();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        r=null;
     }
+    con.cerrar();
+}
 }
 public final void tac_barrio(){
     tac_barrio_table.removeAllItems();
     Conexion con = new Conexion();
     con.conexion();
-    ResultSet r;
+    ResultSet r=null;
     try{
         r = con.s.executeQuery ("SELECT *\n" +
                                 "FROM\n" +
@@ -1714,7 +1772,17 @@ public final void tac_barrio(){
         con.cerrar();
         j.printStackTrace();
         JOptionPane.showMessageDialog(null,j,"Error",JOptionPane.ERROR_MESSAGE);
+    }finally{
+    if (r!=null) {
+        try {
+            r.close();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        r=null;
     }
+    con.cerrar();
+}
 }
 
 public void tac_parentesco(){
@@ -1723,7 +1791,7 @@ public void tac_parentesco(){
     tac_parentesco.addItem("Seleccione..");
     Conexion con = new Conexion();
     con.conexion();
-    ResultSet r;
+    ResultSet r=null;
     try{
         r = con.s.executeQuery ("SELECT * FROM T_PARENTESCO ORDER BY NOMBRE_PAR ASC;");
         while(r.next()){
@@ -1736,7 +1804,17 @@ public void tac_parentesco(){
         con.cerrar();
         j.printStackTrace();
         JOptionPane.showMessageDialog(null,j,"Error",JOptionPane.ERROR_MESSAGE);
+    }finally{
+    if (r!=null) {
+        try {
+            r.close();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        r=null;
     }
+    con.cerrar();
+}
 }
 public void tac_municipio(){
     tac_municipio_table.removeAllItems();
@@ -1744,7 +1822,7 @@ public void tac_municipio(){
     tac_municipio.addItem("Seleccione..");
     Conexion con = new Conexion();
     con.conexion();
-    ResultSet r;
+    ResultSet r=null;
     try{
         r = con.s.executeQuery ("SELECT *\n" +
                                 "FROM\n" +
@@ -1762,7 +1840,17 @@ public void tac_municipio(){
         con.cerrar();
         j.printStackTrace();
         JOptionPane.showMessageDialog(null,j,"Error",JOptionPane.ERROR_MESSAGE);
+    }finally{
+    if (r!=null) {
+        try {
+            r.close();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        r=null;
     }
+    con.cerrar();
+}
 }
 public void tac_obra(){
     tac_obra_table.removeAllItems();
@@ -1770,7 +1858,7 @@ public void tac_obra(){
     tac_obra.addItem("Seleccione..");
     Conexion con = new Conexion();
     con.conexion();
-    ResultSet r;
+    ResultSet r=null;
     try{
         r = con.s.executeQuery ("SELECT *\n" +
                                 "FROM\n" +
@@ -1791,13 +1879,23 @@ public void tac_obra(){
         con.cerrar();
         j.printStackTrace();
         JOptionPane.showMessageDialog(null,j,"Error",JOptionPane.ERROR_MESSAGE);
+    }finally{
+    if (r!=null) {
+        try {
+            r.close();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        r=null;
     }
+    con.cerrar();
+}
 }
 public final void tac_area_trabajo(){
     tac_area_trabajo_table.removeAllItems();
     Conexion con = new Conexion();
     con.conexion();
-    ResultSet r;
+    ResultSet r=null;
     try{
         r = con.s.executeQuery ("SELECT *\n" +
                                 "FROM\n" +
@@ -1811,13 +1909,23 @@ public final void tac_area_trabajo(){
         con.cerrar();
         j.printStackTrace();
         JOptionPane.showMessageDialog(null,j,"Error",JOptionPane.ERROR_MESSAGE);
+    }finally{
+    if (r!=null) {
+        try {
+            r.close();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        r=null;
     }
+    con.cerrar();
+}
 }
 public final void tac_cargo(){
     tac_cargo_table.removeAllItems();
     Conexion con = new Conexion();
     con.conexion();
-    ResultSet r;
+    ResultSet r=null;
     try{
         r = con.s.executeQuery ("SELECT *\n" +
                                 "FROM\n" +
@@ -1831,12 +1939,22 @@ public final void tac_cargo(){
         con.cerrar();
         j.printStackTrace();
         JOptionPane.showMessageDialog(null,j,"Error",JOptionPane.ERROR_MESSAGE);
+    }finally{
+        if (r!=null) {
+            try {
+                r.close();
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+            r=null;
+        }
+        con.cerrar();
     }
 }
 public void load_empleador(String nit){
     Conexion con = new Conexion();
     con.conexion();
-    ResultSet r;
+    ResultSet r=null;
     try{
         r = con.s.executeQuery ("SELECT * FROM T_EMPRESAS WHERE ID_EMPRESA = '"+nit+"';");
         if(r.next()){
@@ -1848,6 +1966,16 @@ public void load_empleador(String nit){
         con.cerrar();
         j.printStackTrace();
         JOptionPane.showMessageDialog(null,j,"Error",JOptionPane.ERROR_MESSAGE);
+    }finally{
+        if (r!=null) {
+            try {
+                r.close();
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+            r=null;
+        }
+        con.cerrar();
     }
 
 }
@@ -1855,7 +1983,7 @@ public void load_empleado(String ced){
     if (!ced.equals("Seleccione..")) {
        Conexion con = new Conexion();
         con.conexion();
-        ResultSet r;
+        ResultSet r=null;
         try{
             r = con.s.executeQuery ("SELECT * FROM T_EMPLEADOS WHERE ID_EMP = "+ced+";");
             if(r.next()){
@@ -1867,7 +1995,17 @@ public void load_empleado(String ced){
             con.cerrar();
             j.printStackTrace();
             JOptionPane.showMessageDialog(null,j,"Error",JOptionPane.ERROR_MESSAGE);
-        } 
+        }finally{
+            if (r!=null) {
+                try {
+                    r.close();
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                }
+                r=null;
+            }
+            con.cerrar();
+        }
     }
     
 
@@ -1876,7 +2014,7 @@ public void load_data_empleador(String afp){
     if (!afp.equals("Seleccione..")) {
         Conexion con = new Conexion();
         con.conexion();
-        ResultSet r;
+        ResultSet r=null;
         try {
             r = con.s.executeQuery ("SELECT * FROM T_EMPRESAS WHERE NOMBRE_EMPRESA = '"+afp+"'");
             if (r.next()) {
@@ -1888,6 +2026,16 @@ public void load_data_empleador(String afp){
             con.cerrar();
             j.printStackTrace();
             JOptionPane.showMessageDialog(this,j,"Error",JOptionPane.ERROR_MESSAGE);
+        }finally{
+            if (r!=null) {
+                try {
+                    r.close();
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                }
+                r=null;
+            }
+            con.cerrar();
         }
     }
     else{
@@ -1916,6 +2064,7 @@ public void load_data_empleador(String afp){
 //        
 //    }
 //}
+/*
 public boolean check_cedula(Object ced){
     boolean ret=false;
     if (ced!=null) {
@@ -2318,6 +2467,7 @@ try{
 }
 return true;
 }
+*/
 public boolean verify_data(){
     boolean ret=true;
     modelo = (DefaultTableModel)jTable1.getModel(); 
@@ -2367,9 +2517,9 @@ public boolean verify_data(){
             }
         }
         for (int i = 0; i < jTable1.getRowCount(); i++) {
-            if (check_cedula(modelo.getValueAt(i, row_cedula))) {
-                if (check_empleador(modelo.getValueAt(i, row_empleador))) {
-                    if (check_fecha(modelo.getValueAt(i, row_f_ingreso))) {
+            if (Validations.check_cedula(modelo.getValueAt(i, row_cedula))) {
+                if (Validations.check_empleador(modelo.getValueAt(i, row_empleador))) {
+                    if (Validations.check_fecha(modelo.getValueAt(i, row_f_ingreso))) {
                         try {
                             Calendar date_in = Calendar.getInstance();
                             date_in.setTime(new SimpleDateFormat("dd-MM-yyyy").parse(modelo.getValueAt(i, row_f_ingreso).toString()));
@@ -2379,36 +2529,36 @@ public boolean verify_data(){
                             //System.out.println("Compara con hoy "+date_in.getTime().compareTo(date_today.getTime()));
                             //System.out.println("Compara con ultimo dia: "+date_in.getTime().compareTo(new SimpleDateFormat("dd-MM-yyyy").parse(getlastDate(date_in.get(Calendar.MONTH)+1, date_in.get(Calendar.YEAR)))));
                             if(date_in.getTime().compareTo(date_today.getTime())<=0){
-                                if (check_salario(modelo.getValueAt(i, row_salario))) {
-                                    if (check_sal_min(modelo.getValueAt(i, row_salario))) {
+                                if (Validations.check_salario(modelo.getValueAt(i, row_salario))) {
+                                    if (Validations.check_sal_min(modelo.getValueAt(i, row_salario))) {
 //                                        if (check_fecha(modelo.getValueAt(i, 4))) {
 //                                            if (check_fecha(modelo.getValueAt(i, 5))) {
-                                                if (check_obra(modelo.getValueAt(i, row_obra))) {
-                                                    if (check_tip_area(modelo.getValueAt(i, row_area))) {
-                                                        if (check_cargo(modelo.getValueAt(i, row_cargo))) {
-                                                            if (check_field_dir(modelo.getValueAt(i, row_direccion))) {
-                                                                if (check_barrio(modelo.getValueAt(i, row_barrio),modelo.getValueAt(i, row_municipio))) {
-                                                                    if (check_municipio(modelo.getValueAt(i, row_municipio))) {
-                                                                        if (check_field(modelo.getValueAt(i, row_telefono))) {
-                                                                            if (check_field_mail(modelo.getValueAt(i, row_correo))) {
-                                                                                if (check_field(modelo.getValueAt(i, row_acud))) {
-                                                                                    if (check_parentesco(modelo.getValueAt(i, row_par))) {
-                                                                                        if (check_field(modelo.getValueAt(i, row_tel_acu))) {
+                                                if (Validations.check_obra(modelo.getValueAt(i, row_obra))) {
+                                                    if (Validations.check_tip_area(modelo.getValueAt(i, row_area))) {
+                                                        if (Validations.check_cargo(modelo.getValueAt(i, row_cargo))) {
+                                                            if (Validations.check_field_dir(modelo.getValueAt(i, row_direccion))) {
+                                                                if (Validations.check_barrio_mun(modelo.getValueAt(i, row_barrio),modelo.getValueAt(i, row_municipio))) {
+                                                                    if (Validations.check_municipio(modelo.getValueAt(i, row_municipio))) {
+                                                                        if (Validations.check_field(modelo.getValueAt(i, row_telefono))) {
+                                                                            if (Validations.check_field_mail(modelo.getValueAt(i, row_correo))) {
+                                                                                if (Validations.check_field(modelo.getValueAt(i, row_acud))) {
+                                                                                    if (Validations.check_parentesco(modelo.getValueAt(i, row_par))) {
+                                                                                        if (Validations.check_field(modelo.getValueAt(i, row_tel_acu))) {
 //                                                                                            if (check_protocolo(modelo.getValueAt(i, row_cedula).toString())) {
-                                                                                                if (check_fecha(modelo.getValueAt(i, row_f_examen_ing))) {
+                                                                                                if (Validations.check_fecha(modelo.getValueAt(i, row_f_examen_ing))) {
                                                                                                     Calendar date_examen = Calendar.getInstance();
                                                                                                     date_examen.setTime(new SimpleDateFormat("dd-MM-yyyy").parse(modelo.getValueAt(i, row_f_examen_ing).toString()));
                                                                                                     date_in.add(Calendar.MONTH, -12);
                                                                                                     System.out.println("F_examen: "+date_examen.getTime());
                                                                                                     System.out.println("F_vigencia: "+date_in.getTime());
                                                                                                     if (date_examen.getTime().compareTo(date_in.getTime())>=0) {
-                                                                                                        if (check_fecha(modelo.getValueAt(i, row_f_consent))) {
-                                                                                                            if (check_active(modelo.getValueAt(i, row_cedula).toString(), modelo.getValueAt(i, row_empleador).toString())) {
-                                                                                                                if (check_vetado(modelo.getValueAt(i, row_cedula).toString())) {
-                                                                                                                    if (check_protocolo(modelo.getValueAt(i, row_cedula).toString()) | check_fecha(modelo.getValueAt(i, row_f_prot))) {
-                                                                                                                        if (check_exon(modelo.getValueAt(i, row_exon).toString())) {
-                                                                                                                            if (check_info(modelo.getValueAt(i, row_cedula).toString())) {
-                                                                                                                                if (check_block_emp(get_id_empleador(modelo.getValueAt(i, row_empleador)))) {
+                                                                                                        if (Validations.check_fecha(modelo.getValueAt(i, row_f_consent))) {
+                                                                                                            if (Validations.check_active(modelo.getValueAt(i, row_cedula).toString(), modelo.getValueAt(i, row_empleador).toString())) {
+                                                                                                                if (Validations.check_vetado(modelo.getValueAt(i, row_cedula).toString())) {
+                                                                                                                    if (Validations.check_protocolo(modelo.getValueAt(i, row_cedula).toString()) | Validations.check_fecha(modelo.getValueAt(i, row_f_prot))) {
+                                                                                                                        if (Validations.check_exon(modelo.getValueAt(i, row_exon).toString())) {
+                                                                                                                            if (Validations.check_info(modelo.getValueAt(i, row_cedula).toString())) {
+                                                                                                                                if (Validations.check_block_emp(GetInfo.get_id_empleador(modelo.getValueAt(i, row_empleador)))) {
                                                                                                                                     ret=true&ret;
                                                                                                                                 } else {
                                                                                                                                     jTable1.changeSelection(i,row_empleador, false, false);
@@ -2632,6 +2782,7 @@ public boolean verify_data(){
     
 return ret;
 }
+/*
 public String get_id_empleador(Object emp){
     Conexion con = new Conexion();
     con.conexion();
@@ -2769,6 +2920,134 @@ public String get_id_parentesco(Object par){
     }
     return i;
 }
+public boolean check_protocolo(String id_empleado){
+    boolean ret;
+    Conexion con = new Conexion();
+    con.conexion();
+    ResultSet r;
+    try{
+        r = con.s.executeQuery ("SELECT *\n" +
+                                "from `t_cap_prot`WHERE ID_EMP = "+id_empleado);
+        ret = r.next();
+        con.cerrar();
+    }catch(SQLException j){
+        con.cerrar();
+        ret = false;
+        j.printStackTrace();
+    }
+    return ret;
+}
+public boolean check_active(String id_empleado, String empleador){
+    boolean ret = false;
+    Conexion con = new Conexion();
+    con.conexion();
+    ResultSet r;
+    try{
+        r = con.s.executeQuery ("SELECT *\n" +
+                                "FROM\n" +
+                                "    t_novedades\n" +
+                                "    INNER JOIN t_empresas \n" +
+                                "        ON (t_novedades.ID_EMPRESA = t_empresas.ID_EMPRESA)" +
+                                "    WHERE t_novedades.ID_EMPLEADO ="+id_empleado+"  AND t_empresas.NOMBRE_EMPRESA='"+empleador+"' AND t_novedades.ID_TIPO IN(1,3,4,5);");
+        ret = !r.next();
+        con.cerrar();
+    }catch(SQLException j){
+        con.cerrar();
+        ret = false;
+        j.printStackTrace();
+    }
+    return ret;
+}
+public boolean check_vetado(String id_empleado){
+    boolean ret;
+    Conexion con = new Conexion();
+    con.conexion();
+    ResultSet r=null;
+    try{
+        r = con.s.executeQuery ("SELECT * FROM t_vetados WHERE ID_EMPLEADO = "+id_empleado);
+        ret = !r.next();
+        con.cerrar();
+    }catch(SQLException j){
+        con.cerrar();
+        ret = false;
+        j.printStackTrace();
+    }finally{
+        if (r!=null) {
+            try {
+                r.close();
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+            r=null;
+        }
+        con.cerrar();
+    }
+    return ret;
+}
+public boolean check_exon(Object ex){
+    boolean ret=false;
+    if (ex!=null) {
+        if (check_char(ex.toString().trim(),"'#$%&()=?¡¿/*+[]{};:<>,")) {
+            if (!ex.toString().trim().toUpperCase().equals("")) {
+                switch (ex.toString().trim().toUpperCase()){
+                        case "SI":  ret=true;
+                                    break;
+                        case "NO":  ret=true;
+                                    break;
+                        default:    ret=false;
+                }
+            }
+        }
+    }
+    return ret;
+}
+public boolean check_info(Object ced){
+    boolean ret=false;
+    if (ced!=null) {
+        if (check_char(ced.toString().trim(),"'#$%&()=?¡¿/*+[]{};:<>,.")) {
+            if (!ced.toString().trim().equals("")) {
+                Conexion con = new Conexion();
+                con.conexion();
+                ResultSet r;
+                try{
+                    r = con.s.executeQuery ("SELECT *\n" +
+                                            "FROM\n" +
+                                            "    `t_info_sociodemografica` WHERE ID_EMP = "+ced.toString().trim());
+                    ret=r.next();
+                    con.cerrar();
+                }catch(SQLException j){
+                    con.cerrar();
+                    j.printStackTrace();
+                    return false;
+                    //JOptionPane.showMessageDialog(null,j,"Error",JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        }
+    }
+    return ret;
+}
+public boolean check_block_emp (Object field){
+    boolean ret=false;
+    if (field!=null) {
+        Conexion con = new Conexion();
+        con.conexion();
+        ResultSet r;
+        try{
+            r = con.s.executeQuery ("SELECT * FROM t_empresas WHERE ID_EMPRESA='"+field+"'");
+            if(r.next()){
+                ret = r.getInt("ESTADO_EMPRESA")==1;
+            }
+            con.cerrar();
+        }catch(SQLException j){
+            con.cerrar();
+            j.printStackTrace();
+        }
+    }
+    return ret;
+
+    
+    }
+*/
 public void autocomplete_date_pressed(int b){
     Calendar c = new GregorianCalendar();
     String annio = Integer.toString(c.get(Calendar.YEAR));
@@ -2894,121 +3173,4 @@ private static String getlastDate(int month, int year) {
     SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("dd-MM-yyyy");
     return DATE_FORMAT.format(date);
 }
-public boolean check_protocolo(String id_empleado){
-    boolean ret;
-    Conexion con = new Conexion();
-    con.conexion();
-    ResultSet r;
-    try{
-        r = con.s.executeQuery ("SELECT *\n" +
-                                "from `t_cap_prot`WHERE ID_EMP = "+id_empleado);
-        ret = r.next();
-        con.cerrar();
-    }catch(SQLException j){
-        con.cerrar();
-        ret = false;
-        j.printStackTrace();
-    }
-    return ret;
-}
-public boolean check_active(String id_empleado, String empleador){
-    boolean ret = false;
-    Conexion con = new Conexion();
-    con.conexion();
-    ResultSet r;
-    try{
-        r = con.s.executeQuery ("SELECT *\n" +
-                                "FROM\n" +
-                                "    t_novedades\n" +
-                                "    INNER JOIN t_empresas \n" +
-                                "        ON (t_novedades.ID_EMPRESA = t_empresas.ID_EMPRESA)" +
-                                "    WHERE t_novedades.ID_EMPLEADO ="+id_empleado+"  AND t_empresas.NOMBRE_EMPRESA='"+empleador+"' AND t_novedades.ID_TIPO IN(1,3,4,5);");
-        ret = !r.next();
-        con.cerrar();
-    }catch(SQLException j){
-        con.cerrar();
-        ret = false;
-        j.printStackTrace();
-    }
-    return ret;
-}
-public boolean check_vetado(String id_empleado){
-    boolean ret;
-    Conexion con = new Conexion();
-    con.conexion();
-    ResultSet r;
-    try{
-        r = con.s.executeQuery ("SELECT * FROM t_vetados WHERE ID_EMPLEADO = "+id_empleado);
-        ret = !r.next();
-        con.cerrar();
-    }catch(SQLException j){
-        con.cerrar();
-        ret = false;
-        j.printStackTrace();
-    }
-    return ret;
-}
-public boolean check_exon(Object ex){
-    boolean ret=false;
-    if (ex!=null) {
-        if (check_char(ex.toString().trim(),"'#$%&()=?¡¿/*+[]{};:<>,")) {
-            if (!ex.toString().trim().toUpperCase().equals("")) {
-                switch (ex.toString().trim().toUpperCase()){
-                        case "SI":  ret=true;
-                                    break;
-                        case "NO":  ret=true;
-                                    break;
-                        default:    ret=false;
-                }
-            }
-        }
-    }
-    return ret;
-}
-public boolean check_info(Object ced){
-    boolean ret=false;
-    if (ced!=null) {
-        if (check_char(ced.toString().trim(),"'#$%&()=?¡¿/*+[]{};:<>,.")) {
-            if (!ced.toString().trim().equals("")) {
-                Conexion con = new Conexion();
-                con.conexion();
-                ResultSet r;
-                try{
-                    r = con.s.executeQuery ("SELECT *\n" +
-                                            "FROM\n" +
-                                            "    `t_info_sociodemografica` WHERE ID_EMP = "+ced.toString().trim());
-                    ret=r.next();
-                    con.cerrar();
-                }catch(SQLException j){
-                    con.cerrar();
-                    j.printStackTrace();
-                    return false;
-                    //JOptionPane.showMessageDialog(null,j,"Error",JOptionPane.ERROR_MESSAGE);
-                }
-            }
-        }
-    }
-    return ret;
-}
-public boolean check_block_emp (Object field){
-    boolean ret=false;
-    if (field!=null) {
-        Conexion con = new Conexion();
-        con.conexion();
-        ResultSet r;
-        try{
-            r = con.s.executeQuery ("SELECT * FROM t_empresas WHERE ID_EMPRESA='"+field+"'");
-            if(r.next()){
-                ret = r.getInt("ESTADO_EMPRESA")==1;
-            }
-            con.cerrar();
-        }catch(SQLException j){
-            con.cerrar();
-            j.printStackTrace();
-        }
-    }
-    return ret;
-
-    
-    }
 }

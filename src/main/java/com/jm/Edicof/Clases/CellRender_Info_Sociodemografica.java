@@ -69,7 +69,7 @@ public class CellRender_Info_Sociodemografica extends DefaultTableCellRenderer{
                         }
                     }else{
                         if (table.getColumnName(column).equals("Barrio*")) {
-                            if (Validations.check_barrio_info(value)) {
+                            if (Validations.check_barrio_table(value)) {
                                 cell.setOpaque(true);
                                 cell.setBackground(new Color(150,240,160));
                                 cell.setForeground(Color.black);

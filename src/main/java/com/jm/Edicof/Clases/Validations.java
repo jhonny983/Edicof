@@ -256,7 +256,24 @@ public static boolean check_estat(Object ced){
         }
         return ret;  
     }
-
+////////////////////////ADD PREINGRESOS TRASLADO
+public static boolean check_exon(Object ex){
+    boolean ret=false;
+    if (ex!=null) {
+        if (check_char(ex.toString().trim(),"'#$%&()=?¡¿/*+[]{};:<>,")) {
+            if (!ex.toString().trim().toUpperCase().equals("")) {
+                switch (ex.toString().trim().toUpperCase()){
+                        case "SI":  ret=true;
+                                    break;
+                        case "NO":  ret=true;
+                                    break;
+                        default:    ret=false;
+                }
+            }
+        }
+    }
+    return ret;
+}
 ///////*****************VALIDATIONS WITH CONNECTION DATABASE CELLRENDER_ASISTENCIAS*******************//////////
 public static boolean check_cedula(Object ced){
     boolean ret=false;
@@ -1206,7 +1223,7 @@ public static boolean check_tip_vivienda(Object tip){
     
     return ret;
 }
-public static boolean check_barrio_info(Object barrio){
+public static boolean check_barrio_table(Object barrio){
     boolean ret=false;
     if (barrio!=null) {
         if (check_char(barrio.toString().trim(),"'$%&()=?¡¿/*+[]{};:<>,")) {
@@ -1357,5 +1374,239 @@ public static boolean check_genero(Object genero){
         }
     }
     return ret;
+    }
+//////////////////PREINGRESO_TRASLADO
+public static boolean check_sal_min(Object salario){
+    boolean ret=false;
+    float sal=0;
+    Conexion con = new Conexion();
+    con.conexion();
+    ResultSet r=null;
+    try {
+        r = con.s.executeQuery ("SELECT * FROM `t_parametros` WHERE NOMBRE_PAR = 'SALARIO_MINIMO';");
+        if(r.next()){
+            sal=r.getFloat("VALOR_PAR"); 
+        }
+        con.cerrar();
+        if (Float.parseFloat(salario.toString())>=sal) {
+            ret = true;
+        }
+    } catch (Exception e) {
+        con.cerrar();
+        e.printStackTrace();
+        JOptionPane.showMessageDialog(null,e,"Error",JOptionPane.ERROR_MESSAGE);
+    }finally{
+        if (r!=null) {
+            try {
+                r.close();
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+            r=null;
+        }
+        con.cerrar();
+    }
+    return ret;
+}
+public static boolean check_barrio_mun(Object barrio, Object mun){
+    boolean ret=false;
+    if (barrio!=null & mun!=null) {
+        if (check_char(barrio.toString().trim(),"'#$%&()=?¡¿/*+[]{};:<>,.") & check_char(mun.toString().trim(),"'#$%&()=?¡¿/*+[]{};:<>,.")) {
+            if (!barrio.toString().trim().equals("") & !mun.toString().trim().equals("")){
+               Conexion con = new Conexion();
+                con.conexion();
+                ResultSet r=null;
+                try{
+                    String str_barrio="";
+                    String str_barrio_mun="";
+                    String str_mun="";
+                    String str_dep="";
+                    StringTokenizer tk_barrio=new StringTokenizer(barrio.toString().trim(), "-");
+                    while(tk_barrio.hasMoreTokens()){
+                        str_barrio=tk_barrio.nextToken().trim();
+                        str_barrio_mun=tk_barrio.nextToken().trim();
+                    }
+                    StringTokenizer tk_mun=new StringTokenizer(mun.toString().trim(), "-");
+                    while(tk_mun.hasMoreTokens()){
+                        str_mun=tk_mun.nextToken().trim();
+                        str_dep=tk_mun.nextToken().trim();
+                    }
+                    if (str_barrio_mun.equals(str_mun)) {
+                        r = con.s.executeQuery ("SELECT * FROM t_barrio WHERE NOMBRE_BARRIO='"+str_barrio+"' AND ID_MUN_BARRIO="+GetInfo.get_id_municipio(mun.toString().trim()));
+                        if(r.next()){
+                            ret=true;
+                        }
+                    }
+                    con.cerrar();
+                }catch(SQLException j){
+                    con.cerrar();
+                    j.printStackTrace();
+                    return false;
+                }finally{
+                    if (r!=null) {
+                        try {
+                            r.close();
+                        } catch (SQLException ex) {
+                            ex.printStackTrace();
+                        }
+                        r=null;
+                    }
+                    con.cerrar();
+                }
+            }
+        }
+    }
+    return ret;
+}
+public static boolean check_active(String id_empleado, String empleador){
+    boolean ret = false;
+    Conexion con = new Conexion();
+    con.conexion();
+    ResultSet r=null;
+    try{
+        r = con.s.executeQuery ("SELECT *\n" +
+                                "FROM\n" +
+                                "    t_novedades\n" +
+                                "    INNER JOIN t_empresas \n" +
+                                "        ON (t_novedades.ID_EMPRESA = t_empresas.ID_EMPRESA)" +
+                                "    WHERE t_novedades.ID_EMPLEADO ="+id_empleado+"  AND t_empresas.NOMBRE_EMPRESA='"+empleador+"' AND t_novedades.ID_TIPO IN(1,3,4,5);");
+        ret = !r.next();
+        con.cerrar();
+    }catch(SQLException j){
+        con.cerrar();
+        ret = false;
+        j.printStackTrace();
+    }finally{
+        if (r!=null) {
+            try {
+                r.close();
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+            r=null;
+        }
+        con.cerrar();
+    }
+    return ret;
+}
+public static boolean check_vetado(String id_empleado){
+    boolean ret;
+    Conexion con = new Conexion();
+    con.conexion();
+    ResultSet r=null;
+    try{
+        r = con.s.executeQuery ("SELECT * FROM t_vetados WHERE ID_EMPLEADO = "+id_empleado);
+        ret = !r.next();
+        con.cerrar();
+    }catch(SQLException j){
+        con.cerrar();
+        ret = false;
+        j.printStackTrace();
+    }finally{
+        if (r!=null) {
+            try {
+                r.close();
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+            r=null;
+        }
+        con.cerrar();
+    }
+    return ret;
+}
+public static boolean check_protocolo(String id_empleado){
+    boolean ret;
+    Conexion con = new Conexion();
+    con.conexion();
+    ResultSet r=null;
+    try{
+        r = con.s.executeQuery ("SELECT *\n" +
+                                "from `t_cap_prot`WHERE ID_EMP = "+id_empleado);
+        ret = r.next();
+        con.cerrar();
+    }catch(SQLException j){
+        con.cerrar();
+        ret = false;
+        j.printStackTrace();
+    }finally{
+        if (r!=null) {
+            try {
+                r.close();
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+            r=null;
+        }
+        con.cerrar();
+    }
+    return ret;
+}
+
+public static boolean check_info(Object ced){
+    boolean ret=false;
+    if (ced!=null) {
+        if (check_char(ced.toString().trim(),"'#$%&()=?¡¿/*+[]{};:<>,.")) {
+            if (!ced.toString().trim().equals("")) {
+                Conexion con = new Conexion();
+                con.conexion();
+                ResultSet r=null;
+                try{
+                    r = con.s.executeQuery ("SELECT *\n" +
+                                            "FROM\n" +
+                                            "    `t_info_sociodemografica` WHERE ID_EMP = "+ced.toString().trim());
+                    ret=r.next();
+                    con.cerrar();
+                }catch(SQLException j){
+                    con.cerrar();
+                    j.printStackTrace();
+                    return false;
+                    //JOptionPane.showMessageDialog(null,j,"Error",JOptionPane.ERROR_MESSAGE);
+                }finally{
+                    if (r!=null) {
+                        try {
+                            r.close();
+                        } catch (SQLException ex) {
+                            ex.printStackTrace();
+                        }
+                        r=null;
+                    }
+                    con.cerrar();
+                }
+            }
+        }
+    }
+    return ret;
+}
+public static boolean check_block_emp (Object field){
+    boolean ret=false;
+    if (field!=null) {
+        Conexion con = new Conexion();
+        con.conexion();
+        ResultSet r=null;
+        try{
+            r = con.s.executeQuery ("SELECT * FROM t_empresas WHERE ID_EMPRESA='"+field+"'");
+            if(r.next()){
+                ret = r.getInt("ESTADO_EMPRESA")==1;
+            }
+            con.cerrar();
+        }catch(SQLException j){
+            con.cerrar();
+            j.printStackTrace();
+        }finally{
+            if (r!=null) {
+                try {
+                    r.close();
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                }
+                r=null;
+            }
+            con.cerrar();
+        }
+    }
+    return ret;
+
+    
     }
 }
