@@ -2520,7 +2520,7 @@ public boolean verify_data(){
                 if (Validations.check_afp(modelo.getValueAt(i, row_afp))) {
                     if (Validations.check_arl(modelo.getValueAt(i, row_arl))) {
                         if (Validations.check_ccf(modelo.getValueAt(i, row_ccf))) {
-                            if (Validations.check_field(modelo.getValueAt(i, row_obs))) {//observaciones
+                            if (Validations.check_field_obs(modelo.getValueAt(i, row_obs))) {//observaciones
                                 ret=true;
                             } else {
                                 jTable1.changeSelection(i,row_obs, false, false);
