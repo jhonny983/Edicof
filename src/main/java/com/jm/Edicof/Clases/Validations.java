@@ -629,7 +629,7 @@ public static boolean check_arl(Object arl){
 public static boolean check_eps(Object eps){
         boolean ret=false;
         if (eps!=null) {
-            if (check_char(eps.toString().trim(),"'#$%&()=?¡¿/*+[]{};:<>,")) {
+            if (check_char(eps.toString().trim(),"'#$%&=?¡¿/*+[]{};:<>,")) {
                 if (!eps.toString().trim().equals("")) {
                     Conexion con = new Conexion();
                     con.conexion();
@@ -657,6 +657,8 @@ public static boolean check_eps(Object eps){
                         con.cerrar();
                     }
                 }
+            }else{
+                ret=false;
             }
         }else{
             ret=true;
