@@ -146,7 +146,7 @@ return ret;
 public static boolean check_field_obs (Object field){
 boolean ret=false;
     if (field!=null) {
-        if (check_char(field.toString().trim(),"'$#%&()=?¡¿/*+[]{};,")) {
+        if (check_char(field.toString().trim(),"'$#%&()=?¡¿/*+[]{};")) {
             if (!field.toString().equals("")) {
                ret=true;
             }
