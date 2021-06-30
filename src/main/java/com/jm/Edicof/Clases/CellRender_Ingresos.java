@@ -25,7 +25,7 @@ public class CellRender_Ingresos extends DefaultTableCellRenderer{
         JLabel cell = (JLabel) super.getTableCellRendererComponent (table, value, isSelected, hasFocus, row, column);
         
         if (table.getColumnName(column).equals("Cedula")) {
-            if (Validations.check_cedula(value.toString())) {
+            if (Validations.check_cedula(value)) {
                 cell.setOpaque(true);
                 cell.setBackground(new Color(150,240,160));
                 cell.setForeground(Color.black);
@@ -36,7 +36,7 @@ public class CellRender_Ingresos extends DefaultTableCellRenderer{
             }
         }else{
             if (table.getColumnName(column).equals("Empleado (Nombre)")) {
-                if (Validations.check_field(value.toString())) {
+                if (Validations.check_field(value)) {
                     cell.setOpaque(true);
                     cell.setBackground(new Color(150,240,160));
                     cell.setForeground(Color.black);
@@ -47,7 +47,7 @@ public class CellRender_Ingresos extends DefaultTableCellRenderer{
                 }
             }else{
                 if (table.getColumnName(column).equals("Empleador (Nombre)")) {
-                    if (Validations.check_empleador(value.toString())) {
+                    if (Validations.check_empleador(value)) {
                         cell.setOpaque(true);
                         cell.setBackground(new Color(150,240,160));
                         cell.setForeground(Color.black);
@@ -58,7 +58,7 @@ public class CellRender_Ingresos extends DefaultTableCellRenderer{
                     }
                 }else{
                     if (table.getColumnName(column).equals("F Ingreso (DD-MM-AAAA)")) {
-                        if (Validations.check_fecha(value.toString())) {
+                        if (Validations.check_fecha(value)) {
                             cell.setOpaque(true);
                             cell.setBackground(new Color(150,240,160));
                             cell.setForeground(Color.black);
@@ -69,7 +69,7 @@ public class CellRender_Ingresos extends DefaultTableCellRenderer{
                         }
                     }else{
                         if (table.getColumnName(column).equals("Salario")) {
-                            if (Validations.check_salario(value.toString())) {
+                            if (Validations.check_salario(value)) {
                                 cell.setOpaque(true);
                                 cell.setBackground(new Color(150,240,160));
                                 cell.setForeground(Color.black);
@@ -80,7 +80,7 @@ public class CellRender_Ingresos extends DefaultTableCellRenderer{
                             }
                         }else{
                             if (table.getColumnName(column).equals("EPS (Nombre)*")) {
-                                if (Validations.check_eps(value.toString())) {
+                                if (Validations.check_eps(value)) {
                                     cell.setOpaque(true);
                                     cell.setBackground(new Color(150,240,160));
                                     cell.setForeground(Color.black);
@@ -91,7 +91,7 @@ public class CellRender_Ingresos extends DefaultTableCellRenderer{
                                 }
                             }else{
                                 if (table.getColumnName(column).equals("AFP (Nombre)*")) {
-                                    if (Validations.check_afp(value.toString())) {
+                                    if (Validations.check_afp(value)) {
                                         cell.setOpaque(true);
                                         cell.setBackground(new Color(150,240,160));
                                         cell.setForeground(Color.black);
@@ -102,7 +102,7 @@ public class CellRender_Ingresos extends DefaultTableCellRenderer{
                                     }
                                 }else{
                                     if (table.getColumnName(column).equals("ARL (Nombre)*")) {
-                                        if (Validations.check_arl(value.toString())) {
+                                        if (Validations.check_arl(value)) {
                                             cell.setOpaque(true);
                                             cell.setBackground(new Color(150,240,160));
                                             cell.setForeground(Color.black);
@@ -113,7 +113,7 @@ public class CellRender_Ingresos extends DefaultTableCellRenderer{
                                         }
                                     }else{
                                         if (table.getColumnName(column).equals("CCF (Nombre)*")) {
-                                            if (Validations.check_ccf(value.toString())) {
+                                            if (Validations.check_ccf(value)) {
                                                 cell.setOpaque(true);
                                                 cell.setBackground(new Color(150,240,160));
                                                 cell.setForeground(Color.black);
@@ -124,7 +124,7 @@ public class CellRender_Ingresos extends DefaultTableCellRenderer{
                                             }
                                         }else{
                                             if (table.getColumnName(column).equals("Obra")) {
-                                                if (Validations.check_obra(value.toString())) {
+                                                if (Validations.check_obra(value)) {
                                                     cell.setOpaque(true);
                                                     cell.setBackground(new Color(150,240,160));
                                                     cell.setForeground(Color.black);

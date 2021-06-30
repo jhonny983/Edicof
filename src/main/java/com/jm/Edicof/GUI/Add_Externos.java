@@ -1101,63 +1101,64 @@ class MyTableCellEditorDate extends AbstractCellEditor implements TableCellEdito
                 Conexion con = new Conexion();
                 con.conexion();
                 ResultSet r=null;
-                for (int i = 0; i < jTable1.getRowCount(); i++) {
                     try {
-                        if (!GetInfo.get_id_empleador(modelo.getValueAt(i, row_empleador)).equals("")) {
-                            r = con.s.executeQuery ("SELECT * FROM `t_novedades` WHERE (ID_EMPLEADO ="+modelo.getValueAt(i, row_cedula)+" AND ID_EMPRESA='"+GetInfo.get_id_empleador(modelo.getValueAt(i, row_empleador))+"' AND FECHA_INGRESO='"+new SimpleDateFormat("yyyy-MM-dd").format(new SimpleDateFormat("dd-MM-yyyy").parse(modelo.getValueAt(i, row_f_ingreso).toString()))+"' AND FECHA_RETIRO='1900-01-01' AND ID_TIPO IN(5));");
-                            if(r.next()){
-                                JOptionPane.showMessageDialog(this,"Esta novedad de Externo ya existe.","Error",JOptionPane.ERROR_MESSAGE);
-                                confirm = false;
-                                jTable1.changeSelection(i,row_cedula, false, false);
+                        for (int i = 0; i < jTable1.getRowCount(); i++) {
+                            if (!GetInfo.get_id_empleador(modelo.getValueAt(i, row_empleador)).equals("")) {
+                                r = con.s.executeQuery ("SELECT * FROM `t_novedades` WHERE (ID_EMPLEADO ="+modelo.getValueAt(i, row_cedula)+" AND ID_EMPRESA='"+GetInfo.get_id_empleador(modelo.getValueAt(i, row_empleador))+"' AND FECHA_INGRESO='"+new SimpleDateFormat("yyyy-MM-dd").format(new SimpleDateFormat("dd-MM-yyyy").parse(modelo.getValueAt(i, row_f_ingreso).toString()))+"' AND FECHA_RETIRO='1900-01-01' AND ID_TIPO IN(5));");
+                                if(r.next()){
+                                    JOptionPane.showMessageDialog(this,"Esta novedad de Externo ya existe.","Error",JOptionPane.ERROR_MESSAGE);
+                                    confirm = false;
+                                    jTable1.changeSelection(i,row_cedula, false, false);
+                                    jTable1.requestFocus();
+                                    break;
+                                }else{
+                                    con.s.executeUpdate("UPDATE `t_novedades` "
+                                            + "SET `ID_EPS`='"+GetInfo.get_id_eps(modelo.getValueAt(i, row_eps))+"',"
+                                            + "`ID_AFP`='"+GetInfo.get_id_afp(modelo.getValueAt(i, row_afp))+"',"
+                                            + "`ARL_NOV`='"+modelo.getValueAt(i, row_arl)+"',"
+                                            + "`CCF_NOV`='"+modelo.getValueAt(i, row_ccf)+"',"
+                                            + "`OBS_NOV`='INGRESO>USR:"+Main.login.getText()+">FR:"+new SimpleDateFormat("dd-MM-yyyy").format(new Date())+">FI:"+modelo.getValueAt(i, 3).toString()+","+modelo.getValueAt(i, 10).toString().toUpperCase()+"',"
+                                            + "`ID_TIPO`=5"
+                                            + " WHERE ID_EMPLEADO="+modelo.getValueAt(i, row_cedula)+""
+                                            + " AND ID_EMPRESA='"+GetInfo.get_id_empleador(modelo.getValueAt(i, row_empleador))+"'"
+                                            + " AND FECHA_INGRESO='"+new SimpleDateFormat("yyyy-MM-dd").format(new SimpleDateFormat("dd-MM-yyyy").parse(modelo.getValueAt(i, row_f_ingreso).toString()))+"'"
+                                            + " AND FECHA_RETIRO='1900-01-01'"
+                                            + "AND ID_TIPO=3");
+                                    con.s.executeUpdate("INSERT INTO `t_registro` "
+                                            + "(ID_EMPLEADO,"
+                                            + "ID_EMPRESA,"
+                                            + "F_INGRESO,"
+                                            + "F_RETIRO,"
+                                            + "ID_TIPO, "
+                                            + "REGISTRO, "
+                                            + "F_REGISTRO, "
+                                            + "FECHA, "
+                                            + "ID_USUARIO) "
+                                            + "VALUES ("+modelo.getValueAt(i, row_cedula)+","
+                                            + "'"+GetInfo.get_id_empleador(modelo.getValueAt(i, row_empleador))+"',"
+                                            + "'"+new SimpleDateFormat("yyyy-MM-dd").format(new SimpleDateFormat("dd-MM-yyyy").parse(modelo.getValueAt(i, row_f_ingreso).toString()))+"',"
+                                            + "'1900-01-01',"
+                                            + "5,"
+                                            + "'EXTERNO',"
+                                            + "'"+new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date())+"',"
+                                            + "'"+new SimpleDateFormat("yyyy-MM-dd").format(new SimpleDateFormat("dd-MM-yyyy").parse(modelo.getValueAt(i, row_f_ingreso).toString()))+"',"
+                                            + "'"+Main.id_usuario+"')");
+                                    modelo.removeRow(i);
+                                    i=i-1;
+                                    confirm = true;
+                                }
+                            }else {
+                                jTable1.changeSelection(i,1, false, false);
                                 jTable1.requestFocus();
+                                JOptionPane.showMessageDialog(this,"Verifique la informacion del empleado","Error",JOptionPane.ERROR_MESSAGE);
                                 break;
-                            }else{
-                                con.s.executeUpdate("UPDATE `t_novedades` "
-                                        + "SET `ID_EPS`='"+GetInfo.get_id_eps(modelo.getValueAt(i, row_eps))+"',"
-                                        + "`ID_AFP`='"+GetInfo.get_id_afp(modelo.getValueAt(i, row_afp))+"',"
-                                        + "`ARL_NOV`='"+modelo.getValueAt(i, row_arl)+"',"
-                                        + "`CCF_NOV`='"+modelo.getValueAt(i, row_ccf)+"',"
-                                        + "`OBS_NOV`='INGRESO>USR:"+Main.login.getText()+">FR:"+new SimpleDateFormat("dd-MM-yyyy").format(new Date())+">FI:"+modelo.getValueAt(i, 3).toString()+","+modelo.getValueAt(i, 10).toString().toUpperCase()+"',"
-                                        + "`ID_TIPO`=5"
-                                        + " WHERE ID_EMPLEADO="+modelo.getValueAt(i, row_cedula)+""
-                                        + " AND ID_EMPRESA='"+GetInfo.get_id_empleador(modelo.getValueAt(i, row_empleador))+"'"
-                                        + " AND FECHA_INGRESO='"+new SimpleDateFormat("yyyy-MM-dd").format(new SimpleDateFormat("dd-MM-yyyy").parse(modelo.getValueAt(i, row_f_ingreso).toString()))+"'"
-                                        + " AND FECHA_RETIRO='1900-01-01'"
-                                        + "AND ID_TIPO=3");
-                                con.s.executeUpdate("INSERT INTO `t_registro` "
-                                        + "(ID_EMPLEADO,"
-                                        + "ID_EMPRESA,"
-                                        + "F_INGRESO,"
-                                        + "F_RETIRO,"
-                                        + "ID_TIPO, "
-                                        + "REGISTRO, "
-                                        + "F_REGISTRO, "
-                                        + "FECHA, "
-                                        + "ID_USUARIO) "
-                                        + "VALUES ("+modelo.getValueAt(i, row_cedula)+","
-                                        + "'"+GetInfo.get_id_empleador(modelo.getValueAt(i, row_empleador))+"',"
-                                        + "'"+new SimpleDateFormat("yyyy-MM-dd").format(new SimpleDateFormat("dd-MM-yyyy").parse(modelo.getValueAt(i, row_f_ingreso).toString()))+"',"
-                                        + "'1900-01-01',"
-                                        + "5,"
-                                        + "'EXTERNO',"
-                                        + "'"+new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date())+"',"
-                                        + "'"+new SimpleDateFormat("yyyy-MM-dd").format(new SimpleDateFormat("dd-MM-yyyy").parse(modelo.getValueAt(i, row_f_ingreso).toString()))+"',"
-                                        + "'"+Main.id_usuario+"')");
-                                modelo.removeRow(i);
-                                i=i-1;
-                                confirm = true;
                             }
-                        }else {
-                            jTable1.changeSelection(i,1, false, false);
-                            jTable1.requestFocus();
-                            JOptionPane.showMessageDialog(this,"Verifique la informacion del empleado","Error",JOptionPane.ERROR_MESSAGE);
-                            break;
                         }
                     } catch (ParseException | SQLException e) {
                         con.cerrar();
                         e.printStackTrace();
                         JOptionPane.showMessageDialog(null,e,"Error",JOptionPane.ERROR_MESSAGE);
-                        break;
+                        
                     }finally{
                         if (r!=null) {
                             try {
@@ -1169,7 +1170,7 @@ class MyTableCellEditorDate extends AbstractCellEditor implements TableCellEdito
                         }
                         con.cerrar();
                     }
-                }
+                
                 con.cerrar();
                 if (confirm) {
                     JOptionPane.showMessageDialog(this,"La información ha sido ingresada correctamente","Informacion",JOptionPane.INFORMATION_MESSAGE);

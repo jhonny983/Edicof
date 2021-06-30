@@ -354,7 +354,6 @@ public class Add_Asistencias extends javax.swing.JDialog {
     private void initComponents() {
 
         jPopupMenu1 = new javax.swing.JPopupMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
         jScrollPane3 = new javax.swing.JScrollPane();
         jPanel7 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
@@ -371,9 +370,6 @@ public class Add_Asistencias extends javax.swing.JDialog {
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton12 = new javax.swing.JButton();
-
-        jMenuItem1.setText("jMenuItem1");
-        jPopupMenu1.add(jMenuItem1);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Agregar Asistencias");
@@ -476,13 +472,13 @@ public class Add_Asistencias extends javax.swing.JDialog {
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
-                .addContainerGap(22, Short.MAX_VALUE)
+                .addContainerGap(24, Short.MAX_VALUE)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jButton9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButton11))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton10)
-                .addContainerGap(21, Short.MAX_VALUE))
+                .addContainerGap(23, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -493,7 +489,7 @@ public class Add_Asistencias extends javax.swing.JDialog {
                     .addComponent(jButton10))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton11)
-                .addContainerGap(13, Short.MAX_VALUE))
+                .addContainerGap(12, Short.MAX_VALUE))
         );
 
         jPanel6.setBorder(javax.swing.BorderFactory.createTitledBorder("Acciones"));
@@ -651,11 +647,12 @@ public class Add_Asistencias extends javax.swing.JDialog {
                         r = con.s.executeQuery ("SELECT\n"
                                                 + "*\n"
                                                 + "FROM t_novedades\n"
-                                                + "WHERE t_novedades.ID_TIPO IN (1,2,4,6)\n" 
+                                                + "WHERE t_novedades.ID_TIPO IN (1,2,4,5,6,7)\n" 
                                                 + "AND ((t_novedades.`FECHA_INGRESO` <= '"+new SimpleDateFormat("yyyy-MM-dd").format(f_asistencia.getDate())+"' AND t_novedades.`FECHA_RETIRO` = '1900-01-01')\n"
                                                 + "OR ( t_novedades.`FECHA_INGRESO` <= '"+new SimpleDateFormat("yyyy-MM-dd").format(f_asistencia.getDate())+"' AND t_novedades.`FECHA_RETIRO` >= '"+new SimpleDateFormat("yyyy-MM-dd").format(f_asistencia.getDate())+"'))"
                                                 + "AND t_novedades.ID_EMPLEADO = "+asistencias.getValueAt(i, 0).toString()+" AND t_novedades.ID_EMPRESA='"+asistencias.getValueAt(i, 1)+"'");
                         if(r.next()){
+                            System.out.println("INSERT INTO `t_asistencias` (ID_EMPLEADO,ID_EMPRESA,F_INGRESO,F_RETIRO,ID_TIPO,F_ASISTENCIA) VALUES ("+modelo.getValueAt(i, 0)+",'"+modelo.getValueAt(i, 1)+"','"+new SimpleDateFormat("yyyy-MM-dd").format(r.getDate("FECHA_INGRESO"))+"','"+new SimpleDateFormat("yyyy-MM-dd").format(r.getDate("FECHA_RETIRO"))+"',"+r.getInt("ID_TIPO")+",'"+new SimpleDateFormat("yyyy-MM-dd").format(f_asistencia.getDate())+"')");
                             con.s.executeUpdate("INSERT INTO `t_asistencias` (ID_EMPLEADO,ID_EMPRESA,F_INGRESO,F_RETIRO,ID_TIPO,F_ASISTENCIA) VALUES ("+modelo.getValueAt(i, 0)+",'"+modelo.getValueAt(i, 1)+"','"+new SimpleDateFormat("yyyy-MM-dd").format(r.getDate("FECHA_INGRESO"))+"','"+new SimpleDateFormat("yyyy-MM-dd").format(r.getDate("FECHA_RETIRO"))+"',"+r.getInt("ID_TIPO")+",'"+new SimpleDateFormat("yyyy-MM-dd").format(f_asistencia.getDate())+"')");
                             modelo.removeRow(i);
                             i=i-1;
@@ -733,7 +730,6 @@ public class Add_Asistencias extends javax.swing.JDialog {
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton9;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel5;
@@ -979,13 +975,13 @@ public boolean verify_data(){
                             r = con.s.executeQuery ("SELECT\n"
                                                 + "*, COUNT(ID_EMPLEADO)\n"
                                                 + "FROM t_novedades\n"
-                                                + "WHERE t_novedades.ID_TIPO IN (1,2,4,6)\n" 
+                                                + "WHERE t_novedades.ID_TIPO IN (1,2,4,5,6,7)\n" 
                                                 + "AND ((t_novedades.`FECHA_INGRESO` <= '"+new SimpleDateFormat("yyyy-MM-dd").format(f_asistencia.getDate())+"' AND t_novedades.`FECHA_RETIRO` = '1900-01-01')\n"
                                                 + "OR ( t_novedades.`FECHA_INGRESO` <= '"+new SimpleDateFormat("yyyy-MM-dd").format(f_asistencia.getDate())+"' AND t_novedades.`FECHA_RETIRO` >= '"+new SimpleDateFormat("yyyy-MM-dd").format(f_asistencia.getDate())+"'))"
                                                 + "AND t_novedades.ID_EMPLEADO = "+asistencias.getValueAt(i, 0).toString()+" AND t_novedades.ID_EMPRESA='"+asistencias.getValueAt(i, 1)+"'");
-                            if(r.next()){
+                                                        if(r.next()){
                                 if (r.getInt("COUNT(ID_EMPLEADO)")==1) {
-                                    r1 = con.s.executeQuery ("SELECT * FROM t_asistencias WHERE ID_EMPLEADO ="+asistencias.getValueAt(i, 0)+" AND FECHA_ASIST='"+new SimpleDateFormat("yyyy-MM-dd").format(f_asistencia.getDate())+"' AND ID_EMPRESA='"+asistencias.getValueAt(i, 1)+"' AND F_INGRESO='"+new SimpleDateFormat("yyyy-MM-dd").format(r.getDate("FECHA_INGRESO"))+"' AND F_RETIRO ='"+new SimpleDateFormat("yyyy-MM-dd").format(r.getDate("FECHA_RETIRO"))+"' AND ID_TIPO ="+r.getInt("ID_TIPO"));
+                                    r1 = con.s.executeQuery ("SELECT * FROM t_asistencias WHERE ID_EMPLEADO ="+asistencias.getValueAt(i, 0)+" AND F_ASISTENCIA='"+new SimpleDateFormat("yyyy-MM-dd").format(f_asistencia.getDate())+"' AND ID_EMPRESA='"+asistencias.getValueAt(i, 1)+"' AND F_INGRESO='"+new SimpleDateFormat("yyyy-MM-dd").format(r.getDate("FECHA_INGRESO"))+"' AND F_RETIRO ='"+new SimpleDateFormat("yyyy-MM-dd").format(r.getDate("FECHA_RETIRO"))+"' AND ID_TIPO ="+r.getInt("ID_TIPO"));
                                     if(r1.next()){
                                         asistencias.changeSelection(i,0, false, false);
                                         asistencias.requestFocus();

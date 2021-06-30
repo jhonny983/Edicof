@@ -1240,7 +1240,7 @@ public static boolean check_tip_vivienda(Object tip){
 public static boolean check_barrio_table(Object barrio){
     boolean ret=false;
     if (barrio!=null) {
-        if (check_char(barrio.toString().trim(),"'$%&()=?¡¿/*+[]{};:<>,")) {
+        if (check_char(barrio.toString().trim(),"'$%&=?¡¿/*+[]{};:<>,")) {
             if (!barrio.toString().equals("") & count_char(barrio.toString().trim(),'-')==1) {
                 String str_barrio="";
                 String str_mun="";
@@ -1425,9 +1425,11 @@ public static boolean check_sal_min(Object salario){
 public static boolean check_barrio_mun(Object barrio, Object mun){
     boolean ret=false;
     if (barrio!=null & mun!=null) {
-        if (check_char(barrio.toString().trim(),"'#$%&()=?¡¿/*+[]{};:<>,.") & check_char(mun.toString().trim(),"'#$%&()=?¡¿/*+[]{};:<>,.")) {
+        if (check_char(barrio.toString().trim(),"'#$%&=?¡¿/*+[]{};:<>,.") & check_char(mun.toString().trim(),"'#$%&=?¡¿/*+[]{};:<>,.")) {
             if (!barrio.toString().trim().equals("") & !mun.toString().trim().equals("")){
-               Conexion con = new Conexion();
+                //System.out.println("Barrio: "+barrio.toString());
+                //System.out.println("Municipio: "+ mun.toString());
+                Conexion con = new Conexion();
                 con.conexion();
                 ResultSet r=null;
                 try{
